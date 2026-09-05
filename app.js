@@ -2394,8 +2394,32 @@ const QUIBOR_AQUIFER = {
 };
 
 const WELL_LOCATIONS = {
-  A: {
-    name: "Opción A: Predio In Situ (0 m)",
+  A60: {
+    name: "Opción A1: Predio In Situ (Freático 60 m - Recarga Flanco Sur)",
+    cota: 700,
+    depthDefault: 120,
+    neBase: 60.0,
+    ndBase: 78.0,
+    drawdownBase: 18.0,
+    ecW: 1.4,
+    lf: 23.0,
+    adductionCost: 0,
+    adductionDesc: "Aducción directa 0 m al reservorio (Ahorro energético con bomba 5.5 HP)",
+    pumpHp: "5.5 HP",
+    pumpDepth: 90,
+    hmtBase: 91.0,
+    layers: [
+      { depth: "0 – 15 m", desc: "Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita Tremie</strong>", comp: "Sello 15 m", cls: "layer-sanitary" },
+      { depth: "15 – 58 m", desc: "Arenas medias secas y arcillas grisáceas compactas", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "58 – 78 m", desc: "<strong>Acuífero Superior / Lente de Grava y Arena</strong> | Nivel Estático NE = 60 m", comp: "Filtro Johnson 14 m", cls: "layer-aquifer-1" },
+      { depth: "78 – 86 m", desc: "Estrato limo-arcilloso firme (Separador) | <em>Posición Bomba Sumergible 5.5 HP a 90 m</em>", comp: "Zona Bomba 5.5 HP", cls: "layer-confining" },
+      { depth: "86 – 112 m", desc: "<strong>Acuífero Principal Quíbor-Atarigua: Gravas de Cuarzo y Lidita Limpias</strong>", comp: "Filtro Johnson 24 m", cls: "layer-aquifer-main" },
+      { depth: "112 – 116 m", desc: "Arenas finas limosas transicionales", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "116 – 120 m", desc: "Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
+    ]
+  },
+  A70: {
+    name: "Opción A2: Predio In Situ (Freático 70 m - Línea Base Estival)",
     cota: 700,
     depthDefault: 120,
     neBase: 70.0,
@@ -2414,6 +2438,31 @@ const WELL_LOCATIONS = {
       { depth: "68 – 82 m", desc: "<strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 70 m", comp: "Filtro Johnson 12 m", cls: "layer-aquifer-1" },
       { depth: "82 – 86 m", desc: "Arcilla limosa arenosa firme (Separador) | <em>Posición Bomba Sumergible a 98 m</em>", comp: "Zona Bomba 7.5 HP", cls: "layer-confining" },
       { depth: "86 – 112 m", desc: "<strong>Acuífero Principal Quíbor: Gravas de Cuarzo y Arenas Gruesas Limpias</strong>", comp: "Filtro Johnson 26 m", cls: "layer-aquifer-main" },
+      { depth: "112 – 116 m", desc: "Arenas finas limosas transicionales", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "116 – 120 m", desc: "Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
+    ]
+  },
+  A: {
+    // Alias para compatibilidad hacia atrás
+    name: "Opción A1: Predio In Situ (Freático 60 m - Recarga Flanco Sur)",
+    cota: 700,
+    depthDefault: 120,
+    neBase: 60.0,
+    ndBase: 78.0,
+    drawdownBase: 18.0,
+    ecW: 1.4,
+    lf: 23.0,
+    adductionCost: 0,
+    adductionDesc: "Aducción directa 0 m al reservorio",
+    pumpHp: "5.5 HP",
+    pumpDepth: 90,
+    hmtBase: 91.0,
+    layers: [
+      { depth: "0 – 15 m", desc: "Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita Tremie</strong>", comp: "Sello 15 m", cls: "layer-sanitary" },
+      { depth: "15 – 58 m", desc: "Arenas medias secas y arcillas grisáceas compactas", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "58 – 78 m", desc: "<strong>Acuífero Superior / Lente de Grava y Arena</strong> | Nivel Estático NE = 60 m", comp: "Filtro Johnson 14 m", cls: "layer-aquifer-1" },
+      { depth: "78 – 86 m", desc: "Estrato limo-arcilloso firme | <em>Posición Bomba Sumergible 5.5 HP a 90 m</em>", comp: "Zona Bomba 5.5 HP", cls: "layer-confining" },
+      { depth: "86 – 112 m", desc: "<strong>Acuífero Principal Quíbor-Atarigua: Gravas de Cuarzo y Lidita Limpias</strong>", comp: "Filtro Johnson 24 m", cls: "layer-aquifer-main" },
       { depth: "112 – 116 m", desc: "Arenas finas limosas transicionales", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
       { depth: "116 – 120 m", desc: "Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
     ]
@@ -2490,13 +2539,14 @@ function initWellDrillingCalculator() {
   }
 
   // Tarjetas interactivas de ubicación
-  const cardOptA = document.getElementById("loc-card-optA");
+  const cardOptA60 = document.getElementById("loc-card-optA60");
+  const cardOptA70 = document.getElementById("loc-card-optA70");
   const cardOptB = document.getElementById("loc-card-optB");
   const cardOptC = document.getElementById("loc-card-optC");
 
   function selectLocationCard(locKey) {
     if (selLocation) selLocation.value = locKey;
-    [cardOptA, cardOptB, cardOptC].forEach(c => {
+    [cardOptA60, cardOptA70, cardOptB, cardOptC].forEach(c => {
       if (c) {
         c.classList.remove("active");
         c.style.borderColor = "rgba(255,255,255,0.12)";
@@ -2504,15 +2554,15 @@ function initWellDrillingCalculator() {
       }
     });
 
-    const activeCard = locKey === "A" ? cardOptA : (locKey === "B" ? cardOptB : cardOptC);
+    const activeCard = locKey === "A60" || locKey === "A" ? cardOptA60 : (locKey === "A70" ? cardOptA70 : (locKey === "B" ? cardOptB : cardOptC));
     if (activeCard) {
       activeCard.classList.add("active");
-      activeCard.style.borderColor = locKey === "A" ? "#38bdf8" : (locKey === "B" ? "#34d399" : "#f59e0b");
-      activeCard.style.background = locKey === "A" ? "rgba(56,189,248,0.08)" : (locKey === "B" ? "rgba(16,185,129,0.08)" : "rgba(245,158,11,0.08)");
+      activeCard.style.borderColor = (locKey === "A60" || locKey === "A") ? "#38bdf8" : (locKey === "A70" ? "#94a3b8" : (locKey === "B" ? "#34d399" : "#f59e0b"));
+      activeCard.style.background = (locKey === "A60" || locKey === "A") ? "rgba(56,189,248,0.08)" : (locKey === "A70" ? "rgba(148,163,184,0.08)" : (locKey === "B" ? "rgba(16,185,129,0.08)" : "rgba(245,158,11,0.08)"));
     }
 
     // Actualizar profundidad sugerida según ubicación
-    const locData = WELL_LOCATIONS[locKey];
+    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.A60;
     if (locData && selDepth) {
       selDepth.value = String(locData.depthDefault);
     }
@@ -2520,7 +2570,8 @@ function initWellDrillingCalculator() {
     recalculateDrillMetrics();
   }
 
-  if (cardOptA) cardOptA.addEventListener("click", () => selectLocationCard("A"));
+  if (cardOptA60) cardOptA60.addEventListener("click", () => selectLocationCard("A60"));
+  if (cardOptA70) cardOptA70.addEventListener("click", () => selectLocationCard("A70"));
   if (cardOptB) cardOptB.addEventListener("click", () => selectLocationCard("B"));
   if (cardOptC) cardOptC.addEventListener("click", () => selectLocationCard("C"));
 
@@ -2643,13 +2694,17 @@ function initWellDrillingCalculator() {
 
     // Bomba y columna
     let costPump = 2450;
+    let costVfd = 1150;
     if (locKey === "C" || correctedHMT > 120) {
       costPump = 3900; // 12.5 HP alta carga
+      costVfd = 1750;
+    } else if (locKey === "A60" || locKey === "A" || locData.pumpHp === "5.5 HP") {
+      costPump = 1950; // 5.5 HP sumergible
+      costVfd = 950;
     } else if (casingDiamInches === 8) {
       costPump = 2850;
     }
     const costColumn = (locData.pumpDepth - 5.0) * 22;
-    const costVfd = locKey === "C" ? 1750 : 1150;
     const costWellhead = 450;
 
     // Obra externa de aducción si aplica (Opción B)

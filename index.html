@@ -803,37 +803,52 @@
         <!-- Selector de Ubicación / Distancia al Frente Freático -->
         <div class="info-card" style="margin-top:1.2rem; background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.3);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
-            <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Distancia al Frente Freático (3 Escenarios Hidrogeológicos):</h4>
-            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.75rem;" id="badge-selected-location">Opción A: Predio In Situ</span>
+            <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Distancia al Frente Freático (4 Escenarios Hidrogeológicos):</h4>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.75rem;" id="badge-selected-location">Opción A1: Predio In Situ (60 m)</span>
           </div>
 
-          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:0.75rem;">
-            <!-- Opción A -->
-            <div class="location-option-card active" id="loc-card-optA" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:2px solid #38bdf8; background:rgba(56,189,248,0.08); transition:all 0.2s ease;">
+          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem;">
+            <!-- Opción A1 (60m) -->
+            <div class="location-option-card active" id="loc-card-optA60" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:2px solid #38bdf8; background:rgba(56,189,248,0.08); transition:all 0.2s ease;">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#38bdf8; font-size:0.9rem;">Opción A: Predio In Situ (0 m)</strong>
-                <span class="status-badge" style="background:#38bdf8; color:#0f172a; font-weight:800; font-size:0.7rem;">RECOMENDADA</span>
+                <strong style="color:#38bdf8; font-size:0.88rem;">Opción A1: Predio In Situ (NE = 60 m)</strong>
+                <span class="status-badge" style="background:#38bdf8; color:#0f172a; font-weight:800; font-size:0.68rem;">RECARGA 60m</span>
               </div>
-              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (ó 100 m)</div>
+                <div>• Espejo de agua: <strong>NE = 60 m</strong> | Dinámico: <strong>ND = 78 m</strong> ($s=18\text{ m}$)</div>
+                <div>• Carga y Bomba: <strong>HMT = 91 mca</strong> | Bomba <strong>5.5 HP</strong> (Ahorro eléctrico)</div>
+                <div>• Calidad y Aducción: <strong>ECw = 1.4 dS/m</strong> | <strong>Aducción 0 m</strong></div>
+                <div>• Capex Estimado: <strong style="color:#38bdf8;">~$29.850 USD</strong></div>
+              </div>
+            </div>
+
+            <!-- Opción A2 (70m) -->
+            <div class="location-option-card" id="loc-card-optA70" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <strong style="color:#cbd5e1; font-size:0.88rem;">Opción A2: Predio In Situ (NE = 70 m)</strong>
+                <span class="tag" style="background:rgba(148,163,184,0.2); color:#cbd5e1; font-size:0.68rem;">LÍNEA ESTIVAL</span>
+              </div>
+              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
                 <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong></div>
-                <div>• Freático: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong> ($s=18\text{ m}$)</div>
-                <div>• Calidad: <strong>ECw = 1.4 dS/m</strong> ($LF \approx 23\%$)</div>
-                <div>• Infraestructura: <strong>Aducción 0 m</strong> (Bomba directa a reservorio)</div>
-                <div>• Capex Estimado: <strong style="color:#38bdf8;">~$31.400 USD</strong></div>
+                <div>• Sequía de marzo: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong> ($s=18\text{ m}$)</div>
+                <div>• Carga y Bomba: <strong>HMT = 100.5 mca</strong> | Bomba <strong>7.5 HP</strong></div>
+                <div>• Calidad y Aducción: <strong>ECw = 1.4 dS/m</strong> | <strong>Aducción 0 m</strong></div>
+                <div>• Capex Estimado: <strong style="color:#cbd5e1;">~$31.400 USD</strong></div>
               </div>
             </div>
 
             <!-- Opción B -->
             <div class="location-option-card" id="loc-card-optB" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#34d399; font-size:0.9rem;">Opción B: Piedemonte Sur (+3.0 km Sur)</strong>
-                <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.7rem;">AGUA DULCE</span>
+                <strong style="color:#34d399; font-size:0.88rem;">Opción B: Piedemonte Sur (+3.0 km)</strong>
+                <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.68rem;">AGUA DULCE</span>
               </div>
-              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
-                <div>• Cota: <strong>750 msnm</strong> (Recarga Atarigua) | Profundidad: <strong>100 m</strong></div>
+              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>750 msnm</strong> (Recarga) | Profundidad: <strong>100 m</strong></div>
                 <div>• Freático somero: <strong>NE = 50 m</strong> | Dinámico: <strong>ND = 68 m</strong> ($s=18\text{ m}$)</div>
                 <div>• Calidad superior: <strong>ECw = 0.9 dS/m</strong> ($LF \approx 11\%$)</div>
-                <div>• Infraestructura: <strong>3.000 m PEAD 75mm</strong> + Servidumbre + Booster</div>
+                <div>• Infraestructura: <strong>3.000 m PEAD 75mm</strong> + Booster</div>
                 <div>• Capex Estimado: <strong style="color:#34d399;">~$48.500 USD</strong> (Obra externa)</div>
               </div>
             </div>
@@ -841,11 +856,11 @@
             <!-- Opción C -->
             <div class="location-option-card" id="loc-card-optC" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
               <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#f59e0b; font-size:0.9rem;">Opción C: Centro Valle (+2.5 km N, Guadalupe)</strong>
-                <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.7rem;">CONO ABATIDO</span>
+                <strong style="color:#f59e0b; font-size:0.88rem;">Opción C: Centro Valle (+2.5 km N)</strong>
+                <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.68rem;">CONO CRÍTICO</span>
               </div>
-              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
-                <div>• Cota: <strong>660 msnm</strong> (Cono crítico) | Profundidad: <strong>140 m</strong></div>
+              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>660 msnm</strong> | Profundidad: <strong>140 m</strong></div>
                 <div>• Freático profundo: <strong>NE = 98 m</strong> | Dinámico: <strong>ND = 122 m</strong> ($s=24\text{ m}$)</div>
                 <div>• Salinidad elevada: <strong>ECw = 2.4 dS/m</strong> ($LF \ge 35\%$)</div>
                 <div>• Infraestructura: Requiere bomba de <strong>12.5 HP</strong> ($HMT = 138\text{ mca}$)</div>
@@ -860,7 +875,8 @@
           <div class="input-item">
             <label for="select-drill-location"><strong>Ubicación Geológica:</strong></label>
             <select id="select-drill-location" class="input-select" style="border-color:#38bdf8;">
-              <option value="A" selected>Opción A: Predio In Situ (0 m, Cota 700)</option>
+              <option value="A60" selected>Opción A1: Predio In Situ (0 m) — Freático 60 m (Recarga 640 msnm)</option>
+              <option value="A70">Opción A2: Predio In Situ (0 m) — Freático 70 m (Línea Base Estival)</option>
               <option value="B">Opción B: Piedemonte Sur (+3.0 km, Cota 750)</option>
               <option value="C">Opción C: Centro Valle (+2.5 km N, Cota 660)</option>
             </select>

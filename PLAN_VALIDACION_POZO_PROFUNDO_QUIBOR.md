@@ -353,20 +353,22 @@ Con la ejecución de este protocolo técnico, el productor del predio en el **Va
 
 Si en el predio georreferenciado (**$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$**, Cota ~700 msnm) se requiere **perforar un pozo nuevo desde cero**, o evaluar la captación a distintas distancias según el nivel freático regional del Valle de Quíbor, los siguientes cálculos hidrogeológicos y especificaciones de ingeniería rigen la obra civil y electromecánica de acuerdo a los estudios hidrogeológicos del CIDIAT-ULA / SHYQ (Jégat et al., 2012) y las normas internacionales AWWA A100.
 
-### 8.0. Análisis Comparativo de 3 Escenarios de Ubicación y Distancia al Frente Freático
+### 8.0. Análisis Comparativo de 4 Escenarios de Ubicación y Profundidad del Frente Freático
 
-| Parámetro Hidrogeológico | Opción A: Predio In Situ (0 m) | Opción B: Piedemonte Sur (+3.0 km Sur) | Opción C: Centro Valle (+2.5 km N, Guadalupe) |
-| :--- | :---: | :---: | :---: |
-| **Cota Topográfica Superficial** | **$700\text{ msnm}$** | **$750\text{ msnm}$** (Piedemonte) | **$660\text{ msnm}$** (Depresión central) |
-| **Nivel Estático ($NE$)** | **$70.0\text{ m}$** | **$50.0\text{ m}$** (Acuífero somero de recarga) | **$98.0\text{ m}$** (Cono de abatimiento regional) |
-| **Nivel Dinámico Previsto ($ND$)** | **$88.0\text{ m}$** ($s = 18.0\text{ m}$) | **$68.0\text{ m}$** ($s = 18.0\text{ m}$) | **$122.0\text{ m}$** ($s = 24.0\text{ m}$) |
-| **Profundidad Total de Barreno** | **$120\text{ m}$** (Contacto Basamento Morán) | **$100\text{ m}$** | **$140\text{ m}$** |
-| **Conductividad Eléctrica ($EC_w$)** | **$1.4\text{ dS/m}$** (Típica predio) | **$0.9\text{ dS/m}$** (Baja salinidad / recarga) | **$2.4\text{ dS/m}$** (Alta salinidad / sulfatada) |
-| **Fracción de Lavado ($LF$) Tomate** | **$23.0\%$** | **$11.0\%$** | **$\ge 35.0\%$** (Alto volumen de sobre-riego) |
-| **Potencia de Bomba Sumergible** | **$7.5\text{ HP}$** ($HMT \approx 100.5\text{ mca}$) | **$5.5\text{ HP}$** en pozo + Booster | **$12.5\text{ HP}$** ($HMT \approx 138.0\text{ mca}$) |
-| **Infraestructura de Aducción** | **$0\text{ m}$** (Directo al reservorio) | **$3.000\text{ m}$ PEAD $75\text{ mm}$ PN10 + Servidumbre** | Conexión local predio norte |
-| **Capex Estimado Llave en Mano** | **~$31.400 USD** | **~$48.500 USD** (Obra lineal externa) | **~$36.800 USD** (Alto costo energético) |
-| **Dictamen de Ingeniería** | **RECOMENDADA (Independencia total)** | Viable si se prioriza agua dulce sin lavado | Desaconsejada por salinización progresiva |
+| Parámetro Hidrogeológico | Opción A1: In Situ (Freático 60 m) | Opción A2: In Situ (Freático 70 m) | Opción B: Piedemonte Sur (+3.0 km) | Opción C: Centro Valle (+2.5 km N) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Condición Hidrogeológica** | **Recarga Quebrada Atarigua (Mayo-Nov)** | **Línea Base Estival (Sequía Marzo)** | **Acuífero Somero de Piedemonte** | **Cono de Abatimiento Regional** |
+| **Cota Topográfica Superficial** | **$700\text{ msnm}$** | **$700\text{ msnm}$** | **$750\text{ msnm}$** (Piedemonte) | **$660\text{ msnm}$** (Depresión central) |
+| **Nivel Estático ($NE$)** | **$60.0\text{ m}$** (Espejo de agua inicial) | **$70.0\text{ m}$** (Línea estival) | **$50.0\text{ m}$** (Acuífero somero recarga) | **$98.0\text{ m}$** (Depresión profunda) |
+| **Nivel Dinámico Previsto ($ND$)** | **$78.0\text{ m}$** ($s = 18.0\text{ m}$) | **$88.0\text{ m}$** ($s = 18.0\text{ m}$) | **$68.0\text{ m}$** ($s = 18.0\text{ m}$) | **$122.0\text{ m}$** ($s = 24.0\text{ m}$) |
+| **Profundidad Total de Barreno** | **$100 - 120\text{ m}$** (Captación gravas) | **$120\text{ m}$** (Contacto Basamento Morán) | **$100\text{ m}$** | **$140\text{ m}$** |
+| **Carga Manométrica Total ($HMT$)**| **$91.0\text{ mca}$** | **$100.5\text{ mca}$** | **$81.0\text{ mca}$** (en pozo) | **$138.0\text{ mca}$** |
+| **Potencia Bomba Sumergible** | **$5.5\text{ HP}$** (Instalada a $90\text{ m}$) | **$7.5\text{ HP}$** (Instalada a $98\text{ m}$) | **$5.5\text{ HP}$** + Booster externo | **$12.5\text{ HP}$** ($HMT$ crítica) |
+| **Conductividad Eléctrica ($EC_w$)** | **$1.4\text{ dS/m}$** | **$1.4\text{ dS/m}$** | **$0.9\text{ dS/m}$** (Baja salinidad) | **$2.4\text{ dS/m}$** (Alta salinidad / sulfatos)|
+| **Fracción de Lavado ($LF$) Tomate** | **$23.0\%$** | **$23.0\%$** | **$11.0\%$** | **$\ge 35.0\%$** (Sobre-riego severo) |
+| **Infraestructura de Aducción** | **$0\text{ m}$** (Directo a reservorio) | **$0\text{ m}$** (Directo a reservorio) | **$3.000\text{ m}$ PEAD $75\text{ mm}$ + Booster** | Conexión secundaria local |
+| **Capex Estimado Llave en Mano** | **~$29.850 USD** | **~$31.400 USD** | **~$48.500 USD** (Obra lineal externa) | **~$36.800 USD** (Alto costo eléctrico) |
+| **Dictamen de Ingeniería** | **ÓPTIMA (Mayor ahorro eléctrico)** | **RECOMENDADA (Margen de sequía)** | Viable si se prioriza agua dulce | Desaconsejada por salinización |
 
 ---
 
