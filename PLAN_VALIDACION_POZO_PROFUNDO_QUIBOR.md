@@ -349,20 +349,54 @@ Con la ejecución de este protocolo técnico, el productor del predio en el **Va
 
 ---
 
-## 8. PROYECTO EJECUTIVO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO (120 m)
+## 8. PROYECTO EJECUTIVO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO
 
-Si en el predio georreferenciado (**$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$**) se requiere **perforar un pozo nuevo desde cero**, los siguientes cálculos y especificaciones de ingeniería rigen la obra civil y electromecánica de acuerdo a los estudios hidrogeológicos del CIDIAT-ULA / SHYQ (Jégat et al., 2012) y las normas internacionales AWWA A100:
+Si en el predio georreferenciado (**$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$**, Cota ~700 msnm) se requiere **perforar un pozo nuevo desde cero**, o evaluar la captación a distintas distancias según el nivel freático regional del Valle de Quíbor, los siguientes cálculos hidrogeológicos y especificaciones de ingeniería rigen la obra civil y electromecánica de acuerdo a los estudios hidrogeológicos del CIDIAT-ULA / SHYQ (Jégat et al., 2012) y las normas internacionales AWWA A100.
+
+### 8.0. Análisis Comparativo de 3 Escenarios de Ubicación y Distancia al Frente Freático
+
+| Parámetro Hidrogeológico | Opción A: Predio In Situ (0 m) | Opción B: Piedemonte Sur (+3.0 km Sur) | Opción C: Centro Valle (+2.5 km N, Guadalupe) |
+| :--- | :---: | :---: | :---: |
+| **Cota Topográfica Superficial** | **$700\text{ msnm}$** | **$750\text{ msnm}$** (Piedemonte) | **$660\text{ msnm}$** (Depresión central) |
+| **Nivel Estático ($NE$)** | **$70.0\text{ m}$** | **$50.0\text{ m}$** (Acuífero somero de recarga) | **$98.0\text{ m}$** (Cono de abatimiento regional) |
+| **Nivel Dinámico Previsto ($ND$)** | **$88.0\text{ m}$** ($s = 18.0\text{ m}$) | **$68.0\text{ m}$** ($s = 18.0\text{ m}$) | **$122.0\text{ m}$** ($s = 24.0\text{ m}$) |
+| **Profundidad Total de Barreno** | **$120\text{ m}$** (Contacto Basamento Morán) | **$100\text{ m}$** | **$140\text{ m}$** |
+| **Conductividad Eléctrica ($EC_w$)** | **$1.4\text{ dS/m}$** (Típica predio) | **$0.9\text{ dS/m}$** (Baja salinidad / recarga) | **$2.4\text{ dS/m}$** (Alta salinidad / sulfatada) |
+| **Fracción de Lavado ($LF$) Tomate** | **$23.0\%$** | **$11.0\%$** | **$\ge 35.0\%$** (Alto volumen de sobre-riego) |
+| **Potencia de Bomba Sumergible** | **$7.5\text{ HP}$** ($HMT \approx 100.5\text{ mca}$) | **$5.5\text{ HP}$** en pozo + Booster | **$12.5\text{ HP}$** ($HMT \approx 138.0\text{ mca}$) |
+| **Infraestructura de Aducción** | **$0\text{ m}$** (Directo al reservorio) | **$3.000\text{ m}$ PEAD $75\text{ mm}$ PN10 + Servidumbre** | Conexión local predio norte |
+| **Capex Estimado Llave en Mano** | **~$31.400 USD** | **~$48.500 USD** (Obra lineal externa) | **~$36.800 USD** (Alto costo energético) |
+| **Dictamen de Ingeniería** | **RECOMENDADA (Independencia total)** | Viable si se prioriza agua dulce sin lavado | Desaconsejada por salinización progresiva |
+
+---
+
+### 8.0.1. Modelo Hidrodinámico de Interferencia de Pozos Vecinos (Cooper-Jacob)
+
+En el acuífero de Quíbor, caracterizado por una Transmisividad $T = 180\text{ m}^2\text{/día}$ ($2.08\times 10^{-3}\text{ m}^2\text{/s}$) y Coeficiente de Almacenamiento $S = 2.5\times 10^{-3}$, el radio de influencia teórico de un pozo operando a $Q = 2.50\text{ L/s}$ ($216\text{ m}^3\text{/día}$) durante un régimen continuo de 24 horas es:
+$$R_0 \approx 1.5 \sqrt{\frac{T \cdot t}{S}} = 1.5 \sqrt{\frac{180 \times 1}{0.0025}} \approx \mathbf{260\text{ metros}}$$
+
+Si un pozo vecino en producción se encuentra a una distancia $r < R_0$, se genera una superposición de conos de depresión con un **abatimiento mutuo adicional ($\Delta s_{interf}$)** evaluado mediante la solución aproximada de Cooper & Jacob (1946):
+$$\Delta s_{interf} = \frac{Q}{4\pi T} \ln \left( \frac{2.25\, T\, t}{r^2\, S} \right)$$
+
+| Distancia al Pozo Vecino ($r$) | Abatimiento Inducido ($\Delta s_{interf}$) | Nivel Dinámico Resultante ($ND_{corregido}$) | Diagnóstico Operativo |
+| :---: | :---: | :---: | :--- |
+| **$50\text{ m}$** | **$+0.89\text{ m}$** | **$88.89\text{ m}$** | ⚠️ **Alerta Crítica:** Fuerte solapamiento; sobrecosto eléctrico y riesgo de turbulencia en filtros. |
+| **$100\text{ m}$** | **$+0.56\text{ m}$** | **$88.56\text{ m}$** | ⚠️ **Precaución Severa:** Interferencia significativa; programar bombeo alterno por turnos. |
+| **$150\text{ m}$** | **$+0.36\text{ m}$** | **$88.36\text{ m}$** | ⚠️ **Interferencia Moderada:** Aceptable si ambos pozos no operan simultáneamente $>6\text{ h}$. |
+| **$200\text{ m}$** | **$+0.23\text{ m}$** | **$88.23\text{ m}$** | ℹ️ **Interferencia Leve:** Poco impacto en el rendimiento energético de la electrobomba. |
+| **$250\text{ m}$** | **$+0.12\text{ m}$** | **$88.12\text{ m}$** | ✅ **Distancia Segura:** Abatimiento marginal ($12\text{ cm}$). |
+| **$\ge 260\text{ m}$** | **$0.00\text{ m}$** | **$88.00\text{ m}$** | ✅ **Independencia Hidrodinámica Plena:** Fuera del cono de depresión recíproco. |
 
 ```mermaid
 graph TD
-    A["Emplazamiento: 9°53'20.0''N, 69°35'35.0''W (Cota ~700 msnm)"] --> B["Perforación Rotaria 12¼'' hasta 120 m (Lodo bentonítico biodegradable)"]
+    A["Emplazamiento Seleccionado: Opción A (9°53'20.0''N, 69°35'35.0''W, Cota ~700 msnm)"] --> B["Perforación Rotaria 12¼'' hasta 120 m (Contacto Basamento Morán)"]
     B --> C["Perfilaje Geofísico Eléctrico SP y Resistividad Normal (16'' y 64'')"]
-    C --> D["Diseño de Entubado Definitivo: 82 m Tubo Ciego + 38 m Filtro Johnson AISI 304"]
-    D --> E["Inyección Sello Sanitario Cemento-Bentonita (0 a 15 m)"]
-    D --> F["Empaque Anular de Grava Cuarzosa 2-4 mm: 6.65 m³ (15 a 120 m)"]
-    E & F --> G["Desarrollo por Air-Lift (200 PSI) + Tripolifosfato de Sodio (24h)"]
-    G --> H["Prueba de Bombeo Escalonada y Continua 24h (Q = 2.50 L/s)"]
-    H --> I["Instalación Electrobomba Sumergible 5.5 a 7.5 HP a 98 m (HMT = 100.5 mca)"]
+    C --> D["Diseño de Entubado: 82 m Tubo Ciego ASTM A53 + 38 m Filtro Johnson AISI 304 (Ve ≤ 0.03 m/s)"]
+    D --> E["Inyección Sello Sanitario Cemento-Bentonita Tremie (0 a 15 m)"]
+    D --> F["Empaque Anular de Grava Cuarzosa 2-4 mm SiO2 >95% (7.06 m³, 11.3 Ton)"]
+    E & F --> G["Desarrollo por Air-Lift (200 PSI) + Tripolifosfato de Sodio (Arenas <10 ppm)"]
+    G --> H["Prueba de Bombeo Escalonada (Jacob) y Continua 24-48h (Theis)"]
+    H --> I["Instalación Electrobomba Sumergible 7.5 HP AISI 304 a 98 m con VFD (HMT = 100.5 mca)"]
 ```
 
 ---
@@ -543,4 +577,27 @@ Precios referenciales de contratistas de perforación en la región Centro-Occid
 * **Ingreso Bruto Proyectado:** A un precio promedio en finca de **$0.90\text{ a }1.20\text{ USD/kg}$ ($18 - 24\text{ USD}$ por caja de 20 kg)**:
   $$\text{Ingreso Ciclo} = 35.000\text{ kg} \times 1.00\text{ USD/kg} = \mathbf{35.000\text{ USD / ciclo}}$$
 * **Impacto del Pozo Propio:** Un pozo propio certificado de 120 m blindado contra el abatimiento del acuífero asegura el agua para **múltiples naves consecutivas (hasta 8.000 - 10.000 m² futuros)**, amortizando la inversión en apenas **1.5 a 2 ciclos de producción**, eliminando por completo la dependencia de camiones cisterna (costo en Quíbor: $30 - 45\text{ USD}$ por cisterna de 10.000 L, lo que representaría más de $2.500\text{ USD/mes}$ en agua comprada).
+
+---
+
+### 8.9. Neutralización Química de Bicarbonatos ($HCO_3^-$) con Ácido Nítrico ($HNO_3$)
+
+Las aguas subterráneas del Valle de Quíbor presentan concentraciones habituales de bicarbonatos entre **$3.5\text{ y }5.0\text{ meq/L}$ ($215 - 305\text{ ppm}$)**, lo que induce un pH alcalino ($7.6 - 8.3$) e incrementa drásticamente el riesgo de obturación química de los goteros autocompensantes (PC) por precipitación de carbonato de calcio ($\text{CaCO}_3$) y fosfatos de calcio insolubles.
+
+#### Reacción Química de Neutralización:
+$$\text{HNO}_3\text{ (ac)} + \text{HCO}_3^-\text{ (ac)} \longrightarrow \text{NO}_3^-\text{ (ac)} + \text{H}_2\text{O} + \text{CO}_2\uparrow$$
+
+#### Ecuación de Dosificación de Ácido Nítrico Comercial al 60% ($d = 1.35\text{ kg/L}$):
+Para neutralizar el exceso de bicarbonatos dejando un valor residual de seguridad de **$0.50\text{ meq/L}$** (evitando desestabilizar el poder amortiguador y la acidificación excesiva de las raíces):
+$$\text{Dosis } \text{HNO}_3\text{ 60% [L/m}^3\text{]} = \frac{(\text{HCO}_3^-\text{ [meq/L]} - 0.50) \times 63.01\text{ g/mol}}{0.60 \times 1.35\text{ kg/L} \times 1.000} \approx (\text{HCO}_3^- - 0.50) \times \mathbf{0.0778\text{ L/m}^3}$$
+
+#### Aporte de Nitrógeno a la Solución Nutritiva:
+Cada $\text{meq/L}$ de bicarbonato neutralizado aporta exactamente $1.0\text{ meq/L}$ de nitrato ($\text{NO}_3^-$):
+$$\text{Aporte N-NO}_3^-\text{ [ppm]} = (\text{HCO}_3^- - 0.50) \times 14.007\text{ ppm}$$
+* **Ejemplo Práctico Quíbor ($\text{HCO}_3^- = 4.2\text{ meq/L}$):**
+  * Consumo de ácido: $(4.2 - 0.5) \times 0.0778 = \mathbf{0.288\text{ L de HNO}_3\text{ 60% por m}^3\text{ de agua}}$.
+  * Para una demanda diaria pico de $15.75\text{ m}^3\text{/día}$ en 2.000 m²: Consumo de **$4.54\text{ Litros/día de HNO}_3$**.
+  * Aporte nutricional: $3.7 \times 14.007 = \mathbf{51.8\text{ ppm de N-NO}_3^-}$.
+  * **Ahorro en Fertilizantes:** Esta cantidad aportada por el ácido debe restarse directamente del nitrato de calcio o nitrato de potasio en la formulación de fertirriego, ahorrando hasta un 25% en la compra de fuentes nitrogenadas comerciales.
+
 

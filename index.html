@@ -13,106 +13,200 @@
   <meta name="theme-color" content="#10b981">
 </head>
 <body class="dark-theme">
-  <!-- Header / Navigation Bar -->
-  <header class="app-header">
-    <div class="header-container">
-      <div class="brand">
-        <div class="brand-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+  <!-- Backdrop for mobile drawer -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <div class="app-layout" id="app-layout">
+    
+    <!-- ==================== SIDEBAR PRO ==================== -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <!-- Sidebar Header -->
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <h1 class="brand-title">AgroQuíbor Pro</h1>
+            <span class="brand-subtitle">Valle de Quíbor (~700 msnm)</span>
+          </div>
+        </div>
+        <button id="btn-collapse-sidebar" class="btn-sidebar-collapse" type="button" title="Colapsar / Expandir Menú">
+          <svg class="icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
           </svg>
-        </div>
-        <div class="brand-text">
-          <h1>Agente Agronómico Quíbor</h1>
-          <span class="subtitle">Ingeniería de Casas de Malla — Quíbor, Lara (9°53'20.0"N 69°35'35.0"W | ~700 msnm)</span>
-        </div>
+        </button>
       </div>
-      <div class="badge-container">
+
+      <!-- Agro Value Chain / Stage Navigation -->
+      <nav class="sidebar-nav" id="sidebar-nav">
+        
+        <!-- ETAPA 1 -->
+        <div class="nav-group">
+          <div class="nav-group-header">
+            <span class="nav-group-num">01</span>
+            <span class="nav-group-title">Bioclima & Emplazamiento</span>
+          </div>
+          <div class="nav-group-items">
+            <button class="nav-item active" data-tab="tab-clima" id="nav-item-clima" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+              </span>
+              <span class="nav-item-label">Climatología & Viento</span>
+              <span class="nav-item-badge">MERRA-2</span>
+            </button>
+            <button class="nav-item" data-tab="tab-ventilacion" id="nav-item-ventilacion" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+              </span>
+              <span class="nav-item-label">Ventilación & Extractores</span>
+              <span class="nav-item-badge">Hellmann</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 2 -->
+        <div class="nav-group">
+          <div class="nav-group-header">
+            <span class="nav-group-num">02</span>
+            <span class="nav-group-title">Estructura & Fitosanidad</span>
+          </div>
+          <div class="nav-group-items">
+            <button class="nav-item" data-tab="tab-estructura" id="nav-item-estructura" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
+              </span>
+              <span class="nav-item-label">Estructura 2.000 m²</span>
+              <span class="nav-item-badge">Guayas</span>
+            </button>
+            <button class="nav-item" data-tab="tab-planos" id="nav-item-planos" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </span>
+              <span class="nav-item-label">Visor 3D & Planos CAD</span>
+              <span class="nav-item-badge">Blender 3D</span>
+            </button>
+            <button class="nav-item" data-tab="tab-plagas" id="nav-item-plagas" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v4a4 4 0 0 0 8 0v-4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/></svg>
+              </span>
+              <span class="nav-item-label">Matriz de Plagas</span>
+              <span class="nav-item-badge">Malla 50×25</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 3 -->
+        <div class="nav-group">
+          <div class="nav-group-header">
+            <span class="nav-group-num">03</span>
+            <span class="nav-group-title">Acuífero & Hidrogeología</span>
+          </div>
+          <div class="nav-group-items">
+            <button class="nav-item" data-tab="tab-riego" id="nav-item-riego" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+              </span>
+              <span class="nav-item-label">Riego FAO-56 & Salinidad</span>
+              <span class="nav-item-badge">LF %</span>
+            </button>
+            <button class="nav-item" data-tab="tab-riego" data-scroll="well-drilling-section" id="nav-item-pozo" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </span>
+              <span class="nav-item-label">Perforación Pozo 120 m</span>
+              <span class="nav-item-badge">CIDIAT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ETAPA 4 -->
+        <div class="nav-group">
+          <div class="nav-group-header">
+            <span class="nav-group-num">04</span>
+            <span class="nav-group-title">Operación & Producción</span>
+          </div>
+          <div class="nav-group-items">
+            <button class="nav-item" data-tab="tab-produccion" id="nav-item-produccion" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+              </span>
+              <span class="nav-item-label">Plan Maestro Tomate</span>
+              <span class="nav-item-badge">37.4 Ton</span>
+            </button>
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="hydraulic-section" id="nav-item-hidraulica" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9m-4-4l4 4 4-4"/></svg>
+              </span>
+              <span class="nav-item-label">Cadena Hidráulica & Bomba</span>
+              <span class="nav-item-badge">1.5 HP</span>
+            </button>
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="field-action-sheet" id="nav-item-ficha" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </span>
+              <span class="nav-item-label">Ficha de Turno Diario</span>
+              <span class="nav-item-badge">Operador</span>
+            </button>
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="economic-simulator-section" id="nav-item-simulador" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </span>
+              <span class="nav-item-label">Simulador Económico</span>
+              <span class="nav-item-badge">AIFA</span>
+            </button>
+          </div>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Footer / Controls -->
+      <div class="sidebar-footer">
         <button id="btn-toggle-sunlight" class="btn-sunlight-toggle" type="button" title="Alternar Modo Sol Directo (Ultra-Contraste para lecturas al aire libre)">
           <span class="sunlight-icon">☀️</span> <span id="sunlight-btn-text">Modo Sol Directo</span>
         </button>
-        <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
-        <span class="badge badge-merra">NASA MERRA-2</span>
-        <span class="badge badge-crop">Pimentón & Tomate</span>
-        <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 9°53'20.0"N 69°35'35.0"W</a>
+        <div class="sidebar-footer-status">
+          <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
+          <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 Quíbor 700m</a>
+        </div>
       </div>
-    </div>
-    
-    <!-- Tab Navigation -->
-    <nav class="nav-tabs">
-      <button class="nav-btn active" data-tab="tab-clima" id="btn-tab-clima">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
-        Clima & Viento
-      </button>
-      <button class="nav-btn" data-tab="tab-ventilacion" id="btn-tab-ventilacion">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
-        Ventilación & Extractores
-      </button>
-      <button class="nav-btn" data-tab="tab-riego" id="btn-tab-riego">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-        Riego FAO-56 & Salinidad
-      </button>
-      <button class="nav-btn" data-tab="tab-plagas" id="btn-tab-plagas">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v4a4 4 0 0 0 8 0v-4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/></svg>
-        Matriz de Plagas (Malla 50×25)
-      </button>
-      <button class="nav-btn" data-tab="tab-estructura" id="btn-tab-estructura">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
-        Estructura 2.000 m²
-      </button>
-      <button class="nav-btn" data-tab="tab-planos" id="btn-tab-planos">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Planos SVG (3D & 2D)
-      </button>
-      <button class="nav-btn" data-tab="tab-produccion" id="btn-tab-produccion">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-        Plan de Producción (2.000 m²)
-      </button>
-    </nav>
-  </header>
+    </aside>
 
-  <!-- Farm Pipeline Navigation (Skill agri-ux-ui: Cadena de Valor Agronómica) -->
-  <div class="pipeline-bar-wrapper">
-    <div class="pipeline-container">
-      <div class="pipeline-title">
-        <span>🌱 Flujo Agronómico:</span>
-      </div>
-      <div class="pipeline-steps" id="farm-pipeline-steps">
-        <div class="pipeline-step active" data-pipeline-tab="tab-clima" title="1. Estacionalidad climática y vientos del Valle de Quíbor">
-          <span class="pipeline-step-num">1</span>
-          <span class="pipeline-step-label">Clima & Emplazamiento</span>
-          <span class="pipeline-step-sub">(Valle de Quíbor 700 msnm)</span>
+    <!-- ==================== MAIN AREA ==================== -->
+    <div class="app-main-area" id="app-main-area">
+      <!-- Topbar Compacta Pro -->
+      <header class="app-topbar" id="app-topbar">
+        <div class="topbar-left">
+          <button id="btn-toggle-sidebar" class="btn-hamburger" type="button" aria-label="Abrir Menú Lateral">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+          <div class="breadcrumb" id="topbar-breadcrumb">
+            <span class="breadcrumb-root">🌱 AgroQuíbor</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-stage" id="breadcrumb-stage">Etapa 1: Bioclima</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-module" id="breadcrumb-module">Climatología & Viento</span>
+          </div>
         </div>
-        <span class="pipeline-arrow">➔</span>
-        <div class="pipeline-step" data-pipeline-tab="tab-estructura" title="2. Arquitectura de nave parral, malla 50x25 y tutorado">
-          <span class="pipeline-step-num">2</span>
-          <span class="pipeline-step-label">Estructura & Parral</span>
-          <span class="pipeline-step-sub">(Malla 50×25 / 5.5m Cumbrera)</span>
+        <div class="topbar-right">
+          <div class="topbar-telemetry">
+            <span class="telemetry-pill pill-wind" title="Viento dominante del Este (88% anual)">💨 88% ESTE</span>
+            <span class="telemetry-pill pill-geo" title="Elevación base del predio">📍 695 msnm</span>
+          </div>
+          <button id="btn-topbar-export" class="btn-topbar-action" type="button" title="Copiar y Enviar Ficha de Turno por WhatsApp">
+            <span>📲</span> <span class="btn-topbar-label">Ficha Turno</span>
+          </button>
         </div>
-        <span class="pipeline-arrow">➔</span>
-        <div class="pipeline-step" data-pipeline-tab="tab-riego" title="3. Estudio hidrogeológico CIDIAT-ULA y balance hídrico">
-          <span class="pipeline-step-num">3</span>
-          <span class="pipeline-step-label">Acuífero & Pozo</span>
-          <span class="pipeline-step-sub">(CIDIAT-ULA / Cono 546 msnm)</span>
-        </div>
-        <span class="pipeline-arrow">➔</span>
-        <div class="pipeline-step" data-pipeline-tab="tab-produccion" data-pipeline-scroll="hydraulic-section" title="4. Cadena hidráulica: Motor 1.5 HP 220V + Filtro de discos 120M">
-          <span class="pipeline-step-num">4</span>
-          <span class="pipeline-step-label">Bombeo & Filtrado</span>
-          <span class="pipeline-step-sub">(Motor 1.5 HP 220V + Discos 120M)</span>
-        </div>
-        <span class="pipeline-arrow">➔</span>
-        <div class="pipeline-step" data-pipeline-tab="tab-produccion" title="5. Ficha operativa de campo, 3 sectores y rendimiento de 37.4 Ton">
-          <span class="pipeline-step-num">5</span>
-          <span class="pipeline-step-label">Riego & Rendimiento</span>
-          <span class="pipeline-step-sub">(3 Sectores / 37.4 Ton Tomate)</span>
-        </div>
-      </div>
-    </div>
-  </div>
+      </header>
 
-  <!-- Main Container -->
-  <main class="main-content">
+      <!-- Main Container -->
+      <main class="main-content">
     
     <!-- ==================== TAB 1: CLIMA & VIENTO ==================== -->
     <section id="tab-clima" class="tab-pane active">
@@ -359,13 +453,41 @@
                 <option value="0">Trasplante / Establecimiento (0-3 sem)</option>
                 <option value="1">Crecimiento Vegetativo (3-6 sem)</option>
                 <option value="2">Floración - Cuajado (6-10 sem)</option>
-                <option value="3" selected>Fructificación - Cosecha (Pico de Calor)</option>
+                <option value="3" selected>Fructificación - Cosecha (Pico de Carga)</option>
                 <option value="4">Fin de Ciclo / Senescencia</option>
               </select>
             </div>
             <div class="input-item">
-              <label for="input-well-ec">Conductividad Agua Pozo (<span class="tooltip-term">ECw <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Conductividad Eléctrica (ECw)</span><span class="tooltip-tag">dS/m</span></span><span class="tooltip-simple">Cantidad de sales disueltas en el agua del pozo. En Quíbor oscila entre 1.0 y 2.5 dS/m. Valores &gt; 1.5 exigen sobre-riego de lavado.</span><span class="tooltip-tech">1 dS/m ≈ 640 ppm sales totales (TDS)</span></span></span> dS/m):</label>
-              <input type="number" id="input-well-ec" value="1.4" min="0.4" max="3.5" step="0.1" class="input-field">
+              <label for="select-month-et0">Mes de Operación (<span class="tooltip-term">ETo MERRA-2 <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración Referencial (ETo)</span><span class="tooltip-tag">NASA MERRA-2</span></span><span class="tooltip-simple">Radiación y demanda atmosférica real mes a mes en el Valle de Quíbor (695 msnm). Pico en Marzo (6.4 mm/d) y mínimo en Julio (4.8 mm/d).</span><span class="tooltip-tech">Penman-Monteith FAO-56 calibrado</span></span></span>):</label>
+              <select id="select-month-et0" class="input-select">
+                <option value="0">Enero (ETo 5.4 mm/día)</option>
+                <option value="1">Febrero (ETo 5.8 mm/día)</option>
+                <option value="2" selected>Marzo (ETo 6.4 mm/día - Pico de Calor)</option>
+                <option value="3">Abril (ETo 6.2 mm/día)</option>
+                <option value="4">Mayo (ETo 5.6 mm/día)</option>
+                <option value="5">Junio (ETo 5.2 mm/día)</option>
+                <option value="6">Julio (ETo 4.8 mm/día - Mínimo)</option>
+                <option value="7">Agosto (ETo 5.1 mm/día)</option>
+                <option value="8">Septiembre (ETo 5.3 mm/día)</option>
+                <option value="9">Octubre (ETo 5.2 mm/día)</option>
+                <option value="10">Noviembre (ETo 4.9 mm/día)</option>
+                <option value="11">Diciembre (ETo 5.0 mm/día)</option>
+              </select>
+            </div>
+            <div class="input-item">
+              <label for="select-soil-cover">Manejo de Superficie / Cobertura:</label>
+              <select id="select-soil-cover" class="input-select">
+                <option value="mulch" selected>Acolchado Plástico Bicolor (Mulch -75% evap. suelo)</option>
+                <option value="bare">Suelo Desnudo / Descubierto (Sin Mulch)</option>
+              </select>
+            </div>
+            <div class="input-item">
+              <label for="input-well-ec">Conductividad Agua Pozo (<span class="tooltip-term">ECw <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Conductividad Eléctrica (ECw)</span><span class="tooltip-tag">dS/m</span></span><span class="tooltip-simple">Cantidad de sales disueltas en el agua del pozo. En Quíbor oscila entre 0.9 y 2.5 dS/m. Valores &gt; 1.5 exigen sobre-riego de lavado.</span><span class="tooltip-tech">1 dS/m ≈ 640 ppm sales totales (TDS)</span></span></span> dS/m):</label>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <input type="number" id="input-well-ec" value="1.4" min="0.4" max="3.5" step="0.1" class="input-field" style="flex:1;">
+                <button type="button" id="btn-quick-yacambu" class="btn-sm" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica del Sistema Yacambú (0.5 dS/m)">💧 Yacambú (0.5)</button>
+                <button type="button" id="btn-quick-well" class="btn-sm" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica de Pozo Profundo Quíbor (1.4 dS/m)">🏜️ Pozo (1.4)</button>
+              </div>
             </div>
             <div class="input-item">
               <label for="input-plant-density">Densidad (Plantas / m²):</label>
@@ -376,12 +498,16 @@
           <!-- Calculation Summary -->
           <div class="results-panel">
             <div class="result-row">
-              <span>Coeficiente de Cultivo (<span class="tooltip-term">Kc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Coeficiente de Cultivo (Kc)</span><span class="tooltip-tag">FAO-56</span></span><span class="tooltip-simple">Factor que ajusta la demanda hídrica según el desarrollo foliar de la planta (0.60 inicial a 1.15 en plena cosecha).</span><span class="tooltip-tech">ETc = ETo × Kc (Lámina neta teórica)</span></span></span> FAO):</span>
-              <strong id="res-fao-kc">1.05</strong>
+              <span>Evapotranspiración Base (<span class="tooltip-term">ETo <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Atmosférica (ETo)</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Consumo de un cultivo de pasto de referencia según temperatura, radiación y viento local de Quíbor.</span><span class="tooltip-tech">NASA MERRA-2 1990-2023</span></span></span>):</span>
+              <strong id="res-fao-eto">6.40 mm/día</strong>
             </div>
             <div class="result-row">
-              <span>Evapotranspiración (<span class="tooltip-term">ETc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración de Cultivo (ETc)</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Volumen neto diario de agua que la planta transpira más la que se evapora del suelo descubierto bajo la malla.</span><span class="tooltip-tech">1 mm/m² = 1.0 Litro de agua</span></span></span> neta):</span>
-              <strong id="res-fao-etc">6.2 mm/día (~18.5 L/pl/sem)</strong>
+              <span>Coeficiente (<span class="tooltip-term">Kc corregido <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Coeficiente de Cultivo Efectivo</span><span class="tooltip-tag">FAO-56</span></span><span class="tooltip-simple">Factor de cultivo ajustado por el acolchado plástico (suprime 75% del componente Ke de evaporación del suelo).</span><span class="tooltip-tech">Kc_efectivo = Kcb + Ke_mulch</span></span></span>):</span>
+              <strong id="res-fao-kc">0.95</strong>
+            </div>
+            <div class="result-row">
+              <span>Evapotranspiración Neta (<span class="tooltip-term">ETc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Neta del Cultivo</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Agua consumida directamente por transpiración de la planta y evaporación de bulbo protegido.</span><span class="tooltip-tech">ETc = ETo × Kc_corregido</span></span></span>):</span>
+              <strong id="res-fao-etc">6.08 mm/día (~19.3 L/pl/sem)</strong>
             </div>
             <div class="result-row">
               <span>Fracción de Lavado Requerida (<span class="tooltip-term">LF <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Fracción de Lixiviación (LF)</span><span class="tooltip-tag">Manejo Salino</span></span><span class="tooltip-simple">Lámina de agua extra para lavar sulfatos y cloruros por debajo del bulbo radicular activo (0-40 cm).</span><span class="tooltip-tech">LF = ECw / [5(ECe) - ECw] (Rhoades / FAO)</span></span></span>):</span>
@@ -389,19 +515,93 @@
             </div>
             <div class="result-row">
               <span>Lámina Bruta Total por Planta:</span>
-              <strong class="highlight-green" id="res-fao-liters-plant">24.0 L / planta / semana</strong>
+              <strong class="highlight-green" id="res-fao-liters-plant">25.1 L / planta / semana</strong>
             </div>
             <div class="result-row">
-              <span>Demanda Diaria Total Módulo 2.000 m²:</span>
-              <strong class="highlight-yellow" id="res-fao-daily-m3">15.08 m³ / día</strong>
+              <span>Demanda Diaria Módulo 2.000 m² (4.400 pl):</span>
+              <strong class="highlight-yellow" id="res-fao-daily-m3">15.78 m³ / día</strong>
+            </div>
+            <div class="result-row">
+              <span>Impacto Salino Sin Lavado (<span class="tooltip-term">Maas-Hoffman <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Ecuación Maas & Hoffman</span><span class="tooltip-tag">Rendimiento</span></span><span class="tooltip-simple">Pérdida potencial de rendimiento acumulado si no se aplica la fracción de lixiviación correspondiente.</span><span class="tooltip-tech">Y = 100 - b(ECe - a)</span></span></span>):</span>
+              <strong id="res-fao-yield-risk" style="color:#f87171;">-0.0% (Lavado Activo Requerido)</strong>
             </div>
           </div>
 
           <div class="info-card" id="salinity-advice-card">
-            <h4>Alerta Agronómica de Salinidad:</h4>
+            <h4>Alerta Agronómica de Salinidad & Manejo Quíbor:</h4>
             <p id="salinity-advice-text">
               Para el agua de pozo de 1.4 dS/m en pimentón, se debe aplicar un 23% extra de agua para evitar que el sodio y cloruros dañen las raíces (concentradas en los primeros 30 cm). Fraccione en 4 pulsos diarios.
             </p>
+          </div>
+
+          <!-- Sub-Card: Neutralización Química de Bicarbonatos -->
+          <div class="info-card" style="margin-top:1rem; border-left:3px solid #38bdf8; background:rgba(15,23,42,0.65);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+              <h4 style="color:#38bdf8; font-size:0.92rem; margin:0;">🧪 Neutralización Química de Bicarbonatos (Acidificación HNO₃)</h4>
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem;">Control de pH 5.8 - 6.2</span>
+            </div>
+            <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:0.75rem; line-height:1.4;">
+              Las aguas subterráneas de Quíbor presentan habitualmente entre <strong>3.5 y 5.0 meq/L de HCO₃⁻</strong> ($215 - 305\text{ ppm}$), precipitando fosfatos y carbonatos de calcio en goteros PC. Neutralizar hasta <strong>0.5 meq/L residual</strong> protege los emisores y aporta nitrógeno nítrico a la solución nutritiva.
+            </p>
+            <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:0.6rem;">
+              <div class="input-item">
+                <label for="input-bicarb-water" style="font-size:0.75rem;">HCO₃⁻ en Agua (meq/L):</label>
+                <input type="number" id="input-bicarb-water" value="4.2" min="1.0" max="8.0" step="0.1" class="input-field" style="padding:0.4rem;">
+              </div>
+              <div class="input-item">
+                <label for="input-bicarb-target" style="font-size:0.75rem;">HCO₃⁻ Residual Deseado:</label>
+                <input type="number" id="input-bicarb-target" value="0.5" min="0.2" max="1.5" step="0.1" class="input-field" style="padding:0.4rem;">
+              </div>
+              <div class="input-item">
+                <label style="font-size:0.75rem;">Ácido Nítrico 60% (d=1.35):</label>
+                <strong id="res-acid-dose-m3" style="color:#38bdf8; font-size:0.95rem; display:block; margin-top:0.3rem;">0.288 L / m³ agua</strong>
+              </div>
+              <div class="input-item">
+                <label style="font-size:0.75rem;">Consumo Diario (2.000 m²):</label>
+                <strong id="res-acid-daily-liters" style="color:#34d399; font-size:0.95rem; display:block; margin-top:0.3rem;">4.54 L / día HNO₃</strong>
+              </div>
+            </div>
+            <div style="margin-top:0.6rem; padding:0.5rem 0.75rem; background:rgba(56,189,248,0.08); border-radius:6px; font-size:0.75rem; color:#cbd5e1; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+              <span>Aporte de Nitrógeno: <strong id="res-acid-n-ppm" style="color:#38bdf8;">51.8 ppm N-NO₃⁻</strong></span>
+              <span style="color:#94a3b8;">Descontar del nitrato de calcio o amonio en el cabezal de fertirriego.</span>
+            </div>
+          </div>
+
+          <!-- Sub-Card: Programación de Pulsos Diarios de Riego -->
+          <div class="info-card" style="margin-top:1rem; border-left:3px solid #10b981; background:rgba(15,23,42,0.65);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+              <h4 style="color:#34d399; font-size:0.92rem; margin:0;">⏱️ Programación de Pulsos Diarios (Goteros PC 1.6 L/h)</h4>
+              <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.7rem;">Caudal Sector: 7.04 m³/h</span>
+            </div>
+            <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:0.75rem; line-height:1.4;">
+              En suelos franco-arcillosos de Quíbor, regar en un solo bloque satura el bulbo, perdiendo agua por escorrentía y concentrando sales en la periferia. Se programa en pulsos circadianos sincronizados con la radiación solar MERRA-2.
+            </p>
+            <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap:0.5rem;" id="pulse-schedule-container">
+              <div class="metric-box" style="padding:0.5rem; text-align:center;">
+                <span class="metric-label" style="font-size:0.7rem;">Pulso 1 (07:30)</span>
+                <span class="metric-val" id="pulse-1-time" style="font-size:1.05rem; color:#38bdf8;">34 min</span>
+                <span class="metric-sub" style="font-size:0.68rem;">Despertar radicular</span>
+              </div>
+              <div class="metric-box" style="padding:0.5rem; text-align:center;">
+                <span class="metric-label" style="font-size:0.7rem;">Pulso 2 (10:30)</span>
+                <span class="metric-val" id="pulse-2-time" style="font-size:1.05rem; color:#34d399;">34 min</span>
+                <span class="metric-sub" style="font-size:0.68rem;">Pico transpiración</span>
+              </div>
+              <div class="metric-box" style="padding:0.5rem; text-align:center;">
+                <span class="metric-label" style="font-size:0.7rem;">Pulso 3 (13:00)</span>
+                <span class="metric-val" id="pulse-3-time" style="font-size:1.05rem; color:#f59e0b;">34 min</span>
+                <span class="metric-sub" style="font-size:0.68rem;">Buffer de calor pico</span>
+              </div>
+              <div class="metric-box" style="padding:0.5rem; text-align:center;">
+                <span class="metric-label" style="font-size:0.7rem;">Pulso 4 (15:30)</span>
+                <span class="metric-val" id="pulse-4-time" style="font-size:1.05rem; color:#a855f7;">33 min</span>
+                <span class="metric-sub" style="font-size:0.68rem;">Lavado de sales final</span>
+              </div>
+            </div>
+            <div style="margin-top:0.6rem; font-size:0.75rem; color:#94a3b8; display:flex; justify-content:space-between;">
+              <span>Tiempo Total Diario: <strong id="res-total-irrigation-minutes" style="color:#f8fafc;">135 min (2.25 h)</strong></span>
+              <span>Lámina Total Diaria: <strong id="res-total-daily-liters-plant" style="color:#34d399;">3.59 L / pl / día</strong></span>
+            </div>
           </div>
         </div>
 
@@ -553,7 +753,7 @@
         <!-- Resumen de las 5 Fases del Protocolo de Campo -->
         <div style="margin-top: 1.25rem;">
           <h4 style="color:#f8fafc; font-size:0.95rem; margin-bottom:0.75rem;">3. Fases Obligatorias para Certificación en Campo:</h4>
-          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem;">
+          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.75rem;">
             <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
               <strong style="color:#38bdf8; font-size:0.85rem;">Fase 1: Video-Inspección CCTV</strong>
               <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Cámara sumergible 360° para verificar verticalidad, posición de filtros y espesor del tapón de sedimentos en el fondo.</p>
@@ -570,58 +770,167 @@
               <strong style="color:#a855f7; font-size:0.85rem;">Fase 4: Caudal Constante 24-48h</strong>
               <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Bombeo continuo a 2.5 L/s midiendo abatimiento y prueba de recuperación Theis ($\ge 90\%$ de reposición del nivel estático).</p>
             </div>
-      <!-- ==================== MÓDULO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO (120 m) ==================== -->
-      <div class="well-drilling-card full-width" id="well-drilling-section">
+            <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
+              <strong style="color:#ec4899; font-size:0.85rem;">Fase 5: Aforos Químicos y Desinfección</strong>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Laboratorio completo (ECw, RAS, SAR, HCO₃⁻, Cl⁻, Boro) y desinfección de entubado con hipoclorito a 50 ppm residual.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== MÓDULO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO ==================== -->
+      <div class="well-drilling-card full-width" id="well-drilling-section" style="margin-top:1.5rem;">
         <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
           <div>
             <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
-              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-weight:700;">🏗️ Obra Hidráulica</span>
-              <h2 style="margin:0;">Proyecto Ejecutivo y Cálculo de Perforación de Pozo (120 m)</h2>
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-weight:700;">🏗️ Obra Hidrogeológica</span>
+              <h2 style="margin:0;">Ingeniería Hidrogeológica y Proyecto de Perforación de Pozo Profundo</h2>
             </div>
             <span class="subtitle">
-              Coordenadas: <strong>9°53'20.0"N 69°35'35.0"W</strong> (~700 msnm) | Abanico Aluvial Atarigua-Quíbor | Basamento Terciario Morán a 116-120 m
+              Coordenadas: <strong>9°53'20.0"N 69°35'35.0"W</strong> (~700 msnm) | Abanico Aluvial Atarigua-Quíbor | Basamento Terciario Formación Morán
             </span>
           </div>
           <div class="filter-group">
-            <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#8-proyecto-ejecutivo-de-ingeniería-y-perforación-de-pozo-profundo-120-m" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(56,189,248,0.2); color:#38bdf8; border-color:rgba(56,189,248,0.4);" title="Ver memoria de cálculo completa">Ver Memoria de Cálculo (.md) ↗</a>
+            <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver predio satelital en Google Maps">📍 Satélite Google ↗</a>
+            <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#8-proyecto-ejecutivo-de-ingeniería-y-perforación-de-pozo-profundo-120-m" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(56,189,248,0.2); color:#38bdf8; border-color:rgba(56,189,248,0.4);" title="Ver memoria de cálculo completa">Ver Memoria Técnica (.md) ↗</a>
           </div>
         </div>
 
         <p class="card-desc" style="margin-top:0.6rem;">
-          Dimensionamiento mecánico y volumétrico para la perforación rotaria de un pozo nuevo en el predio. Basado en la correlación litoestratigráfica de los 42 pozos calibrados en <strong>Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ)</strong>.
+          Dimensionamiento mecánico, hidráulico y económico para la captación subterránea en el Valle de Quíbor. Basado en parámetros calibrados de <strong>Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ)</strong>: Transmisividad $T = 180\text{ m}^2\text{/día}$ ($2.08\times 10^{-3}\text{ m}^2\text{/s}$), Almacenamiento $S = 2.5\times 10^{-3}$, Conductividad hidráulica $K = 22\text{ m/día}$ y Radio de influencia $R_0 \approx 260\text{ m}$.
         </p>
 
+        <!-- Selector de Ubicación / Distancia al Frente Freático -->
+        <div class="info-card" style="margin-top:1.2rem; background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.3);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Distancia al Frente Freático (3 Escenarios Hidrogeológicos):</h4>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.75rem;" id="badge-selected-location">Opción A: Predio In Situ</span>
+          </div>
+
+          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:0.75rem;">
+            <!-- Opción A -->
+            <div class="location-option-card active" id="loc-card-optA" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:2px solid #38bdf8; background:rgba(56,189,248,0.08); transition:all 0.2s ease;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <strong style="color:#38bdf8; font-size:0.9rem;">Opción A: Predio In Situ (0 m)</strong>
+                <span class="status-badge" style="background:#38bdf8; color:#0f172a; font-weight:800; font-size:0.7rem;">RECOMENDADA</span>
+              </div>
+              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong></div>
+                <div>• Freático: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong> ($s=18\text{ m}$)</div>
+                <div>• Calidad: <strong>ECw = 1.4 dS/m</strong> ($LF \approx 23\%$)</div>
+                <div>• Infraestructura: <strong>Aducción 0 m</strong> (Bomba directa a reservorio)</div>
+                <div>• Capex Estimado: <strong style="color:#38bdf8;">~$31.400 USD</strong></div>
+              </div>
+            </div>
+
+            <!-- Opción B -->
+            <div class="location-option-card" id="loc-card-optB" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <strong style="color:#34d399; font-size:0.9rem;">Opción B: Piedemonte Sur (+3.0 km Sur)</strong>
+                <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.7rem;">AGUA DULCE</span>
+              </div>
+              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>750 msnm</strong> (Recarga Atarigua) | Profundidad: <strong>100 m</strong></div>
+                <div>• Freático somero: <strong>NE = 50 m</strong> | Dinámico: <strong>ND = 68 m</strong> ($s=18\text{ m}$)</div>
+                <div>• Calidad superior: <strong>ECw = 0.9 dS/m</strong> ($LF \approx 11\%$)</div>
+                <div>• Infraestructura: <strong>3.000 m PEAD 75mm</strong> + Servidumbre + Booster</div>
+                <div>• Capex Estimado: <strong style="color:#34d399;">~$48.500 USD</strong> (Obra externa)</div>
+              </div>
+            </div>
+
+            <!-- Opción C -->
+            <div class="location-option-card" id="loc-card-optC" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <strong style="color:#f59e0b; font-size:0.9rem;">Opción C: Centro Valle (+2.5 km N, Guadalupe)</strong>
+                <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.7rem;">CONO ABATIDO</span>
+              </div>
+              <div style="font-size:0.8rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+                <div>• Cota: <strong>660 msnm</strong> (Cono crítico) | Profundidad: <strong>140 m</strong></div>
+                <div>• Freático profundo: <strong>NE = 98 m</strong> | Dinámico: <strong>ND = 122 m</strong> ($s=24\text{ m}$)</div>
+                <div>• Salinidad elevada: <strong>ECw = 2.4 dS/m</strong> ($LF \ge 35\%$)</div>
+                <div>• Infraestructura: Requiere bomba de <strong>12.5 HP</strong> ($HMT = 138\text{ mca}$)</div>
+                <div>• Capex Estimado: <strong style="color:#f59e0b;">~$36.800 USD</strong> (Alto costo eléctrico)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Controles Interactivos de Perforación -->
-        <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1.25rem;">
+        <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.9rem; margin-top:1.25rem;">
+          <div class="input-item">
+            <label for="select-drill-location"><strong>Ubicación Geológica:</strong></label>
+            <select id="select-drill-location" class="input-select" style="border-color:#38bdf8;">
+              <option value="A" selected>Opción A: Predio In Situ (0 m, Cota 700)</option>
+              <option value="B">Opción B: Piedemonte Sur (+3.0 km, Cota 750)</option>
+              <option value="C">Opción C: Centro Valle (+2.5 km N, Cota 660)</option>
+            </select>
+          </div>
           <div class="input-item">
             <label for="select-drill-depth"><strong>Profundidad Total Barreno:</strong></label>
             <select id="select-drill-depth" class="input-select" style="border-color:#38bdf8;">
-              <option value="90">90 m (Acuífero Superior - Caudal Ajustado 1.5 L/s)</option>
-              <option value="105">105 m (Acuífero Medio - Caudal 2.0 L/s)</option>
-              <option value="120" selected>120 m (Recomendado CIDIAT-ULA: Contacto Basamento 2.5 L/s)</option>
+              <option value="90">90 m (Acuífero Superior - 1.5 L/s)</option>
+              <option value="100">100 m (Acuífero Piedemonte - 2.5 L/s)</option>
+              <option value="105">105 m (Acuífero Medio - 2.0 L/s)</option>
+              <option value="120" selected>120 m (Contacto Basamento Morán - 2.5 L/s)</option>
+              <option value="140">140 m (Acuífero Profundo Centro Valle - 2.8 L/s)</option>
             </select>
           </div>
           <div class="input-item">
             <label for="select-drill-diameter"><strong>Diámetro de Perforación (Broca):</strong></label>
             <select id="select-drill-diameter" class="input-select">
               <option value="10">10" (254 mm - Espacio Anular Reducido)</option>
-              <option value="12.25" selected>12¼" (311 mm - Estándar Óptimo para Grava)</option>
+              <option value="12.25" selected>12¼" (311 mm - Estándar Óptimo Grava)</option>
               <option value="14">14" (355 mm - Máximo Espacio Anular)</option>
             </select>
           </div>
           <div class="input-item">
-            <label for="select-casing-diameter"><strong>Diámetro Tubería Revestimiento:</strong></label>
+            <label for="select-casing-diameter"><strong>Tubería Revestimiento:</strong></label>
             <select id="select-casing-diameter" class="input-select">
-              <option value="6" selected>6" Acero ASTM A53 (168 mm ext - Caudal hasta 4 L/s)</option>
-              <option value="8">8" Acero ASTM A53 (219 mm ext - Caudal hasta 10 L/s)</option>
+              <option value="6" selected>6" Acero ASTM A53 (168 mm ext, e=6.35 mm)</option>
+              <option value="8">8" Acero ASTM A53 (219 mm ext, e=7.04 mm)</option>
             </select>
           </div>
           <div class="input-item">
             <label for="select-screen-type"><strong>Tipo de Filtros (Captación):</strong></label>
             <select id="select-screen-type" class="input-select" style="border-color:#10b981;">
-              <option value="johnson" selected>Filtro Continuo Johnson AISI 304 (Ranura 0.030" / 0.75 mm)</option>
-              <option value="puente">Tubería Ranurada Tipo Puente (Ranura 1.0 mm)</option>
+              <option value="johnson" selected>Filtro Continuo Johnson AISI 304 (0.030" / 0.75 mm)</option>
+              <option value="puente">Tubería Ranurada Tipo Puente (1.0 mm)</option>
             </select>
+          </div>
+        </div>
+
+        <!-- Módulo de Interferencia de Pozos Vecinos (Cooper-Jacob) -->
+        <div class="info-card" style="margin-top:1.25rem; border-left:3px solid #f59e0b; background:rgba(15,23,42,0.65);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.6rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4 style="color:#f59e0b; font-size:0.92rem; margin:0;">⚡ Interferencia Hidrodinámica de Pozos Vecinos (Modelo Cooper-Jacob)</h4>
+            <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.7rem;">Radio de Influencia R₀ ≈ 260 m</span>
+          </div>
+          <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:0.75rem; line-height:1.4;">
+            En el acuífero de Quíbor ($T = 180\text{ m}^2\text{/día}$, $S = 2.5\times 10^{-3}$), dos pozos que bombean a menos de 250 m solapan sus conos de depresión, produciendo un abatimiento mutuo adicional $\Delta s_{interf} = \frac{Q}{4\pi T}\ln\left(\frac{2.25 T t}{r^2 S}\right)$ que eleva el consumo eléctrico y puede descebar la bomba.
+          </p>
+          <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; align-items:center;">
+            <div class="input-item">
+              <label for="input-well-distance" style="font-size:0.75rem;">Distancia al Pozo Vecino Más Cercano ($r$ en metros):</label>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <input type="range" id="input-well-distance-slider" min="50" max="600" step="10" value="250" style="flex:1;">
+                <input type="number" id="input-well-distance" value="250" min="50" max="600" step="10" class="input-field" style="width:75px; padding:0.3rem;">
+              </div>
+            </div>
+            <div class="metric-box" style="padding:0.5rem;">
+              <span class="metric-label" style="font-size:0.7rem;">Abatimiento por Interferencia (Δs):</span>
+              <span class="metric-val" id="disp-interf-drawdown" style="color:#f59e0b; font-size:1.1rem;">+0.12 m</span>
+              <span class="metric-sub" id="disp-interf-sub">A 250 m con pozo a 2.5 L/s</span>
+            </div>
+            <div class="metric-box" style="padding:0.5rem;">
+              <span class="metric-label" style="font-size:0.7rem;">Nivel Dinámico Corregido:</span>
+              <span class="metric-val" id="disp-corrected-nd" style="color:#38bdf8; font-size:1.1rem;">88.12 m</span>
+              <span class="metric-sub" id="disp-corrected-hmt">HMT Corregida = 101.1 mca</span>
+            </div>
+            <div class="metric-box" style="padding:0.5rem;" id="box-interf-status">
+              <span class="metric-label" style="font-size:0.7rem;">Diagnóstico de Cono Eólico:</span>
+              <span class="metric-val" id="disp-interf-status" style="color:#34d399; font-size:0.95rem;">Distancia Segura</span>
+              <span class="metric-sub" id="disp-interf-status-sub">Interferencia hidrodinámica mínima</span>
+            </div>
           </div>
         </div>
 
@@ -635,7 +944,7 @@
           <div class="metric-box">
             <span class="metric-label">Filtros Johnson</span>
             <span class="metric-val" id="disp-drill-screen" style="color:#34d399;">38.0 m</span>
-            <span class="metric-sub" id="disp-drill-screen-sub">Inox AISI 304 (Ve = 0.0007 m/s)</span>
+            <span class="metric-sub" id="disp-drill-screen-sub">Inox AISI 304 (Ve = 0.0007 m/s ≤ 0.03)</span>
           </div>
           <div class="metric-box">
             <span class="metric-label">Grava Cuarzosa (2-4 mm)</span>
@@ -664,18 +973,18 @@
           <!-- Columna Izquierda: Perfil Estratigráfico y Corte del Pozo -->
           <div class="info-card">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-              <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">Corte Litoestratigráfico Pronosticado (0 - 120 m)</h4>
+              <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;" id="strat-column-title">Corte Litoestratigráfico Pronosticado (0 - 120 m)</h4>
               <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem;">Visual MODFLOW</span>
             </div>
-            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;">
-              Corte hidrogeológico calibrado para las coordenadas $9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$:
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;" id="strat-column-desc">
+              Corte hidrogeológico calibrado para las coordenadas $9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$ (Cota 700 msnm):
             </p>
 
             <div class="drill-visual-container" id="drill-layers-list">
               <!-- 0 a 15 m: Sello Sanitario -->
               <div class="drill-layer layer-sanitary">
                 <span class="drill-layer-depth">0 – 15 m</span>
-                <span class="drill-layer-desc">Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita</strong></span>
+                <span class="drill-layer-desc">Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita Tremie</strong></span>
                 <span class="drill-layer-component badge-seal">Sello 15 m</span>
               </div>
 
@@ -683,13 +992,13 @@
               <div class="drill-layer layer-confining">
                 <span class="drill-layer-depth">15 – 68 m</span>
                 <span class="drill-layer-desc">Arenas medias secas y arcillas plásticas grisáceas compactas</span>
-                <span class="drill-layer-component badge-casing">Tubo Ciego</span>
+                <span class="drill-layer-component badge-casing">Tubo Ciego ASTM A53</span>
               </div>
 
               <!-- 68 a 82 m: Acuífero Superior -->
               <div class="drill-layer layer-aquifer-1">
                 <span class="drill-layer-depth">68 – 82 m</span>
-                <span class="drill-layer-desc"><strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 72 m</span>
+                <span class="drill-layer-desc"><strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 70 m</span>
                 <span class="drill-layer-component badge-screen">Filtro Johnson 12 m</span>
               </div>
 
@@ -711,7 +1020,7 @@
               <div class="drill-layer layer-confining">
                 <span class="drill-layer-depth">112 – 116 m</span>
                 <span class="drill-layer-desc">Arenas finas limosas transicionales</span>
-                <span class="drill-layer-component badge-casing">Tubo Ciego</span>
+                <span class="drill-layer-component badge-casing">Tubo Ciego ASTM A53</span>
               </div>
 
               <!-- 116 a 120 m: Basamento y Calderín -->
@@ -731,28 +1040,28 @@
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #38bdf8;">
                 <strong style="color:#38bdf8;">1. Perfilaje Geofísico Eléctrico Obligatorio:</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  Correr curvas SP y Resistividad Normal (16" y 64") antes de entubar para fijar con precisión milimétrica la cota de los filtros Johnson en las gravas más limpias.
+                  Correr curvas SP y Resistividad Normal (16" y 64") antes de entubar para fijar con precisión milimétrica la cota de los filtros Johnson en los estratos de grava con resistividad &gt; 35 ohm·m.
                 </span>
               </div>
 
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #10b981;">
-                <strong style="color:#34d399;">2. Grava Cuarzosa Seleccionada (No Calcárea):</strong>
+                <strong style="color:#34d399;">2. Filtros Johnson AISI 304 y Velocidad $V_e \le 0.03\text{ m/s}$:</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  Grava de río 2 a 4 mm con sílice &gt; 95%. Queda estrictamente prohibida la piedra picada caliza (reaccionaría con el ácido nítrico y taparía las rejillas).
+                  La ranura continua tipo V de 0.030" (0.75 mm) garantiza un área abierta del 18-22%, manteniendo la velocidad de entrada del agua en $V_e \approx 0.0007\text{ m/s}$, 40 veces por debajo del límite crítico de incrustación de carbonatos.
                 </span>
               </div>
 
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #a855f7;">
-                <strong style="color:#c084fc;">3. Desarrollo por Air-Lift a 200 PSI:</strong>
+                <strong style="color:#c084fc;">3. Grava Cuarzosa Seleccionada 2-4 mm (Sílice &gt; 95%):</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  Inyectar tripolifosfato de sodio para dispersar la bentonita de pared y soplar con compresor hasta lograr arena &lt; 10 ppm (evita dañar los goteros PC de la nave).
+                  Grava de canto rodado lavada. Queda prohibida la grava caliza porque reacciona con el ácido nítrico utilizado en la neutralización de bicarbonatos y genera depósitos insolubles.
                 </span>
               </div>
 
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #f43f5e;">
-                <strong style="color:#fda4af;">4. Sello Sanitario Inyectado a Presión:</strong>
+                <strong style="color:#fda4af;">4. Sello Sanitario Tremie y Límites de Calidad:</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  Lechada de cemento Portland + 4% bentonita inyectada con tubería tremie desde 15 m hacia brocal, aislando escorrentías contaminadas y agroquímicos superficiales.
+                  Lechada de cemento Portland + 4% bentonita inyectada con tubería tremie desde 15 m hacia brocal, aislando escorrentías agrícolas contaminadas y garantizando la sanidad fitosanitaria del predio.
                 </span>
               </div>
             </div>
@@ -766,7 +1075,7 @@
                 </div>
                 <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#87-cómputos-métricos-y-presupuesto-referencial-de-perforación-valle-de-quíbor" target="_blank" class="filter-btn" style="text-decoration:none; font-size:0.75rem;">Ver Cómputos Detallados ↗</a>
               </div>
-              <span style="display:block; font-size:0.72rem; color:#94a3b8; margin-top:0.3rem;">
+              <span style="display:block; font-size:0.72rem; color:#94a3b8; margin-top:0.3rem;" id="drill-summary-desc">
                 Incluye perforación 12¼", entubado 6", 38m filtros Johnson AISI 304, grava, sello, perfilaje, air-lift, bomba 7.5 HP y tablero VFD.
               </span>
             </div>
@@ -959,30 +1268,112 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 6: PLANOS TÉCNICOS SVG (3D Y 2D) ==================== -->
+    <!-- ==================== TAB 6: PLANOS TÉCNICOS & VISOR 3D INTERACTIVO ==================== -->
     <section id="tab-planos" class="tab-pane">
       <div class="card glass-card full-width">
-        <div class="card-header">
+        <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
           <div>
-            <h2>Planos Constructivos Oficiales: Casa de Malla Pura con Guayas y Postes (2.000 m²: 20m × 100m)</h2>
-            <span class="subtitle">Sin Tubos en Techo (Cero Arcos) | 8 Rollos de 4.00 m × 100.00 m | Malla Espaldera a 2.20 m</span>
+            <h2>Visor 3D Interactivo de Estructura & Planos Constructivos (2.000 m²: 20m × 100m)</h2>
+            <span class="subtitle">Simulador 3D en Tiempo Real (WebGL / Blender CAD) | 96 Pilares Sch 40 | 5 Rollos de Cubierta 4m × 100m | Malla 50×25 HDPE</span>
           </div>
           <div class="filter-group">
-            <button class="filter-btn active" id="btn-show-plano3d">Plano 1: Isométrico 3D</button>
-            <button class="filter-btn" id="btn-show-plano2d">Plano 2: Multi-Ángulo 2D (Cortes & Planta)</button>
+            <button class="filter-btn active" id="btn-mode-3d-interactive">🎮 Visor 3D Interactivo</button>
+            <button class="filter-btn" id="btn-mode-2d-blueprints">📐 Planos 2D Técnicos (SVG)</button>
             <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver ubicación satelital en Google Maps">📍 9°53'20.0"N 69°35'35.0"W ↗</a>
-            <a href="plano_3d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(6,182,212,0.2); color:#38bdf8; border-color:rgba(6,182,212,0.4);">Abrir 3D Full SVG ↗</a>
-            <a href="plano_2d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);">Abrir 2D Full SVG ↗</a>
+            <a href="plano_3d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(6,182,212,0.2); color:#38bdf8; border-color:rgba(6,182,212,0.4);">Abrir 3D SVG ↗</a>
+            <a href="plano_2d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);">Abrir 2D SVG ↗</a>
           </div>
         </div>
 
-        <!-- Blueprint Viewer Container -->
-        <div class="blueprint-viewer-container" style="background:#050912; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; margin:1rem 0; box-shadow:0 12px 32px rgba(0,0,0,0.5);">
-          <div id="container-plano3d" style="width:100%; display:block;">
-            <img src="plano_3d_invernadero_quibor.svg?v=parral_final" alt="Plano Isométrico 3D Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
+        <!-- ==================== CONTENEDOR 1: VISOR 3D WEBGL ESTILO BLENDER ==================== -->
+        <div id="container-viewport-3d" class="viewport-3d-wrapper">
+          <!-- Barra Superior de Herramientas Estilo Blender CAD -->
+          <div class="viewport-3d-toolbar">
+            <div class="toolbar-group">
+              <span class="toolbar-label">Vistas:</span>
+              <button class="v3d-btn active" id="btn-v3d-iso" title="Vista Isométrica 3D [0]">📐 Isométrica [0]</button>
+              <button class="v3d-btn" id="btn-v3d-front" title="Corte Transversal 20m [1]">🏢 Frontal 20m [1]</button>
+              <button class="v3d-btn" id="btn-v3d-side" title="Fachada Lateral Este 100m [3]">📏 Lateral 100m [3]</button>
+              <button class="v3d-btn" id="btn-v3d-top" title="Planta Cenital Techo [7]">🗺️ Cenital [7]</button>
+              <button class="v3d-btn" id="btn-v3d-walk" title="Modo Paseo en Campo [W]">🚶 Paseo Interior [W]</button>
+            </div>
+
+            <div class="toolbar-group">
+              <button class="v3d-btn btn-turntable" id="btn-3d-autorotate" title="Iniciar / Detener Rotación 360° en Movimiento [Espacio]">
+                <span class="pulse-indicator"></span> 🔄 Auto-rotar [Espacio]
+              </button>
+            </div>
+
+            <div class="toolbar-group">
+              <span class="toolbar-label">Sombreado:</span>
+              <button class="v3d-btn active" id="btn-v3d-shade-solid" title="Sombreado Sólido PBR">Solid</button>
+              <button class="v3d-btn" id="btn-v3d-shade-wire" title="Estructura Alámbrica CAD">Wireframe</button>
+              <button class="v3d-btn" id="btn-v3d-shade-xray" title="Modo Rayos X">X-Ray</button>
+            </div>
+
+            <div class="toolbar-group toolbar-actions">
+              <button class="v3d-btn" id="btn-v3d-screenshot" title="Descargar Captura de Render PNG">📸 Captura HD</button>
+              <button class="v3d-btn" id="btn-v3d-fullscreen" title="Pantalla Completa">⛶ Pantalla Completa</button>
+            </div>
           </div>
-          <div id="container-plano2d" style="width:100%; display:none;">
+
+          <!-- Lienzo 3D Principal con Gizmo y HUD -->
+          <div class="viewport-3d-stage" id="greenhouse-3d-stage">
+            <div id="greenhouse-3d-container" class="greenhouse-canvas-box"></div>
+
+            <!-- Gizmo XYZ Interactivo (Top-Right) -->
+            <div class="viewport-gizmo-box" title="Gizmo de Navegación 3D estilo Blender (Clic en cualquier eje para vista ortográfica)">
+              <canvas id="greenhouse-3d-gizmo" width="100" height="100"></canvas>
+            </div>
+
+            <!-- HUD de Telemetría (Top-Left) -->
+            <div class="viewport-hud-topleft">
+              <div class="hud-item-title">
+                <span class="hud-dot"></span>
+                <span id="hud-view-name">Isométrica 3D</span>
+              </div>
+              <div class="hud-item-sub" id="hud-camera-coords">X: 45.0m | Y: 32.0m | Z: 60.0m</div>
+              <div class="hud-badge-quibor">Quíbor 2.000 m² | 96 Pilares Sch 40 | 8 Rollos</div>
+            </div>
+
+            <!-- HUD de Atajos de Teclado (Bottom-Right) -->
+            <div class="viewport-hud-bottomright">
+              <span class="hud-key">1</span> Frontal
+              <span class="hud-key">3</span> Lateral
+              <span class="hud-key">7</span> Cenital
+              <span class="hud-key">0</span> Iso
+              <span class="hud-key">W</span> Paseo
+              <span class="hud-key">Espacio</span> Rotar
+            </div>
+          </div>
+
+          <!-- Barra Inferior de Capas de Inspección Estructural -->
+          <div class="viewport-layers-bar">
+            <span class="layers-title">Capas:</span>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-pillars" checked> <span>🏛️ Pilares Sch 40</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-cables" checked> <span>⛓️ Guayas & Tensores 45°</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-mesh" checked> <span>🛡️ Malla 50×25</span></label>
+            <div class="layer-opacity-box">
+              <span style="font-size:0.75rem; color:var(--text-muted);">Opacidad:</span>
+              <input type="range" id="layer-slider-mesh-opacity" min="0.05" max="0.9" step="0.05" value="0.45" style="width:65px; accent-color:var(--emerald-main);">
+            </div>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-crop" checked> <span>🍅 Cultivo Tomate</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-dims" checked> <span>📏 Cotas 3D</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-wind" checked> <span>💨 Viento Este (88%)</span></label>
+          </div>
+        </div>
+
+        <!-- ==================== CONTENEDOR 2: PLANOS TÉCNICOS 2D SVG ==================== -->
+        <div id="container-planos-2d" class="blueprint-viewer-container" style="display:none; background:#050912; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; margin:1rem 0; box-shadow:0 12px 32px rgba(0,0,0,0.5);">
+          <div class="sub-filter-group" style="padding:0.75rem 1rem; background:rgba(15,23,42,0.8); border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:0.5rem;">
+            <button class="filter-btn active" id="btn-sub-plano2d">Plano 2D: Multi-Ángulo (Cortes, Fachadas & Planta)</button>
+            <button class="filter-btn" id="btn-sub-plano3d">Plano Isométrico 3D Técnico (SVG)</button>
+          </div>
+          <div id="subview-plano2d" style="width:100%; display:block;">
             <img src="plano_2d_invernadero_quibor.svg?v=parral_final" alt="Plano 2D Multi-Ángulo Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
+          </div>
+          <div id="subview-plano3d" style="width:100%; display:none;">
+            <img src="plano_3d_invernadero_quibor.svg?v=parral_final" alt="Plano Isométrico 3D Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
           </div>
         </div>
 
@@ -1742,7 +2133,12 @@
       <span class="footer-meta">Asistente Antigravity IDE | Ecuaciones FAO-56 & CIDIAT-ULA / SHYQ (Jégat et al., 2012)</span>
     </div>
   </footer>
+    </div> <!-- /app-main-area -->
+  </div> <!-- /app-layout -->
 
+  <script src="lib/three.min.js"></script>
+  <script src="lib/OrbitControls.js"></script>
+  <script src="greenhouse-3d.js"></script>
   <script src="app.js?v=parral_final"></script>
 </body>
 </html>

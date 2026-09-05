@@ -86,38 +86,96 @@ body {
 }
 
 /* ==========================================================================
-   HEADER & NAVIGATION
+   AGRO-LAYOUT PRO: SIDEBAR + TOPBAR + MAIN AREA
    ========================================================================== */
-.app-header {
-  background: rgba(10, 14, 23, 0.85);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-subtle);
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal);
+}
+
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* SIDEBAR PRO */
+.app-sidebar {
+  width: 275px;
+  flex-shrink: 0;
+  background: rgba(10, 14, 23, 0.95);
+  backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 1rem 1.5rem 0.5rem;
+  transition: width var(--transition-normal), transform var(--transition-normal);
+  overflow: hidden;
 }
 
-.header-container {
-  max-width: 1400px;
-  margin: 0 auto;
+/* Sidebar Colapsado en Escritorio */
+.app-layout.sidebar-collapsed .app-sidebar {
+  width: 76px;
+}
+
+.app-layout.sidebar-collapsed .brand-info,
+.app-layout.sidebar-collapsed .nav-group-title,
+.app-layout.sidebar-collapsed .nav-item-label,
+.app-layout.sidebar-collapsed .nav-item-badge,
+.app-layout.sidebar-collapsed .sidebar-footer-status,
+.app-layout.sidebar-collapsed #sunlight-btn-text {
+  display: none !important;
+}
+
+.app-layout.sidebar-collapsed .nav-group-header {
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.app-layout.sidebar-collapsed .nav-item {
+  justify-content: center;
+  padding: 0.75rem 0;
+}
+
+.app-layout.sidebar-collapsed .nav-item-icon {
+  margin: 0;
+}
+
+.app-layout.sidebar-collapsed .btn-sidebar-collapse .icon-collapse {
+  transform: rotate(180deg);
+}
+
+/* Header del Sidebar */
+.sidebar-header {
+  padding: 1.15rem 1rem;
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-bottom: 0.75rem;
+  gap: 0.75rem;
 }
 
-.brand {
+.sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  min-width: 0;
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-md);
   background: linear-gradient(135deg, var(--emerald-main), var(--cyan-main));
   display: flex;
@@ -125,125 +183,391 @@ body {
   justify-content: center;
   color: #ffffff;
   box-shadow: 0 4px 14px var(--emerald-glow);
+  flex-shrink: 0;
 }
 
 .brand-icon svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
 }
 
-.brand-text h1 {
-  font-size: 1.25rem;
+.brand-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.brand-title {
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(90deg, #ffffff, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
-.brand-text .subtitle {
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn-sidebar-collapse {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.btn-sidebar-collapse:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: var(--border-focus);
+}
+
+.icon-collapse {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-normal);
+}
+
+/* Navegación del Sidebar */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-group-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.5rem 0.35rem;
+}
+
+.nav-group-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--emerald-light);
+  background: rgba(16, 185, 129, 0.12);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+}
+
+.nav-group-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.nav-group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
   font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.nav-item-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+.nav-item-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.nav-item-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-item-badge {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.12));
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);
+}
+
+.nav-item.active .nav-item-icon {
+  color: var(--emerald-light);
+}
+
+.nav-item.active .nav-item-badge {
+  background: rgba(16, 185, 129, 0.25);
+  color: var(--emerald-light);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Footer del Sidebar */
+.sidebar-footer {
+  padding: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sidebar-footer-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+/* MAIN AREA & TOPBAR */
+.app-main-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-topbar {
+  height: 56px;
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  gap: 1rem;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.btn-hamburger {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.btn-hamburger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-focus);
+}
+
+.btn-hamburger svg {
+  width: 20px;
+  height: 20px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.825rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.breadcrumb-root {
+  font-weight: 700;
+  color: var(--emerald-light);
+}
+
+.breadcrumb-separator {
+  color: var(--text-muted);
+}
+
+.breadcrumb-stage {
   color: var(--text-secondary);
   font-weight: 500;
 }
 
-.badge-container {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+.breadcrumb-module {
+  font-weight: 700;
+  color: #fff;
 }
 
-.badge {
-  font-size: 0.75rem;
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.topbar-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.telemetry-pill {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.25rem 0.55rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
   background: rgba(255, 255, 255, 0.04);
 }
 
-.badge-merra {
+.pill-wind {
   color: var(--cyan-light);
   border-color: rgba(6, 182, 212, 0.3);
   background: rgba(6, 182, 212, 0.1);
 }
 
-.badge-crop {
-  color: var(--emerald-light);
-  border-color: rgba(16, 185, 129, 0.3);
-  background: rgba(16, 185, 129, 0.1);
-}
-
-.badge-geo {
+.pill-geo {
   color: var(--amber-main);
   border-color: rgba(245, 158, 11, 0.3);
   background: rgba(245, 158, 11, 0.1);
-  transition: all 0.2s ease;
-  cursor: pointer;
 }
 
-.badge-geo:hover {
-  background: rgba(245, 158, 11, 0.25);
-  border-color: rgba(245, 158, 11, 0.6);
-  color: #fef3c7;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-}
-
-/* Nav Tabs */
-.nav-tabs {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding-top: 0.25rem;
-  scrollbar-width: none;
-}
-
-.nav-tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.nav-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.65rem 1.15rem;
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  cursor: pointer;
-  display: flex;
+.btn-topbar-action {
+  background: #10b981;
+  color: #ffffff;
+  border: 1px solid #059669;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  cursor: pointer;
   transition: var(--transition-fast);
-  border-bottom: 2px solid transparent;
-  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 
-.nav-btn svg {
-  width: 18px;
-  height: 18px;
-  opacity: 0.7;
-  transition: var(--transition-fast);
+.btn-topbar-action:hover {
+  background: #059669;
+  transform: translateY(-1px);
 }
 
-.nav-btn:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.03);
-}
+/* Responsive Móvil / Tablet */
+@media (max-width: 1024px) {
+  .btn-hamburger {
+    display: flex;
+  }
 
-.nav-btn.active {
-  color: var(--emerald-light);
-  border-bottom-color: var(--emerald-main);
-  background: rgba(16, 185, 129, 0.06);
-}
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    box-shadow: none;
+    z-index: 200;
+  }
 
-.nav-btn.active svg {
-  opacity: 1;
-  stroke: var(--emerald-light);
+  .sidebar-open .app-sidebar {
+    transform: translateX(0);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  }
+
+  .sidebar-open .sidebar-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .btn-sidebar-collapse {
+    display: none;
+  }
+
+  .topbar-telemetry {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -956,127 +1280,274 @@ body {
 }
 
 /* ==========================================================================
-   AGRI-UX-UI ENHANCEMENTS: FARM PIPELINE, TOOLTIPS, OPERATOR ACTIONS & HYDRAULICS
+   VIEWPORT 3D WEBGL INTERACTIVO ESTILO BLENDER CAD (GREENHOUSE 3D)
    ========================================================================== */
 
-/* 1. Farm Pipeline Navigation (Línea de Proceso Productivo) */
-.pipeline-bar-wrapper {
-  background: rgba(15, 23, 42, 0.94);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 0.6rem 1.5rem;
-  backdrop-filter: blur(12px);
-  position: sticky;
-  top: 68px;
-  z-index: 80;
+.viewport-3d-wrapper {
+  background: #070d18;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1rem 0 1.5rem 0;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-.pipeline-container {
-  max-width: 1400px;
-  margin: 0 auto;
+.viewport-3d-wrapper:fullscreen {
+  border-radius: 0;
+  margin: 0;
+  height: 100vh !important;
+  width: 100vw !important;
+  border: none;
+  z-index: 99999;
+}
+
+.viewport-3d-wrapper:fullscreen .viewport-3d-stage {
+  height: calc(100vh - 105px) !important;
+}
+
+.viewport-3d-toolbar {
+  background: rgba(10, 16, 28, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.55rem 0.85rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.2rem;
-  scrollbar-width: thin;
-  scrollbar-color: var(--emerald-main) transparent;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  z-index: 5;
 }
 
-.pipeline-title {
+.toolbar-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-muted);
-  white-space: nowrap;
-  padding-right: 0.75rem;
-  border-right: 1px solid var(--border-subtle);
+  gap: 0.35rem;
+  flex-wrap: wrap;
 }
 
-.pipeline-steps {
+.toolbar-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-right: 0.2rem;
+}
+
+.v3d-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  padding: 0.32rem 0.65rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  user-select: none;
+}
+
+.v3d-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.v3d-btn.active {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+.btn-turntable {
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #f59e0b;
+}
+
+.btn-turntable.active {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: #f59e0b;
+  color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+.pulse-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+  display: inline-block;
+  animation: pulseTurntable 1.5s infinite;
+}
+
+@keyframes pulseTurntable {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 8px #f59e0b; }
+  100% { transform: scale(0.8); opacity: 0.5; }
+}
+
+.viewport-3d-stage {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  overflow: hidden;
+  background: #050912;
+}
+
+.greenhouse-canvas-box {
+  width: 100%;
+  height: 100%;
+}
+
+.viewport-gizmo-box {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  cursor: pointer;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.viewport-gizmo-box:hover {
+  transform: scale(1.05);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.viewport-hud-topleft {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  background: rgba(10, 16, 28, 0.82);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  pointer-events: none;
+}
+
+.hud-item-title {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  flex: 1;
-}
-
-.pipeline-step {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  padding: 0.35rem 0.85rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.pipeline-step:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-accent);
-  transform: translateY(-1px);
-}
-
-.pipeline-step.active {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: var(--emerald-main);
-  box-shadow: 0 0 12px var(--emerald-glow);
-}
-
-.pipeline-step-num {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.825rem;
   font-weight: 800;
+  color: #f8fafc;
+}
+
+.hud-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.hud-item-sub {
   font-family: var(--font-mono);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
+  font-size: 0.7rem;
+  color: #38bdf8;
+  margin-top: 0.2rem;
 }
 
-.pipeline-step.active .pipeline-step-num {
-  background: var(--emerald-main);
-  color: #06261c;
+.hud-badge-quibor {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
 }
 
-.pipeline-step-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+.viewport-hud-bottomright {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 10;
+  background: rgba(10, 16, 28, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  pointer-events: none;
 }
 
-.pipeline-step.active .pipeline-step-label {
-  color: #ffffff;
+.hud-key {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.08rem 0.25rem;
+  color: #f8fafc;
+  font-family: var(--font-mono);
   font-weight: 700;
 }
 
-.pipeline-step-sub {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  display: none;
+.viewport-layers-bar {
+  background: rgba(10, 16, 28, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.55rem 0.85rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  z-index: 5;
 }
 
-@media (min-width: 1200px) {
-  .pipeline-step-sub {
-    display: inline;
-  }
+.layers-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
 }
 
-.pipeline-arrow {
-  color: var(--text-muted);
-  font-size: 0.8rem;
+.layer-chk {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
   user-select: none;
 }
+
+.layer-chk input[type="checkbox"] {
+  accent-color: var(--emerald-main);
+  cursor: pointer;
+}
+
+.layer-chk:hover {
+  color: #ffffff;
+}
+
+.layer-opacity-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ==========================================================================
+   AGRI-UX-UI ENHANCEMENTS: FARM PIPELINE, TOOLTIPS, OPERATOR ACTIONS & HYDRAULICS
+   ========================================================================== */
+
+/* 1. Farm Pipeline Navigation: Integrado fluidamente en el menú lateral .app-sidebar */
+
 
 /* 2. Micro-Glossary Tooltips (Comprensión Agronómica Inmediata) */
 .tooltip-term {
@@ -1593,6 +2064,26 @@ body {
   margin-top: 1rem;
 }
 
+.location-option-card {
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.location-option-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.location-option-card.active {
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+input[type="range"] {
+  accent-color: #38bdf8;
+  cursor: pointer;
+}
+
+
 /* ==========================================================================
    FOOTER
    ========================================================================== */
@@ -1656,97 +2147,7 @@ body {
   font-family: var(--font-mono);
 }
 
-/* Modo Sol Directo Activo */
-body.sunlight-mode {
-  --bg-main: #ffffff !important;
-  --bg-secondary: #f8fafc !important;
-  --bg-card: #ffffff !important;
-  --bg-card-hover: #f1f5f9 !important;
-  --bg-input: #ffffff !important;
-  --border-subtle: #000000 !important;
-  --border-focus: #000000 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #111827 !important;
-  --text-muted: #1f2937 !important;
-  background: #ffffff !important;
-  color: #000000 !important;
-}
-
-body.sunlight-mode .app-header {
-  background: #ffffff !important;
-  border-bottom: 2.5px solid #000000 !important;
-}
-
-body.sunlight-mode .pipeline-bar-wrapper {
-  background: #ffffff !important;
-  border-bottom: 2px solid #000000 !important;
-}
-
-body.sunlight-mode .card,
-body.sunlight-mode .field-action-card,
-body.sunlight-mode .hydraulic-circuit-card,
-body.sunlight-mode .metric-box,
-body.sunlight-mode .info-card,
-body.sunlight-mode .action-sector-box,
-body.sunlight-mode .well-drilling-card,
-body.sunlight-mode .drill-budget-card {
-  background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
-  color: #000000 !important;
-}
-
-body.sunlight-mode h1,
-body.sunlight-mode h2,
-body.sunlight-mode h3,
-body.sunlight-mode h4,
-body.sunlight-mode strong,
-body.sunlight-mode .metric-val,
-body.sunlight-mode .telemetry-val,
-body.sunlight-mode .flow-node-title,
-body.sunlight-mode .action-sector-title {
-  color: #000000 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .badge,
-body.sunlight-mode .tag,
-body.sunlight-mode .filter-btn,
-body.sunlight-mode .nav-btn,
-body.sunlight-mode .circuit-btn,
-body.sunlight-mode .pipeline-step {
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  background: #ffffff !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .nav-btn.active,
-body.sunlight-mode .filter-btn.active,
-body.sunlight-mode .circuit-btn.active,
-body.sunlight-mode .pipeline-step.active {
-  background: #fef08a !important; /* Amarillo de advertencia de alto contraste */
-  color: #000000 !important;
-  border-color: #000000 !important;
-}
-
-body.sunlight-mode .input-select,
-body.sunlight-mode .input-num {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 2px solid #000000 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .flow-node {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-}
-
-body.sunlight-mode .flow-connector {
-  color: #000000 !important;
-  font-weight: 900 !important;
-}
+/* Modo Sol Directo se define en bloque maestro al final del archivo para máxima precedencia en cascada CSS */
 
 /* ==========================================================================
    BOTÓN EXPORTADOR DE FICHA DE TURNO (WHATSAPP / IMPRIMIR)
@@ -1920,4 +2321,895 @@ body.sunlight-mode .flow-connector {
 .stepper-btn:active {
   transform: scale(0.95);
 }
+
+/* ==========================================================================
+   AGRI-UX-UI: MODO SOL DIRECTO MAESTRO (ULTRA-CONTRASTE EXTERIOR WCAG AAA)
+   Diseñado específicamente para lectura exterior bajo radiación UV > 11 en Quíbor.
+   Contraste extremo >= 7:1, cero transparencias descoloridas, bordes negros
+   nítidos de 2-2.5px, sombras sólidas neo-brutalistas y semántica agrícola de alto impacto.
+   ========================================================================== */
+
+body.sunlight-mode {
+  --bg-main: #ffffff !important;
+  --bg-secondary: #f8fafc !important;
+  --bg-card: #ffffff !important;
+  --bg-card-hover: #f1f5f9 !important;
+  --bg-input: #ffffff !important;
+  --border-subtle: #000000 !important;
+  --border-focus: #000000 !important;
+  --border-accent: #000000 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #111827 !important;
+  --text-muted: #1f2937 !important;
+
+  /* Tokens Agronómicos de Ultra-Contraste Solar */
+  --emerald-main: #065f46 !important;
+  --emerald-light: #047857 !important;
+  --emerald-glow: none !important;
+  --cyan-main: #0369a1 !important;
+  --cyan-light: #0284c7 !important;
+  --cyan-glow: none !important;
+  --amber-main: #9a3412 !important;
+  --amber-glow: none !important;
+  --rose-main: #991b1b !important;
+  --rose-glow: none !important;
+
+  --agri-water: #0369a1 !important;
+  --agri-water-glow: none !important;
+  --agri-water-bg: #e0f2fe !important;
+  --agri-plant: #065f46 !important;
+  --agri-plant-glow: none !important;
+  --agri-plant-bg: #d1fae5 !important;
+  --agri-sun: #9a3412 !important;
+  --agri-sun-glow: none !important;
+  --agri-sun-bg: #fef3c7 !important;
+  --agri-danger: #991b1b !important;
+  --agri-danger-glow: none !important;
+  --agri-danger-bg: #fee2e2 !important;
+  --agri-pump: #581c87 !important;
+  --agri-pump-glow: none !important;
+  --agri-pump-bg: #f3e8ff !important;
+  --agri-soil: #78350f !important;
+
+  background-color: #ffffff !important;
+  background-image: none !important;
+  color: #000000 !important;
+}
+
+/* Sidebar & Topbar en Modo Sol Directo (Ultra-Contraste) */
+body.sunlight-mode .app-sidebar {
+  background: #ffffff !important;
+  border-right: 2.5px solid #000000 !important;
+  box-shadow: 4px 0px 0px #000000 !important;
+}
+
+body.sunlight-mode .sidebar-header {
+  border-bottom: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .brand-icon {
+  background: #000000 !important;
+  color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+body.sunlight-mode .brand-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .brand-subtitle {
+  color: #1f2937 !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .btn-sidebar-collapse {
+  background: #f1f5f9 !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .btn-sidebar-collapse:hover {
+  background: #e2e8f0 !important;
+}
+
+body.sunlight-mode .nav-group-num {
+  background: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .nav-group-title {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .nav-item {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1.5px solid transparent !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .nav-item:hover {
+  background: #f1f5f9 !important;
+  border-color: #000000 !important;
+}
+
+body.sunlight-mode .nav-item.active {
+  background: #fef08a !important;
+  border: 2.5px solid #000000 !important;
+  color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .nav-item.active .nav-item-icon {
+  color: #000000 !important;
+}
+
+body.sunlight-mode .nav-item.active .nav-item-badge {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+body.sunlight-mode .nav-item-badge {
+  background: #f1f5f9 !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+body.sunlight-mode .sidebar-footer {
+  border-top: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .btn-sunlight-toggle {
+  background: #000000 !important;
+  color: #fef08a !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .btn-sunlight-toggle:hover {
+  background: #1f2937 !important;
+  color: #fef9c3 !important;
+}
+
+body.sunlight-mode .badge-offline {
+  background: #d1fae5 !important;
+  border: 2px solid #047857 !important;
+  color: #064e3b !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .badge-geo {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .app-topbar {
+  background: #ffffff !important;
+  border-bottom: 2.5px solid #000000 !important;
+  box-shadow: 0 4px 0px rgba(0, 0, 0, 0.08) !important;
+}
+
+body.sunlight-mode .btn-hamburger {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .breadcrumb-root {
+  color: #047857 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .breadcrumb-separator {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .breadcrumb-stage {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .breadcrumb-module {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .telemetry-pill {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .btn-topbar-action {
+  background: #047857 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .nav-btn.active svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+/* Contenedores, Tarjetas y Paneles (Estilo Neo-Brutalista Exterior) */
+body.sunlight-mode .card,
+body.sunlight-mode .glass-card,
+body.sunlight-mode .field-action-card,
+body.sunlight-mode .hydraulic-circuit-card,
+body.sunlight-mode .metric-box,
+body.sunlight-mode .info-card,
+body.sunlight-mode .action-card,
+body.sunlight-mode .action-sector-box,
+body.sunlight-mode .well-drilling-card,
+body.sunlight-mode .drill-budget-card,
+body.sunlight-mode .location-option-card,
+body.sunlight-mode .comp-card,
+body.sunlight-mode .formula-box,
+body.sunlight-mode .results-panel,
+body.sunlight-mode .demand-target-box,
+body.sunlight-mode .pest-card,
+body.sunlight-mode .spec-item,
+body.sunlight-mode .economic-simulator-card,
+body.sunlight-mode .econ-input-item,
+body.sunlight-mode .econ-result-card,
+body.sunlight-mode .operator-checklist,
+body.sunlight-mode .sector-telemetry-box,
+body.sunlight-mode .blueprint-viewer-container,
+body.sunlight-mode .drill-visual-container,
+body.sunlight-mode .canvas-container {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  color: #000000 !important;
+  backdrop-filter: none !important;
+}
+
+body.sunlight-mode .card:hover,
+body.sunlight-mode .pest-card:hover,
+body.sunlight-mode .field-action-card:hover {
+  transform: none !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+/* Títulos y Tipografía */
+body.sunlight-mode h1,
+body.sunlight-mode h2,
+body.sunlight-mode h3,
+body.sunlight-mode h4,
+body.sunlight-mode h5,
+body.sunlight-mode strong,
+body.sunlight-mode b,
+body.sunlight-mode .metric-val,
+body.sunlight-mode .metric-value,
+body.sunlight-mode .telemetry-val,
+body.sunlight-mode .target-val,
+body.sunlight-mode .versus-num,
+body.sunlight-mode .comp-speed,
+body.sunlight-mode .flow-node-title,
+body.sunlight-mode .action-sector-title,
+body.sunlight-mode .pest-title,
+body.sunlight-mode .econ-net-val,
+body.sunlight-mode .econ-result-title {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode p,
+body.sunlight-mode span,
+body.sunlight-mode li,
+body.sunlight-mode td,
+body.sunlight-mode th,
+body.sunlight-mode label,
+body.sunlight-mode .card-desc,
+body.sunlight-mode .subtitle,
+body.sunlight-mode .metric-label,
+body.sunlight-mode .metric-sub,
+body.sunlight-mode .target-title,
+body.sunlight-mode .target-note,
+body.sunlight-mode .pest-latin,
+body.sunlight-mode .pest-damage,
+body.sunlight-mode .pest-control-text,
+body.sunlight-mode .pest-section-title,
+body.sunlight-mode .spec-body p,
+body.sunlight-mode .spec-body h4,
+body.sunlight-mode .flow-node-sub,
+body.sunlight-mode .telemetry-lbl,
+body.sunlight-mode .checklist-item,
+body.sunlight-mode .checklist-title,
+body.sunlight-mode .drill-layer-depth,
+body.sunlight-mode .drill-layer-desc,
+body.sunlight-mode .drill-layer-component,
+body.sunlight-mode .econ-metric-row,
+body.sunlight-mode .action-time-window,
+body.sunlight-mode .action-param-item {
+  color: #0f172a !important;
+}
+
+/* Anulación de Colores Claros Inline en Modo Sol Directo */
+body.sunlight-mode [style*="color:#cbd5e1"],
+body.sunlight-mode [style*="color: #cbd5e1"],
+body.sunlight-mode [style*="color:#94a3b8"],
+body.sunlight-mode [style*="color: #94a3b8"],
+body.sunlight-mode [style*="color:#f8fafc"],
+body.sunlight-mode [style*="color: #f8fafc"],
+body.sunlight-mode [style*="color:#e2e8f0"],
+body.sunlight-mode [style*="color: #e2e8f0"],
+body.sunlight-mode [style*="color:#64748b"],
+body.sunlight-mode [style*="color: #64748b"],
+body.sunlight-mode [style*="color:#fff"],
+body.sunlight-mode [style*="color: #fff"],
+body.sunlight-mode [style*="color:#ffffff"],
+body.sunlight-mode [style*="color: #ffffff"] {
+  color: #000000 !important;
+}
+
+body.sunlight-mode [style*="background:rgba(15,23,42"],
+body.sunlight-mode [style*="background: rgba(15,23,42"],
+body.sunlight-mode [style*="background:rgba(0,0,0"],
+body.sunlight-mode [style*="background: rgba(0,0,0"],
+body.sunlight-mode [style*="background:#050912"],
+body.sunlight-mode [style*="background: #050912"] {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+/* Cajas de Alerta de Alto Impacto */
+body.sunlight-mode .alert-box {
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .alert-warning {
+  background: #fef3c7 !important;
+  border-color: #b45309 !important;
+  color: #78350f !important;
+}
+body.sunlight-mode .alert-warning strong,
+body.sunlight-mode .alert-warning .alert-content {
+  color: #78350f !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .alert-caution {
+  background: #fee2e2 !important;
+  border-color: #b91c1c !important;
+  color: #7f1d1d !important;
+}
+body.sunlight-mode .alert-caution strong,
+body.sunlight-mode .alert-caution .alert-content {
+  color: #7f1d1d !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .alert-success {
+  background: #d1fae5 !important;
+  border-color: #047857 !important;
+  color: #064e3b !important;
+}
+body.sunlight-mode .alert-success strong,
+body.sunlight-mode .alert-success .alert-content {
+  color: #064e3b !important;
+  font-weight: 800 !important;
+}
+
+/* Fórmula y Comparaciones (Tabs 1 & 2) */
+body.sunlight-mode .formula-box {
+  background: #f8fafc !important;
+  color: #047857 !important;
+  border: 2.5px solid #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .comp-card {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .comp-card.highlight-card {
+  background: #f0fdf4 !important;
+  border: 2.5px solid #047857 !important;
+  box-shadow: 4px 4px 0px #047857 !important;
+}
+
+body.sunlight-mode .comp-diff.danger {
+  color: #991b1b !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .comp-diff.success {
+  color: #047857 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .demand-target-box {
+  background: #f0fdf4 !important;
+  border: 2.5px solid #000000 !important;
+}
+
+body.sunlight-mode .target-title {
+  color: #047857 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .target-val {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .versus-box.bad {
+  background: #fee2e2 !important;
+  border: 2.5px solid #b91c1c !important;
+}
+
+body.sunlight-mode .versus-box.bad h3,
+body.sunlight-mode .versus-box.bad .versus-num {
+  color: #991b1b !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .versus-box.good {
+  background: #d1fae5 !important;
+  border: 2.5px solid #047857 !important;
+}
+
+body.sunlight-mode .versus-box.good h3,
+body.sunlight-mode .versus-box.good .versus-num {
+  color: #064e3b !important;
+  font-weight: 900 !important;
+}
+
+/* Tablas Agronómicas (Tab 3) */
+body.sunlight-mode .table-container {
+  border: 2px solid #000000 !important;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+body.sunlight-mode .data-table {
+  border-collapse: collapse;
+}
+
+body.sunlight-mode .data-table th {
+  background: #e2e8f0 !important;
+  color: #000000 !important;
+  border-bottom: 2.5px solid #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .data-table td {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-bottom: 1.5px solid #cbd5e1 !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .data-table tr:hover td {
+  background: #f1f5f9 !important;
+}
+
+body.sunlight-mode .row-highlight td {
+  background: #fef9c3 !important;
+  color: #713f12 !important;
+  font-weight: 800 !important;
+}
+
+/* Destacados Semánticos */
+body.sunlight-mode .highlight-cyan {
+  color: #0284c7 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .highlight-green {
+  color: #047857 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .highlight-yellow {
+  color: #b45309 !important;
+  font-weight: 800 !important;
+}
+
+/* Litoestratigrafía del Pozo (Tab 3) */
+body.sunlight-mode .drill-layer {
+  background: #f8fafc !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .drill-layer:hover {
+  background: #e2e8f0 !important;
+}
+
+body.sunlight-mode .badge-casing,
+body.sunlight-mode .badge-screen,
+body.sunlight-mode .badge-seal,
+body.sunlight-mode .badge-pump {
+  border: 1.5px solid #000000 !important;
+  font-weight: 800 !important;
+}
+
+/* Matriz de Plagas (Tab 4) */
+body.sunlight-mode .pest-card {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+body.sunlight-mode .pest-status.status-retiene {
+  background: #d1fae5 !important;
+  color: #064e3b !important;
+  border: 2px solid #047857 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .pest-status.status-pasa {
+  background: #fee2e2 !important;
+  color: #7f1d1d !important;
+  border: 2px solid #b91c1c !important;
+  font-weight: 800 !important;
+}
+
+/* Estructura & Lienzo Canvas (Tab 5) */
+body.sunlight-mode .canvas-container {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+}
+
+body.sunlight-mode .canvas-controls {
+  background: #f8fafc !important;
+  border-top: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .canvas-controls label {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .spec-item {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .spec-num {
+  background: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+/* Planos Técnicos (Tab 6) */
+body.sunlight-mode .blueprint-viewer-container {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+/* Plan Maestro de Producción (Tab 7) */
+body.sunlight-mode .action-sector-box {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .action-sector-box.sector-current {
+  background: #fef9c3 !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+body.sunlight-mode .action-sector-badge {
+  background: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .action-time-window {
+  background: #e2e8f0 !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .operator-checklist {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .checklist-item input[type="checkbox"] {
+  accent-color: #000000 !important;
+  width: 18px;
+  height: 18px;
+}
+
+body.sunlight-mode .flow-node {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .flow-node.active-flow {
+  background: #fef08a !important;
+  border: 2.5px solid #000000 !important;
+}
+
+body.sunlight-mode .flow-connector {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .sector-telemetry-box {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+/* Simulador Económico & Stepper */
+body.sunlight-mode .economic-simulator-card {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+}
+
+body.sunlight-mode .econ-input-item {
+  background: #f8fafc !important;
+  border: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .econ-input-wrapper span {
+  color: #047857 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .econ-input-wrapper input {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .econ-result-card {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .econ-result-card.featured {
+  background: #f0fdf4 !important;
+  border: 2.5px solid #047857 !important;
+  box-shadow: 4px 4px 0px #047857 !important;
+}
+
+body.sunlight-mode .econ-metric-row {
+  border-bottom: 1px solid #cbd5e1 !important;
+}
+
+body.sunlight-mode .econ-net-margin {
+  border-top: 2px dashed #000000 !important;
+}
+
+body.sunlight-mode .econ-net-val {
+  color: #047857 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .stepper-btn {
+  background: #f8fafc !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .stepper-btn:hover {
+  background: #fef08a !important;
+}
+
+body.sunlight-mode .btn-export-shift {
+  background: #047857 !important;
+  color: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .btn-export-shift:hover {
+  background: #065f46 !important;
+}
+
+/* Botones, Filtros y Etiquetas */
+body.sunlight-mode .filter-btn,
+body.sunlight-mode .tag,
+body.sunlight-mode .badge {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .filter-btn:hover {
+  background: #f1f5f9 !important;
+}
+
+body.sunlight-mode .filter-btn.active {
+  background: #fef08a !important;
+  color: #000000 !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+body.sunlight-mode .tag-accent {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border-color: #0284c7 !important;
+}
+
+body.sunlight-mode .tag-formula {
+  background: #f0fdf4 !important;
+  color: #047857 !important;
+  border-color: #059669 !important;
+}
+
+body.sunlight-mode .tag-alert {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #b45309 !important;
+}
+
+/* Inputs, Selects y Deslizadores */
+body.sunlight-mode .input-field,
+body.sunlight-mode .input-select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .custom-slider {
+  background: #cbd5e1 !important;
+  border: 1.5px solid #000000 !important;
+}
+
+body.sunlight-mode .custom-slider::-webkit-slider-thumb {
+  background: #000000 !important;
+  border: 2px solid #ffffff !important;
+}
+
+/* Tooltips de Información Agronómica */
+body.sunlight-mode .tooltip-term {
+  border-bottom: 1.5px dashed #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .tooltip-bubble {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 6px 6px 0px #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .tooltip-title {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+body.sunlight-mode .tooltip-tag {
+  background: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .tooltip-simple {
+  color: #111827 !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .tooltip-tech {
+  background: #f1f5f9 !important;
+  color: #047857 !important;
+  border-top: 1.5px solid #000000 !important;
+  font-weight: 700 !important;
+}
+
+/* Pie de Página */
+body.sunlight-mode .app-footer {
+  background: #ffffff !important;
+  border-top: 2.5px solid #000000 !important;
+  color: #111827 !important;
+}
+
+body.sunlight-mode .app-footer a {
+  color: #0284c7 !important;
+  font-weight: 800 !important;
+  text-decoration: underline !important;
+}
+
+/* Viewport 3D en Modo Sol Directo (Ultra-Contraste WCAG AAA) */
+body.sunlight-mode .viewport-3d-wrapper {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+}
+
+body.sunlight-mode .viewport-3d-toolbar,
+body.sunlight-mode .viewport-layers-bar {
+  background: #f8fafc !important;
+  border-color: #000000 !important;
+}
+
+body.sunlight-mode .viewport-3d-stage {
+  background: #f1f5f9 !important;
+}
+
+body.sunlight-mode .v3d-btn {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  font-weight: 800 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+body.sunlight-mode .v3d-btn:hover {
+  background: #e2e8f0 !important;
+}
+
+body.sunlight-mode .v3d-btn.active {
+  background: #fef08a !important; /* Amarillo sol vivo */
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: 2px 2px 0px #000000 !important;
+}
+
+body.sunlight-mode .btn-turntable {
+  background: #fef3c7 !important;
+  border-color: #b45309 !important;
+  color: #78350f !important;
+}
+
+body.sunlight-mode .btn-turntable.active {
+  background: #fbbf24 !important;
+  border-color: #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .viewport-hud-topleft,
+body.sunlight-mode .viewport-hud-bottomright {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .hud-item-title,
+body.sunlight-mode .hud-item-sub,
+body.sunlight-mode .hud-badge-quibor,
+body.sunlight-mode .layers-title,
+body.sunlight-mode .layer-chk {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .hud-key {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #000000 !important;
+}
+
+body.sunlight-mode .viewport-gizmo-box {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+
 

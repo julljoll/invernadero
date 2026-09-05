@@ -179,8 +179,7 @@ document.addEventListener("DOMContentLoaded", () => {
   FarmState.loadPersisted();
   initPwaOffline();
   initSunlightMode();
-  initTabs();
-  initFarmPipeline();
+  initSidebar();
   initHydraulicCircuit();
   initShiftExport();
   initEconomicSimulator();
@@ -197,76 +196,245 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function initBlueprintViewers() {
-  const btn3D = document.getElementById("btn-show-plano3d");
-  const btn2D = document.getElementById("btn-show-plano2d");
-  const c3D = document.getElementById("container-plano3d");
-  const c2D = document.getElementById("container-plano2d");
+  const container3D = document.getElementById("container-viewport-3d");
+  const container2D = document.getElementById("container-planos-2d");
+  const btnMode3D = document.getElementById("btn-mode-3d-interactive");
+  const btnMode2D = document.getElementById("btn-mode-2d-blueprints");
 
-  if (btn3D && btn2D && c3D && c2D) {
-    btn3D.addEventListener("click", () => {
-      btn3D.classList.add("active");
-      btn2D.classList.remove("active");
-      c3D.style.display = "block";
-      c2D.style.display = "none";
+  // Alternancia de Modo Principal (3D Interactivo vs 2D Técnicos)
+  if (btnMode3D && btnMode2D && container3D && container2D) {
+    btnMode3D.addEventListener("click", () => {
+      btnMode3D.classList.add("active");
+      btnMode2D.classList.remove("active");
+      container3D.style.display = "flex";
+      container2D.style.display = "none";
+      if (window.greenhouse3dViewer) {
+        setTimeout(() => window.greenhouse3dViewer.onResize(), 50);
+      }
     });
 
-    btn2D.addEventListener("click", () => {
-      btn2D.classList.add("active");
-      btn3D.classList.remove("active");
-      c2D.style.display = "block";
-      c3D.style.display = "none";
+    btnMode2D.addEventListener("click", () => {
+      btnMode2D.classList.add("active");
+      btnMode3D.classList.remove("active");
+      container2D.style.display = "block";
+      container3D.style.display = "none";
     });
+  }
+
+  // Sub-pestañas dentro del contenedor 2D
+  const btnSub2D = document.getElementById("btn-sub-plano2d");
+  const btnSub3D = document.getElementById("btn-sub-plano3d");
+  const subView2D = document.getElementById("subview-plano2d");
+  const subView3D = document.getElementById("subview-plano3d");
+
+  if (btnSub2D && btnSub3D && subView2D && subView3D) {
+    btnSub2D.addEventListener("click", () => {
+      btnSub2D.classList.add("active");
+      btnSub3D.classList.remove("active");
+      subView2D.style.display = "block";
+      subView3D.style.display = "none";
+    });
+
+    btnSub3D.addEventListener("click", () => {
+      btnSub3D.classList.add("active");
+      btnSub2D.classList.remove("active");
+      subView3D.style.display = "block";
+      subView2D.style.display = "none";
+    });
+  }
+
+  // Inicialización del Motor 3D WebGL (Greenhouse3DViewer)
+  const canvasBox = document.getElementById("greenhouse-3d-container");
+  if (canvasBox && window.Greenhouse3DViewer && !window.greenhouse3dViewer) {
+    try {
+      window.greenhouse3dViewer = new window.Greenhouse3DViewer("greenhouse-3d-container");
+    } catch (err) {
+      console.warn("[3D Viewer] Error inicializando Three.js viewer:", err);
+    }
+  }
+
+  if (window.greenhouse3dViewer) {
+    const viewer = window.greenhouse3dViewer;
+
+    // Presets de Vistas Rápidas
+    const viewButtons = [
+      { id: "btn-v3d-iso", preset: "iso" },
+      { id: "btn-v3d-front", preset: "front" },
+      { id: "btn-v3d-side", preset: "side" },
+      { id: "btn-v3d-top", preset: "top" },
+      { id: "btn-v3d-walk", preset: "walk" }
+    ];
+
+    viewButtons.forEach(({ id, preset }) => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener("click", () => {
+          viewButtons.forEach(b => {
+            const el = document.getElementById(b.id);
+            if (el) el.classList.remove("active");
+          });
+          btn.classList.add("active");
+          viewer.setCameraPreset(preset, true);
+        });
+      }
+    });
+
+    // Auto-rotación 360° Turntable
+    const btnAutoRotate = document.getElementById("btn-3d-autorotate");
+    if (btnAutoRotate) {
+      btnAutoRotate.addEventListener("click", () => {
+        viewer.toggleAutoRotate();
+      });
+    }
+
+    // Modos de Sombreado
+    const shadeSolid = document.getElementById("btn-v3d-shade-solid");
+    const shadeWire = document.getElementById("btn-v3d-shade-wire");
+    const shadeXray = document.getElementById("btn-v3d-shade-xray");
+
+    const shadeBtns = [shadeSolid, shadeWire, shadeXray].filter(Boolean);
+
+    if (shadeSolid) {
+      shadeSolid.addEventListener("click", () => {
+        shadeBtns.forEach(b => b.classList.remove("active"));
+        shadeSolid.classList.add("active");
+        viewer.setShadingMode("solid");
+      });
+    }
+
+    if (shadeWire) {
+      shadeWire.addEventListener("click", () => {
+        shadeBtns.forEach(b => b.classList.remove("active"));
+        shadeWire.classList.add("active");
+        viewer.setShadingMode("wireframe");
+      });
+    }
+
+    if (shadeXray) {
+      shadeXray.addEventListener("click", () => {
+        shadeBtns.forEach(b => b.classList.remove("active"));
+        shadeXray.classList.add("active");
+        viewer.setShadingMode("xray");
+      });
+    }
+
+    // Captura HD y Pantalla Completa
+    const btnScreenshot = document.getElementById("btn-v3d-screenshot");
+    if (btnScreenshot) {
+      btnScreenshot.addEventListener("click", () => viewer.takeScreenshot());
+    }
+
+    const btnFullscreen = document.getElementById("btn-v3d-fullscreen");
+    if (btnFullscreen) {
+      btnFullscreen.addEventListener("click", () => viewer.toggleFullscreen());
+    }
+
+    // Capas de Inspección Estructural
+    const layerBindings = [
+      { id: "layer-chk-pillars", layer: "pillars" },
+      { id: "layer-chk-cables", layer: "cables" },
+      { id: "layer-chk-mesh", layer: "mesh" },
+      { id: "layer-chk-crop", layer: "crop" },
+      { id: "layer-chk-dims", layer: "dims" },
+      { id: "layer-chk-wind", layer: "wind" }
+    ];
+
+    layerBindings.forEach(({ id, layer }) => {
+      const chk = document.getElementById(id);
+      if (chk) {
+        chk.addEventListener("change", (e) => {
+          viewer.toggleLayer(layer, e.target.checked);
+        });
+      }
+    });
+
+    // Deslizador de Opacidad de Malla 50×25
+    const sliderMesh = document.getElementById("layer-slider-mesh-opacity");
+    if (sliderMesh) {
+      sliderMesh.addEventListener("input", (e) => {
+        viewer.setMeshOpacity(parseFloat(e.target.value));
+      });
+    }
   }
 }
 
+const STAGE_MODULE_MAP = {
+  "tab-clima": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Climatología & Viento (MERRA-2)" },
+  "tab-ventilacion": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Ventilación Convectiva & Extractores" },
+  "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 2.000 m²" },
+  "tab-planos": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Visor 3D Interactivo & Planos CAD" },
+  "tab-plagas": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Matriz de Plagas (Malla 50×25)" },
+  "tab-riego": { stage: "Etapa 3: Acuífero & Hidrogeología", module: "Riego FAO-56 & Salinidad" },
+  "tab-produccion": { stage: "Etapa 4: Operación & Producción", module: "Plan Maestro de Producción Tomate" },
+};
+
 /**
- * Activa una pestaña y sincroniza tanto los botones superiores
- * como los pasos de la barra del Pipeline Agrícola.
+ * Activa un módulo o pestaña y sincroniza el menú lateral,
+ * la miga de pan en la Topbar y el desplazamiento a subsecciones.
  */
 function activateTab(targetTabId, scrollTargetId = null) {
-  const tabButtons = document.querySelectorAll(".nav-btn");
+  const navItems = document.querySelectorAll(".nav-item");
   const tabPanes = document.querySelectorAll(".tab-pane");
-  const pipelineSteps = document.querySelectorAll(".pipeline-step");
+  const breadcrumbStage = document.getElementById("breadcrumb-stage");
+  const breadcrumbModule = document.getElementById("breadcrumb-module");
 
-  tabButtons.forEach(b => {
-    if (b.getAttribute("data-tab") === targetTabId) {
-      b.classList.add("active");
+  // Sincronizar item activo en el menú lateral
+  navItems.forEach(item => {
+    const itemTab = item.getAttribute("data-tab");
+    const itemScroll = item.getAttribute("data-scroll");
+
+    if (itemTab === targetTabId) {
+      if (scrollTargetId && itemScroll === scrollTargetId) {
+        item.classList.add("active");
+      } else if (!scrollTargetId && !itemScroll) {
+        item.classList.add("active");
+      } else if (!scrollTargetId && itemScroll) {
+        item.classList.remove("active");
+      } else {
+        item.classList.remove("active");
+      }
     } else {
-      b.classList.remove("active");
+      item.classList.remove("active");
     }
   });
 
+  // Activar panel de contenido
   tabPanes.forEach(p => {
     if (p.id === targetTabId) {
       p.classList.add("active");
       if (targetTabId === "tab-estructura") {
         requestAnimationFrame(drawGreenhouseStructure);
+      } else if (targetTabId === "tab-planos") {
+        if (window.greenhouse3dViewer) {
+          setTimeout(() => window.greenhouse3dViewer.onResize(), 60);
+        } else {
+          initBlueprintViewers();
+        }
       }
     } else {
       p.classList.remove("active");
     }
   });
 
-  // Sincronizar paso del pipeline
-  pipelineSteps.forEach(s => {
-    const pTab = s.getAttribute("data-pipeline-tab");
-    const pScroll = s.getAttribute("data-pipeline-scroll");
-
-    if (pTab === targetTabId) {
-      if (scrollTargetId && pScroll === scrollTargetId) {
-        s.classList.add("active");
-      } else if (!scrollTargetId && !pScroll) {
-        s.classList.add("active");
-      } else if (!scrollTargetId && pScroll) {
-        s.classList.remove("active");
+  // Actualizar Miga de Pan en la Topbar
+  if (STAGE_MODULE_MAP[targetTabId]) {
+    if (breadcrumbStage) breadcrumbStage.textContent = STAGE_MODULE_MAP[targetTabId].stage;
+    if (breadcrumbModule) {
+      if (scrollTargetId === "well-drilling-section") {
+        breadcrumbModule.textContent = "Perforación Pozo 120 m (CIDIAT)";
+      } else if (scrollTargetId === "hydraulic-section") {
+        breadcrumbModule.textContent = "Cadena Hidráulica & Bomba 1.5 HP";
+      } else if (scrollTargetId === "field-action-sheet") {
+        breadcrumbModule.textContent = "Ficha de Turno Diario (WhatsApp)";
+      } else if (scrollTargetId === "economic-simulator-section") {
+        breadcrumbModule.textContent = "Simulador Económico AIFA";
       } else {
-        s.classList.remove("active");
+        breadcrumbModule.textContent = STAGE_MODULE_MAP[targetTabId].module;
       }
-    } else {
-      s.classList.remove("active");
     }
-  });
+  }
 
+  // Desplazamiento suave si se seleccionó una subsección específica
   if (scrollTargetId) {
     setTimeout(() => {
       const el = document.getElementById(scrollTargetId);
@@ -275,26 +443,82 @@ function activateTab(targetTabId, scrollTargetId = null) {
       }
     }, 120);
   }
+
+  // Cerrar drawer móvil si está abierto
+  document.body.classList.remove("sidebar-open");
 }
 
-function initTabs() {
-  const tabButtons = document.querySelectorAll(".nav-btn");
-  tabButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const targetTabId = btn.getAttribute("data-tab");
-      activateTab(targetTabId);
+function initSidebar() {
+  const layout = document.getElementById("app-layout");
+  const btnCollapse = document.getElementById("btn-collapse-sidebar");
+  const btnHamburger = document.getElementById("btn-toggle-sidebar");
+  const backdrop = document.getElementById("sidebar-backdrop");
+  const navItems = document.querySelectorAll(".nav-item");
+  const btnTopbarExport = document.getElementById("btn-topbar-export");
+
+  // Cargar estado colapsado guardado para escritorio
+  const savedCollapsed = localStorage.getItem("agroquibor_sidebar_collapsed") === "true";
+  if (savedCollapsed && layout && window.innerWidth > 1024) {
+    layout.classList.add("sidebar-collapsed");
+  }
+
+  // Alternar colapso en escritorio
+  if (btnCollapse) {
+    btnCollapse.addEventListener("click", () => {
+      if (!layout) return;
+      const isCollapsed = layout.classList.toggle("sidebar-collapsed");
+      localStorage.setItem("agroquibor_sidebar_collapsed", isCollapsed);
+      requestAnimationFrame(drawGreenhouseStructure);
+    });
+  }
+
+  // Alternar menú en móvil (hamburguesa)
+  if (btnHamburger) {
+    btnHamburger.addEventListener("click", () => {
+      document.body.classList.toggle("sidebar-open");
+    });
+  }
+
+  // Cerrar menú al tocar el backdrop en móvil
+  if (backdrop) {
+    backdrop.addEventListener("click", () => {
+      document.body.classList.remove("sidebar-open");
+    });
+  }
+
+  // Enlaces de navegación del menú lateral
+  navItems.forEach(item => {
+    item.addEventListener("click", () => {
+      const targetTab = item.getAttribute("data-tab");
+      const scrollId = item.getAttribute("data-scroll");
+      activateTab(targetTab, scrollId);
     });
   });
-}
 
-function initFarmPipeline() {
-  const pipelineSteps = document.querySelectorAll(".pipeline-step");
-  pipelineSteps.forEach(step => {
-    step.addEventListener("click", () => {
-      const targetTabId = step.getAttribute("data-pipeline-tab");
-      const scrollId = step.getAttribute("data-pipeline-scroll");
-      activateTab(targetTabId, scrollId);
+  // Botón de exportación rápida en la Topbar
+  if (btnTopbarExport) {
+    btnTopbarExport.addEventListener("click", () => {
+      const btnExport = document.getElementById("btn-export-shift");
+      if (btnExport) {
+        btnExport.click();
+      } else {
+        activateTab("tab-produccion", "field-action-sheet");
+      }
     });
+  }
+
+  // Atajos de teclado Pro: [M] o [B] alterna el menú lateral
+  document.addEventListener("keydown", (e) => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.tagName === "TEXTAREA") return;
+    if (e.key === "m" || e.key === "M" || e.key === "b" || e.key === "B") {
+      if (window.innerWidth <= 1024) {
+        document.body.classList.toggle("sidebar-open");
+      } else if (layout) {
+        const isCollapsed = layout.classList.toggle("sidebar-collapsed");
+        localStorage.setItem("agroquibor_sidebar_collapsed", isCollapsed);
+        requestAnimationFrame(drawGreenhouseStructure);
+      }
+    }
   });
 }
 
@@ -448,6 +672,9 @@ function initSunlightMode() {
       btn.style.background = '';
       btn.style.color = '';
       btn.style.borderColor = '';
+    }
+    if (window.greenhouse3dViewer) {
+      window.greenhouse3dViewer.setThemeMode(active);
     }
   }
 
@@ -851,20 +1078,69 @@ function calculateVentilation() {
 // ==========================================================================
 // 6. TAB 3: CALCULADORA FAO-56 & SALINIDAD
 // ==========================================================================
-const FAO_STAGES = [
-  { nombre: "Trasplante / Establecimiento", kc: 0.60, etc: 3.0, netLitersPlanta: 8.0, desc: "0-3 semanas. Raíz superficial (<15 cm)." },
-  { nombre: "Crecimiento Vegetativo", kc: 0.80, etc: 4.0, netLitersPlanta: 11.0, desc: "3-6 semanas. Desarrollo foliar y tallo." },
-  { nombre: "Floración - Cuajado", kc: 1.10, etc: 5.8, netLitersPlanta: 16.0, desc: "6-10 semanas. Crítico: evitar déficit hídrico." },
-  { nombre: "Fructificación - Cosecha", kc: 1.05, etc: 6.3, netLitersPlanta: 18.5, desc: "Pico de transpiración en calor de marzo-abril." },
-  { nombre: "Fin de Ciclo / Senescencia", kc: 0.90, etc: 5.0, netLitersPlanta: 13.5, desc: "Maduración final." }
+// 6. TAB 3: CALCULADORA FAO-56 & SALINIDAD (MERRA-2 & QUÍBOR CALIBRADO)
+// ==========================================================================
+// Evapotranspiración de Referencia ETo mensual NASA MERRA-2 (Valle de Quíbor 695 msnm)
+const QUIBOR_MONTHLY_ETO = [
+  5.4, // Enero
+  5.8, // Febrero
+  6.4, // Marzo (Pico de Calor y Radiación)
+  6.2, // Abril
+  5.6, // Mayo
+  5.2, // Junio
+  4.8, // Julio (Mínimo de demanda)
+  5.1, // Agosto
+  5.3, // Septiembre
+  5.2, // Octubre
+  4.9, // Noviembre
+  5.0  // Diciembre
+];
+
+// Coeficientes Kc FAO-56 para Suelo Descubierto vs Acolchado Plástico Bicolor (Mulch)
+// El mulch suprime el 75% del componente Ke de evaporación directa del suelo.
+const FAO_STAGES_DATA = [
+  {
+    nombre: "Trasplante / Establecimiento",
+    kcBare: 0.60,
+    kcMulch: 0.45,
+    desc: "0-3 semanas. Raíz superficial (<15 cm). Alta evaporación en suelo desnudo."
+  },
+  {
+    nombre: "Crecimiento Vegetativo",
+    kcBare: 0.80,
+    kcMulch: 0.70,
+    desc: "3-6 semanas. Crecimiento activo de tallo y hojas."
+  },
+  {
+    nombre: "Floración - Cuajado",
+    kcBare: 1.10,
+    kcMulch: 0.98,
+    desc: "6-10 semanas. Crítico: déficit hídrico aborta flores."
+  },
+  {
+    nombre: "Fructificación - Cosecha",
+    kcBare: 1.05,
+    kcMulch: 0.95,
+    desc: "Carga plena. Máxima transpiración del dosel vegetal."
+  },
+  {
+    nombre: "Fin de Ciclo / Senescencia",
+    kcBare: 0.90,
+    kcMulch: 0.80,
+    desc: "Maduración final y deshoje progresivo."
+  }
 ];
 
 function initIrrigationCalculator() {
   const inputs = [
     "select-crop",
     "select-stage",
+    "select-month-et0",
+    "select-soil-cover",
     "input-well-ec",
-    "input-plant-density"
+    "input-plant-density",
+    "input-bicarb-water",
+    "input-bicarb-target"
   ];
 
   inputs.forEach(id => {
@@ -875,55 +1151,175 @@ function initIrrigationCalculator() {
     }
   });
 
+  // Botones de ajuste rápido de fuente de agua
+  const btnYacambu = document.getElementById("btn-quick-yacambu");
+  const btnWell = document.getElementById("btn-quick-well");
+  const inputEc = document.getElementById("input-well-ec");
+
+  if (btnYacambu && inputEc) {
+    btnYacambu.addEventListener("click", () => {
+      inputEc.value = "0.5";
+      calculateIrrigation();
+    });
+  }
+
+  if (btnWell && inputEc) {
+    btnWell.addEventListener("click", () => {
+      inputEc.value = "1.4";
+      calculateIrrigation();
+    });
+  }
+
   calculateIrrigation();
 }
 
 function calculateIrrigation() {
-  const crop = document.getElementById("select-crop").value;
-  const stageIdx = parseInt(document.getElementById("select-stage").value, 10);
-  const ecW = parseFloat(document.getElementById("input-well-ec").value) || 1.4;
-  const density = parseFloat(document.getElementById("input-plant-density").value) || 2.2;
+  const elCrop = document.getElementById("select-crop");
+  const elStage = document.getElementById("select-stage");
+  const elMonth = document.getElementById("select-month-et0");
+  const elCover = document.getElementById("select-soil-cover");
+  const elEcW = document.getElementById("input-well-ec");
+  const elDensity = document.getElementById("input-plant-density");
+  const elBicarb = document.getElementById("input-bicarb-water");
+  const elBicarbTarget = document.getElementById("input-bicarb-target");
 
-  // Umbrales de salinidad según FAO-29 / FAO-56
-  // Pimentón: ECe umbral = 1.5 dS/m (muy sensible)
-  // Tomate: ECe umbral = 2.5 dS/m (moderadamente tolerante)
-  const ecE = crop === "pimenton" ? 1.5 : 2.5;
+  if (!elCrop || !elStage) return;
 
-  // Fracción de lavado: LF = ECw / (5 * ECe - ECw)
+  const crop = elCrop.value;
+  const stageIdx = parseInt(elStage.value, 10) || 0;
+  const monthIdx = elMonth ? parseInt(elMonth.value, 10) || 2 : 2;
+  const hasMulch = elCover ? elCover.value === "mulch" : true;
+  const ecW = elEcW ? parseFloat(elEcW.value) || 1.4 : 1.4;
+  const density = elDensity ? parseFloat(elDensity.value) || 2.2 : 2.2;
+  const bicarbWater = elBicarb ? parseFloat(elBicarb.value) || 4.2 : 4.2;
+  const bicarbTarget = elBicarbTarget ? parseFloat(elBicarbTarget.value) || 0.5 : 0.5;
+
+  // 1. Evapotranspiración base mensual NASA MERRA-2
+  const et0 = QUIBOR_MONTHLY_ETO[monthIdx] || 6.4;
+
+  // 2. Coeficiente Kc corregido por cobertura
+  const stageData = FAO_STAGES_DATA[stageIdx] || FAO_STAGES_DATA[3];
+  const kc = hasMulch ? stageData.kcMulch : stageData.kcBare;
+
+  // 3. Demanda neta de cultivo (ETc)
+  const etcMmDay = et0 * kc;
+  // Litros netos por planta y día = (ETc mm/día) / (pl/m²)
+  const netLitersPlantDay = etcMmDay / density;
+  const netLitersPlantWeek = netLitersPlantDay * 7.0;
+
+  // 4. Umbral de tolerancia a salinidad según FAO-29 / Maas-Hoffman
+  // Pimentón: ECe umbral = 1.5 dS/m (pendiente pérdida b = 14.0% por dS/m)
+  // Tomate: ECe umbral = 2.5 dS/m (pendiente pérdida b = 9.9% por dS/m)
+  const isPepper = crop === "pimenton";
+  const ecE = isPepper ? 1.5 : 2.5;
+  const slopeB = isPepper ? 14.0 : 9.9;
+
+  // Fracción de lixiviación (Rhoades / FAO): LF = ECw / [5(ECe) - ECw]
   let lf = ecW / (5.0 * ecE - ecW);
-  if (lf < 0) lf = 0.05;
-  if (lf > 0.45) lf = 0.45; // Tope práctico
+  if (lf < 0.05) lf = 0.05;
+  if (lf > 0.40) lf = 0.40; // Tope agronómico razonable
 
-  const stageData = FAO_STAGES[stageIdx];
-  const kc = stageData.kc;
-  const netLitersWeek = stageData.netLitersPlanta;
+  // Riesgo de merma si no se aplica fracción de lavado (Maas-Hoffman)
+  // Salinidad del suelo sin lavado saturante alcanza ~1.5 * ECw
+  const projectedECe = ecW * 1.5;
+  let yieldLossNoLeach = 0;
+  if (projectedECe > ecE) {
+    yieldLossNoLeach = (projectedECe - ecE) * slopeB;
+  }
 
-  // Lámina bruta por planta (L/semana) = Neto / (1 - LF)
-  const grossLitersWeek = netLitersWeek / (1.0 - lf);
+  // 5. Lámina bruta por planta (L/semana y L/día)
+  const grossLitersPlantWeek = netLitersPlantWeek / (1.0 - lf);
+  const grossLitersPlantDay = grossLitersPlantWeek / 7.0;
 
-  // Demanda diaria total del módulo de 2.000 m²
-  // Total plantas = 2.000 m² * densidad (4.400 plantas a 2.2 pl/m²)
-  const totalPlants = 2000 * density;
-  const dailyLitersTotal = (grossLitersWeek * totalPlants) / 7.0;
-  const dailyM3Total = dailyLitersTotal / 1000.0;
+  // Demanda diaria total módulo 2.000 m² (4.400 plantas a 2.2 pl/m²)
+  const totalPlants = 2000.0 * density;
+  const dailyM3Total = (grossLitersPlantDay * totalPlants) / 1000.0;
 
-  // Actualizar UI
-  document.getElementById("res-fao-kc").textContent = kc.toFixed(2);
-  document.getElementById("res-fao-etc").textContent = `${stageData.etc} mm/día (~${netLitersWeek.toFixed(1)} L/pl/sem neto)`;
-  document.getElementById("res-fao-lf").textContent = `${(lf * 100).toFixed(1)} % de sobre-riego`;
-  document.getElementById("res-fao-liters-plant").textContent = `${grossLitersWeek.toFixed(1)} L / planta / semana`;
-  document.getElementById("res-fao-daily-m3").textContent = `${dailyM3Total.toFixed(2)} m³ / día`;
+  // 6. Neutralización Química de Bicarbonatos (HNO3 comercial 60%, densidad 1.35 kg/L)
+  // Fórmula: Dose (L/m³) = (HCO3_agua - HCO3_obj) * 63.01 / (0.60 * 1.35 * 1000)
+  const deltaBicarb = Math.max(0, bicarbWater - bicarbTarget);
+  const acidDoseLPerM3 = deltaBicarb * 0.07779;
+  const acidDailyLiters = acidDoseLPerM3 * dailyM3Total;
+  // Aporte de Nitrógeno: meq/L * 14.007 = ppm N-NO3
+  const nitrogenPpm = deltaBicarb * 14.007;
 
-  // Advertencia de salinidad
-  const adviceText = document.getElementById("salinity-advice-text");
-  if (crop === "pimenton") {
-    if (ecW >= 1.5) {
-      adviceText.innerHTML = `<strong>⚠️ ALERTA DE SALINIDAD ALTA:</strong> El agua de pozo (${ecW} dS/m) supera el umbral del pimentón (1.5 dS/m). Requiere un <strong>${(lf * 100).toFixed(0)}% de lavado</strong> para evitar necrosis en bordes de hojas y reducción de calibre. Fraccionar en 4 a 5 pulsos de riego al día.`;
+  // 7. Programación de Pulsos Diarios (Goteros PC 1.6 L/h por planta)
+  // Tiempo total de riego necesario al día (minutos)
+  const totalIrrigationHours = grossLitersPlantDay / 1.6; // 1.6 L/h
+  const totalIrrigationMinutes = Math.round(totalIrrigationHours * 60);
+
+  // Distribución circadiana en 4 pulsos (P1: 25%, P2: 28%, P3: 27%, P4: 20%)
+  const p1 = Math.round(totalIrrigationMinutes * 0.25);
+  const p2 = Math.round(totalIrrigationMinutes * 0.28);
+  const p3 = Math.round(totalIrrigationMinutes * 0.27);
+  const p4 = Math.max(10, totalIrrigationMinutes - (p1 + p2 + p3));
+
+  // 8. Actualizar Interfaz de Usuario
+  const elResEto = document.getElementById("res-fao-eto");
+  const elResKc = document.getElementById("res-fao-kc");
+  const elResEtc = document.getElementById("res-fao-etc");
+  const elResLf = document.getElementById("res-fao-lf");
+  const elResGrossPlant = document.getElementById("res-fao-liters-plant");
+  const elResDailyM3 = document.getElementById("res-fao-daily-m3");
+  const elResYieldRisk = document.getElementById("res-fao-yield-risk");
+
+  if (elResEto) elResEto.textContent = `${et0.toFixed(2)} mm/día`;
+  if (elResKc) elResKc.textContent = `${kc.toFixed(2)} ${hasMulch ? '(con Mulch)' : '(Suelo Desnudo)'}`;
+  if (elResEtc) elResEtc.textContent = `${etcMmDay.toFixed(2)} mm/día (~${netLitersPlantWeek.toFixed(1)} L/pl/sem neto)`;
+  if (elResLf) elResLf.textContent = `${(lf * 100).toFixed(1)} % de sobre-riego`;
+  if (elResGrossPlant) elResGrossPlant.textContent = `${grossLitersPlantWeek.toFixed(1)} L / planta / semana`;
+  if (elResDailyM3) elResDailyM3.textContent = `${dailyM3Total.toFixed(2)} m³ / día`;
+
+  if (elResYieldRisk) {
+    if (yieldLossNoLeach > 0) {
+      elResYieldRisk.textContent = `-${yieldLossNoLeach.toFixed(1)}% si NO se lava`;
+      elResYieldRisk.style.color = "#f87171";
     } else {
-      adviceText.innerHTML = `Para agua de pozo de ${ecW} dS/m en pimentón, aplique un <strong>${(lf * 100).toFixed(0)}% extra de lavado</strong>. El suelo franco de Quíbor mantendrá las sales fuera de la zona de los primeros 30-40 cm con pulsos fraccionados.`;
+      elResYieldRisk.textContent = `0.0% (Dentro de tolerancia)`;
+      elResYieldRisk.style.color = "#34d399";
     }
-  } else {
-    adviceText.innerHTML = `El tomate tolera hasta 2.5 dS/m con relativa facilidad. Con su agua de ${ecW} dS/m, la fracción de lavado es de <strong>${(lf * 100).toFixed(1)}%</strong>. Aproveche esta ligera salinidad controlada para aumentar los grados Brix (°Bx) del fruto sin comprometer el cuajado.`;
+  }
+
+  // Actualizar tarjeta de ácido nítrico
+  const elAcidDose = document.getElementById("res-acid-dose-m3");
+  const elAcidDaily = document.getElementById("res-acid-daily-liters");
+  const elAcidN = document.getElementById("res-acid-n-ppm");
+
+  if (elAcidDose) elAcidDose.textContent = `${acidDoseLPerM3.toFixed(3)} L / m³ agua`;
+  if (elAcidDaily) elAcidDaily.textContent = `${acidDailyLiters.toFixed(2)} L / día HNO₃`;
+  if (elAcidN) elAcidN.textContent = `${nitrogenPpm.toFixed(1)} ppm N-NO₃⁻`;
+
+  // Actualizar pulsos
+  const elP1 = document.getElementById("pulse-1-time");
+  const elP2 = document.getElementById("pulse-2-time");
+  const elP3 = document.getElementById("pulse-3-time");
+  const elP4 = document.getElementById("pulse-4-time");
+  const elTotMin = document.getElementById("res-total-irrigation-minutes");
+  const elTotPlantDay = document.getElementById("res-total-daily-liters-plant");
+
+  if (elP1) elP1.textContent = `${p1} min`;
+  if (elP2) elP2.textContent = `${p2} min`;
+  if (elP3) elP3.textContent = `${p3} min`;
+  if (elP4) elP4.textContent = `${p4} min`;
+  if (elTotMin) elTotMin.textContent = `${totalIrrigationMinutes} min (${(totalIrrigationMinutes / 60).toFixed(2)} h)`;
+  if (elTotPlantDay) elTotPlantDay.textContent = `${grossLitersPlantDay.toFixed(2)} L / pl / día`;
+
+  // Advertencia agronómica
+  const adviceText = document.getElementById("salinity-advice-text");
+  if (adviceText) {
+    if (isPepper) {
+      if (ecW >= 1.5) {
+        adviceText.innerHTML = `<strong>⚠️ ALERTA DE SALINIDAD ALTA EN PIMENTÓN:</strong> El agua (${ecW} dS/m) supera el umbral crítico ($1.5\\text{ dS/m}$). Requiere obligatoriamente un <strong>${(lf * 100).toFixed(0)}% de sobre-riego de lavado</strong>. Si no se aplica, la merma productiva alcanzará el <strong>-${yieldLossNoLeach.toFixed(1)}%</strong> por quemado apical y necrosis radicular. Fraccione en los 4 pulsos calculados.`;
+      } else {
+        adviceText.innerHTML = `Para agua de pozo de <strong>${ecW} dS/m</strong> en pimentón, aplique un <strong>${(lf * 100).toFixed(0)}% extra de lavado</strong>. El suelo franco-arcilloso de Quíbor mantendrá las sales por debajo de los 40 cm activos mediante los 4 pulsos circadianos.`;
+      }
+    } else {
+      if (ecW > 2.5) {
+        adviceText.innerHTML = `<strong>⚠️ ALERTA TOMATE:</strong> Con agua de ${ecW} dS/m se excede el umbral de 2.5 dS/m. Requiere un <strong>${(lf * 100).toFixed(1)}% de lavado</strong> para evitar pudrición apical (*blossom-end rot*) por interferencia de calcio.`;
+      } else {
+        adviceText.innerHTML = `El tomate tolera hasta 2.5 dS/m con alto vigor. Con su agua de ${ecW} dS/m, la fracción de lavado es de <strong>${(lf * 100).toFixed(1)}%</strong>. Esta ligera conductividad controlada concentra azúcares y eleva los grados Brix (°Bx) sin mermar calibre.`;
+      }
+    }
   }
 }
 
@@ -1032,14 +1428,22 @@ function drawGreenhouseStructure(angle = 0) {
   const w = canvas.width;
   const h = canvas.height;
 
+  const isSunlight = document.body.classList.contains("sunlight-mode");
+
   // Clear
   ctx.clearRect(0, 0, w, h);
 
   // Background gradient
   const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
-  bgGrad.addColorStop(0, "#080c16");
-  bgGrad.addColorStop(0.7, "#0f172a");
-  bgGrad.addColorStop(1, "#111b2e");
+  if (isSunlight) {
+    bgGrad.addColorStop(0, "#f8fafc");
+    bgGrad.addColorStop(0.7, "#ffffff");
+    bgGrad.addColorStop(1, "#f1f5f9");
+  } else {
+    bgGrad.addColorStop(0, "#080c16");
+    bgGrad.addColorStop(0.7, "#0f172a");
+    bgGrad.addColorStop(1, "#111b2e");
+  }
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, w, h);
 
@@ -1052,15 +1456,15 @@ function drawGreenhouseStructure(angle = 0) {
 
   // Ground level
   const groundY = h - 60;
-  ctx.strokeStyle = "#334155";
-  ctx.lineWidth = 2;
+  ctx.strokeStyle = isSunlight ? "#000000" : "#334155";
+  ctx.lineWidth = isSunlight ? 3 : 2;
   ctx.beginPath();
   ctx.moveTo(30, groundY);
   ctx.lineTo(w - 30, groundY);
   ctx.stroke();
 
   // Soil hatching
-  ctx.strokeStyle = "rgba(71, 85, 105, 0.3)";
+  ctx.strokeStyle = isSunlight ? "rgba(0, 0, 0, 0.4)" : "rgba(71, 85, 105, 0.3)";
   ctx.lineWidth = 1;
   for (let x = 40; x < w - 40; x += 15) {
     ctx.beginPath();
@@ -1070,22 +1474,18 @@ function drawGreenhouseStructure(angle = 0) {
   }
 
   // 5 Naves Geometría (40m total)
-  // Ancho de dibujo para las 5 naves
   const startX = 130;
   const totalWidth = w - 240; // ~560px
   const numNaves = 5;
   const naveW = totalWidth / numNaves; // ~112px por nave (8m escala)
 
   // Escala vertical: 1 metro = 40 píxeles aprox.
-  // Ground = 0m -> groundY
-  // Techo de guayas = 3.80m -> groundY - (3.80 * 40) = groundY - 152px
-  // Alambre tutorado español = 2.20m -> groundY - (2.20 * 40) = groundY - 88px
   const scaleY = 40;
   const techoY = groundY - (3.80 * scaleY);
   const tutorY = groundY - (2.20 * scaleY);
 
   // Malla semitransparente que envuelve el techo de guayas y paredes
-  ctx.fillStyle = "rgba(16, 185, 129, 0.05)";
+  ctx.fillStyle = isSunlight ? "rgba(6, 95, 70, 0.08)" : "rgba(16, 185, 129, 0.05)";
   ctx.beginPath();
   ctx.moveTo(startX, groundY);
   ctx.lineTo(startX, techoY);
@@ -1095,8 +1495,8 @@ function drawGreenhouseStructure(angle = 0) {
   ctx.fill();
 
   // Pilares verticales tubulares (ÚNICOS TUBOS EN LA ESTRUCTURA - CERO TUBOS EN TECHO)
-  ctx.strokeStyle = "#94a3b8";
-  ctx.lineWidth = 3;
+  ctx.strokeStyle = isSunlight ? "#000000" : "#94a3b8";
+  ctx.lineWidth = isSunlight ? 3.5 : 3;
   for (let i = 0; i <= numNaves; i++) {
     const px = startX + i * naveW;
     ctx.beginPath();
@@ -1105,27 +1505,27 @@ function drawGreenhouseStructure(angle = 0) {
     ctx.stroke();
 
     // Capitel pasacables en tope de pilar
-    ctx.fillStyle = "#38bdf8";
+    ctx.fillStyle = isSunlight ? "#0284c7" : "#38bdf8";
     ctx.fillRect(px - 4, techoY - 3, 8, 4);
 
     // Dados de concreto cimentación
-    ctx.fillStyle = "rgba(148, 163, 184, 0.25)";
+    ctx.fillStyle = isSunlight ? "#cbd5e1" : "rgba(148, 163, 184, 0.25)";
     ctx.fillRect(px - 6, groundY, 12, 16);
-    ctx.strokeStyle = "rgba(148, 163, 184, 0.5)";
+    ctx.strokeStyle = isSunlight ? "#000000" : "rgba(148, 163, 184, 0.5)";
     ctx.strokeRect(px - 6, groundY, 12, 16);
   }
 
   // GUAYAS MAESTRAS DE TECHO (Cable de acero galvanizado 3/8" tensado - CERO ARCOS)
-  ctx.strokeStyle = "#38bdf8";
-  ctx.lineWidth = 2.5;
+  ctx.strokeStyle = isSunlight ? "#0284c7" : "#38bdf8";
+  ctx.lineWidth = isSunlight ? 3 : 2.5;
   ctx.beginPath();
   ctx.moveTo(startX, techoY);
   ctx.lineTo(startX + totalWidth, techoY);
   ctx.stroke();
 
   // Malla 50x25 HDPE cosida a las guayas (representada con línea segmentada verde)
-  ctx.strokeStyle = "#10b981";
-  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = isSunlight ? "#047857" : "#10b981";
+  ctx.lineWidth = isSunlight ? 2 : 1.5;
   ctx.setLineDash([4, 2]);
   ctx.beginPath();
   ctx.moveTo(startX, techoY - 2);
@@ -1134,7 +1534,7 @@ function drawGreenhouseStructure(angle = 0) {
   ctx.setLineDash([]);
 
   // Tirantes verticales de soporte del tutorado que bajan de las guayas de techo
-  ctx.strokeStyle = "rgba(245, 158, 11, 0.4)";
+  ctx.strokeStyle = isSunlight ? "rgba(154, 52, 18, 0.7)" : "rgba(245, 158, 11, 0.4)";
   ctx.lineWidth = 1;
   ctx.setLineDash([2, 2]);
   for (let i = 0; i < numNaves; i++) {
@@ -1148,7 +1548,7 @@ function drawGreenhouseStructure(angle = 0) {
 
   // Alambre tutorado español a 2.2m
   if (showCrop) {
-    ctx.strokeStyle = "rgba(245, 158, 11, 0.6)";
+    ctx.strokeStyle = isSunlight ? "rgba(154, 52, 18, 0.9)" : "rgba(245, 158, 11, 0.6)";
     ctx.lineWidth = 1.5;
     ctx.setLineDash([6, 4]);
     ctx.beginPath();
@@ -1158,7 +1558,7 @@ function drawGreenhouseStructure(angle = 0) {
     ctx.setLineDash([]);
 
     // Plantas de tomate tutoradas (Malla Espaldera vs Hilo)
-    drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisMesh);
+    drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisMesh, isSunlight);
   }
 
   // Tensores a tierra en la fachada ESTE (lado derecho del gráfico)
@@ -1168,32 +1568,33 @@ function drawGreenhouseStructure(angle = 0) {
     const anchorY = groundY + 10;
 
     // Guaya a 45°
-    ctx.strokeStyle = "#f43f5e";
-    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = isSunlight ? "#991b1b" : "#f43f5e";
+    ctx.lineWidth = isSunlight ? 3 : 2.5;
     ctx.beginPath();
     ctx.moveTo(eastX, techoY);
     ctx.lineTo(anchorX, groundY);
     ctx.stroke();
 
     // Muerto de concreto subterráneo
-    ctx.fillStyle = "rgba(244, 63, 94, 0.3)";
+    ctx.fillStyle = isSunlight ? "rgba(153, 27, 27, 0.2)" : "rgba(244, 63, 94, 0.3)";
     ctx.fillRect(anchorX - 10, groundY, 20, 24);
+    ctx.strokeStyle = isSunlight ? "#991b1b" : "#f43f5e";
     ctx.strokeRect(anchorX - 10, groundY, 20, 24);
 
     // Etiqueta tensor
-    ctx.fillStyle = "#fda4af";
+    ctx.fillStyle = isSunlight ? "#7f1d1d" : "#fda4af";
     ctx.font = "bold 10px var(--font-sans)";
     ctx.fillText("Guaya 3/8\" a 45° + Tensor 5/8\"", anchorX - 50, groundY - 10);
   }
 
   // Vector Viento Este (sopla de derecha a izquierda)
   if (showWind) {
-    drawWindArrows(ctx, startX + totalWidth + 70, groundY - 100);
+    drawWindArrows(ctx, startX + totalWidth + 70, groundY - 100, isSunlight);
   }
 
   // Cotas y dimensiones
   if (showDims) {
-    drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY);
+    drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY, isSunlight);
   }
 }
 
@@ -1227,13 +1628,13 @@ function drawTurbine(ctx, x, y, angle) {
   ctx.restore();
 }
 
-function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisMesh = true) {
+function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisMesh = true, isSunlight = false) {
   // Si la Malla Espaldera está activa, dibujamos la cuadrícula de polipropileno continua (15×15 cm)
   if (showTrellisMesh) {
     const lowerWireY = groundY - 8; // Alambre guía inferior a 0.20 m
     
     // Alambre guía inferior (0.20 m)
-    ctx.strokeStyle = "rgba(148, 163, 184, 0.6)";
+    ctx.strokeStyle = isSunlight ? "rgba(0, 0, 0, 0.6)" : "rgba(148, 163, 184, 0.6)";
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(startX, lowerWireY);
@@ -1241,7 +1642,7 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
     ctx.stroke();
 
     // Líneas horizontales de la malla espaldera (cada 15 cm a escala ~6px)
-    ctx.strokeStyle = "rgba(245, 158, 11, 0.35)";
+    ctx.strokeStyle = isSunlight ? "rgba(154, 52, 18, 0.5)" : "rgba(245, 158, 11, 0.35)";
     ctx.lineWidth = 0.8;
     for (let gy = lowerWireY - 8; gy >= tutorY; gy -= 10) {
       ctx.beginPath();
@@ -1260,12 +1661,12 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
 
     // Badge visual en el lienzo canvas
     ctx.save();
-    ctx.fillStyle = "rgba(15, 23, 42, 0.85)";
-    ctx.strokeStyle = "#10b981";
-    ctx.lineWidth = 1;
+    ctx.fillStyle = isSunlight ? "#ffffff" : "rgba(15, 23, 42, 0.85)";
+    ctx.strokeStyle = isSunlight ? "#000000" : "#10b981";
+    ctx.lineWidth = isSunlight ? 2 : 1;
     ctx.fillRect(startX + 10, tutorY - 22, 330, 18);
     ctx.strokeRect(startX + 10, tutorY - 22, 330, 18);
-    ctx.fillStyle = "#34d399";
+    ctx.fillStyle = isSunlight ? "#047857" : "#34d399";
     ctx.font = "bold 9.5px sans-serif";
     ctx.fillText("MALLA ESPALDERA BIORIENTADA 15×15 cm (-88% MANO DE OBRA)", startX + 16, tutorY - 9);
     ctx.restore();
@@ -1275,7 +1676,7 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
   for (let px = startX + 15; px < startX + totalWidth; px += step) {
     if (!showTrellisMesh) {
       // Hilo tradicional de rafia individual (si el usuario apaga la malla tutora)
-      ctx.strokeStyle = "rgba(203, 213, 225, 0.4)";
+      ctx.strokeStyle = isSunlight ? "rgba(0, 0, 0, 0.5)" : "rgba(203, 213, 225, 0.4)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(px, groundY);
@@ -1284,7 +1685,7 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
     }
 
     // Follaje de la planta (verde esmeralda) entrelazado naturalmente en los cuadros
-    ctx.fillStyle = "rgba(16, 185, 129, 0.75)";
+    ctx.fillStyle = isSunlight ? "rgba(6, 95, 70, 0.85)" : "rgba(16, 185, 129, 0.75)";
     for (let py = groundY - 10; py > tutorY + 8; py -= 18) {
       ctx.beginPath();
       ctx.ellipse(px - 4, py, 7, 4.5, -0.2, 0, Math.PI * 2);
@@ -1295,7 +1696,7 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
     }
 
     // Frutos de tomate (rojo) apoyados por gravedad sobre la cuadrícula
-    ctx.fillStyle = "#f43f5e";
+    ctx.fillStyle = isSunlight ? "#991b1b" : "#f43f5e";
     ctx.beginPath();
     ctx.arc(px + 5, groundY - 35, 3.8, 0, Math.PI * 2);
     ctx.fill();
@@ -1305,10 +1706,10 @@ function drawTomatoPlants(ctx, startX, totalWidth, groundY, tutorY, showTrellisM
   }
 }
 
-function drawWindArrows(ctx, x, y) {
+function drawWindArrows(ctx, x, y, isSunlight = false) {
   ctx.save();
-  ctx.strokeStyle = "#38bdf8";
-  ctx.fillStyle = "#38bdf8";
+  ctx.strokeStyle = isSunlight ? "#0284c7" : "#38bdf8";
+  ctx.fillStyle = isSunlight ? "#0284c7" : "#38bdf8";
   ctx.lineWidth = 2;
 
   // Flechas del viento Este
@@ -1329,18 +1730,19 @@ function drawWindArrows(ctx, x, y) {
   }
 
   ctx.font = "bold 11px var(--font-sans)";
+  ctx.fillStyle = isSunlight ? "#000000" : "#38bdf8";
   ctx.fillText("VIENTO DEL ESTE (Dominante)", x - 55, y - 12);
-  ctx.font = "10px var(--font-sans)";
-  ctx.fillStyle = "#94a3b8";
+  ctx.font = "bold 10px var(--font-sans)";
+  ctx.fillStyle = isSunlight ? "#1f2937" : "#94a3b8";
   ctx.fillText("88% horas / Ráfagas 27 km/h", x - 55, y + 95);
   ctx.restore();
 }
 
-function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY) {
+function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY, isSunlight = false) {
   ctx.save();
-  ctx.strokeStyle = "#64748b";
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "10px var(--font-mono)";
+  ctx.strokeStyle = isSunlight ? "#000000" : "#64748b";
+  ctx.fillStyle = isSunlight ? "#000000" : "#94a3b8";
+  ctx.font = "bold 10px var(--font-mono)";
   ctx.lineWidth = 1;
 
   // Cota de Ancho Total (20.00 m)
@@ -1367,7 +1769,7 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY) {
   ctx.fillText("Techo Guayas: 3.80 m", dimX - 110, (groundY + techoY) / 2);
 
   // Cota Tutorado 2.20 m
-  ctx.fillStyle = "#f59e0b";
+  ctx.fillStyle = isSunlight ? "#9a3412" : "#f59e0b";
   ctx.fillText("Malla Tutora: 2.20 m", startX + 10, tutorY - 5);
 
   ctx.restore();
@@ -1980,65 +2382,255 @@ function calculateWellValidation() {
 }
 
 // ==========================================================================
-// 10. MÓDULO DE CÁLCULO Y PROYECTO DE PERFORACIÓN DE POZO PROFUNDO (120 m)
+// 10. MÓDULO DE CÁLCULO Y PROYECTO DE PERFORACIÓN DE POZO PROFUNDO
 // ==========================================================================
+// Parámetros hidrogeológicos calibrados Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ Quíbor)
+const QUIBOR_AQUIFER = {
+  transmissivityT: 180.0,    // m²/día (2.08e-3 m²/s)
+  storativityS: 0.0025,      // Adimensional (confinado / semiconfinado)
+  conductivityK: 22.0,       // m/día
+  testFlowQ: 2.5,            // L/s (216 m³/día)
+  r0Radius: 260.0            // Radio de influencia teórico a 24h bombeo
+};
+
+const WELL_LOCATIONS = {
+  A: {
+    name: "Opción A: Predio In Situ (0 m)",
+    cota: 700,
+    depthDefault: 120,
+    neBase: 70.0,
+    ndBase: 88.0,
+    drawdownBase: 18.0,
+    ecW: 1.4,
+    lf: 23.0,
+    adductionCost: 0,
+    adductionDesc: "Aducción directa 0 m al reservorio",
+    pumpHp: "7.5 HP",
+    pumpDepth: 98,
+    hmtBase: 100.5,
+    layers: [
+      { depth: "0 – 15 m", desc: "Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita Tremie</strong>", comp: "Sello 15 m", cls: "layer-sanitary" },
+      { depth: "15 – 68 m", desc: "Arenas medias secas y arcillas plásticas grisáceas compactas", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "68 – 82 m", desc: "<strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 70 m", comp: "Filtro Johnson 12 m", cls: "layer-aquifer-1" },
+      { depth: "82 – 86 m", desc: "Arcilla limosa arenosa firme (Separador) | <em>Posición Bomba Sumergible a 98 m</em>", comp: "Zona Bomba 7.5 HP", cls: "layer-confining" },
+      { depth: "86 – 112 m", desc: "<strong>Acuífero Principal Quíbor: Gravas de Cuarzo y Arenas Gruesas Limpias</strong>", comp: "Filtro Johnson 26 m", cls: "layer-aquifer-main" },
+      { depth: "112 – 116 m", desc: "Arenas finas limosas transicionales", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "116 – 120 m", desc: "Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
+    ]
+  },
+  B: {
+    name: "Opción B: Piedemonte Sur (+3.0 km Sur)",
+    cota: 750,
+    depthDefault: 100,
+    neBase: 50.0,
+    ndBase: 68.0,
+    drawdownBase: 18.0,
+    ecW: 0.9,
+    lf: 11.0,
+    adductionCost: 17100, // 3.000 m PEAD 75mm PN10 ($13.500) + Booster intermedio ($3.600)
+    adductionDesc: "Aducción 3.000 m PEAD 75mm PN10 + Booster intermedio + Servidumbre",
+    pumpHp: "5.5 HP",
+    pumpDepth: 78,
+    hmtBase: 81.0,
+    layers: [
+      { depth: "0 – 15 m", desc: "Suelos aluviales permeables de piedemonte | <strong>Sello Sanitario Cemento Tremie</strong>", comp: "Sello 15 m", cls: "layer-sanitary" },
+      { depth: "15 – 48 m", desc: "Conglomerados y arenas gruesas secas", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "48 – 62 m", desc: "<strong>Acuífero Somero de Recarga Atarigua</strong> | Nivel Estático NE = 50 m", comp: "Filtro Johnson 14 m", cls: "layer-aquifer-1" },
+      { depth: "62 – 70 m", desc: "Estrato limo-arenoso consolidado | <em>Posición Bomba Sumergible a 78 m</em>", comp: "Zona Bomba 5.5 HP", cls: "layer-confining" },
+      { depth: "70 – 96 m", desc: "<strong>Acuífero de Piedemonte: Gravas gruesas limpias de alta permeabilidad</strong>", comp: "Filtro Johnson 26 m", cls: "layer-aquifer-main" },
+      { depth: "96 – 100 m", desc: "Contacto Formación Morán | <strong>Tubo Decantador + Tapón</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
+    ]
+  },
+  C: {
+    name: "Opción C: Centro Valle (+2.5 km N, Guadalupe)",
+    cota: 660,
+    depthDefault: 140,
+    neBase: 98.0,
+    ndBase: 122.0,
+    drawdownBase: 24.0,
+    ecW: 2.4,
+    lf: 35.0,
+    adductionCost: 1200,
+    adductionDesc: "Conexión a red local secundaria (Requiere lavado salino 35%)",
+    pumpHp: "12.5 HP",
+    pumpDepth: 128,
+    hmtBase: 138.0,
+    layers: [
+      { depth: "0 – 20 m", desc: "Limos arcillosos salinos y rellenos aluviales | <strong>Sello Sanitario Reforzado 20 m</strong>", comp: "Sello 20 m", cls: "layer-sanitary" },
+      { depth: "20 – 96 m", desc: "Arenas medias desaturadas por sobreexplotación (Cono de abatimiento regional)", comp: "Tubo Ciego ASTM A53", cls: "layer-confining" },
+      { depth: "96 – 108 m", desc: "<strong>Acuífero Deprimido Guadalupe</strong> | Nivel Estático NE = 98 m", comp: "Filtro Johnson 12 m", cls: "layer-aquifer-1" },
+      { depth: "108 – 114 m", desc: "Lente arcilloso denso | <em>Posición Bomba de Alta Carga 12.5 HP a 128 m</em>", comp: "Zona Bomba 12.5 HP", cls: "layer-confining" },
+      { depth: "114 – 136 m", desc: "<strong>Acuífero Profundo Centro-Valle (Sulfatado Cálcico)</strong>", comp: "Filtro Johnson 22 m", cls: "layer-aquifer-main" },
+      { depth: "136 – 140 m", desc: "Lutitas negras Formación Paují/Morán | <strong>Tubo Decantador 4 m</strong>", comp: "Decantador 4 m", cls: "layer-bedrock" }
+    ]
+  }
+};
+
 function initWellDrillingCalculator() {
+  const selLocation = document.getElementById("select-drill-location");
   const selDepth = document.getElementById("select-drill-depth");
   const selDrillDiam = document.getElementById("select-drill-diameter");
   const selCasingDiam = document.getElementById("select-casing-diameter");
   const selScreenType = document.getElementById("select-screen-type");
+  const sliderDistance = document.getElementById("input-well-distance-slider");
+  const numDistance = document.getElementById("input-well-distance");
 
   if (!selDepth || !selDrillDiam || !selCasingDiam || !selScreenType) return;
 
+  // Sincronizar control deslizante e input numérico de distancia a pozo vecino
+  if (sliderDistance && numDistance) {
+    sliderDistance.addEventListener("input", (e) => {
+      numDistance.value = e.target.value;
+      recalculateDrillMetrics();
+    });
+    numDistance.addEventListener("input", (e) => {
+      sliderDistance.value = e.target.value;
+      recalculateDrillMetrics();
+    });
+  }
+
+  // Tarjetas interactivas de ubicación
+  const cardOptA = document.getElementById("loc-card-optA");
+  const cardOptB = document.getElementById("loc-card-optB");
+  const cardOptC = document.getElementById("loc-card-optC");
+
+  function selectLocationCard(locKey) {
+    if (selLocation) selLocation.value = locKey;
+    [cardOptA, cardOptB, cardOptC].forEach(c => {
+      if (c) {
+        c.classList.remove("active");
+        c.style.borderColor = "rgba(255,255,255,0.12)";
+        c.style.background = "rgba(255,255,255,0.02)";
+      }
+    });
+
+    const activeCard = locKey === "A" ? cardOptA : (locKey === "B" ? cardOptB : cardOptC);
+    if (activeCard) {
+      activeCard.classList.add("active");
+      activeCard.style.borderColor = locKey === "A" ? "#38bdf8" : (locKey === "B" ? "#34d399" : "#f59e0b");
+      activeCard.style.background = locKey === "A" ? "rgba(56,189,248,0.08)" : (locKey === "B" ? "rgba(16,185,129,0.08)" : "rgba(245,158,11,0.08)");
+    }
+
+    // Actualizar profundidad sugerida según ubicación
+    const locData = WELL_LOCATIONS[locKey];
+    if (locData && selDepth) {
+      selDepth.value = String(locData.depthDefault);
+    }
+
+    recalculateDrillMetrics();
+  }
+
+  if (cardOptA) cardOptA.addEventListener("click", () => selectLocationCard("A"));
+  if (cardOptB) cardOptB.addEventListener("click", () => selectLocationCard("B"));
+  if (cardOptC) cardOptC.addEventListener("click", () => selectLocationCard("C"));
+
+  if (selLocation) {
+    selLocation.addEventListener("change", (e) => {
+      selectLocationCard(e.target.value);
+    });
+  }
+
   function recalculateDrillMetrics() {
-    const depth = parseFloat(selDepth.value);
-    const drillDiamInches = parseFloat(selDrillDiam.value);
-    const casingDiamInches = parseFloat(selCasingDiam.value);
-    const screenType = selScreenType.value;
+    const locKey = selLocation ? selLocation.value : "A";
+    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.A;
+    const depth = parseFloat(selDepth.value) || locData.depthDefault;
+    const drillDiamInches = parseFloat(selDrillDiam.value) || 12.25;
+    const casingDiamInches = parseFloat(selCasingDiam.value) || 6.0;
+    const screenType = selScreenType.value || "johnson";
+    const distanceM = numDistance ? parseFloat(numDistance.value) || 250.0 : 250.0;
 
     FarmState.setState({
+      wellLocation: locKey,
       wellDepthM: depth,
       drillDiamInches: drillDiamInches,
       casingDiamInches: casingDiamInches,
       screenType: screenType
     });
 
-    // Metraje de tubería según profundidad
-    let casingLen = 82.0;
-    let screenLen = 38.0;
-    let pumpHp = "7.5 HP";
-    let hmtDesc = "HMT = 100.5 mca (a 98 m)";
+    // 1. Cálculo de Interferencia de Pozos Vecinos (Cooper-Jacob)
+    // s_interf = (Q / 4*pi*T) * ln(2.25 * T * t / (r^2 * S))
+    // Q = 216 m³/día, T = 180 m²/día, S = 0.0025, t = 1 día
+    let deltaInterf = 0.0;
+    const T = QUIBOR_AQUIFER.transmissivityT;
+    const S = QUIBOR_AQUIFER.storativityS;
+    const Q = 216.0; // m³/día (2.5 L/s)
+    const t = 1.0;   // día
 
-    if (depth === 90) {
-      casingLen = 66.0;
-      screenLen = 24.0;
-      pumpHp = "5.5 HP";
-      hmtDesc = "HMT = 86.0 mca (a 78 m)";
-    } else if (depth === 105) {
-      casingLen = 75.0;
-      screenLen = 30.0;
-      pumpHp = "5.5 a 7.5 HP";
-      hmtDesc = "HMT = 94.0 mca (a 88 m)";
+    const u = (distanceM * distanceM * S) / (4.0 * T * t);
+    if (distanceM < QUIBOR_AQUIFER.r0Radius) {
+      // Cooper-Jacob aproximación logarítmica
+      const argLog = (2.25 * T * t) / (distanceM * distanceM * S);
+      if (argLog > 1.0) {
+        deltaInterf = (Q / (4.0 * Math.PI * T)) * Math.log(argLog);
+      }
+    }
+    if (deltaInterf < 0) deltaInterf = 0;
+
+    // Niveles hidrostáticos corregidos
+    const correctedND = locData.ndBase + deltaInterf;
+    const correctedHMT = correctedND + 13.0; // 13 mca de pérdidas y presión residual
+
+    // Actualizar elementos de interferencia en UI
+    const elInterfDrawdown = document.getElementById("disp-interf-drawdown");
+    const elInterfSub = document.getElementById("disp-interf-sub");
+    const elCorrectedNd = document.getElementById("disp-corrected-nd");
+    const elCorrectedHmt = document.getElementById("disp-corrected-hmt");
+    const elInterfStatus = document.getElementById("disp-interf-status");
+    const elInterfStatusSub = document.getElementById("disp-interf-status-sub");
+
+    if (elInterfDrawdown) elInterfDrawdown.textContent = `+${deltaInterf.toFixed(2)} m`;
+    if (elInterfSub) elInterfSub.textContent = `A ${distanceM.toFixed(0)} m de pozo a 2.5 L/s`;
+    if (elCorrectedNd) elCorrectedNd.textContent = `${correctedND.toFixed(2)} m`;
+    if (elCorrectedHmt) elCorrectedHmt.textContent = `HMT Corregida = ${correctedHMT.toFixed(1)} mca`;
+
+    if (elInterfStatus && elInterfStatusSub) {
+      if (distanceM < 120) {
+        elInterfStatus.textContent = "⚠️ Alerta Crítica (Solapamiento)";
+        elInterfStatus.style.color = "#f87171";
+        elInterfStatusSub.textContent = "Solapamiento severo de conos de depresión. Riesgo de arrastre de arena.";
+      } else if (distanceM < 250) {
+        elInterfStatus.textContent = "⚠️ Interferencia Moderada";
+        elInterfStatus.style.color = "#f59e0b";
+        elInterfStatusSub.textContent = "Conos se intersectan. Se recomienda alternar bombeos.";
+      } else {
+        elInterfStatus.textContent = "✅ Distancia Segura";
+        elInterfStatus.style.color = "#34d399";
+        elInterfStatusSub.textContent = "Separación ≥ Radio de Influencia (R₀ ≈ 260 m).";
+      }
     }
 
-    // Cálculo de empaque de grava cuarzosa anular
+    // 2. Metraje de tubería y filtros según profundidad
+    let screenLen = 38.0;
+    if (depth <= 90) {
+      screenLen = 24.0;
+    } else if (depth <= 100) {
+      screenLen = 28.0;
+    } else if (depth <= 105) {
+      screenLen = 30.0;
+    } else if (depth >= 140) {
+      screenLen = 42.0;
+    }
+    const casingLen = depth - screenLen;
+
+    // 3. Empaque de grava cuarzosa anular
     const dDrillM = drillDiamInches * 0.0254;
     const dCasingM = (casingDiamInches === 8 ? 8.625 : 6.625) * 0.0254;
     const anularArea = (Math.PI / 4) * Math.max(0.001, (dDrillM * dDrillM - dCasingM * dCasingM));
-    const gravelLen = depth - 15.0; // Sello sanitario ocupa los primeros 15 m
-    const gravelVol = anularArea * gravelLen * 1.25; // 25% esponjamiento y derrumbe en arenas
+    const sealDepthM = locKey === "C" ? 20.0 : 15.0;
+    const gravelLen = Math.max(10, depth - sealDepthM);
+    const gravelVol = anularArea * gravelLen * 1.25; // 25% esponjamiento en arenas
     const gravelTons = gravelVol * 1.60;
     const gravelBags = Math.round((gravelTons * 1000) / 50);
 
-    // Cálculo de sello sanitario
+    // 4. Sello sanitario cemento-bentonita
     const dConductorM = 14.0 * 0.0254;
     const sealArea = (Math.PI / 4) * Math.max(0.001, (dConductorM * dConductorM - dCasingM * dCasingM));
-    const sealVol = sealArea * 15.0 * 1.20;
+    const sealVol = sealArea * sealDepthM * 1.20;
 
-    // Cálculo presupuestario referencial (mercado Venezuela)
+    // 5. Presupuesto referencial de obra
     const costMobilization = 1500;
     const costConductor = 18.0 * 95;
-    const costSeal = 650;
+    const costSeal = sealDepthM * 45;
     const costDrilling = (depth - 18.0) * (drillDiamInches > 12.0 ? 75 : 70);
     const costLogging = 600;
     const costCasing = casingLen * (casingDiamInches === 8 ? 62 : 48);
@@ -2048,18 +2640,28 @@ function initWellDrillingCalculator() {
     const costAirlift = 24.0 * 55;
     const costPumpingTest = 1200;
     const costLab = 220;
-    const costPump = casingDiamInches === 8 ? 2850 : 2450;
-    const costColumn = (depth - 22.0) * 22;
-    const costVfd = 1150;
+
+    // Bomba y columna
+    let costPump = 2450;
+    if (locKey === "C" || correctedHMT > 120) {
+      costPump = 3900; // 12.5 HP alta carga
+    } else if (casingDiamInches === 8) {
+      costPump = 2850;
+    }
+    const costColumn = (locData.pumpDepth - 5.0) * 22;
+    const costVfd = locKey === "C" ? 1750 : 1150;
     const costWellhead = 450;
+
+    // Obra externa de aducción si aplica (Opción B)
+    const costExternal = locData.adductionCost;
 
     const subtotal = costMobilization + costConductor + costSeal + costDrilling + costLogging +
                      costCasing + costScreens + costGravel + costAirlift + costPumpingTest +
-                     costLab + costPump + costColumn + costVfd + costWellhead;
+                     costLab + costPump + costColumn + costVfd + costWellhead + costExternal;
     const contingencies = subtotal * 0.05;
     const totalCost = subtotal + contingencies;
 
-    // Actualizar elementos en UI
+    // 6. Actualizar métricas en UI
     const elCasing = document.getElementById("disp-drill-casing");
     const elScreen = document.getElementById("disp-drill-screen");
     const elScreenSub = document.getElementById("disp-drill-screen-sub");
@@ -2070,17 +2672,47 @@ function initWellDrillingCalculator() {
     const elPumpSub = document.getElementById("disp-drill-pump-sub");
     const elCost = document.getElementById("disp-drill-cost");
     const elTotalCost = document.getElementById("drill-summary-total");
+    const elSummaryDesc = document.getElementById("drill-summary-desc");
+    const elBadgeLoc = document.getElementById("badge-selected-location");
 
+    if (elBadgeLoc) elBadgeLoc.textContent = locData.name;
     if (elCasing) elCasing.textContent = `${casingLen.toFixed(1)} m`;
     if (elScreen) elScreen.textContent = `${screenLen.toFixed(1)} m`;
-    if (elScreenSub) elScreenSub.textContent = screenType === "johnson" ? "Inox AISI 304 (Ve = 0.0007 m/s)" : "Ranurada Puente (Ve = 0.0018 m/s)";
+    if (elScreenSub) {
+      elScreenSub.textContent = screenType === "johnson" 
+        ? "Inox AISI 304 (Ve = 0.0007 m/s ≤ 0.03)" 
+        : "Ranurada Puente (Ve = 0.0018 m/s ≤ 0.03)";
+    }
     if (elGravel) elGravel.textContent = `${gravelVol.toFixed(2)} m³`;
     if (elGravelSub) elGravelSub.textContent = `${gravelTons.toFixed(1)} Ton (~${gravelBags} sacos 50kg)`;
     if (elSeal) elSeal.textContent = `${sealVol.toFixed(2)} m³`;
-    if (elPump) elPump.textContent = pumpHp;
-    if (elPumpSub) elPumpSub.textContent = hmtDesc;
+    if (elPump) elPump.textContent = locData.pumpHp;
+    if (elPumpSub) elPumpSub.textContent = `HMT = ${correctedHMT.toFixed(1)} mca (a ${locData.pumpDepth} m)`;
     if (elCost) elCost.textContent = `$${Math.round(totalCost).toLocaleString("en-US")} USD`;
     if (elTotalCost) elTotalCost.textContent = `$${totalCost.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
+    if (elSummaryDesc) {
+      elSummaryDesc.textContent = `Incluye perforación ${drillDiamInches}", entubado ${casingDiamInches}", ${screenLen}m filtros ${screenType === "johnson" ? "Johnson AISI 304" : "Puente"}, grava cuarzosa, sello tremie, perfilaje SP/Res, air-lift, bomba ${locData.pumpHp} y ${locData.adductionDesc}.`;
+    }
+
+    // 7. Actualizar columna estratigráfica interactiva
+    const stratTitle = document.getElementById("strat-column-title");
+    const stratDesc = document.getElementById("strat-column-desc");
+    const stratContainer = document.getElementById("drill-layers-list");
+
+    if (stratTitle) stratTitle.textContent = `Corte Litoestratigráfico Pronosticado (0 - ${depth} m)`;
+    if (stratDesc) {
+      stratDesc.textContent = `Estratigrafía calibrada para ${locData.name} (Cota ${locData.cota} msnm, NE = ${locData.neBase} m, ND = ${locData.ndBase} m):`;
+    }
+
+    if (stratContainer && locData.layers) {
+      stratContainer.innerHTML = locData.layers.map(layer => `
+        <div class="drill-layer ${layer.cls}">
+          <span class="drill-layer-depth">${layer.depth}</span>
+          <span class="drill-layer-desc">${layer.desc}</span>
+          <span class="drill-layer-component badge-${layer.cls.includes('screen') ? 'screen' : (layer.cls.includes('seal') ? 'seal' : 'casing')}">${layer.comp}</span>
+        </div>
+      `).join("");
+    }
   }
 
   selDepth.addEventListener("change", recalculateDrillMetrics);
@@ -2090,4 +2722,5 @@ function initWellDrillingCalculator() {
 
   recalculateDrillMetrics();
 }
+
 
