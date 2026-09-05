@@ -1,9 +1,9 @@
 /**
- * Service Worker: AgroQuíbor Suite (2.000 m²)
+ * Service Worker: LA CIGARRONERA (2.000 m²)
  * Cache-First Strategy for 100% Offline Capability in rural field conditions
  */
 
-const CACHE_NAME = 'agroquibor-v3.0.0';
+const CACHE_NAME = 'lacigarronera-v3.1.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

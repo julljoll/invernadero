@@ -134,35 +134,35 @@ Para pimentón ($EC_e = 1.5\ \text{dS/m}$) con agua de $1.4\ \text{dS/m}$, $LF \
 ## 6. Recomendaciones Estructurales y Tutorado de Mínima Mano de Obra (2.000 m²)
 
 ```text
-       Techo 100% Plano de Guayas de 3/8" a 3.80 m (20.00 m ANCHO × 100.00 m LARGO)
+       Techo 100% Plano de Guayas de 3/8" a 3.00 m (20.00 m ANCHO × 100.00 m LARGO)
     ═════════════════════════════════════════════════════════════════════════════════
     │                                                                               │
-    │  [Buffer Térmico Libre de 1.60 m — Ventilación Convectiva Tangencial al Este] │
+    │  [Buffer Térmico Libre de 1.00 m — Ventilación Convectiva Tangencial al Este] │
     │                                                                               │
     │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
-    │  Alambre Maestro Calibre 10 a 2.20 m + MALLA ESPALDERA (HORTOMALLA 15×15)     │
+    │  Alambre Maestro Calibre 10 a 2.00 m + MALLA ESPALDERA (HORTOMALLA 15×15)     │
     │  ┌───┬───┬───┬───┐  (Cero Atados | Cero Clips | -88% Mano de Obra)            │
     │  ├───┼───┼───┼───┤  4.400 plantas / 19.8 toneladas de biomasa suspendida      │
     │  └───┴───┴───┴───┘  Racimos y ramas descansan por gravedad en cuadrícula      │
     │  Alambre Guía Inferior a 0.20 m sobre camellón (10 camellones de 100 m)       │
     │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
     │                                                                               │
-    └───[Pilares Tubulares Verticales Sch 40 Ø 2 1/2" a 3.80 m libre]───────────────┘
+    └───[Pilares Tubulares Verticales Sch 40 Ø 2 1/2" a 3.00 m libre]───────────────┘
     ═════════════════════════════════════════════════════════════════════════════════
     Zanja Perimetral Continua 20×20 cm (240 m lineales con Faldón Enterrado 20 cm)
 ```
 
 1. **Estructura Tipo Parral Tensado (20.00 m × 100.00 m):**
-   * Pilares verticales tubulares Schedule 40 de $\varnothing\ 2\ 1/2"$ a **3.80 m libre**.
+   * Pilares verticales tubulares Schedule 40 de $\varnothing\ 2\ 1/2"$ a **3.00 m libre** (tubos de $3.80\text{ m}$ con $0.80\text{ m}$ empotrados).
    * Techo sustentado al 100% por red ortogonal de guayas de acero galvanizado de $3/8"$ en cuadrícula de $4.0\text{ m}$ (transversal) $\times 5.0\text{ m}$ (longitudinal).
    * Cero tubos en techo; 60% de ahorro en acero frente a galpones rígidos y ventilación convectiva cenital 100% abierta.
-   * **Orientación Este-Oeste:** El eje de 100 m paralelo a los vientos dominantes del Este reduce en un 50% la superficie frontal expuesta a ráfagas de 27 km/h ($76\text{ m}^2$ frente a $152\text{ m}^2$).
+   * **Orientación Este-Oeste:** El eje de 100 m paralelo a los vientos dominantes del Este reduce en un 50% la superficie frontal expuesta a ráfagas de 27 km/h ($60\text{ m}^2$ frente a $120\text{ m}^2$).
 2. **Sistema de Tutorado Óptimo: Malla Espaldera Biorientada (Hortomalla 15×15 cm):**
-   * Se instala malla tutora de polipropileno de alta densidad (cuadrícula de **$15 \times 15\ \text{cm}$**) fijada entre el alambre maestro superior a **$2.20\text{ m}$** (Calibre 10) y un alambre guía inferior a **$0.20\text{ m}$** (Calibre 14) a lo largo de los 10 camellones de 100 m ($1.000\text{ m}$ lineales).
+   * Se instala malla tutora de polipropileno de alta densidad (cuadrícula de **$15 \times 15\ \text{cm}$**) fijada entre el alambre maestro superior a **$2.00\text{ m}$** (Calibre 10) y un alambre guía inferior a **$0.20\text{ m}$** (Calibre 14) a lo largo de los 10 camellones de 100 m ($1.000\text{ m}$ lineales).
    * **Cero Atados y Cero Clips:** La planta y sus racimos se apoyan por gravedad en los cuadros de la malla.
    * **Ahorro Laboral:** Reduce el tiempo de guiado de 500 h/ha a **80 - 120 h/ha (ahorro de más del 85% en jornales: solo 2 jornales/mes para toda la nave de 2.000 m²)**.
    * **Blindaje contra Virosis:** Reduce en un **80% la manipulación física** de las plantas, previniendo la dispersión mecánica de patógenos letales como el Virus Rugoso del Tomate (**ToBRFV**) y el Virus del Mosaico (**TMV**).
-   * **Despunte Apical a 2.20 m:** Al llegar al alambre maestro, se realiza un único corte apical (topping) a la 7ª-8ª floración, concentrando toda la savia en los racimos cuajados y eliminando el descolgado semanal.
+   * **Despunte Apical a 2.00 m:** Al llegar al alambre maestro, se realiza un único corte apical (topping) a la 7ª-8ª floración, concentrando toda la savia en los racimos cuajados y dejando **1.00 m de colchón térmico libre** bajo el techo.
 3. **Modulación Oficial para Rollo de 4.00 m × 100.00 m (8 Rollos Totales):**
    * **5 franjas longitudinales de 100.00 m** en cubierta (Rollos 1 al 5 al 100% sin cortes transversales).
    * **2 franjas longitudinales de 100.00 m** para paredes laterales Norte y Sur (Rollos 6 y 7 al 100% sin cortes).

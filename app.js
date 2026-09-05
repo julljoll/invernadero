@@ -1,5 +1,5 @@
 /**
- * AGENTE ESPECIALISTA EN INVERNADEROS — VALLE DE QUÍBOR
+ * AGENTE ESPECIALISTA EN INVERNADEROS — LA CIGARRONERA (VALLE DE QUÍBOR)
  * Lógica de cálculo bioclimático, extractores eólicos, FAO-56 y visualizador Canvas
  * Versión: 2.0.0
  */
@@ -9,6 +9,7 @@
 // ==========================================================================
 const CONFIG = Object.freeze({
   VERSION: "2.0.0",
+  PROJECT_NAME: "LA CIGARRONERA",
   LOCATION: {
     name: "Valle de Quíbor",
     municipio: "Jiménez",
@@ -137,7 +138,7 @@ const QUIBOR_YEAR_SCENARIOS = {
     deltaT: 1.2,      // +1.2 °C
     deltaRain: -20,   // -20% lluvia
     windFactor: 1.04,
-    desc: "Retorno del ciclo cálido tropical: temperaturas máximas en marzo rozando los 36-37 °C a cielo abierto. El colchón térmico de 1.60 m del parral es vital contra el aborto floral."
+    desc: "Retorno del ciclo cálido tropical: temperaturas máximas en marzo rozando los 36-37 °C a cielo abierto. El colchón térmico de 1.00 m del parral a 3.00 m es vital contra el aborto floral."
   },
   "2029": {
     year: 2029,
@@ -1297,7 +1298,7 @@ function updateClimateDisplays(monthIndex) {
       alertBox.innerHTML = `
         <div class="alert-icon">🔥</div>
         <div class="alert-content">
-          <strong>${data.mes} ${data.year} (Estrés Térmico — T.Máx ${data.max.toFixed(1)} °C):</strong> Máxima radiación (${data.rad} MJ/m²·d) y baja humedad (${data.rh}%). En estructuras bajas (&lt;2.5 m) el interior superará los 35-37 °C provocando aborto floral en tomate y esterilidad de polen. El parral a 3.80 m (con 1.60 m de colchón térmico libre) y pulsos de riego matutinos amortiguan el calentamiento en el dosel.
+          <strong>${data.mes} ${data.year} (Estrés Térmico — T.Máx ${data.max.toFixed(1)} °C):</strong> Máxima radiación (${data.rad} MJ/m²·d) y baja humedad (${data.rh}%). En estructuras bajas (&lt;2.5 m) el interior superará los 35-37 °C provocando aborto floral en tomate y esterilidad de polen. El parral a 3.00 m (con 1.00 m de colchón térmico libre sobre espaldar a 2.00 m) y pulsos de riego matutinos amortiguan el calentamiento en el dosel.
         </div>`;
     } else if (data.lluvia >= 90 || data.maxLluvia) {
       alertBox.className = "alert-box alert-success";

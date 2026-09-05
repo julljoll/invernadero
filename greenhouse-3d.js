@@ -1,6 +1,6 @@
 /**
  * ====================================================================
- * AgroQuíbor Pro — Motor 3D Interactivo Estilo Blender (WebGL / Three.js)
+ * LA CIGARRONERA — Motor 3D Interactivo Estilo Blender (WebGL / Three.js)
  * Estructura: Casa de Malla 2.000 m² (20.00 m Ancho × 100.00 m Fondo)
  * Coordenadas: 9°53'20.0"N 69°35'35.0"W (Valle de Quíbor, Lara)
  * ====================================================================

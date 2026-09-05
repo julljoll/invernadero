@@ -1,10 +1,10 @@
-# PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA: TOMATE INDETERMINADO EN CASA DE MALLA (2.000 m²)
+# PROYECTO LA CIGARRONERA — PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA: TOMATE INDETERMINADO EN CASA DE MALLA (2.000 m²)
 ## Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela (695 – 710 msnm — Clima Semiárido Cálido BSh)
 ### Georreferenciación Satelital: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
  
 | Versión | Fecha de Emisión | Especialidad / Autoría | Estado y Alcance Agronómico |
 | :---: | :---: | :--- | :--- |
-| **v2.0.0** | 2026-09-05 | Especialista Senior en Agronomía, Climatología e Ingeniería de Invernaderos | **Aprobado**. Sincronización completa con Suite Web AgroQuíbor Pro: balance hídrico dinámico FAO-56 corregido por salinidad y mulch, dimensionamiento de 3 sectores hidráulicos, integración del pozo artesanal Ø 50 cm profundizado a 60 m con bombeo por tandas al reservorio de 80 m³, y matriz fitosanitaria IRAC/FRAC con blindaje contra ácaros y ToBRFV. |
+| **v2.0.0** | 2026-09-05 | Especialista Senior en Agronomía, Climatología e Ingeniería de Invernaderos | **Aprobado**. Sincronización completa con Suite Web LA CIGARRONERA: balance hídrico dinámico FAO-56 corregido por salinidad y mulch, dimensionamiento de 3 sectores hidráulicos, integración del pozo artesanal Ø 50 cm profundizado a 60 m con bombeo por tandas al reservorio de 80 m³, y matriz fitosanitaria IRAC/FRAC con blindaje contra ácaros y ToBRFV. |
 | v1.1.0 | 2026-08-25 | Especialista Senior en Invernaderos — Quíbor | Manejo de salinidad con fracción de lavado LF y tutorado Hortomalla 15x15 cm. |
 | v1.0.0 | 2026-08-10 | Especialista Senior en Invernaderos — Quíbor | Formulación nutricional hidrosoluble e híbrida base. |
 

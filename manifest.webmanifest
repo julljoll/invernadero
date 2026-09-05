@@ -1,7 +1,7 @@
 {
-  "name": "AgroQuíbor — Suite Tecnológica de Invernadero y Pozo",
-  "short_name": "AgroQuíbor",
-  "description": "Suite de cálculo agronómico, ingeniería de pozo profundo (120 m) y gestión de riego para Casa de Malla de 2.000 m² en Quíbor, Lara.",
+  "name": "LA CIGARRONERA — Invernadero y Casa de Malla",
+  "short_name": "LA CIGARRONERA",
+  "description": "LA CIGARRONERA — Suite de cálculo agronómico, ingeniería de pozo profundo y gestión de riego para Casa de Malla de 2.000 m² en Quíbor, Lara.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0a0e17",

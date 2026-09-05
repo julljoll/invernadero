@@ -72,7 +72,7 @@ La estructura es un **Parral Puro Tensado (CERO tubos en el techo)**:
 graph TD
     A["Parral Tensado 20m x 100m (2.000 m²)"] --> B["Cubierta: 6 Guayas Maestras Longitudinales de 3/8'' cada 4.00 m"]
     A --> C["Cubierta: 21 Guayas Maestras Transversales de 3/8'' cada 5.00 m"]
-    A --> D["Pilares: Tubo Galv. Sch 40 Ø 2 1/2'' (Solo Verticales a 3.80 m libre)"]
+    A --> D["Pilares: Tubo Galv. Sch 40 Ø 2 1/2'' (Solo Verticales a 3.00 m libre)"]
     A --> E["Tensigridad: 34 Tirantes Perimetrales a 45° a Muertos de Concreto"]
 ```
 
@@ -84,7 +84,7 @@ graph TD
    * 21 líneas de cable de acero $\varnothing\ 3/8"$ espaciadas cada **$5.00\ \text{m}$** ($Y = 0, 5, 10, 15, \dots, 100\ \text{m}$).
 3. **Pilares Verticales Tubulares:**
    * Tubo de acero galvanizado en caliente ASTM A53 Schedule 40 de $\varnothing\ 2\ 1/2"$ exterior ($73.0\text{ mm}$, espesor $3.6\text{ mm}$).
-   * Altura de tubo: $4.60\ \text{m}$ ($3.80\ \text{m}$ libre $+ 0.80\ \text{m}$ empotrado en dado de concreto ciclópeo de $40\times 40\times 60\ \text{cm}$).
+   * Altura de tubo: $3.80\ \text{m}$ ($3.00\ \text{m}$ libre $+ 0.80\ \text{m}$ empotrado en dado de concreto ciclópeo de $40\times 40\times 60\ \text{cm}$).
    * Distribución: Nodos en cuadrícula modular de $4.00\text{ m}$ transversal $\times 5.00\text{ m}$ longitudinal.
 4. **Tirantes de Tensigridad Exterior a 45°:**
    * 34 tirantes perimetrales de guaya de $3/8"$ con tensores ojo-ojo de $5/8"$.
@@ -97,19 +97,19 @@ graph TD
 El Valle de Quíbor presenta vientos predominantes del **ESTE** durante 11 meses del año, con ráfagas registradas de **27 km/h (17 mph)**.
 
 *   **Orientación Óptima del Eje:** Se orienta el eje largo de **$100.00\ \text{m}$ en dirección Este – Oeste**:
-    *   La fachada corta de barlovento expuesta directamente al Este es de solo **$20.00\ \text{m} \times 3.80\ \text{m} = 76.0\ \text{m}^2$** (reducción del 50% frente a la orientación anterior de 40m).
+    *   La fachada corta de barlovento expuesta directamente al Este es de solo **$20.00\ \text{m} \times 3.00\ \text{m} = 60.0\ \text{m}^2$** (reducción del 50% frente a la orientación anterior de 40m).
 *   **Presión Dinámica del Viento a 695 msnm (Ráfagas con FS = 1.5 $\rightarrow v = 11.25\ \text{m/s}$):**
     $$q_z = \frac{1}{2} (1.145\ \text{kg/m}^3) (11.25)^2 \approx 72.5\ \text{N/m}^2$$
 *   **Empuje Eólico sobre la Cabecera Este:**
-    $$F_{viento\_Este} = 72.5\ \text{N/m}^2 \times 0.72 \times 76.0\ \text{m}^2 \approx \mathbf{3.967\ \text{N}}\ (\approx \mathbf{404\ \text{kgf}})$$
-    *Distribuido entre los 6 postes de la cabecera Este (tensión por tirante a 45° $\approx 95\ \text{kgf}$, apenas el 2.2% de la carga de rotura de la guaya de 3/8" que es de $4.200\ \text{kgf}$). Factor de seguridad $> 30$.*
+    $$F_{viento\_Este} = 72.5\ \text{N/m}^2 \times 0.72 \times 60.0\ \text{m}^2 \approx \mathbf{3.132\ \text{N}}\ (\approx \mathbf{319\ \text{kgf}})$$
+    *Distribuido entre los 6 postes de la cabecera Este (tensión por tirante a 45° $\approx 75\ \text{kgf}$, apenas el 1.8% de la carga de rotura de la guaya de 3/8" que es de $4.200\ \text{kgf}$). Factor de seguridad $> 40$.*
 *   **Efecto Venturi Tangencial:** El viento corre a lo largo de las paredes de 100 m generando succión laminar, lo que acelera la extracción de aire caliente por la cubierta cenital porosa sin requerir extractores mecánicos.
 
 ---
 
 ## 5. Agronomía y Tutorado con Malla Espaldera (4.400 Plantas)
 
-Para **suprimir las labores manuales continuas**, se implementa la Malla Espaldera Biorientada de Polipropileno (Hortomalla de 15×15 cm) combinada con despunte apical a 2.20 m:
+Para **suprimir las labores manuales continuas**, se implementa la Malla Espaldera Biorientada de Polipropileno (Hortomalla de 15×15 cm) combinada con despunte apical a 2.00 m:
 
 ```text
 DISTRIBUCIÓN DE CULTIVO EN 20.00 m DE ANCHO (10 CAMELLONES DOBLES DE 100 m):
@@ -128,12 +128,12 @@ DISTRIBUCIÓN DE CULTIVO EN 20.00 m DE ANCHO (10 CAMELLONES DOBLES DE 100 m):
    * Masa viva total suspendida:
      $$W_{cultivo} = 4.400\ \text{plantas} \times 4.5\ \text{kg} = \mathbf{19.800\ \text{kgf}}\ (\approx \mathbf{19.8\ \text{toneladas}})$$
 3. **Malla Espaldera (Hortomalla 15×15 cm):**
-   * **$1.000\ \text{m}$ lineales** de malla tutora de $1.80 - 2.00\ \text{m}$ de altura fijada entre el alambre maestro superior (Calibre 10 a 2.20 m) y el alambre guía inferior (Calibre 14 a 0.20 m).
+   * **$1.000\ \text{m}$ lineales** de malla tutora de $1.80\ \text{m}$ de altura fijada entre el alambre maestro superior (Calibre 10 a 2.00 m) y el alambre guía inferior (Calibre 14 a 0.20 m).
    * **Cero Atados y Cero Clips:** Los tallos y racimos descansan en las cuadrículas rígidas por gravedad física.
    * **Ahorro Laboral:** Se reduce el guiado a solo **2.0 jornales/mes para toda la nave de 2.000 m²** (ahorro del 88% frente al descolgado holandés).
    * **Blindaje contra Virus Mecánicos:** Al reducir el contacto manual en un 80%, se previene la transmisión del Virus Rugoso (**ToBRFV**), Mosaico (**TMV**) y *Clavibacter michiganensis*.
-4. **Despunte Apical (*Topping*) a 2.20 m:**
-   * Un único corte apical a la 7ª u 8ª inflorescencia al llegar a 2.20 m (labor de 1 hora para toda la nave). Toda la savia se redirige a engordar los frutos cuajados.
+4. **Despunte Apical (*Topping*) a 2.00 m:**
+   * Un único corte apical a la 7ª u 8ª inflorescencia al llegar a 2.00 m (labor de 1 hora para toda la nave). Deja **1.00 m libre de colchón térmico** superior y redirige toda la savia a los racimos cuajados.
 
 ---
 
@@ -154,11 +154,11 @@ DISTRIBUCIÓN DE CULTIVO EN 20.00 m DE ANCHO (10 CAMELLONES DOBLES DE 100 m):
 | Elemento | Especificación Técnica | Cantidad / Dimensiones | Función Principal |
 | :--- | :--- | :--- | :--- |
 | **Malla Anti-Trips** | Monofilamento virgen HDPE 50×25 hilos/pulgada ($\le 192\ \mu\text{m}$) | **8 rollos de 4.00 m × 100.00 m** | Techo (500m) + paredes (240m) + esclusa (14m) + reserva (40m) |
-| **Pilares Verticales** | Tubo de acero galv. en caliente $\varnothing\ 2\ 1/2"\ \text{Sch 40}$ ($e=3.6\text{ mm}$) | 96 unidades de 4.60 m (3.80m libre + 0.80m dado) | Sustentación vertical pura en cuadrícula $4.0\text{ m} \times 5.0\text{ m}$ |
+| **Pilares Verticales** | Tubo de acero galv. en caliente $\varnothing\ 2\ 1/2"\ \text{Sch 40}$ ($e=3.6\text{ mm}$) | 96 unidades de 3.80 m (3.00m libre + 0.80m dado) | Sustentación vertical pura en cuadrícula $4.0\text{ m} \times 5.0\text{ m}$ |
 | **Guayas Maestras** | Cable de acero galv. $\varnothing\ 3/8"\ (9.52\text{ mm})$ clase 6×19 alma de acero | $\approx 1.100\ \text{m}$ lineales en cuadrícula $4.0\text{ m} \times 5.0\text{ m}$ | Soporte estructural de la cubierta sin tubos |
 | **Guayas de Tirante** | Cable de acero galv. $\varnothing\ 3/8"$ a 45° con tensores ojo-ojo de 5/8" | 34 tirantes perimetrales a muertos de concreto | Absorción de empuje eólico y tracción de cables |
-| **Malla Espaldera Tutora** | Polipropileno virgen extruido bi-orientado anti-UV ($15 \times 15\ \text{cm}$) | **1.000 m lineales** ($2.000\ \text{m}^2$) a 1.80-2.00m alto | **Tutorado mecánico: Cero atados, cero clips, -88% mano de obra** |
-| **Alambre Maestro Tutor** | Alambre liso galvanizado alta resistencia Calibre 10 ($3.4\text{ mm}$) | 10 camellones de 100 m = $1.000\ \text{m}$ a 2.20 m alto | Sostén superior de malla tutora y 19.800 kg de tomate |
+| **Malla Espaldera Tutora** | Polipropileno virgen extruido bi-orientado anti-UV ($15 \times 15\ \text{cm}$) | **1.000 m lineales** ($2.000\ \text{m}^2$) a 1.80m alto | **Tutorado mecánico: Cero atados, cero clips, -88% mano de obra** |
+| **Alambre Maestro Tutor** | Alambre liso galvanizado alta resistencia Calibre 10 ($3.4\text{ mm}$) | 10 camellones de 100 m = $1.000\ \text{m}$ a 2.00 m alto | Sostén superior de malla tutora y 19.800 kg de tomate |
 | **Alambre Guía Inferior** | Alambre liso galvanizado Calibre 14 ($2.1\text{ mm}$) | 10 camellones de 100 m = $1.000\ \text{m}$ a 0.20 m sobre suelo | Fijación y plomada inferior de la malla tutora |
 | **Dados de Cimentación** | Concreto ciclópeo resistencia $f'c = 180\ \text{kg/cm}^2$ | Cubos de $40 \times 40 \times 60\ \text{cm}$ en todos los postes | Anclaje y estabilidad al vuelco |
 | **Zanja Sanitaria** | Zanja perimetral continua de $20 \times 20\ \text{cm}$ | 240 metros lineales de contorno | Enterramiento del faldón de 20 cm contra plagas |
