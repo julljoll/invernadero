@@ -17,8 +17,8 @@ class Greenhouse3DViewer {
     this.options = Object.assign({
       width: 20.0,      // Ancho transversal (m)
       length: 100.0,    // Fondo longitudinal (m)
-      height: 3.80,     // Altura libre pilares (m)
-      trellisHeight: 2.20, // Altura tutorado español (m)
+      height: 3.00,     // Altura libre pilares (m)
+      trellisHeight: 2.00, // Altura espaldar Hortomalla (m)
       numBays: 5,       // 5 franjas de 4.00 m
       bayWidth: 4.0,    // Ancho de cada rollo en cubierta (m)
       pillarSpacingZ: 5.0 // Espaciamiento postes en fondo (m)
@@ -28,7 +28,7 @@ class Greenhouse3DViewer {
     this.isAutoRotating = false;
     this.shadingMode = 'solid'; // 'solid' | 'wireframe' | 'xray'
     this.isWalkMode = false;
-    this.isSunlightMode = document.body.classList.contains('sunlight-mode');
+    this.isSunlightMode = true;
     this.meshOpacity = 0.45;
     
     // Grupos de capas para inspección
@@ -131,13 +131,9 @@ class Greenhouse3DViewer {
   }
 
   updateSceneBackground() {
-    if (this.isSunlightMode) {
-      this.scene.background = new THREE.Color(0xf1f5f9);
-      this.scene.fog = new THREE.FogExp2(0xf1f5f9, 0.0035);
-    } else {
-      this.scene.background = new THREE.Color(0x050912);
-      this.scene.fog = new THREE.FogExp2(0x050912, 0.0038);
-    }
+    // Escena diurna permanente para máxima visibilidad (Modo Luz / Campo)
+    this.scene.background = new THREE.Color(0xf1f5f9);
+    this.scene.fog = new THREE.FogExp2(0xf1f5f9, 0.0035);
   }
 
   /**
@@ -241,7 +237,7 @@ class Greenhouse3DViewer {
         this.layers.pillars.add(pillar);
         this.pillarMeshes.push(pillar);
 
-        // Capitel pasacables en tope a 3.80m
+        // Capitel pasacables en tope a 3.00m
         const cap = new THREE.Mesh(capGeo, capMat);
         cap.position.set(x, H + 0.04, z);
         this.layers.pillars.add(cap);
@@ -300,7 +296,7 @@ class Greenhouse3DViewer {
     }
 
     // C. Tirantes perimetrales a tierra a 45° con Tensores Ojo-Ojo
-    const anchorDist = H; // 3.80 m a tierra para 45°
+    const anchorDist = H; // 3.00 m a tierra para 45°
 
     // Tirantes en fachadas Este y Oeste (+X y -X) cada 10 metros
     for (let z = -L / 2; z <= L / 2; z += 10.0) {
@@ -379,7 +375,7 @@ class Greenhouse3DViewer {
       this.layers.mesh.add(strip);
     }
 
-    // Paredes Perimetrales (Rollo 4m: 3.80m visible + 0.20m enterrado)
+    // Paredes Perimetrales (3.00m visible + 0.20m faldón enterrado)
     const wallMat = new THREE.MeshStandardMaterial({
       color: 0x0ea5e9,
       transparent: true,
@@ -505,19 +501,19 @@ class Greenhouse3DViewer {
       dimMat
     );
 
-    // C. Cota de Altura de Pilares: 3.80 m libre
+    // C. Cota de Altura de Pilares: 3.00 m libre
     this.createDimensionLine(
       new THREE.Vector3(-W / 2 - 1.2, 0, L / 2),
       new THREE.Vector3(-W / 2 - 1.2, H, L / 2),
-      '3.80 m Libre Techo',
+      '3.00 m Libre Techo',
       dimMat
     );
 
-    // D. Cota de Tutorado: 2.20 m
+    // D. Cota de Espaldar: 2.00 m
     this.createDimensionLine(
       new THREE.Vector3(-W / 2 - 0.6, 0, L / 2),
       new THREE.Vector3(-W / 2 - 0.6, trellisH, L / 2),
-      '2.20 m Tutorado Español',
+      '2.00 m Espaldar Hortomalla',
       new THREE.LineBasicMaterial({ color: 0xf59e0b })
     );
   }

@@ -3,7 +3,7 @@
  * Cache-First Strategy for 100% Offline Capability in rural field conditions
  */
 
-const CACHE_NAME = 'agroquibor-v1.1.0';
+const CACHE_NAME = 'agroquibor-v3.0.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
@@ -13,6 +13,8 @@ const ASSETS_TO_CACHE = [
   './lib/three.min.js',
   './lib/OrbitControls.js',
   './manifest.webmanifest',
+  './icon-192.svg',
+  './icon-512.svg',
   './plano_2d_invernadero_quibor.svg',
   './plano_3d_invernadero_quibor.svg'
 ];

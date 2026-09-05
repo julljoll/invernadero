@@ -1,12 +1,18 @@
 # PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA: TOMATE INDETERMINADO EN CASA DE MALLA (2.000 m²)
 ## Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela (695 – 710 msnm — Clima Semiárido Cálido BSh)
 ### Georreferenciación Satelital: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
+ 
+| Versión | Fecha de Emisión | Especialidad / Autoría | Estado y Alcance Agronómico |
+| :---: | :---: | :--- | :--- |
+| **v2.0.0** | 2026-09-05 | Especialista Senior en Agronomía, Climatología e Ingeniería de Invernaderos | **Aprobado**. Sincronización completa con Suite Web AgroQuíbor Pro: balance hídrico dinámico FAO-56 corregido por salinidad y mulch, dimensionamiento de 3 sectores hidráulicos, integración del pozo artesanal Ø 50 cm profundizado a 60 m con bombeo por tandas al reservorio de 80 m³, y matriz fitosanitaria IRAC/FRAC con blindaje contra ácaros y ToBRFV. |
+| v1.1.0 | 2026-08-25 | Especialista Senior en Invernaderos — Quíbor | Manejo de salinidad con fracción de lavado LF y tutorado Hortomalla 15x15 cm. |
+| v1.0.0 | 2026-08-10 | Especialista Senior en Invernaderos — Quíbor | Formulación nutricional hidrosoluble e híbrida base. |
 
 ---
 
 ## INTRODUCCIÓN Y MEMORIA AGRONÓMICA
 
-El presente plan de producción establece las directrices agronómicas, hidráulicas, nutricionales y fitosanitarias de alta precisión para el cultivo intensivo de **tomate indeterminado de fruto redondo / saladette (*Solanum lycopersicum*)** dentro de la estructura de **Casa de Malla de 2.000 m² ($20.00\text{ m}\ \text{ancho} \times 100.00\text{ m}\ \text{largo} \times 3.80\text{ m}\ \text{altura}$)** localizada exactamente en las coordenadas **$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$** ([abrir en Google Maps](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)), con cubierta de malla anti-insectos 50×25 HDPE monofilamento, estructura de parral plano tensado con guayas de acero galvanizado (cero tubos en techo) y tutorado mecánico mediante **Malla Espaldera Biorientada (Hortomalla de 15×15 cm)** con despunte apical a 2.20 m.
+El presente plan de producción establece las directrices agronómicas, hidráulicas, nutricionales y fitosanitarias de alta precisión para el cultivo intensivo de **tomate indeterminado de fruto redondo / saladette (*Solanum lycopersicum*)** dentro de la estructura de **Casa de Malla de 2.000 m² ($20.00\text{ m}\ \text{ancho} \times 100.00\text{ m}\ \text{largo} \times 3.00\text{ m}\ \text{altura libre}$)** localizada exactamente en las coordenadas **$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$** ([abrir en Google Maps](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)), con cubierta de malla anti-insectos 50×25 HDPE monofilamento, estructura de parral plano tensado con guayas de acero galvanizado (cero tubos en techo) y tutorado mecánico mediante **Malla Espaldera Biorientada (Hortomalla de 15×15 cm)** a 2.00 m con despunte apical (dejando 1.00 m libre de colchón térmico superior).
 
 El objetivo agronómico es maximizar la eficiencia en el uso de agua salina de pozo ($EC_w \approx 1.2 - 1.5\text{ dS/m}$), suprimir el 88% de la mano de obra en guiado manual, blindar el cultivo contra virosis mecánicas (*ToBRFV* / *TMV*) y plagas del valle, logrando un rendimiento comercial proyectado de **6.5 a 8.5 kg/planta** (**28.6 a 37.4 toneladas métricas en la nave de 2.000 m²** = 143 a 187 t/ha equivalente) en un ciclo de 22 a 24 semanas.
 

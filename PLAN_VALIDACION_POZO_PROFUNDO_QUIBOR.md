@@ -2,6 +2,12 @@
 ## Finca Agroproductiva Quíbor — Cultivo Intensivo de Tomate (*Solanum lycopersicum*)
 ### Coordenadas Satelitales Exactas: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8) | Cota: ~700 msnm
 
+| Versión | Fecha de Emisión | Especialidad / Autoría | Estado y Alcance Técnico |
+| :---: | :---: | :--- | :--- |
+| **v2.0.0** | 2026-09-05 | Especialista Senior en Hidrogeología, Riego & Estructuras Protegidas | **Aprobado**. Integración de los 5 escenarios hidrogeológicos de captación (incluye Pozo Artesanal Ø 50 cm a 60 m con bombeo por tandas al reservorio de 80 m³, Opciones In Situ 120m A1/A2, Piedemonte Sur B y Centro Valle C), modelo de interferencia Cooper-Jacob, desglose itemizado de presupuestos y sincronización dinámica con FAO-56. |
+| v1.2.0 | 2026-08-20 | Especialista Senior en Invernaderos — Quíbor | Incorporación de protocolo de campo en 5 fases y aforo escalonado Jacob. |
+| v1.0.0 | 2026-08-01 | Especialista Senior en Invernaderos — Quíbor | Línea base hidrogeológica y balance hídrico inicial 2.000 m². |
+
 ---
 
 ## RESUMEN EJECUTIVO Y OBJETIVO DEL PLAN
@@ -573,6 +579,37 @@ Precios referenciales de contratistas de perforación en la región Centro-Occid
 
 ---
 
+### 8.7.1. Tabla Comparativa de los 5 Escenarios Hidrogeológicos de Captación
+
+| Modalidad / Ubicación | Prof. Total | NE Base | ND Base | HMT Total | Bomba Sugerida | Caudal Continuo Real | Capex Llave en Mano | Diagnóstico y Viabilidad Agronómica |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Pozo Artesanal In Situ Ø 50 cm (50m ➔ 60m)** | **60 m** (+10m) | **52 m** | **58.5 m** | **65 mca** | **3.0 HP** | **1" a 1¼" (0.8 - 1.2 L/s)** *(Pulsos 15 min/h al reservorio)* | **~$4.850 USD** | **Máximo Ahorro**. Aprovecha fuste existente. Bombeo por tandas al reservorio de 80 m³ entrega 18-22 m³/día (100% de la nave 2.000 m²). |
+| **Opción A1: Predio In Situ Perforado 120m (NE 60m)** | **120 m** | **60 m** | **78 m** | **91 mca** | **5.5 HP** | **2" Continuo (2.5 - 3.2 L/s)** | **~$29.850 USD** | **Industrial Óptimo**. Captación en gravas limpias (86-112m). Abastece hasta 4 naves futuras. |
+| **Opción A2: Predio In Situ Perforado 120m (NE 70m)** | **120 m** | **70 m** | **88 m** | **100.5 mca** | **7.5 HP** | **2" Continuo (2.5 L/s)** | **~$31.400 USD** | **Línea Base Estival**. Considera el abatimiento extremo de sequía de marzo. |
+| **Opción B: Piedemonte Sur (+3.0 km Recarga)** | **100 m** | **50 m** | **68 m** | **81 mca** + Boost | **5.5 HP** | **2" Continuo (2.5 L/s)** | **~$48.500 USD** | **Agua Dulce (0.9 dS/m)**. Ahorro de 55% en lavado salino. Capex elevado por 3 km de aducción PEAD. |
+| **Opción C: Centro Valle (+2.5 km N Guadalupe)** | **140 m** | **98 m** | **122 m** | **138 mca** | **12.5 HP** | **2.8 L/s** | **~$36.800 USD** | **Riesgo Salino / Cono**. Salinidad 2.4 dS/m (LF ≥ 35%), alto consumo eléctrico por bomba 12.5 HP. |
+
+---
+
+### 8.7.2. Cómputos Métricos y Presupuesto Detallado: Opción Pozo Artesanal (+10 m)
+
+Presupuesto de inversión para habilitar el pozo artesanal existente de 50 m profundizando hasta 60 m:
+
+| Ítem | Descripción de la Partida | Unidad | Cantidad | P. Unitario (USD) | Total (USD) |
+| :---: | :--- | :---: | :---: | :---: | :---: |
+| **01** | Profundización manual de fuste a fondo (+10 m) a Ø 50 cm en gravillas y arenas aluviales con torno de izado y achique. | Metro | 10.00 | $120,00 | $1.200,00 |
+| **02** | Suministro, bajada controlada y acuñado de anillos de concreto reforzado Ø 50 cm para soporte estructural del fondo. | Metro | 10.00 | $80,00 | $800,00 |
+| **03** | Suministro de electrobomba sumergible de 3.0 HP monofásica 220V (Caudal nominal 150 L/min a 65 mca) con cable sumergible plano. | Unidad | 1.00 | $1.150,00 | $1.150,00 |
+| **04** | Tablero de automatización eléctrica con relé de nivel, sondas de pozo (alta/baja), guardamotor y temporizador para ciclos de reposición. | Global | 1.00 | $650,00 | $650,00 |
+| **05** | Tubería de impulsión en PEAD 2" PN10 (55 m) con conectores de compresión rápidos, válvula de retención check y codos a reservorio. | Metro | 55.00 | $8,50 | $467,50 |
+| **06** | Limpieza y purga inicial de fondo con compresor de aire (Air-Lift artesanal), purga de lodos finos y aforo volumétrico. | Global | 1.00 | $350,00 | $350,00 |
+| **07** | Suministro y colocación de tapón filtrante de gravilla cuarzosa lavada 1/4" en el fondo (1.20 m³). | m³ | 1.20 | $65,00 | $78,00 |
+| **SUBTOTAL** | **Habilitación Integral de Pozo Artesanal Ø 50 cm a 60 m con Bombeo Automatizado** | | | | **$4.695,50** |
+| **IMPREVISTOS** | Contingencias locales y maniobras de instalación (5%) | | | | **$234,78** |
+| **TOTAL GENERAL** | **Inversión Llave en Mano Pozo Artesanal (+10 m) hacia Reservorio de 80 m³** | | | | **$4.930,28** |
+
+---
+
 ### 8.8. Rentabilidad y Amortización Frente al Invernadero de 2.000 m²
 
 * **Producción Anual Estimada del Invernadero:** **$33.0\text{ a }37.4\text{ Toneladas}$ de tomate** por ciclo (con fertilización hidrosoluble AIFA o híbrida).
@@ -601,5 +638,86 @@ $$\text{Aporte N-NO}_3^-\text{ [ppm]} = (\text{HCO}_3^- - 0.50) \times 14.007\te
   * Para una demanda diaria pico de $15.75\text{ m}^3\text{/día}$ en 2.000 m²: Consumo de **$4.54\text{ Litros/día de HNO}_3$**.
   * Aporte nutricional: $3.7 \times 14.007 = \mathbf{51.8\text{ ppm de N-NO}_3^-}$.
   * **Ahorro en Fertilizantes:** Esta cantidad aportada por el ácido debe restarse directamente del nitrato de calcio o nitrato de potasio en la formulación de fertirriego, ahorrando hasta un 25% en la compra de fuentes nitrogenadas comerciales.
+
+---
+
+## 9. CASO ESPECÍFICO IN SITU: POZO ARTESANAL EXISTENTE Ø 50 CM (50 M ➔ 60 M)
+
+### 9.1. Geometría del Pozo y Capacidad de Almacenamiento Estático de Columna
+El pozo del predio geolocalizado ($9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$, Cota ~700 msnm) posee una sección transversal circular excavada a mano / barrena artesanal con diámetro interno de $50\text{ cm}$ ($D = 0.50\text{ m}$, radio $r = 0.25\text{ m}$):
+
+$$\text{Área Transversal } A = \pi \times r^2 = \pi \times (0.25\text{ m})^2 = \mathbf{0.19635\text{ m}^2}$$
+
+* **Volumen Almacenado por Metro Lineal:**
+  $$V_{metro} = 0.19635\text{ m}^3\text{/m} = \mathbf{196.35\text{ Litros por metro lineal}}$$
+
+A los **50 metros actuales** se produjo el primer contacto freático (filtración somera). Al profundizar **+10 metros (alcanzando 60 metros totales)**, el nivel freático estático ($NE$) se estabilizará aproximadamente entre los **52 y 55 metros**, generando una columna sumergida útil de **5 a 8 metros**:
+
+$$V_{util\_almacenado} = 8\text{ m} \times 196.35\text{ L/m} \approx \mathbf{1.570\text{ Litros}}\ (1.57\text{ m}^3)$$
+
+---
+
+### 9.2. Análisis Termodinámico e Hidrogeológico: ¿Probabilidad de Sacar 2 Pulgadas Continuas?
+
+#### A. Demanda de un Caudal Continuo de 2 Pulgadas:
+Una tubería de impulsión de $2''$ ($50.8\text{ mm}$ de diámetro interior) operando a velocidad de flujo recomendada ($1.2 - 1.5\text{ m/s}$) entrega un caudal de:
+$$Q_{2''} = 2.0\text{ a }2.5\text{ L/s} = \mathbf{120\text{ a }150\text{ Litros/minuto}} = \mathbf{7.2\text{ a }9.0\text{ m}^3\text{/hora}}$$
+
+#### B. Tasa de Recarga Lateral del Estrato a 60 Metros:
+A 50-60 m de profundidad en el abanico aluvial de Quíbor, los estratos corresponden a arenas medias limosas con intercalaciones de arcilla (conductividad hidráulica $K \approx 2.0\text{ a }5.0\text{ m/día}$). Al carecer de filtro industrial continuo Johnson y prefiltro de grava vibrado a presión, el agua ingresa por filtración radial pasiva a través de las paredes del pozo:
+$$Q_{infiltracion} \approx 0.60\text{ a }1.00\text{ L/s} = \mathbf{36\text{ a }60\text{ Litros/minuto}}$$
+
+#### C. Balance de Vaciado (Achique):
+$$\Delta Q = Q_{bombeo} - Q_{recarga} = 150\text{ L/min} - 50\text{ L/min} = \mathbf{100\text{ L/min de déficit}}$$
+
+Tiempo de vaciado total del agua acumulada en el vaso:
+$$t_{achique} = \frac{1.570\text{ Litros}}{100\text{ L/min}} \approx \mathbf{12\text{ a }15\text{ minutos}}$$
+
+> [!CAUTION]
+> **Probabilidad de lograr 2 pulgadas continuas sin achicar a 60 m: INFERIOR AL 15% (Muy Improbable).**
+> Si se coloca una electrobomba sumergible de 2" y se pretende extraer agua ininterrumpidamente 24/7 o por horas seguidas a 2", la bomba **achicará y secará la columna de agua en 12 a 15 minutos**, entrando en cavitación o succión de aire, quemando el motor o arrastrando lodo fino de fondo.
+
+---
+
+### 9.3. Las Dos Soluciones Operativas y Agronómicas 100% Viables
+
+#### Solución 1: Caudal Continuo Regulado a 1" o 1¼" (Sin Achicar)
+Si se estrangula la descarga de la bomba o se utiliza una electrobomba de menor potencia ($1.5\text{ a }2.0\text{ HP}$) con tubería de **1" a 1¼"**, el caudal extraído es de **$0.80\text{ a }1.20\text{ L/s}$ ($48\text{ a }72\text{ L/min}$)**.
+* A este régimen, el caudal extraído **iguala exactamente la velocidad de recarga lateral del pozo**.
+* El nivel dinámico se estabiliza a $58.5\text{ m}$ sin agotar el fondo.
+* Entrega un volumen continuo de:
+  $$V_{continuo} = 1.0\text{ L/s} \times 3.600\text{ s} \times 8\text{ horas} = \mathbf{28.8\text{ m}^3\text{ en 8 horas de bombeo}}$$
+
+#### Solución 2: Bombeo por Pulsos/Tandas al Reservorio de 80 m³ (ESTRATEGIA RECOMENDADA)
+Aprovecha al máximo el volumen de almacenamiento del diámetro de 50 cm sin forzar el estrato:
+1. **Instalación:** Electrobomba sumergible de **$2.0\text{ a }3.0\text{ HP}$ (salida 2")** colocada a $58\text{ metros}$ con electrodos/sondas de nivel alto y bajo en el pozo, y boya eléctrica de llenado en el reservorio de $80\text{ m}^3$.
+2. **Ciclo de Operación Automatizado:**
+   * **Fase de Extracción (12 a 15 minutos):** La bomba arranca a $2''$ ($2.0\text{ L/s}$) y trasvasa **$1.50\text{ a }1.80\text{ m}^3$** de agua limpia directamente al reservorio de tierra.
+   * **Fase de Paro y Recarga (45 minutos):** La sonda inferior corta la corriente antes de que la bomba chupe aire. Durante 45 minutos el pozo se recarga naturalmente por infiltración hasta volver a alcanzar el nivel alto.
+   * **Reinicio:** La sonda superior detecta el pozo lleno e inicia el siguiente pulso.
+3. **Volumen Cosechado Diario:**
+   $$V_{cosecha} = 12\text{ ciclos/día} \times 1.6\text{ m}^3 = \mathbf{19.20\text{ m}^3\text{/día}}$$
+   * **Consumo Pico del Invernadero de 2.000 m²:** **$15.75\text{ m}^3\text{/día}$**.
+   * **Conclusión Agronómica:** ¡El pozo artesanal a 60 m satisface el **100% de la demanda hídrica** de la nave de tomate sin necesidad de gastar $30.000 USD en perforación rotaria profunda!
+
+---
+
+### 9.4. Presupuesto Referencial de Profundización (+10 m) y Equipamiento Artesanal
+
+| Ítem | Partida | Cantidad | P. Unitario (USD) | Total (USD) |
+| :---: | :--- | :---: | :---: | :---: |
+| **01** | Profundización manual artesanal con malacate / barrena de fondo ($50\text{ m} \rightarrow 60\text{ m}$) | 10 m | $120,00 | $1.200,00 |
+| **02** | Revestimiento / anillos de protección de fondo para evitar derrumbes en zona de 50 a 60 m | 10 m | $80,00 | $800,00 |
+| **03** | Colocación de filtro de fondo de gravilla cuarzosa lavada de 1/4" ($1.2\text{ m}^3$) para decantación | Global | 1.00 | $250,00 |
+| **04** | Limpieza inicial, achique y desarenado con compresor de aire / bomba de achique | Horas | 12.00 | $30,00 | $360,00 |
+| **05** | Suministro de electrobomba sumergible de 3.0 HP multietapas (salida 2", trifásica/monofásica 220V) | Unidad | 1.00 | $1.150,00 | $1.150,00 |
+| **06** | Tablero de control automático con relé de nivel por sondas de pozo + boya de tanque + guardamotor | Unidad | 1.00 | $650,00 | $650,00 |
+| **07** | Tubería de impulsión PEAD 2" PN10 ($55\text{ m}$) + guaya de acero inox AISI 304 + cable sumergible | Global | 1.00 | $460,00 | $460,00 |
+| **SUBTOTAL** | **Adecuación y Puesta en Marcha del Pozo Artesanal (60 m)** | | | **$4.870,00** |
+| **CONTINGENCIA** | Imprevistos de fondo (5%) | | | **$243,50** |
+| **TOTAL GENERAL** | **Inversión Mínima para Garantizar Agua al Invernadero** | | | **$5.113,50** |
+
+*Comparación de Ahorro:* Frente a una perforación rotaria de 120 m ($31.400 USD), la adecuación del pozo artesanal representa un **ahorro de capital del 84% (~$26.000 USD)** disponible para reinvertir en la estructura del invernadero, la pantalla térmica o los insumos de fertirriego.
+
 
 

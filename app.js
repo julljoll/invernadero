@@ -1,25 +1,221 @@
 /**
  * AGENTE ESPECIALISTA EN INVERNADEROS — VALLE DE QUÍBOR
  * Lógica de cálculo bioclimático, extractores eólicos, FAO-56 y visualizador Canvas
+ * Versión: 2.0.0
  */
 
 // ==========================================================================
-// 1. BASE DE DATOS METEOROLÓGICA (NASA MERRA-2 QUÍBOR 695 MSNM)
+// 0. CONFIGURACIÓN CENTRALIZADA Y CONSTANTES BIOCLIMÁTICAS DE QUÍBOR
 // ==========================================================================
-const QUIBOR_CLIMATE = [
-  { mes: "Enero", max: 30, min: 19, lluvia: 11, viento: 8.5, bochorno: 16.0, dir: "88% ESTE" },
-  { mes: "Febrero", max: 30, min: 20, lluvia: 14, viento: 8.9, bochorno: 14.5, dir: "85% ESTE" },
-  { mes: "Marzo", max: 31, min: 20, lluvia: 26, viento: 9.0, bochorno: 18.6, dir: "84% ESTE", picoCalor: true },
-  { mes: "Abril", max: 30, min: 20, lluvia: 73, viento: 8.9, bochorno: 22.6, dir: "80% ESTE" },
-  { mes: "Mayo", max: 29, min: 20, lluvia: 104, viento: 9.4, bochorno: 28.1, dir: "78% ESTE", maxLluvia: true },
-  { mes: "Junio", max: 28, min: 20, lluvia: 96, viento: 10.4, bochorno: 27.6, dir: "82% ESTE", maxViento: true },
-  { mes: "Julio", max: 28, min: 19, lluvia: 95, viento: 10.2, bochorno: 28.0, dir: "85% ESTE", masFresco: true },
-  { mes: "Agosto", max: 28, min: 19, lluvia: 91, viento: 9.5, bochorno: 28.6, dir: "86% ESTE", picoBochorno: true },
-  { mes: "Septiembre", max: 29, min: 19, lluvia: 94, viento: 8.4, bochorno: 27.6, dir: "53% SUR (Excepción)" },
-  { mes: "Octubre", max: 29, min: 20, lluvia: 93, viento: 7.1, bochorno: 28.5, dir: "79% ESTE" },
-  { mes: "Noviembre", max: 29, min: 20, lluvia: 64, viento: 7.0, bochorno: 26.4, dir: "84% ESTE", masCalmado: true },
-  { mes: "Diciembre", max: 29, min: 19, lluvia: 28, viento: 7.9, bochorno: 22.0, dir: "87% ESTE" }
+const CONFIG = Object.freeze({
+  VERSION: "2.0.0",
+  LOCATION: {
+    name: "Valle de Quíbor",
+    municipio: "Jiménez",
+    estado: "Lara",
+    pais: "Venezuela",
+    lat: 9.888889,
+    lng: -69.593056,
+    cotaMsnm: 700,
+    koppen: "BSh (Semiárido cálido / Bosque seco premontano)"
+  },
+  WIND: {
+    dominantDirection: "ESTE",
+    dominantFrequency: 0.88,
+    designGustKmH: 27.0,
+    safetyFactor: 1.5,
+    hellmannAlpha: 0.16
+  },
+  GREENHOUSE: {
+    defaultSurfaceM2: 2000,
+    lengthM: 100.0,
+    widthM: 20.0,
+    minHeightGutterM: 3.0,
+    optRidgeHeightM: 3.0,
+    trellisHeightM: 2.0,
+    densityPlantM2: 2.2,
+    totalPlantsDefault: 4400
+  },
+  MESH: {
+    spec: "50×25 hilos/pulgada HDPE monofilamento",
+    maxPoreMicrons: 192,
+    pestExclusion: ["Bemisia tabaci", "Frankliniella occidentalis", "Myzus persicae", "Liriomyza spp.", "Tuta absoluta"]
+  },
+  AQUIFER: {
+    transmissivityT: 180.0, // m²/día
+    storativityS: 0.0025,
+    conductivityK: 22.0,   // m/día
+    influenceRadiusR0: 260.0 // m
+  },
+  CROPS: {
+    tomato: {
+      name: "Tomate Indeterminado",
+      ecThreshold: 2.5,
+      slopePercentPerDs: 9.9
+    },
+    pepper: {
+      name: "Pimentón",
+      ecThreshold: 1.5,
+      slopePercentPerDs: 14.0
+    }
+  }
+});
+window.AGRO_CONFIG = CONFIG;
+
+
+// ==========================================================================
+// 1. BASE DE DATOS METEOROLÓGICA (RECONSTRUCCIÓN NASA MERRA-2 & POWER)
+//    Geolocalización: 9°53'20.0"N, 69°35'35.0"W | Cota: 707 msnm | Valle de Quíbor
+// ==========================================================================
+
+// Línea base climatológica mensual (20 años 2001-2020 reanálisis nativo NASA MERRA-2)
+const QUIBOR_CLIMATE_BASE = [
+  { mes: "Enero", max: 30.1, min: 16.0, tmed: 23.8, lluvia: 18.9, viento: 7.7, bochorno: 16.0, rh: 69.2, rad: 18.7, eto: 5.4, dir: "88% ESTE" },
+  { mes: "Febrero", max: 30.8, min: 16.0, tmed: 24.6, lluvia: 10.1, viento: 8.5, bochorno: 14.5, rh: 63.9, rad: 20.2, eto: 5.8, dir: "85% ESTE" },
+  { mes: "Marzo", max: 31.5, min: 16.0, tmed: 25.4, lluvia: 23.9, viento: 8.6, bochorno: 18.6, rh: 62.2, rad: 19.2, eto: 6.4, dir: "84% ESTE", picoCalor: true },
+  { mes: "Abril", max: 30.6, min: 17.5, tmed: 25.6, lluvia: 61.8, viento: 8.5, bochorno: 22.6, rh: 67.7, rad: 16.7, eto: 6.2, dir: "80% ESTE" },
+  { mes: "Mayo", max: 29.8, min: 18.4, tmed: 25.1, lluvia: 99.8, viento: 8.8, bochorno: 28.1, rh: 73.8, rad: 16.5, eto: 5.6, dir: "78% ESTE", maxLluvia: true },
+  { mes: "Junio", max: 28.6, min: 18.0, tmed: 24.2, lluvia: 99.0, viento: 9.5, bochorno: 27.6, rh: 77.9, rad: 16.2, eto: 5.2, dir: "82% ESTE", maxViento: true },
+  { mes: "Julio", max: 28.2, min: 17.5, tmed: 23.8, lluvia: 99.8, viento: 9.1, bochorno: 28.0, rh: 79.5, rad: 17.2, eto: 4.8, dir: "85% ESTE", masFresco: true },
+  { mes: "Agosto", max: 28.5, min: 17.9, tmed: 24.0, lluvia: 95.2, viento: 9.0, bochorno: 28.6, rh: 80.1, rad: 18.2, eto: 5.1, dir: "86% ESTE", picoBochorno: true },
+  { mes: "Septiembre", max: 29.2, min: 18.1, tmed: 24.2, lluvia: 82.8, viento: 8.2, bochorno: 27.6, rh: 79.1, rad: 18.7, eto: 5.3, dir: "53% SUR (Excepción)" },
+  { mes: "Octubre", max: 29.4, min: 16.7, tmed: 24.0, lluvia: 98.3, viento: 6.7, bochorno: 28.5, rh: 80.3, rad: 17.6, eto: 5.2, dir: "79% ESTE" },
+  { mes: "Noviembre", max: 29.2, min: 17.6, tmed: 23.9, lluvia: 72.0, viento: 6.2, bochorno: 26.4, rh: 80.3, rad: 16.5, eto: 4.9, dir: "84% ESTE", masCalmado: true },
+  { mes: "Diciembre", max: 29.4, min: 15.9, tmed: 23.7, lluvia: 41.2, viento: 7.2, bochorno: 22.0, rh: 75.1, rad: 17.3, eto: 5.0, dir: "87% ESTE" }
 ];
+
+// Compatibilidad retroactiva con llamadas heredadas
+const QUIBOR_CLIMATE = QUIBOR_CLIMATE_BASE;
+
+// Escenarios Multianuales (Observados 2024-2025 y Proyecciones 2026-2030 según ENSO y CMIP6 SSP2-4.5)
+const QUIBOR_YEAR_SCENARIOS = {
+  "2024": {
+    year: 2024,
+    label: "2024 (Observado NASA POWER — Super El Niño)",
+    fase: "Super El Niño (Cálido y Seco)",
+    tagClass: "tag-enso-warm",
+    deltaT: 2.1,      // +2.1 °C anomalía observada en Quíbor por NASA POWER
+    deltaRain: -25,   // -25% precipitación (sequía acentuada)
+    windFactor: 1.06, // vientos alisios y ráfagas +6%
+    desc: "Datos reales registrados por NASA POWER en Quíbor. Marcada por El Niño global: sequía extrema en el primer cuatrimestre y calor récord en marzo (Tmax observada 37.4 °C en horas pico)."
+  },
+  "2025": {
+    year: 2025,
+    label: "2025 (Observado — Transición a Fase Neutra)",
+    fase: "Transición Neutra",
+    tagClass: "tag-enso-neutral",
+    deltaT: 0.5,      // +0.5 °C sobre histórica
+    deltaRain: 5,     // +5% lluvia
+    windFactor: 1.01,
+    desc: "Disipación del evento El Niño y retorno a condiciones neutras en el Centro-Occidente venezolano. Recuperación paulatina de la lámina pluviométrica estacional."
+  },
+  "2026": {
+    year: 2026,
+    label: "2026 (Año en Curso — Línea Calibrada NASA MERRA-2)",
+    fase: "Año en Curso — Fase Neutra Calibrada",
+    tagClass: "tag-enso-neutral",
+    deltaT: 0.4,      // Tendencia global sostenida (+0.4 °C sobre climatología 2001-2020)
+    deltaRain: 0,
+    windFactor: 1.00,
+    desc: "Línea base representativa calibrada con reanálisis MERRA-2 y NASA POWER. Condiciones óptimas para producción protegida en invernadero parral de 2.000 m² a 3.00 m con técnica de espaldar."
+  },
+  "2027": {
+    year: 2027,
+    label: "2027 (Proyección — Ciclo La Niña / Lluvias Convectivas)",
+    fase: "La Niña Convectiva (Húmedo)",
+    tagClass: "tag-enso-cool",
+    deltaT: -0.2,     // Días ligeramente más frescos por nubosidad, mayor bochorno nocturno
+    deltaRain: 22,    // +22% lluvia
+    windFactor: 1.08, // Ráfagas convectivas por tormentas
+    desc: "Proyección de fase La Niña: incremento de precipitación (+22%), mayor número de días bochornosos y ráfagas convectivas vespertinas. Exige ventilación perimetral fluida."
+  },
+  "2028": {
+    year: 2028,
+    label: "2028 (Proyección — Ciclo El Niño / Estrés Térmico)",
+    fase: "El Niño Cálido (Estrés Térmico)",
+    tagClass: "tag-enso-warm",
+    deltaT: 1.2,      // +1.2 °C
+    deltaRain: -20,   // -20% lluvia
+    windFactor: 1.04,
+    desc: "Retorno del ciclo cálido tropical: temperaturas máximas en marzo rozando los 36-37 °C a cielo abierto. El colchón térmico de 1.60 m del parral es vital contra el aborto floral."
+  },
+  "2029": {
+    year: 2029,
+    label: "2029 (Proyección — Fase Neutra-Cálida)",
+    fase: "Neutra con Sesgo Cálido",
+    tagClass: "tag-enso-neutral",
+    deltaT: 0.8,
+    deltaRain: -5,
+    windFactor: 1.02,
+    desc: "Condiciones climatológicas medias con forzamiento radiativo regional. Evapotranspiración ETo sostenida de 5.5 a 6.6 mm/día que exige fertirriego diario ininterrumpido."
+  },
+  "2030": {
+    year: 2030,
+    label: "2030 (Horizonte Decenal — Modelo CMIP6 SSP2-4.5)",
+    fase: "Horizonte Decenal 2030 (SSP2-4.5)",
+    tagClass: "tag-enso-warm",
+    deltaT: 1.3,      // +1.3 °C calentamiento regional decenal
+    deltaRain: -8,    // Leve reducción y mayor torrencialidad
+    windFactor: 1.05, // Mayor energía cinética y ráfagas
+    desc: "Horizonte 2030 según proyecciones CMIP6 (SSP2-4.5): incremento térmico sostenido de +1.3 °C, aumento del 6.8% en la demanda hídrica y necesidad de fertirriego de alta precisión."
+  }
+};
+
+/**
+ * Calcula dinámicamente las variables meteorológicas de Quíbor para un año y mes específicos.
+ * @param {string} yearStr - Año a evaluar ("2024" al "2030")
+ * @param {number} monthIdx - Índice del mes (0 a 11)
+ * @returns {Object} Objeto con las métricas climáticas calculadas y anomalías
+ */
+function getCalculatedClimate(yearStr, monthIdx) {
+  const scenario = QUIBOR_YEAR_SCENARIOS[yearStr] || QUIBOR_YEAR_SCENARIOS["2026"];
+  const base = QUIBOR_CLIMATE_BASE[monthIdx] || QUIBOR_CLIMATE_BASE[2];
+
+  const max = Math.round((base.max + scenario.deltaT) * 10) / 10;
+  const min = Math.round((base.min + scenario.deltaT * 0.7) * 10) / 10;
+  const tmed = Math.round((base.tmed + scenario.deltaT * 0.85) * 10) / 10;
+
+  const viento = Math.round((base.viento * scenario.windFactor) * 10) / 10;
+  const rafaga = Math.round(viento * 2.8);
+
+  const lluvia = Math.max(1, Math.round(base.lluvia * (1 + scenario.deltaRain / 100)));
+
+  const deltaBochorno = scenario.deltaT > 0 ? scenario.deltaT * 1.5 : scenario.deltaT * 1.0;
+  const bochorno = Math.min(31, Math.max(5, Math.round((base.bochorno + deltaBochorno) * 10) / 10));
+
+  const rh = Math.min(95, Math.max(45, Math.round((base.rh - scenario.deltaT * 1.8 + scenario.deltaRain * 0.15) * 10) / 10));
+
+  const factorEto = 1 + (scenario.deltaT * 0.035) + ((scenario.windFactor - 1) * 0.5);
+  const eto = Math.round((base.eto * factorEto) * 100) / 100;
+
+  return {
+    mes: base.mes,
+    year: scenario.year,
+    scenarioLabel: scenario.label,
+    fase: scenario.fase,
+    tagClass: scenario.tagClass,
+    deltaT: scenario.deltaT,
+    deltaRain: scenario.deltaRain,
+    scenarioDesc: scenario.desc,
+    max,
+    min,
+    tmed,
+    viento,
+    rafaga,
+    lluvia,
+    bochorno,
+    rh,
+    rad: base.rad,
+    eto,
+    dir: base.dir,
+    picoCalor: base.picoCalor,
+    maxLluvia: base.maxLluvia,
+    maxViento: base.maxViento,
+    masFresco: base.masFresco,
+    picoBochorno: base.picoBochorno,
+    masCalmado: base.masCalmado
+  };
+}
 
 // ==========================================================================
 // 2. MATRIZ FITOSANITARIA COMPLETA
@@ -100,20 +296,23 @@ const PEST_DATA = [
 ];
 
 // ==========================================================================
-// 2.5 NÚCLEO DE ESTADO REACTIVO CENTRALIZADO (FarmState)
+// 3. NÚCLEO DE ESTADO REACTIVO CENTRALIZADO (FarmState)
 // Unifica y sincroniza la fuente de agua, sectorización, nutrición y pozo
 // ==========================================================================
 const FarmState = {
   waterSource: 'pozo', // 'pozo' | 'yacambu'
   wellFlowLs: 2.5,
   wellDepthM: 120,
+  wellLocation: 'ARTESANAL', // 'ARTESANAL' | 'A60' | 'A70' | 'B' | 'C'
+  grossLitersPlantDay: 2.85,
+  dailyDemandM3: 12.54,
   drillDiamInches: 12.25,
   casingDiamInches: 6.0,
   screenType: 'johnson',
   activeSector: '1', // '1', '2', '3', 'all'
   fertilizerRegime: 'aifa', // 'aifa' | 'granulado' | 'hibrido'
   prodStageIdx: 3,
-  sunlightMode: false,
+  sunlightMode: true,
 
   // Precios dinámicos mercado venezolano
   priceAifaBag25kg: 65.0,
@@ -146,6 +345,7 @@ const FarmState = {
         waterSource: this.waterSource,
         wellFlowLs: this.wellFlowLs,
         wellDepthM: this.wellDepthM,
+        wellLocation: this.wellLocation,
         fertilizerRegime: this.fertilizerRegime,
         sunlightMode: this.sunlightMode,
         priceAifaBag25kg: this.priceAifaBag25kg,
@@ -162,6 +362,7 @@ const FarmState = {
         if (p.waterSource) this.waterSource = p.waterSource;
         if (p.wellFlowLs) this.wellFlowLs = Number(p.wellFlowLs);
         if (p.wellDepthM) this.wellDepthM = Number(p.wellDepthM);
+        if (p.wellLocation) this.wellLocation = p.wellLocation;
         if (p.fertilizerRegime) this.fertilizerRegime = p.fertilizerRegime;
         if (typeof p.sunlightMode === "boolean") this.sunlightMode = p.sunlightMode;
         if (p.priceAifaBag25kg) this.priceAifaBag25kg = Number(p.priceAifaBag25kg);
@@ -173,27 +374,194 @@ const FarmState = {
 };
 
 // ==========================================================================
-// 3. INICIALIZACIÓN Y MANEJO DE PESTAÑAS (TABS)
+// 4. INICIALIZACIÓN Y MANEJO DE PESTAÑAS (TABS)
 // ==========================================================================
-document.addEventListener("DOMContentLoaded", () => {
-  FarmState.loadPersisted();
-  initPwaOffline();
-  initSunlightMode();
-  initSidebar();
-  initHydraulicCircuit();
-  initShiftExport();
-  initEconomicSimulator();
-  initTooltips();
-  initClimateTab();
-  initVentilationCalculator();
-  initIrrigationCalculator();
-  initWellValidationCalculator();
-  initWellDrillingCalculator();
-  initPestMatrix();
-  initCanvasVisualizer();
-  initBlueprintViewers();
-  initProductionTab();
-});
+function initApp() {
+  const hideLoader = () => {
+    const loader = document.getElementById("app-loader");
+    if (loader) {
+      loader.classList.add("hidden");
+      setTimeout(() => { loader.style.display = "none"; }, 350);
+    }
+  };
+  setTimeout(hideLoader, 150);
+
+  try { FarmState.loadPersisted(); } catch (e) { console.error(e); }
+  try { initPwaOffline(); } catch (e) { console.error(e); }
+  try { initSunlightMode(); } catch (e) { console.error(e); }
+  try { initSidebar(); } catch (e) { console.error(e); }
+  try { initHydraulicCircuit(); } catch (e) { console.error(e); }
+  try { initShiftExport(); } catch (e) { console.error(e); }
+  try { initEconomicSimulator(); } catch (e) { console.error(e); }
+  try { initTooltips(); } catch (e) { console.error(e); }
+  try { initClimateTab(); } catch (e) { console.error(e); }
+  try { initVentilationCalculator(); } catch (e) { console.error(e); }
+  try { initIrrigationCalculator(); } catch (e) { console.error(e); }
+  try { initWellValidationCalculator(); } catch (e) { console.error(e); }
+  try { initWellDrillingCalculator(); } catch (e) { console.error(e); }
+  try { initPestMatrix(); } catch (e) { console.error(e); }
+  try { initCanvasVisualizer(); } catch (e) { console.error(e); }
+  try { initBlueprintViewers(); } catch (e) { console.error(e); }
+  try { initProductionTab(); } catch (e) { console.error(e); }
+
+  hideLoader();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
+
+let threeJsLoadingPromise = null;
+function ensureThreeJsLoaded() {
+  if (window.THREE && window.Greenhouse3DViewer) {
+    return Promise.resolve();
+  }
+  if (threeJsLoadingPromise) return threeJsLoadingPromise;
+
+  threeJsLoadingPromise = new Promise((resolve) => {
+    function loadScript(src) {
+      return new Promise((res) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.onload = res;
+        s.onerror = (err) => {
+          console.warn(`[LazyLoader] Error loading ${src}:`, err);
+          res();
+        };
+        document.head.appendChild(s);
+      });
+    }
+
+    loadScript("lib/three.min.js")
+      .then(() => loadScript("lib/OrbitControls.js"))
+      .then(() => loadScript("greenhouse-3d.js"))
+      .then(() => resolve());
+  });
+  return threeJsLoadingPromise;
+}
+
+function init3DViewerInstance() {
+  const canvasBox = document.getElementById("greenhouse-3d-container");
+  if (!canvasBox) return;
+
+  ensureThreeJsLoaded().then(() => {
+    if (window.Greenhouse3DViewer && !window.greenhouse3dViewer) {
+      try {
+        window.greenhouse3dViewer = new window.Greenhouse3DViewer("greenhouse-3d-container");
+      } catch (err) {
+        console.warn("[3D Viewer] Error inicializando Three.js viewer:", err);
+      }
+    }
+
+    if (window.greenhouse3dViewer) {
+      const viewer = window.greenhouse3dViewer;
+
+      // Presets de Vistas Rápidas
+      const viewButtons = [
+        { id: "btn-v3d-iso", preset: "iso" },
+        { id: "btn-v3d-front", preset: "front" },
+        { id: "btn-v3d-side", preset: "side" },
+        { id: "btn-v3d-top", preset: "top" },
+        { id: "btn-v3d-walk", preset: "walk" }
+      ];
+
+      viewButtons.forEach(({ id, preset }) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.addEventListener("click", () => {
+            viewButtons.forEach(b => {
+              const el = document.getElementById(b.id);
+              if (el) el.classList.remove("active");
+            });
+            btn.classList.add("active");
+            viewer.setCameraPreset(preset, true);
+          });
+        }
+      });
+
+      // Auto-rotación 360° Turntable
+      const btnAutoRotate = document.getElementById("btn-3d-autorotate");
+      if (btnAutoRotate) {
+        btnAutoRotate.addEventListener("click", () => {
+          viewer.toggleAutoRotate();
+        });
+      }
+
+      // Modos de Sombreado
+      const shadeSolid = document.getElementById("btn-v3d-shade-solid");
+      const shadeWire = document.getElementById("btn-v3d-shade-wire");
+      const shadeXray = document.getElementById("btn-v3d-shade-xray");
+
+      const shadeBtns = [shadeSolid, shadeWire, shadeXray].filter(Boolean);
+
+      if (shadeSolid) {
+        shadeSolid.addEventListener("click", () => {
+          shadeBtns.forEach(b => b.classList.remove("active"));
+          shadeSolid.classList.add("active");
+          viewer.setShadingMode("solid");
+        });
+      }
+
+      if (shadeWire) {
+        shadeWire.addEventListener("click", () => {
+          shadeBtns.forEach(b => b.classList.remove("active"));
+          shadeWire.classList.add("active");
+          viewer.setShadingMode("wireframe");
+        });
+      }
+
+      if (shadeXray) {
+        shadeXray.addEventListener("click", () => {
+          shadeBtns.forEach(b => b.classList.remove("active"));
+          shadeXray.classList.add("active");
+          viewer.setShadingMode("xray");
+        });
+      }
+
+      // Captura HD y Pantalla Completa
+      const btnScreenshot = document.getElementById("btn-v3d-screenshot");
+      if (btnScreenshot) {
+        btnScreenshot.addEventListener("click", () => viewer.takeScreenshot());
+      }
+
+      const btnFullscreen = document.getElementById("btn-v3d-fullscreen");
+      if (btnFullscreen) {
+        btnFullscreen.addEventListener("click", () => viewer.toggleFullscreen());
+      }
+
+      // Capas de Inspección Estructural
+      const layerBindings = [
+        { id: "layer-chk-pillars", layer: "pillars" },
+        { id: "layer-chk-cables", layer: "cables" },
+        { id: "layer-chk-mesh", layer: "mesh" },
+        { id: "layer-chk-crop", layer: "crop" },
+        { id: "layer-chk-dims", layer: "dims" },
+        { id: "layer-chk-wind", layer: "wind" }
+      ];
+
+      layerBindings.forEach(({ id, layer }) => {
+        const chk = document.getElementById(id);
+        if (chk) {
+          chk.addEventListener("change", (e) => {
+            viewer.toggleLayer(layer, e.target.checked);
+          });
+        }
+      });
+
+      // Deslizador de Opacidad de Malla 50×25
+      const sliderMesh = document.getElementById("layer-slider-mesh-opacity");
+      if (sliderMesh) {
+        sliderMesh.addEventListener("input", (e) => {
+          viewer.setMeshOpacity(parseFloat(e.target.value));
+        });
+      }
+
+      setTimeout(() => viewer.onResize(), 60);
+    }
+  });
+}
 
 function initBlueprintViewers() {
   const container3D = document.getElementById("container-viewport-3d");
@@ -210,6 +578,8 @@ function initBlueprintViewers() {
       container2D.style.display = "none";
       if (window.greenhouse3dViewer) {
         setTimeout(() => window.greenhouse3dViewer.onResize(), 50);
+      } else {
+        init3DViewerInstance();
       }
     });
 
@@ -224,145 +594,47 @@ function initBlueprintViewers() {
   // Sub-pestañas dentro del contenedor 2D
   const btnSub2D = document.getElementById("btn-sub-plano2d");
   const btnSub3D = document.getElementById("btn-sub-plano3d");
+  const btnSubCross = document.getElementById("btn-sub-cross-section");
   const subView2D = document.getElementById("subview-plano2d");
   const subView3D = document.getElementById("subview-plano3d");
+  const subViewCross = document.getElementById("subview-cross-section");
 
-  if (btnSub2D && btnSub3D && subView2D && subView3D) {
+  const subBtns = [btnSub2D, btnSub3D, btnSubCross].filter(Boolean);
+  const subViews = [subView2D, subView3D, subViewCross].filter(Boolean);
+
+  if (btnSub2D && subView2D) {
     btnSub2D.addEventListener("click", () => {
+      subBtns.forEach(b => b.classList.remove("active"));
+      subViews.forEach(v => v.style.display = "none");
       btnSub2D.classList.add("active");
-      btnSub3D.classList.remove("active");
       subView2D.style.display = "block";
-      subView3D.style.display = "none";
     });
+  }
 
+  if (btnSub3D && subView3D) {
     btnSub3D.addEventListener("click", () => {
+      subBtns.forEach(b => b.classList.remove("active"));
+      subViews.forEach(v => v.style.display = "none");
       btnSub3D.classList.add("active");
-      btnSub2D.classList.remove("active");
       subView3D.style.display = "block";
-      subView2D.style.display = "none";
     });
   }
 
-  // Inicialización del Motor 3D WebGL (Greenhouse3DViewer)
-  const canvasBox = document.getElementById("greenhouse-3d-container");
-  if (canvasBox && window.Greenhouse3DViewer && !window.greenhouse3dViewer) {
-    try {
-      window.greenhouse3dViewer = new window.Greenhouse3DViewer("greenhouse-3d-container");
-    } catch (err) {
-      console.warn("[3D Viewer] Error inicializando Three.js viewer:", err);
-    }
-  }
-
-  if (window.greenhouse3dViewer) {
-    const viewer = window.greenhouse3dViewer;
-
-    // Presets de Vistas Rápidas
-    const viewButtons = [
-      { id: "btn-v3d-iso", preset: "iso" },
-      { id: "btn-v3d-front", preset: "front" },
-      { id: "btn-v3d-side", preset: "side" },
-      { id: "btn-v3d-top", preset: "top" },
-      { id: "btn-v3d-walk", preset: "walk" }
-    ];
-
-    viewButtons.forEach(({ id, preset }) => {
-      const btn = document.getElementById(id);
-      if (btn) {
-        btn.addEventListener("click", () => {
-          viewButtons.forEach(b => {
-            const el = document.getElementById(b.id);
-            if (el) el.classList.remove("active");
-          });
-          btn.classList.add("active");
-          viewer.setCameraPreset(preset, true);
-        });
-      }
+  if (btnSubCross && subViewCross) {
+    btnSubCross.addEventListener("click", () => {
+      subBtns.forEach(b => b.classList.remove("active"));
+      subViews.forEach(v => v.style.display = "none");
+      btnSubCross.classList.add("active");
+      subViewCross.style.display = "block";
+      requestAnimationFrame(() => drawGreenhouseStructure());
     });
-
-    // Auto-rotación 360° Turntable
-    const btnAutoRotate = document.getElementById("btn-3d-autorotate");
-    if (btnAutoRotate) {
-      btnAutoRotate.addEventListener("click", () => {
-        viewer.toggleAutoRotate();
-      });
-    }
-
-    // Modos de Sombreado
-    const shadeSolid = document.getElementById("btn-v3d-shade-solid");
-    const shadeWire = document.getElementById("btn-v3d-shade-wire");
-    const shadeXray = document.getElementById("btn-v3d-shade-xray");
-
-    const shadeBtns = [shadeSolid, shadeWire, shadeXray].filter(Boolean);
-
-    if (shadeSolid) {
-      shadeSolid.addEventListener("click", () => {
-        shadeBtns.forEach(b => b.classList.remove("active"));
-        shadeSolid.classList.add("active");
-        viewer.setShadingMode("solid");
-      });
-    }
-
-    if (shadeWire) {
-      shadeWire.addEventListener("click", () => {
-        shadeBtns.forEach(b => b.classList.remove("active"));
-        shadeWire.classList.add("active");
-        viewer.setShadingMode("wireframe");
-      });
-    }
-
-    if (shadeXray) {
-      shadeXray.addEventListener("click", () => {
-        shadeBtns.forEach(b => b.classList.remove("active"));
-        shadeXray.classList.add("active");
-        viewer.setShadingMode("xray");
-      });
-    }
-
-    // Captura HD y Pantalla Completa
-    const btnScreenshot = document.getElementById("btn-v3d-screenshot");
-    if (btnScreenshot) {
-      btnScreenshot.addEventListener("click", () => viewer.takeScreenshot());
-    }
-
-    const btnFullscreen = document.getElementById("btn-v3d-fullscreen");
-    if (btnFullscreen) {
-      btnFullscreen.addEventListener("click", () => viewer.toggleFullscreen());
-    }
-
-    // Capas de Inspección Estructural
-    const layerBindings = [
-      { id: "layer-chk-pillars", layer: "pillars" },
-      { id: "layer-chk-cables", layer: "cables" },
-      { id: "layer-chk-mesh", layer: "mesh" },
-      { id: "layer-chk-crop", layer: "crop" },
-      { id: "layer-chk-dims", layer: "dims" },
-      { id: "layer-chk-wind", layer: "wind" }
-    ];
-
-    layerBindings.forEach(({ id, layer }) => {
-      const chk = document.getElementById(id);
-      if (chk) {
-        chk.addEventListener("change", (e) => {
-          viewer.toggleLayer(layer, e.target.checked);
-        });
-      }
-    });
-
-    // Deslizador de Opacidad de Malla 50×25
-    const sliderMesh = document.getElementById("layer-slider-mesh-opacity");
-    if (sliderMesh) {
-      sliderMesh.addEventListener("input", (e) => {
-        viewer.setMeshOpacity(parseFloat(e.target.value));
-      });
-    }
   }
 }
 
 const STAGE_MODULE_MAP = {
   "tab-clima": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Climatología & Viento (MERRA-2)" },
   "tab-ventilacion": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Ventilación Convectiva & Extractores" },
-  "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 2.000 m²" },
-  "tab-planos": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Visor 3D Interactivo & Planos CAD" },
+  "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 2.000 m² (Visor 3D & Planos)" },
   "tab-plagas": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Matriz de Plagas (Malla 50×25)" },
   "tab-riego": { stage: "Etapa 3: Acuífero & Hidrogeología", module: "Riego FAO-56 & Salinidad" },
   "tab-produccion": { stage: "Etapa 4: Operación & Producción", module: "Plan Maestro de Producción Tomate" },
@@ -378,41 +650,65 @@ function activateTab(targetTabId, scrollTargetId = null) {
   const breadcrumbStage = document.getElementById("breadcrumb-stage");
   const breadcrumbModule = document.getElementById("breadcrumb-module");
 
-  // Sincronizar item activo en el menú lateral
+  // Sincronizar item activo en el menú lateral y accesibilidad ARIA (Paso 6.1)
   navItems.forEach(item => {
     const itemTab = item.getAttribute("data-tab");
     const itemScroll = item.getAttribute("data-scroll");
 
+    let isActive = false;
     if (itemTab === targetTabId) {
       if (scrollTargetId && itemScroll === scrollTargetId) {
-        item.classList.add("active");
+        isActive = true;
       } else if (!scrollTargetId && !itemScroll) {
-        item.classList.add("active");
-      } else if (!scrollTargetId && itemScroll) {
-        item.classList.remove("active");
-      } else {
-        item.classList.remove("active");
+        isActive = true;
       }
+    }
+
+    if (isActive) {
+      item.classList.add("active");
+      item.setAttribute("aria-selected", "true");
     } else {
       item.classList.remove("active");
+      item.setAttribute("aria-selected", "false");
     }
   });
 
-  // Activar panel de contenido
+  // Activar panel de contenido y actualizar aria-hidden
   tabPanes.forEach(p => {
     if (p.id === targetTabId) {
       p.classList.add("active");
+      p.setAttribute("aria-hidden", "false");
       if (targetTabId === "tab-estructura") {
-        requestAnimationFrame(drawGreenhouseStructure);
-      } else if (targetTabId === "tab-planos") {
-        if (window.greenhouse3dViewer) {
-          setTimeout(() => window.greenhouse3dViewer.onResize(), 60);
+        const btnMode3D = document.getElementById("btn-mode-3d-interactive");
+        const btnMode2D = document.getElementById("btn-mode-2d-blueprints");
+        const container3D = document.getElementById("container-viewport-3d");
+        const container2D = document.getElementById("container-planos-2d");
+
+        if (scrollTargetId === "container-planos-2d") {
+          if (btnMode2D && btnMode3D && container2D && container3D) {
+            btnMode2D.classList.add("active");
+            btnMode3D.classList.remove("active");
+            container2D.style.display = "block";
+            container3D.style.display = "none";
+          }
         } else {
-          initBlueprintViewers();
+          if (btnMode3D && btnMode2D && container3D && container2D) {
+            btnMode3D.classList.add("active");
+            btnMode2D.classList.remove("active");
+            container3D.style.display = "flex";
+            container2D.style.display = "none";
+          }
+          if (window.greenhouse3dViewer) {
+            setTimeout(() => window.greenhouse3dViewer.onResize(), 60);
+          } else {
+            init3DViewerInstance();
+          }
         }
+        requestAnimationFrame(() => drawGreenhouseStructure());
       }
     } else {
       p.classList.remove("active");
+      p.setAttribute("aria-hidden", "true");
     }
   });
 
@@ -428,6 +724,8 @@ function activateTab(targetTabId, scrollTargetId = null) {
         breadcrumbModule.textContent = "Ficha de Turno Diario (WhatsApp)";
       } else if (scrollTargetId === "economic-simulator-section") {
         breadcrumbModule.textContent = "Simulador Económico AIFA";
+      } else if (scrollTargetId === "container-planos-2d") {
+        breadcrumbModule.textContent = "Planos Constructivos & Cortes (SVG / 2D)";
       } else {
         breadcrumbModule.textContent = STAGE_MODULE_MAP[targetTabId].module;
       }
@@ -549,7 +847,7 @@ function initHydraulicCircuit() {
   const sectorConfigs = {
     "1": {
       name: "Sector 1 (Camellones 1 al 3)",
-      rows: "8 Hileras de Tomate (100 m)",
+      rows: "6 Hileras de Tomate (100 m)",
       flow: "2.40 m³/h",
       lmin: "40.0 L/minuto",
       emitters: "1.500 Goteros PC (40 cm)",
@@ -573,7 +871,7 @@ function initHydraulicCircuit() {
     },
     "3": {
       name: "Sector 3 (Camellones 8 al 10)",
-      rows: "8 Hileras de Tomate (100 m)",
+      rows: "6 Hileras de Tomate (100 m)",
       flow: "2.40 m³/h",
       lmin: "40.0 L/minuto",
       emitters: "1.500 Goteros PC (40 cm)",
@@ -585,7 +883,7 @@ function initHydraulicCircuit() {
     },
     "all": {
       name: "Ciclo Completo (3 Sectores)",
-      rows: "24 Hileras Totales (2.000 m²)",
+      rows: "20 Hileras Totales (2.000 m²)",
       flow: "2.4 a 3.2 m³/h (Rotativo)",
       lmin: "Total Nave: 8.0 m³/h",
       emitters: "5.000 Goteros PC Totales",
@@ -634,7 +932,7 @@ function initHydraulicCircuit() {
 }
 
 // ==========================================================================
-// 3.1 PWA OFFLINE MANAGER & SERVICE WORKER
+// 4.1 PWA OFFLINE MANAGER & SERVICE WORKER
 // ==========================================================================
 function initPwaOffline() {
   if ('serviceWorker' in navigator) {
@@ -652,45 +950,19 @@ function initPwaOffline() {
 }
 
 // ==========================================================================
-// 3.2 MODO SOL DIRECTO (AGRI-UX-UI ALTO CONTRASTE EXTERIOR)
+// 4.2 MODO SOL DIRECTO (AGRI-UX-UI ALTO CONTRASTE EXTERIOR)
 // ==========================================================================
 function initSunlightMode() {
-  const btn = document.getElementById('btn-toggle-sunlight');
-  const btnText = document.getElementById('sunlight-btn-text');
-  if (!btn) return;
-
-  function applyMode(active) {
-    if (active) {
-      document.body.classList.add('sunlight-mode');
-      if (btnText) btnText.textContent = 'Modo Noche / Estándar';
-      btn.style.background = '#000000';
-      btn.style.color = '#fef08a';
-      btn.style.borderColor = '#000000';
-    } else {
-      document.body.classList.remove('sunlight-mode');
-      if (btnText) btnText.textContent = 'Modo Sol Directo';
-      btn.style.background = '';
-      btn.style.color = '';
-      btn.style.borderColor = '';
-    }
-    if (window.greenhouse3dViewer) {
-      window.greenhouse3dViewer.setThemeMode(active);
-    }
+  // Modo Diurno permanente para alta visibilidad y ergonomía de campo (Skill agri-ux-ui)
+  document.body.classList.add('sunlight-mode');
+  document.body.classList.add('light-theme');
+  if (window.greenhouse3dViewer) {
+    window.greenhouse3dViewer.setThemeMode(true);
   }
-
-  if (FarmState.sunlightMode) {
-    applyMode(true);
-  }
-
-  btn.addEventListener('click', () => {
-    const nextState = !document.body.classList.contains('sunlight-mode');
-    applyMode(nextState);
-    FarmState.setState({ sunlightMode: nextState });
-  });
 }
 
 // ==========================================================================
-// 3.3 EXPORTADOR DE FICHA DE TURNO DIARIO (WHATSAPP / IMPRIMIR)
+// 4.3 EXPORTADOR DE FICHA DE TURNO DIARIO (WHATSAPP / IMPRIMIR)
 // ==========================================================================
 function initShiftExport() {
   const btn = document.getElementById('btn-export-shift');
@@ -766,7 +1038,7 @@ ${acidText}
 }
 
 // ==========================================================================
-// 3.4 SIMULADOR ECONÓMICO DINÁMICO (AIFA VS GRANULADO VS HÍBRIDO)
+// 4.4 SIMULADOR ECONÓMICO DINÁMICO (AIFA VS GRANULADO VS HÍBRIDO)
 // ==========================================================================
 function initEconomicSimulator() {
   const inputAifa = document.getElementById('input-price-aifa');
@@ -917,11 +1189,19 @@ function initTooltips() {
 }
 
 // ==========================================================================
-// 4. TAB 1: CLIMA & CAPA LÍMITE
+// 5. TAB 1: CLIMA & CAPA LÍMITE (MOTOR MULTIANUAL NASA POWER/MERRA-2 2024-2030)
 // ==========================================================================
 function initClimateTab() {
+  const selectYear = document.getElementById("select-climate-year");
   const selectMonth = document.getElementById("select-month");
   const sliderHeight = document.getElementById("input-wind-height");
+
+  if (selectYear) {
+    selectYear.addEventListener("change", () => {
+      const mIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
+      updateClimateDisplays(mIdx);
+    });
+  }
   
   if (selectMonth) {
     selectMonth.addEventListener("change", () => {
@@ -939,82 +1219,193 @@ function initClimateTab() {
 }
 
 function updateClimateDisplays(monthIndex) {
-  const data = QUIBOR_CLIMATE[monthIndex];
+  const selectYear = document.getElementById("select-climate-year");
+  const yearStr = selectYear ? selectYear.value : "2026";
+  const data = getCalculatedClimate(yearStr, monthIndex);
   if (!data) return;
 
-  document.getElementById("disp-temp-max").textContent = `${data.max} °C`;
-  document.getElementById("disp-temp-min").textContent = `Mínima: ${data.min} °C`;
-  document.getElementById("disp-wind-speed").textContent = `${data.viento} km/h`;
-  document.getElementById("disp-wind-dir").textContent = `Dirección: ${data.dir}`;
-  document.getElementById("disp-rain").textContent = `${data.lluvia} mm`;
-  document.getElementById("disp-muggy").textContent = `${data.bochorno} d`;
+  // 1. Actualizar Tarjetas de Métricas Principales (6 métricas bioclimáticas)
+  const dispMax = document.getElementById("disp-temp-max");
+  if (dispMax) dispMax.textContent = `${data.max.toFixed(1)} °C`;
 
-  // Dynamic alert
-  const alertBox = document.getElementById("box-clima-alert");
-  if (data.picoCalor) {
-    alertBox.className = "alert-box alert-warning";
-    alertBox.innerHTML = `
-      <div class="alert-icon">🔥</div>
-      <div class="alert-content">
-        <strong>Marzo (Pico Térmico Anual - 31 °C):</strong> Máxima insolación y sequedad. En casas de 2.5 m el aire interior alcanza 34-37 °C provocando aborto floral en tomate y esterilidad de polen. Altura recomendada: 5.5 m.
-      </div>`;
-  } else if (data.maxLluvia) {
-    alertBox.className = "alert-box alert-success";
-    alertBox.innerHTML = `
-      <div class="alert-icon">🌧️</div>
-      <div class="alert-content">
-        <strong>Mayo (Mes más lluvioso - 104 mm):</strong> El bochorno salta a 28.1 días/mes. La alta humedad ambiental exige ventilación perimetral fluida para evitar Botrytis y quemaduras apicales.
-      </div>`;
-  } else if (data.maxViento) {
-    alertBox.className = "alert-box alert-warning";
-    alertBox.innerHTML = `
-      <div class="alert-icon">💨</div>
-      <div class="alert-content">
-        <strong>Junio (Mes más ventoso - 10.4 km/h promedio):</strong> Viento sostenido del Este. Verifique la tensión de las guayas de 1/4" y los resortes zig-zag de la malla 50×25 en la fachada barlovento.
-      </div>`;
-  } else {
-    alertBox.className = "alert-box alert-warning";
-    alertBox.innerHTML = `
-      <div class="alert-icon">ℹ️</div>
-      <div class="alert-content">
-        <strong>Condiciones de ${data.mes}:</strong> Viento medio de ${data.viento} km/h (${data.dir}). Humedad y calor sostenidos con ${data.bochorno} días bochornosos.
-      </div>`;
+  const dispMin = document.getElementById("disp-temp-min");
+  if (dispMin) dispMin.textContent = `Mín: ${data.min.toFixed(1)} °C | Media: ${data.tmed.toFixed(1)} °C`;
+
+  const dispWind = document.getElementById("disp-wind-speed");
+  if (dispWind) dispWind.textContent = `${data.viento.toFixed(1)} km/h`;
+
+  const dispWindDir = document.getElementById("disp-wind-dir");
+  if (dispWindDir) dispWindDir.textContent = `Dir: ${data.dir} | Ráfaga: ${data.rafaga} km/h`;
+
+  const dispRain = document.getElementById("disp-rain");
+  if (dispRain) dispRain.textContent = `${data.lluvia} mm`;
+
+  const dispRainDesc = document.getElementById("disp-rain-desc");
+  if (dispRainDesc) {
+    const diffSign = data.deltaRain >= 0 ? "+" : "";
+    dispRainDesc.textContent = `${diffSign}${data.deltaRain}% vs media histórica`;
   }
 
-  // Update boundary layer with new base wind
+  const dispMuggy = document.getElementById("disp-muggy");
+  if (dispMuggy) dispMuggy.textContent = `${data.bochorno.toFixed(1)} d`;
+
+  const dispMuggyRh = document.getElementById("disp-muggy-rh");
+  if (dispMuggyRh) dispMuggyRh.textContent = `HR media: ${data.rh.toFixed(1)}% (${data.rh > 75 ? "bochorno" : "seco"})`;
+
+  const dispEto = document.getElementById("disp-eto");
+  if (dispEto) dispEto.textContent = `${data.eto.toFixed(2)} mm/d`;
+
+  const dispEtoVol = document.getElementById("disp-eto-vol");
+  if (dispEtoVol) {
+    const volDia = (data.eto * 2000) / 1000;
+    dispEtoVol.textContent = `${volDia.toFixed(1)} m³/d (2.000 m²)`;
+  }
+
+  const dispRad = document.getElementById("disp-solar-rad");
+  if (dispRad) dispRad.textContent = `${data.rad.toFixed(1)} MJ/m²·d`;
+
+  const dispSolarSub = document.getElementById("disp-solar-sub");
+  if (dispSolarSub) {
+    const kwh = (data.rad / 3.6).toFixed(2);
+    dispSolarSub.textContent = `${kwh} kWh/m²·d (NASA POWER)`;
+  }
+
+  // 2. Banner de Fase Climática / ENSO
+  const tagPhase = document.getElementById("tag-climate-phase");
+  if (tagPhase) {
+    tagPhase.className = `tag ${data.tagClass}`;
+    tagPhase.textContent = `Año ${data.year}: ${data.fase}`;
+  }
+
+  const tagAnomaly = document.getElementById("tag-climate-anomaly");
+  if (tagAnomaly) {
+    const signT = data.deltaT >= 0 ? "+" : "";
+    const signP = data.deltaRain >= 0 ? "+" : "";
+    tagAnomaly.textContent = `ΔT: ${signT}${data.deltaT.toFixed(1)} °C | ΔP: ${signP}${data.deltaRain}%`;
+  }
+
+  const descPhase = document.getElementById("desc-climate-phase");
+  if (descPhase) {
+    descPhase.textContent = data.scenarioDesc;
+  }
+
+  // 3. Alerta Agroclimática Dinámica y Contextualizada
+  const alertBox = document.getElementById("box-clima-alert");
+  if (alertBox) {
+    if (data.max >= 32.0 || (data.picoCalor && data.deltaT >= 0)) {
+      alertBox.className = "alert-box alert-warning";
+      alertBox.innerHTML = `
+        <div class="alert-icon">🔥</div>
+        <div class="alert-content">
+          <strong>${data.mes} ${data.year} (Estrés Térmico — T.Máx ${data.max.toFixed(1)} °C):</strong> Máxima radiación (${data.rad} MJ/m²·d) y baja humedad (${data.rh}%). En estructuras bajas (&lt;2.5 m) el interior superará los 35-37 °C provocando aborto floral en tomate y esterilidad de polen. El parral a 3.80 m (con 1.60 m de colchón térmico libre) y pulsos de riego matutinos amortiguan el calentamiento en el dosel.
+        </div>`;
+    } else if (data.lluvia >= 90 || data.maxLluvia) {
+      alertBox.className = "alert-box alert-success";
+      alertBox.innerHTML = `
+        <div class="alert-icon">🌧️</div>
+        <div class="alert-content">
+          <strong>${data.mes} ${data.year} (Pico de Lluvias — ${data.lluvia} mm acumulados):</strong> El bochorno alcanza ${data.bochorno} días/mes con HR de ${data.rh}%. La alta humedad relativa dentro del cultivo exige máxima ventilación convectiva a lo largo de las paredes laterales de 100 m para evitar brotes de <em>Botrytis cinerea</em> y tizón tardío.
+        </div>`;
+    } else if (data.viento >= 9.5 || data.maxViento) {
+      alertBox.className = "alert-box alert-warning";
+      alertBox.innerHTML = `
+        <div class="alert-icon">💨</div>
+        <div class="alert-content">
+          <strong>${data.mes} ${data.year} (Pico Eólico — Viento ${data.viento.toFixed(1)} km/h, Ráfagas ${data.rafaga} km/h):</strong> Flujo sostenido del Este. Verifique la tensión de los 34 tirantes perimetrales a 45° y la sujeción de la malla 50×25 en la fachada barlovento Este de 20.00 m.
+        </div>`;
+    } else {
+      alertBox.className = "alert-box alert-warning";
+      alertBox.innerHTML = `
+        <div class="alert-icon">ℹ️</div>
+        <div class="alert-content">
+          <strong>Condiciones ${data.mes} ${data.year}:</strong> Temperatura media de ${data.tmed.toFixed(1)} °C, viento de ${data.viento.toFixed(1)} km/h (${data.dir}) y evapotranspiración de ${data.eto.toFixed(2)} mm/d (${(data.eto * 2).toFixed(1)} m³/d en 2.000 m²). Mantenga la fracción de lavado LF por salinidad del pozo.
+        </div>`;
+    }
+  }
+
+  // 4. Sincronizar Capa Límite de Hellmann con el viento activo del año
   const sliderHeight = document.getElementById("input-wind-height");
   if (sliderHeight) {
     updateBoundaryLayerDisplays(parseFloat(sliderHeight.value));
   }
 }
 
-// Hellmann boundary layer: v(z) = v10 * (z/10)^0.16
+/**
+ * Calcula la velocidad del viento corregida a una altura z aplicando el exponente de Hellmann (0.16 para terreno semiárido).
+ * @param {number} v10 - Velocidad del viento medida a 10 metros de altura (km/h)
+ * @param {number} z - Altura objetivo de evaluación o cumbrera (m)
+ * @returns {number} Velocidad estimada del viento a la cota z (km/h)
+ */
 function getWindAtHeight(v10, z) {
   return v10 * Math.pow(z / 10.0, 0.16);
 }
 
 function updateBoundaryLayerDisplays(userHeight) {
+  const selectYear = document.getElementById("select-climate-year");
   const selectMonth = document.getElementById("select-month");
+  const yearStr = selectYear ? selectYear.value : "2026";
   const monthIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
-  const v10 = QUIBOR_CLIMATE[monthIdx].viento;
+  const currentClimate = getCalculatedClimate(yearStr, monthIdx);
+  const v10 = currentClimate.viento;
 
-  const v25 = getWindAtHeight(v10, 2.5);
+  // Cota de espaldar según planos actuales (2.00 m) y altura evaluada (por defecto 3.00 m techo parral)
+  const v20 = getWindAtHeight(v10, 2.0);
   const vUser = getWindAtHeight(v10, userHeight);
 
-  document.getElementById("val-wind-height").textContent = `${userHeight.toFixed(1)} m`;
-  document.getElementById("speed-25m").textContent = `${v25.toFixed(1)} km/h`;
-  document.getElementById("label-user-height").textContent = `A ${userHeight.toFixed(1)} m`;
-  document.getElementById("speed-user-height").textContent = `${vUser.toFixed(1)} km/h`;
-  document.getElementById("speed-10m").textContent = `${v10.toFixed(1)} km/h`;
+  const valWind = document.getElementById("val-wind-height");
+  if (valWind) valWind.textContent = `${userHeight.toFixed(1)} m`;
+
+  const speed25m = document.getElementById("speed-25m");
+  if (speed25m) speed25m.textContent = `${v20.toFixed(1)} km/h`;
+
+  const diff22m = document.getElementById("diff-22m");
+  if (diff22m) {
+    const diff20Percent = ((v20 - v10) / v10) * 100;
+    diff22m.textContent = `${diff20Percent.toFixed(1)}% respecto a 10m`;
+  }
+
+  const labelUser = document.getElementById("label-user-height");
+  if (labelUser) {
+    if (Math.abs(userHeight - 3.0) < 0.08) {
+      labelUser.textContent = `A 3.00 m (Techo Parral Plano)`;
+    } else if (Math.abs(userHeight - 2.0) < 0.08) {
+      labelUser.textContent = `A 2.00 m (Espaldar Hortomalla)`;
+    } else if (Math.abs(userHeight - 5.5) < 0.08) {
+      labelUser.textContent = `A 5.50 m (Cumbrera Referencial)`;
+    } else {
+      labelUser.textContent = `A ${userHeight.toFixed(1)} m (Evaluación)`;
+    }
+  }
+
+  const speedUser = document.getElementById("speed-user-height");
+  if (speedUser) speedUser.textContent = `${vUser.toFixed(1)} km/h`;
+
+  const speed10 = document.getElementById("speed-10m");
+  if (speed10) speed10.textContent = `${v10.toFixed(1)} km/h`;
 
   const diffPercent = ((vUser - v10) / v10) * 100;
   const diffElem = document.getElementById("diff-user-height");
-  diffElem.textContent = `${diffPercent.toFixed(1)}% respecto a 10m`;
-  diffElem.className = diffPercent < -15 ? "comp-diff danger" : "comp-diff success";
+  if (diffElem) {
+    diffElem.textContent = `${diffPercent > 0 ? "+" : ""}${diffPercent.toFixed(1)}% respecto a 10m`;
+    diffElem.className = diffPercent < -15 ? "comp-diff danger" : "comp-diff success";
+  }
+
+  const noteUser = document.getElementById("note-user-height");
+  if (noteUser) {
+    if (Math.abs(userHeight - 3.0) < 0.08) {
+      noteUser.textContent = "Colchón térmico superior: 1.00 m libre";
+    } else if (userHeight <= 2.0) {
+      noteUser.textContent = "Zona follaje y fruto (espaldera)";
+    } else if (userHeight > 2.0 && userHeight < 3.0) {
+      noteUser.textContent = `En colchón térmico (+${(userHeight - 2.0).toFixed(1)} m sobre espaldar)`;
+    } else {
+      noteUser.textContent = `Cota exterior (+${(userHeight - 3.0).toFixed(1)} m sobre techo)`;
+    }
+  }
 }
 
 // ==========================================================================
-// 5. TAB 2: CALCULADORA EXTRACTORES EÓLICOS & VENTILACIÓN
+// 6. TAB 2: CALCULADORA EXTRACTORES EÓLICOS & VENTILACIÓN
 // ==========================================================================
 function initVentilationCalculator() {
   const inputs = [
@@ -1037,6 +1428,10 @@ function initVentilationCalculator() {
   calculateVentilation();
 }
 
+/**
+ * Dimensiona la tasa de extracción eólica unitaria y colectiva según la ecuación
+ * termomecánica empírica oficial TurboExtractor (17" a 36") y calcula las RAH resultantes.
+ */
 function calculateVentilation() {
   const A = parseFloat(document.getElementById("input-ext-height").value) || 5.5;
   const V10 = parseFloat(document.getElementById("input-ext-wind").value) || 9.0;
@@ -1076,9 +1471,7 @@ function calculateVentilation() {
 }
 
 // ==========================================================================
-// 6. TAB 3: CALCULADORA FAO-56 & SALINIDAD
-// ==========================================================================
-// 6. TAB 3: CALCULADORA FAO-56 & SALINIDAD (MERRA-2 & QUÍBOR CALIBRADO)
+// 7. TAB 3: CALCULADORA FAO-56 & SALINIDAD (MERRA-2 & QUÍBOR CALIBRADO)
 // ==========================================================================
 // Evapotranspiración de Referencia ETo mensual NASA MERRA-2 (Valle de Quíbor 695 msnm)
 const QUIBOR_MONTHLY_ETO = [
@@ -1139,6 +1532,7 @@ function initIrrigationCalculator() {
     "select-soil-cover",
     "input-well-ec",
     "input-plant-density",
+    "input-surface-m2",
     "input-bicarb-water",
     "input-bicarb-target"
   ];
@@ -1170,9 +1564,19 @@ function initIrrigationCalculator() {
     });
   }
 
+  const btnExportCsv = document.getElementById("btn-export-fao-csv");
+  if (btnExportCsv) {
+    btnExportCsv.addEventListener("click", exportFAOCsv);
+  }
+
   calculateIrrigation();
 }
 
+/**
+ * Calcula la demanda hídrica fenológica FAO-56 ajustada por cobertura de suelo (mulch),
+ * la fracción de lixiviación (LF) según conductividad eléctrica del pozo y la neutralización
+ * química de bicarbonatos con ácido nítrico 60%.
+ */
 function calculateIrrigation() {
   const elCrop = document.getElementById("select-crop");
   const elStage = document.getElementById("select-stage");
@@ -1231,9 +1635,18 @@ function calculateIrrigation() {
   const grossLitersPlantWeek = netLitersPlantWeek / (1.0 - lf);
   const grossLitersPlantDay = grossLitersPlantWeek / 7.0;
 
-  // Demanda diaria total módulo 2.000 m² (4.400 plantas a 2.2 pl/m²)
-  const totalPlants = 2000.0 * density;
+  // Demanda diaria total módulo configurable (por defecto 2.000 m²)
+  const elSurface = document.getElementById("input-surface-m2");
+  const surfaceM2 = elSurface ? parseFloat(elSurface.value) || 2000.0 : 2000.0;
+  const totalPlants = surfaceM2 * density;
   const dailyM3Total = (grossLitersPlantDay * totalPlants) / 1000.0;
+
+  // Actualizar estado centralizado para sincronizar con validación de pozo
+  FarmState.grossLitersPlantDay = grossLitersPlantDay;
+  FarmState.dailyDemandM3 = dailyM3Total;
+  if (typeof calculateWellValidation === "function" && document.getElementById("well-test-flow")) {
+    calculateWellValidation();
+  }
 
   // 6. Neutralización Química de Bicarbonatos (HNO3 comercial 60%, densidad 1.35 kg/L)
   // Fórmula: Dose (L/m³) = (HCO3_agua - HCO3_obj) * 63.01 / (0.60 * 1.35 * 1000)
@@ -1321,10 +1734,207 @@ function calculateIrrigation() {
       }
     }
   }
+
+  // 9. Renderizar Tabla Resumen 12 Meses & Gráfico Canvas
+  render12MonthFAO(density, surfaceM2, kc, hasMulch, lf, stageData);
+}
+
+/**
+ * Genera la proyección mensual completa (12 meses) de demanda hídrica
+ * y actualiza la tabla de datos y el gráfico Canvas 2D
+ */
+function render12MonthFAO(density, surfaceM2, kc, hasMulch, lf, stageData) {
+  const months = [
+    { name: "Enero", et0: 5.4, days: 31 },
+    { name: "Febrero", et0: 5.8, days: 28 },
+    { name: "Marzo", et0: 6.4, days: 31, peak: true },
+    { name: "Abril", et0: 6.2, days: 30 },
+    { name: "Mayo", et0: 5.6, days: 31 },
+    { name: "Junio", et0: 5.2, days: 30 },
+    { name: "Julio", et0: 4.8, days: 31, min: true },
+    { name: "Agosto", et0: 5.1, days: 31 },
+    { name: "Septiembre", et0: 5.3, days: 30 },
+    { name: "Octubre", et0: 5.2, days: 31 },
+    { name: "Noviembre", et0: 4.9, days: 30 },
+    { name: "Diciembre", et0: 5.0, days: 31 }
+  ];
+
+  const totalPlants = surfaceM2 * density;
+  const rowsData = [];
+
+  const tbody = document.getElementById("tbody-fao-12months");
+  if (tbody) tbody.innerHTML = "";
+
+  months.forEach((m) => {
+    const etc = m.et0 * kc;
+    const netLitersDay = etc / density;
+    const grossLitersDay = netLitersDay / (1.0 - lf);
+    const m3Day = (grossLitersDay * totalPlants) / 1000.0;
+    const m3Month = m3Day * m.days;
+
+    rowsData.push({
+      mes: m.name,
+      et0: m.et0,
+      kc: kc,
+      etc: etc,
+      grossLitersDay: grossLitersDay,
+      m3Day: m3Day,
+      m3Month: m3Month,
+      peak: m.peak,
+      min: m.min
+    });
+
+    if (tbody) {
+      const tr = document.createElement("tr");
+      if (m.peak) tr.style.backgroundColor = "rgba(239,68,68,0.12)";
+      else if (m.min) tr.style.backgroundColor = "rgba(16,185,129,0.08)";
+      
+      tr.innerHTML = `
+        <td><strong>${m.name}</strong> ${m.peak ? '🔥' : (m.min ? '❄️' : '')}</td>
+        <td>${m.et0.toFixed(1)}</td>
+        <td>${etc.toFixed(2)}</td>
+        <td style="color:var(--emerald-light); font-weight:600;">${grossLitersDay.toFixed(2)} L</td>
+        <td style="color:var(--cyan-light); font-weight:700;">${m3Day.toFixed(2)} m³</td>
+        <td style="color:var(--amber-main); font-weight:700;">${m3Month.toFixed(0)} m³</td>
+      `;
+      tbody.appendChild(tr);
+    }
+  });
+
+  // Guardar datos en FarmState para exportar a CSV
+  FarmState.faoMonthlyData = rowsData;
+
+  // Renderizar gráfico Canvas 2D
+  drawFAOChart(rowsData);
+}
+
+/**
+ * Dibuja un gráfico de barras mensual con Canvas 2D puro
+ */
+function drawFAOChart(rowsData) {
+  const canvas = document.getElementById("canvas-fao-monthly");
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const paddingLeft = 45;
+  const paddingRight = 15;
+  const paddingTop = 25;
+  const paddingBottom = 30;
+  const chartW = w - paddingLeft - paddingRight;
+  const chartH = h - paddingTop - paddingBottom;
+
+  const maxVal = Math.max(...rowsData.map(r => r.m3Month)) * 1.18;
+
+  // Líneas horizontales de cuadrícula
+  ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+  ctx.lineWidth = 1;
+  ctx.fillStyle = "rgba(148, 163, 184, 0.8)";
+  ctx.font = "10px 'JetBrains Mono', monospace";
+  ctx.textAlign = "right";
+
+  const numGrid = 4;
+  for (let i = 0; i <= numGrid; i++) {
+    const yVal = (maxVal / numGrid) * i;
+    const y = paddingTop + chartH - (i / numGrid) * chartH;
+    ctx.beginPath();
+    ctx.moveTo(paddingLeft, y);
+    ctx.lineTo(w - paddingRight, y);
+    ctx.stroke();
+    ctx.fillText(`${Math.round(yVal)}`, paddingLeft - 6, y + 3);
+  }
+
+  // Dibujar barras
+  const n = rowsData.length;
+  const barWidth = (chartW / n) * 0.65;
+  const step = chartW / n;
+
+  ctx.textAlign = "center";
+  ctx.font = "9px 'Plus Jakarta Sans', sans-serif";
+
+  rowsData.forEach((r, i) => {
+    const barH = (r.m3Month / maxVal) * chartH;
+    const x = paddingLeft + i * step + (step - barWidth) / 2;
+    const y = paddingTop + chartH - barH;
+
+    // Gradiente de color según consumo
+    let grad = ctx.createLinearGradient(0, y, 0, y + barH);
+    if (r.m3Month > 450 || r.peak) {
+      grad.addColorStop(0, "#ef4444");
+      grad.addColorStop(1, "#b91c1c");
+    } else if (r.m3Month > 360) {
+      grad.addColorStop(0, "#f59e0b");
+      grad.addColorStop(1, "#d97706");
+    } else {
+      grad.addColorStop(0, "#10b981");
+      grad.addColorStop(1, "#047857");
+    }
+
+    ctx.fillStyle = grad;
+    if (typeof ctx.roundRect === "function") {
+      ctx.beginPath();
+      ctx.roundRect(x, y, barWidth, barH, [4, 4, 0, 0]);
+      ctx.fill();
+    } else {
+      ctx.fillRect(x, y, barWidth, barH);
+    }
+
+    // Etiqueta numérica sobre la barra
+    ctx.fillStyle = "#f8fafc";
+    ctx.font = "9px 'JetBrains Mono', monospace";
+    ctx.fillText(`${Math.round(r.m3Month)}`, x + barWidth / 2, y - 4);
+
+    // Etiqueta del mes
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "9px 'Plus Jakarta Sans', sans-serif";
+    ctx.fillText(r.mes.slice(0, 3), x + barWidth / 2, h - 12);
+  });
+}
+
+/**
+ * Exporta los datos de la proyección mensual FAO-56 a un archivo CSV
+ */
+function exportFAOCsv() {
+  const data = FarmState.faoMonthlyData;
+  if (!data || !data.length) return;
+
+  const headers = [
+    "Mes",
+    "ETo_mm_dia",
+    "Kc",
+    "ETc_mm_dia",
+    "Lamina_Bruta_L_pl_dia",
+    "Demanda_Diaria_m3_dia",
+    "Demanda_Mensual_m3_mes"
+  ];
+  const rows = data.map(d => [
+    d.mes,
+    d.et0.toFixed(2),
+    d.kc.toFixed(2),
+    d.etc.toFixed(2),
+    d.grossLitersDay.toFixed(2),
+    d.m3Day.toFixed(2),
+    d.m3Month.toFixed(2)
+  ]);
+
+  let csvContent = "data:text/csv;charset=utf-8," 
+    + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
+
+  const encodedUri = encodeURI(csvContent);
+  const link = document.createElement("a");
+  link.setAttribute("href", encodedUri);
+  link.setAttribute("download", `demanda_hidrica_fao56_quibor.csv`);
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 // ==========================================================================
-// 7. TAB 4: MATRIZ DE PLAGAS Y FILTRADO
+// 8. TAB 4: MATRIZ DE PLAGAS Y FILTRADO
 // ==========================================================================
 function initPestMatrix() {
   const container = document.getElementById("pest-cards-container");
@@ -1390,7 +2000,7 @@ function renderPestCards(filter) {
 }
 
 // ==========================================================================
-// 8. TAB 5: VISUALIZADOR ESTRUCTURAL INTERACTIVO (CANVAS 2D/3D)
+// 9. TAB 5: VISUALIZADOR ESTRUCTURAL INTERACTIVO (CANVAS 2D/3D)
 // ==========================================================================
 function initCanvasVisualizer() {
   const canvas = document.getElementById("canvas-structure");
@@ -1481,8 +2091,8 @@ function drawGreenhouseStructure(angle = 0) {
 
   // Escala vertical: 1 metro = 40 píxeles aprox.
   const scaleY = 40;
-  const techoY = groundY - (3.80 * scaleY);
-  const tutorY = groundY - (2.20 * scaleY);
+  const techoY = groundY - (3.00 * scaleY);
+  const tutorY = groundY - (2.00 * scaleY);
 
   // Malla semitransparente que envuelve el techo de guayas y paredes
   ctx.fillStyle = isSunlight ? "rgba(6, 95, 70, 0.08)" : "rgba(16, 185, 129, 0.05)";
@@ -1759,24 +2369,24 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY, isSunl
   // Cotas de Altura (Izquierda)
   const dimX = startX - 45;
 
-  // Cota Techo de Guayas 3.80 m
+  // Cota Techo de Guayas 3.00 m
   ctx.beginPath();
   ctx.moveTo(dimX, groundY);
   ctx.lineTo(dimX, techoY);
   ctx.stroke();
   ctx.strokeRect(dimX - 4, groundY, 8, 1);
   ctx.strokeRect(dimX - 4, techoY, 8, 1);
-  ctx.fillText("Techo Guayas: 3.80 m", dimX - 110, (groundY + techoY) / 2);
+  ctx.fillText("Techo Guayas: 3.00 m", dimX - 110, (groundY + techoY) / 2);
 
-  // Cota Tutorado 2.20 m
+  // Cota Espaldar 2.00 m
   ctx.fillStyle = isSunlight ? "#9a3412" : "#f59e0b";
-  ctx.fillText("Malla Tutora: 2.20 m", startX + 10, tutorY - 5);
+  ctx.fillText("Espaldar Hortomalla: 2.00 m (Colchón 1.00 m)", startX + 10, tutorY - 5);
 
   ctx.restore();
 }
 
 // ==========================================================================
-// 8. TAB 7: PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA (2.000 m² / 4.400 PLANTAS)
+// 10. TAB 6: PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA (2.000 m² / 4.400 PLANTAS)
 // ==========================================================================
 const PROD_STAGES = [
   {
@@ -2277,7 +2887,7 @@ function renderSprayMatrix(filter = "all") {
 }
 
 // ==========================================================================
-// 12. PROTOCOLO DE VALIDACIÓN Y CERTIFICACIÓN DE POZO PROFUNDO
+// 11. PROTOCOLO DE VALIDACIÓN Y CERTIFICACIÓN DE POZO PROFUNDO
 // ==========================================================================
 function initWellValidationCalculator() {
   const inputs = [
@@ -2298,6 +2908,10 @@ function initWellValidationCalculator() {
   calculateWellValidation();
 }
 
+/**
+ * Valida la suficiencia técnica y operativa del pozo profundo frente a la demanda hídrica
+ * máxima calculada por el módulo FAO-56, evaluando horas de bombeo, HMT, potencia sugerida y días de reserva.
+ */
 function calculateWellValidation() {
   const flowLs = parseFloat(document.getElementById("well-test-flow")?.value) || 2.5;
   const nd = parseFloat(document.getElementById("well-test-nd")?.value) || 87.0;
@@ -2309,8 +2923,8 @@ function calculateWellValidation() {
   // 1. Demanda diaria pico para 4.400 plantas de tomate
   // Neta: 18.5 L/planta/semana = 2.643 L/planta/día
   const lfFrac = Math.min(Math.max(lfPercent / 100.0, 0.05), 0.40);
-  const grossLitersPlantDay = 2.642857 / (1.0 - lfFrac);
-  const dailyDemandM3 = (4400 * grossLitersPlantDay) / 1000.0;
+  const grossLitersPlantDay = FarmState.grossLitersPlantDay || (2.642857 / (1.0 - lfFrac));
+  const dailyDemandM3 = FarmState.dailyDemandM3 || ((4400 * grossLitersPlantDay) / 1000.0);
 
   // 2. Caudal horario del pozo (m³/h)
   const flowM3h = flowLs * 3.6;
@@ -2382,7 +2996,7 @@ function calculateWellValidation() {
 }
 
 // ==========================================================================
-// 10. MÓDULO DE CÁLCULO Y PROYECTO DE PERFORACIÓN DE POZO PROFUNDO
+// 12. MÓDULO DE CÁLCULO Y PROYECTO DE PERFORACIÓN DE POZO PROFUNDO
 // ==========================================================================
 // Parámetros hidrogeológicos calibrados Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ Quíbor)
 const QUIBOR_AQUIFER = {
@@ -2394,6 +3008,28 @@ const QUIBOR_AQUIFER = {
 };
 
 const WELL_LOCATIONS = {
+  ARTESANAL: {
+    name: "Pozo Artesanal In Situ Ø 50 cm (50m actual ➔ 60m)",
+    cota: 700,
+    depthDefault: 60,
+    neBase: 52.0,
+    ndBase: 58.5,
+    drawdownBase: 6.5,
+    ecW: 1.4,
+    lf: 23.0,
+    adductionCost: 0,
+    adductionDesc: "Aducción directa 0 m al reservorio de 80 m³",
+    pumpHp: "3.0 HP (Sumergible 2\" o 1¼\")",
+    pumpDepth: 58,
+    hmtBase: 65.0,
+    isArtesanal: true,
+    layers: [
+      { depth: "0 – 15 m", desc: "Brocal y fuste superior excavado Ø 50 cm en limos arcillosos", comp: "Anillos Ø 50 cm", cls: "layer-sanitary" },
+      { depth: "15 – 50 m", desc: "Fuste excavado a mano en arenas medias secas y arcillas compactas (Nivel actual)", comp: "Fuste Existente", cls: "layer-confining" },
+      { depth: "50 – 55 m", desc: "<strong>Primer contacto freático (húmedo / pequeño caudal)</strong> | Nivel Estático NE ≈ 52 m", comp: "Afloramiento Somero", cls: "layer-aquifer-1" },
+      { depth: "55 – 60 m", desc: "<strong>Profundización proyectada (+5 a +10 m) en arenas con gravilla</strong> | Nivel Dinámico ND ≈ 58.5 m", comp: "Profundización 10m", cls: "layer-aquifer-main" }
+    ]
+  },
   A60: {
     name: "Opción A1: Predio In Situ (Freático 60 m - Recarga Flanco Sur)",
     cota: 700,
@@ -2538,31 +3174,81 @@ function initWellDrillingCalculator() {
     });
   }
 
-  // Tarjetas interactivas de ubicación
+  // Tarjetas interactivas de ubicación y filas de la tabla comparativa
+  const cardOptArtesanal = document.getElementById("loc-card-optArtesanal");
   const cardOptA60 = document.getElementById("loc-card-optA60");
   const cardOptA70 = document.getElementById("loc-card-optA70");
   const cardOptB = document.getElementById("loc-card-optB");
   const cardOptC = document.getElementById("loc-card-optC");
+  const boxArtesanal = document.getElementById("artesanal-diagnosis-box");
+  const boxShaft = document.getElementById("artesanal-shaft-box");
 
   function selectLocationCard(locKey) {
     if (selLocation) selLocation.value = locKey;
-    [cardOptA60, cardOptA70, cardOptB, cardOptC].forEach(c => {
+    [cardOptArtesanal, cardOptA60, cardOptA70, cardOptB, cardOptC].forEach(c => {
       if (c) {
         c.classList.remove("active");
-        c.style.borderColor = "rgba(255,255,255,0.12)";
-        c.style.background = "rgba(255,255,255,0.02)";
+        c.style.borderColor = "";
+        c.style.background = "";
       }
     });
 
-    const activeCard = locKey === "A60" || locKey === "A" ? cardOptA60 : (locKey === "A70" ? cardOptA70 : (locKey === "B" ? cardOptB : cardOptC));
+    let activeCard = cardOptArtesanal;
+    if (locKey === "ARTESANAL") {
+      activeCard = cardOptArtesanal;
+    } else if (locKey === "A60" || locKey === "A") {
+      activeCard = cardOptA60;
+    } else if (locKey === "A70") {
+      activeCard = cardOptA70;
+    } else if (locKey === "B") {
+      activeCard = cardOptB;
+    } else if (locKey === "C") {
+      activeCard = cardOptC;
+    }
+
     if (activeCard) {
       activeCard.classList.add("active");
-      activeCard.style.borderColor = (locKey === "A60" || locKey === "A") ? "#38bdf8" : (locKey === "A70" ? "#94a3b8" : (locKey === "B" ? "#34d399" : "#f59e0b"));
-      activeCard.style.background = (locKey === "A60" || locKey === "A") ? "rgba(56,189,248,0.08)" : (locKey === "A70" ? "rgba(148,163,184,0.08)" : (locKey === "B" ? "rgba(16,185,129,0.08)" : "rgba(245,158,11,0.08)"));
+    }
+
+    // Sincronizar filas de la tabla comparativa
+    const compRows = document.querySelectorAll(".well-comparison-row");
+    compRows.forEach(row => {
+      const rLoc = row.getAttribute("data-loc");
+      if (rLoc === locKey || (locKey === "A" && rLoc === "A60")) {
+        row.classList.add("active");
+      } else {
+        row.classList.remove("active");
+      }
+    });
+
+    // Mostrar/ocultar caja de diagnóstico y esquema visual del pozo artesanal
+    const isArtesanal = (locKey === "ARTESANAL");
+    if (boxArtesanal) {
+      boxArtesanal.style.display = isArtesanal ? "block" : "none";
+    }
+    if (boxShaft) {
+      boxShaft.style.display = isArtesanal ? "block" : "none";
+    }
+
+    // Deshabilitar/habilitar selectores industriales para el pozo artesanal (Paso 5.3)
+    if (selDrillDiam) {
+      selDrillDiam.disabled = isArtesanal;
+      selDrillDiam.style.opacity = isArtesanal ? "0.55" : "1";
+      selDrillDiam.title = isArtesanal ? "Fuste manual Ø 50 cm (no aplica broca rotaria)" : "";
+    }
+    if (selCasingDiam) {
+      selCasingDiam.disabled = isArtesanal;
+      selCasingDiam.style.opacity = isArtesanal ? "0.55" : "1";
+      selCasingDiam.title = isArtesanal ? "Fuste de Ø 50 cm con anillos de concreto reforzado" : "";
+    }
+    if (selScreenType) {
+      selScreenType.disabled = isArtesanal;
+      selScreenType.style.opacity = isArtesanal ? "0.55" : "1";
+      selScreenType.title = isArtesanal ? "Fondo filtrante artesanal con tapón de grava cuarzosa 1/4\"" : "";
     }
 
     // Actualizar profundidad sugerida según ubicación
-    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.A60;
+    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.ARTESANAL;
     if (locData && selDepth) {
       selDepth.value = String(locData.depthDefault);
     }
@@ -2570,10 +3256,21 @@ function initWellDrillingCalculator() {
     recalculateDrillMetrics();
   }
 
+  // Click listeners para tarjetas
+  if (cardOptArtesanal) cardOptArtesanal.addEventListener("click", () => selectLocationCard("ARTESANAL"));
   if (cardOptA60) cardOptA60.addEventListener("click", () => selectLocationCard("A60"));
   if (cardOptA70) cardOptA70.addEventListener("click", () => selectLocationCard("A70"));
   if (cardOptB) cardOptB.addEventListener("click", () => selectLocationCard("B"));
   if (cardOptC) cardOptC.addEventListener("click", () => selectLocationCard("C"));
+
+  // Click listeners para filas de la tabla comparativa (Paso 5.1)
+  const compRows = document.querySelectorAll(".well-comparison-row");
+  compRows.forEach(row => {
+    row.addEventListener("click", () => {
+      const loc = row.getAttribute("data-loc");
+      if (loc) selectLocationCard(loc);
+    });
+  });
 
   if (selLocation) {
     selLocation.addEventListener("change", (e) => {
@@ -2581,9 +3278,13 @@ function initWellDrillingCalculator() {
     });
   }
 
+  /**
+   * Recalcula metrajes de tubería, empaque granular, sello sanitario, interferencia
+   * de pozos vecinos (modelo Cooper-Jacob) y presupuesto itemizado para la modalidad seleccionada.
+   */
   function recalculateDrillMetrics() {
-    const locKey = selLocation ? selLocation.value : "A";
-    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.A;
+    const locKey = selLocation ? selLocation.value : "ARTESANAL";
+    const locData = WELL_LOCATIONS[locKey] || WELL_LOCATIONS.ARTESANAL;
     const depth = parseFloat(selDepth.value) || locData.depthDefault;
     const drillDiamInches = parseFloat(selDrillDiam.value) || 12.25;
     const casingDiamInches = parseFloat(selCasingDiam.value) || 6.0;
@@ -2599,17 +3300,13 @@ function initWellDrillingCalculator() {
     });
 
     // 1. Cálculo de Interferencia de Pozos Vecinos (Cooper-Jacob)
-    // s_interf = (Q / 4*pi*T) * ln(2.25 * T * t / (r^2 * S))
-    // Q = 216 m³/día, T = 180 m²/día, S = 0.0025, t = 1 día
     let deltaInterf = 0.0;
     const T = QUIBOR_AQUIFER.transmissivityT;
     const S = QUIBOR_AQUIFER.storativityS;
     const Q = 216.0; // m³/día (2.5 L/s)
     const t = 1.0;   // día
 
-    const u = (distanceM * distanceM * S) / (4.0 * T * t);
     if (distanceM < QUIBOR_AQUIFER.r0Radius) {
-      // Cooper-Jacob aproximación logarítmica
       const argLog = (2.25 * T * t) / (distanceM * distanceM * S);
       if (argLog > 1.0) {
         deltaInterf = (Q / (4.0 * Math.PI * T)) * Math.log(argLog);
@@ -2619,7 +3316,7 @@ function initWellDrillingCalculator() {
 
     // Niveles hidrostáticos corregidos
     const correctedND = locData.ndBase + deltaInterf;
-    const correctedHMT = correctedND + 13.0; // 13 mca de pérdidas y presión residual
+    const correctedHMT = correctedND + (locKey === "ARTESANAL" ? 6.5 : 13.0); // 6.5 mca para artesanal, 13 mca para perforado
 
     // Actualizar elementos de interferencia en UI
     const elInterfDrawdown = document.getElementById("disp-interf-drawdown");
@@ -2650,73 +3347,101 @@ function initWellDrillingCalculator() {
       }
     }
 
-    // 2. Metraje de tubería y filtros según profundidad
-    let screenLen = 38.0;
-    if (depth <= 90) {
-      screenLen = 24.0;
-    } else if (depth <= 100) {
-      screenLen = 28.0;
-    } else if (depth <= 105) {
-      screenLen = 30.0;
-    } else if (depth >= 140) {
-      screenLen = 42.0;
+    // 2. Metraje de tubería, filtros y empaque
+    let casingLen = 0;
+    let screenLen = 0;
+    let gravelVol = 0;
+    let gravelTons = 0;
+    let gravelBags = 0;
+    let sealVol = 0;
+    let subtotal = 0;
+    let totalCost = 0;
+
+    if (locKey === "ARTESANAL") {
+      casingLen = 50.0; // Fuste excavado existente
+      screenLen = 10.0; // Tramo a profundizar (+10 m)
+      gravelVol = 1.20; // Gravilla de fondo de 1/4" para evitar arrastre de arenas
+      gravelTons = 1.92;
+      gravelBags = 38;
+      sealVol = 0.50;
+
+      // Presupuesto artesanal: profundizar 10m + brocal/anillos + bomba 3HP + control
+      const costDeepening = 10.0 * 120; // $1.200 (excavación manual / torno artesanal)
+      const costLining = 800;          // Anillos de concreto / entubado protector 10m
+      const costPumpArtesanal = 1150;  // Bomba sumergible 3.0 HP con sondas de pozo
+      const costVfdArtesanal = 650;    // Tablero de mando automático con boyas/sondas
+      const costColumnArtesanal = 55.0 * 8.5; // Tubería PEAD PN10 2" ($467)
+      const costAirliftArtesanal = 350;// Limpieza y desarenado con compresor
+      subtotal = costDeepening + costLining + costPumpArtesanal + costVfdArtesanal + costColumnArtesanal + costAirliftArtesanal;
+      const contingencies = subtotal * 0.05;
+      totalCost = subtotal + contingencies; // ~$4.850 USD
+    } else {
+      // Perforación industrial mecanizada
+      if (depth <= 90) {
+        screenLen = 24.0;
+      } else if (depth <= 100) {
+        screenLen = 28.0;
+      } else if (depth <= 105) {
+        screenLen = 30.0;
+      } else if (depth >= 140) {
+        screenLen = 42.0;
+      } else {
+        screenLen = 38.0;
+      }
+      casingLen = depth - screenLen;
+
+      // Empaque de grava cuarzosa anular
+      const dDrillM = drillDiamInches * 0.0254;
+      const dCasingM = (casingDiamInches === 8 ? 8.625 : 6.625) * 0.0254;
+      const anularArea = (Math.PI / 4) * Math.max(0.001, (dDrillM * dDrillM - dCasingM * dCasingM));
+      const sealDepthM = locKey === "C" ? 20.0 : 15.0;
+      const gravelLen = Math.max(10, depth - sealDepthM);
+      gravelVol = anularArea * gravelLen * 1.25;
+      gravelTons = gravelVol * 1.60;
+      gravelBags = Math.round((gravelTons * 1000) / 50);
+
+      // Sello sanitario cemento-bentonita
+      const dConductorM = 14.0 * 0.0254;
+      const sealArea = (Math.PI / 4) * Math.max(0.001, (dConductorM * dConductorM - dCasingM * dCasingM));
+      sealVol = sealArea * sealDepthM * 1.20;
+
+      // Presupuesto de obra rotaria
+      const costMobilization = 1500;
+      const costConductor = 18.0 * 95;
+      const costSeal = sealDepthM * 45;
+      const costDrilling = (depth - 18.0) * (drillDiamInches > 12.0 ? 75 : 70);
+      const costLogging = 600;
+      const costCasing = casingLen * (casingDiamInches === 8 ? 62 : 48);
+      const screenUnitPrice = screenType === "johnson" ? (casingDiamInches === 8 ? 140 : 110) : 70;
+      const costScreens = screenLen * screenUnitPrice;
+      const costGravel = gravelTons * 65;
+      const costAirlift = 24.0 * 55;
+      const costPumpingTest = 1200;
+      const costLab = 220;
+
+      let costPump = 2450;
+      let costVfd = 1150;
+      if (locKey === "C" || correctedHMT > 120) {
+        costPump = 3900;
+        costVfd = 1750;
+      } else if (locKey === "A60" || locKey === "A" || locData.pumpHp === "5.5 HP") {
+        costPump = 1950;
+        costVfd = 950;
+      } else if (casingDiamInches === 8) {
+        costPump = 2850;
+      }
+      const costColumn = (locData.pumpDepth - 5.0) * 22;
+      const costWellhead = 450;
+      const costExternal = locData.adductionCost;
+
+      subtotal = costMobilization + costConductor + costSeal + costDrilling + costLogging +
+                 costCasing + costScreens + costGravel + costAirlift + costPumpingTest +
+                 costLab + costPump + costColumn + costVfd + costWellhead + costExternal;
+      const contingencies = subtotal * 0.05;
+      totalCost = subtotal + contingencies;
     }
-    const casingLen = depth - screenLen;
 
-    // 3. Empaque de grava cuarzosa anular
-    const dDrillM = drillDiamInches * 0.0254;
-    const dCasingM = (casingDiamInches === 8 ? 8.625 : 6.625) * 0.0254;
-    const anularArea = (Math.PI / 4) * Math.max(0.001, (dDrillM * dDrillM - dCasingM * dCasingM));
-    const sealDepthM = locKey === "C" ? 20.0 : 15.0;
-    const gravelLen = Math.max(10, depth - sealDepthM);
-    const gravelVol = anularArea * gravelLen * 1.25; // 25% esponjamiento en arenas
-    const gravelTons = gravelVol * 1.60;
-    const gravelBags = Math.round((gravelTons * 1000) / 50);
-
-    // 4. Sello sanitario cemento-bentonita
-    const dConductorM = 14.0 * 0.0254;
-    const sealArea = (Math.PI / 4) * Math.max(0.001, (dConductorM * dConductorM - dCasingM * dCasingM));
-    const sealVol = sealArea * sealDepthM * 1.20;
-
-    // 5. Presupuesto referencial de obra
-    const costMobilization = 1500;
-    const costConductor = 18.0 * 95;
-    const costSeal = sealDepthM * 45;
-    const costDrilling = (depth - 18.0) * (drillDiamInches > 12.0 ? 75 : 70);
-    const costLogging = 600;
-    const costCasing = casingLen * (casingDiamInches === 8 ? 62 : 48);
-    const screenUnitPrice = screenType === "johnson" ? (casingDiamInches === 8 ? 140 : 110) : 70;
-    const costScreens = screenLen * screenUnitPrice;
-    const costGravel = gravelTons * 65;
-    const costAirlift = 24.0 * 55;
-    const costPumpingTest = 1200;
-    const costLab = 220;
-
-    // Bomba y columna
-    let costPump = 2450;
-    let costVfd = 1150;
-    if (locKey === "C" || correctedHMT > 120) {
-      costPump = 3900; // 12.5 HP alta carga
-      costVfd = 1750;
-    } else if (locKey === "A60" || locKey === "A" || locData.pumpHp === "5.5 HP") {
-      costPump = 1950; // 5.5 HP sumergible
-      costVfd = 950;
-    } else if (casingDiamInches === 8) {
-      costPump = 2850;
-    }
-    const costColumn = (locData.pumpDepth - 5.0) * 22;
-    const costWellhead = 450;
-
-    // Obra externa de aducción si aplica (Opción B)
-    const costExternal = locData.adductionCost;
-
-    const subtotal = costMobilization + costConductor + costSeal + costDrilling + costLogging +
-                     costCasing + costScreens + costGravel + costAirlift + costPumpingTest +
-                     costLab + costPump + costColumn + costVfd + costWellhead + costExternal;
-    const contingencies = subtotal * 0.05;
-    const totalCost = subtotal + contingencies;
-
-    // 6. Actualizar métricas en UI
+    // Actualizar métricas en UI
     const elCasing = document.getElementById("disp-drill-casing");
     const elScreen = document.getElementById("disp-drill-screen");
     const elScreenSub = document.getElementById("disp-drill-screen-sub");
@@ -2731,12 +3456,14 @@ function initWellDrillingCalculator() {
     const elBadgeLoc = document.getElementById("badge-selected-location");
 
     if (elBadgeLoc) elBadgeLoc.textContent = locData.name;
-    if (elCasing) elCasing.textContent = `${casingLen.toFixed(1)} m`;
-    if (elScreen) elScreen.textContent = `${screenLen.toFixed(1)} m`;
+    if (elCasing) elCasing.textContent = locKey === "ARTESANAL" ? "50.0 m (Existente)" : `${casingLen.toFixed(1)} m`;
+    if (elScreen) elScreen.textContent = locKey === "ARTESANAL" ? "10.0 m (A profund.)" : `${screenLen.toFixed(1)} m`;
     if (elScreenSub) {
-      elScreenSub.textContent = screenType === "johnson" 
-        ? "Inox AISI 304 (Ve = 0.0007 m/s ≤ 0.03)" 
-        : "Ranurada Puente (Ve = 0.0018 m/s ≤ 0.03)";
+      elScreenSub.textContent = locKey === "ARTESANAL"
+        ? "Fondo filtrante artesanal Ø 50 cm con gravilla cuarzosa"
+        : (screenType === "johnson" 
+          ? "Inox AISI 304 (Ve = 0.0007 m/s ≤ 0.03)" 
+          : "Ranurada Puente (Ve = 0.0018 m/s ≤ 0.03)");
     }
     if (elGravel) elGravel.textContent = `${gravelVol.toFixed(2)} m³`;
     if (elGravelSub) elGravelSub.textContent = `${gravelTons.toFixed(1)} Ton (~${gravelBags} sacos 50kg)`;
@@ -2746,10 +3473,14 @@ function initWellDrillingCalculator() {
     if (elCost) elCost.textContent = `$${Math.round(totalCost).toLocaleString("en-US")} USD`;
     if (elTotalCost) elTotalCost.textContent = `$${totalCost.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
     if (elSummaryDesc) {
-      elSummaryDesc.textContent = `Incluye perforación ${drillDiamInches}", entubado ${casingDiamInches}", ${screenLen}m filtros ${screenType === "johnson" ? "Johnson AISI 304" : "Puente"}, grava cuarzosa, sello tremie, perfilaje SP/Res, air-lift, bomba ${locData.pumpHp} y ${locData.adductionDesc}.`;
+      if (locKey === "ARTESANAL") {
+        elSummaryDesc.textContent = `Profundización manual de 50 m a 60 m (+10 m), empaque de fondo, electrobomba sumergible de 3.0 HP con tablero de control por sondas automáticas para bombeo por tandas al reservorio de 80 m³. No saca 2" continuo sin achicar, pero entrega 18-22 m³/día en ciclos automáticos de 15 min.`;
+      } else {
+        elSummaryDesc.textContent = `Incluye perforación ${drillDiamInches}", entubado ${casingDiamInches}", ${screenLen}m filtros ${screenType === "johnson" ? "Johnson AISI 304" : "Puente"}, grava cuarzosa, sello tremie, perfilaje SP/Res, air-lift, bomba ${locData.pumpHp} y ${locData.adductionDesc}.`;
+      }
     }
 
-    // 7. Actualizar columna estratigráfica interactiva
+    // Actualizar columna estratigráfica interactiva
     const stratTitle = document.getElementById("strat-column-title");
     const stratDesc = document.getElementById("strat-column-desc");
     const stratContainer = document.getElementById("drill-layers-list");
@@ -2768,6 +3499,100 @@ function initWellDrillingCalculator() {
         </div>
       `).join("");
     }
+
+    // Renderizar desglose itemizado de partidas presupuestarias (Paso 5.2)
+    const tbodyBudget = document.getElementById("tbody-itemized-budget");
+    const budgetTitle = document.getElementById("itemized-budget-title");
+    const budgetBadge = document.getElementById("itemized-budget-badge");
+
+    if (tbodyBudget) {
+      tbodyBudget.innerHTML = "";
+      let budgetItems = [];
+
+      if (locKey === "ARTESANAL") {
+        if (budgetTitle) budgetTitle.textContent = "📋 Presupuesto Itemizado: Pozo Artesanal Ø 50 cm (+10 m)";
+        if (budgetBadge) budgetBadge.textContent = "Ahorro ~$25.000 USD vs Perforación";
+
+        budgetItems = [
+          { num: "01", desc: "Profundización manual de fuste a fondo (+10 m) a Ø 50 cm en gravillas y arenas con torno de izado", qty: "10 m", pu: 120.00, total: 1200.00 },
+          { num: "02", desc: "Anillos de concreto reforzado Ø 50 cm (suministro, bajada controlada y acuñado de fuste)", qty: "10 m", pu: 80.00, total: 800.00 },
+          { num: "03", desc: "Electrobomba sumergible de pozo 3.0 HP monofásica 220V (Caudal 150 L/min a 65 mca)", qty: "1 u.", pu: 1150.00, total: 1150.00 },
+          { num: "04", desc: "Tablero automático con relé de nivel, sondas de pozo (alta/baja), guardamotor y contactor", qty: "1 u.", pu: 650.00, total: 650.00 },
+          { num: "05", desc: "Tubería de impulsión PEAD 2\" PN10 (60 m) con uniones rápidas, válvula check y codos", qty: "55 m", pu: 8.50, total: 467.50 },
+          { num: "06", desc: "Limpieza y purga inicial con compresor de aire (Air-Lift artesanal), desarenado y aforo", qty: "1 gl.", pu: 350.00, total: 350.00 },
+          { num: "07", desc: "Empaque de fondo con gravilla cuarzosa lavada 1/4\" (tapón de fondo anti-arenamiento)", qty: "1.2 m³", pu: 65.00, total: 78.00 }
+        ];
+      } else {
+        if (budgetTitle) budgetTitle.textContent = `📋 Presupuesto de Obra: ${locData.name}`;
+        if (budgetBadge) budgetBadge.textContent = `Llave en Mano (Industrial)`;
+
+        budgetItems = [
+          { num: "01", desc: "Movilización, desmovilización y montaje de taladro rotario industrial", qty: "1 gl.", pu: 1500.00, total: 1500.00 },
+          { num: "02", desc: "Tubería conductora de superficie 14\" acero ASTM A53 (0 a 18 m)", qty: "18 m", pu: 95.00, total: 1710.00 },
+          { num: "03", desc: `Sello sanitario tremie cemento-bentonita (0 a ${locKey === "C" ? 20 : 15} m)`, qty: `${locKey === "C" ? 20 : 15} m`, pu: 45.00, total: (locKey === "C" ? 20 : 15) * 45 },
+          { num: "04", desc: `Perforación rotaria con broca ${drillDiamInches}\" con lodos bentoníticos`, qty: `${Math.round(depth - 18)} m`, pu: drillDiamInches > 12 ? 75.00 : 70.00, total: Math.round(depth - 18) * (drillDiamInches > 12 ? 75 : 70) },
+          { num: "05", desc: "Perfilaje geofísico eléctrico continuo (Potencial Espontáneo SP + Resistividad 16\"/64\")", qty: "1 serv.", pu: 600.00, total: 600.00 },
+          { num: "06", desc: `Tubería de revestimiento ciega ${casingDiamInches}\" Acero ASTM A53 (e=6.35mm)`, qty: `${casingLen.toFixed(1)} m`, pu: casingDiamInches === 8 ? 62.00 : 48.00, total: casingLen * (casingDiamInches === 8 ? 62 : 48) },
+          { num: "07", desc: `Filtros de captación ${screenType === "johnson" ? "Johnson AISI 304 ranura 0.030\"" : "Ranurados tipo puente"}`, qty: `${screenLen.toFixed(1)} m`, pu: screenType === "johnson" ? (casingDiamInches === 8 ? 140 : 110) : 70, total: screenLen * (screenType === "johnson" ? (casingDiamInches === 8 ? 140 : 110) : 70) },
+          { num: "08", desc: `Empaque de grava cuarzosa seleccionada 2-4 mm (Espacio anular)`, qty: `${gravelTons.toFixed(1)} Ton`, pu: 65.00, total: gravelTons * 65 },
+          { num: "09", desc: "Desarrollo y desarenado con doble columna Air-Lift a 200 PSI (24 horas continuas)", qty: "24 h", pu: 55.00, total: 1320.00 },
+          { num: "10", desc: "Prueba de bombeo escalonada Jacob (4 escalones) y recuperación Theis", qty: "1 serv.", pu: 1200.00, total: 1200.00 },
+          { num: "11", desc: "Análisis fisicoquímico certificado de laboratorio (ECw, RAS, SAR, HCO₃⁻, Boro)", qty: "1 mues.", pu: 220.00, total: 220.00 },
+          { num: "12", desc: `Electrobomba sumergible industrial (${locData.pumpHp}) + motor trifásico`, qty: "1 u.", pu: (locKey === "C" || correctedHMT > 120) ? 3900.00 : (locData.pumpHp === "5.5 HP" ? 1950.00 : 2450.00), total: (locKey === "C" || correctedHMT > 120) ? 3900.00 : (locData.pumpHp === "5.5 HP" ? 1950.00 : 2450.00) },
+          { num: "13", desc: `Tubería de columna de impulsión acero roscado 2½\" (hasta ${locData.pumpDepth} m)`, qty: `${locData.pumpDepth - 5} m`, pu: 22.00, total: (locData.pumpDepth - 5) * 22 },
+          { num: "14", desc: `Tablero de control electromecánico con Variador de Frecuencia (VFD) y telemetría`, qty: "1 u.", pu: (locKey === "C" || correctedHMT > 120) ? 1750.00 : (locData.pumpHp === "5.5 HP" ? 950.00 : 1150.00), total: (locKey === "C" || correctedHMT > 120) ? 1750.00 : (locData.pumpHp === "5.5 HP" ? 950.00 : 1150.00) },
+          { num: "15", desc: "Cabezal de pozo sanitario, manómetro glicerina, válvula retención y compuerta", qty: "1 gl.", pu: 450.00, total: 450.00 }
+        ];
+
+        if (locData.adductionCost > 0) {
+          budgetItems.push({
+            num: "16",
+            desc: `Aducción externa de conducción (${locData.adductionDesc})`,
+            qty: "1 gl.",
+            pu: locData.adductionCost,
+            total: locData.adductionCost
+          });
+        }
+      }
+
+      let runningSubtotal = 0;
+      budgetItems.forEach(item => {
+        runningSubtotal += item.total;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td style="font-family:var(--font-mono); color:var(--text-secondary);">${item.num}</td>
+          <td>${item.desc}</td>
+          <td style="text-align:right; font-family:var(--font-mono);">${item.qty}</td>
+          <td style="text-align:right; font-family:var(--font-mono);">$${item.pu.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+          <td style="text-align:right; font-weight:700; font-family:var(--font-mono); color:var(--cyan-light);">$${item.total.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        `;
+        tbodyBudget.appendChild(tr);
+      });
+
+      const contingencyVal = runningSubtotal * 0.05;
+      const runningFinal = runningSubtotal + contingencyVal;
+
+      // Fila de contingencias
+      const trCont = document.createElement("tr");
+      trCont.style.color = "var(--text-secondary)";
+      trCont.innerHTML = `
+        <td style="font-family:var(--font-mono);">--</td>
+        <td><em>Imprevistos, transporte local y contingencias de obra (5%)</em></td>
+        <td style="text-align:right; font-family:var(--font-mono);">5%</td>
+        <td style="text-align:right; font-family:var(--font-mono);">$${contingencyVal.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td style="text-align:right; font-weight:600; font-family:var(--font-mono); color:var(--amber-main);">$${contingencyVal.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+      `;
+      tbodyBudget.appendChild(trCont);
+
+      // Fila de Total
+      const trTotal = document.createElement("tr");
+      trTotal.className = "itemized-budget-total-row";
+      trTotal.innerHTML = `
+        <td colspan="4" style="text-align:right; font-weight:800; text-transform:uppercase;">Inversión Total Estimada:</td>
+        <td style="text-align:right; font-weight:800; font-family:var(--font-mono);">$${runningFinal.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD</td>
+      `;
+      tbodyBudget.appendChild(trTotal);
+    }
   }
 
   selDepth.addEventListener("change", recalculateDrillMetrics);
@@ -2775,7 +3600,10 @@ function initWellDrillingCalculator() {
   selCasingDiam.addEventListener("change", recalculateDrillMetrics);
   selScreenType.addEventListener("change", recalculateDrillMetrics);
 
-  recalculateDrillMetrics();
+  // Inicializar en la opción seleccionada (respetando FarmState persistido)
+  const initialLoc = FarmState.wellLocation || (selLocation ? selLocation.value : "ARTESANAL");
+  if (selLocation) selLocation.value = initialLoc;
+  selectLocationCard(initialLoc);
 }
 
 

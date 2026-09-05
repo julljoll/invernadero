@@ -11,8 +11,30 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#10b981">
+
+  <!-- Open Graph / WhatsApp / Facebook (Paso 6.4) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AgroQuíbor Pro — Suite de Horticultura Protegida">
+  <meta property="og:description" content="Ingeniería bioclimática, cálculo de ventilación eólica, fertirriego FAO-56 adaptado a aguas salinas y proyecto de pozo en Quíbor, Lara.">
+  <meta property="og:image" content="icon-512.svg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AgroQuíbor Pro — Valle de Quíbor (Lara)">
+  <meta name="twitter:description" content="Suite de ingeniería agronómica, ventilación y cálculo hidrogeológico de pozos para casas de malla en Quíbor.">
+  <meta name="twitter:image" content="icon-512.svg">
 </head>
-<body class="dark-theme">
+<body class="light-theme sunlight-mode">
+  <!-- Splash Screen / Loader Inicial -->
+  <div id="app-loader" class="app-loader" onclick="this.classList.add('hidden'); setTimeout(()=>this.style.display='none', 200);">
+    <div class="loader-spinner-box">
+      <div class="loader-logo">🌱</div>
+      <div class="loader-title">AgroQuíbor Pro</div>
+      <div class="loader-sub">Cargando Suite Agronómica & Hidrogeológica...</div>
+      <div class="loader-spinner"></div>
+    </div>
+  </div>
+
   <!-- Backdrop for mobile drawer -->
   <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
 
@@ -41,7 +63,7 @@
       </div>
 
       <!-- Agro Value Chain / Stage Navigation -->
-      <nav class="sidebar-nav" id="sidebar-nav">
+      <nav class="sidebar-nav" id="sidebar-nav" role="tablist" aria-label="Etapas Agronómicas del Proyecto">
         
         <!-- ETAPA 1 -->
         <div class="nav-group">
@@ -50,14 +72,14 @@
             <span class="nav-group-title">Bioclima & Emplazamiento</span>
           </div>
           <div class="nav-group-items">
-            <button class="nav-item active" data-tab="tab-clima" id="nav-item-clima" type="button">
+            <button class="nav-item active" data-tab="tab-clima" id="nav-item-clima" role="tab" aria-selected="true" aria-controls="tab-clima" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
               </span>
               <span class="nav-item-label">Climatología & Viento</span>
               <span class="nav-item-badge">MERRA-2</span>
             </button>
-            <button class="nav-item" data-tab="tab-ventilacion" id="nav-item-ventilacion" type="button">
+            <button class="nav-item" data-tab="tab-ventilacion" id="nav-item-ventilacion" role="tab" aria-selected="false" aria-controls="tab-ventilacion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
               </span>
@@ -74,21 +96,21 @@
             <span class="nav-group-title">Estructura & Fitosanidad</span>
           </div>
           <div class="nav-group-items">
-            <button class="nav-item" data-tab="tab-estructura" id="nav-item-estructura" type="button">
-              <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
-              </span>
-              <span class="nav-item-label">Estructura 2.000 m²</span>
-              <span class="nav-item-badge">Guayas</span>
-            </button>
-            <button class="nav-item" data-tab="tab-planos" id="nav-item-planos" type="button">
+            <button class="nav-item" data-tab="tab-estructura" id="nav-item-estructura" role="tab" aria-selected="false" aria-controls="tab-estructura" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
               </span>
-              <span class="nav-item-label">Visor 3D & Planos CAD</span>
-              <span class="nav-item-badge">Blender 3D</span>
+              <span class="nav-item-label">Estructura 2.000 m²</span>
+              <span class="nav-item-badge">3D CAD</span>
             </button>
-            <button class="nav-item" data-tab="tab-plagas" id="nav-item-plagas" type="button">
+            <button class="nav-item" data-tab="tab-estructura" data-scroll="container-planos-2d" id="nav-item-planos" role="tab" aria-selected="false" aria-controls="tab-estructura" type="button">
+              <span class="nav-item-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
+              </span>
+              <span class="nav-item-label">Planos Constructivos</span>
+              <span class="nav-item-badge">SVG / Cortes</span>
+            </button>
+            <button class="nav-item" data-tab="tab-plagas" id="nav-item-plagas" role="tab" aria-selected="false" aria-controls="tab-plagas" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v4a4 4 0 0 0 8 0v-4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/></svg>
               </span>
@@ -105,14 +127,14 @@
             <span class="nav-group-title">Acuífero & Hidrogeología</span>
           </div>
           <div class="nav-group-items">
-            <button class="nav-item" data-tab="tab-riego" id="nav-item-riego" type="button">
+            <button class="nav-item" data-tab="tab-riego" id="nav-item-riego" role="tab" aria-selected="false" aria-controls="tab-riego" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
               </span>
               <span class="nav-item-label">Riego FAO-56 & Salinidad</span>
               <span class="nav-item-badge">LF %</span>
             </button>
-            <button class="nav-item" data-tab="tab-riego" data-scroll="well-drilling-section" id="nav-item-pozo" type="button">
+            <button class="nav-item" data-tab="tab-riego" data-scroll="well-drilling-section" id="nav-item-pozo" role="tab" aria-selected="false" aria-controls="tab-riego" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </span>
@@ -129,28 +151,28 @@
             <span class="nav-group-title">Operación & Producción</span>
           </div>
           <div class="nav-group-items">
-            <button class="nav-item" data-tab="tab-produccion" id="nav-item-produccion" type="button">
+            <button class="nav-item" data-tab="tab-produccion" id="nav-item-produccion" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
               </span>
               <span class="nav-item-label">Plan Maestro Tomate</span>
               <span class="nav-item-badge">37.4 Ton</span>
             </button>
-            <button class="nav-item" data-tab="tab-produccion" data-scroll="hydraulic-section" id="nav-item-hidraulica" type="button">
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="hydraulic-section" id="nav-item-hidraulica" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9m-4-4l4 4 4-4"/></svg>
               </span>
               <span class="nav-item-label">Cadena Hidráulica & Bomba</span>
               <span class="nav-item-badge">1.5 HP</span>
             </button>
-            <button class="nav-item" data-tab="tab-produccion" data-scroll="field-action-sheet" id="nav-item-ficha" type="button">
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="field-action-sheet" id="nav-item-ficha" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               </span>
               <span class="nav-item-label">Ficha de Turno Diario</span>
               <span class="nav-item-badge">Operador</span>
             </button>
-            <button class="nav-item" data-tab="tab-produccion" data-scroll="economic-simulator-section" id="nav-item-simulador" type="button">
+            <button class="nav-item" data-tab="tab-produccion" data-scroll="economic-simulator-section" id="nav-item-simulador" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </span>
@@ -164,9 +186,9 @@
 
       <!-- Sidebar Footer / Controls -->
       <div class="sidebar-footer">
-        <button id="btn-toggle-sunlight" class="btn-sunlight-toggle" type="button" title="Alternar Modo Sol Directo (Ultra-Contraste para lecturas al aire libre)">
-          <span class="sunlight-icon">☀️</span> <span id="sunlight-btn-text">Modo Sol Directo</span>
-        </button>
+        <div class="badge-daylight-mode" title="Modo Diurno / Luz Natural permanente optimizado para uso en campo bajo sol">
+          <span class="sunlight-icon">☀️</span> <span id="sunlight-btn-text">Modo Luz Natural (Campo)</span>
+        </div>
         <div class="sidebar-footer-status">
           <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
           <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 Quíbor 700m</a>
@@ -197,7 +219,7 @@
         <div class="topbar-right">
           <div class="topbar-telemetry">
             <span class="telemetry-pill pill-wind" title="Viento dominante del Este (88% anual)">💨 88% ESTE</span>
-            <span class="telemetry-pill pill-geo" title="Elevación base del predio">📍 695 msnm</span>
+            <span class="telemetry-pill pill-geo" title="Elevación base del predio">📍 ~700 msnm</span>
           </div>
           <button id="btn-topbar-export" class="btn-topbar-action" type="button" title="Copiar y Enviar Ficha de Turno por WhatsApp">
             <span>📲</span> <span class="btn-topbar-label">Ficha Turno</span>
@@ -221,48 +243,84 @@
             </div>
           </div>
           <p class="card-desc">
-            Base meteorológica histórica (1980–2016) geolocalizada en Quíbor. Muestra la estacionalidad térmica, régimen bimodal de lluvias y persistencia del viento del Este.
+            Base meteorológica satelital calibrada con <strong>NASA POWER &amp; MERRA-2</strong> (reanálisis 2001–2020 y observaciones recientes 2021–2024). Permite evaluar el régimen histórico y proyectar el impacto térmico, hídrico y eólico en el invernadero de 2.000 m² desde el año en curso hasta el 2030:
           </p>
           
-          <div class="month-selector">
-            <label for="select-month">Seleccionar Mes:</label>
-            <select id="select-month" class="input-select">
-              <option value="0">Enero</option>
-              <option value="1">Febrero</option>
-              <option value="2" selected>Marzo (Pico Térmico 31°C)</option>
-              <option value="3">Abril</option>
-              <option value="4">Mayo (Más Lluvioso 104mm)</option>
-              <option value="5">Junio (Más Ventoso 10.4km/h)</option>
-              <option value="6">Julio (Más Fresco 28°C)</option>
-              <option value="7">Agosto (Pico Bochorno 28.6d)</option>
-              <option value="8">Septiembre (Giro a Viento Sur)</option>
-              <option value="9">Octubre</option>
-              <option value="10">Noviembre (Más Calmado 7km/h)</option>
-              <option value="11">Diciembre</option>
-            </select>
+          <!-- Controles de Clima: Año (2024 a 2030) y Mes -->
+          <div class="clima-controls-grid">
+            <div class="clima-select-group">
+              <label for="select-climate-year">Año / Horizonte Climático:</label>
+              <select id="select-climate-year" class="input-select">
+                <option value="2024">2024 (Observado NASA POWER — Super El Niño)</option>
+                <option value="2025">2025 (Observado — Transición a Fase Neutra)</option>
+                <option value="2026" selected>2026 (Año en Curso — Línea Calibrada NASA)</option>
+                <option value="2027">2027 (Proyección — La Niña / Lluvias Convectivas)</option>
+                <option value="2028">2028 (Proyección — El Niño Cálido / Estrés Térmico)</option>
+                <option value="2029">2029 (Proyección — Fase Neutra-Cálida)</option>
+                <option value="2030">2030 (Horizonte Decenal — Modelo CMIP6 SSP2-4.5)</option>
+              </select>
+            </div>
+            <div class="clima-select-group">
+              <label for="select-month">Mes de Evaluación:</label>
+              <select id="select-month" class="input-select">
+                <option value="0">Enero (Secano / Máxima Radiación)</option>
+                <option value="1">Febrero (Mínima Lluvia 10 mm / Insolación)</option>
+                <option value="2" selected>Marzo (Pico Térmico Crítico &gt;31 °C)</option>
+                <option value="3">Abril (Transición a Período Húmedo)</option>
+                <option value="4">Mayo (Pico Lluvias 100 mm / Bochorno)</option>
+                <option value="5">Junio (Pico Eólico Sostenido 10.4 km/h)</option>
+                <option value="6">Julio (Mes Más Fresco 28 °C)</option>
+                <option value="7">Agosto (Pico Bochorno 28.6 d / 80% HR)</option>
+                <option value="8">Septiembre (Giro Transitorio a Viento Sur)</option>
+                <option value="9">Octubre (Segundo Pico de Lluvias)</option>
+                <option value="10">Noviembre (Mes Más Calmado 7.0 km/h)</option>
+                <option value="11">Diciembre (Inicio de Temporada Seca)</option>
+              </select>
+            </div>
           </div>
 
-          <!-- Highlight Cards -->
-          <div class="metrics-grid">
+          <!-- Banner Informativo de Fase Climática / ENSO -->
+          <div class="clima-phase-banner" id="box-climate-phase">
+            <div class="phase-badge-wrapper">
+              <span class="tag tag-enso-neutral" id="tag-climate-phase">Año 2026: Fase Neutra Calibrada</span>
+              <span class="tag tag-anomaly" id="tag-climate-anomaly">ΔT: +0.4 °C | ΔP: 0%</span>
+            </div>
+            <p class="phase-desc" id="desc-climate-phase">
+              Línea base representativa calibrada con reanálisis MERRA-2 y NASA POWER. Condiciones óptimas para producción protegida en invernadero parral de 2.000 m² a 3.00 m.
+            </p>
+          </div>
+
+          <!-- Highlight Cards: 6 Métricas Climatológicas y Agronómicas -->
+          <div class="metrics-grid metrics-grid-6">
             <div class="metric-box">
               <span class="metric-label">Temperatura Máxima</span>
-              <div class="metric-value" id="disp-temp-max">31 °C</div>
-              <span class="metric-sub" id="disp-temp-min">Mínima: 20 °C</span>
+              <div class="metric-value highlight-orange" id="disp-temp-max">31.5 °C</div>
+              <span class="metric-sub" id="disp-temp-min">Mín: 16.0 °C | Media: 25.4 °C</span>
             </div>
             <div class="metric-box">
               <span class="metric-label">Viento Medio (10 m)</span>
-              <div class="metric-value" id="disp-wind-speed">9.0 km/h</div>
-              <span class="metric-sub" id="disp-wind-dir">Dirección: 88% ESTE</span>
+              <div class="metric-value highlight-cyan" id="disp-wind-speed">8.6 km/h</div>
+              <span class="metric-sub" id="disp-wind-dir">Dir: 84% ESTE | Ráfaga: 24 km/h</span>
             </div>
             <div class="metric-box">
-              <span class="metric-label">Precipitación</span>
-              <div class="metric-value" id="disp-rain">26 mm</div>
-              <span class="metric-sub" id="disp-rain-desc">Época seca</span>
+              <span class="metric-label">Precipitación Acum.</span>
+              <div class="metric-value highlight-blue" id="disp-rain">24 mm</div>
+              <span class="metric-sub" id="disp-rain-desc">0% vs media histórica</span>
             </div>
             <div class="metric-box">
               <span class="metric-label">Días Bochornosos</span>
-              <div class="metric-value" id="disp-muggy">18.6 d</div>
-              <span class="metric-sub">Húmedo-calor</span>
+              <div class="metric-value highlight-amber" id="disp-muggy">18.6 d</div>
+              <span class="metric-sub" id="disp-muggy-rh">HR media: 62.2% (seco)</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Evapotranspiración ETo</span>
+              <div class="metric-value highlight-green" id="disp-eto">6.40 mm/d</div>
+              <span class="metric-sub" id="disp-eto-vol">12.8 m³/d (2.000 m²)</span>
+            </div>
+            <div class="metric-box">
+              <span class="metric-label">Radiación Solar Global</span>
+              <div class="metric-value highlight-yellow" id="disp-solar-rad">19.2 MJ/m²·d</div>
+              <span class="metric-sub" id="disp-solar-sub">5.33 kWh/m²·d (NASA POWER)</span>
             </div>
           </div>
 
@@ -270,7 +328,7 @@
           <div class="alert-box alert-warning" id="box-clima-alert">
             <div class="alert-icon">⚠️</div>
             <div class="alert-content">
-              <strong>Marzo - Abril (Ventana Crítica):</strong> Coinciden las máximas del año (>30-31 °C) con el inicio de los días bochornosos. En estructuras bajas (<3 m), el interior superará con facilidad los 34 °C provocando aborto floral en tomate.
+              <strong>Marzo 2026 (Pico Térmico Crítico):</strong> Coinciden las máximas del año (>31.5 °C) con radiación solar pico. En estructuras bajas (&lt;2.5 m), el interior superará los 34-37 °C provocando aborto floral en tomate. El parral a 3.00 m con técnica de espaldar a 2.00 m (y 1.00 m de colchón térmico libre) disipa el calor convectivo hacia los laterales.
             </div>
           </div>
         </div>
@@ -279,42 +337,48 @@
         <div class="card glass-card">
           <div class="card-header">
             <h2>Perfil de Viento en Capa Límite (Fórmula de Hellmann)</h2>
-            <span class="tag tag-accent">Gradiente Vertical</span>
+            <span class="tag tag-accent">Gradiente Vertical — Quíbor (α = 0.16)</span>
           </div>
           <p class="card-desc">
-            El roce del suelo desacelera el viento en los primeros metros de altura. Compara la velocidad disponible para extractores y ventilación a diferentes alturas:
+            El roce con la rugosidad del terreno semiárido en Quíbor desacelera el viento en los primeros metros según la ley potencial de Hellmann: <em>v(z) = v₁₀ · (z / 10)⁰·¹⁶</em>. Compara la velocidad disponible para ventilación y arrastre dinámico entre el espaldar vegetal (2.00 m) y el techo plano del parral actual (3.00 m libre):
           </p>
 
           <div class="slider-group">
             <div class="slider-header">
-              <span>Altura de Evaluación ($z$):</span>
-              <span class="slider-val" id="val-wind-height">5.5 m</span>
+              <span>Altura de Evaluación (z):</span>
+              <span class="slider-val" id="val-wind-height">3.0 m</span>
             </div>
-            <input type="range" id="input-wind-height" min="1.0" max="10.0" step="0.5" value="5.5" class="custom-slider">
+            <input type="range" id="input-wind-height" min="1.0" max="10.0" step="0.1" value="3.0" class="custom-slider">
           </div>
 
           <div class="comparison-cards">
             <div class="comp-card">
-              <h4>A 2.5 m (Pilar bajo)</h4>
-              <div class="comp-speed" id="speed-25m">7.2 km/h</div>
-              <div class="comp-diff danger">-20% respecto a 10m</div>
+              <h4>A 2.00 m (Espaldar Hortomalla)</h4>
+              <div class="comp-speed" id="speed-25m">7.0 km/h</div>
+              <div class="comp-diff danger" id="diff-22m">-22.7% respecto a 10m</div>
+              <div class="comp-note">Zona follaje y fruto (espaldera)</div>
             </div>
             <div class="comp-card highlight-card">
-              <h4 id="label-user-height">A 5.5 m (Cumbrera)</h4>
-              <div class="comp-speed" id="speed-user-height">8.2 km/h</div>
-              <div class="comp-diff success" id="diff-user-height">-9% respecto a 10m</div>
+              <h4 id="label-user-height">A 3.00 m (Techo Parral Plano)</h4>
+              <div class="comp-speed" id="speed-user-height">7.4 km/h</div>
+              <div class="comp-diff success" id="diff-user-height">-17.5% respecto a 10m</div>
+              <div class="comp-note" id="note-user-height">Colchón térmico superior: 1.00 m libre</div>
             </div>
             <div class="comp-card">
-              <h4>A 10.0 m (Meteo)</h4>
+              <h4>A 10.0 m (Estación MERRA-2)</h4>
               <div class="comp-speed" id="speed-10m">9.0 km/h</div>
               <div class="comp-diff">Referencia 100%</div>
+              <div class="comp-note">Anemómetro oficial (10 m)</div>
             </div>
           </div>
 
           <div class="info-card">
-            <h4>Impacto en Anclajes (Ráfagas de 27 km/h):</h4>
+            <h4>Impacto en Fachadas y Anclajes (Ráfagas de Diseño 27 km/h / 17 mph):</h4>
             <p>
-              Aunque el promedio es moderado (7–10 km/h), los reportes registran <strong>ráfagas de hasta 27 km/h (17 mph)</strong>. La fachada Este de 40 m de ancho recibe un empuje dinámico total que exige dobles tensores de acero galvanizado de 1/4" anclados a dados de concreto de 40×40×60 cm.
+              Aunque el promedio es moderado (7–10 km/h), se registran <strong>ráfagas de hasta 27 km/h (17 mph)</strong>. Con la orientación óptima E–W de los planos actuales, la <strong>fachada Este expuesta al viento frontal dominante mide 20.00 m de ancho</strong> (área frontal de 60.0 m² a 3.00 m de altura), reduciendo en un <strong>60% la solicitación dinámica frontal</strong> frente a la configuración de 40 m de ancho.
+            </p>
+            <p style="margin-top:0.5rem;">
+              La estructura se estabiliza con <strong>34 tirantes perimetrales inclinados a 45°</strong> de guaya de acero galvanizado de <strong>3/8"</strong> (7×19 de alta resistencia, rotura &gt;6.000 kg), <strong>tensores ojo-ojo de 5/8"</strong> y <strong>dados de concreto ciclópeo de 40×40×60 cm</strong> (factor de seguridad ≥ 1.5). Esta red de anclajes sostiene con rigidez las <strong>6 guayas maestras longitudinales de 3/8"</strong> a 3.00 m y la red secundaria N° 12 con las 37.4 Ton de carga vegetal en plena cosecha.
             </p>
           </div>
         </div>
@@ -493,6 +557,10 @@
               <label for="input-plant-density">Densidad (Plantas / m²):</label>
               <input type="number" id="input-plant-density" value="2.2" min="1.5" max="3.5" step="0.1" class="input-field">
             </div>
+            <div class="input-item">
+              <label for="input-surface-m2">Superficie de Nave (m²):</label>
+              <input type="number" id="input-surface-m2" value="2000" min="200" max="20000" step="100" class="input-field">
+            </div>
           </div>
 
           <!-- Calculation Summary -->
@@ -665,6 +733,51 @@
         </div>
       </div>
 
+      <!-- Card Anual 12 Meses: Demanda Hídrica & Gráfico (Paso 4.1 & 4.2) -->
+      <div class="card glass-card full-width" style="margin-top: 1.5rem;" id="fao56-annual-card">
+        <div class="card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+          <div>
+            <h2>Proyección Anual de Demanda Hídrica (12 Meses MERRA-2)</h2>
+            <span class="card-subtitle">Balance hídrico completo ajustado por salinidad y cobertura para la superficie configurada</span>
+          </div>
+          <button id="btn-export-fao-csv" class="btn btn-primary" type="button" style="display:inline-flex; align-items:center; gap:0.4rem; padding:0.45rem 0.9rem; font-size:0.82rem;">
+            <span>📥</span> <span>Exportar Tabla CSV</span>
+          </button>
+        </div>
+
+        <div class="grid-2col" style="grid-template-columns: 1fr 1.3fr; gap:1.25rem; margin-top:1rem; align-items:center;">
+          <!-- Canvas Bar Chart -->
+          <div class="chart-container-box" style="background:rgba(15,23,42,0.6); padding:1rem; border-radius:var(--radius-md); border:1px solid var(--border-subtle);">
+            <h4 style="font-size:0.88rem; color:var(--cyan-light); margin-bottom:0.5rem; text-align:center;">Consumo Mensual Estimado (m³/mes)</h4>
+            <canvas id="canvas-fao-monthly" width="480" height="220" style="width:100%; height:auto; display:block;"></canvas>
+            <div style="display:flex; justify-content:center; gap:1rem; margin-top:0.6rem; font-size:0.75rem; color:var(--text-secondary);">
+              <span style="display:flex; align-items:center; gap:0.3rem;"><span style="width:10px; height:10px; background:#10b981; border-radius:2px; display:inline-block;"></span> Bajo / Fresco</span>
+              <span style="display:flex; align-items:center; gap:0.3rem;"><span style="width:10px; height:10px; background:#f59e0b; border-radius:2px; display:inline-block;"></span> Moderado</span>
+              <span style="display:flex; align-items:center; gap:0.3rem;"><span style="width:10px; height:10px; background:#ef4444; border-radius:2px; display:inline-block;"></span> Pico Calor (Mar-Abr)</span>
+            </div>
+          </div>
+
+          <!-- 12-Month Table -->
+          <div class="table-container" style="max-height: 320px; overflow-y: auto;">
+            <table class="data-table" id="table-fao-12months">
+              <thead>
+                <tr>
+                  <th>Mes</th>
+                  <th>ETo</th>
+                  <th>ETc</th>
+                  <th>L/pl/día</th>
+                  <th>m³/día</th>
+                  <th>m³/mes</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-fao-12months">
+                <!-- Generado dinámicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- Protocolo de Validación y Certificación de Pozo Profundo (Full Width Card) -->
       <div class="card glass-card full-width" style="margin-top: 1.5rem;">
         <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
@@ -803,80 +916,190 @@
         <!-- Selector de Ubicación / Distancia al Frente Freático -->
         <div class="info-card" style="margin-top:1.2rem; background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.3);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
-            <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Distancia al Frente Freático (4 Escenarios Hidrogeológicos):</h4>
-            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.75rem;" id="badge-selected-location">Opción A1: Predio In Situ (60 m)</span>
+            <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Modalidad del Pozo (5 Escenarios Hidrogeológicos):</h4>
+            <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.75rem;" id="badge-selected-location">Pozo Artesanal Ø 50 cm (60 m)</span>
           </div>
 
-          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem;">
-            <!-- Opción A1 (60m) -->
-            <div class="location-option-card active" id="loc-card-optA60" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:2px solid #38bdf8; background:rgba(56,189,248,0.08); transition:all 0.2s ease;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#38bdf8; font-size:0.88rem;">Opción A1: Predio In Situ (NE = 60 m)</strong>
-                <span class="status-badge" style="background:#38bdf8; color:#0f172a; font-weight:800; font-size:0.68rem;">RECARGA 60m</span>
+          <div class="location-options-grid">
+            <!-- Opción Artesanal (Ø 50 cm, 50m -> 60m) -->
+            <div class="location-option-card card-artesanal active" id="loc-card-optArtesanal">
+              <div class="location-card-header">
+                <strong class="location-card-title" style="color:var(--amber-main);">Pozo Artesanal Ø 50 cm (50m ➔ 60m)</strong>
+                <span class="status-badge" style="background:var(--amber-main); color:#0f172a; font-weight:800; font-size:0.68rem;">EXISTENTE + 10m</span>
               </div>
-              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
-                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (ó 100 m)</div>
-                <div>• Espejo de agua: <strong>NE = 60 m</strong> | Dinámico: <strong>ND = 78 m</strong> ($s=18\text{ m}$)</div>
-                <div>• Carga y Bomba: <strong>HMT = 91 mca</strong> | Bomba <strong>5.5 HP</strong> (Ahorro eléctrico)</div>
-                <div>• Calidad y Aducción: <strong>ECw = 1.4 dS/m</strong> | <strong>Aducción 0 m</strong></div>
-                <div>• Capex Estimado: <strong style="color:#38bdf8;">~$29.850 USD</strong></div>
+              <div class="location-card-body">
+                <div>• Estado: <strong>50 m excavados</strong> | Meta: <strong>+10 m (60 m total)</strong></div>
+                <div>• Sección: <strong>Ø 50 cm</strong> (Almacenamiento: <strong>196 L / metro</strong>)</div>
+                <div>• Caudal Continuo Sin Achicar: <strong style="color:var(--amber-main);">1" a 1¼" (0.8 - 1.2 L/s)</strong></div>
+                <div>• ¿Tira 2" continuo?: <strong style="color:var(--rose-main);">NO (Se achica en 12-15 min)</strong></div>
+                <div>• Estrategia: <strong>Bombeo por tandas al reservorio 80 m³</strong></div>
+                <div>• Inversión adicional (+10 m + bomba): <strong style="color:var(--emerald-light);">~$4.500 USD</strong></div>
               </div>
             </div>
 
-            <!-- Opción A2 (70m) -->
-            <div class="location-option-card" id="loc-card-optA70" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#cbd5e1; font-size:0.88rem;">Opción A2: Predio In Situ (NE = 70 m)</strong>
-                <span class="tag" style="background:rgba(148,163,184,0.2); color:#cbd5e1; font-size:0.68rem;">LÍNEA ESTIVAL</span>
+            <!-- Opción A1 (60m) Perforado Mecánico -->
+            <div class="location-option-card card-a60" id="loc-card-optA60">
+              <div class="location-card-header">
+                <strong class="location-card-title" style="color:var(--cyan-light);">Opción A1: Perforado 120m (NE = 60 m)</strong>
+                <span class="tag" style="background:rgba(56,189,248,0.2); color:var(--cyan-light); font-size:0.68rem;">2" CONTINUO 24/7</span>
               </div>
-              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+              <div class="location-card-body">
+                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (Gravas 86-112m)</div>
+                <div>• Espejo de agua: <strong>NE = 60 m</strong> | Dinámico: <strong>ND = 78 m</strong></div>
+                <div>• Caudal Continuo: <strong style="color:var(--emerald-light);">2" a tubo lleno (2.5 - 3.2 L/s)</strong></div>
+                <div>• Bomba y Carga: <strong>5.5 HP</strong> (HMT = 91 mca) | <strong>Aducción 0 m</strong></div>
+                <div>• Capex Estimado Llave en Mano: <strong style="color:var(--cyan-light);">~$29.850 USD</strong></div>
+              </div>
+            </div>
+
+            <!-- Opción A2 (70m) Perforado Mecánico Estival -->
+            <div class="location-option-card card-a70" id="loc-card-optA70">
+              <div class="location-card-header">
+                <strong class="location-card-title" style="color:var(--text-secondary);">Opción A2: Perforado 120m (NE = 70 m)</strong>
+                <span class="tag" style="background:rgba(148,163,184,0.2); color:var(--text-secondary); font-size:0.68rem;">LÍNEA ESTIVAL</span>
+              </div>
+              <div class="location-card-body">
                 <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong></div>
-                <div>• Sequía de marzo: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong> ($s=18\text{ m}$)</div>
+                <div>• Sequía de marzo: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong></div>
                 <div>• Carga y Bomba: <strong>HMT = 100.5 mca</strong> | Bomba <strong>7.5 HP</strong></div>
-                <div>• Calidad y Aducción: <strong>ECw = 1.4 dS/m</strong> | <strong>Aducción 0 m</strong></div>
-                <div>• Capex Estimado: <strong style="color:#cbd5e1;">~$31.400 USD</strong></div>
+                <div>• Caudal Continuo: <strong style="color:var(--emerald-light);">2" a tubo lleno (2.5 L/s)</strong></div>
+                <div>• Capex Estimado: <strong style="color:var(--text-secondary);">~$31.400 USD</strong></div>
               </div>
             </div>
 
             <!-- Opción B -->
-            <div class="location-option-card" id="loc-card-optB" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#34d399; font-size:0.88rem;">Opción B: Piedemonte Sur (+3.0 km)</strong>
-                <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.68rem;">AGUA DULCE</span>
+            <div class="location-option-card card-b" id="loc-card-optB">
+              <div class="location-card-header">
+                <strong class="location-card-title" style="color:var(--emerald-light);">Opción B: Piedemonte Sur (+3.0 km)</strong>
+                <span class="tag" style="background:rgba(16,185,129,0.2); color:var(--emerald-light); font-size:0.68rem;">AGUA DULCE</span>
               </div>
-              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
+              <div class="location-card-body">
                 <div>• Cota: <strong>750 msnm</strong> (Recarga) | Profundidad: <strong>100 m</strong></div>
-                <div>• Freático somero: <strong>NE = 50 m</strong> | Dinámico: <strong>ND = 68 m</strong> ($s=18\text{ m}$)</div>
-                <div>• Calidad superior: <strong>ECw = 0.9 dS/m</strong> ($LF \approx 11\%$)</div>
-                <div>• Infraestructura: <strong>3.000 m PEAD 75mm</strong> + Booster</div>
-                <div>• Capex Estimado: <strong style="color:#34d399;">~$48.500 USD</strong> (Obra externa)</div>
+                <div>• Freático somero: <strong>NE = 50 m</strong> | Dinámico: <strong>ND = 68 m</strong></div>
+                <div>• Calidad superior: <strong>ECw = 0.9 dS/m</strong> | 3.000 m PEAD + Booster</div>
+                <div>• Capex Estimado: <strong style="color:var(--emerald-light);">~$48.500 USD</strong></div>
               </div>
             </div>
 
             <!-- Opción C -->
-            <div class="location-option-card" id="loc-card-optC" style="cursor:pointer; padding:0.85rem; border-radius:8px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.02); transition:all 0.2s ease;">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <strong style="color:#f59e0b; font-size:0.88rem;">Opción C: Centro Valle (+2.5 km N)</strong>
-                <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.68rem;">CONO CRÍTICO</span>
+            <div class="location-option-card card-c" id="loc-card-optC">
+              <div class="location-card-header">
+                <strong class="location-card-title" style="color:var(--rose-main);">Opción C: Centro Valle (+2.5 km N)</strong>
+                <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.68rem;">CONO CRÍTICO</span>
               </div>
-              <div style="font-size:0.78rem; color:#cbd5e1; margin-top:0.4rem; line-height:1.45;">
-                <div>• Cota: <strong>660 msnm</strong> | Profundidad: <strong>140 m</strong></div>
-                <div>• Freático profundo: <strong>NE = 98 m</strong> | Dinámico: <strong>ND = 122 m</strong> ($s=24\text{ m}$)</div>
-                <div>• Salinidad elevada: <strong>ECw = 2.4 dS/m</strong> ($LF \ge 35\%$)</div>
-                <div>• Infraestructura: Requiere bomba de <strong>12.5 HP</strong> ($HMT = 138\text{ mca}$)</div>
-                <div>• Capex Estimado: <strong style="color:#f59e0b;">~$36.800 USD</strong> (Alto costo eléctrico)</div>
+              <div class="location-card-body">
+                <div>• Cota: <strong>660 msnm</strong> | Profundidad: <strong>140 m</strong> (Salinidad alta)</div>
+                <div>• Freático profundo: <strong>NE = 98 m</strong> | Dinámico: <strong>ND = 122 m</strong></div>
+                <div>• Bomba <strong>12.5 HP</strong> ($HMT = 138\text{ mca}$) | $LF \ge 35\%$</div>
+                <div>• Capex Estimado: <strong style="color:var(--rose-main);">~$36.800 USD</strong></div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Banner de Diagnóstico Específico para Pozo Artesanal Ø 50 cm -->
+        <div class="info-card artesanal-diagnosis-card" id="artesanal-diagnosis-box">
+          <div class="artesanal-diag-header">
+            <h4 class="artesanal-diag-title">💡 Diagnóstico Hidráulico de tu Pozo Artesanal (Ø 50 cm, 50 m actual ➔ 60 m):</h4>
+            <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.7rem;">Capacidad de Almacenamiento: 196 L/m</span>
+          </div>
+          <div class="artesanal-diag-body">
+            <div>• <strong>Probabilidad de sacar 2" continuas a 60 m:</strong> <span style="color:var(--rose-main); font-weight:700;">MENOS DEL 15% (Muy Baja)</span>. Una bomba de 2" saca 150 L/min y vaciará los ~1.500 L acumulados en el fondo en <strong>solo 10 a 13 minutos</strong>.</div>
+            <div>• <strong>Caudal Continuo Real Sin Achicar a 60 m:</strong> <span style="color:var(--emerald-light); font-weight:700;">1" a 1¼" (0.8 a 1.2 L/s = 3.0 a 4.3 m³/h)</span>. Este caudal iguala la recarga lateral del suelo sin agotar el vaso.</div>
+            <div>• <strong>Solución Agronómica Perfecta (Bombeo por Tandas al Reservorio de 80 m³):</strong> Bombeando 15 min a 2" cada 1 hora con electrobomba sumergible de 2.0-3.0 HP y sondas de nivel, cosechas <strong>18 a 22 m³/día</strong>, cubriendo el 100% de la nave de 2.000 m² sin perforar un pozo nuevo.</div>
+          </div>
+        </div>
+
+        <!-- Tabla Comparativa Técnica & Financiera (5 Opciones de Captación) -->
+        <div class="info-card" id="well-comparison-card" style="margin-top:1.25rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4 style="color:var(--cyan-light); font-size:0.95rem; margin:0;">📊 Comparativa Técnica y Financiera de las 5 Opciones de Captación</h4>
+            <span class="tag" style="background:rgba(56,189,248,0.15); color:var(--cyan-light); font-size:0.72rem;">💡 Clic en cualquier fila para seleccionarla</span>
+          </div>
+          <div class="table-container" style="overflow-x:auto;">
+            <table class="data-table well-comparison-table" id="table-well-comparison">
+              <thead>
+                <tr>
+                  <th>Modalidad / Ubicación</th>
+                  <th>Prof.</th>
+                  <th>NE</th>
+                  <th>ND</th>
+                  <th>HMT</th>
+                  <th>Bomba</th>
+                  <th>Caudal Continuo</th>
+                  <th>Capex Estimado</th>
+                  <th>Viabilidad / Estrategia</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-well-comparison">
+                <tr class="well-comparison-row row-artesanal active" id="comp-row-ARTESANAL" data-loc="ARTESANAL">
+                  <td><strong style="color:var(--amber-main);">Pozo Artesanal Ø 50 cm</strong> (50m ➔ 60m)</td>
+                  <td>60 m (+10m)</td>
+                  <td>52 m</td>
+                  <td>58.5 m</td>
+                  <td>65 mca</td>
+                  <td>3.0 HP</td>
+                  <td><span style="color:var(--amber-main); font-weight:700;">1" a 1¼"</span> (0.8-1.2 L/s)</td>
+                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$4.850 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-high">Máximo Ahorro</span></td>
+                </tr>
+                <tr class="well-comparison-row" id="comp-row-A60" data-loc="A60">
+                  <td><strong style="color:var(--cyan-light);">Opción A1: In Situ 120m</strong> (NE 60m)</td>
+                  <td>120 m</td>
+                  <td>60 m</td>
+                  <td>78 m</td>
+                  <td>91 mca</td>
+                  <td>5.5 HP</td>
+                  <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (2.5-3.2 L/s)</td>
+                  <td><strong style="color:var(--cyan-light); font-family:var(--font-mono);">~$29.850 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-high">Industrial Óptimo</span></td>
+                </tr>
+                <tr class="well-comparison-row" id="comp-row-A70" data-loc="A70">
+                  <td><strong style="color:var(--text-secondary);">Opción A2: In Situ 120m</strong> (NE 70m Estival)</td>
+                  <td>120 m</td>
+                  <td>70 m</td>
+                  <td>88 m</td>
+                  <td>100.5 mca</td>
+                  <td>7.5 HP</td>
+                  <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (2.5 L/s)</td>
+                  <td><strong style="color:var(--text-secondary); font-family:var(--font-mono);">~$31.400 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-medium">Línea Estival</span></td>
+                </tr>
+                <tr class="well-comparison-row" id="comp-row-B" data-loc="B">
+                  <td><strong style="color:var(--emerald-light);">Opción B: Piedemonte Sur</strong> (+3.0 km)</td>
+                  <td>100 m</td>
+                  <td>50 m</td>
+                  <td>68 m</td>
+                  <td>81 mca + Boost</td>
+                  <td>5.5 HP</td>
+                  <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (0.9 dS/m)</td>
+                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$48.500 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-medium">Agua Dulce / Capex Alto</span></td>
+                </tr>
+                <tr class="well-comparison-row" id="comp-row-C" data-loc="C">
+                  <td><strong style="color:var(--rose-main);">Opción C: Centro Valle</strong> (+2.5 km N)</td>
+                  <td>140 m</td>
+                  <td>98 m</td>
+                  <td>122 m</td>
+                  <td>138 mca</td>
+                  <td>12.5 HP</td>
+                  <td><span style="color:var(--rose-main); font-weight:700;">2.8 L/s</span> (2.4 dS/m)</td>
+                  <td><strong style="color:var(--rose-main); font-family:var(--font-mono);">~$36.800 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-risk">Riesgo Salino / Cono</span></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
         <!-- Controles Interactivos de Perforación -->
         <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.9rem; margin-top:1.25rem;">
           <div class="input-item">
-            <label for="select-drill-location"><strong>Ubicación Geológica:</strong></label>
+            <label for="select-drill-location"><strong>Ubicación y Modalidad:</strong></label>
             <select id="select-drill-location" class="input-select" style="border-color:#38bdf8;">
-              <option value="A60" selected>Opción A1: Predio In Situ (0 m) — Freático 60 m (Recarga 640 msnm)</option>
-              <option value="A70">Opción A2: Predio In Situ (0 m) — Freático 70 m (Línea Base Estival)</option>
+              <option value="ARTESANAL" selected>Pozo Artesanal In Situ Ø 50 cm (50m actual ➔ 60m)</option>
+              <option value="A60">Opción A1: Predio In Situ Perforado 120m (NE 60m, 2" continuo)</option>
+              <option value="A70">Opción A2: Predio In Situ Perforado 120m (NE 70m Estival)</option>
               <option value="B">Opción B: Piedemonte Sur (+3.0 km, Cota 750)</option>
               <option value="C">Opción C: Centro Valle (+2.5 km N, Cota 660)</option>
             </select>
@@ -884,6 +1107,7 @@
           <div class="input-item">
             <label for="select-drill-depth"><strong>Profundidad Total Barreno:</strong></label>
             <select id="select-drill-depth" class="input-select" style="border-color:#38bdf8;">
+              <option value="60">60 m (Profundización Artesanal +10 m - 1.0 L/s)</option>
               <option value="90">90 m (Acuífero Superior - 1.5 L/s)</option>
               <option value="100">100 m (Acuífero Piedemonte - 2.5 L/s)</option>
               <option value="105">105 m (Acuífero Medio - 2.0 L/s)</option>
@@ -996,6 +1220,47 @@
               Corte hidrogeológico calibrado para las coordenadas $9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$ (Cota 700 msnm):
             </p>
 
+            <!-- Esquema Gráfico del Pozo Artesanal Ø 50 cm (50m -> 60m) -->
+            <div class="artesanal-shaft-schematic" id="artesanal-shaft-box" style="margin-bottom:0.9rem;">
+              <div class="artesanal-shaft-header">
+                <h5 class="artesanal-shaft-title">📐 Corte Transversal de Fuste Artesanal (Ø 50 cm)</h5>
+                <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.68rem;">196 L / metro lineal</span>
+              </div>
+              <div class="shaft-svg-box">
+                <svg viewBox="0 0 520 230" style="width:100%; height:auto; display:block;" id="svg-artesanal-shaft">
+                  <!-- Terreno Superficial -->
+                  <rect x="10" y="20" width="500" height="20" fill="#334155" rx="3"/>
+                  <text x="25" y="34" fill="#94a3b8" font-size="10" font-family="'JetBrains Mono', monospace">0.0 m (Cota 700 msnm - Brocal de Concreto)</text>
+
+                  <!-- Fuste Seco 0 - 50 m -->
+                  <rect x="120" y="40" width="80" height="75" fill="#1e293b" stroke="#f59e0b" stroke-dasharray="4,2" stroke-width="1.5"/>
+                  <text x="215" y="75" fill="#cbd5e1" font-size="10">0 a 50 m: Fuste excavado Ø 50 cm (Seco)</text>
+                  <text x="215" y="90" fill="#94a3b8" font-size="9">Limos arcillosos y arenas medias compactas</text>
+
+                  <!-- Contacto y Columna de Agua 50 - 60 m -->
+                  <rect x="120" y="115" width="80" height="85" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="2"/>
+                  <line x1="100" y1="125" x2="200" y2="125" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+                  <text x="215" y="128" fill="#38bdf8" font-weight="700" font-size="10">NE ≈ 52 m (Nivel Estático de Agua)</text>
+
+                  <!-- Tramo Profundización +10 m -->
+                  <rect x="120" y="150" width="80" height="50" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+                  <text x="215" y="152" fill="#f59e0b" font-weight="700" font-size="10">ND ≈ 58.5 m (Nivel Dinámico)</text>
+                  <text x="215" y="168" fill="#cbd5e1" font-size="9">Meta: +10 m (50m ➔ 60m en arenas con gravilla)</text>
+
+                  <!-- Bomba Sumergible a 58 m -->
+                  <rect x="145" y="165" width="30" height="22" rx="3" fill="#a855f7" stroke="#e9d5ff" stroke-width="1"/>
+                  <text x="160" y="180" fill="#ffffff" font-size="8" text-anchor="middle" font-weight="800">3 HP</text>
+                  <line x1="160" y1="40" x2="160" y2="165" stroke="#10b981" stroke-width="2"/>
+                  <text x="215" y="185" fill="#c084fc" font-size="9">Bomba sumergible 3.0 HP con sondas de nivel a 58 m</text>
+                  <text x="215" y="198" fill="#10b981" font-size="9">Manguera PEAD 2" PN10 hacia reservorio 80 m³</text>
+
+                  <!-- Fondo y Gravilla -->
+                  <rect x="120" y="200" width="80" height="15" fill="#475569" stroke="#94a3b8" stroke-width="1"/>
+                  <text x="215" y="212" fill="#94a3b8" font-size="8.5">60.0 m: Fondo filtrante con tapón de gravilla 1/4"</text>
+                </svg>
+              </div>
+            </div>
+
             <div class="drill-visual-container" id="drill-layers-list">
               <!-- 0 a 15 m: Sello Sanitario -->
               <div class="drill-layer layer-sanitary">
@@ -1095,6 +1360,30 @@
                 Incluye perforación 12¼", entubado 6", 38m filtros Johnson AISI 304, grava, sello, perfilaje, air-lift, bomba 7.5 HP y tablero VFD.
               </span>
             </div>
+
+            <!-- Desglose Itemizado de Partidas Presupuestarias (Paso 5.2) -->
+            <div class="itemized-budget-card" id="well-itemized-budget-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                <h5 style="color:var(--emerald-light); font-size:0.86rem; margin:0;" id="itemized-budget-title">📋 Cómputos Métricos & Desglose Itemizado</h5>
+                <span class="tag" style="background:rgba(16,185,129,0.15); color:var(--emerald-light); font-size:0.68rem;" id="itemized-budget-badge">Presupuesto Referencial</span>
+              </div>
+              <div class="table-container" style="margin-top:0.5rem; overflow-x:auto;">
+                <table class="itemized-budget-table" id="table-itemized-budget">
+                  <thead>
+                    <tr>
+                      <th style="width:24px;">#</th>
+                      <th>Partida / Descripción</th>
+                      <th style="text-align:right;">Cant.</th>
+                      <th style="text-align:right;">P.U. ($)</th>
+                      <th style="text-align:right;">Total ($)</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody-itemized-budget">
+                    <!-- Renderizado dinámico -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -1129,163 +1418,8 @@
       </div>
     </section>
 
-    <!-- ==================== TAB 5: ESTRUCTURA 2.000 m² ==================== -->
+    <!-- ==================== TAB 5: ESTRUCTURA PARRAL 2.000 m² (VISOR 3D & PLANOS) ==================== -->
     <section id="tab-estructura" class="tab-pane">
-      <div class="grid-2col">
-        <!-- Col 1: Visualizador Interactivo Canvas -->
-        <div class="card glass-card">
-          <div class="card-header">
-            <h2>Corte Transversal Estructural — 20.00 m Ancho × 100.00 m Largo (2.000 m²)</h2>
-            <span class="tag tag-accent">Esquema Dinámico</span>
-          </div>
-          <p class="card-desc">
-            Visualización interactiva a escala: 5 franjas de malla de 4.00 m en cubierta, 10 camellones dobles de tomate (4.400 plantas / 19.8 ton), pilares a 3.80 m libre y malla tutora a 2.20 m.
-          </p>
-
-          <div class="canvas-container">
-            <canvas id="canvas-structure" width="800" height="460"></canvas>
-          </div>
-
-          <div class="canvas-controls">
-            <label><input type="checkbox" id="chk-show-crop" checked> Mostrar Cultivo Tutorado (2.2 m)</label>
-            <label><input type="checkbox" id="chk-trellis-mesh" checked> Malla Tutora 15×15 cm (Hortomalla)</label>
-            <label><input type="checkbox" id="chk-show-wind" checked> Vector Viento Este</label>
-            <label><input type="checkbox" id="chk-show-dims" checked> Cotas y Alturas</label>
-            <label><input type="checkbox" id="chk-show-tensores" checked> Tensores a Tierra</label>
-          </div>
-        </div>
-
-        <!-- Col 2: Especificaciones de Obra -->
-        <div class="card glass-card">
-          <div class="card-header">
-            <h2>Detalles Constructivos para el Valle de Quíbor</h2>
-            <span class="tag">Ingeniería Estructural</span>
-          </div>
-
-          <div class="spec-list">
-            <div class="spec-item">
-              <div class="spec-num">01</div>
-              <div class="spec-body">
-                <h4>Geometría Modular de Postes y Guayas (2.000 m²)</h4>
-                <p>96 pilares verticales en cuadrícula de 4.0 m transversal × 5.0 m longitudinal = <strong>20.0 m de ancho</strong> por <strong>100.0 m de fondo</strong>. 5 franjas longitudinales de 100 m sin cortes en techo.</p>
-              </div>
-            </div>
-
-            <div class="spec-item">
-              <div class="spec-num">02</div>
-              <div class="spec-body">
-                <h4>Cotas (Techo a 3.80 m / Malla Tutora a 2.20 m)</h4>
-                <p>Pilares libres a <strong>3.80 m</strong>. 4.400 plantas de tomate (19.8 toneladas de carga viva). La malla espaldera deja 1.60 m libres de colchón térmico superior.</p>
-              </div>
-            </div>
-
-            <div class="spec-item">
-              <div class="spec-num">03</div>
-              <div class="spec-body">
-                <h4>Tutorado de Mínima Mano de Obra (1.000 m lineales)</h4>
-                <p>10 camellones de 100 m con Malla Espaldera 15×15 cm. <strong>Cero atados y cero clips</strong>; ahorro del 88% en mano de obra (2 jornales/mes para toda la nave).</p>
-              </div>
-            </div>
-
-            <div class="spec-item">
-              <div class="spec-num">04</div>
-              <div class="spec-body">
-                <h4>Modulación Oficial 8 Rollos 4m × 100m</h4>
-                <p>5 rollos en cubierta + 2 en laterales de 100 m + 1 en cabeceras y esclusa. Faldón de 20 cm en zanja de 20×20 cm en los 240 m perimetrales (aprovechamiento 98.7%).</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="alert-box alert-success" style="margin-top: 1rem;">
-            <div class="alert-icon">✓</div>
-            <div class="alert-content">
-              <strong>Estructura Optimizada 2.000 m²:</strong> Orientación Este-Oeste reduce en 50% el empuje eólico frontal de ráfagas (27 km/h) y aprovecha el efecto Venturi tangencial.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tarjeta Comparativa de Sistemas de Tutorado -->
-      <div class="card glass-card full-width" style="margin-top: 1.5rem;">
-        <div class="card-header">
-          <div>
-            <h2>Comparativa Técnica de Tutorado: Eliminación de Labores Manuales y Virosis</h2>
-            <span class="subtitle">Evaluación de horas-hombre, costos de jornales y riesgo epidemiológico en 2.000 m² de tomate (4.400 plantas)</span>
-          </div>
-          <span class="tag tag-accent" style="background:#059669; color:#fff;">Elección Óptima: Malla Espaldera</span>
-        </div>
-
-        <div class="table-container" style="margin-top: 1rem;">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Sistema de Tutorado</th>
-                <th>Labores Manuales Exigidas</th>
-                <th>Horas-Hombre / ha</th>
-                <th>Jornales en 2.000 m²</th>
-                <th>Riesgo Virosis Mecánica (ToBRFV/TMV)</th>
-                <th>Ahorro Laboral</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>1. Holandés High-Wire</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Ganchos Rollerhook / Bobinas</span></td>
-                <td>Descolgado semanal, enrollado en suelo, 60.000 clips plásticos, deshoje basal riguroso.</td>
-                <td>950 – 1.100 h</td>
-                <td>24 – 28 jornales/mes</td>
-                <td><span class="status-badge" style="background:rgba(239,68,68,0.2); color:#ef4444;">Muy Alto (95%)</span></td>
-                <td>0% (Línea base más cara)</td>
-              </tr>
-              <tr>
-                <td><strong>2. Español Tradicional</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Hilo Individual de Rafia a 2.2m</span></td>
-                <td>Atado inicial al cuello, enrollado semanal tallo por tallo en espiral o colocación de anillos.</td>
-                <td>450 – 550 h</td>
-                <td>12 – 14 jornales/mes</td>
-                <td><span class="status-badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Alto (65%)</span></td>
-                <td>50% vs Holandés</td>
-              </tr>
-              <tr>
-                <td><strong>3. Enrejillado Horizontal</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Rafia Continua "Florida Weave"</span></td>
-                <td>Pasar madejas de rafia horizontal a ambos lados cada 25 cm de altura. Tensado repetido.</td>
-                <td>280 – 350 h</td>
-                <td>7 – 9 jornales/mes</td>
-                <td><span class="status-badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Medio (40%)</span></td>
-                <td>68% vs Holandés</td>
-              </tr>
-              <tr class="row-highlight" style="background:rgba(16,185,129,0.12); border-left:4px solid #10b981;">
-                <td><strong style="color:#34d399;">4. Malla Espaldera Biorientada</strong><br><span style="font-size:0.8rem; color:#a7f3d0;">Hortomallas 15×15 cm + Despunte 2.2m</span></td>
-                <td><strong style="color:#f8fafc;">Cero atado y cero clips.</strong> Ramas y racimos descansan en cuadros de 15×15 cm. Solo encaminado rápido al caminar.</td>
-                <td><strong style="color:#34d399;">80 – 120 h</strong></td>
-                <td><strong style="color:#34d399;">2.0 – 2.5 jornales/mes</strong></td>
-                <td><span class="status-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">Mínimo (&lt;15%)</span></td>
-                <td><strong style="color:#34d399;">-88% vs Holandés (-78% vs Hilo)</strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="grid-2col" style="margin-top: 1.25rem;">
-          <div class="info-card">
-            <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.4rem;">¿Por qué la Malla Espaldera Elimina el Trabajo Manual?</h4>
-            <ul style="font-size:0.85rem; color:#cbd5e1; padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem;">
-              <li><strong>Soporte por Gravedad Física:</strong> En la malla de 15×15 cm las ramas se expanden y traban de forma natural en la cuadrícula rígida de polipropileno.</li>
-              <li><strong>Cero Gasto en Clips:</strong> Elimina más de 60.000 clips plásticos en 2.000 m² que contaminan el suelo y consumen horas de colocación y retiro.</li>
-              <li><strong>Despunte Apical (Topping) a 2.20 m:</strong> Se corta la yema apical una sola vez al llegar al alambre maestro (1 jornalero en 1 hora para toda la nave de 2.000 m²).</li>
-            </ul>
-          </div>
-
-          <div class="info-card">
-            <h4 style="color:#38bdf8; font-size:0.95rem; margin-bottom:0.4rem;">Blindaje Epidemiológico contra Virosis Mecánicas:</h4>
-            <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
-              En Quíbor, tocar las plantas semanalmente con las manos de las cuadrillas es el vector #1 de dispersión del <strong>Virus Rugoso del Tomate (ToBRFV)</strong>, del Mosaico (TMV) y de bacterias como <em>Clavibacter michiganensis</em>. Al <strong>reducir la manipulación física en un 80%</strong>, la malla espaldera actúa como una vacuna operativa de bioseguridad.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 6: PLANOS TÉCNICOS & VISOR 3D INTERACTIVO ==================== -->
-    <section id="tab-planos" class="tab-pane">
       <div class="card glass-card full-width">
         <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
           <div>
@@ -1294,7 +1428,7 @@
           </div>
           <div class="filter-group">
             <button class="filter-btn active" id="btn-mode-3d-interactive">🎮 Visor 3D Interactivo</button>
-            <button class="filter-btn" id="btn-mode-2d-blueprints">📐 Planos 2D Técnicos (SVG)</button>
+            <button class="filter-btn" id="btn-mode-2d-blueprints">📐 Planos 2D Técnicos (SVG / Corte)</button>
             <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver ubicación satelital en Google Maps">📍 9°53'20.0"N 69°35'35.0"W ↗</a>
             <a href="plano_3d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(6,182,212,0.2); color:#38bdf8; border-color:rgba(6,182,212,0.4);">Abrir 3D SVG ↗</a>
             <a href="plano_2d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);">Abrir 2D SVG ↗</a>
@@ -1379,36 +1513,180 @@
           </div>
         </div>
 
-        <!-- ==================== CONTENEDOR 2: PLANOS TÉCNICOS 2D SVG ==================== -->
+        <!-- ==================== CONTENEDOR 2: PLANOS TÉCNICOS 2D SVG & CORTE ==================== -->
         <div id="container-planos-2d" class="blueprint-viewer-container" style="display:none; background:#050912; border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; margin:1rem 0; box-shadow:0 12px 32px rgba(0,0,0,0.5);">
-          <div class="sub-filter-group" style="padding:0.75rem 1rem; background:rgba(15,23,42,0.8); border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:0.5rem;">
-            <button class="filter-btn active" id="btn-sub-plano2d">Plano 2D: Multi-Ángulo (Cortes, Fachadas & Planta)</button>
-            <button class="filter-btn" id="btn-sub-plano3d">Plano Isométrico 3D Técnico (SVG)</button>
+          <div class="sub-filter-group" style="padding:0.75rem 1rem; background:rgba(15,23,42,0.8); border-bottom:1px solid rgba(255,255,255,0.08); display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="filter-btn active" id="btn-sub-plano2d">📐 Plano 2D: Multi-Ángulo (Cortes, Fachadas & Planta)</button>
+            <button class="filter-btn" id="btn-sub-plano3d">📦 Plano Isométrico 3D Técnico (SVG)</button>
+            <button class="filter-btn" id="btn-sub-cross-section">📊 Corte Transversal Dinámico (Canvas)</button>
           </div>
           <div id="subview-plano2d" style="width:100%; display:block;">
-            <img src="plano_2d_invernadero_quibor.svg?v=parral_final" alt="Plano 2D Multi-Ángulo Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
+            <img src="plano_2d_invernadero_quibor.svg?v=v2.1.0_updated" alt="Plano 2D Multi-Ángulo Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
           </div>
           <div id="subview-plano3d" style="width:100%; display:none;">
-            <img src="plano_3d_invernadero_quibor.svg?v=parral_final" alt="Plano Isométrico 3D Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
+            <img src="plano_3d_invernadero_quibor.svg?v=v2.1.0_updated" alt="Plano Isométrico 3D Casa de Malla Guayas Quíbor" style="width:100%; height:auto; display:block;">
+          </div>
+          <div id="subview-cross-section" style="width:100%; display:none; padding:1rem; background:rgba(10,16,28,0.95);">
+            <div class="canvas-container">
+              <canvas id="canvas-structure" width="800" height="460"></canvas>
+            </div>
+            <div class="canvas-controls" style="margin-top:0.75rem;">
+              <label><input type="checkbox" id="chk-show-crop" checked> Mostrar Cultivo Tutorado (2.2 m)</label>
+              <label><input type="checkbox" id="chk-trellis-mesh" checked> Malla Tutora 15×15 cm (Hortomalla)</label>
+              <label><input type="checkbox" id="chk-show-wind" checked> Vector Viento Este</label>
+              <label><input type="checkbox" id="chk-show-dims" checked> Cotas y Alturas</label>
+              <label><input type="checkbox" id="chk-show-tensores" checked> Tensores a Tierra</label>
+            </div>
           </div>
         </div>
 
-        <!-- Technical Analysis Grid -->
-        <div class="grid-2col" style="margin-top:1.5rem;">
-          <div class="info-card">
-            <h4 style="color:#f59e0b; font-size:0.95rem; margin-bottom:0.5rem;">Ahorro de Mano de Obra con Tutorado Español en Quíbor:</h4>
-            <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
-              El sistema holandés exige cuadrillas permanentes descolgando ganchos Bato semanalmente (alto riesgo de quebrar tallos leñosos). El <strong>tutorado español almeriense</strong> fija el dosel al alambre Calibre 10 a <strong>2.20 m</strong>. La planta se despunta a la 7ª u 8ª inflorescencia o se deja colgar en cortina, ahorrando un <strong>65% de jornales</strong> durante el ciclo productivo.
-            </p>
+        <!-- ==================== ESPECIFICACIONES DE OBRA & DETALLES TÉCNICOS ==================== -->
+        <div class="grid-2col" style="margin-top: 1.5rem;">
+          <!-- Col 1: Especificaciones de Obra 01-04 -->
+          <div class="card glass-card">
+            <div class="card-header">
+              <h2>Detalles Constructivos para el Valle de Quíbor</h2>
+              <span class="tag">Ingeniería Estructural</span>
+            </div>
+
+            <div class="spec-list">
+              <div class="spec-item">
+                <div class="spec-num">01</div>
+                <div class="spec-body">
+                  <h4>Geometría Modular de Postes y Guayas (2.000 m²)</h4>
+                  <p>96 pilares verticales en cuadrícula de 4.0 m transversal × 5.0 m longitudinal = <strong>20.0 m de ancho</strong> por <strong>100.0 m de fondo</strong>. 5 franjas longitudinales de 100 m sin cortes en techo.</p>
+                </div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-num">02</div>
+                <div class="spec-body">
+                  <h4>Cotas (Techo a 3.00 m / Espaldar a 2.00 m)</h4>
+                  <p>Pilares libres a <strong>3.00 m</strong> (tubos Sch 40 de 3.80 m con 0.80 m empotrados). 4.400 plantas de tomate (19.8 toneladas vivas). La técnica de espaldar a 2.00 m deja <strong>1.00 m libre de colchón térmico superior</strong>.</p>
+                </div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-num">03</div>
+                <div class="spec-body">
+                  <h4>Tutorado de Mínima Mano de Obra (1.000 m lineales)</h4>
+                  <p>10 camellones de 100 m con Malla Espaldera 15×15 cm. <strong>Cero atados y cero clips</strong>; ahorro del 88% en mano de obra (2 jornales/mes para toda la nave).</p>
+                </div>
+              </div>
+
+              <div class="spec-item">
+                <div class="spec-num">04</div>
+                <div class="spec-body">
+                  <h4>Modulación Oficial 8 Rollos 4m × 100m</h4>
+                  <p>5 rollos en cubierta + 2 en laterales de 100 m + 1 en cabeceras y esclusa. Faldón de 20 cm en zanja de 20×20 cm en los 240 m perimetrales (aprovechamiento 98.7%).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert-box alert-success" style="margin-top: 1rem;">
+              <div class="alert-icon">✓</div>
+              <div class="alert-content">
+                <strong>Estructura Optimizada 2.000 m²:</strong> Orientación Este-Oeste reduce en 50% el empuje eólico frontal de ráfagas (27 km/h) y aprovecha el efecto Venturi tangencial.
+              </div>
+            </div>
           </div>
-          <div class="info-card">
-            <h4 style="color:#10b981; font-size:0.95rem; margin-bottom:0.5rem;">Regiones Homólogas con Éxito Comprobado:</h4>
-            <ul style="font-size:0.825rem; color:#94a3b8; padding-left:1.2rem; display:flex; flex-direction:column; gap:0.35rem;">
-              <li><strong style="color:#f8fafc;">Almería (España):</strong> Cuna del parral plano de guayas y tutorado español en >32.000 ha protegidas.</li>
-              <li><strong style="color:#f8fafc;">Culiacán (Sinaloa, México):</strong> Casas de malla tensadas con cables para tomate. Mayor flujo térmico que bajo plástico.</li>
-              <li><strong style="color:#f8fafc;">Valle de Azapa (Chile):</strong> Parrales de malla y guayas con aguas salinas de pozo ($EC_w > 2.5\ \text{dS/m}$).</li>
-              <li><strong style="color:#f8fafc;">Quíbor (Lara, Venezuela):</strong> Estructuras de postes y guayas a 3.8 m eliminan el aborto floral por calor en marzo.</li>
-            </ul>
+
+          <!-- Col 2: Análisis Técnico Regional y Tutorado Español -->
+          <div style="display:flex; flex-direction:column; gap:1.25rem;">
+            <div class="info-card" style="height:auto;">
+              <h4 style="color:#f59e0b; font-size:0.95rem; margin-bottom:0.5rem;">Ahorro de Mano de Obra con Tutorado Español en Quíbor:</h4>
+              <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
+                El sistema holandés exige cuadrillas permanentes descolgando ganchos Bato semanalmente (alto riesgo de quebrar tallos leñosos). El <strong>tutorado español almeriense</strong> fija el dosel al alambre Calibre 10 a <strong>2.20 m</strong>. La planta se despunta a la 7ª u 8ª inflorescencia o se deja colgar en cortina, ahorrando un <strong>65% de jornales</strong> durante el ciclo productivo.
+              </p>
+            </div>
+
+            <div class="info-card" style="height:auto;">
+              <h4 style="color:#10b981; font-size:0.95rem; margin-bottom:0.5rem;">Regiones Homólogas con Éxito Comprobado:</h4>
+              <ul style="font-size:0.825rem; color:#94a3b8; padding-left:1.2rem; display:flex; flex-direction:column; gap:0.35rem;">
+                <li><strong style="color:#f8fafc;">Almería (España):</strong> Cuna del parral plano de guayas y tutorado español en &gt;32.000 ha protegidas.</li>
+                <li><strong style="color:#f8fafc;">Culiacán (Sinaloa, México):</strong> Casas de malla tensadas con cables para tomate. Mayor flujo térmico que bajo plástico.</li>
+                <li><strong style="color:#f8fafc;">Valle de Azapa (Chile):</strong> Parrales de malla y guayas con aguas salinas de pozo ($EC_w &gt; 2.5\ \text{dS/m}$).</li>
+                <li><strong style="color:#047857;">Quíbor (Lara, Venezuela):</strong> Estructuras de postes y guayas a 3.0 m con espaldar a 2.0 m y 1.0 m de colchón disipan el calor y previenen el aborto floral.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TARJETA COMPARATIVA DE SISTEMAS DE TUTORADO ==================== -->
+        <div class="card glass-card full-width" style="margin-top: 1.5rem;">
+          <div class="card-header">
+            <div>
+              <h2>Comparativa Técnica de Tutorado: Eliminación de Labores Manuales y Virosis</h2>
+              <span class="subtitle">Evaluación de horas-hombre, costos de jornales y riesgo epidemiológico en 2.000 m² de tomate (4.400 plantas)</span>
+            </div>
+            <span class="tag tag-accent" style="background:#059669; color:#fff;">Elección Óptima: Malla Espaldera</span>
+          </div>
+
+          <div class="table-container" style="margin-top: 1rem;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Sistema de Tutorado</th>
+                  <th>Labores Manuales Exigidas</th>
+                  <th>Horas-Hombre / ha</th>
+                  <th>Jornales en 2.000 m²</th>
+                  <th>Riesgo Virosis Mecánica (ToBRFV/TMV)</th>
+                  <th>Ahorro Laboral</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Holandés High-Wire</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Ganchos Rollerhook / Bobinas</span></td>
+                  <td>Descolgado semanal, enrollado en suelo, 60.000 clips plásticos, deshoje basal riguroso.</td>
+                  <td>950 – 1.100 h</td>
+                  <td>24 – 28 jornales/mes</td>
+                  <td><span class="status-badge" style="background:rgba(239,68,68,0.2); color:#ef4444;">Muy Alto (95%)</span></td>
+                  <td>0% (Línea base más cara)</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Español Tradicional</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Hilo Individual de Rafia a 2.2m</span></td>
+                  <td>Atado inicial al cuello, enrollado semanal tallo por tallo en espiral o colocación de anillos.</td>
+                  <td>450 – 550 h</td>
+                  <td>12 – 14 jornales/mes</td>
+                  <td><span class="status-badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Alto (65%)</span></td>
+                  <td>50% vs Holandés</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Enrejillado Horizontal</strong><br><span style="font-size:0.8rem; color:#94a3b8;">Rafia Continua "Florida Weave"</span></td>
+                  <td>Pasar madejas de rafia horizontal a ambos lados cada 25 cm de altura. Tensado repetido.</td>
+                  <td>280 – 350 h</td>
+                  <td>7 – 9 jornales/mes</td>
+                  <td><span class="status-badge" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Medio (40%)</span></td>
+                  <td>68% vs Holandés</td>
+                </tr>
+                <tr class="row-highlight" style="background:rgba(16,185,129,0.12); border-left:4px solid #10b981;">
+                  <td><strong style="color:#34d399;">4. Malla Espaldera Biorientada</strong><br><span style="font-size:0.8rem; color:#a7f3d0;">Hortomallas 15×15 cm + Despunte 2.2m</span></td>
+                  <td><strong style="color:#f8fafc;">Cero atado y cero clips.</strong> Ramas y racimos descansan en cuadros de 15×15 cm. Solo encaminado rápido al caminar.</td>
+                  <td><strong style="color:#34d399;">80 – 120 h</strong></td>
+                  <td><strong style="color:#34d399;">2.0 – 2.5 jornales/mes</strong></td>
+                  <td><span class="status-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">Mínimo (&lt;15%)</span></td>
+                  <td><strong style="color:#34d399;">-88% vs Holandés (-78% vs Hilo)</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid-2col" style="margin-top: 1.25rem;">
+            <div class="info-card">
+              <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.4rem;">¿Por qué la Malla Espaldera Elimina el Trabajo Manual?</h4>
+              <ul style="font-size:0.85rem; color:#cbd5e1; padding-left:1.2rem; display:flex; flex-direction:column; gap:0.4rem;">
+                <li><strong>Soporte por Gravedad Física:</strong> En la malla de 15×15 cm las ramas se expanden y traban de forma natural en la cuadrícula rígida de polipropileno.</li>
+                <li><strong>Cero Gasto en Clips:</strong> Elimina más de 60.000 clips plásticos en 2.000 m² que contaminan el suelo y consumen horas de colocación y retiro.</li>
+                <li><strong>Despunte Apical (Topping) a 2.20 m:</strong> Se corta la yema apical una sola vez al llegar al alambre maestro (1 jornalero en 1 hora para toda la nave de 2.000 m²).</li>
+              </ul>
+            </div>
+
+            <div class="info-card">
+              <h4 style="color:#38bdf8; font-size:0.95rem; margin-bottom:0.4rem;">Blindaje Epidemiológico contra Virosis Mecánicas:</h4>
+              <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
+                En Quíbor, tocar las plantas semanalmente con las manos de las cuadrillas es el vector #1 de dispersión del <strong>Virus Rugoso del Tomate (ToBRFV)</strong>, del Mosaico (TMV) y de bacterias como <em>Clavibacter michiganensis</em>. Al <strong>reducir la manipulación física en un 80%</strong>, la malla espaldera actúa como una vacuna operativa de bioseguridad.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -2152,9 +2430,6 @@
     </div> <!-- /app-main-area -->
   </div> <!-- /app-layout -->
 
-  <script src="lib/three.min.js"></script>
-  <script src="lib/OrbitControls.js"></script>
-  <script src="greenhouse-3d.js"></script>
-  <script src="app.js?v=parral_final"></script>
+  <script src="app.js?v=2.0.0"></script>
 </body>
 </html>

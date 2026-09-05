@@ -4,51 +4,73 @@
    ========================================================================== */
 
 :root {
-  --bg-main: #0a0e17;
-  --bg-secondary: #0f172a;
-  --bg-card: rgba(18, 26, 43, 0.75);
-  --bg-card-hover: rgba(24, 35, 58, 0.85);
-  --bg-input: rgba(10, 16, 28, 0.8);
+  --bg-main: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-input: #ffffff;
   
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-focus: rgba(16, 185, 129, 0.5);
-  --border-accent: rgba(56, 189, 248, 0.3);
+  --border-subtle: #cbd5e1;
+  --border-focus: #059669;
+  --border-accent: #0284c7;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
   --text-muted: #64748b;
 
-  --emerald-main: #10b981;
-  --emerald-light: #34d399;
-  --emerald-glow: rgba(16, 185, 129, 0.25);
+  --emerald-main: #059669;
+  --emerald-light: #10b981;
+  --emerald-glow: rgba(5, 150, 105, 0.15);
 
-  --cyan-main: #06b6d4;
-  --cyan-light: #38bdf8;
-  --cyan-glow: rgba(6, 182, 212, 0.25);
+  --cyan-main: #0284c7;
+  --cyan-light: #0ea5e9;
+  --cyan-glow: rgba(2, 132, 199, 0.15);
 
-  --amber-main: #f59e0b;
-  --amber-glow: rgba(245, 158, 11, 0.2);
+  --amber-main: #d97706;
+  --amber-glow: rgba(217, 119, 6, 0.15);
 
-  --rose-main: #f43f5e;
-  --rose-glow: rgba(244, 63, 94, 0.2);
+  --rose-main: #dc2626;
+  --rose-glow: rgba(220, 38, 38, 0.15);
 
   /* Semántica Agrícola Específica (Skill agri-ux-ui) */
-  --agri-water: #0ea5e9;
-  --agri-water-glow: rgba(14, 165, 233, 0.25);
-  --agri-water-bg: rgba(14, 165, 233, 0.12);
-  --agri-plant: #10b981;
-  --agri-plant-glow: rgba(16, 185, 129, 0.25);
-  --agri-plant-bg: rgba(16, 185, 129, 0.12);
-  --agri-sun: #f59e0b;
-  --agri-sun-glow: rgba(245, 158, 11, 0.25);
-  --agri-sun-bg: rgba(245, 158, 11, 0.12);
-  --agri-danger: #ef4444;
-  --agri-danger-glow: rgba(239, 68, 68, 0.25);
-  --agri-danger-bg: rgba(239, 68, 68, 0.12);
-  --agri-pump: #a855f7;
-  --agri-pump-glow: rgba(168, 85, 247, 0.25);
-  --agri-pump-bg: rgba(168, 85, 247, 0.12);
-  --agri-soil: #d97706;
+  --agri-water: #0284c7;
+  --agri-water-glow: rgba(2, 132, 199, 0.15);
+  --agri-water-bg: #e0f2fe;
+  --agri-plant: #059669;
+  --agri-plant-glow: rgba(5, 150, 105, 0.15);
+  --agri-plant-bg: #d1fae5;
+  --agri-sun: #d97706;
+  --agri-sun-glow: rgba(217, 119, 6, 0.15);
+  --agri-sun-bg: #fef3c7;
+  --agri-danger: #dc2626;
+  --agri-danger-glow: rgba(220, 38, 38, 0.15);
+  --agri-danger-bg: #fee2e2;
+  --agri-pump: #7c3aed;
+  --agri-pump-glow: rgba(124, 58, 237, 0.15);
+  --agri-pump-bg: #f3e8ff;
+  --agri-soil: #92400e;
+
+  /* Paleta Unificada y Tokens de Diseño */
+  --color-emerald-400: #10b981;
+  --color-emerald-500: #059669;
+  --color-sky-400: #0ea5e9;
+  --color-sky-500: #0284c7;
+  --color-amber-400: #f59e0b;
+  --color-amber-500: #d97706;
+  --color-red-400: #ef4444;
+  --color-red-500: #dc2626;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #64748b;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-dark-bg: #f8fafc;
+
+  /* Semántica de Pozo & Riego */
+  --color-artesanal: var(--amber-main);
+  --color-water-source: var(--cyan-main);
+  --color-success: var(--emerald-main);
+  --color-warning: var(--amber-main);
+  --color-danger: var(--rose-main);
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -71,11 +93,7 @@
 
 body {
   background-color: var(--bg-main);
-  background-image: 
-    radial-gradient(at 10% 10%, rgba(16, 185, 129, 0.07) 0px, transparent 50%),
-    radial-gradient(at 90% 20%, rgba(6, 182, 212, 0.07) 0px, transparent 50%),
-    radial-gradient(at 50% 90%, rgba(245, 158, 11, 0.04) 0px, transparent 60%);
-  background-attachment: fixed;
+  background-image: none;
   color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
@@ -111,8 +129,7 @@ body {
 .app-sidebar {
   width: 275px;
   flex-shrink: 0;
-  background: rgba(10, 14, 23, 0.95);
-  backdrop-filter: blur(20px);
+  background: #ffffff;
   border-right: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
@@ -685,6 +702,22 @@ body {
   margin: 1.25rem 0;
 }
 
+.metrics-grid-6 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 992px) {
+  .metrics-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .metrics-grid-6 {
+    grid-template-columns: 1fr;
+  }
+}
+
 .metric-box {
   background: rgba(10, 16, 28, 0.6);
   border: 1px solid var(--border-subtle);
@@ -692,6 +725,12 @@ body {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.metric-box:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .metric-box.full-width {
@@ -715,10 +754,102 @@ body {
   letter-spacing: -0.02em;
 }
 
+.metric-value.highlight-orange { color: #fb923c; }
+.metric-value.highlight-cyan   { color: #38bdf8; }
+.metric-value.highlight-blue   { color: #60a5fa; }
+.metric-value.highlight-amber  { color: #f59e0b; }
+.metric-value.highlight-green  { color: #34d399; }
+.metric-value.highlight-yellow { color: #facc15; }
+
 .metric-sub {
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin-top: 0.2rem;
+}
+
+/* Controles de Clima Multianual (Año 2024-2030 y Mes) */
+.clima-controls-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 1rem;
+  background: rgba(10, 16, 28, 0.5);
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .clima-controls-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.clima-select-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.clima-select-group label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Banner de Fase Climática / ENSO */
+.clima-phase-banner {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--emerald-main);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.phase-badge-wrapper {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+}
+
+.phase-desc {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.tag-enso-warm {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+.tag-enso-cool {
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.tag-enso-neutral {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-light);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.tag-anomaly {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-light);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
 }
 
 /* ==========================================================================
@@ -862,6 +993,13 @@ body {
 
 .comp-diff.danger { color: var(--rose-main); }
 .comp-diff.success { color: var(--emerald-light); }
+
+.comp-note {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+  line-height: 1.25;
+}
 
 .highlight-card {
   border-color: var(--cyan-main);
@@ -1399,6 +1537,18 @@ body {
   height: 560px;
   overflow: hidden;
   background: #050912;
+}
+
+@media (max-width: 900px) {
+  .viewport-3d-stage {
+    height: 440px;
+  }
+}
+
+@media (max-width: 540px) {
+  .viewport-3d-stage {
+    height: 360px;
+  }
 }
 
 .greenhouse-canvas-box {
@@ -2114,6 +2264,21 @@ input[type="range"] {
    AGRI-UX-UI: MODO SOL DIRECTO (ULTRA-CONTRASTE EXTERIOR WCAG AAA)
    Diseñado para lectura clara bajo radiación solar intensa en Quíbor (UV > 11)
    ========================================================================== */
+.badge-daylight-mode {
+  background: #fef3c7;
+  border: 1.5px solid #d97706;
+  color: #92400e;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
 .btn-sunlight-toggle {
   background: rgba(245, 158, 11, 0.15);
   border: 1px solid rgba(245, 158, 11, 0.4);
@@ -2714,6 +2879,64 @@ body.sunlight-mode .formula-box {
   font-weight: 800 !important;
 }
 
+body.sunlight-mode .clima-controls-grid {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .clima-select-group label {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .clima-phase-banner {
+  background: #f8fafc !important;
+  border: 2px solid #000000 !important;
+  border-left: 6px solid #047857 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .phase-desc {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .tag-enso-warm {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border: 2px solid #991b1b !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .tag-enso-cool {
+  background: #e0f2fe !important;
+  color: #0369a1 !important;
+  border: 2px solid #0369a1 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .tag-enso-neutral {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  border: 2px solid #065f46 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .tag-anomaly {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border: 2px solid #92400e !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .metric-value.highlight-orange { color: #c2410c !important; }
+body.sunlight-mode .metric-value.highlight-cyan   { color: #0369a1 !important; }
+body.sunlight-mode .metric-value.highlight-blue   { color: #1d4ed8 !important; }
+body.sunlight-mode .metric-value.highlight-amber  { color: #b45309 !important; }
+body.sunlight-mode .metric-value.highlight-green  { color: #047857 !important; }
+body.sunlight-mode .metric-value.highlight-yellow { color: #854d0e !important; }
+
 body.sunlight-mode .comp-card {
   background: #ffffff !important;
   border: 2px solid #000000 !important;
@@ -2734,6 +2957,11 @@ body.sunlight-mode .comp-diff.danger {
 body.sunlight-mode .comp-diff.success {
   color: #047857 !important;
   font-weight: 800 !important;
+}
+
+body.sunlight-mode .comp-note {
+  color: #334155 !important;
+  font-weight: 600 !important;
 }
 
 body.sunlight-mode .demand-target-box {
@@ -3210,6 +3438,450 @@ body.sunlight-mode .viewport-gizmo-box {
   border: 2px solid #000000 !important;
   box-shadow: 3px 3px 0px #000000 !important;
 }
+
+/* ==========================================================================
+   TARJETAS DE OPCIONES DE POZO & DIAGNÓSTICO
+   ========================================================================== */
+/* Accessibility: Focus Visible (Paso 6.2) */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--cyan-light) !important;
+  outline-offset: 2px !important;
+}
+
+.location-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Mobile Horizontal Carousel (Paso 6.3) */
+@media (max-width: 640px) {
+  .location-options-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    gap: 0.75rem;
+  }
+  .location-option-card {
+    flex: 0 0 85%;
+    max-width: 310px;
+    scroll-snap-align: start;
+  }
+}
+
+.location-option-card {
+  cursor: pointer;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  transition: all var(--transition-fast);
+}
+
+.location-option-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.location-option-card.card-artesanal.active {
+  border: 2px solid var(--amber-main) !important;
+  background: rgba(245, 158, 11, 0.08) !important;
+}
+
+.location-option-card.card-a60.active {
+  border: 2px solid var(--cyan-light) !important;
+  background: rgba(56, 189, 248, 0.08) !important;
+}
+
+.location-option-card.card-a70.active {
+  border: 2px solid var(--text-secondary) !important;
+  background: rgba(148, 163, 184, 0.08) !important;
+}
+
+.location-option-card.card-b.active {
+  border: 2px solid var(--emerald-light) !important;
+  background: rgba(16, 185, 129, 0.08) !important;
+}
+
+.location-option-card.card-c.active {
+  border: 2px solid var(--rose-main) !important;
+  background: rgba(248, 113, 113, 0.08) !important;
+}
+
+.location-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.location-card-title {
+  font-size: 0.88rem;
+}
+
+.location-card-body {
+  font-size: 0.78rem;
+  color: var(--color-slate-300);
+  margin-top: 0.4rem;
+  line-height: 1.45;
+}
+
+.artesanal-diagnosis-card {
+  margin-top: 1rem;
+  border-left: 3px solid var(--amber-main);
+  background: rgba(245, 158, 11, 0.06);
+  padding: 0.9rem;
+  border-radius: var(--radius-sm);
+}
+
+.artesanal-diag-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.artesanal-diag-title {
+  color: var(--amber-main);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.artesanal-diag-body {
+  font-size: 0.8rem;
+  color: var(--color-slate-300);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Reglas Modo Sol Directo para Tarjetas de Pozo y Diagnóstico */
+body.sunlight-mode .location-option-card {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .location-option-card.active {
+  background: #fef08a !important;
+  border: 3px solid #000000 !important;
+  box-shadow: 3px 3px 0px #000000 !important;
+}
+
+body.sunlight-mode .location-card-title,
+body.sunlight-mode .location-card-body,
+body.sunlight-mode .location-card-body * {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .artesanal-diagnosis-card {
+  background: #fffbeb !important;
+  border: 3px solid #000000 !important;
+  border-left: 8px solid #b45309 !important;
+}
+
+body.sunlight-mode .artesanal-diag-title,
+body.sunlight-mode .artesanal-diag-body,
+body.sunlight-mode .artesanal-diag-body * {
+  color: #000000 !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   SPLASH SCREEN / APP LOADER
+   ========================================================================== */
+.app-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-main);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOutLoader 0.5s 0.15s forwards ease-out;
+  pointer-events: none;
+}
+
+@keyframes fadeOutLoader {
+  0% { opacity: 1; visibility: visible; }
+  99% { opacity: 0; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; display: none; }
+}
+
+.app-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+}
+
+.loader-spinner-box {
+  text-align: center;
+  padding: 2rem;
+}
+
+.loader-logo {
+  font-size: 3.2rem;
+  margin-bottom: 0.5rem;
+  animation: pulseLogo 2s infinite ease-in-out;
+}
+
+@keyframes pulseLogo {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.loader-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--emerald-light);
+  letter-spacing: -0.5px;
+}
+
+.loader-sub {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.loader-spinner {
+  width: 36px;
+  height: 36px;
+  margin: 0 auto;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--emerald-light);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   FASE 5: TABLA COMPARATIVA DE POZOS, PRESUPUESTO ITEMIZADO & ESQUEMA ARTESANAL
+   ========================================================================== */
+.well-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.well-comparison-table th {
+  background: rgba(15, 23, 42, 0.85);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: left;
+}
+
+.well-comparison-row {
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.well-comparison-row:hover {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+.well-comparison-row.active {
+  background: rgba(56, 189, 248, 0.14) !important;
+  border-left: 3px solid var(--cyan-light);
+}
+
+.well-comparison-row.row-artesanal.active {
+  background: rgba(245, 158, 11, 0.14) !important;
+  border-left: 3px solid var(--amber-main);
+}
+
+.well-comparison-table td {
+  padding: 0.65rem 0.75rem;
+  vertical-align: middle;
+  color: #cbd5e1;
+}
+
+.well-feasibility-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.feasibility-high {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--emerald-light);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.feasibility-medium {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--amber-main);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.feasibility-risk {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--rose-main);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* Presupuesto Itemizado */
+.itemized-budget-card {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.itemized-budget-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin-top: 0.6rem;
+}
+
+.itemized-budget-table th {
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.itemized-budget-table td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+}
+
+.itemized-budget-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.itemized-budget-total-row {
+  background: rgba(16, 185, 129, 0.12) !important;
+  font-weight: 800;
+  color: var(--emerald-light) !important;
+}
+
+.itemized-budget-total-row td {
+  color: var(--emerald-light) !important;
+  border-top: 2px solid var(--emerald-light);
+  font-size: 0.88rem;
+}
+
+/* Esquema Visual Pozo Artesanal */
+.artesanal-shaft-schematic {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  margin-top: 1rem;
+}
+
+.artesanal-shaft-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.artesanal-shaft-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--amber-main);
+  margin: 0;
+}
+
+.shaft-svg-box {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  background: #090d16;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+/* Sunlight Mode Overrides para Fase 5 */
+body.sunlight-mode .well-comparison-table th {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-bottom: 2px solid #000;
+}
+
+body.sunlight-mode .well-comparison-row {
+  border-bottom: 1px solid #cbd5e1;
+}
+
+body.sunlight-mode .well-comparison-row:hover {
+  background: #f8fafc;
+}
+
+body.sunlight-mode .well-comparison-row.active {
+  background: #e0f2fe !important;
+  border-left: 4px solid #0284c7;
+}
+
+body.sunlight-mode .well-comparison-row.row-artesanal.active {
+  background: #fef3c7 !important;
+  border-left: 4px solid #d97706;
+}
+
+body.sunlight-mode .well-comparison-table td {
+  color: #0f172a;
+}
+
+body.sunlight-mode .itemized-budget-card {
+  background: #ffffff;
+  border: 2px solid #000000;
+}
+
+body.sunlight-mode .itemized-budget-table th {
+  background: #f1f5f9;
+  color: #000000;
+  border-bottom: 2px solid #000000;
+}
+
+body.sunlight-mode .itemized-budget-table td {
+  color: #000000;
+  border-bottom: 1px solid #cbd5e1;
+}
+
+body.sunlight-mode .itemized-budget-total-row {
+  background: #dcfce7 !important;
+  color: #047857 !important;
+}
+
+body.sunlight-mode .artesanal-shaft-schematic {
+  background: #ffffff;
+  border: 2px solid #d97706;
+}
+
+body.sunlight-mode .shaft-svg-box {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+}
+
+
+
 
 
 
