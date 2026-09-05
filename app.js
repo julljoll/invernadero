@@ -107,9 +107,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initClimateTab();
   initVentilationCalculator();
   initIrrigationCalculator();
+  initWellValidationCalculator();
   initPestMatrix();
   initCanvasVisualizer();
   initBlueprintViewers();
+  initProductionTab();
 });
 
 function initBlueprintViewers() {
@@ -370,9 +372,9 @@ function calculateIrrigation() {
   // Lámina bruta por planta (L/semana) = Neto / (1 - LF)
   const grossLitersWeek = netLitersWeek / (1.0 - lf);
 
-  // Demanda diaria total del módulo de 1.000 m²
-  // Total plantas = 1000 m² * densidad
-  const totalPlants = 1000 * density;
+  // Demanda diaria total del módulo de 2.000 m²
+  // Total plantas = 2.000 m² * densidad (4.400 plantas a 2.2 pl/m²)
+  const totalPlants = 2000 * density;
   const dailyLitersTotal = (grossLitersWeek * totalPlants) / 7.0;
   const dailyM3Total = dailyLitersTotal / 1000.0;
 
@@ -812,7 +814,7 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY) {
   ctx.font = "10px var(--font-mono)";
   ctx.lineWidth = 1;
 
-  // Cota de Ancho Total (40.00 m)
+  // Cota de Ancho Total (20.00 m)
   const dimY = groundY + 38;
   ctx.beginPath();
   ctx.moveTo(startX, dimY);
@@ -821,7 +823,7 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY) {
   // Flechas
   ctx.strokeRect(startX, dimY - 4, 1, 8);
   ctx.strokeRect(startX + totalWidth, dimY - 4, 1, 8);
-  ctx.fillText("40.00 m (5 Módulos de 8.00 m entre postes)", startX + totalWidth / 2 - 120, dimY - 6);
+  ctx.fillText("20.00 m ANCHO (5 Franjas de 4.00 m) × 100.00 m LARGO (2.000 m²)", startX + totalWidth / 2 - 165, dimY - 6);
 
   // Cotas de Altura (Izquierda)
   const dimX = startX - 45;
@@ -837,7 +839,532 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY) {
 
   // Cota Tutorado 2.20 m
   ctx.fillStyle = "#f59e0b";
-  ctx.fillText("Tutor Español: 2.20 m", startX + 10, tutorY - 5);
+  ctx.fillText("Malla Tutora: 2.20 m", startX + 10, tutorY - 5);
 
   ctx.restore();
 }
+
+// ==========================================================================
+// 8. TAB 7: PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA (2.000 m² / 4.400 PLANTAS)
+// ==========================================================================
+const PROD_STAGES = [
+  {
+    idx: 0,
+    nombre: "1. Enraizamiento / Establecimiento (Sem 1 a 3)",
+    grossLiters: 9.4,
+    netLiters: 8.0,
+    lf: 15,
+    dailyM3: 5.91,
+    pulses: 3,
+    pulseTime: 11,
+    schedule: "08:30 | 11:30 | 15:00",
+    ec: "1.9 dS/m",
+    ph: "5.8 - 6.0 (Relación N:K 1:1.3)",
+    tankA: {
+      total: "22.45 kg/sem",
+      detail: "Nitrato de Calcio: 12.0 kg | Nitrato de Potasio: 10.0 kg | Fe-EDDHA: 0.45 kg"
+    },
+    tankB: {
+      total: "15.28 kg/sem",
+      detail: "MKP (0-52-34): 6.0 kg | K₂SO₄: 4.0 kg | MgSO₄: 5.0 kg | Boro: 0.08 kg | Micro: 0.20 kg"
+    },
+    tankC: {
+      total: "~6.0 L/sem",
+      detail: "Ácido Nítrico 60% (regula pH de gotero a 5.8 y neutraliza bicarbonatos)"
+    }
+  },
+  {
+    idx: 1,
+    nombre: "2. Crecimiento Vegetativo (Sem 4 a 7)",
+    grossLiters: 13.4,
+    netLiters: 11.0,
+    lf: 18,
+    dailyM3: 8.43,
+    pulses: 4,
+    pulseTime: 13,
+    schedule: "08:00 | 10:30 | 13:00 | 15:30",
+    ec: "2.2 dS/m",
+    ph: "5.8 - 6.2 (Relación N:K 1:1.5)",
+    tankA: {
+      total: "42.70 kg/sem",
+      detail: "Nitrato de Calcio: 22.0 kg | Nitrato de Potasio: 20.0 kg | Fe-EDDHA: 0.70 kg"
+    },
+    tankB: {
+      total: "27.50 kg/sem",
+      detail: "MKP: 8.0 kg | K₂SO₄: 10.0 kg | MgSO₄: 9.0 kg | Boro: 0.15 kg | Micro: 0.35 kg"
+    },
+    tankC: {
+      total: "~12.0 L/sem",
+      detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor a pH 5.9)"
+    }
+  },
+  {
+    idx: 2,
+    nombre: "3. Floración y Cuajado (Sem 8 a 11)",
+    grossLiters: 20.0,
+    netLiters: 16.0,
+    lf: 20,
+    dailyM3: 12.57,
+    pulses: 6,
+    pulseTime: 15,
+    schedule: "07:30 | 09:30 | 11:30 | 13:30 | 15:30",
+    ec: "2.5 dS/m",
+    ph: "5.8 - 6.2 (Relación N:K 1:1.9)",
+    tankA: {
+      total: "67.90 kg/sem",
+      detail: "Nitrato de Calcio: 32.0 kg | Nitrato de Potasio: 35.0 kg | Fe-EDDHA: 0.90 kg"
+    },
+    tankB: {
+      total: "44.75 kg/sem",
+      detail: "MKP: 12.0 kg | K₂SO₄: 18.0 kg | MgSO₄: 14.0 kg | Boro: 0.25 kg | Micro: 0.50 kg"
+    },
+    tankC: {
+      total: "~18.0 L/sem",
+      detail: "Ácido Nítrico 60% (neutraliza agua alcalina de pozo)"
+    }
+  },
+  {
+    idx: 3,
+    nombre: "4. Fructificación Masiva y Cosecha (Sem 12 a 22)",
+    grossLiters: 23.1,
+    netLiters: 18.5,
+    lf: 20,
+    dailyM3: 14.53,
+    pulses: 7,
+    pulseTime: 16,
+    schedule: "07:00 | 08:30 | 10:00 | 11:30 | 13:00 | 14:30 | 16:00",
+    ec: "2.7 dS/m",
+    ph: "5.8 - 6.2 (Relación N:K 1:2.2)",
+    tankA: {
+      total: "52.10 kg/sem",
+      detail: "Nitrato de Calcio: 36.0 kg | Nitrato de Potasio: 15.0 kg | Fe-EDDHA (6%): 1.10 kg"
+    },
+    tankB: {
+      total: "80.90 kg/sem",
+      detail: "KNO₃: 30.0 kg | MKP: 10.0 kg | K₂SO₄: 24.0 kg | MgSO₄: 16.0 kg | Boro: 0.30 kg | Micro: 0.60 kg"
+    },
+    tankC: {
+      total: "~22.0 L/sem",
+      detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor y aporta nitrógeno nítrico)"
+    }
+  },
+  {
+    idx: 4,
+    nombre: "5. Fin de Ciclo / Cierre (Sem 23 a 24)",
+    grossLiters: 15.9,
+    netLiters: 13.5,
+    lf: 15,
+    dailyM3: 9.98,
+    pulses: 4,
+    pulseTime: 14,
+    schedule: "08:00 | 11:00 | 13:30 | 15:30",
+    ec: "2.3 dS/m",
+    ph: "5.8 - 6.2 (Relación N:K 2.0)",
+    tankA: {
+      total: "32.60 kg/sem",
+      detail: "Nitrato de Calcio: 20.0 kg | Nitrato de Potasio: 12.0 kg | Fe-EDDHA: 0.60 kg"
+    },
+    tankB: {
+      total: "42.30 kg/sem",
+      detail: "KNO₃: 15.0 kg | MKP: 6.0 kg | K₂SO₄: 12.0 kg | MgSO₄: 9.0 kg | Micro: 0.30 kg"
+    },
+    tankC: {
+      total: "~14.0 L/sem",
+      detail: "Ácido Nítrico 60% (limpieza y desincrustación de goteros)"
+    }
+  }
+];
+
+const SPRAY_MATRIX = [
+  {
+    categoria: "acaros",
+    blanco: "Araña Roja (Tetranychus urticae)",
+    activo: "Abamectina 1.8% EC",
+    comercial: "Vertimec / Acaramik",
+    grupo: "IRAC 6",
+    dosis: "75 – 100 mL",
+    modo: "Translaminar. Aspersión al envés foliar con boquilla cónica fina.",
+    pc: "3 días"
+  },
+  {
+    categoria: "acaros",
+    blanco: "Huevos y Ninfas de Ácaro",
+    activo: "Hexitiazox 10% WP",
+    comercial: "Caesar / Nissorun",
+    grupo: "IRAC 10A",
+    dosis: "50 – 60 g",
+    modo: "Ovicida-larvicida selectivo. Inhibe la muda. Rotar con IRAC 6.",
+    pc: "7 días"
+  },
+  {
+    categoria: "acaros",
+    blanco: "Ácaro Blanco y Mosca Blanca",
+    activo: "Spiromesifen 24% SC",
+    comercial: "Oberon",
+    grupo: "IRAC 23",
+    dosis: "60 – 80 mL",
+    modo: "Inhibidor de la síntesis de lípidos. Larga persistencia preventiva.",
+    pc: "3 días"
+  },
+  {
+    categoria: "vectores",
+    blanco: "Trips Occidental (Frankliniella)",
+    activo: "Spinosad 48% SC",
+    comercial: "Tracer",
+    grupo: "IRAC 5",
+    dosis: "20 – 25 mL",
+    modo: "Modulador nicotínico GABA. Aplicar al atardecer fresco.",
+    pc: "1 día"
+  },
+  {
+    categoria: "vectores",
+    blanco: "Trips y Mosca Blanca (Adultos)",
+    activo: "Acetamiprid 20% SP",
+    comercial: "Mospilan",
+    grupo: "IRAC 4A",
+    dosis: "35 – 50 g",
+    modo: "Sistémico acropétalo. Alta eficacia de choque.",
+    pc: "3 días"
+  },
+  {
+    categoria: "vectores",
+    blanco: "Pulgones / Áfidos y Mosca",
+    activo: "Flonicamid 50% WG",
+    comercial: "Teppeki / Beleaf",
+    grupo: "IRAC 29",
+    dosis: "15 – 20 g",
+    modo: "Inhibidor de la succión por estilete. Cero impacto a benéficos.",
+    pc: "1 día"
+  },
+  {
+    categoria: "vectores",
+    blanco: "Gusano Perforador del Fruto",
+    activo: "Clorantraniliprol 20% SC",
+    comercial: "Coragen",
+    grupo: "IRAC 28",
+    dosis: "15 – 20 mL",
+    modo: "Modulador receptor de rianodina. Ovicida y larvicida ingestión.",
+    pc: "1 día"
+  },
+  {
+    categoria: "hongos",
+    blanco: "Oídio / Cenicilla (Leveillula taurica)",
+    activo: "Azufre Micronizado 80% WP",
+    comercial: "Kumulus / Microthiol",
+    grupo: "FRAC M02",
+    dosis: "250 – 300 g",
+    modo: "Multisitio preventivo. No aplicar a temperaturas >32 °C.",
+    pc: "0 días"
+  },
+  {
+    categoria: "hongos",
+    blanco: "Oídio y Tizón Temprano",
+    activo: "Difenoconazol 25% EC",
+    comercial: "Score",
+    grupo: "FRAC 3",
+    dosis: "40 – 50 mL",
+    modo: "Triazol sistémico DMI. Acción curativa y erradicante.",
+    pc: "7 días"
+  },
+  {
+    categoria: "hongos",
+    blanco: "Tizón Temprano (Alternaria solani)",
+    activo: "Clorotalonil 72% SC",
+    comercial: "Daconil / Bravo",
+    grupo: "FRAC M05",
+    dosis: "200 – 250 mL",
+    modo: "Contacto multisitio puro. Bloquea germinación de conidias.",
+    pc: "3 días"
+  },
+  {
+    categoria: "hongos",
+    blanco: "Moho Gris (Botrytis cinerea)",
+    activo: "Boscalid 50% WG",
+    comercial: "Cantus",
+    grupo: "FRAC 7",
+    dosis: "50 – 60 g",
+    modo: "Inhibidor respiratorio complejo II SDHI. Clave en floración.",
+    pc: "3 días"
+  },
+  {
+    categoria: "hongos",
+    blanco: "Bacteriosis (Xanthomonas / Clavibacter)",
+    activo: "Oxicloruro Cobre + Mancozeb",
+    comercial: "Cobrethane / Cupravit",
+    grupo: "FRAC M01+M03",
+    dosis: "250 g + 200 g",
+    modo: "Bactericida y fungicida de contacto protector. Post-poda.",
+    pc: "7 días"
+  },
+  {
+    categoria: "virus",
+    blanco: "Virus Rugoso (ToBRFV) y Mosaico (TMV)",
+    activo: "Leche en Polvo Descremada 10%",
+    comercial: "Leche descremada",
+    grupo: "Bioseguridad",
+    dosis: "100 g / L agua",
+    modo: "Inmersión de manos en la esclusa. Desactiva la cápside viral.",
+    pc: "Exento"
+  },
+  {
+    categoria: "virus",
+    blanco: "Desinfección de Tijeras y Pediluvios",
+    activo: "Amonio Cuaternario / Virkon S",
+    comercial: "Virkon S al 1%",
+    grupo: "Bioseguridad",
+    dosis: "10 g / L agua",
+    modo: "Inmersión de tijeras entre camellón y bandeja de pies en entrada.",
+    pc: "Exento"
+  }
+];
+
+let currentProdStageIdx = 3;
+let currentWaterSource = "pozo";
+
+function initProductionTab() {
+  const selectStage = document.getElementById("select-prod-stage");
+  const selectWater = document.getElementById("select-water-source");
+
+  if (selectStage) {
+    selectStage.addEventListener("change", (e) => {
+      currentProdStageIdx = parseInt(e.target.value, 10);
+      updateProductionStage();
+    });
+  }
+
+  if (selectWater) {
+    selectWater.addEventListener("change", (e) => {
+      currentWaterSource = e.target.value;
+      updateProductionStage();
+    });
+  }
+
+  updateProductionStage();
+  initSprayFilterButtons();
+  renderSprayMatrix("all");
+}
+
+function updateProductionStage() {
+  const stageIdx = currentProdStageIdx;
+  const data = PROD_STAGES[stageIdx] || PROD_STAGES[3];
+  const isYacambu = currentWaterSource === "yacambu";
+
+  // Water source adjustment
+  const lfPercent = isYacambu ? 6.5 : data.lf;
+  const lfFactor = lfPercent / 100.0;
+  const grossLiters = data.netLiters / (1.0 - lfFactor);
+  const dailyM3 = (grossLiters * 4400) / 7.0 / 1000.0;
+  const pulseQty = isYacambu ? Math.max(3, data.pulses - 1) : data.pulses;
+  const pulseTime = isYacambu ? data.pulseTime - 2 : data.pulseTime;
+
+  // Acid calculation
+  let acidText = data.tankC.total;
+  let acidDetail = data.tankC.detail;
+  if (isYacambu) {
+    const rawVal = parseFloat(data.tankC.total.replace("~", "").replace(" L/sem", "")) || 22;
+    const reducedAcid = Math.max(3, Math.round(rawVal * 0.36));
+    acidText = `~${reducedAcid}.0 L/sem (-64% gasto)`;
+    acidDetail = "Ácido Nítrico 60% reducido (agua dulce Yacambú con bajos bicarbonatos, CE = 0.5 dS/m)";
+  }
+
+  // UI elements
+  const elGross = document.getElementById("prod-gross-liters");
+  const elNet = document.getElementById("prod-net-liters");
+  const elDaily = document.getElementById("prod-daily-m3");
+  const elPulseQty = document.getElementById("prod-pulse-qty");
+  const elPulseTime = document.getElementById("prod-pulse-time");
+  const elTargetEc = document.getElementById("prod-target-ec");
+  const elTargetPh = document.getElementById("prod-target-ph");
+  const elSchedule = document.getElementById("prod-pulse-schedule");
+
+  const elTankATotal = document.getElementById("prod-tank-a-total");
+  const elTankADetail = document.getElementById("prod-tank-a-detail");
+  const elTankBTotal = document.getElementById("prod-tank-b-total");
+  const elTankBDetail = document.getElementById("prod-tank-b-detail");
+  const elTankCTotal = document.getElementById("prod-tank-c-total");
+  const elTankCDetail = document.getElementById("prod-tank-c-detail");
+
+  const alertBox = document.getElementById("water-source-alert");
+  const alertText = document.getElementById("water-source-alert-text");
+
+  if (elGross) elGross.textContent = `${grossLiters.toFixed(1)} L/sem`;
+  if (elNet) elNet.textContent = `Neto: ${data.netLiters.toFixed(1)} L + ${lfPercent.toFixed(1)}% Lavado`;
+  if (elDaily) elDaily.textContent = `${dailyM3.toFixed(2)} m³/día`;
+  if (elPulseQty) elPulseQty.textContent = `${pulseQty} pulsos / día`;
+  if (elPulseTime) elPulseTime.textContent = `Duración: ${pulseTime} min / pulso`;
+  if (elTargetEc) elTargetEc.textContent = isYacambu ? `${(parseFloat(data.ec) - 0.4).toFixed(1)} dS/m (Yacambú Dulce)` : data.ec;
+  if (elTargetPh) elTargetPh.textContent = `pH ${data.ph}`;
+  if (elSchedule) elSchedule.textContent = isYacambu ? "07:30 | 09:30 | 11:30 | 13:30 | 15:30" : data.schedule;
+
+  if (elTankATotal) elTankATotal.textContent = data.tankA.total;
+  if (elTankADetail) elTankADetail.textContent = data.tankA.detail;
+  if (elTankBTotal) elTankBTotal.textContent = data.tankB.total;
+  if (elTankBDetail) elTankBDetail.textContent = data.tankB.detail;
+  if (elTankCTotal) elTankCTotal.textContent = acidText;
+  if (elTankCDetail) elTankCDetail.textContent = acidDetail;
+
+  if (alertBox && alertText) {
+    if (isYacambu) {
+      alertBox.className = "alert-box alert-success";
+      alertText.innerHTML = `<strong>Escenario Yacambú / Recarga Artificial (1 m³/s):</strong> Agua andina dulce (ECw = 0.5 dS/m). Fracción de lavado reducida a <strong>6.5% (consumo de ${dailyM3.toFixed(2)} m³/día, ahorro de ${(14.53 - dailyM3).toFixed(2)} m³/día)</strong> y ahorro del <strong>64% en ácido nítrico</strong>.`;
+    } else {
+      alertBox.className = "alert-box alert-caution";
+      alertText.innerHTML = `<strong>Escenario Pozo Abatido (Actual CIDIAT-ULA):</strong> Cono a 546 msnm con sobreexplotación del 29%. Requiere <strong>20% de lavado salino (${dailyM3.toFixed(2)} m³/día)</strong> y ${acidText} de ácido para neutralizar bicarbonatos.`;
+    }
+  }
+}
+
+function initSprayFilterButtons() {
+  const buttons = document.querySelectorAll("[data-spray-filter]");
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-spray-filter");
+      renderSprayMatrix(filter);
+    });
+  });
+}
+
+function renderSprayMatrix(filter = "all") {
+  const tbody = document.getElementById("spray-table-body");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+
+  const filtered = filter === "all" 
+    ? SPRAY_MATRIX 
+    : SPRAY_MATRIX.filter(item => item.categoria === filter);
+
+  filtered.forEach(item => {
+    const tr = document.createElement("tr");
+
+    let badgeColor = "#38bdf8";
+    let badgeBg = "rgba(56,189,248,0.15)";
+    if (item.categoria === "acaros") {
+      badgeColor = "#f43f5e";
+      badgeBg = "rgba(244,63,94,0.2)";
+    } else if (item.categoria === "virus") {
+      badgeColor = "#10b981";
+      badgeBg = "rgba(16,185,129,0.2)";
+    } else if (item.categoria === "hongos") {
+      badgeColor = "#f59e0b";
+      badgeBg = "rgba(245,158,11,0.2)";
+    }
+
+    tr.innerHTML = `
+      <td><strong>${item.blanco}</strong></td>
+      <td>${item.activo}</td>
+      <td style="color:#cbd5e1;">${item.comercial}</td>
+      <td><span class="tag" style="background:${badgeBg}; color:${badgeColor}; border:1px solid ${badgeColor}40; font-size:0.75rem; padding:0.2rem 0.5rem;">${item.grupo}</span></td>
+      <td><strong style="color:#f8fafc;">${item.dosis}</strong></td>
+      <td style="font-size:0.8rem; color:#94a3b8;">${item.modo}</td>
+      <td><span class="status-badge" style="background:rgba(255,255,255,0.06); color:#f8fafc; font-size:0.8rem;">${item.pc}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ==========================================================================
+// 12. PROTOCOLO DE VALIDACIÓN Y CERTIFICACIÓN DE POZO PROFUNDO
+// ==========================================================================
+function initWellValidationCalculator() {
+  const inputs = [
+    "well-test-flow",
+    "well-test-nd",
+    "well-test-res-vol",
+    "well-test-lf"
+  ];
+
+  inputs.forEach(id => {
+    const elem = document.getElementById(id);
+    if (elem) {
+      elem.addEventListener("input", calculateWellValidation);
+      elem.addEventListener("change", calculateWellValidation);
+    }
+  });
+
+  calculateWellValidation();
+}
+
+function calculateWellValidation() {
+  const flowLs = parseFloat(document.getElementById("well-test-flow")?.value) || 2.5;
+  const nd = parseFloat(document.getElementById("well-test-nd")?.value) || 87.0;
+  const resVol = parseFloat(document.getElementById("well-test-res-vol")?.value) || 80.0;
+  const lfPercent = parseFloat(document.getElementById("well-test-lf")?.value) || 20.0;
+
+  // 1. Demanda diaria pico para 4.400 plantas de tomate
+  // Neta: 18.5 L/planta/semana = 2.643 L/planta/día
+  const lfFrac = Math.min(Math.max(lfPercent / 100.0, 0.05), 0.40);
+  const grossLitersPlantDay = 2.642857 / (1.0 - lfFrac);
+  const dailyDemandM3 = (4400 * grossLitersPlantDay) / 1000.0;
+
+  // 2. Caudal horario del pozo (m³/h)
+  const flowM3h = flowLs * 3.6;
+
+  // 3. Horas de bombeo diario
+  const pumpHours = dailyDemandM3 / flowM3h;
+
+  // 4. Altura Manométrica Total (HMT)
+  // ND + 3.5m elevación + 4.5m fricción + 5.0m presión residual (0.5 bar)
+  const hmt = nd + 13.0;
+  const psi = hmt * 1.4223;
+
+  // 5. Potencia Teórica y Comercial Bomba (HP)
+  // HP = (Q [L/s] * HMT [m]) / (75 * 0.62)
+  const hpTheor = (flowLs * hmt) / (75.0 * 0.62);
+  let hpSuggested = "3.0 a 5.0 HP";
+  if (hpTheor > 7.5) {
+    hpSuggested = "10.0 a 15.0 HP";
+  } else if (hpTheor > 5.2) {
+    hpSuggested = "7.5 a 10.0 HP";
+  } else if (hpTheor > 3.5) {
+    hpSuggested = "5.5 a 7.5 HP";
+  }
+
+  // 6. Autonomía del Reservorio (Días)
+  const autonomyDays = resVol / dailyDemandM3;
+
+  // 7. Actualizar UI
+  const elDemand = document.getElementById("well-calc-daily-demand");
+  const elHours = document.getElementById("well-calc-pump-hours");
+  const elRate = document.getElementById("well-calc-pump-rate");
+  const elHmt = document.getElementById("well-calc-hmt");
+  const elPsi = document.getElementById("well-calc-psi");
+  const elHp = document.getElementById("well-calc-hp");
+  const elAutonomy = document.getElementById("well-calc-autonomy");
+
+  if (elDemand) elDemand.textContent = `${dailyDemandM3.toFixed(2)} m³/día`;
+  if (elHours) elHours.textContent = `${pumpHours.toFixed(2)} h / día`;
+  if (elRate) elRate.textContent = `Caudal: ${flowM3h.toFixed(1)} m³/h (${flowLs.toFixed(2)} L/s)`;
+  if (elHmt) elHmt.textContent = `${hmt.toFixed(1)} mca`;
+  if (elPsi) elPsi.textContent = `~${Math.round(psi)} PSI total`;
+  if (elHp) elHp.textContent = hpSuggested;
+  if (elAutonomy) elAutonomy.textContent = `${autonomyDays.toFixed(1)} Días Continuos`;
+
+  // Veredicto del Pozo
+  const boxVerdict = document.getElementById("well-verdict-box");
+  const iconVerdict = document.getElementById("well-verdict-icon");
+  const titleVerdict = document.getElementById("well-verdict-title");
+  const descVerdict = document.getElementById("well-verdict-desc");
+
+  if (boxVerdict && iconVerdict && titleVerdict && descVerdict) {
+    if (flowLs >= 2.0 && autonomyDays >= 3.0) {
+      boxVerdict.className = "alert-box alert-success";
+      iconVerdict.textContent = "✅";
+      titleVerdict.textContent = "Pozo Aprobado para Casa de Malla (2.000 m²)";
+      descVerdict.textContent = `El caudal de ${flowLs.toFixed(2)} L/s repone la demanda pico (${dailyDemandM3.toFixed(2)} m³/día) en apenas ${pumpHours.toFixed(2)} horas al día, con ${autonomyDays.toFixed(1)} días de reserva protegida en reservorio.`;
+    } else if (flowLs >= 1.2) {
+      boxVerdict.className = "alert-box alert-warning";
+      iconVerdict.textContent = "⚠️";
+      titleVerdict.textContent = "Pozo Aprobado Condicionado (Caudal Ajustado)";
+      descVerdict.textContent = `El pozo requiere bombear ${pumpHours.toFixed(2)} horas/día. Se recomienda ampliar el reservorio a ≥ 80 m³ para blindar la operación ante contingencias eléctricas.`;
+    } else {
+      boxVerdict.className = "alert-box alert-danger";
+      iconVerdict.textContent = "❌";
+      titleVerdict.textContent = "Caudal Insuficiente / Alerta Crítica";
+      descVerdict.textContent = `El caudal de ${flowLs.toFixed(2)} L/s exigiría ${pumpHours.toFixed(2)} horas de bombeo continuo diario, sobreexplotando el acuífero local con alto riesgo de agotamiento estival en marzo.`;
+    }
+  }
+}
+

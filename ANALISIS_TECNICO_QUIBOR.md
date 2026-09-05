@@ -1,11 +1,12 @@
 # Análisis Técnico Maestro: Casa de Malla en Quíbor (Municipio Jiménez, Lara)
 ## Cultivo Protegido de Pimentón (*Capsicum annuum*) y Tomate (*Solanum lycopersicum*)
+### Coordenadas del Proyecto: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
 
 ---
 
 ## Resumen Ejecutivo
 
-El presente informe técnico consolida la evaluación microclimática, aerodinámica, fitosanitaria, hídrica y de cálculo estructural para la construcción y operación de una **casa de malla de 1.000 m²** en el **Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela** (695 msnm, clima semiárido cálido Köppen BSh).
+El presente informe técnico consolida la evaluación microclimática, aerodinámica, fitosanitaria, hídrica y de cálculo estructural para la construcción y operación de una **casa de malla de 2.000 m² ($20.00\text{ m} \times 100.00\text{ m}$)** geolocalizada con precisión en las coordenadas satelitales **$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$** en el **Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela** (695 – 710 msnm, clima semiárido cálido Köppen BSh). [Ver ubicación en Google Maps](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8).
 
 El análisis parte de la evaluación rigurosa de datos climáticos georreferenciados (NASA MERRA-2 1980-2016 y estaciones locales) y responde a las dos decisiones críticas de ingeniería planteadas:
 1.  **La viabilidad de mantener pilares a 2.5 metros de altura frente a la necesidad agronómica de 3.0 m al alero y 5.5 m a cumbrera para tomate indeterminado en hilo alto.**
@@ -130,38 +131,68 @@ Para pimentón ($EC_e = 1.5\ \text{dS/m}$) con agua de $1.4\ \text{dS/m}$, $LF \
 
 ---
 
-## 6. Recomendaciones Estructurales y Tutorado de Mínima Mano de Obra (1.000 m²)
+## 6. Recomendaciones Estructurales y Tutorado de Mínima Mano de Obra (2.000 m²)
 
 ```text
-       Techo 100% Plano de Guayas de 3/8" a 3.80 m (CERO TUBOS EN TECHO)
-    ═════════════════════════════════════════════════════════════════════════════
-    │                                                                           │
-    │  [Buffer Térmico Libre de 1.60 m — Escape Cenital 100% Poroso]            │
-    │                                                                           │
-    │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
-    │  Alambre Maestro Calibre 10 a 2.20 m + MALLA ESPALDERA (HORTOMALLA 15×15) │
-    │  ┌───┬───┬───┬───┐  (Cero Atados | Cero Clips | -88% Mano de Obra)        │
-    │  ├───┼───┼───┼───┤                                                        │
-    │  └───┴───┴───┴───┘  Racimos y ramas descansan por gravedad en cuadrícula  │
-    │  Alambre Guía Inferior a 0.20 m sobre camellón                            │
-    │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
-    │                                                                           │
-    └───[Pilares Tubulares Verticales Sch 40 Ø 2 1/2" a 3.80 m libre]───────────┘
-    ═════════════════════════════════════════════════════════════════════════════
-    Zanja Perimetral 20×20 cm (Faldón de Malla Enterrado 20 cm) Nivel Suelo ±0.00 m
+       Techo 100% Plano de Guayas de 3/8" a 3.80 m (20.00 m ANCHO × 100.00 m LARGO)
+    ═════════════════════════════════════════════════════════════════════════════════
+    │                                                                               │
+    │  [Buffer Térmico Libre de 1.60 m — Ventilación Convectiva Tangencial al Este] │
+    │                                                                               │
+    │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
+    │  Alambre Maestro Calibre 10 a 2.20 m + MALLA ESPALDERA (HORTOMALLA 15×15)     │
+    │  ┌───┬───┬───┬───┐  (Cero Atados | Cero Clips | -88% Mano de Obra)            │
+    │  ├───┼───┼───┼───┤  4.400 plantas / 19.8 toneladas de biomasa suspendida      │
+    │  └───┴───┴───┴───┘  Racimos y ramas descansan por gravedad en cuadrícula      │
+    │  Alambre Guía Inferior a 0.20 m sobre camellón (10 camellones de 100 m)       │
+    │ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - │
+    │                                                                               │
+    └───[Pilares Tubulares Verticales Sch 40 Ø 2 1/2" a 3.80 m libre]───────────────┘
+    ═════════════════════════════════════════════════════════════════════════════════
+    Zanja Perimetral Continua 20×20 cm (240 m lineales con Faldón Enterrado 20 cm)
 ```
 
-1. **Estructura Tipo Parral Tensado (Sin Tubos en Techo):**
+1. **Estructura Tipo Parral Tensado (20.00 m × 100.00 m):**
    * Pilares verticales tubulares Schedule 40 de $\varnothing\ 2\ 1/2"$ a **3.80 m libre**.
-   * Techo sustentado al 100% por red ortogonal de guayas de acero galvanizado de $3/8"$ en cuadrícula de $4.0\text{ m} \times 5.0\text{ m}$.
+   * Techo sustentado al 100% por red ortogonal de guayas de acero galvanizado de $3/8"$ en cuadrícula de $4.0\text{ m}$ (transversal) $\times 5.0\text{ m}$ (longitudinal).
    * Cero tubos en techo; 60% de ahorro en acero frente a galpones rígidos y ventilación convectiva cenital 100% abierta.
-2. **Sistema de Tutorado Óptimo: Malla Espaldera Biorientada (Hortomalla):**
-   * Se instala malla tutora de polipropileno de alta densidad (cuadrícula de **$15 \times 15\ \text{cm}$**) fijada entre el alambre maestro superior a **$2.20\text{ m}$** (Calibre 10) y un alambre guía inferior a **$0.20\text{ m}$** (Calibre 14).
+   * **Orientación Este-Oeste:** El eje de 100 m paralelo a los vientos dominantes del Este reduce en un 50% la superficie frontal expuesta a ráfagas de 27 km/h ($76\text{ m}^2$ frente a $152\text{ m}^2$).
+2. **Sistema de Tutorado Óptimo: Malla Espaldera Biorientada (Hortomalla 15×15 cm):**
+   * Se instala malla tutora de polipropileno de alta densidad (cuadrícula de **$15 \times 15\ \text{cm}$**) fijada entre el alambre maestro superior a **$2.20\text{ m}$** (Calibre 10) y un alambre guía inferior a **$0.20\text{ m}$** (Calibre 14) a lo largo de los 10 camellones de 100 m ($1.000\text{ m}$ lineales).
    * **Cero Atados y Cero Clips:** La planta y sus racimos se apoyan por gravedad en los cuadros de la malla.
-   * **Ahorro Laboral:** Reduce el tiempo de guiado de 500 h/ha a **80 - 120 h/ha (ahorro de más del 85% en jornales)**.
+   * **Ahorro Laboral:** Reduce el tiempo de guiado de 500 h/ha a **80 - 120 h/ha (ahorro de más del 85% en jornales: solo 2 jornales/mes para toda la nave de 2.000 m²)**.
    * **Blindaje contra Virosis:** Reduce en un **80% la manipulación física** de las plantas, previniendo la dispersión mecánica de patógenos letales como el Virus Rugoso del Tomate (**ToBRFV**) y el Virus del Mosaico (**TMV**).
    * **Despunte Apical a 2.20 m:** Al llegar al alambre maestro, se realiza un único corte apical (topping) a la 7ª-8ª floración, concentrando toda la savia en los racimos cuajados y eliminando el descolgado semanal.
-3. **Modulación para Rollo de 4.00 m × 100.00 m:**
-   * 10 franjas de 4.00 m en cubierta cosidas sobre guayas ($40.0\text{ m} \times 25.0\text{ m}$).
-   * Paredes perimetrales de 4.00 m continuas ($3.80\text{ m}$ libres $+ 0.20\text{ m}$ enterrados en zanja perimetral de $20\times 20\text{ cm}$). Desperdicio total $< 1.2\%$ (Aprovechamiento 98.8%).
+3. **Modulación Oficial para Rollo de 4.00 m × 100.00 m (8 Rollos Totales):**
+   * **5 franjas longitudinales de 100.00 m** en cubierta (Rollos 1 al 5 al 100% sin cortes transversales).
+   * **2 franjas longitudinales de 100.00 m** para paredes laterales Norte y Sur (Rollos 6 y 7 al 100% sin cortes).
+   * **2 cortes de 20.00 m** para cabeceras Este y Oeste + esclusa sanitaria de doble puerta (Rollo 8 con remanente de mantenimiento).
+   * Desperdicio real de retazos en obra: **0.00 m (0%)**. Aprovechamiento global: **98.7%**.
+
+---
+
+## 7. Hidrogeología, Minería del Acuífero de Quíbor y Recarga Artificial (CIDIAT-ULA / SHYQ)
+
+La viabilidad técnica de este proyecto agroproductivo está directamente ligada a la realidad hidrogeológica descrita por **Jégat, Mora, Hernández (CIDIAT-ULA), Alvarado, Massiah (SHYQ) y Terán (2012)** en su investigación sobre la dinámica del acuífero y su recarga artificial:
+
+### 7.1. Diagnóstico Hidrogeológico y Sobreexplotación del Acuífero
+* **Medio Físico:** Valle intramontano de 243 km² con relleno fluviolacustre cuaternario constituido por **lentes lenticulares de gravas y arenas intercalados con arcillas** (medio altamente heterogéneo y semiconfinado).
+* **Déficit Evaporativo Severo:** Precipitación de 400 a 532 mm/año frente a una **evaporación media anual de 1.700 a 3.200 mm/año** (déficit de 4 a 6 veces). La agricultura a cielo abierto es insostenible.
+* **Minería del Acuífero:** En la zona de mayor explotación (90 km²):
+  * Extracción anual por bombeo: **$22\times 10^6\text{ m}^3\text{/año}$**.
+  * Recarga natural renovable: solo **$17\times 10^6\text{ m}^3\text{/año}$**.
+  * **Sobreexplotación del 29% ($5\text{ Mm}^3\text{/año}$ de déficit permanente)** extraído de las reservas geológicas ($125\text{ Mm}^3$).
+* **Cono de Abatimiento Central:**
+  * Descenso histórico de niveles estáticos de **53 m a 95 m** entre 1963 y 1987, con profundidades actuales que alcanzan los **136 metros**.
+  * La cota piezométrica cae desde 795 msnm en la zona de recarga (Quebrada Atarigua) hasta **546 msnm en la parte central del Valle** (25 metros por debajo del nivel de salida en Quebrada Las Raíces a 571 msnm), formando una **cubeta cerrada sin drenaje natural** que concentra sales solubles y eleva la conductividad eléctrica de los pozos profundos a $EC_w = 1.2 - 2.0\text{ dS/m}$.
+
+### 7.2. Modelación de Recarga Artificial (Visual MODFLOW 4.1)
+El modelo matemático de CIDIAT-ULA / SHYQ (93 filas × 121 columnas, 11.253 nodos activos, 12 estratos litológicos calibrados con 42 pozos) demostró que:
+* La inyección artificial de **$1.0\text{ m}^3\text{/s}$ ($1.000\text{ L/s}$)** proveniente del túnel de trasvase del Río Yacambú mediante baterías de 4 pozos profundos de inyección ($100\text{ L/s}$ por batería) revierte el abatimiento del acuífero y genera **conos invertidos de sobre-elevación freática** con agua andina de baja salinidad.
+
+### 7.3. Doble Escenario de Operación del Invernadero (2.000 m²)
+1. **Escenario A (Actual - Pozo Profundo en Cono Abatido):** $EC_w = 1.4\text{ dS/m}$, pH 7.8, requiere **$LF = 20\%$** de lavado salino, consumo de **$15.08\text{ m}^3\text{/día}$** y neutralización con $22\text{ L/semana de Ácido Nítrico 60\%}$.
+2. **Escenario B (Conexión Yacambú / Recarga Artificial):** Agua dulce andina ($EC_w \approx 0.5\text{ dS/m}$), reduciendo la fracción de lavado a **$LF = 6.5\%$**, con consumo de **$12.45\text{ m}^3\text{/día}$ (ahorro de $2.63\text{ m}^3\text{/día} = 17.5\%$ de agua)** y 65% menos gasto en ácido nítrico.
+3. **Eficiencia Hídrica de la Casa de Malla:** Gracias a los goteros autocompensantes PC/ND a 1.2 L/h y al mulch plata/negro, la Casa de Malla produce **2.5 kg de tomate por m³ de agua** frente a 0.9 kg/m³ en campo abierto, constituyendo la única alternativa sostenible ante el agotamiento del acuífero de Quíbor.
+
 

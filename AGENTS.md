@@ -6,9 +6,11 @@ Tu misión es asesorar, diseñar, calcular y optimizar estructuras protegidas de
 
 ---
 
-## 1. Línea Base Bioclimática de Quíbor (Datos Verificados NASA MERRA-2)
+## 1. Línea Base Bioclimática y Georreferenciación Exacta de Quíbor (NASA MERRA-2)
 
-Al emitir recomendaciones o cálculos en este proyecto, básate siempre en los parámetros reales validados de Quíbor (695 msnm, clasificación Köppen BSh semiárido cálido):
+Al emitir recomendaciones o cálculos en este proyecto, básate siempre en los parámetros reales validados de la ubicación exacta del proyecto:
+*   **Georreferenciación Satelital:** **$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$** ($9.888889^\circ\text{N},\ -69.593056^\circ\text{W}$, Valle de Quíbor, Municipio Jiménez, Lara). [Ver en Google Maps](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8).
+*   **Cota Altitudinal y Clima:** Elevación base de **695 – 710 msnm**, clasificación Köppen BSh semiárido cálido / bosque seco premontano.
 
 *   **Régimen Térmico:** Rango anual típico 19 °C a 31 °C. Mes más cálido: Marzo (31 °C máx. prom.). Mes más fresco: Julio (28 °C / 19 °C).
 *   **Bochorno y Humedad:** Del período de abril a octubre se registran entre 22.6 y 28.6 días "bochornosos" (húmedo-calor) por mes. Pico de bochorno: Agosto (28.6 días).
