@@ -60,83 +60,167 @@ La nave dispone de 20.00 m de ancho transversal que se dividen exactamente en **
   $$\text{Densidad} = \frac{4.400\text{ plantas}}{2.000\text{ m}^2} = \mathbf{2.20\text{ plantas/m}^2}$$
   *(Densidad agronómica estándar para tomate indeterminado en climas cálidos-semiáridos, evitando el sombreado mutuo y la proliferación de hongos por condensación interna).*
 
-### 1.3. Acolchado Plástico (Mulch Bicolor Plata/Negro)
-* **Especificación:** Película de polietileno coextruido plata/negro de **1.20 m a 1.40 m de ancho**, calibre 1.0 a 1.2 mil (25 a 30 micras), estabilizado anti-UV.
-* **Instalación:** Cara **PLATA HACIA ARRIBA** y cara **NEGRA HACIA EL SUELO**.
-* **Beneficios Críticos en Quíbor:**
-  1. **Repelencia de Plagas:** La cara plateada refleja la luz UV en longitudes de onda desorientadoras para mosca blanca (*Bemisia tabaci*) y trips (*Frankliniella occidentalis*), reduciendo la colonización temprana en un 40%.
-  2. **Control Térmico de la Rampa Radicular:** Refleja la alta radiación solar incidente de Quíbor, manteniendo la temperatura de la zona radicular (0-30 cm) entre 20 °C y 25 °C (temperaturas de suelo >30 °C inducen senescencia de raicillas absorbentes).
-  3. **Control de Evaporación y Ascenso Capilar de Sales:** Reduce la evaporación directa del suelo en un 70%, evitando que los sulfatos y cloruros del agua de pozo asciendan a la superficie por capilaridad y quemen el cuello de las plántulas.
-  4. **Cero Malezas:** La cara negra bloquea la fotosíntesis de malezas competidoras dentro de la hilera.
+### 1.3. Manejo a Suelo Descubierto (Sin Acolchado Plástico)
+En esta configuración operativa se prescinde del acolchado plástico (mulch), cultivando las 4.400 plantas directamente sobre los camellones de tierra al descubierto. Esta modalidad exige adaptaciones agronómicas e hidráulicas específicas para el Valle de Quíbor:
+
+1. **Aumento de la Evaporación Directa y Demanda Hídrica:**
+   * Sin la barrera plástica, la evaporación superficial directa ($E_s$) bajo la radiación solar y viento del Este de Quíbor se incrementa en un **18% a 20%**.
+   * La demanda hídrica bruta en fructificación máxima pasa de $15.75\text{ m}^3\text{/día}$ a **$18.50\text{ a }19.00\text{ m}^3\text{/día}$** (aprox. 4.2 a 4.3 L/planta/día con lavado salino $LF=20\%$).
+2. **Control del Ascenso Capilar y Costra Salina Superficial:**
+   * Al evaporarse el agua del pozo ($EC_w = 1.4\text{ dS/m}$), los sulfatos y sales solubles ascienden a los primeros 2-3 cm del suelo formando una costra salina blanquecina.
+   * **Protocolo de Manejo:** Realizar **escardas manuales superficiales ligeras (descostrado con escardilla)** a 2-3 cm de profundidad cada 15-20 días para romper los capilares del suelo franco-arcilloso, frenar la evaporación y evitar que el cuello de la planta entre en contacto con sales concentradas.
+3. **Fijación Mecánica de la Cinta de Goteo:**
+   * Al no estar aprisionada bajo el plástico, la cinta de goteo puede ser desplazada por el viento o por el tránsito de los operarios.
+   * **Instalación Obligatoria:** Clavar **horquillas o grapas de alambre dulce/galvanizado Calibre 12** (o estacas de plástico) cada **6 a 8 metros** a lo largo del lomo del camellón para mantener las dos líneas de goteo estrictamente rectas y pegadas a la base de las plantas.
+4. **Control Manual de Malezas:**
+   * La ausencia de mulch negro permite la germinación de malezas (*Portulaca oleracea*, *Amaranthus*, etc.). Se programan **2 deshierbes manuales ligeros por mes** en el lomo del camellón, protegiendo siempre la cinta de goteo y el sistema radicular superficial.
+5. **Facilidad de Abonado Granulado:**
+   * La gran ventaja operativa de prescindir del mulch es que el abono granulado (NPK 12-12-17 SOP + Sulfato de Potasio) se aplica directamente sobre el suelo a 15 cm del tallo e incorporado con una pasada rápida de rastrillo/escardilla, suprimiendo la laboriosa tarea de perforar y parchar el plástico.
 
 ---
 
 ## CAPÍTULO 2: DISEÑO TÉCNICO DEL SISTEMA DE RIEGO POR GOTEO
 
-### 2.1. Hidráulica y Selección de la Emisión
-En un camellón de 100 metros de longitud, una cinta convencional de laberinto o gotero turbulento simple sufre una pérdida de carga ($\Delta H$) que genera un diferencial de descarga >20% entre el inicio y el final de la hilera. Dado que el agua de pozo de Quíbor contiene sales, cualquier sub-dosificación al final de la hilera provocaría salinización inmediata del bulbo húmedo.
+### 2.1. Hidráulica y Selección de la Cinta de Goteo
+En un camellón de 100 metros de longitud, una cinta convencional de laberinto simple sufre una pérdida de carga ($\Delta H$) que genera un diferencial de descarga >25% entre el inicio y el final de la hilera. Dado que el agua de pozo de Quíbor contiene sales disueltas ($EC_w \approx 1.4\text{ dS/m}$), cualquier sub-dosificación al final de la hilera provocaría salinización inmediata del bulbo húmedo.
 
-* **Tipo de Emisor Seleccionado:** Tubería de polietileno (PE) Ø 16 mm (calibre pesado 35 a 40 mil / 0.9 mm) o cinta pesada (15 mil) con **Goteros Integrados Autocompensantes y Antidrenantes (PC/ND - Pressure Compensating / Non-Draining)**.
-  * *Autocompensante (PC):* Rango de presión de compensación constante de $0.7\text{ a }3.5\text{ bar}$ ($10\text{ a }50\text{ PSI}$), garantizando exactamente el mismo caudal ($\pm 3\%$) a lo largo de los 100 m.
-  * *Antidrenante (ND):* Presión de apertura a $0.4\text{ bar}$ y cierre hermético a $0.2\text{ bar}$. Evita que al apagarse la bomba la tubería se vacíe por las partes bajas, y permite el **arranque simultáneo e instantáneo de todos los goteros** al encenderse el pulso de riego.
-* **Caudal Nominal del Gotero:** **$1.20\text{ a }1.60\text{ L/h}$** (se adopta $1.20\text{ L/h}$ para suelo franco-arcilloso o $1.60\text{ L/h}$ para franco-arenoso; diseño base a $1.20\text{ L/h}$).
-* **Espaciamiento Entre Goteros:** **$0.20\text{ m}$** de distancia en la línea.
-* **Número de Líneas por Camellón:** **2 líneas paralelas** (una línea por hilera de siembra).
-* **Total de Tubería de Goteo Instalada:**
-  $$10\text{ camellones} \times 2\text{ líneas} \times 100\text{ m} = \mathbf{2.000\text{ metros lineales de lateral de goteo}}$$
+* **Tipo de Emisor Seleccionado:** **Cinta de Goteo de calibre pesado (12 a 15 mil / 300 a 380 micras) con Goteros Integrados Autorregulantes / Autocompensantes (PC - Pressure Compensating)**.
+  * *Autocompensante (PC):* Rango de presión de compensación constante de $0.6\text{ a }3.5\text{ bar}$ ($8.7\text{ a }50.7\text{ PSI}$), garantizando una tasa de emisión idéntica ($\pm 3\%$) a lo largo de los 100 metros de camellón.
+  * *Antisifón / Antidrenante:* Bloquea la succión de partículas de suelo hacia el interior del emisor cuando se despresuriza la línea al apagar el pulso de riego (vital en suelo descubierto sin plástico).
+* **Caudal Nominal del Gotero:** **$1.60\text{ L/h}$** (optimiza la infiltración en suelo franco-arcilloso de Quíbor).
+* **Espaciamiento Entre Goteros:** **$0.40\text{ m}$** de distancia en la cinta.
+* **Número de Líneas por Camellón:** **2 líneas paralelas** separadas a 0.50 m (una línea de cinta por cada hilera de siembra).
+* **Total de Cinta de Goteo Instalada:**
+  $$10\text{ camellones} \times 2\text{ líneas} \times 100\text{ m} = \mathbf{2.000\text{ metros lineales de cinta de goteo}}$$
 * **Total de Emisores en la Nave:**
-  $$\frac{2.000\text{ m}}{0.20\text{ m/gotero}} = \mathbf{10.000\text{ goteros}}$$
-  *(Promedio de 2.27 goteros de 1.20 L/h por cada planta, garantizando un bulbo húmedo continuo y coalescente a lo largo de todo el camellón).*
+  $$\frac{2.000\text{ m}}{0.40\text{ m/gotero}} = \mathbf{5.000\text{ goteros autorregulantes}}$$
+  *(Promedio de 1.14 goteros de 1.60 L/h por cada planta de tomate al tresbolillo en marcos a 0.45 m).*
 
-### 2.2. Caudal Total Horario y Requerimientos de Bombeo
-* **Caudal Horario Total del Sistema:**
-  $$Q_{sistema} = 10.000\text{ goteros} \times 1.20\text{ L/h} = 12.000\text{ L/h} = \mathbf{12.00\text{ m}^3\text{/h}} \quad (3.33\text{ L/s})$$
-* **Sectorización:** El módulo de 2.000 m² puede regarse en **1 solo turno completo** con un caudal de $12.00\text{ m}^3\text{/h}$, o dividirse en **2 sectores hidráulicos de 5 camellones cada uno** ($6.00\text{ m}^3\text{/h}$ por sector) si la capacidad del pozo o del cabezal es menor a 15 m³/h.
-* **Presión de Operación Requerida en Cabecera:** $2.0\text{ a }2.5\text{ bar}$ en cabezal para mantener $1.2\text{ a }1.5\text{ bar}$ en la entrada de los laterales.
-* **Potencia de Bomba Sugerida:** Electrobomba centrífuga de **$3.0\text{ a }5.5\text{ HP}$** con variador de frecuencia.
+### 2.2. Hidráulica de Bombeo y Sectorización Obligatoria para Motor 1" 1.5 HP (220V)
 
-### 2.3. Cabezal de Filtrado y Equipamiento
-El agua subterránea de Quíbor arrastra arenas finas y presenta sales disueltas que forman precipitados cálcicos.
-1. **Hidrociclón Desarenador:** Primera barrera para separar partículas de arena densas provenientes del pozo profundo.
-2. **Batería de Filtros de Anillas Ranuradas (Discos):** Dos cuerpos de 2" o 3" con anillas de **120 mesh / 130 micras** con retrolavado manual/semiautomático.
-3. **Válvula Reguladora de Presión y Sostenedora:** Mantiene la presión estable a $2.0\text{ bar}$ en el múltiple de distribución.
-4. **Válvulas de Aire de Doble Efecto (Ventosas):** Instaladas en los puntos altos de los múltiples de alimentación y en el extremo final de los 100 m para evitar golpes de ariete y succión de partículas del suelo por presión negativa al apagar el riego.
+#### Diagnóstico Técnico del Equipo Disponible:
+* **Equipo del Productor:** Motor eléctrico de alta presión 220V, conexión de **1 pulgada (1")**, potencia de **1.5 HP** (~1.1 kW).
+* **Caudal Total de la Nave Completa:**
+  $$Q_{total\_nave} = 5.000\text{ goteros} \times 1.60\text{ L/h} = \mathbf{8.00\text{ m}^3\text{/h}} \quad (\mathbf{2.22\text{ L/s}} = \mathbf{133.3\text{ L/min}})$$
+* **¿Por qué la bomba de 1.5 HP es INSUFICIENTE para regar toda la nave a la vez?**
+  1. Una electrobomba centrífuga/multietapa típica de 1" y 1.5 HP entrega su máximo rendimiento eficiente entre **$2.4\text{ y }3.2\text{ m}^3\text{/h}$** ($40\text{ a }53\text{ L/min}$) a presiones manométricas de trabajo de **$2.5\text{ a }3.5\text{ bar}$** ($25 - 35\text{ mca}$).
+  2. Hacer circular $8.00\text{ m}^3\text{/h}$ a través de una conexión de 1" (diámetro interno ~26 mm) provocaría una velocidad de flujo desorbitada de **$4.2\text{ m/s}$** (el límite normativo es $1.5 - 2.0\text{ m/s}$), generando pérdidas por fricción $>45\text{ mca/100m}$, cavitación y colapso de la presión a $<0.5\text{ bar}$. A esa presión, los goteros autorregulantes no abren ni compensan.
+
+#### Solución de Ingeniería Agronómica: Sectorización en 3 Bloques Balanceados
+Para adaptar la demanda a la curva de rendimiento óptimo de la bomba de 1.5 HP, la nave de 2.000 m² se divide hidráulicamente en **3 sectores independientes**:
+
+```
+====================================================================================================
+ARQUITECTURA DE SECTORIZACIÓN HIDRÁULICA (NAVE 2.000 m² / BOMBA 1.5 HP 220V DE 1")
+====================================================================================================
+Sector       Camellones Asignados   Goteros PC (40 cm)   Caudal de Operación     Plantas   Presión en Cabezal
+----------------------------------------------------------------------------------------------------
+SECTOR 1     Camellones 1 a 3 (3)   1.500 goteros        2.40 m³/h (40.0 L/min)  1.320 pl  2.8 – 3.2 bar
+SECTOR 2     Camellones 4 a 7 (4)   2.000 goteros        3.20 m³/h (53.3 L/min)  1.760 pl  2.5 – 2.8 bar
+SECTOR 3     Camellones 8 a 10 (3)  1.500 goteros        2.40 m³/h (40.0 L/min)  1.320 pl  2.8 – 3.2 bar
+====================================================================================================
+TOTALES      10 Camellones Dobles   5.000 Goteros        Operación Secuencial    4.400 pl  Garantía PC
+```
+
+* **Diámetros de Tubería:**
+  * **Descarga de Bomba:** 1 pulgada (1").
+  * **Ampliación Inmediata tras el Filtro:** La tubería matriz de distribución se amplía de 1" a **2 pulgadas (PVC Clase 10 / SDR 26)**. Con $3.2\text{ m}^3\text{/h}$, la velocidad en 2" es de apenas $0.45\text{ m/s}$, manteniendo las pérdidas de carga en $<0.4\text{ mca}$ a lo largo de toda la cabecera.
+  * **Cabezal de Sector:** Válvula de bola o solenoide de 1.5" o 2" por cada sector.
+
+#### Programación Secuencial de Bombeo por Sector:
+* En pico de fructificación (demanda total sin mulch: $\approx 18.5\text{ m}^3\text{/día}$ para las 4.400 plantas):
+  * **Sector 1 (3 camellones):** Demanda $5.55\text{ m}^3\text{/día} \div 2.40\text{ m}^3\text{/h} = \mathbf{2.31\text{ h/día}}$ ($139\text{ min/día}$). Se distribuye en **5 pulsos de 28 minutos**.
+  * **Sector 2 (4 camellones):** Demanda $7.40\text{ m}^3\text{/día} \div 3.20\text{ m}^3\text{/h} = \mathbf{2.31\text{ h/día}}$ ($139\text{ min/día}$). Se distribuye en **5 pulsos de 28 minutos**.
+  * **Sector 3 (3 camellones):** Demanda $5.55\text{ m}^3\text{/día} \div 2.40\text{ m}^3\text{/h} = \mathbf{2.31\text{ h/día}}$ ($139\text{ min/día}$). Se distribuye en **5 pulsos de 28 minutos**.
+* **Tiempo Total Acumulado de Bombeo:** $2.31\text{ h} \times 3 = \mathbf{6.93\text{ horas/día}}$ de trabajo para el motor de 1.5 HP, operado en rondas escalonadas (ej. Ronda 1: Sec 1 de 07:00 a 07:28, Sec 2 de 07:30 a 07:58, Sec 3 de 08:00 a 08:28... y descansos entre rondas). La bomba trabaja fría y en su punto de máxima eficiencia eléctrica.
 
 ---
 
-## CAPÍTULO 3: PROGRAMACIÓN DE RIEGO POR PULSOS (FAO-56 AJUSTADO A QUÍBOR)
+### 2.3. Cabezal de Filtración con Filtro de Discos (120 Mesh) para Laguna de Tierra
 
-### 3.1. Estrategia de Pulsos Cortos contra la Salinidad del Pozo
-En el clima de Quíbor, regar en 1 o 2 riegos largos diarios es un grave error técnico: en un suelo franco, un riego de 60 minutos genera percolación profunda rápida de los nutrientes (lavando el nitrógeno) y, al secarse la superficie horas después, las sales del agua de pozo ($EC_w \approx 1.4\text{ dS/m}$) se concentran en la zona radicular elevando la conductividad eléctrica del extracto saturado ($EC_e$) por encima de $4.0\text{ dS/m}$, deteniendo la absorción hídrica y causando pudrición apical (culillo) en los tomates.
-
-La estrategia profesional es el **Riego Fraccionado por Alta Frecuencia (Pulsos de 12 a 20 minutos)**:
-* Mantiene el potencial mátrico del suelo constantemente alto (entre $-10\text{ y }-25\text{ kPa}$), facilitando que la planta tome agua sin esfuerzo osmótico.
-* Mantiene un frente húmedo descendente continuo que empuja el anillo de sales hacia la periferia del bulbo (lejos del eje radicular principal).
-* Incorpora la **Fracción de Lavado ($LF = 20\%$)** en cada pulso diario.
+El agua vertida previamente en una **laguna de tierra a cielo abierto** en Quíbor acumula dos contaminantes críticos que colapsan los sistemas de goteo en cuestión de horas:
+1. **Proliferación de Algas Verdes y Cianobacterias:** Estimuladas por la radiación solar incidente constante de Quíbor. Las algas filamentosas forman masas mucilaginosas elásticas.
+2. **Arcillas y Limos Coloidales en Suspensión:** Levantados de las paredes y fondo de la laguna de tierra por el viento y el oleaje.
 
 ```
-                           SUPERFICIE ACOLCHADA
-    ===================[ Gotero ]========[ Gotero ]===================
-             . - ~ ~ - .                  . - ~ ~ - .
-          /               \            /               \
-         |  ZONA DE BAJA   |          |  ZONA DE BAJA   |
-         |    SALINIDAD    |          |    SALINIDAD    |
-         |   (0 - 25 cm)   |          |   (0 - 25 cm)   |
-          \   RAÍCES       /          \   RAÍCES       /
-            ~ . _ _ _ . ~               ~ . _ _ _ . ~
-       ====================================================
+[ LAGUNA DE TIERRA A CIELO ABIERTO ]
+              |
+              v
+   (1) CANASTILLA / PICHINCHA FLOTANTE CON BOYA
+       Malla de acero inox 1.5 - 2.0 mm suspendida a 50 cm bajo el agua
+       (No toca el lodo del fondo ni succiona natas flotantes)
+              |
+              v  Tubería de succión 1.25" o 1.5" con válvula check
+   (2) MOTOR ELÉCTRICO DE ALTA PRESIÓN 1.5 HP 220V (1 pulgada)
+              |
+              v  Ampliación a 1.5" o 2"
+   (3) BATERÍA DE FILTRO DE DISCOS DE ANILLAS RANURADAS (120 MESH / 130 µm)
+       Filtro de 1.5" o 2" (código de color rojo) con compresión helicoidal
+       Doble manómetro de glicerina (Entrada y Salida) para medir diferencial ΔP
+              |
+              v
+   (4) INYECTOR VENTURI DE 1" EN BYPASS (Fertilizantes y Ácido Nítrico)
+              |
+              v
+   (5) MATRIZ PRINCIPAL DE PVC 2" CON DERIVACIÓN A 3 VÁLVULAS DE SECTOR
+```
+
+#### Especificación Exacta del Filtro de Discos de 120 Mesh:
+* **Tipo de Filtro:** Filtro de discos de anillas ranuradas (tecnología tipo Azud Modular 100 / Arkal Super Leader / Irritec Rotodisk).
+* **Diámetro de Conexión Recomendado:** **1.5 pulgadas o 2 pulgadas** (rosca macho BSP/NPT).
+  * *Por qué 1.5" o 2" si la bomba es de 1":* Un filtro de discos de 1.5" o 2" tiene una capacidad nominal de filtrado de $10\text{ a }15\text{ m}^3\text{/h}$. Al operar con el caudal del sector ($2.4\text{ a }3.2\text{ m}^3\text{/h}$), el filtro trabaja **sobredimensionado 3x a 4x**, reduciendo la velocidad de paso del agua a través de las anillas. Esto permite que el filtro retenga gran cantidad de algas sin saturarse en medio de un pulso de riego.
+* **Grado de Filtrado:** **120 Mesh / 130 micras (Anillas de color ROJO)**.
+* **Mecanismo de Retención Tridimensional vs Filtro de Malla:**
+  * En una laguna de tierra, un filtro de malla metálica plana es inútil: las algas filamentosas se aplanan contra la malla como una lámina de papel tapándola en minutos.
+  * El **filtro de discos** comprime cientos de anillas ranuradas mediante un resorte de acero inox. El agua atraviesa las ranuras microscópicas cruzadas, atrapando algas y partículas de arcilla en **profundidad tridimensional**, permitiendo que el agua limpia continúe fluyendo hacia los goteros.
+* **Monitoreo de Colmatación y Retrolavado:**
+  * Se instalan **dos manómetros de glicerina de 0-6 bar** (uno antes del filtro y otro después).
+  * Mientras el filtro está limpio: $\Delta P = P_{entrada} - P_{salida} \le 0.1\text{ a }0.2\text{ bar}$.
+  * **Criterio de Limpieza:** Cuando $\Delta P \ge \mathbf{0.4\text{ a }0.5\text{ bar}}$, se detiene el pulso, se afloja la abrazadera del filtro, se descomprimen las anillas bajo chorro de agua o se acciona el retrolavado manual/semiautomático. Se recomienda limpieza preventiva al inicio de cada jornada.
+
+---
+
+### 3.1. Estrategia de Pulsos Cortos contra la Salinidad del Pozo a Suelo Descubierto
+En el clima semiárido de Quíbor y cultivando a **suelo descubierto (sin acolchado plástico)**, la evaporación superficial aceleraría la acumulación de costras de sal en la base del tallo si se regara con riegos largos e infrecuentes. En un suelo franco-arcilloso, un riego largo lava los nutrientes móviles (nitratos) al fondo y, durante las horas de calor, la evaporación capilar succiona las sales del agua de pozo ($EC_w \approx 1.4\text{ dS/m}$) hacia la superficie, elevando la conductividad del extracto saturado ($EC_e$) por encima de $4.5\text{ dS/m}$ y provocando necrosis foliar y pudrición apical (culillo).
+
+La solución técnica es el **Riego Fraccionado por Alta Frecuencia en Sectores (4 a 5 pulsos de 20 a 28 min por sector)**:
+* Mantiene el potencial mátrico del suelo constantemente elevado (entre $-10\text{ y }-25\text{ kPa}$), evitando el estrés hídrico.
+* Genera un frente de humedad descendente continuo que desplaza las sales solubles hacia los bordes exteriores del camellón, manteniendo la zona de raíces (0-30 cm) desintoxicada.
+* Se complementa con **escardas superficiales de rotura de costra** cada 15-20 días.
+
+```
+       SUPERFICIE A SUELO DESCUBIERTO (CINTA FIJADA CON HORQUILLAS CADA 6-8 M)
+    ===================[ Gotero PC ]========[ Gotero PC ]===================
+             . - ~ ~ - .                    . - ~ ~ - .
+          /               \              /               \
+         |  ZONA DE BAJA   |            |  ZONA DE BAJA   |
+         |    SALINIDAD    |            |    SALINIDAD    |
+         |   (0 - 30 cm)   |            |   (0 - 30 cm)   |
+          \   RAÍCES       /            \   RAÍCES       /
+            ~ . _ _ _ . ~                 ~ . _ _ _ . ~
+       =========================================================
        FRENTE DE LAVADO: Sales empujadas a la periferia (>35 cm)
+       [Rotura de costra capilar con escardilla ligera a 2-3 cm]
 ```
 
-### 3.2. Calendario Dinámico de Riego por Etapa Fenológica
+### 3.2. Calendario Dinámico de Riego por Etapa Fenológica (Suelo Descubierto & 3 Sectores)
 
-| Etapa Fenológica | Duración (Semanas) | Kc FAO-56 | Demanda Neta (L/planta/sem) | Fracción Lavado (LF) | Lámina Bruta (L/planta/sem) | Volumen Diario Nave 2.000 m² | N° de Pulsos Diarios | Duración de Cada Pulso | Horarios Típicos Recomendados |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **1. Enraizamiento / Establecimiento** | Semanas 1 a 3 | 0.60 | 8.0 L | 15% | **9.4 L/pl/sem** | **5.91 m³/día** | 3 pulsos | 10 – 12 min | 08:30, 11:30, 15:00 |
-| **2. Crecimiento Vegetativo** | Semanas 4 a 7 | 0.80 | 11.0 L | 18% | **13.4 L/pl/sem** | **8.43 m³/día** | 4 pulsos | 12 – 15 min | 08:00, 10:30, 13:00, 15:30 |
-| **3. Floración y Primeros Cuajados** | Semanas 8 a 11 | 1.10 | 16.0 L | 20% | **20.0 L/pl/sem** | **12.57 m³/día** | 5 – 6 pulsos | 14 – 16 min | 07:30, 09:30, 11:30, 13:30, 15:30 |
-| **4. Fructificación Masiva y Cosecha** | Semanas 12 a 22+ | 1.05 | 18.5 L | 20% | **23.1 L/pl/sem** | **14.53 – 15.75 m³/día** | 6 – 8 pulsos | 15 – 18 min | 07:00, 08:30, 10:00, 11:30, 13:00, 14:30, 16:00 |
-| **5. Fin de Ciclo / Cierre** | Últimas 2 sem | 0.90 | 13.5 L | 15% | **15.9 L/pl/sem** | **9.98 m³/día** | 4 pulsos | 12 – 14 min | 08:00, 11:00, 13:30, 15:30 |
+*Valores calculados para la nave de 2.000 m² (4.400 plantas) a suelo descubierto (evaporación ajustada +18-20%) y operando con electrobomba de 1" y 1.5 HP en 3 sectores secuenciales ($2.40\text{ m}^3\text{/h}$ en Sec 1 y 3; $3.20\text{ m}^3\text{/h}$ en Sec 2):*
+
+| Etapa Fenológica | Duración (Semanas) | Kc FAO-56 | Demanda Bruta (+20% Evap + LF) | Volumen Diario Nave 2.000 m² | Volumen Diario por Sector (Sec 1/Sec 2/Sec 3) | Pulsos / Día por Sector | Duración de Pulso por Sector (Bomba 1.5 HP) | Tiempo Bombeo Diario Acumulado |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **1. Enraizamiento / Establecimiento** | Semanas 1 a 3 | 0.60 | **11.1 L/pl/sem** | **7.00 m³/día** | 2.10 / 2.80 / 2.10 m³ | 3 pulsos | **18 min / sector** | **2.6 h / día** |
+| **2. Crecimiento Vegetativo** | Semanas 4 a 7 | 0.80 | **15.8 L/pl/sem** | **9.95 m³/día** | 2.98 / 3.98 / 2.98 m³ | 4 pulsos | **19 min / sector** | **3.8 h / día** |
+| **3. Floración y Cuajado** | Semanas 8 a 11 | 1.10 | **23.6 L/pl/sem** | **14.85 m³/día** | 4.45 / 5.95 / 4.45 m³ | 5 pulsos | **22 min / sector** | **5.5 h / día** |
+| **4. Fructificación Masiva y Cosecha** | Semanas 12 a 22+ | 1.05 | **27.2 L/pl/sem** | **17.10 – 18.50 m³/día** | 5.55 / 7.40 / 5.55 m³ | 5 pulsos | **28 min / sector** | **6.9 h / día** |
+| **5. Fin de Ciclo / Cierre** | Últimas 2 sem | 0.90 | **18.8 L/pl/sem** | **11.80 m³/día** | 3.54 / 4.72 / 3.54 m³ | 4 pulsos | **22 min / sector** | **4.4 h / día** |
+
+*Régimen de Riego Secuencial Recomendado en Fructificación (Pico 18.5 m³/día):*
+* **Ronda 1 (Mañana temprana):** Sec 1 (07:00 - 07:28) $\rightarrow$ Sec 2 (07:30 - 07:58) $\rightarrow$ Sec 3 (08:00 - 08:28). [Bomba descansa 1h].
+* **Ronda 2 (Media mañana):** Sec 1 (09:30 - 09:58) $\rightarrow$ Sec 2 (10:00 - 10:28) $\rightarrow$ Sec 3 (10:30 - 10:58). [Bomba descansa 45 min].
+* **Ronda 3 (Mediodía):** Sec 1 (11:45 - 12:13) $\rightarrow$ Sec 2 (12:15 - 12:43) $\rightarrow$ Sec 3 (12:45 - 13:13). [Bomba descansa 45 min].
+* **Ronda 4 (Primera tarde):** Sec 1 (14:00 - 14:28) $\rightarrow$ Sec 2 (14:30 - 14:58) $\rightarrow$ Sec 3 (15:00 - 15:28). [Bomba descansa 30 min].
+* **Ronda 5 (Tarde fresca):** Sec 1 (16:00 - 16:28) $\rightarrow$ Sec 2 (16:30 - 16:58) $\rightarrow$ Sec 3 (17:00 - 17:28). Cierre de jornada.
 
 ---
 
@@ -210,6 +294,83 @@ A continuación se detalla la cantidad física en **kilogramos por semana** que 
 | **Mezcla Micronutrientes (Tradecorp AZ / similar)**| 0.20 kg | 0.35 kg | 0.50 kg | **0.60 kg** |
 | **Ácido Nítrico 60% (Consumo Semanal)** | ~6.0 L | ~12.0 L | ~18.0 L | **~22.0 L** |
 | **TOTAL FERTILIZANTES SÓLIDOS / SEMANA** | **37.73 kg** | **70.20 kg** | **112.65 kg** | **133.00 kg** |
+
+### 4.5. Programa con Fertilizantes Hidrosolubles de la Marca AIFA (Disponibles en Venezuela)
+
+En el mercado agroquímico venezolano (ampliamente distribuidos en el Estado Lara y Valle de Quíbor), la marca **AIFA (Fertilizantes AIFA C.A.)** ofrece una línea completa de fertilizantes grado fertirriego 100% solubles y libres de insolubles, con quelatación de microelementos:
+
+1. **Catálogo AIFA Específico para el Ciclo de Tomate:**
+   * **AIFA Fructificación / Producción (NPK 12-06-36 + ME o 13-05-40):** Fórmula de engorde rica en potasio, con micronutrientes quelatados (B, Zn, Mn, Cu, Mo). Ideal para floración avanzada y cuajado masivo.
+   * **AIFA Nitrato de Calcio Hidrosoluble ($15.5\%\text{ N} - 26.0\%\text{ CaO}$):** Pureza cristalina sin cloruros, soluble en agua dura.
+   * **AIFA MKP (Fosfato Monopotásico 0-52-34):** Aporte concentrado de fósforo y potasio con índice de salinidad mínimo.
+   * **AIFA Sulfato de Magnesio Hidrosoluble ($16\%\text{ MgO} - 13\%\text{ S}$):** Fuente de magnesio para síntesis de clorofila.
+   * **AIFA Desarrollo (NPK 20-20-20 + ME o 18-18-18):** Para fases vegetativas intermedias (semanas 4 a 7).
+   * **Quelato de Hierro Fe-EDDHA (6% Fe soluble):** Indispensable para contrarrestar el pH $7.8 - 8.2$ del agua de pozo de Quíbor, donde el hierro común precipita inmediatamente.
+
+2. **Receta Semanal Específica con Productos AIFA en Fructificación Plena (4.400 Plantas / 2.000 m²):**
+   * **TANQUE A (1.000 L de Solución Madre):**
+     * AIFA Nitrato de Calcio: **$36.0\text{ kg/semana}$**
+     * Quelato de Hierro Fe-EDDHA (6%): **$1.10\text{ kg/semana}$**
+   * **TANQUE B (1.000 L de Solución Madre):**
+     * AIFA Fructificación 12-06-36 + ME: **$55.0\text{ kg/semana}$**
+     * Sulfato de Potasio Soluble (o Nitrato de Potasio suplementario): **$22.0\text{ kg/semana}$**
+     * AIFA MKP (0-52-34): **$8.0\text{ kg/semana}$**
+     * AIFA Sulfato de Magnesio: **$16.0\text{ kg/semana}$**
+     * Solubor / Boro Soluble: **$0.30\text{ kg/semana}$**
+   * **TANQUE C (Ácido Corrector de pH):**
+     * Ácido Nítrico al 60%: **$~22.0\text{ L/semana}$** (para mantener pH en $5.8 - 6.2$ y destruir bicarbonatos).
+
+---
+
+### 4.6. Alternativa de Bajo Costo en Insumo: Abonado Granulado de Aplicación Manual en Fructificación
+
+Como alternativa de menor costo de adquisición por saco en Venezuela, se puede implementar el abonado edáfico con fertilizantes granulados convencionales aplicados de forma manual durante la fructificación.
+
+#### 1. Fuentes Granuladas Comerciales Recomendadas en Venezuela:
+* **NPK 12-12-17+2MgO+TE (tipo Blaukorn / Nitrophoska Azul / FertiComplex / YaraMila Complex / formulaciones Pequiven libres de cloro):** Gránulo complejo con base en **Sulfato de Potasio (SOP)**. Es la fórmula edáfica por excelencia en Quíbor para solanáceas.
+* **Sulfato de Potasio Granulado ($\text{K}_2\text{SO}_4$ 0-0-50 + 18% S):** Gránulo estándar libre de cloro para refuerzo potásico en engorde.
+* **Nitrato de Calcio Granulado (tipo YaraLiva Tropicote o equivalente importado):** Gránulos recubiertos para aplicación al suelo sin apelmazamiento.
+
+> [!CAUTION]
+> **ADVERTENCIA VINCULANTE SOBRE EL CLORO EN QUÍBOR:**
+> Queda **terminantemente prohibido el uso de Cloruro de Potasio (KCl / 0-0-60) o fórmulas NPK convencionales a base de KCl (ej. Triple 15 estándar de $47\%\text{ Cl}^-$)**. El agua de pozo de Quíbor ya contiene entre $2.5\text{ y }4.0\text{ meq/L de Cloruros}$. La aplicación manual de KCl disparará la salinidad puntual del suelo a $>5.0\text{ dS/m}$, provocando fitotoxicidad por cloro, quemado de bordes foliares, bloqueo de calcio y aparición masiva de culillo (*blossom end rot*). Toda fuente potásica debe ser a base de Sulfato de Potasio (SOP).
+
+#### 2. Protocolo Operativo y Dosificación Manual:
+* **Dosis por Planta:** **$30\text{ a }35\text{ gramos por planta}$** cada 18 a 21 días (3 aplicaciones durante la fase de fructificación de 10 a 12 semanas).
+* **Consumo Físico por Abonada (4.400 Plantas):**
+  $$4.400\text{ plantas} \times 32\text{ g/planta} = \mathbf{140.8\text{ kg totales por abonada}} \quad (\approx 3\text{ sacos de }50\text{ kg})$$
+* **Composición de la Mezcla Física Granulada por Abonada:**
+  * NPK 12-12-17 SOP: **$70.0\text{ kg}$** ($1.4\text{ sacos}$)
+  * Sulfato de Potasio Granulado (0-0-50): **$45.0\text{ kg}$** ($0.9\text{ sacos}$)
+  * Nitrato de Calcio Granulado: **$25.8\text{ kg}$** ($0.5\text{ sacos}$)
+* **Técnica de Aplicación Manual a Suelo Descubierto (Sin Acolchado Plástico):**
+  * Al no tener acolchado, la aplicación es sumamente ágil: depositar los 32 gramos de mezcla en banda continua a **$15\text{ cm}$ del tallo**, directamente sobre la línea húmeda que genera la cinta de goteo a 40 cm.
+  * Realizar una **escarda ligera con rastrillo o escardilla superficial** para incorporar el abono a 2-3 cm de profundidad, rompiendo simultáneamente la costra salina.
+  * Activar inmediatamente un pulso de riego de 25-28 minutos en el sector para disolver los gránulos e inducir la absorción radicular.
+
+---
+
+### 4.7. Estudio Comparativo Exhaustivo: AIFA Hidrosoluble vs Granulado Manual en Fructificación
+
+A continuación se comparan técnica, agronómica y financieramente ambas estrategias para la nave de 2.000 m² en Quíbor:
+
+| Parámetro Agronómico y Económico | Estrategia 1: Fertirriego 100% Hidrosoluble AIFA | Estrategia 2: Abonado Granulado Manual (NPK 12-12-17 SOP) | Diferencia e Impacto Operativo |
+| :--- | :--- | :--- | :--- |
+| **Forma de Aplicación** | Inyección continua por cinta a 40 cm (en cada pulso diario) | Aplicación manual cada 18-21 días en banda sobre camellón | Ahorro de mano de obra con AIFA |
+| **Eficiencia de Absorción Nutricional** | **$80 – 90\%$** (nutrientes disueltos en el bulbo radicular) | **$50 – 60\%$** (pérdidas por insolubilidad y fijación) | +30% asimilación neta con hidrosoluble |
+| **Control de Salinidad ($EC_e$)** | Estable ($2.4 - 2.7\text{ dS/m}$ sin picos osmóticos) | **Picos salinos locales ($>4.5\text{ dS/m}$)** tras abonar | Menor estrés osmótico y cero culillo |
+| **Rendimiento Comercial Proyectado** | **$7.5\text{ a }8.5\text{ kg / planta}$** | **$5.5\text{ a }6.8\text{ kg / planta}$** | **Pérdida de $1.7\text{ a }2.0\text{ kg/planta}$ con granulado** |
+| **Producción Total en 2.000 m² (4.400 pl)**| **$33.0\text{ a }37.4\text{ Toneladas}$** | **$24.2\text{ a }29.9\text{ Toneladas}$** | **Brecha de $7.5\text{ a }8.8\text{ Toneladas}$ menos** |
+| **Cestas Plásticas de 20 kg Cosechadas**| **$1.650\text{ a }1.870\text{ cestas}$** | **$1.210\text{ a }1.495\text{ cestas}$** | **$-375\text{ a }-440\text{ cestas de fruta}$** |
+| **Calibre Extra / Primera (>180 g)** | **$75 – 80\%$** (calibre grueso uniforme) | **$60 – 65\%$** (mayor dispersión hacia segunda) | Tomate AIFA accede a precios premium |
+| **Costo Mensual de Fertilizantes (Est.)**| ~$850 – $950 USD / mes ($25-$30/saco 25kg) | **~$420 – $500 USD / mes** ($25-$35/saco 50kg) | **Ahorro aparente en insumo: ~$450 USD/mes** |
+| **Mano de Obra en Fertilización** | **0 jornales extra** (automatizado en cabezal) | **2 a 3 jornales por abonada** (6 a 9 jornales en ciclo) | Labor directa a suelo descubierto sin romper film |
+| **Balance Financiero Neto a Puerta de Finca**| **MÁXIMA RENTABILIDAD NETA:** Las 7.5 Ton extra ($0.65 - $0.80/kg) generan **$4.875 a $6.000 USD de ingreso bruto adicional**. | El ahorro en sacos de fertilizante ($~1.000 USD en el ciclo) no compensa la pérdida de $5.000 USD en fruta. | **El fertirriego AIFA genera +$3.800 USD netos de beneficio sobre el granulado.** |
+
+#### Recomendación Agronómica Mixta (Estrategia Híbrida Óptima a Suelo Descubierto):
+Para productores que buscan **economía de arranque sin comprometer el calibre final**:
+1. **Fondo Granulado al Preparar el Camellón:** Incorporar $50\text{ g/metro lineal}$ de NPK 12-12-17 SOP en el lomo del camellón antes del trasplante e instalar la cinta fijada con horquillas. Esto nutre el enraizamiento inicial (semanas 1 a 4) a muy bajo costo.
+2. **Fertirriego Hidrosoluble AIFA en Fructificación:** A partir de la floración y durante toda la cosecha (semanas 8 a 22), pasar al **fertirriego 100% con sales hidrosolubles AIFA** en la cinta de goteo sectorizada. Esto asegura calibre primera y suprime los jornales manuales.
 
 ---
 
@@ -340,14 +501,14 @@ La instalación de la **Hortomalla de 15×15 cm** a lo largo de los 10 camellone
 ## CAPÍTULO 8: CRONOGRAMA MAESTRO SEMANA A SEMANA (CICLO DE 24 SEMANAS)
 
 ```
-Semana  0: Preparación de camas, instalación de cinta de goteo, solarización y mulch plata/negro.
-Semanas 1-2: Trasplante plántulas (12-15 cm, 4 hojas verdaderas). Drench fungicida-enraizador. Riego Fase 1.
-Semanas 3-4: Amarre de Hortomalla al alambre superior (2.20 m). Primer deschuponado manual en seco.
+Semana  0: Nivelación y camas, instalación de cinta PC a 40 cm fijada con horquillas cada 6-8 m, prueba de presión en los 3 sectores.
+Semanas 1-2: Trasplante plántulas (12-15 cm, 4 hojas verdaderas). Drench fungicida-enraizador. Riego Fase 1 en 3 sectores.
+Semanas 3-4: Amarre de Hortomalla al alambre superior (2.20 m). Primer deschuponado manual en seco y escarda superficial.
 Semanas 5-7: Fase vegetativa acelerada. Encaminado en cuadros 15x15 cm. Inicia fertirriego Fase 2.
-Semanas 8-9: Inicio de floración masiva. Primera aplicación de Calcio-Boro foliar. Riego Fase 3.
-Semanas 10-11: Primer cuajado de frutos. Despunte apical (topping) a 2.20 m al llegar al alambre maestro.
+Semanas 8-9: Inicio de floración masiva. Primera aplicación de Calcio-Boro foliar. Riego Fase 3 en 3 sectores.
+Semanas 10-11: Primer cuajado de frutos. Despunte apical (topping) a 2.20 m al llegar al alambre maestro. Escarda de costra.
 Semana  12: Inicio de cosecha racimos 1 y 2. Deshoje basal de las primeras 2 hojas senescentes.
-Semanas 13-20: Pico de cosecha continua (2 a 3 cortes por semana). Fertirriego Fase 4 (K:N 2.2).
+Semanas 13-20: Pico de cosecha continua (2 a 3 cortes por semana). Fertirriego Fase 4 (K:N 2.2). Limpieza periódica de filtro de discos.
 Semanas 21-23: Cosecha de racimos superiores (7 y 8). Cierre gradual de fertirriego (Fase 5).
 Semana  24: Cosecha final completa, retiro de restos vegetales fuera de la nave y desinfección total.
 ```
@@ -357,6 +518,8 @@ Semana  24: Cosecha final completa, retiro de restos vegetales fuera de la nave 
 ## CONCLUSIONES AGRONÓMICAS
 
 1. **Eficiencia Máxima en 2.000 m²:** La configuración de 10 camellones dobles de 100 m aloja con holgura a **4.400 plantas**, garantizando pasillos de 1.20 m para una cosecha ágil y libre de tropiezos.
-2. **Blindaje contra la Salinidad:** Los pulsos fraccionados de 12 a 18 minutos con goteros autocompensantes PC/ND a 1.20 L/h empujan las sales fuera del bulbo radicular, permitiendo cultivar con agua de pozo de Quíbor ($EC_w = 1.4\text{ dS/m}$) sin quemaduras foliares ni "culillo".
-3. **Erradicación de Costos de Mano de Obra:** La combinación de **Hortomalla 15×15 cm y despunte apical a 2.20 m** reduce el requerimiento de personal a **solo 1 trabajador a tiempo parcial** para el manejo cultural de la nave (3 jornales/mes), generando un ahorro económico superior a $4.500 USD por ciclo respecto al sistema de hilo tradicional.
-4. **Sanidad Profesional:** La rotación química estricta (IRAC 6, 10A, 23, 5, 29 / FRAC 3, 7, M02, M05) y el protocolo antiviral protegen la inversión contra el único vector incontrolable por malla (los ácaros) y el virus rugoso (*ToBRFV*).
+2. **Sectorización Hidráulica Perfecta para Bomba 1" 1.5 HP (220V):** La división en **3 sectores balanceados ($2.40\text{ a }3.20\text{ m}^3\text{/h}$)** permite operar el sistema con el motor existente de 1.5 HP dentro de su zona de mayor rendimiento y presión ($2.5\text{ a }3.2\text{ bar}$), asegurando que los 5.000 goteros autorregulantes a 40 cm funcionen con total precisión.
+3. **Protección Tridimensional contra Algas de Laguna:** La incorporación de una **canastilla flotante con boya** a 50 cm de profundidad y una **batería de filtro de discos de anillas ranuradas de 120 mesh (130 micras)** en 1.5" o 2" resuelve el grave problema de sedimentos y algas verdes propio de almacenar agua de pozo en lagunas de tierra a cielo abierto.
+4. **Manejo a Suelo Descubierto sin Acolchado:** La sujeción de la cinta con horquillas cada 6-8 m y el protocolo de escarda superficial ligera (descostrado) previenen el ascenso capilar salino y controlan malezas, agilizando además la fertilización granulada directa.
+5. **Erradicación de Costos de Mano de Obra:** La combinación de **Hortomalla 15×15 cm y despunte apical a 2.20 m** reduce el requerimiento de personal a **solo 1 trabajador a tiempo parcial** para el manejo cultural de la nave (3 jornales/mes), generando un ahorro económico superior a $4.500 USD por ciclo respecto al sistema de hilo tradicional.
+6. **Sanidad Profesional:** La rotación química estricta (IRAC 6, 10A, 23, 5, 29 / FRAC 3, 7, M02, M05) y el protocolo antiviral protegen la inversión contra el único vector incontrolable por malla (los ácaros) y el virus rugoso (*ToBRFV*).

@@ -17,21 +17,22 @@ El presente documento establece el **protocolo técnico, hidrogeológico, mecán
        Coord: 9°53'20.0"N 69°35'35.0"W (~700 msnm)
        Q_bombeo = 2.0 a 2.5 L/s (7.2 - 9.0 m³/h)
        Operación: 2.0 a 2.5 horas/día
-              |
-              v
-       [ DESARENADOR HIDROCICLÓN (2") ]  <--- Separación centrífuga de arenas (>75 micras)
-              |
-              v
-       [ RESERVORIO REGULADOR AUSTRALIANO (80 m³) ] <--- 5 días de autonomía de reserva
-       (Ecualización térmica, desgasificación, sedimentación)
-              |
-              v
-       [ CABEZAL DE FERTIRRIEGO NAVE ] <--- Bomba 5.5 HP (12.0 m³/h a 3.0 bar con VFD)
-       Inyección Tanque A (Ca-Fe), Tanque B (P-K-Mg) y Tanque C (Ácido Nítrico 60%)
-              |
-              v
-       [ 10 CAMELLONES DOBLES / 10.000 GOTEROS PC/ND (1.20 L/h) ] en Nave 2.000 m²
-       ========================================================================================
+              [ DESARENADOR HIDROCICLÓN (2") ]  <--- Separación centrífuga de arenas (>75 micras)
+               |
+               v
+        [ LAGUNA DE TIERRA / RESERVORIO A CIELO ABIERTO ] <--- Almacenamiento y sedimentación
+        (Regulación térmica y amortiguación de cortes eléctricos)
+               |
+               v
+        [ CANASTILLA / PICHINCHA FLOTANTE CON BOYA ] <--- Malla inox 1.5-2.0 mm a 50 cm bajo agua
+               |
+               v
+        [ MOTOR ELÉCTRICO 220V 1" 1.5 HP + FILTRO DE DISCOS 120 MESH (130 µm) ] <--- Operación a 2.4 - 3.2 m³/h
+        Inyección Tanque A (Ca-Fe), Tanque B (P-K-Mg) y Tanque C (Ácido Nítrico 60%)
+               |
+               v
+        [ 3 SECTORES HIDRÁULICOS (2.4 a 3.2 m³/h) / 5.000 GOTEROS PC (1.60 L/h a 40 cm) ] en Nave 2.000 m²
+        ========================================================================================
 ```
 
 ---
@@ -57,25 +58,24 @@ El presente documento establece el **protocolo técnico, hidrogeológico, mecán
 
 Para certificar que el pozo es apto, debe satisfacer con holgura los siguientes consumos calculados bajo la metodología FAO-56 adaptada a Quíbor:
 
-### 2.1. Métricas de Demanda Hídrica
+### 2.1. Métricas de Demanda Hídrica (Ajustada para Suelo Descubierto sin Acolchado)
 1. **Población Vegetal:** 4.400 plantas de tomate ($2.20\text{ plantas/m}^2$).
-2. **Consumo Máximo Pico (Etapa 4: Fructificación y Cosecha en Marzo-Abril):**
-   * Demanda evapotranspirativa neta ($ET_c$): $18.50\text{ L/planta/semana}$ ($2.64\text{ L/planta/día}$).
-   * Fracción de Lavado de Sales ($LF = 20\%$ para agua con $EC_w = 1.4\text{ dS/m}$):
-     $$Lámina\ Bruta = \frac{18.50}{1 - 0.20} = \mathbf{23.125\text{ L/planta/semana}} \quad (\mathbf{3.30\text{ a }3.58\text{ L/planta/día}})$$
+2. **Consumo Máximo Pico (Etapa 4: Fructificación y Cosecha en Marzo-Abril a Suelo Descubierto):**
+   * Demanda bruta con evaporación de suelo (+18%) y Fracción de Lavado de Sales ($LF = 20\%$ para agua con $EC_w = 1.4\text{ dS/m}$): **$27.2\text{ L/planta/semana}$** ($3.89\text{ a }4.20\text{ L/planta/día}$).
    * **Volumen Diario Máximo de la Nave:**
-     $$V_{diario\_max} = 4.400\text{ plantas} \times 3.58\text{ L/día} = \mathbf{15.75\text{ m}^3\text{/día}}$$
+     $$V_{diario\_max} = 4.400\text{ plantas} \times 4.20\text{ L/día} = \mathbf{18.50\text{ m}^3\text{/día}}$$
    * **Volumen Mensual Máximo (Pico de Cosecha):**
-     $$V_{mensual\_max} = 15.75\text{ m}^3\text{/día} \times 30\text{ días} = \mathbf{472.5\text{ m}^3\text{/mes}}$$
+     $$V_{mensual\_max} = 18.50\text{ m}^3\text{/día} \times 30\text{ días} = \mathbf{555.0\text{ m}^3\text{/mes}}$$
 
-### 2.2. Caudal Instantáneo del Sistema de Riego en Nave
-* 10 camellones dobles de 100 m = 2.000 m lineales de lateral.
-* Goteros autocompensantes PC/ND a 0.20 m = 10.000 emisores de 1.20 L/h.
-* **Caudal Instantáneo de Riego:**
-  $$Q_{riego} = 10.000 \times 1.20\text{ L/h} = 12.000\text{ L/h} = \mathbf{12.00\text{ m}^3\text{/h}} \quad (\mathbf{3.33\text{ L/s}})$$
-* **Tiempo de Riego Diario Acumulado:**
-  $$T_{riego} = \frac{15.75\text{ m}^3}{12.00\text{ m}^3\text{/h}} = 1.31\text{ horas/día} \quad (78.75\text{ minutos/día})$$
-  *(Distribuido en 7 pulsos de 11.2 minutos a lo largo de la jornada).*
+### 2.2. Caudal Instantáneo, Bomba de 1.5 HP y Sectorización en 3 Bloques
+* 10 camellones dobles de 100 m = 2.000 m lineales de lateral de cinta de goteo pesada (5.000 goteros PC a 0.40 m de 1.60 L/h).
+* **Caudal Total Simultáneo de Nave:** $8.00\text{ m}^3\text{/h}$ ($2.22\text{ L/s}$).
+* **Limitación de la Bomba de 1" 1.5 HP:** Entrega un caudal óptimo de **$2.4\text{ a }3.2\text{ m}^3\text{/h}$** a $2.5 - 3.2\text{ bar}$. Al ser insuficiente para regar toda la nave junta, se divide en **3 sectores hidráulicos**:
+  * **Sector 1 (Camellones 1 a 3):** 1.500 goteros PC = **$2.40\text{ m}^3\text{/h}$** ($40\text{ L/min}$).
+  * **Sector 2 (Camellones 4 a 7):** 2.000 goteros PC = **$3.20\text{ m}^3\text{/h}$** ($53.3\text{ L/min}$).
+  * **Sector 3 (Camellones 8 a 10):** 1.500 goteros PC = **$2.40\text{ m}^3\text{/h}$** ($40\text{ L/min}$).
+* **Filtración:** Batería de filtro de discos de **120 mesh / 130 micras** (1.5" o 2") para retener algas y arcillas de la laguna de tierra.
+* **Tiempo de Riego Diario Acumulado por Sector:** Cada sector recibe **5 pulsos de 28 minutos diarios** ($2.31\text{ h/día/sector}$). El motor opera $6.93\text{ horas/día}$ en rondas alternadas.
 
 ### 2.3. Caudal Seguro de Explotación Requerido del Pozo ($Q_{seguro}$)
 * **Con Reservorio de Almacenamiento Regulador de $80\text{ m}^3$ (RECOMENDADO):**
@@ -346,3 +346,201 @@ Con la ejecución de este protocolo técnico, el productor del predio en el **Va
 1. **Seguridad Hídrica:** Conoce el caudal sustentable real del pozo ($Q_{seguro}$) para no arriesgar la inversión de 4.400 plantas de tomate ($19.8$ toneladas vivas bajo malla espaldera).
 2. **Eficiencia de Costos:** Al instalar un **reservorio regulador de $80\text{ m}^3$**, el pozo solo necesita producir **$2.0\text{ L/s}$ durante 2.2 horas diarias**, reduciendo en un 70% el consumo eléctrico y desgaste mecánico en comparación con el bombeo directo.
 3. **Blindaje Agronómico:** El análisis químico permite ajustar desde el día 1 la receta de ácido nítrico en el Tanque C y la fracción de lavado ($LF=20\%$), eliminando el riesgo de quemado por salinidad y taponamiento de goteros en el Valle de Quíbor.
+
+---
+
+## 8. PROYECTO EJECUTIVO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO (120 m)
+
+Si en el predio georreferenciado (**$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$**) se requiere **perforar un pozo nuevo desde cero**, los siguientes cálculos y especificaciones de ingeniería rigen la obra civil y electromecánica de acuerdo a los estudios hidrogeológicos del CIDIAT-ULA / SHYQ (Jégat et al., 2012) y las normas internacionales AWWA A100:
+
+```mermaid
+graph TD
+    A["Emplazamiento: 9°53'20.0''N, 69°35'35.0''W (Cota ~700 msnm)"] --> B["Perforación Rotaria 12¼'' hasta 120 m (Lodo bentonítico biodegradable)"]
+    B --> C["Perfilaje Geofísico Eléctrico SP y Resistividad Normal (16'' y 64'')"]
+    C --> D["Diseño de Entubado Definitivo: 82 m Tubo Ciego + 38 m Filtro Johnson AISI 304"]
+    D --> E["Inyección Sello Sanitario Cemento-Bentonita (0 a 15 m)"]
+    D --> F["Empaque Anular de Grava Cuarzosa 2-4 mm: 6.65 m³ (15 a 120 m)"]
+    E & F --> G["Desarrollo por Air-Lift (200 PSI) + Tripolifosfato de Sodio (24h)"]
+    G --> H["Prueba de Bombeo Escalonada y Continua 24h (Q = 2.50 L/s)"]
+    H --> I["Instalación Electrobomba Sumergible 5.5 a 7.5 HP a 98 m (HMT = 100.5 mca)"]
+```
+
+---
+
+### 8.1. Columna Litoestratigráfica Pronosticada (0.00 a 120.00 m)
+
+De acuerdo a la interpolación del modelo **Visual MODFLOW 4.1 (CIDIAT-ULA)** en el abanico aluvial cuaternario de la Quebrada Atarigua hacia la depresión central:
+
+| Tramo Profundidad (m) | Espesor (m) | Descripción Litoestratigráfica Detallada | Potencial Hidrogeológico | Función en el Diseño |
+| :---: | :---: | :--- | :--- | :--- |
+| **0.00 – 2.50** | 2.50 | Suelo vegetal franco-arcilloso marrón oscuro, raíces finas. | No saturado / Infiltración | Descarte superficial |
+| **2.50 – 15.00** | 12.50 | Arcillas limosas plásticas marrones y ocres compactas con lentes delgados de arena fina. | Impermeable / Confinante | **Anclaje de Sello Sanitario de Cemento** |
+| **15.00 – 35.00** | 20.00 | Arenas medias a gruesas con gravillas subangulares intercaladas con limos arenosos. | Acuífero colgado superior (seco / baja carga) | Tubería ciega + Grava |
+| **35.00 – 68.00** | 33.00 | Arcillas grisáceas plásticas muy compactas con intercalaciones de limos consolidados. | Acuitardo / Confinante regional | Tubería ciega + Grava |
+| **68.00 – 82.00** | 14.00 | **Lente de grava fina a media (2 - 10 mm) y arena cuarzosa limpia**. $NE \approx 72\text{ m}$. | **Acuífero Saturado Superior** ($K \approx 15\text{ m/d}$) | **Tramo 1 Filtro Johnson (12 m)** |
+| **82.00 – 86.00** | 4.00 | Arcilla limosa arenosa gris oscuro firme. | Lente separador semipermeable | Tubería ciega intermedia |
+| **86.00 – 112.00** | 26.00 | **Acuífero Principal Quíbor-Atarigua: Gravas arenosas y arenas gruesas de cuarzo y lidita**. | **Acuífero Saturado Primario** ($K \approx 30 - 45\text{ m/d}$) | **Tramo 2 Filtro Johnson (26 m)** |
+| **112.00 – 116.00** | 4.00 | Arenas finas con matriz arcillosa transicional. | Baja permeabilidad | Tubería ciega |
+| **116.00 – 120.00** | 4.00 | Lutitas y arcillitas esquistosas duras terciarias (**Basamento Formación Morán**). | Impermeable (Fondo de Pozo) | **Tubo Decantador + Tapón Cónico** |
+
+---
+
+### 8.2. Método de Perforación y Diámetros del Barreno
+
+1. **Método Seleccionado:** Perforación rotaria con mesa rotaria o *top-drive*, con circulación directa de lodo a base de agua dulce y bentonita sódica de alta dispersión (aditivada con polímero biodegradable tipo PAC).
+   * **Parámetros del Lodo:** Densidad $1.04 - 1.07\text{ g/cm}^3$, Viscosidad Marsh $34 - 38\text{ segundos}$, Filtrado API $< 10\text{ cm}^3$, revoque de pared fino ($<1.0\text{ mm}$) para evitar colapso de las gravas sin plastificar el acuífero.
+2. **Dimensionamiento del Barreno:**
+   * **Tramo Superficial ($0.00\text{ a }18.00\text{ m}$):** Perforación en diámetro de **$14''\text{ a }16''$ ($355 - 406\text{ mm}$)** para alojar tubería de revestimiento superficial (conductor) de $10''$ o $12''$ y permitir el sello sanitario de cemento de $3''$ de espesor radial.
+   * **Tramo Profundo ($18.00\text{ a }120.00\text{ m}$):** Perforación con broca tricono de dientes o insertos de carburo de tungsteno en diámetro de **$12\ \frac{1}{4}''$ ($311.15\text{ mm}$)**.
+   * **Espacio Anular Libre:** Con tubería de revestimiento de $6''$ ($168\text{ mm}$ ext) o $8''$ ($219\text{ mm}$ ext), queda un espacio anular radial de **$46\text{ a }71\text{ mm}$**, óptimo para la colocación gravitacional del empaque de grava con tubería auxiliar de inyección (*tremie pipe*).
+
+---
+
+### 8.3. Diseño Mecánico del Entubado (Casing) y Filtros Johnson
+
+Para garantizar una vida útil superior a **30 años** resistiendo las aguas moderadamente salinas de Quíbor ($EC_w = 1.4\text{ dS/m}$):
+
+* **Tubería de Revestimiento Ciega:**
+  * **Material:** Tubería de Acero al Carbono para Pozo Profundo ASTM A53 Grado B (o ASTM A139), diámetro nominal **$6''$ ($168.3\text{ mm}$ ext, espesor $6.35\text{ mm} = 1/4''$)** o **$8''$ ($219.1\text{ mm}$ ext)** con extremos biselados para soldadura eléctrica de penetración completa.
+  * **Metraje de Tubo Ciego:**
+    * $0.00 - 70.00\text{ m}$: 70.00 m (zona no saturada y sello).
+    * $82.00 - 86.00\text{ m}$: 4.00 m (estrato limo-arcilloso intermedio).
+    * $112.00 - 116.00\text{ m}$: 4.00 m (estrato inferior).
+    * $116.00 - 120.00\text{ m}$: 4.00 m (**Tubo decantador o calderín** para recolección de sedimentos, cerrado en su base con tapón cónico de acero soldado).
+    * **Total Tubería Ciega:** **$82.00\text{ metros}$**.
+* **Filtros de Captación (Screens):**
+  * **Tecnología:** Filtro continuo de ranura en espiral continua tipo **Johnson en Acero Inoxidable AISI 304**, alambre con perfil en V invertida soldado por resistencia sobre varillas axiales.
+  * **Abertura de Ranura (Slot Size):** **$0.030''$ ($0.75\text{ mm}$)** a **$0.040''$ ($1.00\text{ mm}$)**, reteniendo el 90% de la grava cuarzosa seleccionada.
+  * **Metraje de Filtros Activos:**
+    * Tramo 1 ($68.00 - 82.00\text{ m}$): **$12.00\text{ metros}$**.
+    * Tramo 2 ($86.00 - 112.00\text{ m}$): **$26.00\text{ metros}$**.
+    * **Total Rejilla Filtrante:** **$38.00\text{ metros}$**.
+  * **Verificación de Velocidad de Entrada (Criterio de Driscoll):**
+    Para un caudal de diseño de $2.50\text{ L/s}$ ($0.0025\text{ m}^3\text{/s}$):
+    * Área abierta del filtro Johnson ($6''$, ranura $0.030''$): $\approx 18\% = 0.095\text{ m}^2\text{ por metro lineal}$.
+    * Área abierta total ($38\text{ m}$ de rejilla): $A_o = 38 \times 0.095 = 3.61\text{ m}^2$.
+    * Velocidad de paso del agua a través de la rejilla:
+      $$V_e = \frac{Q}{A_o} = \frac{0.0025\text{ m}^3\text{/s}}{3.61\text{ m}^2} = \mathbf{0.00069\text{ m/s}} = \mathbf{0.069\text{ cm/s}}$$
+    * Como **$V_e = 0.0007\text{ m/s} \ll 0.03\text{ m/s}$ ($0.1\text{ ft/s}$)** (límite máximo recomendado para evitar turbulencia, desprendimiento de arena y precipitación de carbonatos), el pozo operará con régimen **completamente laminar**, garantizando eficiencia hidráulica $\ge 85\%$ y nulo arrastre de finos a los goteros.
+
+---
+
+### 8.4. Cálculo del Empaque de Grava y Sello Sanitario
+
+```
+                     ESQUEMA DE CORTE TRANSVERSAL DEL POZO (120 m)
+ 0 m  |========================[ BROCAL DE CONCRETO ]========================|
+      |   SELLO SANITARIO: Lechada Cemento-Bentonita (0 a 15 m)               |
+15 m  |-----------------------------------------------------------------------|
+      |                                                                       |
+      |   EMPAQUE DE GRAVA CUARZOSA (2.0 a 4.0 mm)                            |
+      |   Espacio anular entre barreno 12¼" y tubería de 6" (15 a 120 m)      |
+      |                                                                       |
+      |   Tubería Ciega de Acero ASTM A53 6" (0 a 70 m)                       |
+      |                                                                       |
+70 m  |==================[ NIVEL ESTÁTICO NE = 72.0 m ]======================|
+      |   FILTRO JOHNSON AISI 304 Ranura 0.030" (Tramo 1: 68 a 82 m)          |
+82 m  |------------------ Tubo Ciego Separador (82 a 86 m) -------------------|
+      |                                                                       |
+      |   [ POSICIÓN ELECTROBOMBA SUMERGIBLE 7.5 HP a 98.0 m ]                |
+      |   (Dentro de tubo ciego o con manga de enfriamiento, ND = 90.0 m)     |
+      |                                                                       |
+86 m  |   FILTRO JOHNSON AISI 304 Ranura 0.030" (Tramo 2: 86 a 112 m)         |
+112 m |-----------------------------------------------------------------------|
+      |   Tubo Ciego Inferior (112 a 116 m)                                   |
+116 m |-----------------------------------------------------------------------|
+      |   TUBO DECANTADOR / CALDERÍN (116 a 120 m) + TAPÓN CÓNICO DE FONDO    |
+120 m |====================[ FONDO DE PERFORACIÓN ]===========================|
+```
+
+1. **Sello Sanitario Superficial ($0.00\text{ a }15.00\text{ m}$):**
+   * Previene la percolación directa de escorrentías superficiales, fertilizantes o pesticidas hacia el acuífero.
+   * Volumen de lechada (cemento Portland Tipo I con 4% de bentonita prehidratada, relación agua/cemento 0.45):
+     $$V_{sello} = \frac{\pi}{4} \times \left(D_{barreno}^2 - D_{tubo}^2\right) \times L_{sello} \times 1.20$$
+     $$V_{sello} = \frac{\pi}{4} \times \left(0.355^2 - 0.168^2\right) \times 15.0 \times 1.20 \approx \mathbf{1.38\text{ m}^3\text{ de lechada}}$$ ($\approx 28\text{ sacos de cemento}$ inyectados por método *tremie* desde 15 m hacia superficie).
+2. **Empaque de Grava Cuarzosa ($15.00\text{ a }120.00\text{ m}$):**
+   * **Especificación:** Grava silícea cuarzosa de río, redondeada, lavada y clasificada en rango granulométrico **$2.0\text{ a }4.0\text{ mm}$ (Malla 1/8" - 1/4")**, contenido de sílice $\text{SiO}_2 > 95\%$, solubilidad en ácido clorhídrico $< 5\%$, libre de fragmentos de yeso o caliza.
+   * **Volumen Teórico del Espacio Anular ($L = 105.00\text{ m}$):**
+     * Diámetro del barreno: $12\ \frac{1}{4}'' = 0.311\text{ m}$.
+     * Diámetro exterior del tubo: $6\ \frac{5}{8}'' = 0.168\text{ m}$.
+     $$A_{anular} = \frac{\pi}{4} \times \left(0.311^2 - 0.168^2\right) = 0.0538\text{ m}^2$$
+     * Factor de seguridad por cavernas y ensanchamiento de pared en arenas: $1.25$ ($+25\%$).
+     $$V_{grava} = 0.0538\text{ m}^2 \times 105.0\text{ m} \times 1.25 = \mathbf{7.06\text{ m}^3}$$
+   * **Tonelaje Requerido:** Considerando densidad aparente de la grava cuarzosa seca de $1.60\text{ Ton/m}^3$:
+     $$\text{Peso Total} = 7.06\text{ m}^3 \times 1.60\text{ Ton/m}^3 = \mathbf{11.30\text{ Toneladas}}\ (\approx 226\text{ sacos de 50 kg})$$
+
+---
+
+### 8.5. Perfilaje Geofísico Eléctrico y Desarrollo del Pozo
+
+1. **Perfilaje Geofísico de Pozo Abierto (Wireline Logging):**
+   * Una vez alcanzados los 120 m y antes de introducir la tubería de revestimiento, se retira la sarta y se introduce la sonda eléctrica para registrar:
+     * **Potencial Espontáneo (SP):** Identifica permeabilidad y espesor exacto de los estratos arenosos frente a las arcillas.
+     * **Resistividad Normal Corta (16"):** Mide resistividad en la zona invadida por lodo.
+     * **Resistividad Normal Larga (64"):** Mide la resistividad del agua virgen de formación.
+   * **Ajuste de Taller:** Con el perfilaje se confirman los cortes decimétricos exactos donde se posicionarán los 38 m de filtros Johnson (pudiendo mover los tramos unos metros si las gravas están ligeramente desplazadas).
+2. **Desarrollo y Desarenado del Pozo:**
+   * **Dispersión Química:** Inyección de solución de tripolifosfato de sodio ($2.0\text{ kg/m}^3$ de agua en el pozo) para disgregar el revoque de bentonita de las paredes.
+   * **Pistoneo y Descompresión:** Pistón de doble copa de caucho con válvula check accionado a lo largo de cada tramo de rejilla.
+   * **Lavado por *Air-Lift*:** Tubería concéntrica con compresor de alta presión (**$180 - 220\text{ PSI}$**, $750\text{ CFM}$) inyectando aire intermitente para inducir golpes de ariete controlados y expulsar los finos hasta lograr:
+     * Contenido de arena medido en Cono Imhoff: **$< 10\text{ g/m}^3$ ($< 10\text{ ppm}$)** tras 15 minutos de bombeo.
+     * Turbidez: **$< 5\text{ NTU}$**.
+
+---
+
+### 8.6. Dimensionamiento Hidráulico y Selección de la Electrobomba Sumergible
+
+* **Caudal de Explotación Objetivo:** **$Q = 2.50\text{ L/s} = 9.00\text{ m}^3\text{/h}$** ($39.6\text{ GPM}$).
+* **Nivel Estático ($NE$):** $72.0\text{ m}$.
+* **Nivel Dinámico Previsto ($ND$):** **$90.0\text{ m}$** (con abatimiento $s = 18.0\text{ m}$, capacidad específica estimada $Sc = Q/s = 0.14\text{ L/s/m}$).
+* **Profundidad de Instalación de la Bomba:** **$98.0\text{ metros}$** (dentro de tramo ciego o equipada con camisa de flujo/manga de enfriamiento para garantizar velocidad de fluido $>0.15\text{ m/s}$ sobre el motor).
+* **Cálculo de la Carga Manométrica Total ($HMT$):**
+  $$HMT = ND + H_{descarga} + h_{f\_columna} + h_{f\_cabezal}$$
+  * $ND = 90.0\text{ mca}$.
+  * Altura de descarga sobre terreno (borde de reservorio / laguna): $H_{descarga} = 3.5\text{ mca}$.
+  * Pérdida por fricción en $98\text{ m}$ de tubería de impulsión de acero galvanizado o PVC cédula 80 de $2''$ ($Q = 2.5\text{ L/s}$, $hf \approx 5.5\text{ m/100m}$): $hf_{columna} = 5.4\text{ mca}$.
+  * Pérdida en cabezal de pozo, codos, válvula de retención check y macromedidor: $hf_{cabezal} = 1.6\text{ mca}$.
+  $$HMT = 90.0 + 3.5 + 5.4 + 1.6 = \mathbf{100.5\text{ mca}}\ (\approx 143\text{ PSI})$$
+* **Potencia Hidráulica y Eléctrica:**
+  $$HP_{teorico} = \frac{Q\text{ [L/s]} \times HMT\text{ [m]}}{75 \times \eta_{bomba}} = \frac{2.50 \times 100.5}{75 \times 0.65} = \mathbf{5.15\text{ HP}}$$
+* **Selección del Equipo Comercial:**
+  * **Bomba:** Electrobomba sumergible de pozo profundo multietapa de **$7.5\text{ HP}$ ($5.5\text{ kW}$)**, $4''$ o $6''$, caudal nominal $9.0\text{ m}^3\text{/h}$ a $105\text{ mca}$, cuerpo e impulsores en acero inoxidable AISI 304.
+  * **Motor:** Motor sumergible rebobinable o sellado de $7.5\text{ HP}$, 220V o 440V trifásico, 60 Hz, con cable sumergible plano sumergible de cobre 3×10 AWG + tierra.
+  * **Control:** Tablero eléctrico con Variador de Frecuencia (VFD) o arrancador suave, relé térmico de sobrecarga, sensor de nivel contra trabajo en seco (sondas de nivel) y descargador de sobretensiones transitorias para rayos.
+
+---
+
+### 8.7. Cómputos Métricos y Presupuesto Referencial de Perforación (Valle de Quíbor)
+
+Precios referenciales de contratistas de perforación en la región Centro-Occidental de Venezuela (Estado Lara):
+
+| Ítem | Descripción de la Partida | Unidad | Cantidad | P. Unitario (USD) | Total (USD) |
+| :---: | :--- | :---: | :---: | :---: | :---: |
+| **01** | Movilización, instalación y desmovilización de equipo rotario de perforación, lodos y campamento al predio en Quíbor. | Global | 1.00 | $1.500,00 | $1.500,00 |
+| **02** | Perforación en diámetro superficial de $14''$ ($0 - 18\text{ m}$) y suministro/colocación de tubería conductora de acero $10''$. | Metro | 18.00 | $95,00 | $1.710,00 |
+| **03** | Inyección de sello sanitario de cemento Portland Tipo I + 4% bentonita en espacio anular ($0 - 15\text{ m}$). | Global | 1.00 | $650,00 | $650,00 |
+| **04** | Perforación rotaria en formación aluvial en diámetro de $12\ \frac{1}{4}''$ con lodo bentonítico biodegradable ($18 - 120\text{ m}$). | Metro | 102.00 | $75,00 | $7.650,00 |
+| **05** | Perfilaje geofísico eléctrico de pozo abierto: Curvas de Potencial Espontáneo (SP) y Resistividad Normal Corta/Larga (16"-64"). | Pozo | 1.00 | $600,00 | $600,00 |
+| **06** | Suministro e instalación de tubería de revestimiento ciega de acero al carbono ASTM A53 6" ($e = 6.35\text{ mm}$), soldada. | Metro | 82.00 | $48,00 | $3.936,00 |
+| **07** | Suministro e instalación de filtro continuo Johnson en Acero Inoxidable AISI 304 ranura $0.030''$ ($0.75\text{ mm}$) de 6". | Metro | 38.00 | $110,00 | $4.180,00 |
+| **08** | Suministro, transporte y colocación por tubería auxiliar de empaque de grava cuarzosa silícea de río $2.0 - 4.0\text{ mm}$ ($11.3\text{ Ton}$). | Ton | 11.30 | $65,00 | $734,50 |
+| **09** | Limpieza química con tripolifosfato de sodio, pistoneo mecánico y desarrollo por *air-lift* a alta presión (200 PSI) hasta turbidez $<5\text{ NTU}$. | Horas | 24.00 | $55,00 | $1.320,00 |
+| **10** | Prueba de bombeo escalonada (4 pasos) + prueba continua de 24 horas con bomba de prueba y medición piezométrica de recuperación Theis. | Global | 1.00 | $1.200,00 | $1.200,00 |
+| **11** | Toma de muestra y análisis físico-químico completo en laboratorio certificado (CE, pH, cationes, aniones, boro, sodio, RAS, CSR). | Muestra | 1.00 | $220,00 | $220,00 |
+| **12** | Suministro de electrobomba sumergible de 7.5 HP (AISI 304, trifásica 220V/440V, 9 m³/h a 105 mca) + $100\text{ m}$ cable 3×10 AWG. | Unidad | 1.00 | $2.450,00 | $2.450,00 |
+| **13** | Suministro e instalación de columna de impulsión de acero galvanizado cédula 40 de $2''$ con uniones roscadas y guaya de seguridad ($98\text{ m}$). | Metro | 98.00 | $22,00 | $2.156,00 |
+| **14** | Tablero de control y potencia con Variador de Frecuencia (VFD) de 7.5 HP, protecciones térmicas, pararrayos y sondas de nivel. | Global | 1.00 | $1.150,00 | $1.150,00 |
+| **15** | Cabezal de pozo metálico con sello sanitario hermético, manómetro de glicerina, válvula de retención check 2" y llave de purga. | Global | 1.00 | $450,00 | $450,00 |
+| **SUBTOTAL** | **Costo Integral de Perforación, Entubado y Equipamiento del Pozo (120 m)** | | | | **$29.906,50** |
+| **IMPREVISTOS** | Contingencias geológicas de obra (5%) | | | | **$1.495,33** |
+| **TOTAL GENERAL** | **Inversión Llave en Mano para Garantizar Agua 100% Autónoma (Valle de Quíbor)** | | | | **$31.401,83** |
+
+---
+
+### 8.8. Rentabilidad y Amortización Frente al Invernadero de 2.000 m²
+
+* **Producción Anual Estimada del Invernadero:** **$33.0\text{ a }37.4\text{ Toneladas}$ de tomate** por ciclo (con fertilización hidrosoluble AIFA o híbrida).
+* **Ingreso Bruto Proyectado:** A un precio promedio en finca de **$0.90\text{ a }1.20\text{ USD/kg}$ ($18 - 24\text{ USD}$ por caja de 20 kg)**:
+  $$\text{Ingreso Ciclo} = 35.000\text{ kg} \times 1.00\text{ USD/kg} = \mathbf{35.000\text{ USD / ciclo}}$$
+* **Impacto del Pozo Propio:** Un pozo propio certificado de 120 m blindado contra el abatimiento del acuífero asegura el agua para **múltiples naves consecutivas (hasta 8.000 - 10.000 m² futuros)**, amortizando la inversión en apenas **1.5 a 2 ciclos de producción**, eliminando por completo la dependencia de camiones cisterna (costo en Quíbor: $30 - 45\text{ USD}$ por cisterna de 10.000 L, lo que representaría más de $2.500\text{ USD/mes}$ en agua comprada).
+

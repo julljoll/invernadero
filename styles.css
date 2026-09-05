@@ -32,6 +32,24 @@
   --rose-main: #f43f5e;
   --rose-glow: rgba(244, 63, 94, 0.2);
 
+  /* Semántica Agrícola Específica (Skill agri-ux-ui) */
+  --agri-water: #0ea5e9;
+  --agri-water-glow: rgba(14, 165, 233, 0.25);
+  --agri-water-bg: rgba(14, 165, 233, 0.12);
+  --agri-plant: #10b981;
+  --agri-plant-glow: rgba(16, 185, 129, 0.25);
+  --agri-plant-bg: rgba(16, 185, 129, 0.12);
+  --agri-sun: #f59e0b;
+  --agri-sun-glow: rgba(245, 158, 11, 0.25);
+  --agri-sun-bg: rgba(245, 158, 11, 0.12);
+  --agri-danger: #ef4444;
+  --agri-danger-glow: rgba(239, 68, 68, 0.25);
+  --agri-danger-bg: rgba(239, 68, 68, 0.12);
+  --agri-pump: #a855f7;
+  --agri-pump-glow: rgba(168, 85, 247, 0.25);
+  --agri-pump-bg: rgba(168, 85, 247, 0.12);
+  --agri-soil: #d97706;
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
@@ -938,6 +956,644 @@ body {
 }
 
 /* ==========================================================================
+   AGRI-UX-UI ENHANCEMENTS: FARM PIPELINE, TOOLTIPS, OPERATOR ACTIONS & HYDRAULICS
+   ========================================================================== */
+
+/* 1. Farm Pipeline Navigation (Línea de Proceso Productivo) */
+.pipeline-bar-wrapper {
+  background: rgba(15, 23, 42, 0.94);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.6rem 1.5rem;
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 68px;
+  z-index: 80;
+}
+
+.pipeline-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--emerald-main) transparent;
+}
+
+.pipeline-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding-right: 0.75rem;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.pipeline-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.pipeline-step:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-accent);
+  transform: translateY(-1px);
+}
+
+.pipeline-step.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--emerald-main);
+  box-shadow: 0 0 12px var(--emerald-glow);
+}
+
+.pipeline-step-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.pipeline-step.active .pipeline-step-num {
+  background: var(--emerald-main);
+  color: #06261c;
+}
+
+.pipeline-step-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.pipeline-step.active .pipeline-step-label {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.pipeline-step-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  .pipeline-step-sub {
+    display: inline;
+  }
+}
+
+.pipeline-arrow {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  user-select: none;
+}
+
+/* 2. Micro-Glossary Tooltips (Comprensión Agronómica Inmediata) */
+.tooltip-term {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border-bottom: 1.5px dashed var(--cyan-light);
+  cursor: help;
+  position: relative;
+  color: inherit;
+  font-weight: inherit;
+  transition: color var(--transition-fast);
+}
+
+.tooltip-term:hover,
+.tooltip-term.is-open {
+  color: var(--cyan-light);
+}
+
+.tooltip-icon {
+  font-size: 0.7em;
+  opacity: 0.7;
+  color: var(--cyan-light);
+}
+
+.tooltip-bubble {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  width: 290px;
+  max-width: 90vw;
+  background: #0f172a;
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 16px rgba(56, 189, 248, 0.2);
+  z-index: 1000;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  pointer-events: none;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.tooltip-term:hover .tooltip-bubble,
+.tooltip-term.is-open .tooltip-bubble {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-title {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--cyan-light);
+}
+
+.tooltip-tag {
+  font-size: 0.65rem;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--cyan-light);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+}
+
+.tooltip-simple {
+  font-size: 0.78rem;
+  color: #e2e8f0;
+  margin-bottom: 0.35rem;
+}
+
+.tooltip-tech {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* 3. Ficha de Turno Diario para el Regador (Field Action Sheet) */
+.field-action-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(24, 15, 40, 0.9));
+  border: 2px solid var(--emerald-main);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  box-shadow: 0 8px 30px rgba(16, 185, 129, 0.15);
+}
+
+.action-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+}
+
+.action-badge {
+  background: var(--emerald-main);
+  color: #042f1a;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.action-sector-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-sector-box.sector-current {
+  border-color: var(--emerald-main);
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.action-sector-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+.action-sector-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.action-time-window {
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--amber-main);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.action-params-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.action-param-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.action-param-item strong {
+  color: #ffffff;
+}
+
+.operator-checklist {
+  margin-top: 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.checklist-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.checklist-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.checklist-item input[type="checkbox"] {
+  accent-color: var(--emerald-main);
+  margin-top: 0.2rem;
+  cursor: pointer;
+}
+
+/* 4. Esquema Interactivo de la Cadena Hidráulica */
+.hydraulic-circuit-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.circuit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.circuit-selector-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.circuit-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.circuit-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.circuit-btn.active {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: var(--agri-water);
+  color: #fff;
+  box-shadow: 0 0 12px var(--agri-water-glow);
+}
+
+.circuit-flow-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.flow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.flow-node.active-flow {
+  border-color: var(--agri-water);
+  background: rgba(14, 165, 233, 0.1);
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.25);
+}
+
+.flow-icon {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.flow-node-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.flow-node-sub {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-top: 0.15rem;
+}
+
+.flow-connector {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .circuit-flow-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .flow-node {
+    flex: 1;
+    min-width: 110px;
+  }
+  .flow-connector {
+    display: flex;
+    color: var(--agri-water);
+    font-size: 1.1rem;
+    font-weight: 800;
+    padding: 0 0.25rem;
+    animation: pulseArrow 1.5s infinite;
+  }
+}
+
+@keyframes pulseArrow {
+  0%, 100% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.sector-telemetry-box {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid var(--border-focus);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem;
+  text-align: center;
+}
+
+.telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.telemetry-lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.telemetry-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+  color: var(--emerald-light);
+}
+
+/* 5. Módulo de Perforación de Pozo Profundo (Well Drilling Engineering) */
+.well-drilling-card {
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(20, 29, 47, 0.92));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.drill-visual-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(10, 14, 23, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.drill-layer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  transition: all var(--transition-fast);
+  border-left: 5px solid transparent;
+}
+
+.drill-layer:hover {
+  transform: translateX(4px);
+}
+
+.layer-sanitary {
+  background: rgba(239, 68, 68, 0.12);
+  border-left-color: var(--rose-main);
+}
+
+.layer-upper-sand {
+  background: rgba(245, 158, 11, 0.08);
+  border-left-color: var(--amber-main);
+}
+
+.layer-confining {
+  background: rgba(148, 163, 184, 0.08);
+  border-left-color: #64748b;
+}
+
+.layer-aquifer-1 {
+  background: rgba(56, 189, 248, 0.14);
+  border-left-color: var(--cyan-light);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+}
+
+.layer-aquifer-main {
+  background: rgba(16, 185, 129, 0.15);
+  border-left-color: var(--emerald-main);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.2);
+}
+
+.layer-bedrock {
+  background: rgba(107, 114, 128, 0.18);
+  border-left-color: #9ca3af;
+}
+
+.drill-layer-depth {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 90px;
+}
+
+.drill-layer-desc {
+  flex: 1;
+  color: var(--text-primary);
+  padding: 0 0.5rem;
+}
+
+.drill-layer-component {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.badge-casing {
+  background: rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.badge-screen {
+  background: rgba(16, 185, 129, 0.25);
+  color: var(--emerald-light);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+}
+
+.badge-seal {
+  background: rgba(244, 63, 94, 0.25);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.badge-pump {
+  background: rgba(168, 85, 247, 0.25);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+}
+
+.drill-budget-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
    FOOTER
    ========================================================================== */
 .app-footer {
@@ -962,3 +1618,306 @@ body {
 .footer-meta {
   font-family: var(--font-mono);
 }
+
+/* ==========================================================================
+   AGRI-UX-UI: MODO SOL DIRECTO (ULTRA-CONTRASTE EXTERIOR WCAG AAA)
+   Diseñado para lectura clara bajo radiación solar intensa en Quíbor (UV > 11)
+   ========================================================================== */
+.btn-sunlight-toggle {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: var(--amber-main);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-sunlight-toggle:hover {
+  background: rgba(245, 158, 11, 0.3);
+  transform: translateY(-1px);
+}
+
+.badge-offline {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: var(--emerald-light);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+}
+
+/* Modo Sol Directo Activo */
+body.sunlight-mode {
+  --bg-main: #ffffff !important;
+  --bg-secondary: #f8fafc !important;
+  --bg-card: #ffffff !important;
+  --bg-card-hover: #f1f5f9 !important;
+  --bg-input: #ffffff !important;
+  --border-subtle: #000000 !important;
+  --border-focus: #000000 !important;
+  --text-primary: #000000 !important;
+  --text-secondary: #111827 !important;
+  --text-muted: #1f2937 !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode .app-header {
+  background: #ffffff !important;
+  border-bottom: 2.5px solid #000000 !important;
+}
+
+body.sunlight-mode .pipeline-bar-wrapper {
+  background: #ffffff !important;
+  border-bottom: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .card,
+body.sunlight-mode .field-action-card,
+body.sunlight-mode .hydraulic-circuit-card,
+body.sunlight-mode .metric-box,
+body.sunlight-mode .info-card,
+body.sunlight-mode .action-sector-box,
+body.sunlight-mode .well-drilling-card,
+body.sunlight-mode .drill-budget-card {
+  background: #ffffff !important;
+  border: 2.5px solid #000000 !important;
+  box-shadow: 4px 4px 0px #000000 !important;
+  color: #000000 !important;
+}
+
+body.sunlight-mode h1,
+body.sunlight-mode h2,
+body.sunlight-mode h3,
+body.sunlight-mode h4,
+body.sunlight-mode strong,
+body.sunlight-mode .metric-val,
+body.sunlight-mode .telemetry-val,
+body.sunlight-mode .flow-node-title,
+body.sunlight-mode .action-sector-title {
+  color: #000000 !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .badge,
+body.sunlight-mode .tag,
+body.sunlight-mode .filter-btn,
+body.sunlight-mode .nav-btn,
+body.sunlight-mode .circuit-btn,
+body.sunlight-mode .pipeline-step {
+  border: 2px solid #000000 !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .nav-btn.active,
+body.sunlight-mode .filter-btn.active,
+body.sunlight-mode .circuit-btn.active,
+body.sunlight-mode .pipeline-step.active {
+  background: #fef08a !important; /* Amarillo de advertencia de alto contraste */
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+body.sunlight-mode .input-select,
+body.sunlight-mode .input-num {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .flow-node {
+  background: #ffffff !important;
+  border: 2px solid #000000 !important;
+}
+
+body.sunlight-mode .flow-connector {
+  color: #000000 !important;
+  font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   BOTÓN EXPORTADOR DE FICHA DE TURNO (WHATSAPP / IMPRIMIR)
+   ========================================================================== */
+.btn-export-shift {
+  background: #10b981;
+  color: #ffffff;
+  border: 1px solid #059669;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-export-shift:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.45);
+}
+
+.btn-export-shift:active {
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   SIMULADOR ECONÓMICO DINÁMICO (AIFA VS GRANULADO VS HÍBRIDO)
+   ========================================================================== */
+.economic-simulator-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.econ-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.econ-input-item {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.econ-input-item label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.econ-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.econ-input-wrapper span {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--emerald-light);
+}
+
+.econ-input-wrapper input {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.econ-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.econ-result-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.econ-result-card.featured {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.econ-result-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.econ-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.8rem;
+}
+
+.econ-net-margin {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 2px dashed rgba(255, 255, 255, 0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.econ-net-val {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* Stepper Controls para dedos enguantados en campo */
+.stepper-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stepper-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-fast);
+}
+
+.stepper-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: var(--emerald-main);
+}
+
+.stepper-btn:active {
+  transform: scale(0.95);
+}
+

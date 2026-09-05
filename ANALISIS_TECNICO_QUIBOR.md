@@ -193,6 +193,6 @@ El modelo matemático de CIDIAT-ULA / SHYQ (93 filas × 121 columnas, 11.253 nod
 ### 7.3. Doble Escenario de Operación del Invernadero (2.000 m²)
 1. **Escenario A (Actual - Pozo Profundo en Cono Abatido):** $EC_w = 1.4\text{ dS/m}$, pH 7.8, requiere **$LF = 20\%$** de lavado salino, consumo de **$15.08\text{ m}^3\text{/día}$** y neutralización con $22\text{ L/semana de Ácido Nítrico 60\%}$.
 2. **Escenario B (Conexión Yacambú / Recarga Artificial):** Agua dulce andina ($EC_w \approx 0.5\text{ dS/m}$), reduciendo la fracción de lavado a **$LF = 6.5\%$**, con consumo de **$12.45\text{ m}^3\text{/día}$ (ahorro de $2.63\text{ m}^3\text{/día} = 17.5\%$ de agua)** y 65% menos gasto en ácido nítrico.
-3. **Eficiencia Hídrica de la Casa de Malla:** Gracias a los goteros autocompensantes PC/ND a 1.2 L/h y al mulch plata/negro, la Casa de Malla produce **2.5 kg de tomate por m³ de agua** frente a 0.9 kg/m³ en campo abierto, constituyendo la única alternativa sostenible ante el agotamiento del acuífero de Quíbor.
+3. **Eficiencia Hídrica de la Casa de Malla:** Gracias a los goteros autorregulantes PC a 40 cm y al microclima protegido con riego sectorizado en 3 bloques, la Casa de Malla produce **2.3 a 2.5 kg de tomate por m³ de agua** frente a 0.9 kg/m³ en campo abierto, constituyendo la única alternativa sostenible ante el agotamiento del acuífero de Quíbor.
 
 

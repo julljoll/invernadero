@@ -100,14 +100,96 @@ const PEST_DATA = [
 ];
 
 // ==========================================================================
+// 2.5 NÚCLEO DE ESTADO REACTIVO CENTRALIZADO (FarmState)
+// Unifica y sincroniza la fuente de agua, sectorización, nutrición y pozo
+// ==========================================================================
+const FarmState = {
+  waterSource: 'pozo', // 'pozo' | 'yacambu'
+  wellFlowLs: 2.5,
+  wellDepthM: 120,
+  drillDiamInches: 12.25,
+  casingDiamInches: 6.0,
+  screenType: 'johnson',
+  activeSector: '1', // '1', '2', '3', 'all'
+  fertilizerRegime: 'aifa', // 'aifa' | 'granulado' | 'hibrido'
+  prodStageIdx: 3,
+  sunlightMode: false,
+
+  // Precios dinámicos mercado venezolano
+  priceAifaBag25kg: 65.0,
+  priceGranulatedBag50kg: 38.0,
+  priceTomatoCesta20kg: 18.0,
+
+  listeners: [],
+  subscribe(fn) {
+    this.listeners.push(fn);
+  },
+  notify(changed) {
+    this.listeners.forEach(fn => {
+      try { fn(this, changed); } catch (e) { console.error("Error FarmState listener:", e); }
+    });
+    this.persist();
+  },
+  setState(updates) {
+    let changed = false;
+    for (const [k, v] of Object.entries(updates)) {
+      if (this[k] !== v) {
+        this[k] = v;
+        changed = true;
+      }
+    }
+    if (changed) this.notify(updates);
+  },
+  persist() {
+    try {
+      localStorage.setItem("agroquibor_state_v1", JSON.stringify({
+        waterSource: this.waterSource,
+        wellFlowLs: this.wellFlowLs,
+        wellDepthM: this.wellDepthM,
+        fertilizerRegime: this.fertilizerRegime,
+        sunlightMode: this.sunlightMode,
+        priceAifaBag25kg: this.priceAifaBag25kg,
+        priceGranulatedBag50kg: this.priceGranulatedBag50kg,
+        priceTomatoCesta20kg: this.priceTomatoCesta20kg
+      }));
+    } catch (e) {}
+  },
+  loadPersisted() {
+    try {
+      const saved = localStorage.getItem("agroquibor_state_v1");
+      if (saved) {
+        const p = JSON.parse(saved);
+        if (p.waterSource) this.waterSource = p.waterSource;
+        if (p.wellFlowLs) this.wellFlowLs = Number(p.wellFlowLs);
+        if (p.wellDepthM) this.wellDepthM = Number(p.wellDepthM);
+        if (p.fertilizerRegime) this.fertilizerRegime = p.fertilizerRegime;
+        if (typeof p.sunlightMode === "boolean") this.sunlightMode = p.sunlightMode;
+        if (p.priceAifaBag25kg) this.priceAifaBag25kg = Number(p.priceAifaBag25kg);
+        if (p.priceGranulatedBag50kg) this.priceGranulatedBag50kg = Number(p.priceGranulatedBag50kg);
+        if (p.priceTomatoCesta20kg) this.priceTomatoCesta20kg = Number(p.priceTomatoCesta20kg);
+      }
+    } catch (e) {}
+  }
+};
+
+// ==========================================================================
 // 3. INICIALIZACIÓN Y MANEJO DE PESTAÑAS (TABS)
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
+  FarmState.loadPersisted();
+  initPwaOffline();
+  initSunlightMode();
   initTabs();
+  initFarmPipeline();
+  initHydraulicCircuit();
+  initShiftExport();
+  initEconomicSimulator();
+  initTooltips();
   initClimateTab();
   initVentilationCalculator();
   initIrrigationCalculator();
   initWellValidationCalculator();
+  initWellDrillingCalculator();
   initPestMatrix();
   initCanvasVisualizer();
   initBlueprintViewers();
@@ -137,26 +219,473 @@ function initBlueprintViewers() {
   }
 }
 
-function initTabs() {
+/**
+ * Activa una pestaña y sincroniza tanto los botones superiores
+ * como los pasos de la barra del Pipeline Agrícola.
+ */
+function activateTab(targetTabId, scrollTargetId = null) {
   const tabButtons = document.querySelectorAll(".nav-btn");
   const tabPanes = document.querySelectorAll(".tab-pane");
+  const pipelineSteps = document.querySelectorAll(".pipeline-step");
 
+  tabButtons.forEach(b => {
+    if (b.getAttribute("data-tab") === targetTabId) {
+      b.classList.add("active");
+    } else {
+      b.classList.remove("active");
+    }
+  });
+
+  tabPanes.forEach(p => {
+    if (p.id === targetTabId) {
+      p.classList.add("active");
+      if (targetTabId === "tab-estructura") {
+        requestAnimationFrame(drawGreenhouseStructure);
+      }
+    } else {
+      p.classList.remove("active");
+    }
+  });
+
+  // Sincronizar paso del pipeline
+  pipelineSteps.forEach(s => {
+    const pTab = s.getAttribute("data-pipeline-tab");
+    const pScroll = s.getAttribute("data-pipeline-scroll");
+
+    if (pTab === targetTabId) {
+      if (scrollTargetId && pScroll === scrollTargetId) {
+        s.classList.add("active");
+      } else if (!scrollTargetId && !pScroll) {
+        s.classList.add("active");
+      } else if (!scrollTargetId && pScroll) {
+        s.classList.remove("active");
+      } else {
+        s.classList.remove("active");
+      }
+    } else {
+      s.classList.remove("active");
+    }
+  });
+
+  if (scrollTargetId) {
+    setTimeout(() => {
+      const el = document.getElementById(scrollTargetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 120);
+  }
+}
+
+function initTabs() {
+  const tabButtons = document.querySelectorAll(".nav-btn");
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-      tabButtons.forEach(b => b.classList.remove("active"));
-      tabPanes.forEach(p => p.classList.remove("active"));
-
-      btn.classList.add("active");
       const targetTabId = btn.getAttribute("data-tab");
-      const targetPane = document.getElementById(targetTabId);
-      if (targetPane) {
-        targetPane.classList.add("active");
-        if (targetTabId === "tab-estructura") {
-          // Re-dibujar canvas al activar la pestaña
-          requestAnimationFrame(drawGreenhouseStructure);
+      activateTab(targetTabId);
+    });
+  });
+}
+
+function initFarmPipeline() {
+  const pipelineSteps = document.querySelectorAll(".pipeline-step");
+  pipelineSteps.forEach(step => {
+    step.addEventListener("click", () => {
+      const targetTabId = step.getAttribute("data-pipeline-tab");
+      const scrollId = step.getAttribute("data-pipeline-scroll");
+      activateTab(targetTabId, scrollId);
+    });
+  });
+}
+
+/**
+ * Esquema Interactivo de la Cadena Hidráulica:
+ * Simulación de ruta del caudal (Laguna ➔ Pichincha ➔ Bomba ➔ Filtro ➔ Matriz ➔ Sector)
+ * y actualización en vivo de telemetría y resaltado de la Ficha de Turno Diario.
+ */
+function initHydraulicCircuit() {
+  const circuitButtons = document.querySelectorAll(".circuit-btn");
+  const nodeTargetTitle = document.getElementById("node-target-title");
+  const nodeTargetSub = document.getElementById("node-target-sub");
+  const telemSector = document.getElementById("telem-sector-name");
+  const telemRows = document.getElementById("telem-sector-rows");
+  const telemFlow = document.getElementById("telem-flow-rate");
+  const telemFlowLmin = document.getElementById("telem-flow-lmin");
+  const telemEmitters = document.getElementById("telem-emitter-qty");
+  const telemPlants = document.getElementById("telem-plants-served");
+  const telemPulse = document.getElementById("telem-pulse-duration");
+  const telemPressure = document.getElementById("telem-pressure");
+
+  const actionBoxes = {
+    "1": document.getElementById("action-box-sec1"),
+    "2": document.getElementById("action-box-sec2"),
+    "3": document.getElementById("action-box-sec3")
+  };
+
+  const sectorConfigs = {
+    "1": {
+      name: "Sector 1 (Camellones 1 al 3)",
+      rows: "8 Hileras de Tomate (100 m)",
+      flow: "2.40 m³/h",
+      lmin: "40.0 L/minuto",
+      emitters: "1.500 Goteros PC (40 cm)",
+      plants: "1.320 Plantas (1.60 L/h)",
+      pulse: "28 Minutos (Turno 1: 06:00-06:28)",
+      pressure: "2.8 a 3.2 bar (Cabezal)",
+      targetTitle: "Sector 1 Activo",
+      targetSub: "1.500 goteros PC 40cm"
+    },
+    "2": {
+      name: "Sector 2 (Camellones 4 al 7)",
+      rows: "8 Hileras de Tomate (100 m)",
+      flow: "3.20 m³/h",
+      lmin: "53.3 L/minuto",
+      emitters: "2.000 Goteros PC (40 cm)",
+      plants: "1.760 Plantas (1.60 L/h)",
+      pulse: "28 Minutos (Turno 2: 06:35-07:03)",
+      pressure: "2.5 a 2.9 bar (Cabezal)",
+      targetTitle: "Sector 2 Activo",
+      targetSub: "2.000 goteros PC 40cm"
+    },
+    "3": {
+      name: "Sector 3 (Camellones 8 al 10)",
+      rows: "8 Hileras de Tomate (100 m)",
+      flow: "2.40 m³/h",
+      lmin: "40.0 L/minuto",
+      emitters: "1.500 Goteros PC (40 cm)",
+      plants: "1.320 Plantas (1.60 L/h)",
+      pulse: "28 Minutos (Turno 3: 07:10-07:38)",
+      pressure: "2.8 a 3.2 bar (Cabezal)",
+      targetTitle: "Sector 3 Activo",
+      targetSub: "1.500 goteros PC 40cm"
+    },
+    "all": {
+      name: "Ciclo Completo (3 Sectores)",
+      rows: "24 Hileras Totales (2.000 m²)",
+      flow: "2.4 a 3.2 m³/h (Rotativo)",
+      lmin: "Total Nave: 8.0 m³/h",
+      emitters: "5.000 Goteros PC Totales",
+      plants: "4.400 Plantas Productivas",
+      pulse: "84 Minutos Total (3×28m)",
+      pressure: "Auto-compensación Activa",
+      targetTitle: "Tren Secuencial 1➔2➔3",
+      targetSub: "84 min de bombeo diario"
+    }
+  };
+
+  circuitButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      circuitButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const secKey = btn.getAttribute("data-circuit-sector");
+      const cfg = sectorConfigs[secKey];
+      if (!cfg) return;
+
+      FarmState.setState({ activeSector: secKey });
+
+      if (nodeTargetTitle) nodeTargetTitle.textContent = cfg.targetTitle;
+      if (nodeTargetSub) nodeTargetSub.textContent = cfg.targetSub;
+      if (telemSector) telemSector.textContent = cfg.name;
+      if (telemRows) telemRows.textContent = cfg.rows;
+      if (telemFlow) telemFlow.textContent = cfg.flow;
+      if (telemFlowLmin) telemFlowLmin.textContent = cfg.lmin;
+      if (telemEmitters) telemEmitters.textContent = cfg.emitters;
+      if (telemPlants) telemPlants.textContent = cfg.plants;
+      if (telemPulse) telemPulse.textContent = cfg.pulse;
+      if (telemPressure) telemPressure.textContent = cfg.pressure;
+
+      // Resaltar en la Ficha de Turno Diario
+      Object.keys(actionBoxes).forEach(k => {
+        const box = actionBoxes[k];
+        if (!box) return;
+        if (secKey === "all" || secKey === k) {
+          box.classList.add("sector-current");
+        } else {
+          box.classList.remove("sector-current");
         }
+      });
+    });
+  });
+}
+
+// ==========================================================================
+// 3.1 PWA OFFLINE MANAGER & SERVICE WORKER
+// ==========================================================================
+function initPwaOffline() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(() => {
+      const badge = document.getElementById('pwa-status-badge');
+      if (badge) {
+        badge.style.display = 'inline-flex';
+        badge.textContent = '🟢 Offline Listo (PWA)';
+      }
+    }).catch(() => {
+      const badge = document.getElementById('pwa-status-badge');
+      if (badge) badge.style.display = 'none';
+    });
+  }
+}
+
+// ==========================================================================
+// 3.2 MODO SOL DIRECTO (AGRI-UX-UI ALTO CONTRASTE EXTERIOR)
+// ==========================================================================
+function initSunlightMode() {
+  const btn = document.getElementById('btn-toggle-sunlight');
+  const btnText = document.getElementById('sunlight-btn-text');
+  if (!btn) return;
+
+  function applyMode(active) {
+    if (active) {
+      document.body.classList.add('sunlight-mode');
+      if (btnText) btnText.textContent = 'Modo Noche / Estándar';
+      btn.style.background = '#000000';
+      btn.style.color = '#fef08a';
+      btn.style.borderColor = '#000000';
+    } else {
+      document.body.classList.remove('sunlight-mode');
+      if (btnText) btnText.textContent = 'Modo Sol Directo';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.style.borderColor = '';
+    }
+  }
+
+  if (FarmState.sunlightMode) {
+    applyMode(true);
+  }
+
+  btn.addEventListener('click', () => {
+    const nextState = !document.body.classList.contains('sunlight-mode');
+    applyMode(nextState);
+    FarmState.setState({ sunlightMode: nextState });
+  });
+}
+
+// ==========================================================================
+// 3.3 EXPORTADOR DE FICHA DE TURNO DIARIO (WHATSAPP / IMPRIMIR)
+// ==========================================================================
+function initShiftExport() {
+  const btn = document.getElementById('btn-export-shift');
+  if (!btn) return;
+
+  btn.addEventListener('click', () => {
+    const isYacambu = FarmState.waterSource === 'yacambu';
+    const fertRegime = FarmState.fertilizerRegime;
+    const stageName = PROD_STAGES[FarmState.prodStageIdx] ? PROD_STAGES[FarmState.prodStageIdx].name : "Fructificación y Cosecha";
+
+    let fertText = "";
+    if (fertRegime === 'granulado') {
+      fertText = "• Régimen: Abono Granulado Manual NPK 12-12-17 SOP (32 g/planta cada 20 días en banda a 15 cm del tallo).\n• Tanque A: Fe-EDDHA (6%) 1.10 kg/sem.\n• Tanque B: Microelementos 0.60 kg + Ácido Bórico 0.30 kg/sem.";
+    } else if (fertRegime === 'hibrido') {
+      fertText = "• Régimen: Estrategia Híbrida (Fondo granulado + AIFA en goteo).\n• Tanque A: Nitrato de Calcio AIFA 25 kg + KNO3 12 kg + Fe-EDDHA 1 kg/sem.\n• Tanque B: AIFA 12-6-36 35 kg + MKP 6 kg + SOP 14 kg + MgSO4 10 kg/sem.";
+    } else {
+      fertText = "• Régimen: 100% AIFA Hidrosoluble.\n• Tanque A: Nitrato de Calcio AIFA 36 kg + KNO3 15 kg + Fe-EDDHA 1.1 kg/sem.\n• Tanque B: KNO3 30 kg + MKP 10 kg + K2SO4 24 kg + MgSO4 16 kg + Micro 0.6 kg/sem.";
+    }
+
+    const acidText = isYacambu ? "• Tanque C: ~8.0 L/sem Ácido Nítrico 60% (Agua dulce Yacambú CE 0.5 dS/m)" : "• Tanque C: ~22.0 L/sem Ácido Nítrico 60% (Pozo salino CE 1.4 dS/m - Bicarbonatos altos)";
+
+    const now = new Date();
+    const dateStr = now.toLocaleDateString("es-VE", { year: 'numeric', month: 'long', day: 'numeric' });
+
+    const pauta = `📋 PAUTA DIARIA DE RIEGO Y FERTILIZACIÓN — CASA DE MALLA QUÍBOR (2.000 m²)
+📅 Fecha: ${dateStr}
+🌱 Etapa: ${stageName} (4.400 Plantas)
+💧 Fuente de Agua: ${isYacambu ? "Trasvase Yacambú (CE 0.5 dS/m | LF 6.5%)" : "Pozo Profundo Abatido (CE 1.4 dS/m | LF 20%)"}
+⚡ Equipo de Bombeo: Motor 1.5 HP 220V + Filtro Discos 120 Mesh
+
+⏰ TURNOS SECUENCIALES OBLIGATORIOS (BOMBA 1.5 HP):
+1️⃣ SECTOR 1 (Camellones 1 al 3 | 1.320 pl):
+   • Horario: 06:00 – 06:28 AM (28 minutos)
+   • Válvula 1 ABIERTA (2 y 3 CERRADAS)
+   • Caudal: 2.40 m³/h | Presión: 2.8 a 3.2 bar
+
+2️⃣ SECTOR 2 (Camellones 4 al 7 | 1.760 pl):
+   • Horario: 06:35 – 07:03 AM (28 minutos)
+   • Válvula 2 ABIERTA (1 y 3 CERRADAS)
+   • Caudal: 3.20 m³/h | Presión: 2.5 a 2.9 bar
+
+3️⃣ SECTOR 3 (Camellones 8 al 10 | 1.320 pl):
+   • Horario: 07:10 – 07:38 AM (28 minutos)
+   • Válvula 3 ABIERTA (1 y 2 CERRADAS)
+   • Caudal: 2.40 m³/h | Presión: 2.8 a 3.2 bar
+
+🧪 NUTRICIÓN & FERTIRRIEGO:
+${fertText}
+${acidText}
+
+⚠️ REGLAS DE ORO DE SEGURIDAD:
+1. NUNCA abrir dos válvulas a la vez (colapsaría la presión de la bomba 1.5 HP).
+2. Purgar filtro de discos al iniciar. Lavar anillos si ΔP > 0.5 bar.
+3. Al manipular ácido nítrico: verter ÁCIDO SOBRE EL AGUA, jamás agua al ácido.
+4. Desinfección de manos con leche descremada al 10% en esclusa (antiviral ToBRFV).
+
+— Generado por Asistente Agronómico Quíbor (9°53'20.0"N, 69°35'35.0"W)`;
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pauta).then(() => {
+        alert("✅ Pauta de riego copiada al portapapeles.\n\nSe abrirá WhatsApp para que puedas enviarla directamente a tu regador o mayordomo.");
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
+        window.open(whatsappUrl, '_blank');
+      }).catch(() => {
+        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
+        window.open(whatsappUrl, '_blank');
+      });
+    } else {
+      const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+  });
+}
+
+// ==========================================================================
+// 3.4 SIMULADOR ECONÓMICO DINÁMICO (AIFA VS GRANULADO VS HÍBRIDO)
+// ==========================================================================
+function initEconomicSimulator() {
+  const inputAifa = document.getElementById('input-price-aifa');
+  const inputGran = document.getElementById('input-price-granulado');
+  const inputCesta = document.getElementById('input-price-cesta');
+
+  const btnAifaMinus = document.getElementById('btn-aifa-minus');
+  const btnAifaPlus = document.getElementById('btn-aifa-plus');
+  const btnGranMinus = document.getElementById('btn-gran-minus');
+  const btnGranPlus = document.getElementById('btn-gran-plus');
+  const btnCestaMinus = document.getElementById('btn-cesta-minus');
+  const btnCestaPlus = document.getElementById('btn-cesta-plus');
+
+  if (!inputAifa || !inputGran || !inputCesta) return;
+
+  // Cargar valores iniciales desde FarmState
+  inputAifa.value = FarmState.priceAifaBag25kg;
+  inputGran.value = FarmState.priceGranulatedBag50kg;
+  inputCesta.value = FarmState.priceTomatoCesta20kg;
+
+  function calculateAndRenderEcon() {
+    const pAifa = Math.max(10, parseFloat(inputAifa.value) || 65);
+    const pGran = Math.max(10, parseFloat(inputGran.value) || 38);
+    const pCesta = Math.max(1, parseFloat(inputCesta.value) || 18);
+    const pKg = pCesta / 20.0;
+
+    FarmState.setState({
+      priceAifaBag25kg: pAifa,
+      priceGranulatedBag50kg: pGran,
+      priceTomatoCesta20kg: pCesta
+    });
+
+    const elPriceKg = document.getElementById('disp-price-kg');
+    if (elPriceKg) elPriceKg.textContent = `$${pKg.toFixed(2)} USD/kg`;
+
+    // 1. AIFA 100% Hidrosoluble (35.2 Ton = 1.760 cestas, 42 sacos 25kg)
+    const yieldAifaKg = 35200;
+    const cestasAifa = 1760;
+    const bagsAifa = 42;
+    const grossAifa = cestasAifa * pCesta;
+    const costAifa = bagsAifa * pAifa;
+    const netAifa = grossAifa - costAifa;
+    const unitCostAifa = costAifa / yieldAifaKg;
+
+    // 2. Estrategia Híbrida (33.5 Ton = 1.675 cestas, 16 sacos gran 50kg + 23 sacos aifa 25kg)
+    const yieldHibridoKg = 33500;
+    const cestasHibrido = 1675;
+    const grossHibrido = cestasHibrido * pCesta;
+    const costHibrido = (16 * pGran) + (23 * pAifa);
+    const netHibrido = grossHibrido - costHibrido;
+    const unitCostHibrido = costHibrido / yieldHibridoKg;
+
+    // 3. Granulado Manual (27.0 Ton = 1.350 cestas, 38 sacos gran 50kg)
+    const yieldGranKg = 27000;
+    const cestasGran = 1350;
+    const bagsGran = 38;
+    const grossGran = cestasGran * pCesta;
+    const costGran = bagsGran * pGran;
+    const netGran = grossGran - costGran;
+    const unitCostGran = costGran / yieldGranKg;
+
+    // Diferencial AIFA vs Granulado
+    const diffNet = netAifa - netGran;
+    const extraInvest = costAifa - costGran;
+
+    // Actualizar UI AIFA
+    const dispGrossAifa = document.getElementById('disp-econ-gross-aifa');
+    const dispCostAifa = document.getElementById('disp-econ-cost-aifa');
+    const dispUnitCostAifa = document.getElementById('disp-econ-unitcost-aifa');
+    const dispNetAifa = document.getElementById('disp-econ-net-aifa');
+
+    if (dispGrossAifa) dispGrossAifa.textContent = `$${Math.round(grossAifa).toLocaleString('en-US')} USD`;
+    if (dispCostAifa) dispCostAifa.textContent = `$${Math.round(costAifa).toLocaleString('en-US')} USD`;
+    if (dispUnitCostAifa) dispUnitCostAifa.textContent = `$${unitCostAifa.toFixed(3)} USD/kg`;
+    if (dispNetAifa) dispNetAifa.textContent = `$${Math.round(netAifa).toLocaleString('en-US')} USD`;
+
+    // Actualizar UI Híbrido
+    const dispGrossHib = document.getElementById('disp-econ-gross-hibrido');
+    const dispCostHib = document.getElementById('disp-econ-cost-hibrido');
+    const dispUnitCostHib = document.getElementById('disp-econ-unitcost-hibrido');
+    const dispNetHib = document.getElementById('disp-econ-net-hibrido');
+
+    if (dispGrossHib) dispGrossHib.textContent = `$${Math.round(grossHibrido).toLocaleString('en-US')} USD`;
+    if (dispCostHib) dispCostHib.textContent = `$${Math.round(costHibrido).toLocaleString('en-US')} USD`;
+    if (dispUnitCostHib) dispUnitCostHib.textContent = `$${unitCostHibrido.toFixed(3)} USD/kg`;
+    if (dispNetHib) dispNetHib.textContent = `$${Math.round(netHibrido).toLocaleString('en-US')} USD`;
+
+    // Actualizar UI Granulado
+    const dispGrossGran = document.getElementById('disp-econ-gross-granulado');
+    const dispCostGran = document.getElementById('disp-econ-cost-granulado');
+    const dispUnitCostGran = document.getElementById('disp-econ-unitcost-granulado');
+    const dispNetGran = document.getElementById('disp-econ-net-granulado');
+
+    if (dispGrossGran) dispGrossGran.textContent = `$${Math.round(grossGran).toLocaleString('en-US')} USD`;
+    if (dispCostGran) dispCostGran.textContent = `$${Math.round(costGran).toLocaleString('en-US')} USD`;
+    if (dispUnitCostGran) dispUnitCostGran.textContent = `$${unitCostGran.toFixed(3)} USD/kg`;
+    if (dispNetGran) dispNetGran.textContent = `$${Math.round(netGran).toLocaleString('en-US')} USD`;
+
+    // Conclusión financiera
+    const dispConclusion = document.getElementById('disp-econ-conclusion');
+    if (dispConclusion) {
+      if (diffNet > 0) {
+        dispConclusion.innerHTML = `<strong>Veredicto Económico para el Productor en Quíbor:</strong> Aunque el abono hidrosoluble AIFA requiere $${Math.round(extraInvest).toLocaleString('en-US')} USD adicionales de inversión inicial frente al granulado, genera <strong>+$${Math.round(diffNet).toLocaleString('en-US')} USD netos adicionales de ganancia</strong> por ciclo productivo, gracias a su mayor cuajado, menor aborto floral y 75% de frutos de Primera calidad.`;
+      } else {
+        dispConclusion.innerHTML = `<strong>Veredicto de Mercado Bajo:</strong> A precios reducidos de tomate, la <strong>Estrategia Híbrida</strong> minimiza el riesgo financiero inicial asegurando un margen de $${Math.round(netHibrido).toLocaleString('en-US')} USD.`;
+      }
+    }
+  }
+
+  // Event Listeners Inputs
+  inputAifa.addEventListener('input', calculateAndRenderEcon);
+  inputGran.addEventListener('input', calculateAndRenderEcon);
+  inputCesta.addEventListener('input', calculateAndRenderEcon);
+
+  // Steppers
+  if (btnAifaMinus) btnAifaMinus.addEventListener('click', () => { inputAifa.value = Math.max(10, parseFloat(inputAifa.value) - 1); calculateAndRenderEcon(); });
+  if (btnAifaPlus) btnAifaPlus.addEventListener('click', () => { inputAifa.value = parseFloat(inputAifa.value) + 1; calculateAndRenderEcon(); });
+
+  if (btnGranMinus) btnGranMinus.addEventListener('click', () => { inputGran.value = Math.max(10, parseFloat(inputGran.value) - 1); calculateAndRenderEcon(); });
+  if (btnGranPlus) btnGranPlus.addEventListener('click', () => { inputGran.value = parseFloat(inputGran.value) + 1; calculateAndRenderEcon(); });
+
+  if (btnCestaMinus) btnCestaMinus.addEventListener('click', () => { inputCesta.value = Math.max(1, (parseFloat(inputCesta.value) - 0.5).toFixed(1)); calculateAndRenderEcon(); });
+  if (btnCestaPlus) btnCestaPlus.addEventListener('click', () => { inputCesta.value = (parseFloat(inputCesta.value) + 0.5).toFixed(1); calculateAndRenderEcon(); });
+
+  calculateAndRenderEcon();
+}
+
+/**
+ * Micro-Glosario Agronómico Interactivo:
+ * Soporte para pantallas táctiles en campo (smartphones/tablets).
+ */
+function initTooltips() {
+  const tooltips = document.querySelectorAll(".tooltip-term");
+  tooltips.forEach(tt => {
+    tt.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = tt.classList.contains("is-open");
+      tooltips.forEach(t => t.classList.remove("is-open"));
+      if (!isOpen) {
+        tt.classList.add("is-open");
       }
     });
+  });
+
+  document.addEventListener("click", () => {
+    tooltips.forEach(t => t.classList.remove("is-open"));
   });
 }
 
@@ -851,13 +1380,13 @@ const PROD_STAGES = [
   {
     idx: 0,
     nombre: "1. Enraizamiento / Establecimiento (Sem 1 a 3)",
-    grossLiters: 9.4,
-    netLiters: 8.0,
+    grossLiters: 11.1,
+    netLiters: 9.4,
     lf: 15,
-    dailyM3: 5.91,
+    dailyM3: 7.00,
     pulses: 3,
-    pulseTime: 11,
-    schedule: "08:30 | 11:30 | 15:00",
+    pulseTime: 18,
+    schedule: "08:00 | 11:30 | 15:00 (Sectores 1, 2 y 3 en secuencia)",
     ec: "1.9 dS/m",
     ph: "5.8 - 6.0 (Relación N:K 1:1.3)",
     tankA: {
@@ -869,107 +1398,107 @@ const PROD_STAGES = [
       detail: "MKP (0-52-34): 6.0 kg | K₂SO₄: 4.0 kg | MgSO₄: 5.0 kg | Boro: 0.08 kg | Micro: 0.20 kg"
     },
     tankC: {
-      total: "~6.0 L/sem",
+      total: "~7.0 L/sem",
       detail: "Ácido Nítrico 60% (regula pH de gotero a 5.8 y neutraliza bicarbonatos)"
     }
   },
   {
     idx: 1,
     nombre: "2. Crecimiento Vegetativo (Sem 4 a 7)",
-    grossLiters: 13.4,
-    netLiters: 11.0,
+    grossLiters: 15.8,
+    netLiters: 13.0,
     lf: 18,
-    dailyM3: 8.43,
+    dailyM3: 9.95,
     pulses: 4,
-    pulseTime: 13,
-    schedule: "08:00 | 10:30 | 13:00 | 15:30",
+    pulseTime: 19,
+    schedule: "08:00 | 10:30 | 13:00 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
     ec: "2.2 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:1.5)",
     tankA: {
       total: "42.70 kg/sem",
-      detail: "Nitrato de Calcio: 22.0 kg | Nitrato de Potasio: 20.0 kg | Fe-EDDHA: 0.70 kg"
+      detail: "AIFA Nitrato de Calcio: 22.0 kg | AIFA Nitrato de Potasio: 20.0 kg | Fe-EDDHA: 0.70 kg"
     },
     tankB: {
       total: "27.50 kg/sem",
-      detail: "MKP: 8.0 kg | K₂SO₄: 10.0 kg | MgSO₄: 9.0 kg | Boro: 0.15 kg | Micro: 0.35 kg"
+      detail: "AIFA MKP: 8.0 kg | K₂SO₄: 10.0 kg | AIFA MgSO₄: 9.0 kg | Boro: 0.15 kg | Micro: 0.35 kg"
     },
     tankC: {
-      total: "~12.0 L/sem",
+      total: "~14.0 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor a pH 5.9)"
     }
   },
   {
     idx: 2,
     nombre: "3. Floración y Cuajado (Sem 8 a 11)",
-    grossLiters: 20.0,
-    netLiters: 16.0,
+    grossLiters: 23.6,
+    netLiters: 18.9,
     lf: 20,
-    dailyM3: 12.57,
-    pulses: 6,
-    pulseTime: 15,
-    schedule: "07:30 | 09:30 | 11:30 | 13:30 | 15:30",
+    dailyM3: 14.85,
+    pulses: 5,
+    pulseTime: 22,
+    schedule: "07:30 | 09:30 | 11:30 | 13:30 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
     ec: "2.5 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:1.9)",
     tankA: {
       total: "67.90 kg/sem",
-      detail: "Nitrato de Calcio: 32.0 kg | Nitrato de Potasio: 35.0 kg | Fe-EDDHA: 0.90 kg"
+      detail: "AIFA Nitrato de Calcio: 32.0 kg | AIFA Nitrato de Potasio: 35.0 kg | Fe-EDDHA: 0.90 kg"
     },
     tankB: {
       total: "44.75 kg/sem",
-      detail: "MKP: 12.0 kg | K₂SO₄: 18.0 kg | MgSO₄: 14.0 kg | Boro: 0.25 kg | Micro: 0.50 kg"
+      detail: "AIFA MKP: 12.0 kg | K₂SO₄: 18.0 kg | AIFA MgSO₄: 14.0 kg | Boro: 0.25 kg | Micro: 0.50 kg"
     },
     tankC: {
-      total: "~18.0 L/sem",
+      total: "~20.0 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza agua alcalina de pozo)"
     }
   },
   {
     idx: 3,
     nombre: "4. Fructificación Masiva y Cosecha (Sem 12 a 22)",
-    grossLiters: 23.1,
-    netLiters: 18.5,
+    grossLiters: 27.2,
+    netLiters: 21.8,
     lf: 20,
-    dailyM3: 14.53,
-    pulses: 7,
-    pulseTime: 16,
-    schedule: "07:00 | 08:30 | 10:00 | 11:30 | 13:00 | 14:30 | 16:00",
+    dailyM3: 17.10,
+    pulses: 5,
+    pulseTime: 28,
+    schedule: "07:00 | 09:30 | 11:45 | 14:00 | 16:00 (Sectores 1, 2 y 3 en secuencia)",
     ec: "2.7 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:2.2)",
     tankA: {
       total: "52.10 kg/sem",
-      detail: "Nitrato de Calcio: 36.0 kg | Nitrato de Potasio: 15.0 kg | Fe-EDDHA (6%): 1.10 kg"
+      detail: "AIFA Nitrato de Calcio: 36.0 kg | AIFA Nitrato de Potasio: 15.0 kg | Fe-EDDHA (6%): 1.10 kg"
     },
     tankB: {
       total: "80.90 kg/sem",
-      detail: "KNO₃: 30.0 kg | MKP: 10.0 kg | K₂SO₄: 24.0 kg | MgSO₄: 16.0 kg | Boro: 0.30 kg | Micro: 0.60 kg"
+      detail: "AIFA Fructificación 12-6-36: 50.0 kg | AIFA MKP: 8.0 kg | K₂SO₄: 20.0 kg | AIFA MgSO₄: 16.0 kg | Boro: 0.30 kg"
     },
     tankC: {
-      total: "~22.0 L/sem",
+      total: "~25.0 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor y aporta nitrógeno nítrico)"
     }
   },
   {
     idx: 4,
     nombre: "5. Fin de Ciclo / Cierre (Sem 23 a 24)",
-    grossLiters: 15.9,
-    netLiters: 13.5,
+    grossLiters: 18.8,
+    netLiters: 16.0,
     lf: 15,
-    dailyM3: 9.98,
+    dailyM3: 11.80,
     pulses: 4,
-    pulseTime: 14,
-    schedule: "08:00 | 11:00 | 13:30 | 15:30",
+    pulseTime: 22,
+    schedule: "08:00 | 11:00 | 13:30 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
     ec: "2.3 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 2.0)",
     tankA: {
       total: "32.60 kg/sem",
-      detail: "Nitrato de Calcio: 20.0 kg | Nitrato de Potasio: 12.0 kg | Fe-EDDHA: 0.60 kg"
+      detail: "AIFA Nitrato de Calcio: 20.0 kg | Nitrato de Potasio: 12.0 kg | Fe-EDDHA: 0.60 kg"
     },
     tankB: {
       total: "42.30 kg/sem",
-      detail: "KNO₃: 15.0 kg | MKP: 6.0 kg | K₂SO₄: 12.0 kg | MgSO₄: 9.0 kg | Micro: 0.30 kg"
+      detail: "AIFA 12-6-36: 25.0 kg | AIFA MKP: 6.0 kg | K₂SO₄: 10.0 kg | AIFA MgSO₄: 9.0 kg"
     },
     tankC: {
-      total: "~14.0 L/sem",
+      total: "~16.0 L/sem",
       detail: "Ácido Nítrico 60% (limpieza y desincrustación de goteros)"
     }
   }
@@ -1118,26 +1647,46 @@ const SPRAY_MATRIX = [
   }
 ];
 
-let currentProdStageIdx = 3;
-let currentWaterSource = "pozo";
-
 function initProductionTab() {
   const selectStage = document.getElementById("select-prod-stage");
   const selectWater = document.getElementById("select-water-source");
+  const selectFertilizer = document.getElementById("select-fertilizer-source");
+
+  // Sincronizar selectores con FarmState
+  if (selectStage) selectStage.value = String(FarmState.prodStageIdx);
+  if (selectWater) selectWater.value = FarmState.waterSource;
+  if (selectFertilizer) selectFertilizer.value = FarmState.fertilizerRegime;
 
   if (selectStage) {
     selectStage.addEventListener("change", (e) => {
-      currentProdStageIdx = parseInt(e.target.value, 10);
+      FarmState.setState({ prodStageIdx: parseInt(e.target.value, 10) });
       updateProductionStage();
     });
   }
 
   if (selectWater) {
     selectWater.addEventListener("change", (e) => {
-      currentWaterSource = e.target.value;
+      FarmState.setState({ waterSource: e.target.value });
       updateProductionStage();
     });
   }
+
+  if (selectFertilizer) {
+    selectFertilizer.addEventListener("change", (e) => {
+      FarmState.setState({ fertilizerRegime: e.target.value });
+      updateProductionStage();
+    });
+  }
+
+  // Suscribir recálculo reactivo
+  FarmState.subscribe((state, changed) => {
+    if (changed && (changed.prodStageIdx !== undefined || changed.waterSource !== undefined || changed.fertilizerRegime !== undefined)) {
+      if (selectStage && selectStage.value !== String(state.prodStageIdx)) selectStage.value = String(state.prodStageIdx);
+      if (selectWater && selectWater.value !== state.waterSource) selectWater.value = state.waterSource;
+      if (selectFertilizer && selectFertilizer.value !== state.fertilizerRegime) selectFertilizer.value = state.fertilizerRegime;
+      updateProductionStage();
+    }
+  });
 
   updateProductionStage();
   initSprayFilterButtons();
@@ -1145,9 +1694,9 @@ function initProductionTab() {
 }
 
 function updateProductionStage() {
-  const stageIdx = currentProdStageIdx;
+  const stageIdx = FarmState.prodStageIdx;
   const data = PROD_STAGES[stageIdx] || PROD_STAGES[3];
-  const isYacambu = currentWaterSource === "yacambu";
+  const isYacambu = FarmState.waterSource === "yacambu";
 
   // Water source adjustment
   const lfPercent = isYacambu ? 6.5 : data.lf;
@@ -1165,6 +1714,66 @@ function updateProductionStage() {
     const reducedAcid = Math.max(3, Math.round(rawVal * 0.36));
     acidText = `~${reducedAcid}.0 L/sem (-64% gasto)`;
     acidDetail = "Ácido Nítrico 60% reducido (agua dulce Yacambú con bajos bicarbonatos, CE = 0.5 dS/m)";
+  }
+
+  // Fertilizer source handling & recipes
+  let tankATotal = data.tankA.total;
+  let tankADetail = data.tankA.detail;
+  let tankBTotal = data.tankB.total;
+  let tankBDetail = data.tankB.detail;
+
+  const fertAlertBox = document.getElementById("fertilizer-source-alert");
+  const fertAlertText = document.getElementById("fertilizer-source-alert-text");
+  const fertAlertIcon = document.getElementById("fertilizer-source-alert-icon");
+  const elKpiYield = document.getElementById("disp-kpi-yield");
+  const elKpiYieldSub = document.getElementById("disp-kpi-yield-sub");
+  const elKpiYieldTag = document.getElementById("disp-kpi-yield-tag");
+
+  if (FarmState.fertilizerRegime === "granulado") {
+    if (elKpiYield) elKpiYield.textContent = "24.2 – 29.9 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "5.5 a 6.8 kg/planta (1.210 – 1.495 cajas | 60-65% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 24.2 a 29.9 Ton (Granulado)";
+
+    if (fertAlertBox && fertAlertText) {
+      fertAlertBox.className = "alert-box alert-caution";
+      if (fertAlertIcon) fertAlertIcon.textContent = "⚠️";
+      fertAlertText.innerHTML = `<strong>Abonado Granulado Manual Edáfico (NPK 12-12-17 SOP + Sulfato de Potasio Granular):</strong> Aplicación manual a suelo descubierto cada 20 días en banda a 15 cm del tallo (32 g/planta = 140.8 kg/abonada = 3 sacos de 50 kg). Costo por saco 45% menor, pero causa <strong>merma productiva del 20-25% (24.2 a 29.9 Ton)</strong> por picos osmóticos de salinidad y absorción discontinua.`;
+    }
+
+    if (stageIdx === 3) {
+      tankATotal = "1.10 kg/sem (Solo Quelato Fe)";
+      tankADetail = "Fe-EDDHA (6%): 1.10 kg inyectado en goteo | Calcio y Potasio aportados al suelo vía Nitrato de Calcio granular y Sulfato de Potasio (SOP) granulado comercial.";
+      tankBTotal = "3.00 kg/sem (Solo Foliar / B-Micro)";
+      tankBDetail = "Microelementos quelatados: 0.60 kg | Ácido Bórico: 0.30 kg | Fósforo, Magnesio y K de fondo en suelo vía NPK 12-12-17+2MgO SOP.";
+    }
+  } else if (FarmState.fertilizerRegime === "hibrido") {
+    if (elKpiYield) elKpiYield.textContent = "31.5 – 35.5 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.1 a 8.0 kg/planta (1.575 – 1.775 cajas | 72-76% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 31.5 a 35.5 Ton (Híbrido)";
+
+    if (fertAlertBox && fertAlertText) {
+      fertAlertBox.className = "alert-box alert-success";
+      if (fertAlertIcon) fertAlertIcon.textContent = "💡";
+      fertAlertText.innerHTML = `<strong>Estrategia Híbrida Óptima para Quíbor:</strong> Fondo granulado al preparar el camellón (NPK 12-12-17 SOP a 30 g/m lin) + Fertirriego hidrosoluble AIFA en floración y cosecha. Proyecta <strong>31.5 a 35.5 Ton (7.1 a 8.0 kg/pl)</strong> con excelente relación costo/beneficio en Venezuela.`;
+    }
+
+    if (stageIdx === 3) {
+      tankATotal = "38.00 kg/sem";
+      tankADetail = "AIFA Nitrato de Calcio: 25.0 kg | AIFA Nitrato de Potasio: 12.0 kg | Fe-EDDHA (6%): 1.00 kg (complementa reserva de fondo en suelo).";
+      tankBTotal = "55.00 kg/sem";
+      tankBDetail = "AIFA Fructificación 12-6-36: 35.0 kg | AIFA MKP: 6.0 kg | K₂SO₄ soluble: 14.0 kg | AIFA MgSO₄: 10.0 kg.";
+    }
+  } else {
+    // "aifa" (100% hidrosoluble)
+    if (elKpiYield) elKpiYield.textContent = "33.0 – 37.4 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.5 a 8.5 kg/planta (1.650 – 1.870 cajas | 75-80% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 33.0 a 37.4 Ton (AIFA Hidrosoluble)";
+
+    if (fertAlertBox && fertAlertText) {
+      fertAlertBox.className = "alert-box alert-success";
+      if (fertAlertIcon) fertAlertIcon.textContent = "✨";
+      fertAlertText.innerHTML = `<strong>Línea AIFA Hidrosoluble (Venezuela):</strong> Inyección continua y dosificada por cinta a 40 cm en 3 sectores (AIFA Fructificación 12-6-36 + Nitrato de Calcio AIFA + MKP AIFA). Eficiencia del 85-90% sin picos salinos. Proyecta <strong>7.5 a 8.5 kg/planta (33.0 a 37.4 Ton)</strong> con 75-80% fruta de Primera calidad.`;
+    }
   }
 
   // UI elements
@@ -1190,16 +1799,16 @@ function updateProductionStage() {
   if (elGross) elGross.textContent = `${grossLiters.toFixed(1)} L/sem`;
   if (elNet) elNet.textContent = `Neto: ${data.netLiters.toFixed(1)} L + ${lfPercent.toFixed(1)}% Lavado`;
   if (elDaily) elDaily.textContent = `${dailyM3.toFixed(2)} m³/día`;
-  if (elPulseQty) elPulseQty.textContent = `${pulseQty} pulsos / día`;
-  if (elPulseTime) elPulseTime.textContent = `Duración: ${pulseTime} min / pulso`;
+  if (elPulseQty) elPulseQty.textContent = `${pulseQty} pulsos / sector`;
+  if (elPulseTime) elPulseTime.textContent = `Duración: ${pulseTime} min / sector (3 bloques)`;
   if (elTargetEc) elTargetEc.textContent = isYacambu ? `${(parseFloat(data.ec) - 0.4).toFixed(1)} dS/m (Yacambú Dulce)` : data.ec;
   if (elTargetPh) elTargetPh.textContent = `pH ${data.ph}`;
-  if (elSchedule) elSchedule.textContent = isYacambu ? "07:30 | 09:30 | 11:30 | 13:30 | 15:30" : data.schedule;
+  if (elSchedule) elSchedule.textContent = isYacambu ? "07:30 | 09:30 | 11:30 | 13:30 | 15:30 (Sectores en secuencia)" : data.schedule;
 
-  if (elTankATotal) elTankATotal.textContent = data.tankA.total;
-  if (elTankADetail) elTankADetail.textContent = data.tankA.detail;
-  if (elTankBTotal) elTankBTotal.textContent = data.tankB.total;
-  if (elTankBDetail) elTankBDetail.textContent = data.tankB.detail;
+  if (elTankATotal) elTankATotal.textContent = tankATotal;
+  if (elTankADetail) elTankADetail.textContent = tankADetail;
+  if (elTankBTotal) elTankBTotal.textContent = tankBTotal;
+  if (elTankBDetail) elTankBDetail.textContent = tankBDetail;
   if (elTankCTotal) elTankCTotal.textContent = acidText;
   if (elTankCDetail) elTankCDetail.textContent = acidDetail;
 
@@ -1293,6 +1902,8 @@ function calculateWellValidation() {
   const resVol = parseFloat(document.getElementById("well-test-res-vol")?.value) || 80.0;
   const lfPercent = parseFloat(document.getElementById("well-test-lf")?.value) || 20.0;
 
+  FarmState.setState({ wellFlowLs: flowLs });
+
   // 1. Demanda diaria pico para 4.400 plantas de tomate
   // Neta: 18.5 L/planta/semana = 2.643 L/planta/día
   const lfFrac = Math.min(Math.max(lfPercent / 100.0, 0.05), 0.40);
@@ -1366,5 +1977,117 @@ function calculateWellValidation() {
       descVerdict.textContent = `El caudal de ${flowLs.toFixed(2)} L/s exigiría ${pumpHours.toFixed(2)} horas de bombeo continuo diario, sobreexplotando el acuífero local con alto riesgo de agotamiento estival en marzo.`;
     }
   }
+}
+
+// ==========================================================================
+// 10. MÓDULO DE CÁLCULO Y PROYECTO DE PERFORACIÓN DE POZO PROFUNDO (120 m)
+// ==========================================================================
+function initWellDrillingCalculator() {
+  const selDepth = document.getElementById("select-drill-depth");
+  const selDrillDiam = document.getElementById("select-drill-diameter");
+  const selCasingDiam = document.getElementById("select-casing-diameter");
+  const selScreenType = document.getElementById("select-screen-type");
+
+  if (!selDepth || !selDrillDiam || !selCasingDiam || !selScreenType) return;
+
+  function recalculateDrillMetrics() {
+    const depth = parseFloat(selDepth.value);
+    const drillDiamInches = parseFloat(selDrillDiam.value);
+    const casingDiamInches = parseFloat(selCasingDiam.value);
+    const screenType = selScreenType.value;
+
+    FarmState.setState({
+      wellDepthM: depth,
+      drillDiamInches: drillDiamInches,
+      casingDiamInches: casingDiamInches,
+      screenType: screenType
+    });
+
+    // Metraje de tubería según profundidad
+    let casingLen = 82.0;
+    let screenLen = 38.0;
+    let pumpHp = "7.5 HP";
+    let hmtDesc = "HMT = 100.5 mca (a 98 m)";
+
+    if (depth === 90) {
+      casingLen = 66.0;
+      screenLen = 24.0;
+      pumpHp = "5.5 HP";
+      hmtDesc = "HMT = 86.0 mca (a 78 m)";
+    } else if (depth === 105) {
+      casingLen = 75.0;
+      screenLen = 30.0;
+      pumpHp = "5.5 a 7.5 HP";
+      hmtDesc = "HMT = 94.0 mca (a 88 m)";
+    }
+
+    // Cálculo de empaque de grava cuarzosa anular
+    const dDrillM = drillDiamInches * 0.0254;
+    const dCasingM = (casingDiamInches === 8 ? 8.625 : 6.625) * 0.0254;
+    const anularArea = (Math.PI / 4) * Math.max(0.001, (dDrillM * dDrillM - dCasingM * dCasingM));
+    const gravelLen = depth - 15.0; // Sello sanitario ocupa los primeros 15 m
+    const gravelVol = anularArea * gravelLen * 1.25; // 25% esponjamiento y derrumbe en arenas
+    const gravelTons = gravelVol * 1.60;
+    const gravelBags = Math.round((gravelTons * 1000) / 50);
+
+    // Cálculo de sello sanitario
+    const dConductorM = 14.0 * 0.0254;
+    const sealArea = (Math.PI / 4) * Math.max(0.001, (dConductorM * dConductorM - dCasingM * dCasingM));
+    const sealVol = sealArea * 15.0 * 1.20;
+
+    // Cálculo presupuestario referencial (mercado Venezuela)
+    const costMobilization = 1500;
+    const costConductor = 18.0 * 95;
+    const costSeal = 650;
+    const costDrilling = (depth - 18.0) * (drillDiamInches > 12.0 ? 75 : 70);
+    const costLogging = 600;
+    const costCasing = casingLen * (casingDiamInches === 8 ? 62 : 48);
+    const screenUnitPrice = screenType === "johnson" ? (casingDiamInches === 8 ? 140 : 110) : 70;
+    const costScreens = screenLen * screenUnitPrice;
+    const costGravel = gravelTons * 65;
+    const costAirlift = 24.0 * 55;
+    const costPumpingTest = 1200;
+    const costLab = 220;
+    const costPump = casingDiamInches === 8 ? 2850 : 2450;
+    const costColumn = (depth - 22.0) * 22;
+    const costVfd = 1150;
+    const costWellhead = 450;
+
+    const subtotal = costMobilization + costConductor + costSeal + costDrilling + costLogging +
+                     costCasing + costScreens + costGravel + costAirlift + costPumpingTest +
+                     costLab + costPump + costColumn + costVfd + costWellhead;
+    const contingencies = subtotal * 0.05;
+    const totalCost = subtotal + contingencies;
+
+    // Actualizar elementos en UI
+    const elCasing = document.getElementById("disp-drill-casing");
+    const elScreen = document.getElementById("disp-drill-screen");
+    const elScreenSub = document.getElementById("disp-drill-screen-sub");
+    const elGravel = document.getElementById("disp-drill-gravel");
+    const elGravelSub = document.getElementById("disp-drill-gravel-sub");
+    const elSeal = document.getElementById("disp-drill-seal");
+    const elPump = document.getElementById("disp-drill-pump");
+    const elPumpSub = document.getElementById("disp-drill-pump-sub");
+    const elCost = document.getElementById("disp-drill-cost");
+    const elTotalCost = document.getElementById("drill-summary-total");
+
+    if (elCasing) elCasing.textContent = `${casingLen.toFixed(1)} m`;
+    if (elScreen) elScreen.textContent = `${screenLen.toFixed(1)} m`;
+    if (elScreenSub) elScreenSub.textContent = screenType === "johnson" ? "Inox AISI 304 (Ve = 0.0007 m/s)" : "Ranurada Puente (Ve = 0.0018 m/s)";
+    if (elGravel) elGravel.textContent = `${gravelVol.toFixed(2)} m³`;
+    if (elGravelSub) elGravelSub.textContent = `${gravelTons.toFixed(1)} Ton (~${gravelBags} sacos 50kg)`;
+    if (elSeal) elSeal.textContent = `${sealVol.toFixed(2)} m³`;
+    if (elPump) elPump.textContent = pumpHp;
+    if (elPumpSub) elPumpSub.textContent = hmtDesc;
+    if (elCost) elCost.textContent = `$${Math.round(totalCost).toLocaleString("en-US")} USD`;
+    if (elTotalCost) elTotalCost.textContent = `$${totalCost.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
+  }
+
+  selDepth.addEventListener("change", recalculateDrillMetrics);
+  selDrillDiam.addEventListener("change", recalculateDrillMetrics);
+  selCasingDiam.addEventListener("change", recalculateDrillMetrics);
+  selScreenType.addEventListener("change", recalculateDrillMetrics);
+
+  recalculateDrillMetrics();
 }
 

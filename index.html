@@ -9,6 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#10b981">
 </head>
 <body class="dark-theme">
   <!-- Header / Navigation Bar -->
@@ -26,7 +28,11 @@
         </div>
       </div>
       <div class="badge-container">
-        <span class="badge badge-merra">NASA MERRA-2 Verificado</span>
+        <button id="btn-toggle-sunlight" class="btn-sunlight-toggle" type="button" title="Alternar Modo Sol Directo (Ultra-Contraste para lecturas al aire libre)">
+          <span class="sunlight-icon">☀️</span> <span id="sunlight-btn-text">Modo Sol Directo</span>
+        </button>
+        <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
+        <span class="badge badge-merra">NASA MERRA-2</span>
         <span class="badge badge-crop">Pimentón & Tomate</span>
         <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 9°53'20.0"N 69°35'35.0"W</a>
       </div>
@@ -64,6 +70,46 @@
       </button>
     </nav>
   </header>
+
+  <!-- Farm Pipeline Navigation (Skill agri-ux-ui: Cadena de Valor Agronómica) -->
+  <div class="pipeline-bar-wrapper">
+    <div class="pipeline-container">
+      <div class="pipeline-title">
+        <span>🌱 Flujo Agronómico:</span>
+      </div>
+      <div class="pipeline-steps" id="farm-pipeline-steps">
+        <div class="pipeline-step active" data-pipeline-tab="tab-clima" title="1. Estacionalidad climática y vientos del Valle de Quíbor">
+          <span class="pipeline-step-num">1</span>
+          <span class="pipeline-step-label">Clima & Emplazamiento</span>
+          <span class="pipeline-step-sub">(Valle de Quíbor 700 msnm)</span>
+        </div>
+        <span class="pipeline-arrow">➔</span>
+        <div class="pipeline-step" data-pipeline-tab="tab-estructura" title="2. Arquitectura de nave parral, malla 50x25 y tutorado">
+          <span class="pipeline-step-num">2</span>
+          <span class="pipeline-step-label">Estructura & Parral</span>
+          <span class="pipeline-step-sub">(Malla 50×25 / 5.5m Cumbrera)</span>
+        </div>
+        <span class="pipeline-arrow">➔</span>
+        <div class="pipeline-step" data-pipeline-tab="tab-riego" title="3. Estudio hidrogeológico CIDIAT-ULA y balance hídrico">
+          <span class="pipeline-step-num">3</span>
+          <span class="pipeline-step-label">Acuífero & Pozo</span>
+          <span class="pipeline-step-sub">(CIDIAT-ULA / Cono 546 msnm)</span>
+        </div>
+        <span class="pipeline-arrow">➔</span>
+        <div class="pipeline-step" data-pipeline-tab="tab-produccion" data-pipeline-scroll="hydraulic-section" title="4. Cadena hidráulica: Motor 1.5 HP 220V + Filtro de discos 120M">
+          <span class="pipeline-step-num">4</span>
+          <span class="pipeline-step-label">Bombeo & Filtrado</span>
+          <span class="pipeline-step-sub">(Motor 1.5 HP 220V + Discos 120M)</span>
+        </div>
+        <span class="pipeline-arrow">➔</span>
+        <div class="pipeline-step" data-pipeline-tab="tab-produccion" title="5. Ficha operativa de campo, 3 sectores y rendimiento de 37.4 Ton">
+          <span class="pipeline-step-num">5</span>
+          <span class="pipeline-step-label">Riego & Rendimiento</span>
+          <span class="pipeline-step-sub">(3 Sectores / 37.4 Ton Tomate)</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Main Container -->
   <main class="main-content">
@@ -318,7 +364,7 @@
               </select>
             </div>
             <div class="input-item">
-              <label for="input-well-ec">Conductividad Agua de Pozo ($EC_w$ dS/m):</label>
+              <label for="input-well-ec">Conductividad Agua Pozo (<span class="tooltip-term">ECw <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Conductividad Eléctrica (ECw)</span><span class="tooltip-tag">dS/m</span></span><span class="tooltip-simple">Cantidad de sales disueltas en el agua del pozo. En Quíbor oscila entre 1.0 y 2.5 dS/m. Valores &gt; 1.5 exigen sobre-riego de lavado.</span><span class="tooltip-tech">1 dS/m ≈ 640 ppm sales totales (TDS)</span></span></span> dS/m):</label>
               <input type="number" id="input-well-ec" value="1.4" min="0.4" max="3.5" step="0.1" class="input-field">
             </div>
             <div class="input-item">
@@ -330,15 +376,15 @@
           <!-- Calculation Summary -->
           <div class="results-panel">
             <div class="result-row">
-              <span>Coeficiente de Cultivo ($Kc$ FAO):</span>
+              <span>Coeficiente de Cultivo (<span class="tooltip-term">Kc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Coeficiente de Cultivo (Kc)</span><span class="tooltip-tag">FAO-56</span></span><span class="tooltip-simple">Factor que ajusta la demanda hídrica según el desarrollo foliar de la planta (0.60 inicial a 1.15 en plena cosecha).</span><span class="tooltip-tech">ETc = ETo × Kc (Lámina neta teórica)</span></span></span> FAO):</span>
               <strong id="res-fao-kc">1.05</strong>
             </div>
             <div class="result-row">
-              <span>Evapotranspiración ($ET_c$ neta):</span>
+              <span>Evapotranspiración (<span class="tooltip-term">ETc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración de Cultivo (ETc)</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Volumen neto diario de agua que la planta transpira más la que se evapora del suelo descubierto bajo la malla.</span><span class="tooltip-tech">1 mm/m² = 1.0 Litro de agua</span></span></span> neta):</span>
               <strong id="res-fao-etc">6.2 mm/día (~18.5 L/pl/sem)</strong>
             </div>
             <div class="result-row">
-              <span>Fracción de Lavado Requerida ($LF$):</span>
+              <span>Fracción de Lavado Requerida (<span class="tooltip-term">LF <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Fracción de Lixiviación (LF)</span><span class="tooltip-tag">Manejo Salino</span></span><span class="tooltip-simple">Lámina de agua extra para lavar sulfatos y cloruros por debajo del bulbo radicular activo (0-40 cm).</span><span class="tooltip-tech">LF = ECw / [5(ECe) - ECw] (Rhoades / FAO)</span></span></span>):</span>
               <strong class="highlight-cyan" id="res-fao-lf">23.0 % de sobre-riego</strong>
             </div>
             <div class="result-row">
@@ -485,7 +531,7 @@
                 <span class="metric-sub" id="well-calc-pump-rate">Caudal: 9.0 m³/h</span>
               </div>
               <div class="metric-box" style="padding:0.6rem;">
-                <span class="metric-label">Carga Manométrica (HMT)</span>
+                <span class="metric-label">Carga Manométrica (<span class="tooltip-term">HMT <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Altura Manométrica Total (HMT)</span><span class="tooltip-tag">mca / PSI</span></span><span class="tooltip-simple">Esfuerzo hidrostático total que vence la bomba: profundidad del agua en el pozo + fricción de tuberías + presión de filtrado.</span><span class="tooltip-tech">HMT = Nivel Dinámico + hf + P_entrega</span></span></span>)</span>
                 <span class="metric-val" id="well-calc-hmt" style="color:#f59e0b; font-size:1.2rem;">100.0 mca</span>
                 <span class="metric-sub" id="well-calc-psi">~142 PSI total</span>
               </div>
@@ -524,11 +570,208 @@
               <strong style="color:#a855f7; font-size:0.85rem;">Fase 4: Caudal Constante 24-48h</strong>
               <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Bombeo continuo a 2.5 L/s midiendo abatimiento y prueba de recuperación Theis ($\ge 90\%$ de reposición del nivel estático).</p>
             </div>
-            <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
-              <strong style="color:#fda4af; font-size:0.85rem;">Fase 5: Análisis Fisicoquímico</strong>
-              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Toma en hora 22 de bombeo: CE, pH, Na, Ca, Mg, HCO₃, Cl, Boro, Fe, RAS y CSR en laboratorio certificado.</p>
+      <!-- ==================== MÓDULO DE INGENIERÍA Y PERFORACIÓN DE POZO PROFUNDO (120 m) ==================== -->
+      <div class="well-drilling-card full-width" id="well-drilling-section">
+        <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-weight:700;">🏗️ Obra Hidráulica</span>
+              <h2 style="margin:0;">Proyecto Ejecutivo y Cálculo de Perforación de Pozo (120 m)</h2>
+            </div>
+            <span class="subtitle">
+              Coordenadas: <strong>9°53'20.0"N 69°35'35.0"W</strong> (~700 msnm) | Abanico Aluvial Atarigua-Quíbor | Basamento Terciario Morán a 116-120 m
+            </span>
+          </div>
+          <div class="filter-group">
+            <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#8-proyecto-ejecutivo-de-ingeniería-y-perforación-de-pozo-profundo-120-m" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(56,189,248,0.2); color:#38bdf8; border-color:rgba(56,189,248,0.4);" title="Ver memoria de cálculo completa">Ver Memoria de Cálculo (.md) ↗</a>
+          </div>
+        </div>
+
+        <p class="card-desc" style="margin-top:0.6rem;">
+          Dimensionamiento mecánico y volumétrico para la perforación rotaria de un pozo nuevo en el predio. Basado en la correlación litoestratigráfica de los 42 pozos calibrados en <strong>Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ)</strong>.
+        </p>
+
+        <!-- Controles Interactivos de Perforación -->
+        <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-top:1.25rem;">
+          <div class="input-item">
+            <label for="select-drill-depth"><strong>Profundidad Total Barreno:</strong></label>
+            <select id="select-drill-depth" class="input-select" style="border-color:#38bdf8;">
+              <option value="90">90 m (Acuífero Superior - Caudal Ajustado 1.5 L/s)</option>
+              <option value="105">105 m (Acuífero Medio - Caudal 2.0 L/s)</option>
+              <option value="120" selected>120 m (Recomendado CIDIAT-ULA: Contacto Basamento 2.5 L/s)</option>
+            </select>
+          </div>
+          <div class="input-item">
+            <label for="select-drill-diameter"><strong>Diámetro de Perforación (Broca):</strong></label>
+            <select id="select-drill-diameter" class="input-select">
+              <option value="10">10" (254 mm - Espacio Anular Reducido)</option>
+              <option value="12.25" selected>12¼" (311 mm - Estándar Óptimo para Grava)</option>
+              <option value="14">14" (355 mm - Máximo Espacio Anular)</option>
+            </select>
+          </div>
+          <div class="input-item">
+            <label for="select-casing-diameter"><strong>Diámetro Tubería Revestimiento:</strong></label>
+            <select id="select-casing-diameter" class="input-select">
+              <option value="6" selected>6" Acero ASTM A53 (168 mm ext - Caudal hasta 4 L/s)</option>
+              <option value="8">8" Acero ASTM A53 (219 mm ext - Caudal hasta 10 L/s)</option>
+            </select>
+          </div>
+          <div class="input-item">
+            <label for="select-screen-type"><strong>Tipo de Filtros (Captación):</strong></label>
+            <select id="select-screen-type" class="input-select" style="border-color:#10b981;">
+              <option value="johnson" selected>Filtro Continuo Johnson AISI 304 (Ranura 0.030" / 0.75 mm)</option>
+              <option value="puente">Tubería Ranurada Tipo Puente (Ranura 1.0 mm)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Métricas Dinámicas del Pozo Perforado -->
+        <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top:1.25rem;">
+          <div class="metric-box">
+            <span class="metric-label">Tubería Ciega</span>
+            <span class="metric-val" id="disp-drill-casing" style="color:#cbd5e1;">82.0 m</span>
+            <span class="metric-sub">Acero ASTM A53 (e = 6.35 mm)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Filtros Johnson</span>
+            <span class="metric-val" id="disp-drill-screen" style="color:#34d399;">38.0 m</span>
+            <span class="metric-sub" id="disp-drill-screen-sub">Inox AISI 304 (Ve = 0.0007 m/s)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Grava Cuarzosa (2-4 mm)</span>
+            <span class="metric-val" id="disp-drill-gravel" style="color:#f59e0b;">7.06 m³</span>
+            <span class="metric-sub" id="disp-drill-gravel-sub">11.3 Ton (~226 sacos 50kg)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Sello Sanitario Cemento</span>
+            <span class="metric-val" id="disp-drill-seal" style="color:#fda4af;">1.38 m³</span>
+            <span class="metric-sub">0 a 15 m (~28 sacos cemento)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Bomba Sumergible</span>
+            <span class="metric-val" id="disp-drill-pump" style="color:#a855f7;">7.5 HP</span>
+            <span class="metric-sub" id="disp-drill-pump-sub">HMT = 100.5 mca (a 98 m)</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Inversión Llave en Mano</span>
+            <span class="metric-val" id="disp-drill-cost" style="color:#38bdf8;">$31.400 USD</span>
+            <span class="metric-sub">Perforación, entubado y bomba</span>
+          </div>
+        </div>
+
+        <div class="grid-2col" style="margin-top:1.25rem;">
+          
+          <!-- Columna Izquierda: Perfil Estratigráfico y Corte del Pozo -->
+          <div class="info-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+              <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">Corte Litoestratigráfico Pronosticado (0 - 120 m)</h4>
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem;">Visual MODFLOW</span>
+            </div>
+            <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;">
+              Corte hidrogeológico calibrado para las coordenadas $9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$:
+            </p>
+
+            <div class="drill-visual-container" id="drill-layers-list">
+              <!-- 0 a 15 m: Sello Sanitario -->
+              <div class="drill-layer layer-sanitary">
+                <span class="drill-layer-depth">0 – 15 m</span>
+                <span class="drill-layer-desc">Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita</strong></span>
+                <span class="drill-layer-component badge-seal">Sello 15 m</span>
+              </div>
+
+              <!-- 15 a 68 m: Acuífero Colgado & Confinante -->
+              <div class="drill-layer layer-confining">
+                <span class="drill-layer-depth">15 – 68 m</span>
+                <span class="drill-layer-desc">Arenas medias secas y arcillas plásticas grisáceas compactas</span>
+                <span class="drill-layer-component badge-casing">Tubo Ciego</span>
+              </div>
+
+              <!-- 68 a 82 m: Acuífero Superior -->
+              <div class="drill-layer layer-aquifer-1">
+                <span class="drill-layer-depth">68 – 82 m</span>
+                <span class="drill-layer-desc"><strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 72 m</span>
+                <span class="drill-layer-component badge-screen">Filtro Johnson 12 m</span>
+              </div>
+
+              <!-- 82 a 86 m: Lente Arcilloso Intermedio -->
+              <div class="drill-layer layer-confining">
+                <span class="drill-layer-depth">82 – 86 m</span>
+                <span class="drill-layer-desc">Arcilla limosa arenosa firme (Separador) | <em>Posición Bomba Sumergible a 98 m</em></span>
+                <span class="drill-layer-component badge-pump">Zona Bomba 7.5 HP</span>
+              </div>
+
+              <!-- 86 a 112 m: Acuífero Principal -->
+              <div class="drill-layer layer-aquifer-main">
+                <span class="drill-layer-depth">86 – 112 m</span>
+                <span class="drill-layer-desc"><strong>Acuífero Principal Quíbor: Gravas de Cuarzo y Arenas Gruesas Limpias</strong></span>
+                <span class="drill-layer-component badge-screen">Filtro Johnson 26 m</span>
+              </div>
+
+              <!-- 112 a 116 m: Transición -->
+              <div class="drill-layer layer-confining">
+                <span class="drill-layer-depth">112 – 116 m</span>
+                <span class="drill-layer-desc">Arenas finas limosas transicionales</span>
+                <span class="drill-layer-component badge-casing">Tubo Ciego</span>
+              </div>
+
+              <!-- 116 a 120 m: Basamento y Calderín -->
+              <div class="drill-layer layer-bedrock">
+                <span class="drill-layer-depth">116 – 120 m</span>
+                <span class="drill-layer-desc">Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong></span>
+                <span class="drill-layer-component badge-casing">Decantador 4 m</span>
+              </div>
             </div>
           </div>
+
+          <!-- Columna Derecha: Resumen de Partidas y Especificaciones de Perforación -->
+          <div class="info-card">
+            <h4 style="color:#f59e0b; font-size:0.95rem; margin-bottom:0.5rem;">Especificaciones Técnicas Críticas de Perforación:</h4>
+            
+            <div style="display:flex; flex-direction:column; gap:0.6rem; font-size:0.82rem; color:#cbd5e1;">
+              <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #38bdf8;">
+                <strong style="color:#38bdf8;">1. Perfilaje Geofísico Eléctrico Obligatorio:</strong>
+                <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
+                  Correr curvas SP y Resistividad Normal (16" y 64") antes de entubar para fijar con precisión milimétrica la cota de los filtros Johnson en las gravas más limpias.
+                </span>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #10b981;">
+                <strong style="color:#34d399;">2. Grava Cuarzosa Seleccionada (No Calcárea):</strong>
+                <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
+                  Grava de río 2 a 4 mm con sílice &gt; 95%. Queda estrictamente prohibida la piedra picada caliza (reaccionaría con el ácido nítrico y taparía las rejillas).
+                </span>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #a855f7;">
+                <strong style="color:#c084fc;">3. Desarrollo por Air-Lift a 200 PSI:</strong>
+                <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
+                  Inyectar tripolifosfato de sodio para dispersar la bentonita de pared y soplar con compresor hasta lograr arena &lt; 10 ppm (evita dañar los goteros PC de la nave).
+                </span>
+              </div>
+
+              <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #f43f5e;">
+                <strong style="color:#fda4af;">4. Sello Sanitario Inyectado a Presión:</strong>
+                <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
+                  Lechada de cemento Portland + 4% bentonita inyectada con tubería tremie desde 15 m hacia brocal, aislando escorrentías contaminadas y agroquímicos superficiales.
+                </span>
+              </div>
+            </div>
+
+            <!-- Botón de Presupuesto Rápido -->
+            <div class="drill-budget-card" style="margin-top:1rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <span style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.05em;">Presupuesto de Obra Llave en Mano:</span>
+                  <div style="font-size:1.3rem; font-weight:800; color:#38bdf8; font-family:var(--font-mono);" id="drill-summary-total">$31.401,83 USD</div>
+                </div>
+                <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#87-cómputos-métricos-y-presupuesto-referencial-de-perforación-valle-de-quíbor" target="_blank" class="filter-btn" style="text-decoration:none; font-size:0.75rem;">Ver Cómputos Detallados ↗</a>
+              </div>
+              <span style="display:block; font-size:0.72rem; color:#94a3b8; margin-top:0.3rem;">
+                Incluye perforación 12¼", entubado 6", 38m filtros Johnson AISI 304, grava, sello, perfilaje, air-lift, bomba 7.5 HP y tablero VFD.
+              </span>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -772,7 +1015,7 @@
         <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
           <div>
             <h2>Plan Maestro de Producción Agronómica — Tomate Indeterminado (2.000 m²)</h2>
-            <span class="subtitle">Valle de Quíbor (~700 msnm) | 4.400 Plantas | Goteo Autocompensante PC/ND | Malla Espaldera a 2.20 m</span>
+            <span class="subtitle">Valle de Quíbor (~700 msnm) | 4.400 Plantas | Suelo Descubierto (Sin Acolchado) | Bomba 1.5 HP (3 Sectores) | Filtro Discos 120 Mesh</span>
           </div>
           <div class="filter-group">
             <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver predio satelital en Google Maps">📍 9°53'20.0"N 69°35'35.0"W ↗</a>
@@ -789,23 +1032,244 @@
           </div>
           <div class="metric-box">
             <span class="metric-label">Meta de Cosecha</span>
-            <span class="metric-val" style="color:#34d399;">28.6 – 37.4 Ton</span>
-            <span class="metric-sub">6.5 a 8.5 kg/planta (1.430 – 1.870 cajas)</span>
+            <span class="metric-val" id="disp-kpi-yield" style="color:#34d399;">33.0 – 37.4 Ton</span>
+            <span class="metric-sub" id="disp-kpi-yield-sub">7.5 a 8.5 kg/planta (1.650 – 1.870 cajas)</span>
           </div>
           <div class="metric-box">
             <span class="metric-label">Riego Pico Máximo</span>
-            <span class="metric-val" style="color:#f59e0b;">15.75 m³/día</span>
-            <span class="metric-sub">7 a 8 pulsos (LF = 20% lavado salino)</span>
+            <span class="metric-val" style="color:#f59e0b;">18.50 m³/día</span>
+            <span class="metric-sub">5 pulsos de 28 min/sector (+20% evap)</span>
           </div>
           <div class="metric-box">
-            <span class="metric-label">Líneas de Goteo PC/ND</span>
-            <span class="metric-val" style="color:#a855f7;">2.000 m lin</span>
-            <span class="metric-sub">10.000 goteros 1.2 L/h (12.0 m³/h)</span>
+            <span class="metric-label">Bomba 1" 1.5 HP (220V)</span>
+            <span class="metric-val" style="color:#a855f7;">3 Sectores</span>
+            <span class="metric-sub">2.4 a 3.2 m³/h | 5.000 <span class="tooltip-term">goteros PC <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Gotero Autocompensante (PC)</span><span class="tooltip-tag">Presión Constante</span></span><span class="tooltip-simple">Gotero con diafragma de silicona que descarga exactamente 1.60 L/h aunque varíe la presión de la manguera entre 0.8 y 3.5 bar.</span><span class="tooltip-tech">Q = cte (elimina desbalances entre inicio y fin de fila)</span></span></span></span>
           </div>
           <div class="metric-box">
-            <span class="metric-label">Ahorro Mano de Obra</span>
-            <span class="metric-val" style="color:#10b981;">-88% Horas</span>
-            <span class="metric-sub">3 jornales/mes con Hortomalla 15×15</span>
+            <span class="metric-label">Laguna & Filtrado</span>
+            <span class="metric-val" style="color:#10b981;">Discos 120 M</span>
+            <span class="metric-sub">130 µm tridimensional + canastilla boya</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ficha de Turno Diario para el Regador (Skill agri-ux-ui: Operador de Campo) -->
+      <div class="field-action-card" id="field-action-sheet">
+        <div class="action-header">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+              <span class="action-badge">📋 Ficha de Turno Diario</span>
+              <h3 style="font-size:1.15rem; font-weight:800; color:#fff; margin:0;">Instrucción Operativa para el Regador (Bomba 1.5 HP 220V)</h3>
+            </div>
+            <p style="font-size:0.8rem; color:#94a3b8; margin:0.3rem 0 0 0;">
+              Regar en 3 turnos secuenciales de 28 minutos para garantizar presión óptima en goteros autocompensantes. Total: 84 min de bombeo diario.
+            </p>
+          </div>
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+            <button type="button" id="btn-export-shift" class="btn-export-shift" title="Generar pauta formateada para WhatsApp o impresión rápida">
+              <span>📲 Compartir por WhatsApp / Imprimir</span>
+            </button>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-weight:700;">💧 Caudal Total: 8.0 m³/h</span>
+            <span class="tag" style="background:rgba(168,85,247,0.2); color:#c084fc; font-weight:700;">⚡ 2.5 – 3.2 bar</span>
+          </div>
+        </div>
+
+        <div class="action-grid">
+          <!-- Sector 1 -->
+          <div class="action-sector-box sector-current" id="action-box-sec1">
+            <span class="action-sector-badge" style="background:rgba(168,85,247,0.25); color:#c084fc;">Turno 1</span>
+            <div class="action-sector-title">Sector 1: Camellones 1 al 3 (8 Filas)</div>
+            <div class="action-time-window">⏱️ 06:00 – 06:28 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-params-list">
+              <div class="action-param-item">
+                <span>Válvula de Campo:</span>
+                <strong style="color:#34d399;">VÁLVULA 1 ABIERTA (2 y 3 CERRADAS)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Caudal Demandado:</span>
+                <strong>2.40 m³/h (40.0 L/min)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Población Servida:</span>
+                <strong>1.500 Goteros PC | 1.320 Plantas</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Presión Manómetro:</span>
+                <strong style="color:#38bdf8;">2.8 a 3.2 bar (40-46 PSI)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sector 2 -->
+          <div class="action-sector-box" id="action-box-sec2">
+            <span class="action-sector-badge" style="background:rgba(56,189,248,0.25); color:#38bdf8;">Turno 2</span>
+            <div class="action-sector-title">Sector 2: Camellones 4 al 7 (8 Filas)</div>
+            <div class="action-time-window">⏱️ 06:35 – 07:03 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-params-list">
+              <div class="action-param-item">
+                <span>Válvula de Campo:</span>
+                <strong style="color:#34d399;">VÁLVULA 2 ABIERTA (1 y 3 CERRADAS)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Caudal Demandado:</span>
+                <strong>3.20 m³/h (53.3 L/min)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Población Servida:</span>
+                <strong>2.000 Goteros PC | 1.760 Plantas</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Presión Manómetro:</span>
+                <strong style="color:#38bdf8;">2.5 a 2.9 bar (36-42 PSI)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sector 3 -->
+          <div class="action-sector-box" id="action-box-sec3">
+            <span class="action-sector-badge" style="background:rgba(168,85,247,0.25); color:#c084fc;">Turno 3</span>
+            <div class="action-sector-title">Sector 3: Camellones 8 al 10 (8 Filas)</div>
+            <div class="action-time-window">⏱️ 07:10 – 07:38 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-params-list">
+              <div class="action-param-item">
+                <span>Válvula de Campo:</span>
+                <strong style="color:#34d399;">VÁLVULA 3 ABIERTA (1 y 2 CERRADAS)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Caudal Demandado:</span>
+                <strong>2.40 m³/h (40.0 L/min)</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Población Servida:</span>
+                <strong>1.500 Goteros PC | 1.320 Plantas</strong>
+              </div>
+              <div class="action-param-item">
+                <span>Presión Manómetro:</span>
+                <strong style="color:#38bdf8;">2.8 a 3.2 bar (40-46 PSI)</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checklist del Operador -->
+        <div class="operator-checklist">
+          <div class="checklist-title">
+            <span>✅ Lista de Comprobación y Seguridad del Regador:</span>
+          </div>
+          <div class="checklist-items">
+            <label class="checklist-item">
+              <input type="checkbox" checked>
+              <span><strong>1. Boya Pichincha Flotante:</strong> Succión sumergida a 50 cm bajo el espejo (lejos del fango del fondo y de natas de superficie).</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" checked>
+              <span><strong>2. Lavado Filtro Discos 120 Mesh:</strong> Abrir válvula de purga 10 s al inicio. Si ΔP &gt; 0.5 bar, desenroscar carcasa y lavar anillos.</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" checked>
+              <span><strong>3. Regla de Oro Hidráulica:</strong> NUNCA abrir dos válvulas a la vez: la bomba 1.5 HP colapsaría y los goteros PC no compensarían.</span>
+            </label>
+            <label class="checklist-item">
+              <input type="checkbox" checked>
+              <span><strong>4. Seguridad Tanque C (Ácido Nítrico):</strong> Usar guantes y lentes. Verter siempre el ácido al agua, NUNCA agua sobre ácido concentrado.</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Esquema Interactivo de la Cadena Hidráulica (Skill agri-ux-ui: Diagrama Reactivo) -->
+      <div class="hydraulic-circuit-card" id="hydraulic-section">
+        <div class="circuit-header">
+          <div>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff; margin:0;">🌊 Esquema Dinámico de la Cadena Hidráulica: Laguna ➔ Bomba ➔ 3 Sectores</h3>
+            <span style="font-size:0.8rem; color:#94a3b8;">Haz clic en los botones de sector para simular la ruta del agua y verificar la telemetría hidráulica</span>
+          </div>
+          <div class="circuit-selector-bar">
+            <button type="button" class="circuit-btn active" id="btn-circuit-sec1" data-circuit-sector="1">
+              <span>📍 Sector 1 (Cam 1-3)</span>
+            </button>
+            <button type="button" class="circuit-btn" id="btn-circuit-sec2" data-circuit-sector="2">
+              <span>📍 Sector 2 (Cam 4-7)</span>
+            </button>
+            <button type="button" class="circuit-btn" id="btn-circuit-sec3" data-circuit-sector="3">
+              <span>📍 Sector 3 (Cam 8-10)</span>
+            </button>
+            <button type="button" class="circuit-btn" id="btn-circuit-all" data-circuit-sector="all">
+              <span>🔄 Tren Completo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Flujo Visual de Nodos -->
+        <div class="circuit-flow-display">
+          <div class="flow-node active-flow" id="node-laguna">
+            <div class="flow-icon">🌊</div>
+            <div class="flow-node-title">Laguna de Tierra</div>
+            <div class="flow-node-sub">Sedimentador Limo</div>
+          </div>
+          <div class="flow-connector">➔</div>
+
+          <div class="flow-node active-flow" id="node-pichincha">
+            <div class="flow-icon">🛟</div>
+            <div class="flow-node-title">Pichincha Boya</div>
+            <div class="flow-node-sub">Succión -50 cm</div>
+          </div>
+          <div class="flow-connector">➔</div>
+
+          <div class="flow-node active-flow" id="node-bomba">
+            <div class="flow-icon">⚡</div>
+            <div class="flow-node-title">Motor 1.5 HP</div>
+            <div class="flow-node-sub">1" 220V Alta Presión</div>
+          </div>
+          <div class="flow-connector">➔</div>
+
+          <div class="flow-node active-flow" id="node-filtro">
+            <div class="flow-icon">🌀</div>
+            <div class="flow-node-title">Filtro Discos 120M</div>
+            <div class="flow-node-sub">130 µm Tridimensional</div>
+          </div>
+          <div class="flow-connector">➔</div>
+
+          <div class="flow-node active-flow" id="node-matriz">
+            <div class="flow-icon">🚰</div>
+            <div class="flow-node-title">Matriz PVC 2"</div>
+            <div class="flow-node-sub">hf &lt; 0.8 mca</div>
+          </div>
+          <div class="flow-connector">➔</div>
+
+          <div class="flow-node active-flow" id="node-sector-target">
+            <div class="flow-icon" id="node-target-icon">🌾</div>
+            <div class="flow-node-title" id="node-target-title">Sector 1 Activo</div>
+            <div class="flow-node-sub" id="node-target-sub">1.500 goteros PC 40cm</div>
+          </div>
+        </div>
+
+        <!-- Telemetría Dinámica del Sector Seleccionado -->
+        <div class="sector-telemetry-box" id="sector-telemetry-display">
+          <div class="telemetry-item">
+            <span class="telemetry-lbl">Sector Seleccionado</span>
+            <span class="telemetry-val" id="telem-sector-name" style="color:#c084fc;">Sector 1 (Cam 1-3)</span>
+            <span class="telemetry-sub" id="telem-sector-rows">8 Hileras de Tomate</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-lbl">Caudal Bomba 1.5 HP</span>
+            <span class="telemetry-val" id="telem-flow-rate" style="color:#38bdf8;">2.40 m³/h</span>
+            <span class="telemetry-sub" id="telem-flow-lmin">40.0 L/minuto</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-lbl">Emisores de Precisión</span>
+            <span class="telemetry-val" id="telem-emitter-qty" style="color:#34d399;">1.500 Goteros PC</span>
+            <span class="telemetry-sub" id="telem-plants-served">1.320 Plantas (1.60 L/h)</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-lbl">Tiempo de Pulso</span>
+            <span class="telemetry-val" id="telem-pulse-duration" style="color:#f59e0b;">28 Minutos</span>
+            <span class="telemetry-sub">5 turnos en fructificación pico</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-lbl">Presión en Gotero PC</span>
+            <span class="telemetry-val" id="telem-pressure" style="color:#a855f7;">1.2 – 1.8 bar</span>
+            <span class="telemetry-sub">Auto-regulación activa</span>
           </div>
         </div>
       </div>
@@ -836,6 +1300,53 @@
             <div class="alert-content" id="water-source-alert-text">
               <strong>Escenario Pozo Abatido:</strong> Acuífero sobreexplotado en 29% (extracción 22 Mm³ vs recarga 17 Mm³). Requiere 20% de lavado salino y 22 L/sem de ácido nítrico para neutralizar bicarbonatos.
             </div>
+          </div>
+
+          <div class="month-selector" style="margin-bottom:0.75rem;">
+            <label for="select-fertilizer-source"><strong>Estrategia Nutricional en Fructificación (Mercado Venezuela):</strong></label>
+            <select id="select-fertilizer-source" class="input-select" style="border-color:#10b981;">
+              <option value="aifa" selected>1. Fertirriego 100% Hidrosoluble Marca AIFA (12-6-36 + Ca + MKP) — Meta: 33.0 a 37.4 Ton</option>
+              <option value="granulado">2. Abonado Granulado Manual Edáfico (NPK 12-12-17 SOP + Ca Granular) — Meta: 24.2 a 29.9 Ton</option>
+              <option value="hibrido">3. Estrategia Híbrida Óptima (Fondo Granulado + Fertirriego AIFA) — Meta: 31.5 a 35.5 Ton</option>
+            </select>
+          </div>
+
+          <div id="fertilizer-source-alert" class="alert-box alert-success" style="margin-bottom:1rem; font-size:0.825rem; padding:0.6rem 0.8rem;">
+            <div class="alert-icon" id="fertilizer-source-alert-icon">✨</div>
+            <div class="alert-content" id="fertilizer-source-alert-text">
+              <strong>Línea AIFA Hidrosoluble:</strong> Inyección continua por cinta a 40 cm. Eficiencia del 85-90% sin picos salinos. Proyecta 7.5 a 8.5 kg/planta (33 a 37.4 Ton) con 75-80% de fruta de Primera.
+            </div>
+          </div>
+
+          <!-- Módulo de Sectorización Hidráulica para Bomba 1.5 HP 220V -->
+          <div class="info-card" style="margin-bottom:1.1rem; border:1px solid rgba(168,85,247,0.4); background:rgba(24,15,40,0.7); padding:0.8rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <h4 style="color:#c084fc; font-size:0.92rem; margin:0;">⚡ Sectorización Hidráulica: Motor 1" 1.5 HP (220V)</h4>
+              <span class="tag" style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.7rem; padding:0.15rem 0.4rem;">Caudal Seguro 2.4 – 3.2 m³/h</span>
+            </div>
+            <p style="font-size:0.8rem; color:#cbd5e1; margin:0 0 0.5rem 0; line-height:1.4;">
+              Nave completa demanda 8.0 m³/h (inviable para 1.5 HP). Se divide en <strong>3 sectores secuenciales</strong> para trabajar a presión óptima de 2.5 a 3.2 bar:
+            </p>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem; text-align:center;">
+              <div style="background:rgba(255,255,255,0.04); padding:0.4rem; border-radius:6px; border:1px solid rgba(168,85,247,0.25);">
+                <span style="display:block; font-size:0.72rem; color:#c084fc; font-weight:700;">SECTOR 1 (Cam 1-3)</span>
+                <span style="font-size:0.9rem; font-weight:700; color:#fff;">2.40 m³/h</span>
+                <span style="display:block; font-size:0.7rem; color:#94a3b8;">1.500 got | 1.320 pl</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); padding:0.4rem; border-radius:6px; border:1px solid rgba(56,189,248,0.35);">
+                <span style="display:block; font-size:0.72rem; color:#38bdf8; font-weight:700;">SECTOR 2 (Cam 4-7)</span>
+                <span style="font-size:0.9rem; font-weight:700; color:#fff;">3.20 m³/h</span>
+                <span style="display:block; font-size:0.7rem; color:#94a3b8;">2.000 got | 1.760 pl</span>
+              </div>
+              <div style="background:rgba(255,255,255,0.04); padding:0.4rem; border-radius:6px; border:1px solid rgba(168,85,247,0.25);">
+                <span style="display:block; font-size:0.72rem; color:#c084fc; font-weight:700;">SECTOR 3 (Cam 8-10)</span>
+                <span style="font-size:0.9rem; font-weight:700; color:#fff;">2.40 m³/h</span>
+                <span style="display:block; font-size:0.7rem; color:#94a3b8;">1.500 got | 1.320 pl</span>
+              </div>
+            </div>
+            <span style="display:block; margin-top:0.4rem; font-size:0.75rem; color:#94a3b8;">
+              ⏱️ En fructificación máxima cada sector recibe <strong>5 pulsos de 28 min</strong> (bomba opera 6.9 h/día en turnos alternados).
+            </span>
           </div>
 
           <div class="month-selector" style="margin-bottom:1.25rem;">
@@ -930,32 +1441,32 @@
             <div class="spec-item">
               <div class="spec-num">01</div>
               <div class="spec-body">
-                <h4>Laterales de Goteo PC/ND (2.000 m lineales)</h4>
-                <p>Tubería PE Ø 16 mm (calibre 35-40 mil) con goteros autocompensantes y antidrenantes a <strong>0.20 m</strong>. 2 líneas por camellón = 10.000 goteros totales. Caudal de 1.20 L/h.</p>
+                <h4>Cinta de Goteo PC a 40 cm (Fijada con Horquillas)</h4>
+                <p>Cinta pesada calibre 12-15 mil con goteros autorregulantes (PC) a <strong>0.40 m</strong> (1.60 L/h). Fijada con horquillas de alambre cada 6-8 m al suelo descubierto.</p>
               </div>
             </div>
 
             <div class="spec-item">
               <div class="spec-num">02</div>
               <div class="spec-body">
-                <h4>Caudal Horario y Sectorización</h4>
-                <p>Caudal total simultáneo: <strong>12.00 m³/h (3.33 L/s)</strong> a 2.0 bar de presión en cabezal. Se riega en 1 solo turno completo con bomba de 3.0 a 5.0 HP o 2 sectores de 6.0 m³/h.</p>
+                <h4>Bomba Alta Presión 1.5 HP (1") y 3 Sectores</h4>
+                <p>Caudal de 8.0 m³/h excede la bomba; se divide en <strong>3 sectores balanceados (2.4 a 3.2 m³/h)</strong> a 2.5 - 3.2 bar, ampliando a matriz de 2" de PVC tras el filtro.</p>
               </div>
             </div>
 
             <div class="spec-item">
               <div class="spec-num">03</div>
               <div class="spec-body">
-                <h4>Cabezal de Filtrado para Acuífero de Quíbor</h4>
-                <p>Hidrociclón desarenador en pozo profundo + batería de filtros de anillas ranuradas de <strong>120-130 mesh (130 micras)</strong> con retrolavado y válvulas ventosas de aire de doble efecto.</p>
+                <h4>Filtro de Discos de 120 Mesh (Laguna de Tierra)</h4>
+                <p>Batería de discos ranurados de <strong>120 mesh / 130 µm (1.5" o 2")</strong> con compresión tridimensional para retener algas y limos + canastilla flotante con boya a 50 cm.</p>
               </div>
             </div>
 
             <div class="spec-item">
               <div class="spec-num">04</div>
               <div class="spec-body">
-                <h4>Acolchado Mulch Plata/Negro (1.20 m ancho)</h4>
-                <p>Cara plata hacia arriba (repele mosca blanca/trips y reduce temperatura radicular) y cara negra al suelo (suprime malezas y frena la evaporación de sales capilares).</p>
+                <h4>Manejo a Suelo Descubierto (Sin Acolchado)</h4>
+                <p>Escarda superficial ligera a 2-3 cm cada 15-20 días para romper la costra salina capilar y malezas. Facilita la aplicación rápida y directa de fertilizantes granulados.</p>
               </div>
             </div>
           </div>
@@ -963,7 +1474,7 @@
           <div class="alert-box alert-success" style="margin-top:1.25rem;">
             <div class="alert-icon">💧</div>
             <div class="alert-content">
-              <strong>Por qué Goteros Antidrenantes (ND) en 100 m:</strong> Evitan que los laterales se vacíen por pendiente al apagarse el pulso, asegurando que los 10.000 goteros comiencen a regar al mismo segundo con la misma dosis.
+              <strong>Hidráulica Calibrada para Quíbor:</strong> La sectorización en 3 bloques garantiza presión constante (2.5 - 3.2 bar) para los goteros PC con el motor de 1.5 HP, y el filtro de discos de 120 mesh protege la red de las algas de la laguna de tierra.
             </div>
           </div>
 
@@ -984,6 +1495,157 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Simulador Económico Comparativo: AIFA vs Granulado vs Híbrido (Mercado Venezuela) -->
+      <div class="card glass-card full-width economic-simulator-card" id="economic-simulator-section">
+        <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+              <span class="action-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">💰 Análisis Financiero en Campo</span>
+              <h2 style="margin:0;">Simulador de Rentabilidad Neta: AIFA Hidrosoluble vs Granulado Nacional</h2>
+            </div>
+            <span class="subtitle">Ajusta los precios de mercado en Venezuela para calcular en tiempo real el Retorno de Inversión (ROI) y el diferencial de ganancia neta en 2.000 m²</span>
+          </div>
+          <span class="tag tag-accent" id="tag-econ-best" style="background:#059669; color:#fff;">Mayor Beneficio: AIFA Hidrosoluble</span>
+        </div>
+
+        <!-- Inputs de Precios Dinámicos -->
+        <div class="econ-inputs-grid">
+          <div class="econ-input-item">
+            <label for="input-price-aifa">Precio Saco AIFA Soluble (25 kg):</label>
+            <div class="econ-input-wrapper">
+              <span>$</span>
+              <input type="number" id="input-price-aifa" min="30" max="150" step="1" value="65">
+              <div class="stepper-control">
+                <button type="button" class="stepper-btn" id="btn-aifa-minus">-</button>
+                <button type="button" class="stepper-btn" id="btn-aifa-plus">+</button>
+              </div>
+            </div>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Promedio Venezuela: $60 - $75 USD</span>
+          </div>
+
+          <div class="econ-input-item">
+            <label for="input-price-granulado">Precio Saco Granulado NPK (50 kg):</label>
+            <div class="econ-input-wrapper">
+              <span>$</span>
+              <input type="number" id="input-price-granulado" min="20" max="90" step="1" value="38">
+              <div class="stepper-control">
+                <button type="button" class="stepper-btn" id="btn-gran-minus">-</button>
+                <button type="button" class="stepper-btn" id="btn-gran-plus">+</button>
+              </div>
+            </div>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Promedio Venezuela: $35 - $45 USD</span>
+          </div>
+
+          <div class="econ-input-item">
+            <label for="input-price-cesta">Precio Cesta Tomate 20 kg (Finca):</label>
+            <div class="econ-input-wrapper">
+              <span>$</span>
+              <input type="number" id="input-price-cesta" min="8" max="40" step="0.5" value="18">
+              <div class="stepper-control">
+                <button type="button" class="stepper-btn" id="btn-cesta-minus">-</button>
+                <button type="button" class="stepper-btn" id="btn-cesta-plus">+</button>
+              </div>
+            </div>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Equivale a <strong id="disp-price-kg" style="color:#38bdf8;">$0.90 USD/kg</strong></span>
+          </div>
+        </div>
+
+        <!-- Grid Comparativo de Resultados -->
+        <div class="econ-results-grid">
+          <!-- 1. AIFA 100% Hidrosoluble -->
+          <div class="econ-result-card featured" id="econ-card-aifa">
+            <div class="econ-result-title">
+              <span style="color:#34d399;">1. AIFA 100% Hidrosoluble</span>
+              <span class="tag" style="background:rgba(16,185,129,0.25); color:#34d399;">Máxima Productividad</span>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
+              <strong style="color:#fff;" id="disp-econ-yield-aifa">35.2 Ton (1.760 cestas)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
+              <strong style="color:#34d399;" id="disp-econ-gross-aifa">$31.680 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
+              <strong style="color:#f43f5e;" id="disp-econ-cost-aifa">$2.730 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Nutrición / kg Tomate:</span>
+              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-aifa">$0.078 USD/kg</strong>
+            </div>
+            <div class="econ-net-margin">
+              <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Margen Neto Nutricional:</span>
+              <span class="econ-net-val" style="color:#34d399;" id="disp-econ-net-aifa">$28.950 USD</span>
+            </div>
+          </div>
+
+          <!-- 2. Estrategia Híbrida -->
+          <div class="econ-result-card" id="econ-card-hibrido">
+            <div class="econ-result-title">
+              <span style="color:#38bdf8;">2. Estrategia Híbrida Óptima</span>
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8;">Equilibrio Costo/Beneficio</span>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
+              <strong style="color:#fff;" id="disp-econ-yield-hibrido">33.5 Ton (1.675 cestas)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
+              <strong style="color:#38bdf8;" id="disp-econ-gross-hibrido">$30.150 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
+              <strong style="color:#f43f5e;" id="disp-econ-cost-hibrido">$2.110 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Nutrición / kg Tomate:</span>
+              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-hibrido">$0.063 USD/kg</strong>
+            </div>
+            <div class="econ-net-margin">
+              <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Margen Neto Nutricional:</span>
+              <span class="econ-net-val" style="color:#38bdf8;" id="disp-econ-net-hibrido">$28.040 USD</span>
+            </div>
+          </div>
+
+          <!-- 3. Granulado Manual Edáfico -->
+          <div class="econ-result-card" id="econ-card-granulado">
+            <div class="econ-result-title">
+              <span style="color:#f59e0b;">3. Granulado Manual Nacional</span>
+              <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Baja Inversión Inicial</span>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
+              <strong style="color:#fff;" id="disp-econ-yield-granulado">27.0 Ton (1.350 cestas)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
+              <strong style="color:#f59e0b;" id="disp-econ-gross-granulado">$24.300 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
+              <strong style="color:#f43f5e;" id="disp-econ-cost-granulado">$1.444 USD</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Costo Nutrición / kg Tomate:</span>
+              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-granulado">$0.053 USD/kg</strong>
+            </div>
+            <div class="econ-net-margin">
+              <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Margen Neto Nutricional:</span>
+              <span class="econ-net-val" style="color:#f59e0b;" id="disp-econ-net-granulado">$22.856 USD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conclusión Financiera -->
+        <div class="alert-box alert-success" style="margin-top:1rem; font-size:0.85rem;">
+          <div class="alert-icon">💡</div>
+          <div class="alert-content" id="disp-econ-conclusion">
+            <strong>Veredicto Económico para el Productor en Quíbor:</strong> Aunque el abono hidrosoluble AIFA requiere $1.286 USD adicionales de inversión inicial frente al granulado, genera <strong>+$6.094 USD netos adicionales de ganancia</strong> por ciclo productivo, gracias a su mayor cuajado, menor aborto floral y 75% de frutos de Primera calidad.
+          </div>
+        </div>
       </div>
 
       <!-- Tarjeta 3 Full-Width: Matriz de Fumigación y Manejo Fitosanitario -->
@@ -1009,7 +1671,7 @@
                 <th>Blanco / Plaga / Enfermedad</th>
                 <th>Ingrediente Activo</th>
                 <th>Producto Referencia</th>
-                <th>Grupo IRAC / FRAC</th>
+                <th>Grupo <span class="tooltip-term">IRAC / FRAC <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Comités de Acción IRAC / FRAC</span><span class="tooltip-tag">Anti-Resistencia</span></span><span class="tooltip-simple">Clasificación internacional del modo de acción químico. Alternar números en cada aplicación evita crear plagas o cepas resistentes.</span><span class="tooltip-tech">IRAC: Insecticidas | FRAC: Fungicidas</span></span></span></th>
                 <th>Dosis / 100 L</th>
                 <th>Momento y Modo de Acción</th>
                 <th>Carencia (PC)</th>
@@ -1029,7 +1691,7 @@
             </p>
           </div>
           <div class="info-card">
-            <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.4rem;">🛡️ Protocolo Antiviral Estricto (ToBRFV y TMV):</h4>
+            <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.4rem;">🛡️ Protocolo Antiviral Estricto (<span class="tooltip-term">ToBRFV <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Virus Rugoso del Tomate (ToBRFV)</span><span class="tooltip-tag">Tobamovirus</span></span><span class="tooltip-simple">Virus letal transmitido por contacto físico de manos, ropa o tijeras. Provoca deformaciones y necrosis en fruto.</span><span class="tooltip-tech">Se inactiva al 100% con leche descremada al 10%</span></span></span> y TMV):</h4>
             <p style="font-size:0.85rem; color:#cbd5e1; line-height:1.5;">
               El Virus Rugoso se transmite por contacto mecánico. Exigir lavado de manos en solución de <strong>leche descremada al 10% en la esclusa</strong>, desinfección de tijeras con amonio cuaternario al 2% entre camellón y camellón, y prohibición absoluta de tabaco en toda la finca.
             </p>
@@ -1044,7 +1706,7 @@
             <h2>Protocolo Cultural de Tutorado Mecánico y Metas de Rendimiento (2.000 m²)</h2>
             <span class="subtitle">Guía de campo para maximizar calibre y suprimir el 88% de la mano de obra tradicional</span>
           </div>
-          <span class="tag tag-accent" style="background:#059669; color:#fff;">Meta: 28.6 a 37.4 Toneladas</span>
+          <span class="tag tag-accent" id="disp-kpi-yield-tag" style="background:#059669; color:#fff;">Meta: 33.0 a 37.4 Toneladas (AIFA Hidrosoluble)</span>
         </div>
 
         <div class="grid-2col" style="margin-top:1.25rem;">
