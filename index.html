@@ -83,7 +83,7 @@
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
               </span>
-              <span class="nav-item-label">Ventilación & Extractores</span>
+              <span class="nav-item-label">Ventilación & Eólicos</span>
               <span class="nav-item-badge">Hellmann</span>
             </button>
           </div>
@@ -108,14 +108,14 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
               </span>
               <span class="nav-item-label">Planos Constructivos</span>
-              <span class="nav-item-badge">SVG / Cortes</span>
+              <span class="nav-item-badge">Cortes</span>
             </button>
             <button class="nav-item" data-tab="tab-plagas" id="nav-item-plagas" role="tab" aria-selected="false" aria-controls="tab-plagas" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v4a4 4 0 0 0 8 0v-4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/></svg>
               </span>
               <span class="nav-item-label">Matriz de Plagas</span>
-              <span class="nav-item-badge">110gsm 50mesh</span>
+              <span class="nav-item-badge">50 Mesh</span>
             </button>
           </div>
         </div>
@@ -131,15 +131,15 @@
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
               </span>
-              <span class="nav-item-label">Riego FAO-56 & Salinidad</span>
-              <span class="nav-item-badge">LF %</span>
+              <span class="nav-item-label">Riego FAO-56</span>
+              <span class="nav-item-badge">Salinidad</span>
             </button>
             <button class="nav-item" data-tab="tab-riego" data-scroll="well-drilling-section" id="nav-item-pozo" role="tab" aria-selected="false" aria-controls="tab-riego" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </span>
-              <span class="nav-item-label">Perforación Pozo 120 m</span>
-              <span class="nav-item-badge">CIDIAT</span>
+              <span class="nav-item-label">Pozo Profundo</span>
+              <span class="nav-item-badge">120 m</span>
             </button>
           </div>
         </div>
@@ -162,15 +162,15 @@
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9m-4-4l4 4 4-4"/></svg>
               </span>
-              <span class="nav-item-label">Cadena Hidráulica & Bomba</span>
+              <span class="nav-item-label">Cadena Hidráulica</span>
               <span class="nav-item-badge">1.5 HP</span>
             </button>
             <button class="nav-item" data-tab="tab-produccion" data-scroll="field-action-sheet" id="nav-item-ficha" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               </span>
-              <span class="nav-item-label">Ficha de Turno Diario</span>
-              <span class="nav-item-badge">Operador</span>
+              <span class="nav-item-label">Ficha de Turno</span>
+              <span class="nav-item-badge">WhatsApp</span>
             </button>
             <button class="nav-item" data-tab="tab-produccion" data-scroll="economic-simulator-section" id="nav-item-simulador" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
@@ -186,9 +186,9 @@
 
       <!-- Sidebar Footer / Controls -->
       <div class="sidebar-footer">
-        <div class="badge-daylight-mode" title="Modo Diurno / Luz Natural permanente optimizado para uso en campo bajo sol">
-          <span class="sunlight-icon">☀️</span> <span id="sunlight-btn-text">Modo Luz Natural (Campo)</span>
-        </div>
+        <button id="btn-theme-toggle" class="btn-sunlight-toggle" type="button" title="Alternar entre Modo Luz Campo y Modo Nocturno Cockpit">
+          <span class="sunlight-icon" id="theme-icon">☀️</span> <span id="sunlight-btn-text">Modo Luz Campo</span>
+        </button>
         <div class="sidebar-footer-status">
           <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
           <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 Quíbor 700m</a>
@@ -2429,6 +2429,11 @@
   </footer>
     </div> <!-- /app-main-area -->
   </div> <!-- /app-layout -->
+
+  <div id="agro-toast" class="agro-toast" role="status" aria-live="polite">
+    <span class="agro-toast-icon">📋</span>
+    <span id="agro-toast-msg">¡Copiado con éxito!</span>
+  </div>
 
   <script src="app.js?v=2.0.0"></script>
 </body>

@@ -127,9 +127,9 @@ body {
 
 /* SIDEBAR PRO */
 .app-sidebar {
-  width: 275px;
+  width: 300px;
   flex-shrink: 0;
-  background: #ffffff;
+  background: var(--bg-secondary);
   border-right: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
@@ -218,7 +218,7 @@ body {
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -770,25 +770,21 @@ body {
 /* Controles de Clima Multianual (Año 2024-2030 y Mes) */
 .clima-controls-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
   background: rgba(10, 16, 28, 0.5);
   padding: 0.9rem 1.1rem;
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
   margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .clima-controls-grid {
-    grid-template-columns: 1fr;
-  }
+  min-width: 0;
 }
 
 .clima-select-group {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
+  min-width: 0;
 }
 
 .clima-select-group label {
@@ -874,8 +870,8 @@ body {
 
 .inputs-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.15rem;
   margin-bottom: 1.25rem;
 }
 
@@ -883,6 +879,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  min-width: 0;
 }
 
 .input-item label {
@@ -892,6 +889,10 @@ body {
 }
 
 .input-field, .input-select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   background: var(--bg-input);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
@@ -901,6 +902,8 @@ body {
   border-radius: var(--radius-sm);
   outline: none;
   transition: var(--transition-fast);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .input-field:focus, .input-select:focus {
@@ -2488,227 +2491,245 @@ input[type="range"] {
 }
 
 /* ==========================================================================
-   AGRI-UX-UI: MODO SOL DIRECTO MAESTRO (ULTRA-CONTRASTE EXTERIOR WCAG AAA)
-   Diseñado específicamente para lectura exterior bajo radiación UV > 11 en Quíbor.
-   Contraste extremo >= 7:1, cero transparencias descoloridas, bordes negros
-   nítidos de 2-2.5px, sombras sólidas neo-brutalistas y semántica agrícola de alto impacto.
+   AGRI-UX-UI: MODO LUZ DE CAMPO (ALTO CONTRASTE EXTERIOR & PRECISIÓN WCAG AAA)
+   Diseñado específicamente para operabilidad técnica bajo sol intenso en Quíbor.
+   Contraste extremo sin agresividad visual, tipografía nítida de alta legibilidad,
+   acabado AgTech moderno y pulido, sin bordes toscos de cómic ni sombras duras.
    ========================================================================== */
 
 body.sunlight-mode {
-  --bg-main: #ffffff !important;
-  --bg-secondary: #f8fafc !important;
+  --bg-main: #f8fafc !important;
+  --bg-secondary: #ffffff !important;
   --bg-card: #ffffff !important;
   --bg-card-hover: #f1f5f9 !important;
   --bg-input: #ffffff !important;
-  --border-subtle: #000000 !important;
-  --border-focus: #000000 !important;
-  --border-accent: #000000 !important;
-  --text-primary: #000000 !important;
-  --text-secondary: #111827 !important;
-  --text-muted: #1f2937 !important;
+  --border-subtle: #cbd5e1 !important;
+  --border-focus: #059669 !important;
+  --border-accent: #0284c7 !important;
+  --text-primary: #0f172a !important;
+  --text-secondary: #334155 !important;
+  --text-muted: #64748b !important;
 
-  /* Tokens Agronómicos de Ultra-Contraste Solar */
-  --emerald-main: #065f46 !important;
-  --emerald-light: #047857 !important;
-  --emerald-glow: none !important;
-  --cyan-main: #0369a1 !important;
-  --cyan-light: #0284c7 !important;
-  --cyan-glow: none !important;
-  --amber-main: #9a3412 !important;
-  --amber-glow: none !important;
-  --rose-main: #991b1b !important;
-  --rose-glow: none !important;
+  /* Tokens Agronómicos de Alta Precisión Solar */
+  --emerald-main: #059669 !important;
+  --emerald-light: #10b981 !important;
+  --emerald-glow: rgba(5, 150, 105, 0.12) !important;
+  --cyan-main: #0284c7 !important;
+  --cyan-light: #0ea5e9 !important;
+  --cyan-glow: rgba(2, 132, 199, 0.12) !important;
+  --amber-main: #d97706 !important;
+  --amber-glow: rgba(217, 119, 6, 0.12) !important;
+  --rose-main: #dc2626 !important;
+  --rose-glow: rgba(220, 38, 38, 0.12) !important;
 
-  --agri-water: #0369a1 !important;
-  --agri-water-glow: none !important;
+  --agri-water: #0284c7 !important;
+  --agri-water-glow: rgba(2, 132, 199, 0.12) !important;
   --agri-water-bg: #e0f2fe !important;
-  --agri-plant: #065f46 !important;
-  --agri-plant-glow: none !important;
+  --agri-plant: #059669 !important;
+  --agri-plant-glow: rgba(5, 150, 105, 0.12) !important;
   --agri-plant-bg: #d1fae5 !important;
-  --agri-sun: #9a3412 !important;
-  --agri-sun-glow: none !important;
+  --agri-sun: #d97706 !important;
+  --agri-sun-glow: rgba(217, 119, 6, 0.12) !important;
   --agri-sun-bg: #fef3c7 !important;
-  --agri-danger: #991b1b !important;
-  --agri-danger-glow: none !important;
+  --agri-danger: #dc2626 !important;
+  --agri-danger-glow: rgba(220, 38, 38, 0.12) !important;
   --agri-danger-bg: #fee2e2 !important;
-  --agri-pump: #581c87 !important;
-  --agri-pump-glow: none !important;
+  --agri-pump: #7c3aed !important;
+  --agri-pump-glow: rgba(124, 58, 237, 0.12) !important;
   --agri-pump-bg: #f3e8ff !important;
-  --agri-soil: #78350f !important;
+  --agri-soil: #92400e !important;
 
-  background-color: #ffffff !important;
+  background-color: #f8fafc !important;
   background-image: none !important;
-  color: #000000 !important;
+  color: #0f172a !important;
 }
 
-/* Sidebar & Topbar en Modo Sol Directo (Ultra-Contraste) */
+/* Sidebar & Topbar en Modo Luz de Campo */
 body.sunlight-mode .app-sidebar {
   background: #ffffff !important;
-  border-right: 2.5px solid #000000 !important;
-  box-shadow: 4px 0px 0px #000000 !important;
+  border-right: 1px solid #e2e8f0 !important;
+  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .sidebar-header {
-  border-bottom: 2px solid #000000 !important;
+  border-bottom: 1px solid #e2e8f0 !important;
 }
 
 body.sunlight-mode .brand-icon {
-  background: #000000 !important;
+  background: linear-gradient(135deg, #059669, #0284c7) !important;
   color: #ffffff !important;
-  box-shadow: none !important;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2) !important;
 }
 
 body.sunlight-mode .brand-title {
-  color: #000000 !important;
-  font-weight: 900 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
 body.sunlight-mode .brand-subtitle {
-  color: #1f2937 !important;
+  color: #64748b !important;
   font-weight: 600 !important;
 }
 
 body.sunlight-mode .btn-sidebar-collapse {
-  background: #f1f5f9 !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #475569 !important;
 }
 
 body.sunlight-mode .btn-sidebar-collapse:hover {
   background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border-color: #94a3b8 !important;
 }
 
 body.sunlight-mode .nav-group-num {
-  background: #000000 !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
+  background: rgba(5, 150, 105, 0.1) !important;
+  color: #059669 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .nav-group-title {
-  color: #000000 !important;
-  font-weight: 800 !important;
+  color: #64748b !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .nav-item {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 1.5px solid transparent !important;
-  font-weight: 700 !important;
+  background: transparent !important;
+  color: #334155 !important;
+  border: 1px solid transparent !important;
+  font-weight: 600 !important;
 }
 
 body.sunlight-mode .nav-item:hover {
   background: #f1f5f9 !important;
-  border-color: #000000 !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
 }
 
 body.sunlight-mode .nav-item.active {
-  background: #fef08a !important;
-  border: 2.5px solid #000000 !important;
-  color: #000000 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
-  font-weight: 900 !important;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(2, 132, 199, 0.08)) !important;
+  border: 1px solid rgba(5, 150, 105, 0.35) !important;
+  color: #065f46 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.1) !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .nav-item.active .nav-item-icon {
-  color: #000000 !important;
+  color: #059669 !important;
 }
 
 body.sunlight-mode .nav-item.active .nav-item-badge {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border-color: #000000 !important;
+  background: rgba(5, 150, 105, 0.18) !important;
+  color: #065f46 !important;
+  border-color: rgba(5, 150, 105, 0.3) !important;
 }
 
 body.sunlight-mode .nav-item-badge {
-  background: #f1f5f9 !important;
-  color: #000000 !important;
-  border: 1px solid #000000 !important;
+  background: #f8fafc !important;
+  color: #475569 !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 body.sunlight-mode .sidebar-footer {
-  border-top: 2px solid #000000 !important;
+  border-top: 1px solid #e2e8f0 !important;
 }
 
-body.sunlight-mode .btn-sunlight-toggle {
-  background: #000000 !important;
-  color: #fef08a !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
-  font-weight: 800 !important;
+body.sunlight-mode .btn-sunlight-toggle,
+body.sunlight-mode .badge-daylight-mode {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+  font-weight: 700 !important;
+  cursor: pointer;
 }
 
 body.sunlight-mode .btn-sunlight-toggle:hover {
-  background: #1f2937 !important;
-  color: #fef9c3 !important;
+  background: #e2e8f0 !important;
 }
 
 body.sunlight-mode .badge-offline {
-  background: #d1fae5 !important;
-  border: 2px solid #047857 !important;
-  color: #064e3b !important;
-  font-weight: 800 !important;
+  background: #dcfce7 !important;
+  border: 1px solid #86efac !important;
+  color: #15803d !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .badge-geo {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
+  background: #fef3c7 !important;
+  border: 1px solid #fde68a !important;
+  color: #92400e !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .app-topbar {
-  background: #ffffff !important;
-  border-bottom: 2.5px solid #000000 !important;
-  box-shadow: 0 4px 0px rgba(0, 0, 0, 0.08) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .btn-hamburger {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1e293b !important;
 }
 
 body.sunlight-mode .breadcrumb-root {
-  color: #047857 !important;
-  font-weight: 900 !important;
-}
-
-body.sunlight-mode .breadcrumb-separator {
-  color: #000000 !important;
+  color: #059669 !important;
   font-weight: 800 !important;
 }
 
+body.sunlight-mode .breadcrumb-separator {
+  color: #94a3b8 !important;
+  font-weight: 600 !important;
+}
+
 body.sunlight-mode .breadcrumb-stage {
-  color: #1f2937 !important;
-  font-weight: 700 !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
 }
 
 body.sunlight-mode .breadcrumb-module {
-  color: #000000 !important;
-  font-weight: 900 !important;
+  color: #0f172a !important;
+  font-weight: 800 !important;
 }
 
 body.sunlight-mode .telemetry-pill {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.sunlight-mode .pill-wind {
+  background: #e0f2fe !important;
+  border-color: #bae6fd !important;
+  color: #0369a1 !important;
+}
+
+body.sunlight-mode .pill-geo {
+  background: #fef3c7 !important;
+  border-color: #fde68a !important;
+  color: #92400e !important;
 }
 
 body.sunlight-mode .btn-topbar-action {
-  background: #047857 !important;
+  background: linear-gradient(135deg, #059669, #047857) !important;
   color: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
-  font-weight: 800 !important;
+  border: 1px solid #047857 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25) !important;
+  font-weight: 700 !important;
 }
 
-body.sunlight-mode .nav-btn.active svg {
-  color: #000000 !important;
-  stroke: #000000 !important;
+body.sunlight-mode .btn-topbar-action:hover {
+  background: #047857 !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Contenedores, Tarjetas y Paneles (Estilo Neo-Brutalista Exterior) */
+/* Tarjetas y Contenedores AgTech de Alta Definición */
 body.sunlight-mode .card,
 body.sunlight-mode .glass-card,
 body.sunlight-mode .field-action-card,
@@ -2735,20 +2756,20 @@ body.sunlight-mode .blueprint-viewer-container,
 body.sunlight-mode .drill-visual-container,
 body.sunlight-mode .canvas-container {
   background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
-  color: #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
+  color: #0f172a !important;
   backdrop-filter: none !important;
 }
 
 body.sunlight-mode .card:hover,
 body.sunlight-mode .pest-card:hover,
 body.sunlight-mode .field-action-card:hover {
-  transform: none !important;
-  box-shadow: 4px 4px 0px #000000 !important;
+  border-color: #94a3b8 !important;
+  box-shadow: 0 8px 24px -3px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04) !important;
 }
 
-/* Títulos y Tipografía */
+/* Tipografía de Alto Contraste */
 body.sunlight-mode h1,
 body.sunlight-mode h2,
 body.sunlight-mode h3,
@@ -2767,7 +2788,7 @@ body.sunlight-mode .action-sector-title,
 body.sunlight-mode .pest-title,
 body.sunlight-mode .econ-net-val,
 body.sunlight-mode .econ-result-title {
-  color: #000000 !important;
+  color: #0f172a !important;
   font-weight: 800 !important;
 }
 
@@ -2799,644 +2820,557 @@ body.sunlight-mode .drill-layer-component,
 body.sunlight-mode .econ-metric-row,
 body.sunlight-mode .action-time-window,
 body.sunlight-mode .action-param-item {
-  color: #0f172a !important;
+  color: #334155 !important;
 }
 
-/* Anulación de Colores Claros Inline en Modo Sol Directo */
-body.sunlight-mode [style*="color:#cbd5e1"],
-body.sunlight-mode [style*="color: #cbd5e1"],
-body.sunlight-mode [style*="color:#94a3b8"],
-body.sunlight-mode [style*="color: #94a3b8"],
-body.sunlight-mode [style*="color:#f8fafc"],
-body.sunlight-mode [style*="color: #f8fafc"],
-body.sunlight-mode [style*="color:#e2e8f0"],
-body.sunlight-mode [style*="color: #e2e8f0"],
-body.sunlight-mode [style*="color:#64748b"],
-body.sunlight-mode [style*="color: #64748b"],
-body.sunlight-mode [style*="color:#fff"],
-body.sunlight-mode [style*="color: #fff"],
-body.sunlight-mode [style*="color:#ffffff"],
-body.sunlight-mode [style*="color: #ffffff"] {
-  color: #000000 !important;
-}
-
-body.sunlight-mode [style*="background:rgba(15,23,42"],
-body.sunlight-mode [style*="background: rgba(15,23,42"],
-body.sunlight-mode [style*="background:rgba(0,0,0"],
-body.sunlight-mode [style*="background: rgba(0,0,0"],
-body.sunlight-mode [style*="background:#050912"],
-body.sunlight-mode [style*="background: #050912"] {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-}
-
-/* Cajas de Alerta de Alto Impacto */
+/* Alert Boxes */
 body.sunlight-mode .alert-box {
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
-  font-weight: 700 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
 }
 
 body.sunlight-mode .alert-warning {
   background: #fef3c7 !important;
-  border-color: #b45309 !important;
-  color: #78350f !important;
+  border-color: #fcd34d !important;
+  border-left: 4px solid #d97706 !important;
+  color: #92400e !important;
 }
 body.sunlight-mode .alert-warning strong,
 body.sunlight-mode .alert-warning .alert-content {
   color: #78350f !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .alert-caution {
   background: #fee2e2 !important;
-  border-color: #b91c1c !important;
-  color: #7f1d1d !important;
+  border-color: #fca5a5 !important;
+  border-left: 4px solid #dc2626 !important;
+  color: #991b1b !important;
 }
 body.sunlight-mode .alert-caution strong,
 body.sunlight-mode .alert-caution .alert-content {
   color: #7f1d1d !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .alert-success {
-  background: #d1fae5 !important;
-  border-color: #047857 !important;
-  color: #064e3b !important;
+  background: #dcfce7 !important;
+  border-color: #86efac !important;
+  border-left: 4px solid #16a34a !important;
+  color: #14532d !important;
 }
 body.sunlight-mode .alert-success strong,
 body.sunlight-mode .alert-success .alert-content {
-  color: #064e3b !important;
-  font-weight: 800 !important;
+  color: #14532d !important;
+  font-weight: 700 !important;
 }
 
-/* Fórmula y Comparaciones (Tabs 1 & 2) */
+/* Controles Climáticos y Fórmulas */
 body.sunlight-mode .formula-box {
   background: #f8fafc !important;
   color: #047857 !important;
-  border: 2.5px solid #000000 !important;
-  font-weight: 800 !important;
+  border: 1px solid #cbd5e1 !important;
+  border-left: 4px solid #059669 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .clima-controls-grid {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .clima-select-group label {
-  color: #000000 !important;
-  font-weight: 800 !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .clima-phase-banner {
-  background: #f8fafc !important;
-  border: 2px solid #000000 !important;
-  border-left: 6px solid #047857 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-left: 5px solid #059669 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .phase-desc {
-  color: #0f172a !important;
+  color: #334155 !important;
   font-weight: 600 !important;
 }
 
 body.sunlight-mode .tag-enso-warm {
   background: #fee2e2 !important;
   color: #991b1b !important;
-  border: 2px solid #991b1b !important;
-  font-weight: 800 !important;
+  border: 1px solid #fca5a5 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .tag-enso-cool {
   background: #e0f2fe !important;
   color: #0369a1 !important;
-  border: 2px solid #0369a1 !important;
-  font-weight: 800 !important;
+  border: 1px solid #bae6fd !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .tag-enso-neutral {
-  background: #d1fae5 !important;
-  color: #065f46 !important;
-  border: 2px solid #065f46 !important;
-  font-weight: 800 !important;
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border: 1px solid #86efac !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .tag-anomaly {
   background: #fef3c7 !important;
   color: #92400e !important;
-  border: 2px solid #92400e !important;
-  font-weight: 800 !important;
+  border: 1px solid #fde68a !important;
+  font-weight: 700 !important;
 }
 
-body.sunlight-mode .metric-value.highlight-orange { color: #c2410c !important; }
-body.sunlight-mode .metric-value.highlight-cyan   { color: #0369a1 !important; }
-body.sunlight-mode .metric-value.highlight-blue   { color: #1d4ed8 !important; }
-body.sunlight-mode .metric-value.highlight-amber  { color: #b45309 !important; }
-body.sunlight-mode .metric-value.highlight-green  { color: #047857 !important; }
-body.sunlight-mode .metric-value.highlight-yellow { color: #854d0e !important; }
+/* Metric Colors */
+body.sunlight-mode .metric-value.highlight-orange { color: #ea580c !important; }
+body.sunlight-mode .metric-value.highlight-cyan   { color: #0284c7 !important; }
+body.sunlight-mode .metric-value.highlight-blue   { color: #2563eb !important; }
+body.sunlight-mode .metric-value.highlight-amber  { color: #d97706 !important; }
+body.sunlight-mode .metric-value.highlight-green  { color: #059669 !important; }
+body.sunlight-mode .metric-value.highlight-yellow { color: #ca8a04 !important; }
 
 body.sunlight-mode .comp-card {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .comp-card.highlight-card {
   background: #f0fdf4 !important;
-  border: 2.5px solid #047857 !important;
-  box-shadow: 4px 4px 0px #047857 !important;
-}
-
-body.sunlight-mode .comp-diff.danger {
-  color: #991b1b !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .comp-diff.success {
-  color: #047857 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .comp-note {
-  color: #334155 !important;
-  font-weight: 600 !important;
+  border: 1.5px solid #059669 !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.1) !important;
 }
 
 body.sunlight-mode .demand-target-box {
   background: #f0fdf4 !important;
-  border: 2.5px solid #000000 !important;
+  border: 1px solid #86efac !important;
 }
 
 body.sunlight-mode .target-title {
-  color: #047857 !important;
-  font-weight: 900 !important;
+  color: #15803d !important;
+  font-weight: 800 !important;
 }
 
 body.sunlight-mode .target-val {
-  color: #000000 !important;
+  color: #0f172a !important;
   font-weight: 900 !important;
 }
 
 body.sunlight-mode .versus-box.bad {
   background: #fee2e2 !important;
-  border: 2.5px solid #b91c1c !important;
+  border: 1px solid #fca5a5 !important;
 }
 
 body.sunlight-mode .versus-box.bad h3,
 body.sunlight-mode .versus-box.bad .versus-num {
-  color: #991b1b !important;
-  font-weight: 900 !important;
+  color: #b91c1c !important;
+  font-weight: 800 !important;
 }
 
 body.sunlight-mode .versus-box.good {
-  background: #d1fae5 !important;
-  border: 2.5px solid #047857 !important;
+  background: #dcfce7 !important;
+  border: 1px solid #86efac !important;
 }
 
 body.sunlight-mode .versus-box.good h3,
 body.sunlight-mode .versus-box.good .versus-num {
-  color: #064e3b !important;
-  font-weight: 900 !important;
+  color: #15803d !important;
+  font-weight: 800 !important;
 }
 
-/* Tablas Agronómicas (Tab 3) */
+/* Tablas Agronómicas */
 body.sunlight-mode .table-container {
-  border: 2px solid #000000 !important;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: var(--radius-md) !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
 }
 
 body.sunlight-mode .data-table {
-  border-collapse: collapse;
+  border-collapse: collapse !important;
 }
 
 body.sunlight-mode .data-table th {
-  background: #e2e8f0 !important;
-  color: #000000 !important;
-  border-bottom: 2.5px solid #000000 !important;
-  font-weight: 800 !important;
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  border-bottom: 2px solid #cbd5e1 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .data-table td {
   background: #ffffff !important;
-  color: #0f172a !important;
-  border-bottom: 1.5px solid #cbd5e1 !important;
-  font-weight: 600 !important;
+  color: #334155 !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  font-weight: 500 !important;
 }
 
 body.sunlight-mode .data-table tr:hover td {
-  background: #f1f5f9 !important;
+  background: #f8fafc !important;
 }
 
 body.sunlight-mode .row-highlight td {
-  background: #fef9c3 !important;
-  color: #713f12 !important;
-  font-weight: 800 !important;
+  background: #fefce8 !important;
+  color: #854d0e !important;
+  font-weight: 700 !important;
 }
 
-/* Destacados Semánticos */
-body.sunlight-mode .highlight-cyan {
-  color: #0284c7 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .highlight-green {
-  color: #047857 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .highlight-yellow {
-  color: #b45309 !important;
-  font-weight: 800 !important;
-}
-
-/* Litoestratigrafía del Pozo (Tab 3) */
-body.sunlight-mode .drill-layer {
-  background: #f8fafc !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-}
-
-body.sunlight-mode .drill-layer:hover {
-  background: #e2e8f0 !important;
-}
-
-body.sunlight-mode .badge-casing,
-body.sunlight-mode .badge-screen,
-body.sunlight-mode .badge-seal,
-body.sunlight-mode .badge-pump {
-  border: 1.5px solid #000000 !important;
-  font-weight: 800 !important;
-}
-
-/* Matriz de Plagas (Tab 4) */
+/* Plagas & Status */
 body.sunlight-mode .pest-card {
   background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .pest-status.status-retiene {
-  background: #d1fae5 !important;
-  color: #064e3b !important;
-  border: 2px solid #047857 !important;
-  font-weight: 800 !important;
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border: 1px solid #86efac !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .pest-status.status-pasa {
   background: #fee2e2 !important;
-  color: #7f1d1d !important;
-  border: 2px solid #b91c1c !important;
-  font-weight: 800 !important;
-}
-
-/* Estructura & Lienzo Canvas (Tab 5) */
-body.sunlight-mode .canvas-container {
-  background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-}
-
-body.sunlight-mode .canvas-controls {
-  background: #f8fafc !important;
-  border-top: 2px solid #000000 !important;
-}
-
-body.sunlight-mode .canvas-controls label {
-  color: #000000 !important;
+  color: #b91c1c !important;
+  border: 1px solid #fca5a5 !important;
   font-weight: 700 !important;
 }
 
-body.sunlight-mode .spec-item {
+/* Inputs, Selects & Sliders */
+body.sunlight-mode .input-field,
+body.sunlight-mode .input-select {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+  color: #0f172a !important;
+  border: 1px solid #94a3b8 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
 }
 
-body.sunlight-mode .spec-num {
-  background: #000000 !important;
+body.sunlight-mode .input-field:focus,
+body.sunlight-mode .input-select:focus {
+  border-color: #059669 !important;
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15) !important;
+}
+
+body.sunlight-mode .custom-slider {
+  background: #cbd5e1 !important;
+}
+
+body.sunlight-mode .custom-slider::-webkit-slider-thumb {
+  background: #0284c7 !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4) !important;
+}
+
+/* Botones y Filtros */
+body.sunlight-mode .filter-btn,
+body.sunlight-mode .tag,
+body.sunlight-mode .badge {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .filter-btn:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+}
+
+body.sunlight-mode .filter-btn.active {
+  background: #ecfdf5 !important;
+  color: #065f46 !important;
+  border: 1px solid #059669 !important;
+  box-shadow: 0 1px 3px rgba(5, 150, 105, 0.15) !important;
+  font-weight: 700 !important;
+}
+
+/* Viewport 3D en Modo Sol Directo */
+body.sunlight-mode .viewport-3d-wrapper {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+  border-radius: var(--radius-lg);
+}
+
+body.sunlight-mode .viewport-3d-toolbar,
+body.sunlight-mode .viewport-layers-bar {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+
+body.sunlight-mode .viewport-3d-stage {
+  background: #f8fafc !important;
+}
+
+body.sunlight-mode .v3d-btn {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+body.sunlight-mode .v3d-btn:hover {
+  background: #f1f5f9 !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+body.sunlight-mode .v3d-btn.active {
+  background: #ecfdf5 !important;
+  color: #065f46 !important;
+  border-color: #059669 !important;
+  box-shadow: 0 1px 4px rgba(5, 150, 105, 0.15) !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .btn-turntable {
+  background: #fef3c7 !important;
+  border-color: #fcd34d !important;
+  color: #92400e !important;
+}
+
+body.sunlight-mode .btn-turntable.active {
+  background: #fde68a !important;
+  border-color: #d97706 !important;
+  color: #78350f !important;
+}
+
+body.sunlight-mode .viewport-hud-topleft,
+body.sunlight-mode .viewport-hud-bottomright {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  color: #0f172a !important;
+}
+
+body.sunlight-mode .hud-key {
+  background: #1e293b !important;
   color: #ffffff !important;
-  font-weight: 900 !important;
+  border: 1px solid #334155 !important;
 }
 
-/* Planos Técnicos (Tab 6) */
-body.sunlight-mode .blueprint-viewer-container {
+body.sunlight-mode .viewport-gizmo-box {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Tooltips */
+body.sunlight-mode .tooltip-term {
+  border-bottom: 1.5px dashed #059669 !important;
+  color: #0f172a !important;
+}
+
+body.sunlight-mode .tooltip-bubble {
   background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.15) !important;
+  color: #0f172a !important;
 }
 
-/* Plan Maestro de Producción (Tab 7) */
+body.sunlight-mode .tooltip-title {
+  color: #0f172a !important;
+  font-weight: 800 !important;
+}
+
+body.sunlight-mode .tooltip-tag {
+  background: #059669 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+body.sunlight-mode .tooltip-tech {
+  background: #f8fafc !important;
+  color: #059669 !important;
+  border-top: 1px solid #e2e8f0 !important;
+  font-weight: 600 !important;
+}
+
+/* Acciones de Campo & Operador */
 body.sunlight-mode .action-sector-box {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #0f172a !important;
 }
 
 body.sunlight-mode .action-sector-box.sector-current {
-  background: #fef9c3 !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
+  background: #f0fdf4 !important;
+  border: 1.5px solid #059669 !important;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.12) !important;
 }
 
 body.sunlight-mode .action-sector-badge {
-  background: #000000 !important;
+  background: #059669 !important;
   color: #ffffff !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .action-time-window {
-  background: #e2e8f0 !important;
-  color: #000000 !important;
-  border: 1px solid #000000 !important;
-  font-weight: 700 !important;
+  background: #f1f5f9 !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+  font-weight: 600 !important;
 }
 
 body.sunlight-mode .operator-checklist {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 body.sunlight-mode .checklist-item input[type="checkbox"] {
-  accent-color: #000000 !important;
+  accent-color: #059669 !important;
   width: 18px;
   height: 18px;
 }
 
 body.sunlight-mode .flow-node {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 body.sunlight-mode .flow-node.active-flow {
-  background: #fef08a !important;
-  border: 2.5px solid #000000 !important;
+  background: #ecfdf5 !important;
+  border: 1.5px solid #059669 !important;
 }
 
 body.sunlight-mode .flow-connector {
-  color: #000000 !important;
-  font-weight: 900 !important;
+  color: #059669 !important;
+  font-weight: 800 !important;
 }
 
-body.sunlight-mode .sector-telemetry-box {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
+body.sunlight-mode .btn-export-shift {
+  background: linear-gradient(135deg, #059669, #047857) !important;
+  color: #ffffff !important;
+  border: 1px solid #047857 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25) !important;
+  font-weight: 700 !important;
 }
 
-/* Simulador Económico & Stepper */
-body.sunlight-mode .economic-simulator-card {
-  background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
+body.sunlight-mode .btn-export-shift:hover {
+  background: #047857 !important;
+  transform: translateY(-1px) !important;
 }
 
+/* Simulador Económico */
 body.sunlight-mode .econ-input-item {
   background: #f8fafc !important;
-  border: 2px solid #000000 !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 body.sunlight-mode .econ-input-wrapper span {
-  color: #047857 !important;
-  font-weight: 800 !important;
+  color: #059669 !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .econ-input-wrapper input {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
+  border: 1px solid #94a3b8 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .econ-result-card {
   background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
 
 body.sunlight-mode .econ-result-card.featured {
   background: #f0fdf4 !important;
-  border: 2.5px solid #047857 !important;
-  box-shadow: 4px 4px 0px #047857 !important;
-}
-
-body.sunlight-mode .econ-metric-row {
-  border-bottom: 1px solid #cbd5e1 !important;
-}
-
-body.sunlight-mode .econ-net-margin {
-  border-top: 2px dashed #000000 !important;
+  border: 1.5px solid #059669 !important;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.12) !important;
 }
 
 body.sunlight-mode .econ-net-val {
-  color: #047857 !important;
+  color: #059669 !important;
   font-weight: 900 !important;
 }
 
 body.sunlight-mode .stepper-btn {
   background: #f8fafc !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #1e293b !important;
+  font-weight: 700 !important;
 }
 
 body.sunlight-mode .stepper-btn:hover {
-  background: #fef08a !important;
-}
-
-body.sunlight-mode .btn-export-shift {
-  background: #047857 !important;
-  color: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .btn-export-shift:hover {
-  background: #065f46 !important;
-}
-
-/* Botones, Filtros y Etiquetas */
-body.sunlight-mode .filter-btn,
-body.sunlight-mode .tag,
-body.sunlight-mode .badge {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .filter-btn:hover {
-  background: #f1f5f9 !important;
-}
-
-body.sunlight-mode .filter-btn.active {
-  background: #fef08a !important;
-  color: #000000 !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
-}
-
-body.sunlight-mode .tag-accent {
-  background: #e0f2fe !important;
-  color: #0369a1 !important;
-  border-color: #0284c7 !important;
-}
-
-body.sunlight-mode .tag-formula {
-  background: #f0fdf4 !important;
-  color: #047857 !important;
-  border-color: #059669 !important;
-}
-
-body.sunlight-mode .tag-alert {
-  background: #fef3c7 !important;
-  color: #92400e !important;
-  border-color: #b45309 !important;
-}
-
-/* Inputs, Selects y Deslizadores */
-body.sunlight-mode .input-field,
-body.sunlight-mode .input-select {
-  background: #ffffff !important;
-  color: #000000 !important;
-  border: 2px solid #000000 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .custom-slider {
-  background: #cbd5e1 !important;
-  border: 1.5px solid #000000 !important;
-}
-
-body.sunlight-mode .custom-slider::-webkit-slider-thumb {
-  background: #000000 !important;
-  border: 2px solid #ffffff !important;
-}
-
-/* Tooltips de Información Agronómica */
-body.sunlight-mode .tooltip-term {
-  border-bottom: 1.5px dashed #000000 !important;
-  color: #000000 !important;
-}
-
-body.sunlight-mode .tooltip-bubble {
-  background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 6px 6px 0px #000000 !important;
-  color: #000000 !important;
-}
-
-body.sunlight-mode .tooltip-title {
-  color: #000000 !important;
-  font-weight: 900 !important;
-}
-
-body.sunlight-mode .tooltip-tag {
-  background: #000000 !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .tooltip-simple {
-  color: #111827 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .tooltip-tech {
-  background: #f1f5f9 !important;
-  color: #047857 !important;
-  border-top: 1.5px solid #000000 !important;
-  font-weight: 700 !important;
-}
-
-/* Pie de Página */
-body.sunlight-mode .app-footer {
-  background: #ffffff !important;
-  border-top: 2.5px solid #000000 !important;
-  color: #111827 !important;
-}
-
-body.sunlight-mode .app-footer a {
-  color: #0284c7 !important;
-  font-weight: 800 !important;
-  text-decoration: underline !important;
-}
-
-/* Viewport 3D en Modo Sol Directo (Ultra-Contraste WCAG AAA) */
-body.sunlight-mode .viewport-3d-wrapper {
-  background: #ffffff !important;
-  border: 2.5px solid #000000 !important;
-  box-shadow: 4px 4px 0px #000000 !important;
-}
-
-body.sunlight-mode .viewport-3d-toolbar,
-body.sunlight-mode .viewport-layers-bar {
-  background: #f8fafc !important;
-  border-color: #000000 !important;
-}
-
-body.sunlight-mode .viewport-3d-stage {
-  background: #f1f5f9 !important;
-}
-
-body.sunlight-mode .v3d-btn {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  color: #000000 !important;
-  font-weight: 800 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
-}
-
-body.sunlight-mode .v3d-btn:hover {
   background: #e2e8f0 !important;
 }
 
-body.sunlight-mode .v3d-btn.active {
-  background: #fef08a !important; /* Amarillo sol vivo */
-  color: #000000 !important;
-  border-color: #000000 !important;
-  box-shadow: 2px 2px 0px #000000 !important;
+/* Toast & Progressive Disclosure */
+.agro-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.85rem 1.35rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 1000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-body.sunlight-mode .btn-turntable {
-  background: #fef3c7 !important;
-  border-color: #b45309 !important;
-  color: #78350f !important;
+.agro-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
-body.sunlight-mode .btn-turntable.active {
-  background: #fbbf24 !important;
-  border-color: #000000 !important;
-  color: #000000 !important;
+.agro-toast-icon {
+  font-size: 1.25rem;
 }
 
-body.sunlight-mode .viewport-hud-topleft,
-body.sunlight-mode .viewport-hud-bottomright {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
-  color: #000000 !important;
+details.tech-disclosure {
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  margin-top: 1rem;
+  overflow: hidden;
+  transition: var(--transition-fast);
 }
 
-body.sunlight-mode .hud-item-title,
-body.sunlight-mode .hud-item-sub,
-body.sunlight-mode .hud-badge-quibor,
-body.sunlight-mode .layers-title,
-body.sunlight-mode .layer-chk {
-  color: #000000 !important;
-  font-weight: 700 !important;
+details.tech-disclosure[open] {
+  background: rgba(15, 23, 42, 0.04);
 }
 
-body.sunlight-mode .hud-key {
-  background: #000000 !important;
-  color: #ffffff !important;
-  border: 1px solid #000000 !important;
+summary.tech-summary {
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  font-size: 0.825rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  user-select: none;
+  color: var(--text-secondary);
 }
 
-body.sunlight-mode .viewport-gizmo-box {
-  background: #ffffff !important;
-  border: 2px solid #000000 !important;
-  box-shadow: 3px 3px 0px #000000 !important;
+summary.tech-summary:hover {
+  color: var(--emerald-main);
+}
+
+.tech-disclosure-body {
+  padding: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
 /* ==========================================================================
@@ -3824,7 +3758,7 @@ body.sunlight-mode .artesanal-diag-body * {
 body.sunlight-mode .well-comparison-table th {
   background: #f1f5f9;
   color: #0f172a;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #cbd5e1;
 }
 
 body.sunlight-mode .well-comparison-row {
@@ -3851,28 +3785,30 @@ body.sunlight-mode .well-comparison-table td {
 
 body.sunlight-mode .itemized-budget-card {
   background: #ffffff;
-  border: 2px solid #000000;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05);
 }
 
 body.sunlight-mode .itemized-budget-table th {
-  background: #f1f5f9;
-  color: #000000;
-  border-bottom: 2px solid #000000;
+  background: #f8fafc;
+  color: #1e293b;
+  border-bottom: 2px solid #cbd5e1;
 }
 
 body.sunlight-mode .itemized-budget-table td {
-  color: #000000;
-  border-bottom: 1px solid #cbd5e1;
+  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 body.sunlight-mode .itemized-budget-total-row {
   background: #dcfce7 !important;
-  color: #047857 !important;
+  color: #15803d !important;
 }
 
 body.sunlight-mode .artesanal-shaft-schematic {
   background: #ffffff;
-  border: 2px solid #d97706;
+  border: 1px solid #fde68a;
+  box-shadow: 0 4px 16px -2px rgba(217, 119, 6, 0.08);
 }
 
 body.sunlight-mode .shaft-svg-box {

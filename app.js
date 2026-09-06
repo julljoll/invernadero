@@ -813,6 +813,45 @@ function initSidebar() {
     });
   }
 
+  // Alternancia entre Modo Luz Campo (Sunlight) y Modo Cockpit (Noche)
+  const btnTheme = document.getElementById("btn-theme-toggle");
+  const sunlightText = document.getElementById("sunlight-btn-text");
+  const themeIcon = document.getElementById("theme-icon");
+
+  function updateThemeUI(isSunlight) {
+    if (isSunlight) {
+      document.body.classList.add("sunlight-mode");
+      document.body.classList.add("light-theme");
+      document.body.classList.remove("dark-theme");
+      if (sunlightText) sunlightText.textContent = "Modo Luz Campo";
+      if (themeIcon) themeIcon.textContent = "☀️";
+    } else {
+      document.body.classList.remove("sunlight-mode");
+      document.body.classList.remove("light-theme");
+      document.body.classList.add("dark-theme");
+      if (sunlightText) sunlightText.textContent = "Modo Cockpit (Noche)";
+      if (themeIcon) themeIcon.textContent = "🌙";
+    }
+  }
+
+  const savedTheme = localStorage.getItem("agroquibor_theme");
+  if (savedTheme === "cockpit") {
+    updateThemeUI(false);
+  } else {
+    updateThemeUI(true);
+  }
+
+  if (btnTheme) {
+    btnTheme.addEventListener("click", () => {
+      const isSunlightNow = document.body.classList.contains("sunlight-mode");
+      const newIsSunlight = !isSunlightNow;
+      updateThemeUI(newIsSunlight);
+      localStorage.setItem("agroquibor_theme", newIsSunlight ? "sunlight" : "cockpit");
+      showToast(newIsSunlight ? "Modo Luz de Campo activado (Alta Claridad)" : "Modo Cockpit Nocturno activado", newIsSunlight ? "☀️" : "🌙");
+      requestAnimationFrame(() => drawGreenhouseStructure());
+    });
+  }
+
   // Atajos de teclado Pro: [M] o [B] alterna el menú lateral
   document.addEventListener("keydown", (e) => {
     if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.tagName === "TEXTAREA") return;
@@ -826,6 +865,23 @@ function initSidebar() {
       }
     }
   });
+}
+
+/**
+ * Notificaciones flotantes Toast para acciones de campo
+ */
+function showToast(message, icon = "📋", duration = 3200) {
+  const toast = document.getElementById("agro-toast");
+  const msg = document.getElementById("agro-toast-msg");
+  if (!toast || !msg) return;
+  const iconEl = toast.querySelector(".agro-toast-icon");
+  if (iconEl) iconEl.textContent = icon;
+  msg.textContent = message;
+  toast.classList.add("show");
+  if (window._agroToastTimer) clearTimeout(window._agroToastTimer);
+  window._agroToastTimer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, duration);
 }
 
 /**
@@ -1031,14 +1087,16 @@ ${acidText}
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pauta).then(() => {
-        alert("✅ Pauta de riego copiada al portapapeles.\n\nSe abrirá WhatsApp para que puedas enviarla directamente a tu regador o mayordomo.");
+        showToast("¡Ficha copiada al portapapeles! Abriendo WhatsApp...", "📲", 3500);
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
-        window.open(whatsappUrl, '_blank');
+        setTimeout(() => window.open(whatsappUrl, '_blank'), 300);
       }).catch(() => {
+        showToast("Abriendo WhatsApp con la ficha...", "📲", 3000);
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
         window.open(whatsappUrl, '_blank');
       });
     } else {
+      showToast("Abriendo WhatsApp con la ficha...", "📲", 3000);
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
       window.open(whatsappUrl, '_blank');
     }
