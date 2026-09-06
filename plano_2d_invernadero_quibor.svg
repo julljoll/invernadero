@@ -1,436 +1,702 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="100%" height="100%" style="background:#050912; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="100%" height="100%" style="background:#f8fafc; font-family:'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;">
   <defs>
-    <!-- Blueprint Grids and Patterns -->
-    <pattern id="gridBlueprint" width="20" height="20" patternUnits="userSpaceOnUse">
-      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="0.5" opacity="0.6"/>
+    <!-- Filtros de Sombra Suave (Light Mode Drop Shadow) -->
+    <filter id="cardShadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06"/>
+    </filter>
+    <filter id="badgeShadow" x="-3%" y="-4%" width="106%" height="110%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+
+    <!-- Patrones Técnicos en Modo Light -->
+    <pattern id="gridLight" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e2e8f0" stroke-width="0.6"/>
     </pattern>
-    <pattern id="majorGrid" width="100" height="100" patternUnits="userSpaceOnUse">
-      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#334155" stroke-width="0.8" opacity="0.5"/>
+    <pattern id="majorGridLight" width="100" height="100" patternUnits="userSpaceOnUse">
+      <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#cbd5e1" stroke-width="0.9" stroke-dasharray="2,2"/>
     </pattern>
-    <linearGradient id="bgBlueprint" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#050912"/>
-      <stop offset="100%" stop-color="#0a101d"/>
+
+    <!-- Achurado de Suelo (Soil Hatch) -->
+    <pattern id="soilHatch" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M 0 12 L 12 0 M 6 12 L 12 6 M 0 6 L 6 0" fill="none" stroke="#94a3b8" stroke-width="0.75" opacity="0.4"/>
+    </pattern>
+
+    <!-- Gradientes Suaves de Franjas de Malla (Modo Claro) -->
+    <linearGradient id="stripGradEmerald" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ecfdf5"/>
+      <stop offset="100%" stop-color="#d1fae5"/>
     </linearGradient>
-    <linearGradient id="stripGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#10b981" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#059669" stop-opacity="0.12"/>
+    <linearGradient id="stripGradSky" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0f9ff"/>
+      <stop offset="100%" stop-color="#e0f2fe"/>
     </linearGradient>
-    <linearGradient id="stripGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#0284c7" stop-opacity="0.10"/>
+    <linearGradient id="thermalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fef3c7" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#fde68a" stop-opacity="0.2"/>
     </linearGradient>
 
-    <!-- Markers -->
-    <marker id="arrowB" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#38bdf8"/>
+    <!-- Marcadores de Cotas Técnicas (Flechas) -->
+    <marker id="arrowDimSky" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 10 5 L 0 8 z" fill="#0284c7"/>
     </marker>
-    <marker id="arrowE" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#10b981"/>
+    <marker id="arrowDimEmerald" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 10 5 L 0 8 z" fill="#059669"/>
+    </marker>
+    <marker id="arrowDimAmber" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 10 5 L 0 8 z" fill="#d97706"/>
+    </marker>
+    <marker id="arrowWind" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0284c7"/>
     </marker>
   </defs>
 
-  <!-- Background Grid -->
-  <rect width="1600" height="1200" fill="url(#bgBlueprint)"/>
-  <rect width="1600" height="1200" fill="url(#gridBlueprint)"/>
-  <rect width="1600" height="1200" fill="url(#majorGrid)"/>
+  <!-- ==================== FONDO RETICULADO MODO CLARO ==================== -->
+  <rect width="1600" height="1200" fill="#f8fafc"/>
+  <rect width="1600" height="1200" fill="url(#gridLight)"/>
+  <rect width="1600" height="1200" fill="url(#majorGridLight)"/>
 
-  <!-- ==================== ENCABEZADO TÉCNICO OFICIAL ==================== -->
-  <g id="header2D" transform="translate(50, 25)">
-    <rect x="0" y="0" width="1500" height="85" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-    <rect x="0" y="0" width="8" height="85" rx="3" fill="#10b981"/>
-    <text x="25" y="26" fill="#f8fafc" font-size="19" font-weight="800">
-      PROYECTO LA CIGARRONERA — PLANO 2: MULTI-ÁNGULO 2D (2.000 m²: 20m × 100m)
+  <!-- ==================== 1. ENCABEZADO TÉCNICO OFICIAL ==================== -->
+  <g id="headerLight" transform="translate(50, 22)">
+    <!-- Tarjeta Principal Blanca con Borde y Sombra -->
+    <rect x="0" y="0" width="1500" height="92" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    <!-- Barra Lateral de Acento Agronómico -->
+    <rect x="0" y="0" width="8" height="92" rx="4" fill="#059669"/>
+
+    <!-- Título de Alto Contraste -->
+    <text x="26" y="27" fill="#0f172a" font-size="20" font-weight="900" letter-spacing="-0.3">
+      PROYECTO LA CIGARRONERA — PLANO 2D MULTI-ÁNGULO: ARQUITECTURA &amp; INGENIERÍA
     </text>
-    <text x="25" y="48" fill="#38bdf8" font-size="12" font-weight="600">
-      96 PILARES SCH 40 A 3.00 m | 5 FRANJAS TECHO 4.00 m × 100 m | COLCHÓN TÉRMICO 1.00 m | ESPALDAR HORTOMALLA 2.00 m
-    </text>
-    <text x="25" y="68" fill="#94a3b8" font-size="10" font-family="'JetBrains Mono', monospace">
-      4.400 PLANTAS TOMATE (37.4 TON) • POZO ARTESANAL 60 m + TANQUE 80 m³ • HELLMANN: 7.4 km/h (3.0m) / 7.0 km/h (2.0m) • NASA POWER 2024-2030 • QUIBOR (707 msnm)
+    
+    <!-- Pills y Tags Descriptivos -->
+    <g transform="translate(26, 38)">
+      <rect x="0" y="0" width="190" height="20" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+      <text x="10" y="14" fill="#166534" font-size="10.5" font-weight="700">✓ SUPERFICIE: 2.000 m² (20m × 100m)</text>
+
+      <rect x="198" y="0" width="225" height="20" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
+      <text x="208" y="14" fill="#0369a1" font-size="10.5" font-weight="700">⚡ 204 PILARES SCH 40 A 3.00 m LIBRE</text>
+
+      <rect x="431" y="0" width="210" height="20" rx="10" fill="#fef3c7" stroke="#fde68a" stroke-width="1"/>
+      <text x="441" y="14" fill="#92400e" font-size="10.5" font-weight="700">☀️ COLCHÓN TÉRMICO LIBRE 1.00 m</text>
+
+      <rect x="649" y="0" width="215" height="20" rx="10" fill="#fdf2f8" stroke="#fbcfe8" stroke-width="1"/>
+      <text x="659" y="14" fill="#9d174d" font-size="10.5" font-weight="700">🌱 HORTOMALLA TUTORA A 2.00 m</text>
+    </g>
+
+    <!-- Datos de Ubicación y Bioclima -->
+    <text x="26" y="78" fill="#475569" font-size="11" font-family="'JetBrains Mono', 'Segoe UI', monospace">
+      <tspan fill="#0284c7" font-weight="700">📍 9°53'20.0"N 69°35'35.0"W (707 msnm)</tspan> • Valle de Quíbor, Lara • 4.400 Plantas Tomate (37.4 Ton) • Pozo 60m + Tanque 80m³ • Viento E: 7.4 km/h
     </text>
 
-    <!-- Roll Spec Badge -->
-    <rect x="1170" y="10" width="315" height="65" rx="4" fill="#021a2c" stroke="#10b981" stroke-width="1.2"/>
-    <text x="1185" y="26" fill="#34d399" font-size="11" font-weight="800">FORMATO: 8 ROLLOS 4.00m × 100.00m</text>
-    <text x="1185" y="40" fill="#a7f3d0" font-size="9.5" font-family="'JetBrains Mono', monospace">5 TECHO + 2 LATERALES + 1 CABECERAS (98.7% APROV.)</text>
-    <text x="1185" y="54" fill="#f59e0b" font-size="9" font-weight="700">NASA POWER: 17.7 MJ/m²·d | T.MAX MARZO: 31.5°C</text>
-    <text x="1185" y="67" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace">FAO-56: 15.75 m³/d | LF=20% | 34 TIRANTES 3/8" A 45°</text>
+    <!-- Badge Derecho: Formato 8 Rollos & Eficiencia -->
+    <g transform="translate(1160, 10)">
+      <rect x="0" y="0" width="325" height="72" rx="8" fill="#f8fafc" stroke="#059669" stroke-width="1.5"/>
+      <rect x="0" y="0" width="325" height="22" rx="6" fill="#ecfdf5"/>
+      <text x="12" y="15" fill="#065f46" font-size="11" font-weight="800">
+        FORMATO: 8 ROLLOS 4.00 m × 100.00 m
+      </text>
+      <text x="12" y="36" fill="#0f172a" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="700">
+        5 TECHO + 2 LATERALES + 1 CABECERAS
+      </text>
+      <text x="12" y="50" fill="#059669" font-size="10" font-weight="700">
+        APROVECHAMIENTO: 98.7% • DESPERDICIO: 0.0 m
+      </text>
+      <text x="12" y="64" fill="#64748b" font-size="9" font-family="'JetBrains Mono', monospace">
+        FAO-56: 15.75 m³/d | LF=20% | 34 TIRANTES 3/8" A 45°
+      </text>
+    </g>
   </g>
 
   <!-- ====================================================================
-       VISTA A: CORTE TRANSVERSAL FRONTAL (20.00 m DE ANCHO) — ESCALA 1:75
-       Modulación: 5 franjas de malla de 4.00 m de ancho en techo.
-       Guayas maestras de 3/8" cada 4.00 m en las uniones de orillos.
-       Altura: 3.00 m libre + 0.20 m faldón enterrado en zanja = 3.20 m pared instalada.
-       CERO TUBOS EN TECHO: 100% guayas de acero y malla 50×25.
-       Tutorado Hortomalla 15x15 cm a 2.00 m dejando 1.00 m de Colchón Térmico.
+       2. VISTA A: CORTE TRANSVERSAL FRONTAL (20.00 m) — FACHADA ESTE
        ==================================================================== -->
-  <g id="vistaA" transform="translate(50, 125)">
-    <!-- Título de la Vista -->
-    <rect x="0" y="0" width="600" height="26" rx="4" fill="#032b43" stroke="#0284c7" stroke-width="1"/>
-    <text x="12" y="18" fill="#38bdf8" font-size="11.5" font-weight="700">VISTA A: FACHADA ESTE BARLOVENTO 20.00 m (-60% CARGA EÓLICA VS 40 m)</text>
+  <g id="vistaA_Light" transform="translate(50, 126)">
+    <!-- Contenedor Tarjeta Blanca -->
+    <rect x="0" y="0" width="650" height="235" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Barra Título de Vista -->
+    <rect x="0" y="0" width="650" height="30" rx="8" fill="#f0f9ff"/>
+    <text x="14" y="20" fill="#0369a1" font-size="12" font-weight="800">
+      VISTA A: CORTE TRANSVERSAL FRONTAL — FACHADA ESTE BARLOVENTO (20.00 m)
+    </text>
+    <rect x="525" y="6" width="115" height="18" rx="9" fill="#0284c7"/>
+    <text x="536" y="18" fill="#ffffff" font-size="9.5" font-weight="700">-60% CARGA EÓLICA</text>
 
-    <!-- Nivel de Suelo -->
-    <line x1="30" y1="260" x2="630" y2="260" stroke="#475569" stroke-width="2"/>
-    <text x="635" y="264" fill="#64748b" font-size="10" font-family="'JetBrains Mono', monospace">±0.00 m (NPT)</text>
+    <!-- Terreno Natural y Achurado Geotécnico -->
+    <rect x="40" y="170" width="570" height="22" fill="url(#soilHatch)"/>
+    <line x1="30" y1="170" x2="620" y2="170" stroke="#334155" stroke-width="2.5"/>
+    <text x="625" y="174" fill="#64748b" font-size="9.5" font-family="'JetBrains Mono', monospace">±0.00 m NPT</text>
 
-    <!-- Zanja Sanitaria Perimetral (20x20 cm) en X = 80 y X = 580 -->
-    <g fill="#1e293b" stroke="#059669" stroke-width="1.2">
-      <rect x="70" y="260" width="16" height="12" rx="1"/>
-      <rect x="574" y="260" width="16" height="12" rx="1"/>
+    <!-- Zanjas Sanitarias Perimetrales (20×20 cm) -->
+    <g fill="#f1f5f9" stroke="#059669" stroke-width="1.5">
+      <rect x="80" y="170" width="14" height="14" rx="1"/>
+      <rect x="566" y="170" width="14" height="14" rx="1"/>
     </g>
-    <text x="15" y="285" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace">Zanja 20×20cm (Faldón enterrado)</text>
-    <text x="545" y="285" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace">Zanja 20×20cm</text>
-
-    <!-- PILARES VERTICALES TUBULARES (Sch 40 Ø 2 1/2" - 3", libre = 3.80 m) -->
-    <!-- X = 80, 180, 280, 380, 480, 580 (5 vanos de 4.00 m) -->
-    <g stroke="#94a3b8" stroke-width="3.5">
-      <line x1="80" y1="260" x2="80" y2="154"/>
-      <line x1="180" y1="260" x2="180" y2="154"/>
-      <line x1="280" y1="260" x2="280" y2="154"/>
-      <line x1="380" y1="260" x2="380" y2="154"/>
-      <line x1="480" y1="260" x2="480" y2="154"/>
-      <line x1="580" y1="260" x2="580" y2="154" stroke="#38bdf8" stroke-width="4"/>
-    </g>
-
-    <!-- Capiteles pasacables en tope de todos los pilares a 3.80 m -->
-    <g fill="#38bdf8">
-      <rect x="75" y="151" width="10" height="4" rx="1"/><rect x="175" y="151" width="10" height="4" rx="1"/>
-      <rect x="275" y="151" width="10" height="4" rx="1"/><rect x="375" y="151" width="10" height="4" rx="1"/>
-      <rect x="475" y="151" width="10" height="4" rx="1"/><rect x="575" y="151" width="10" height="4" rx="1"/>
-    </g>
+    <text x="25" y="195" fill="#059669" font-size="8.5" font-weight="700" font-family="'JetBrains Mono', monospace">Zanja 20×20cm (Faldón)</text>
+    <text x="525" y="195" fill="#059669" font-size="8.5" font-weight="700" font-family="'JetBrains Mono', monospace">Zanja 20×20cm</text>
 
     <!-- Dados de Concreto Ciclópeo 40×40×60 cm -->
-    <g fill="#334155" stroke="#475569" stroke-width="1">
-      <rect x="72" y="260" width="16" height="24" rx="1"/>
-      <rect x="172" y="260" width="16" height="24" rx="1"/>
-      <rect x="272" y="260" width="16" height="24" rx="1"/>
-      <rect x="372" y="260" width="16" height="24" rx="1"/>
-      <rect x="472" y="260" width="16" height="24" rx="1"/>
-      <rect x="572" y="260" width="16" height="24" rx="1"/>
+    <g fill="#e2e8f0" stroke="#64748b" stroke-width="1.2">
+      <rect x="82" y="170" width="16" height="20" rx="2"/>
+      <rect x="177" y="170" width="16" height="20" rx="2"/>
+      <rect x="272" y="170" width="16" height="20" rx="2"/>
+      <rect x="367" y="170" width="16" height="20" rx="2"/>
+      <rect x="462" y="170" width="16" height="20" rx="2"/>
+      <rect x="557" y="170" width="16" height="20" rx="2"/>
     </g>
 
-    <!-- GUAYAS MAESTRAS DE TECHO A 3.80 m (Cables de acero 3/8" tensados - CERO TUBOS EN TECHO) -->
-    <line x1="80" y1="154" x2="580" y2="154" stroke="#38bdf8" stroke-width="2.8"/>
-
-    <!-- LAS 5 FRANJAS DE MALLA DE 4.00 m (Costura orillo con orillo sobre cada guaya) -->
-    <g stroke="#10b981" stroke-width="1.8">
-      <line x1="80" y1="150" x2="180" y2="150"/>
-      <line x1="180" y1="150" x2="280" y2="150" stroke="#34d399"/>
-      <line x1="280" y1="150" x2="380" y2="150"/>
-      <line x1="380" y1="150" x2="480" y2="150" stroke="#34d399"/>
-      <line x1="480" y1="150" x2="580" y2="150"/>
+    <!-- PILARES TUBULARES GALVANIZADOS SCH 40 (3.00 m LIBRE) -->
+    <!-- X = 90, 185, 280, 375, 470, 565 (5 vanos de 4.00 m = 20.00 m) -->
+    <g stroke="#1e293b" stroke-width="3.5" stroke-linecap="round">
+      <line x1="90" y1="170" x2="90" y2="76"/>
+      <line x1="185" y1="170" x2="185" y2="76"/>
+      <line x1="280" y1="170" x2="280" y2="76"/>
+      <line x1="375" y1="170" x2="375" y2="76"/>
+      <line x1="470" y1="170" x2="470" y2="76"/>
+      <line x1="565" y1="170" x2="565" y2="76"/>
     </g>
 
-    <!-- Nodos de Costura Doble sobre cada Guaya Maestra de 4.00 m -->
-    <g fill="#f59e0b">
-      <circle cx="180" cy="150" r="3"/><circle cx="280" cy="150" r="3"/>
-      <circle cx="380" cy="150" r="3"/><circle cx="480" cy="150" r="3"/>
+    <!-- Capiteles Pasacables en el Tope de los Pilares -->
+    <g fill="#0284c7" stroke="#0369a1" stroke-width="0.8">
+      <rect x="85" y="73" width="10" height="4" rx="1"/>
+      <rect x="180" y="73" width="10" height="4" rx="1"/>
+      <rect x="275" y="73" width="10" height="4" rx="1"/>
+      <rect x="370" y="73" width="10" height="4" rx="1"/>
+      <rect x="465" y="73" width="10" height="4" rx="1"/>
+      <rect x="560" y="73" width="10" height="4" rx="1"/>
     </g>
 
-    <!-- Rótulo de las 5 franjas en cubierta -->
-    <text x="330" y="138" fill="#10b981" font-size="11" font-weight="800" text-anchor="middle">
-      5 FRANJAS DE MALLA DE 4.00 m (5 ROLLOS COMPLETOS DE 100 m EN TECHO - CERO CORTES)
+    <!-- GUAYA MAESTRA DE TECHO A +3.00 m (Cables de Acero 3/8" Tensados) -->
+    <line x1="90" y1="75" x2="565" y2="75" stroke="#0284c7" stroke-width="2.5"/>
+
+    <!-- COLCHÓN TÉRMICO SUPERIOR LIBRE DE 1.00 m (ENTRE +2.00 m Y +3.00 m) -->
+    <rect x="90" y="75" width="475" height="34" fill="url(#thermalGrad)" stroke="#f59e0b" stroke-width="1" stroke-dasharray="3,3"/>
+    
+    <!-- Cartel Blanco de Colchón Térmico (Evita Superposición con Pilares) -->
+    <rect x="105" y="82" width="445" height="20" rx="5" fill="#ffffff" stroke="#f59e0b" stroke-width="1"/>
+    <text x="327" y="96" fill="#b45309" font-size="9.5" font-weight="800" text-anchor="middle">
+      COLCHÓN TÉRMICO DISIPATIVO: 1.00 m LIBRE (ANTI-ABORTO FLORAL &gt;32°C)
     </text>
 
-    <!-- COLCHÓN TÉRMICO SUPERIOR DE 1.00 m (ENTRE 2.00 m Y 3.00 m) -->
-    <rect x="80" y="154" width="500" height="44" fill="#f59e0b" fill-opacity="0.06" stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="2,3"/>
-    <text x="330" y="180" fill="#fbbf24" font-size="10" font-weight="700" text-anchor="middle">
-      COLCHÓN TÉRMICO SUPERIOR LIBRE: 1.00 m (DISIPACIÓN CONVECTIVA ANTI-ABORTO FLORAL)
+    <!-- 5 FRANJAS DE MALLA 50×25 EN CUBIERTA -->
+    <g stroke="#059669" stroke-width="2">
+      <line x1="90" y1="72" x2="185" y2="72"/>
+      <line x1="185" y1="72" x2="280" y2="72"/>
+      <line x1="280" y1="72" x2="375" y2="72"/>
+      <line x1="375" y1="72" x2="470" y2="72"/>
+      <line x1="470" y1="72" x2="565" y2="72"/>
+    </g>
+
+    <!-- Nodos de Costura Reforzada sobre Guayas -->
+    <g fill="#d97706">
+      <circle cx="185" cy="72" r="3"/>
+      <circle cx="280" cy="72" r="3"/>
+      <circle cx="375" cy="72" r="3"/>
+      <circle cx="470" cy="72" r="3"/>
+    </g>
+    <text x="327" y="62" fill="#047857" font-size="10.5" font-weight="800" text-anchor="middle">
+      5 FRANJAS DE MALLA 4.00 m (5 ROLLOS COMPLETOS × 100 m EN TECHO)
     </text>
 
-    <!-- ALAMBRE DE TUTORADO CON MALLA ESPALDERA (HORTOMALLA 15×15 cm) A 2.00 m (Y = 198) -->
-    <line x1="80" y1="198" x2="580" y2="198" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6,3"/>
-    <text x="590" y="202" fill="#f59e0b" font-size="10" font-weight="700">Malla Espaldera 15×15cm a +2.00m (-88% Mano Obra)</text>
+    <!-- TUTORADO HORTOMALLA 15×15 cm A +2.00 m (Y = 109) -->
+    <line x1="90" y1="109" x2="565" y2="109" stroke="#d97706" stroke-width="2.2" stroke-dasharray="5,2"/>
+    
+    <!-- Badge Hortomalla dentro del Contenedor (Sin Desbordar) -->
+    <rect x="440" y="112" width="120" height="16" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1"/>
+    <text x="500" y="123" fill="#b45309" font-size="8.5" font-weight="800" text-anchor="middle">Hortomalla +2.00m</text>
 
-    <!-- MALLA ESPALDERA BIORIENTADA ENTRE 0.20 m Y 2.20 m (TUTORADO MECÁNICO CERO ATADOS) -->
-    <g stroke="#f59e0b" stroke-width="0.75" stroke-opacity="0.4" stroke-dasharray="2,2">
-      <line x1="80" y1="210" x2="580" y2="210"/>
-      <line x1="80" y1="222" x2="580" y2="222"/>
-      <line x1="80" y1="234" x2="580" y2="234"/>
-      <line x1="80" y1="246" x2="580" y2="246"/>
-      <line x1="80" y1="255" x2="580" y2="255" stroke="#cbd5e1" stroke-width="1"/> <!-- Alambre guía a 0.20 m -->
+    <!-- Malla Espaldera vertical simulada -->
+    <g stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.65">
+      <line x1="90" y1="120" x2="565" y2="120"/>
+      <line x1="90" y1="133" x2="565" y2="133"/>
+      <line x1="90" y1="146" x2="565" y2="146"/>
+      <line x1="90" y1="159" x2="565" y2="159"/>
     </g>
 
-    <!-- LÍNEAS DE CULTIVO DE TOMATE EN 10 CAMELLONES DOBLES (4.400 PLANTAS TOTAL) -->
-    <g stroke="#10b981" stroke-width="1.2" opacity="0.85">
-      <line x1="110" y1="260" x2="110" y2="198"/><line x1="130" y1="260" x2="130" y2="198"/>
-      <line x1="160" y1="260" x2="160" y2="198"/><line x1="180" y1="260" x2="180" y2="198"/>
-      <line x1="210" y1="260" x2="210" y2="198"/><line x1="230" y1="260" x2="230" y2="198"/>
-      <line x1="260" y1="260" x2="260" y2="198"/><line x1="280" y1="260" x2="280" y2="198"/>
-      <line x1="310" y1="260" x2="310" y2="198"/><line x1="330" y1="260" x2="330" y2="198"/>
-      <line x1="360" y1="260" x2="360" y2="198"/><line x1="380" y1="260" x2="380" y2="198"/>
-      <line x1="410" y1="260" x2="410" y2="198"/><line x1="430" y1="260" x2="430" y2="198"/>
-      <line x1="460" y1="260" x2="460" y2="198"/><line x1="480" y1="260" x2="480" y2="198"/>
-      <line x1="510" y1="260" x2="510" y2="198"/><line x1="530" y1="260" x2="530" y2="198"/>
-      <line x1="550" y1="260" x2="550" y2="198"/><line x1="570" y1="260" x2="570" y2="198"/>
+    <!-- Líneas de Cultivo de Tomate Indeterminado -->
+    <g stroke="#16a34a" stroke-width="1.4">
+      <line x1="115" y1="170" x2="115" y2="109"/><line x1="135" y1="170" x2="135" y2="109"/>
+      <line x1="165" y1="170" x2="165" y2="109"/><line x1="210" y1="170" x2="210" y2="109"/>
+      <line x1="235" y1="170" x2="235" y2="109"/><line x1="260" y1="170" x2="260" y2="109"/>
+      <line x1="305" y1="170" x2="305" y2="109"/><line x1="330" y1="170" x2="330" y2="109"/>
+      <line x1="355" y1="170" x2="355" y2="109"/><line x1="400" y1="170" x2="400" y2="109"/>
+      <line x1="425" y1="170" x2="425" y2="109"/><line x1="450" y1="170" x2="450" y2="109"/>
+      <line x1="495" y1="170" x2="495" y2="109"/><line x1="520" y1="170" x2="520" y2="109"/>
+      <line x1="545" y1="170" x2="545" y2="109"/>
+    </g>
+    <!-- Tomates en racimo -->
+    <g fill="#dc2626">
+      <circle cx="115" cy="130" r="2.5"/><circle cx="210" cy="130" r="2.5"/>
+      <circle cx="305" cy="130" r="2.5"/><circle cx="400" cy="130" r="2.5"/>
+      <circle cx="495" cy="130" r="2.5"/>
     </g>
 
-    <!-- Tomates en racimos -->
-    <g fill="#ef4444">
-      <circle cx="111" cy="225" r="2.2"/><circle cx="211" cy="225" r="2.2"/>
-      <circle cx="311" cy="225" r="2.2"/><circle cx="411" cy="225" r="2.2"/>
-      <circle cx="511" cy="225" r="2.2"/>
+    <!-- TIRANTES PERIMETRALES A 45° CON MUERTOS DE CONCRETO -->
+    <line x1="90" y1="75" x2="45" y2="170" stroke="#e11d48" stroke-width="2.4"/>
+    <line x1="565" y1="75" x2="610" y2="170" stroke="#e11d48" stroke-width="2.4"/>
+    <g fill="#fecdd3" stroke="#e11d48" stroke-width="1.2">
+      <rect x="36" y="167" width="16" height="12" rx="1"/>
+      <rect x="604" y="167" width="16" height="12" rx="1"/>
     </g>
 
-    <!-- TIRANTES PERIMETRALES A 45° CON MUERTOS DE CONCRETO (34 EN TOTAL) -->
-    <line x1="80" y1="154" x2="30" y2="260" stroke="#f43f5e" stroke-width="2.2"/>
-    <line x1="580" y1="154" x2="630" y2="260" stroke="#f43f5e" stroke-width="2.2"/>
-    <g fill="#f43f5e" fill-opacity="0.3" stroke="#f43f5e" stroke-width="1.2">
-      <rect x="20" y="255" width="16" height="12" rx="1"/>
-      <rect x="624" y="255" width="16" height="12" rx="1"/>
-    </g>
-    <text x="-15" y="248" fill="#f43f5e" font-size="8" font-weight="700">Tirante 3/8" a 45°</text>
-    <text x="630" y="248" fill="#f43f5e" font-size="8" font-weight="700">Tirante 3/8" a 45°</text>
-    <text x="330" y="124" fill="#38bdf8" font-size="9" font-weight="700" text-anchor="middle">
-      HELLMANN: 7.4 km/h en Techo (3.0m, -17%) | 7.0 km/h en Espaldar (2.0m, -23%) | 9.0 km/h (10m)
-    </text>
+    <!-- Badges de Tirantes (Ubicados sin Tocar Líneas) -->
+    <g>
+      <rect x="12" y="140" width="68" height="16" rx="4" fill="#fff1f2" stroke="#f43f5e" stroke-width="1"/>
+      <text x="46" y="151" fill="#be123c" font-size="8.5" font-weight="800" text-anchor="middle">Tirante 45°</text>
 
-    <!-- COTAS VISTA A -->
-    <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">
-      <!-- Cota de cada vano de 4.00 m -->
-      <line x1="80" y1="295" x2="180" y2="295" stroke="#38bdf8" stroke-width="1"/>
-      <text x="115" y="306" fill="#38bdf8">4.00 m rollo</text>
-      <!-- Cota total 20.00 m -->
-      <line x1="80" y1="318" x2="580" y2="318" stroke="#06b6d4" stroke-width="1.5"/>
-      <text x="260" y="330" fill="#06b6d4" font-size="11" font-weight="700">20.00 m ANCHO TOTAL (5 FRANJAS DE 4.00 m)</text>
-      <!-- Cotas de Altura -->
-      <line x1="60" y1="260" x2="60" y2="154" stroke="#cbd5e1" stroke-width="1.2"/>
-      <text x="25" y="210" fill="#cbd5e1">3.00 m</text>
-      <line x1="45" y1="272" x2="45" y2="154" stroke="#10b981" stroke-width="1.2"/>
-      <text x="-5" y="215" fill="#10b981" font-size="8.5" transform="rotate(-90 -5 215)">4.00 m ANCHO ROLLO PARED</text>
+      <rect x="568" y="140" width="68" height="16" rx="4" fill="#fff1f2" stroke="#f43f5e" stroke-width="1"/>
+      <text x="602" y="151" fill="#be123c" font-size="8.5" font-weight="800" text-anchor="middle">Tirante 45°</text>
+    </g>
+
+    <!-- COTAS TÉCNICAS VISTA A (Con Cajas de Protección Anti-Superposición) -->
+    <g font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#334155">
+      <!-- Cota de un vano de 4.00 m -->
+      <line x1="90" y1="202" x2="185" y2="202" stroke="#0284c7" stroke-width="1.2" marker-start="url(#arrowDimSky)" marker-end="url(#arrowDimSky)"/>
+      <rect x="106" y="194" width="64" height="15" rx="3" fill="#ffffff" stroke="#0284c7" stroke-width="0.8"/>
+      <text x="138" y="205" fill="#0284c7" font-weight="800" text-anchor="middle" font-size="9">4.00 m</text>
+
+      <!-- Cota Total 20.00 m -->
+      <line x1="90" y1="222" x2="565" y2="222" stroke="#059669" stroke-width="1.6" marker-start="url(#arrowDimEmerald)" marker-end="url(#arrowDimEmerald)"/>
+      <rect x="180" y="213" width="295" height="18" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+      <text x="327" y="226" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">
+        20.00 m ANCHO TOTAL (5 FRANJAS DE 4.00 m)
+      </text>
+
+      <!-- Cotas Verticales -->
+      <line x1="68" y1="170" x2="68" y2="76" stroke="#475569" stroke-width="1.2" marker-start="url(#arrowDimSky)" marker-end="url(#arrowDimSky)"/>
+      <rect x="14" y="112" width="46" height="26" rx="3" fill="#ffffff" stroke="#475569" stroke-width="0.8"/>
+      <text x="37" y="123" fill="#0f172a" font-weight="800" text-anchor="middle">3.00 m</text>
+      <text x="37" y="134" fill="#64748b" font-size="8" text-anchor="middle">libre</text>
     </g>
   </g>
 
   <!-- ====================================================================
-       VISTA B: CORTE LONGITUDINAL (100.00 m DE LARGO) — ESCALA 1:125
-       Modulación: 20 vanos de 5.00 m = 100.00 m (21 postes longitudinales).
-       1 ROLLO ENTERO DE 100.00 m CUBRE LA TOTALIDAD DE LA PARED SIN EMPALMES.
+       3. VISTA B: CORTE LONGITUDINAL (100.00 m) — BARRIDO TANGENCIAL
        ==================================================================== -->
-  <g id="vistaB" transform="translate(50, 125)">
-    <!-- Título de la Vista -->
-    <rect x="730" y="0" width="740" height="26" rx="4" fill="#032b43" stroke="#0284c7" stroke-width="1"/>
-    <text x="742" y="18" fill="#38bdf8" font-size="11.5" font-weight="700">VISTA B: LATERAL 100.00 m — BARRIDO TANGENCIAL VENTURI DEL ESTE (88% ANUAL) A LO LARGO DE PAREDES</text>
-
-    <!-- Nivel de Suelo -->
-    <line x1="750" y1="260" x2="1470" y2="260" stroke="#475569" stroke-width="2"/>
-
-    <!-- Pilares longitudinales cada 5.00 m (21 postes a escala 35px por vano de 5m) -->
-    <!-- X = 760 a 1460 (700px = 100m, 35px = 5.00 m) -->
-    <g stroke="#94a3b8" stroke-width="2.5">
-      <line x1="760" y1="260" x2="760" y2="154"/>
-      <line x1="795" y1="260" x2="795" y2="154" opacity="0.4"/>
-      <line x1="830" y1="260" x2="830" y2="154"/>
-      <line x1="865" y1="260" x2="865" y2="154" opacity="0.4"/>
-      <line x1="900" y1="260" x2="900" y2="154"/>
-      <line x1="935" y1="260" x2="935" y2="154" opacity="0.4"/>
-      <line x1="970" y1="260" x2="970" y2="154"/>
-      <line x1="1005" y1="260" x2="1005" y2="154" opacity="0.4"/>
-      <line x1="1040" y1="260" x2="1040" y2="154"/>
-      <line x1="1075" y1="260" x2="1075" y2="154" opacity="0.4"/>
-      <line x1="1110" y1="260" x2="1110" y2="154"/>
-      <line x1="1145" y1="260" x2="1145" y2="154" opacity="0.4"/>
-      <line x1="1180" y1="260" x2="1180" y2="154"/>
-      <line x1="1215" y1="260" x2="1215" y2="154" opacity="0.4"/>
-      <line x1="1250" y1="260" x2="1250" y2="154"/>
-      <line x1="1285" y1="260" x2="1285" y2="154" opacity="0.4"/>
-      <line x1="1320" y1="260" x2="1320" y2="154"/>
-      <line x1="1355" y1="260" x2="1355" y2="154" opacity="0.4"/>
-      <line x1="1390" y1="260" x2="1390" y2="154"/>
-      <line x1="1425" y1="260" x2="1425" y2="154" opacity="0.4"/>
-      <line x1="1460" y1="260" x2="1460" y2="154" stroke="#38bdf8" stroke-width="3"/>
-    </g>
-
-    <!-- Guaya Maestra Longitudinal Superior de 100 m a 3.80 m (Y = 154) -->
-    <line x1="760" y1="154" x2="1460" y2="154" stroke="#38bdf8" stroke-width="2.8"/>
-    <!-- Malla de Pared Continua de 100 m (Rollo 6 o 7 completo) -->
-    <line x1="760" y1="150" x2="1460" y2="150" stroke="#10b981" stroke-width="1.8"/>
-
-    <!-- Alambre Maestro de Tutorado a 2.20 m (Y = 198) -->
-    <line x1="760" y1="198" x2="1460" y2="198" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,3"/>
-
-    <!-- Malla Espaldera vertical a lo largo de los 100 m -->
-    <g stroke="#f59e0b" stroke-width="0.6" stroke-opacity="0.35" stroke-dasharray="2,2">
-      <line x1="760" y1="212" x2="1460" y2="212"/>
-      <line x1="760" y1="226" x2="1460" y2="226"/>
-      <line x1="760" y1="240" x2="1460" y2="240"/>
-      <line x1="760" y1="254" x2="1460" y2="254" stroke="#cbd5e1" stroke-width="0.8"/>
-    </g>
-
-    <!-- Tirantes perimetrales a 45° en cabeceras longitudinales -->
-    <line x1="760" y1="154" x2="710" y2="260" stroke="#f43f5e" stroke-width="2"/>
-    <line x1="1460" y1="154" x2="1510" y2="260" stroke="#f43f5e" stroke-width="2"/>
-
-    <!-- Rótulo explicativo del paño continuo de 100 m -->
-    <rect x="860" y="115" width="500" height="24" rx="4" fill="#022c22" stroke="#10b981" stroke-width="1"/>
-    <text x="1110" y="131" fill="#34d399" font-size="10.5" font-weight="700" text-anchor="middle">
-      1 ROLLO CONTINUO DE 4.00 m × 100.00 m (CERO RETAZOS | CERO EMPALMES INTERMEDIOS)
+  <g id="vistaB_Light" transform="translate(720, 126)">
+    <!-- Contenedor Tarjeta Blanca -->
+    <rect x="0" y="0" width="830" height="235" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Barra Título de Vista -->
+    <rect x="0" y="0" width="830" height="30" rx="8" fill="#f0fdf4"/>
+    <text x="14" y="20" fill="#166534" font-size="12" font-weight="800">
+      VISTA B: CORTE LONGITUDINAL LATERAL (100.00 m) — BARRIDO TANGENCIAL VENTURI DEL ESTE (88% ANUAL)
     </text>
+    <rect x="710" y="6" width="105" height="18" rx="9" fill="#059669"/>
+    <text x="720" y="18" fill="#ffffff" font-size="9.5" font-weight="700">1 ROLLO × 100m</text>
 
-    <!-- Cotas Vista B (Corregido a 5.00 m módulo entre pilares) -->
-    <g font-family="'JetBrains Mono', monospace" font-size="9" fill="#94a3b8">
-      <line x1="760" y1="295" x2="795" y2="295" stroke="#38bdf8" stroke-width="1"/>
-      <text x="765" y="306" fill="#38bdf8">5.00 m</text>
+    <!-- Vector Viento Dominante del Este -->
+    <g transform="translate(18, 40)">
+      <line x1="0" y1="10" x2="70" y2="10" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowWind)"/>
+      <text x="78" y="14" fill="#0369a1" font-size="9.5" font-weight="800">VIENTO ESTE: 7.4 km/h (α=0.16)</text>
+    </g>
+
+    <!-- Terreno Natural -->
+    <rect x="25" y="170" width="770" height="22" fill="url(#soilHatch)"/>
+    <line x1="20" y1="170" x2="805" y2="170" stroke="#334155" stroke-width="2.5"/>
+    <text x="807" y="174" fill="#64748b" font-size="9.5" font-family="'JetBrains Mono', monospace">±0.00 m</text>
+
+    <!-- Pilares Longitudinales Sch 40 cada 3.00 m (34 postes, paso = 22px) -->
+    <!-- X = 45 a 771 -->
+    <g stroke="#334155" stroke-width="2.2" stroke-linecap="round">
+      <line x1="45" y1="170" x2="45" y2="76"/>
+      <line x1="67" y1="170" x2="67" y2="76" opacity="0.4"/>
+      <line x1="89" y1="170" x2="89" y2="76" opacity="0.4"/>
+      <line x1="111" y1="170" x2="111" y2="76"/>
+      <line x1="133" y1="170" x2="133" y2="76" opacity="0.4"/>
+      <line x1="155" y1="170" x2="155" y2="76" opacity="0.4"/>
+      <line x1="177" y1="170" x2="177" y2="76"/>
+      <line x1="199" y1="170" x2="199" y2="76" opacity="0.4"/>
+      <line x1="221" y1="170" x2="221" y2="76" opacity="0.4"/>
+      <line x1="243" y1="170" x2="243" y2="76"/>
+      <line x1="265" y1="170" x2="265" y2="76" opacity="0.4"/>
+      <line x1="287" y1="170" x2="287" y2="76" opacity="0.4"/>
+      <line x1="309" y1="170" x2="309" y2="76"/>
+      <line x1="331" y1="170" x2="331" y2="76" opacity="0.4"/>
+      <line x1="353" y1="170" x2="353" y2="76" opacity="0.4"/>
+      <line x1="375" y1="170" x2="375" y2="76"/>
+      <line x1="397" y1="170" x2="397" y2="76" opacity="0.4"/>
+      <line x1="419" y1="170" x2="419" y2="76" opacity="0.4"/>
+      <line x1="441" y1="170" x2="441" y2="76"/>
+      <line x1="463" y1="170" x2="463" y2="76" opacity="0.4"/>
+      <line x1="485" y1="170" x2="485" y2="76" opacity="0.4"/>
+      <line x1="507" y1="170" x2="507" y2="76"/>
+      <line x1="529" y1="170" x2="529" y2="76" opacity="0.4"/>
+      <line x1="551" y1="170" x2="551" y2="76" opacity="0.4"/>
+      <line x1="573" y1="170" x2="573" y2="76"/>
+      <line x1="595" y1="170" x2="595" y2="76" opacity="0.4"/>
+      <line x1="617" y1="170" x2="617" y2="76" opacity="0.4"/>
+      <line x1="639" y1="170" x2="639" y2="76"/>
+      <line x1="661" y1="170" x2="661" y2="76" opacity="0.4"/>
+      <line x1="683" y1="170" x2="683" y2="76" opacity="0.4"/>
+      <line x1="705" y1="170" x2="705" y2="76"/>
+      <line x1="727" y1="170" x2="727" y2="76" opacity="0.4"/>
+      <line x1="749" y1="170" x2="749" y2="76" opacity="0.4"/>
+      <line x1="771" y1="170" x2="771" y2="76" stroke="#1e293b" stroke-width="3"/>
+    </g>
+
+    <!-- Guaya Maestra Longitudinal Superior a 3.00 m -->
+    <line x1="45" y1="75" x2="771" y2="75" stroke="#0284c7" stroke-width="2.6"/>
+
+    <!-- Malla de Pared Continua de 100 m (1 Paño Entero) -->
+    <line x1="45" y1="72" x2="771" y2="72" stroke="#059669" stroke-width="2"/>
+
+    <!-- Alambre Maestro de Tutorado a +2.00 m (Y = 109) -->
+    <line x1="45" y1="109" x2="771" y2="109" stroke="#d97706" stroke-width="2.2" stroke-dasharray="5,2"/>
+
+    <!-- Malla Espaldera Hortomalla Longitudinal -->
+    <g stroke="#f59e0b" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.6">
+      <line x1="45" y1="124" x2="771" y2="124"/>
+      <line x1="45" y1="139" x2="771" y2="139"/>
+      <line x1="45" y1="154" x2="771" y2="154"/>
+    </g>
+
+    <!-- Tirantes Perimetrales a 45° en Cabeceras -->
+    <line x1="45" y1="75" x2="15" y2="170" stroke="#e11d48" stroke-width="2.2"/>
+    <line x1="771" y1="75" x2="801" y2="170" stroke="#e11d48" stroke-width="2.2"/>
+
+    <!-- Banner Central: 1 Rollo Continuo de 100 m -->
+    <g transform="translate(210, 80)">
+      <rect x="0" y="0" width="410" height="24" rx="12" fill="#ecfdf5" stroke="#10b981" stroke-width="1.2"/>
+      <text x="205" y="16" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">
+        1 ROLLO CONTINUO DE 4.00 m × 100.00 m (CERO CORTES | CERO EMPALMES INTERMEDIOS)
+      </text>
+    </g>
+
+    <!-- Cotas Vista B (Con Cajas de Protección Anti-Superposición) -->
+    <g font-family="'JetBrains Mono', monospace" font-size="9.5" fill="#334155">
+      <!-- Cota Módulo 3.00 m -->
+      <line x1="45" y1="202" x2="67" y2="202" stroke="#0284c7" stroke-width="1.2" marker-start="url(#arrowDimSky)" marker-end="url(#arrowDimSky)"/>
+      <rect x="75" y="194" width="135" height="16" rx="3" fill="#ffffff" stroke="#0284c7" stroke-width="0.8"/>
+      <text x="142" y="206" fill="#0369a1" font-weight="700" text-anchor="middle" font-size="9">3.00 m módulo postes</text>
+
       <!-- Cota Total 100.00 m -->
-      <line x1="760" y1="318" x2="1460" y2="318" stroke="#10b981" stroke-width="1.8"/>
-      <text x="1040" y="332" fill="#10b981" font-size="11" font-weight="800">100.00 m LONGITUD TOTAL (20 VÁNOS DE 5.00 m)</text>
+      <line x1="45" y1="222" x2="771" y2="222" stroke="#059669" stroke-width="1.8" marker-start="url(#arrowDimEmerald)" marker-end="url(#arrowDimEmerald)"/>
+      <rect x="180" y="213" width="455" height="18" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+      <text x="408" y="226" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">
+        100.00 m LONGITUD TOTAL (33 VANOS DE 3.00 m — 34 LÍNEAS DE POSTES)
+      </text>
     </g>
   </g>
 
   <!-- ====================================================================
-       VISTA C: PLANTA CENITAL (20.00 m ANCHO × 100.00 m LARGO = 2.000 m²)
-       Modulación de 5 Franjas de Malla de 4.00 m (F-1 a F-5) de 100 m cada una.
-       Cuadrícula de 6 guayas maestras longitudinales × 21 transversales.
+       4. VISTA C: PLANTA CENITAL (20m × 100m = 2.000 m²)
        ==================================================================== -->
-  <g id="vistaC" transform="translate(50, 125)">
-    <!-- Título de la Vista -->
-    <rect x="0" y="375" width="600" height="26" rx="4" fill="#032b43" stroke="#0284c7" stroke-width="1"/>
-    <text x="12" y="393" fill="#38bdf8" font-size="12" font-weight="700">VISTA C: PLANTA CENITAL — 5 FRANJAS DE 4.00 m × 100.00 m (2.000 m²)</text>
+  <g id="vistaC_Light" transform="translate(50, 380)">
+    <!-- Contenedor Tarjeta Blanca -->
+    <rect x="0" y="0" width="930" height="345" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Barra Título de Vista -->
+    <rect x="0" y="0" width="930" height="32" rx="8" fill="#f8fafc"/>
+    <text x="14" y="21" fill="#0f172a" font-size="12.5" font-weight="800">
+      VISTA C: PLANTA CENITAL — MODULACIÓN 5 FRANJAS DE 4.00 m × 100.00 m (2.000 m²)
+    </text>
+    <rect x="790" y="6" width="125" height="20" rx="10" fill="#0369a1"/>
+    <text x="802" y="20" fill="#ffffff" font-size="10" font-weight="700">PARRAL TENSADO</text>
 
-    <!-- Contorno de la Casa de Malla (20m ancho × 100m largo) -->
-    <rect x="80" y="420" width="800" height="200" fill="#0f172a" fill-opacity="0.8" stroke="#38bdf8" stroke-width="2"/>
+    <!-- Indicador de Viento Este y Coordenadas -->
+    <g transform="translate(40, 42)">
+      <circle cx="20" cy="20" r="16" fill="#f0f9ff" stroke="#0284c7" stroke-width="1.2"/>
+      <text x="20" y="11" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">N</text>
+      <text x="20" y="34" fill="#64748b" font-size="7.5" font-weight="800" text-anchor="middle">S</text>
+      <text x="8" y="23" fill="#64748b" font-size="7.5" font-weight="800">O</text>
+      <text x="27" y="23" fill="#0284c7" font-size="9" font-weight="900">E</text>
+      <path d="M 45 20 L 95 20" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrowWind)"/>
+      <text x="105" y="24" fill="#0369a1" font-size="10" font-weight="800">VIENTO DOMINANTE DEL ESTE (88% ANUAL)</text>
+    </g>
 
-    <!-- LAS 5 FRANJAS LONGITUDINALES DE MALLA DE 4.00 m (F-1 A F-5) -->
-    <rect x="80" y="420" width="800" height="40" fill="url(#stripGrad1)" stroke="#10b981" stroke-width="0.8"/>
-    <rect x="80" y="460" width="800" height="40" fill="url(#stripGrad2)" stroke="#06b6d4" stroke-width="0.8"/>
-    <rect x="80" y="500" width="800" height="40" fill="url(#stripGrad1)" stroke="#10b981" stroke-width="0.8"/>
-    <rect x="80" y="540" width="800" height="40" fill="url(#stripGrad2)" stroke="#06b6d4" stroke-width="0.8"/>
-    <rect x="80" y="580" width="800" height="40" fill="url(#stripGrad1)" stroke="#10b981" stroke-width="0.8"/>
+    <!-- Rótulos de Cabeceras (Alineados Perfectamente sin Desbordar) -->
+    <text x="85" y="66" fill="#64748b" font-size="10" font-weight="800">CABECERA OESTE (Sotavento)</text>
+    <text x="825" y="66" fill="#0284c7" font-size="10" font-weight="800" text-anchor="end">FACHADA ESTE (Barlovento)</text>
 
-    <!-- Rótulos de las franjas F-1 a F-5 -->
-    <g font-size="10" font-family="'JetBrains Mono', monospace" font-weight="700" fill="#f8fafc">
-      <text x="95" y="445">FRANJA 1: Rollo 1 entero (4m × 100m = 400 m²)</text>
-      <text x="95" y="485">FRANJA 2: Rollo 2 entero (4m × 100m = 400 m²)</text>
-      <text x="95" y="525">FRANJA 3: Rollo 3 entero (4m × 100m = 400 m²)</text>
-      <text x="95" y="565">FRANJA 4: Rollo 4 entero (4m × 100m = 400 m²)</text>
-      <text x="95" y="605">FRANJA 5: Rollo 5 entero (4m × 100m = 400 m²)</text>
+    <!-- CUERPO DE LA PLANTA (20m × 100m) -->
+    <!-- X = 85, Y = 75, Ancho = 740, Alto = 200 (5 Franjas de 40px) -->
+    <rect x="85" y="75" width="740" height="200" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+
+    <!-- LAS 5 FRANJAS LONGITUDINALES DE MALLA 50×25 DE 4.00 m (F-1 a F-5) -->
+    <rect x="85" y="75" width="740" height="40" fill="url(#stripGradEmerald)" stroke="#059669" stroke-width="0.9"/>
+    <rect x="85" y="115" width="740" height="40" fill="url(#stripGradSky)" stroke="#0284c7" stroke-width="0.9"/>
+    <rect x="85" y="155" width="740" height="40" fill="url(#stripGradEmerald)" stroke="#059669" stroke-width="0.9"/>
+    <rect x="85" y="195" width="740" height="40" fill="url(#stripGradSky)" stroke="#0284c7" stroke-width="0.9"/>
+    <rect x="85" y="235" width="740" height="40" fill="url(#stripGradEmerald)" stroke="#059669" stroke-width="0.9"/>
+
+    <!-- Rótulos de las 5 Franjas con Pills de Protección -->
+    <g font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800">
+      <rect x="100" y="86" width="345" height="18" rx="4" fill="#ffffff" fill-opacity="0.9" stroke="#86efac" stroke-width="0.8"/>
+      <text x="110" y="99" fill="#065f46">FRANJA 1 (Rollo 1): 4.00 m × 100.00 m (400 m²)</text>
+
+      <rect x="100" y="126" width="345" height="18" rx="4" fill="#ffffff" fill-opacity="0.9" stroke="#bae6fd" stroke-width="0.8"/>
+      <text x="110" y="139" fill="#0369a1">FRANJA 2 (Rollo 2): 4.00 m × 100.00 m (400 m²)</text>
+
+      <rect x="100" y="166" width="345" height="18" rx="4" fill="#ffffff" fill-opacity="0.9" stroke="#86efac" stroke-width="0.8"/>
+      <text x="110" y="179" fill="#065f46">FRANJA 3 (Rollo 3): 4.00 m × 100.00 m (400 m²)</text>
+
+      <rect x="100" y="206" width="345" height="18" rx="4" fill="#ffffff" fill-opacity="0.9" stroke="#bae6fd" stroke-width="0.8"/>
+      <text x="110" y="219" fill="#0369a1">FRANJA 4 (Rollo 4): 4.00 m × 100.00 m (400 m²)</text>
+
+      <rect x="100" y="246" width="345" height="18" rx="4" fill="#ffffff" fill-opacity="0.9" stroke="#86efac" stroke-width="0.8"/>
+      <text x="110" y="259" fill="#065f46">FRANJA 5 (Rollo 5): 4.00 m × 100.00 m (400 m²)</text>
     </g>
 
     <!-- 6 GUAYAS MAESTRAS LONGITUDINALES CADA 4.00 m -->
-    <g stroke="#38bdf8" stroke-width="1.8">
-      <line x1="80" y1="420" x2="880" y2="420"/>
-      <line x1="80" y1="460" x2="880" y2="460"/>
-      <line x1="80" y1="500" x2="880" y2="500"/>
-      <line x1="80" y1="540" x2="880" y2="540"/>
-      <line x1="80" y1="580" x2="880" y2="580"/>
-      <line x1="80" y1="620" x2="880" y2="620"/>
+    <g stroke="#0284c7" stroke-width="1.8">
+      <line x1="85" y1="75" x2="825" y2="75"/>
+      <line x1="85" y1="115" x2="825" y2="115"/>
+      <line x1="85" y1="155" x2="825" y2="155"/>
+      <line x1="85" y1="195" x2="825" y2="195"/>
+      <line x1="85" y1="235" x2="825" y2="235"/>
+      <line x1="85" y1="275" x2="825" y2="275"/>
     </g>
 
-    <!-- GUAYAS TRANSVERSALES CADA 5.00 m (40px) -->
-    <g stroke="#38bdf8" stroke-width="0.8" stroke-opacity="0.5">
-      <line x1="120" y1="420" x2="120" y2="620"/><line x1="160" y1="420" x2="160" y2="620"/>
-      <line x1="200" y1="420" x2="200" y2="620"/><line x1="240" y1="420" x2="240" y2="620"/>
-      <line x1="280" y1="420" x2="280" y2="620"/><line x1="320" y1="420" x2="320" y2="620"/>
-      <line x1="360" y1="420" x2="360" y2="620"/><line x1="400" y1="420" x2="400" y2="620"/>
-      <line x1="440" y1="420" x2="440" y2="620"/><line x1="480" y1="420" x2="480" y2="620"/>
-      <line x1="520" y1="420" x2="520" y2="620"/><line x1="560" y1="420" x2="560" y2="620"/>
-      <line x1="600" y1="420" x2="600" y2="620"/><line x1="640" y1="420" x2="640" y2="620"/>
-      <line x1="680" y1="420" x2="680" y2="620"/><line x1="720" y1="420" x2="720" y2="620"/>
-      <line x1="760" y1="420" x2="760" y2="620"/><line x1="800" y1="420" x2="800" y2="620"/>
-      <line x1="840" y1="420" x2="840" y2="620"/>
+    <!-- 34 GUAYAS TRANSVERSALES CADA 3.00 m (Nodos de Pilares) -->
+    <g stroke="#94a3b8" stroke-width="0.8" opacity="0.65" stroke-dasharray="1,1">
+      <line x1="107" y1="75" x2="107" y2="275"/><line x1="129" y1="75" x2="129" y2="275"/>
+      <line x1="151" y1="75" x2="151" y2="275"/><line x1="174" y1="75" x2="174" y2="275"/>
+      <line x1="196" y1="75" x2="196" y2="275"/><line x1="218" y1="75" x2="218" y2="275"/>
+      <line x1="240" y1="75" x2="240" y2="275"/><line x1="262" y1="75" x2="262" y2="275"/>
+      <line x1="285" y1="75" x2="285" y2="275"/><line x1="307" y1="75" x2="307" y2="275"/>
+      <line x1="329" y1="75" x2="329" y2="275"/><line x1="351" y1="75" x2="351" y2="275"/>
+      <line x1="373" y1="75" x2="373" y2="275"/><line x1="396" y1="75" x2="396" y2="275"/>
+      <line x1="418" y1="75" x2="418" y2="275"/><line x1="440" y1="75" x2="440" y2="275"/>
+      <line x1="462" y1="75" x2="462" y2="275"/><line x1="484" y1="75" x2="484" y2="275"/>
+      <line x1="507" y1="75" x2="507" y2="275"/><line x1="529" y1="75" x2="529" y2="275"/>
+      <line x1="551" y1="75" x2="551" y2="275"/><line x1="573" y1="75" x2="573" y2="275"/>
+      <line x1="595" y1="75" x2="595" y2="275"/><line x1="618" y1="75" x2="618" y2="275"/>
+      <line x1="640" y1="75" x2="640" y2="275"/><line x1="662" y1="75" x2="662" y2="275"/>
+      <line x1="684" y1="75" x2="684" y2="275"/><line x1="706" y1="75" x2="706" y2="275"/>
+      <line x1="729" y1="75" x2="729" y2="275"/><line x1="751" y1="75" x2="751" y2="275"/>
+      <line x1="773" y1="75" x2="773" y2="275"/><line x1="795" y1="75" x2="795" y2="275"/>
+      <line x1="817" y1="75" x2="817" y2="275"/>
     </g>
 
-    <!-- ESCLUSA SANITARIA EN CABECERA OESTE (3m × 2m Doble Puerta) -->
-    <rect x="50" y="500" width="30" height="40" fill="#022c22" stroke="#10b981" stroke-width="1.5"/>
-    <text x="-5" y="525" fill="#34d399" font-size="8.5" font-weight="700">ESCLUSA SANITARIA</text>
-    <text x="-5" y="536" fill="#94a3b8" font-size="7.5">3m × 2m (Doble Puerta)</text>
-
-    <!-- Cotas Planta -->
-    <g font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8">
-      <line x1="80" y1="635" x2="880" y2="635" stroke="#10b981" stroke-width="1.8"/>
-      <text x="430" y="650" fill="#10b981" font-weight="700" text-anchor="middle">100.00 m LONGITUD TOTAL (EJE ESTE - OESTE)</text>
-
-      <line x1="895" y1="420" x2="895" y2="620" stroke="#06b6d4" stroke-width="1.8"/>
-      <text x="910" y="525" fill="#06b6d4" font-weight="700">20.00 m</text>
+    <!-- ESCLUSA SANITARIA EN CABECERA OESTE (3.00 m × 2.00 m Doble Puerta) -->
+    <g transform="translate(48, 155)">
+      <rect x="0" y="0" width="37" height="40" rx="3" fill="#ffffff" stroke="#059669" stroke-width="1.8"/>
+      <!-- Doble puerta abatible -->
+      <path d="M 0 10 A 10 10 0 0 1 10 0" fill="none" stroke="#059669" stroke-width="1.2" stroke-dasharray="2,2"/>
+      <path d="M 37 30 A 10 10 0 0 1 27 40" fill="none" stroke="#059669" stroke-width="1.2" stroke-dasharray="2,2"/>
+      <!-- Pill Centrado Verticalmente Sin Desbordar el Borde Izquierdo -->
+      <rect x="-36" y="8" width="34" height="24" rx="3" fill="#ecfdf5" stroke="#059669" stroke-width="0.8"/>
+      <text x="-19" y="19" fill="#065f46" font-size="7.5" font-weight="800" text-anchor="middle">ESCLUSA</text>
+      <text x="-19" y="28" fill="#64748b" font-size="6.5" text-anchor="middle">3m×2m</text>
     </g>
 
-    <!-- CUADRO DE DESPIECE OFICIAL & BALANCES TÉCNICOS -->
-    <g transform="translate(930, 375)">
-      <rect x="0" y="0" width="520" height="280" rx="8" fill="#0a101d" stroke="#10b981" stroke-width="1.2"/>
-      <rect x="0" y="0" width="520" height="28" rx="4" fill="#022c22"/>
-      <text x="15" y="18" fill="#34d399" font-size="12" font-weight="800">
-        PLAN DE DESPIECE OFICIAL: 8 ROLLOS (4.00 m × 100.00 m = 3.200 m²)
+    <!-- COTAS PLANTA (Protegidas Anti-Superposición) -->
+    <g font-family="'JetBrains Mono', monospace" font-size="10" fill="#334155">
+      <!-- Cota 100.00 m Longitudinal -->
+      <line x1="85" y1="295" x2="825" y2="295" stroke="#059669" stroke-width="1.8" marker-start="url(#arrowDimEmerald)" marker-end="url(#arrowDimEmerald)"/>
+      <rect x="275" y="286" width="360" height="18" rx="4" fill="#ffffff" stroke="#059669" stroke-width="1"/>
+      <text x="455" y="299" fill="#065f46" font-size="10.5" font-weight="800" text-anchor="middle">
+        100.00 m LONGITUD TOTAL (EJE ESTE - OESTE)
       </text>
 
-      <g font-size="9.5" fill="#cbd5e1" transform="translate(15, 36)">
-        <text x="0" y="0" fill="#38bdf8" font-weight="700">• ROLLOS 1 AL 5 (500 m lineales):</text>
-        <text x="10" y="13" fill="#94a3b8">5 paños de 100.00 m → Techo Franjas F-1 a F-5 (20m × 100m = 2.000 m²). Desperdicio: 0.0 m.</text>
+      <!-- Cota 20.00 m Transversal (Ubicada Dentro del Límite de 930px) -->
+      <line x1="845" y1="75" x2="845" y2="275" stroke="#0284c7" stroke-width="1.8" marker-start="url(#arrowDimSky)" marker-end="url(#arrowDimSky)"/>
+      <rect x="855" y="165" width="60" height="20" rx="3" fill="#ffffff" stroke="#0284c7" stroke-width="0.8"/>
+      <text x="885" y="179" fill="#0369a1" font-size="10" font-weight="800" text-anchor="middle">20.00 m</text>
+    </g>
+  </g>
 
-        <text x="0" y="28" fill="#38bdf8" font-weight="700">• ROLLOS 6 Y 7 (200 m lineales):</text>
-        <text x="10" y="41" fill="#94a3b8">2 paños de 100.00 m → Pared Lateral Norte (100m) y Lateral Sur (100m). Desperdicio: 0.0 m.</text>
+  <!-- ====================================================================
+       5. CUADRO DE DESPIECE & BALANCES TÉCNICOS (DASHBOARD LIGHT)
+       ==================================================================== -->
+  <g id="cuadroDespiece_Light" transform="translate(1000, 380)">
+    <!-- Contenedor Tarjeta Blanca con Borde y Sombra -->
+    <rect x="0" y="0" width="550" height="345" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
+    
+    <!-- Header del Cuadro en Verde Esmeralda Suave -->
+    <rect x="0" y="0" width="550" height="32" rx="8" fill="#ecfdf5"/>
+    <text x="16" y="21" fill="#065f46" font-size="12" font-weight="900">
+      PLAN DE DESPIECE OFICIAL: 8 ROLLOS (4.00 m × 100.00 m = 3.200 m²)
+    </text>
 
-        <text x="0" y="56" fill="#38bdf8" font-weight="700">• ROLLO 8 (100 m lineales):</text>
-        <text x="10" y="69" fill="#94a3b8">1 paño 20m Cabecera Este + 1 paño 20m Cabecera Oeste + 20m Esclusa/solapes.</text>
-        <text x="10" y="82" fill="#f59e0b">Sobrante útil de 40.00 m → Reserva estratégica de obra para mantenimiento.</text>
+    <!-- Contenido del Despiece -->
+    <g transform="translate(16, 42)" font-size="9.5" font-family="'Segoe UI', -apple-system, sans-serif">
+      <!-- Item 1: Techo -->
+      <rect x="0" y="0" width="518" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="12" y="15" fill="#0369a1" font-weight="800">• ROLLOS 1 AL 5 (500 m lineales):</text>
+      <text x="12" y="28" fill="#334155">5 paños de 100.00 m → Techo Franjas F-1 a F-5 (20m × 100m = 2.000 m²). Desperdicio: 0.0 m.</text>
 
-        <rect x="0" y="94" width="490" height="42" rx="4" fill="#021a2c" stroke="#38bdf8" stroke-width="1"/>
-        <text x="10" y="109" fill="#38bdf8" font-weight="800">BALANCE TÉCNICO DE MATERIAL &amp; EFICIENCIA:</text>
-        <text x="10" y="122" fill="#a7f3d0" font-family="'JetBrains Mono', monospace">• Malla Adquirida: 8 rollos × 400 m² = 3.200 m² | Malla Instalada: 3.160 m²</text>
-        <text x="10" y="133" fill="#fbbf24" font-weight="700">• Desperdicio real: 0.0% | Aprovechamiento: 98.7% | Sobrante útil: 40 m</text>
+      <!-- Item 2: Laterales -->
+      <rect x="0" y="38" width="518" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="12" y="53" fill="#0369a1" font-weight="800">• ROLLOS 6 Y 7 (200 m lineales):</text>
+      <text x="12" y="66" fill="#334155">2 paños de 100.00 m → Lateral Norte (100m) y Lateral Sur (100m). Desperdicio: 0.0 m.</text>
 
-        <!-- Balance Hidrogeológico Pozo Artesanal & Riego FAO-56 -->
-        <rect x="0" y="142" width="490" height="42" rx="4" fill="#031f33" stroke="#0284c7" stroke-width="1"/>
-        <text x="10" y="156" fill="#38bdf8" font-weight="800">SUMINISTRO HÍDRICO (POZO ARTESANAL 60 m + TANQUE 80 m³):</text>
-        <text x="10" y="169" fill="#e0f2fe" font-size="9">• Demanda Pico FAO-56: 15.75 m³/d | Fracción Lavado LF=20% (ECw 1.4 dS/m)</text>
-        <text x="10" y="180" fill="#34d399" font-weight="700" font-size="9">• Recarga Artesanal Ø50cm: 18 - 22 m³/d en tandas (100% de cobertura) | Autonomía: 5.1 días</text>
+      <!-- Item 3: Cabeceras y Reserva -->
+      <rect x="0" y="76" width="518" height="42" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="12" y="91" fill="#0369a1" font-weight="800">• ROLLO 8 (100 m lineales):</text>
+      <text x="12" y="103" fill="#334155">1 paño 20m Este + 1 paño 20m Oeste + 20m Esclusa/solapes (60m instalados).</text>
+      <text x="12" y="114" fill="#b45309" font-weight="700">✓ Sobrante útil: 40.00 m → Reserva estratégica en almacén para reparaciones.</text>
 
-        <text x="0" y="196" fill="#10b981" font-weight="700">• TUTORADO CON MALLA ESPALDERA BIORIENTADA (HORTOMALLA 15×15 cm):</text>
-        <text x="10" y="209" fill="#cbd5e1">10 camellones dobles de 100 m = 1.000 m lin. Soporta 19.800 kgf de tomate vivo.</text>
-        <text x="10" y="222" fill="#34d399">Cero atados y clips: -88% mano de obra (2 jornales/mes) | Blindaje ToBRFV (-80% contacto).</text>
+      <!-- KPI Box: Eficiencia & Material -->
+      <g transform="translate(0, 124)">
+        <rect x="0" y="0" width="518" height="44" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/>
+        <text x="12" y="17" fill="#166534" font-weight="900" font-size="10.5">BALANCE TÉCNICO DE MATERIAL &amp; RENDIMIENTO:</text>
+        <text x="12" y="30" fill="#065f46" font-family="'JetBrains Mono', monospace" font-size="9">
+          Malla Adquirida: 3.200 m² | Instalada: 3.160 m² | Aprovechamiento: 98.7%
+        </text>
+        <text x="12" y="41" fill="#15803d" font-weight="700">
+          Desperdicio real: 0.0% • Cero retazos inservibles
+        </text>
+      </g>
+
+      <!-- KPI Box: Hidrogeología y Riego -->
+      <g transform="translate(0, 174)">
+        <rect x="0" y="0" width="518" height="46" rx="6" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.2"/>
+        <text x="12" y="16" fill="#0369a1" font-weight="900" font-size="10.5">SUMINISTRO HÍDRICO (POZO ARTESANAL 60 m + TANQUE 80 m³):</text>
+        <text x="12" y="29" fill="#0c4a6e" font-family="'JetBrains Mono', monospace" font-size="9">
+          Demanda Pico FAO-56: 15.75 m³/d | Fracción Lavado LF=20% (ECw 1.4 dS/m)
+        </text>
+        <text x="12" y="41" fill="#0284c7" font-weight="700">
+          Aforo Pozo Ø50cm: 18 - 22 m³/d | Autonomía Tanque 80 m³: 5.1 días de reserva
+        </text>
+      </g>
+
+      <!-- Trellis Note -->
+      <g transform="translate(0, 226)">
+        <rect x="0" y="0" width="518" height="44" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1.2"/>
+        <text x="12" y="16" fill="#92400e" font-weight="900" font-size="10.5">TUTORADO CON MALLA ESPALDERA BIORIENTADA (HORTOMALLA 15×15 cm):</text>
+        <text x="12" y="29" fill="#78350f">
+          10 camellones dobles de 100 m = 1.000 m lin. Soporta 19.800 kgf de tomate vivo.
+        </text>
+        <text x="12" y="40" fill="#b45309" font-weight="700">
+          Cero atados y clips: -88% mano de obra (2 jornales/mes) • Blindaje ToBRFV (-80% roce)
+        </text>
       </g>
     </g>
+  </g>
 
-  </g> <!-- Fin Vista C -->
+  <!-- ====================================================================
+       6. CARTELA FINAL DE ESPECIFICACIONES DE MONTAJE
+       ==================================================================== -->
+  <g id="cartelaFinal_Light" transform="translate(50, 745)">
+    <!-- Tarjeta Principal con Sombra -->
+    <rect x="0" y="0" width="1500" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" filter="url(#cardShadow)"/>
 
-  <!-- ==================== CARTELA DE ESPECIFICACIONES DE MONTAJE ==================== -->
-  <g id="cartelaFinal" transform="translate(50, 950)">
-    <rect x="0" y="0" width="1500" height="225" rx="8" fill="#0b1320" stroke="#334155" stroke-width="1.5"/>
+    <!-- Cabecera de la Cartela -->
+    <rect x="0" y="0" width="1500" height="34" rx="10" fill="#f8fafc"/>
+    <text x="24" y="22" fill="#0f172a" font-size="13" font-weight="900">
+      MEMORIA TÉCNICA DE MONTAJE, BIOCLIMATOLOGÍA &amp; ESPECIFICACIONES DE CAMPO
+    </text>
+    <text x="1350" y="22" fill="#64748b" font-size="11" font-family="'JetBrains Mono', monospace">REV: v2.2.0-VERIFIED</text>
 
-    <!-- Columna 1: Especificaciones Constructivas -->
-    <g transform="translate(25, 18)">
-      <text x="0" y="16" fill="#38bdf8" font-size="12.5" font-weight="800">ESPECIFICACIONES CONSTRUCTIVAS — 2.000 m² (20m × 100m)</text>
+    <!-- COLUMNA 1: Especificaciones Constructivas -->
+    <g transform="translate(24, 48)">
+      <rect x="0" y="0" width="460" height="360" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="0" y="0" width="460" height="26" rx="6" fill="#f0f9ff"/>
+      <text x="14" y="18" fill="#0369a1" font-size="11.5" font-weight="800">1. ESPECIFICACIONES ESTRUCTURALES Y MONTAJE</text>
       
-      <g transform="translate(0, 32)" font-size="10.5" fill="#cbd5e1">
-        <text x="0" y="0">• <tspan fill="#f8fafc" font-weight="700">Pilares Verticales (96 Unid.):</tspan> Tubo galv. Sch 40 Ø 2 1/2" - 3" (3.00 m libre + 0.80 m dado concreto = 3.80 m tubo).</text>
-        <text x="0" y="18">• <tspan fill="#f8fafc" font-weight="700">Cubierta de Guayas (Cero Tubos en Techo):</tspan> Cable de acero 3/8" clase 6×19 cada 4.00 m a 3.00 m de altura.</text>
-        <text x="0" y="36">• <tspan fill="#fbbf24" font-weight="700">Colchón Térmico Superior (1.00 m):</tspan> Disipación convectiva libre entre espaldar (2.00 m) y techo (3.00 m).</text>
-        <text x="0" y="54">• <tspan fill="#f8fafc" font-weight="700">Paredes 3.20 m Instaladas:</tspan> 3.00 m libre + 0.20 m faldón enterrado en zanja 20×20 cm (240 m perimetrales).</text>
-        <text x="0" y="72">• <tspan fill="#f59e0b" font-weight="700">Tutorado Malla Espaldera:</tspan> Hortomalla 15×15 cm a 2.00 m (1.000 m lineales para 4.400 plantas, -88% mano obra).</text>
-        <text x="0" y="90">• <tspan fill="#f8fafc" font-weight="700">Tirantes a 45°:</tspan> 34 tirantes perimetrales con tensores ojo-ojo 5/8" a muertos de concreto ciclópeo.</text>
+      <g transform="translate(14, 40)" font-size="10" fill="#334155">
+        <text x="0" y="0">• <tspan fill="#0f172a" font-weight="800">Pilares Sch 40 (204 Unid):</tspan> Tubo galv. Ø 2 1/2" a 3".</text>
+        <text x="10" y="15" fill="#64748b">3.00 m libre + 0.80 m empotrado en dado concreto (3.80 m total).</text>
+
+        <text x="0" y="38">• <tspan fill="#0f172a" font-weight="800">Cuadrícula Estructural:</tspan> 4.00 m transv. × 3.00 m long.</text>
+        <text x="10" y="53" fill="#0369a1" font-weight="700">Reduce flecha en guayas de techo un 64% vs vanos de 5.00 m.</text>
+
+        <text x="0" y="76">• <tspan fill="#0f172a" font-weight="800">Cubierta Parral Tensado:</tspan> Cable de acero 3/8" clase 6×19.</text>
+        <text x="10" y="91" fill="#64748b">Cero tubos transversales en techo. Malla cosida a guayas maestras.</text>
+
+        <text x="0" y="114">• <tspan fill="#b45309" font-weight="800">Colchón Térmico Superior (1.00 m):</tspan> Libre entre 2.00 m y 3.00 m.</text>
+        <text x="10" y="129" fill="#92400e">Disipación convectiva continua para evitar calor estancado y aborto.</text>
+
+        <text x="0" y="152">• <tspan fill="#0f172a" font-weight="800">Paredes 3.20 m Instaladas:</tspan> 3.00 m libre + 0.20 m faldón enterrado.</text>
+        <text x="10" y="167" fill="#64748b">Zanja perimetral de 20×20 cm compactada (240 m lineales).</text>
+
+        <text x="0" y="190">• <tspan fill="#0f172a" font-weight="800">Tirantes Perimetrales a 45° (34 Unidades):</tspan></text>
+        <text x="10" y="205" fill="#64748b">Guaya 3/8" con tensores ojo-ojo 5/8" a muertos de concreto ciclópeo.</text>
+
+        <text x="0" y="228">• <tspan fill="#0f172a" font-weight="800">Malla 110gsm 50mesh Blanca:</tspan> HDPE virgen anti-UV.</text>
+        <text x="10" y="243" fill="#047857" font-weight="700">Ventilación convectiva y difusión solar anti-sobrecalentamiento.</text>
+
+        <text x="0" y="266">• <tspan fill="#0f172a" font-weight="800">Tutorado Hortomalla 15×15 cm:</tspan> 1.000 m lineales a 2.00 m.</text>
+        <text x="10" y="281" fill="#059669" font-weight="700">Soporta 19.800 kgf de biomasa viva de tomate sin colapso.</text>
+
+        <text x="0" y="304">• <tspan fill="#0f172a" font-weight="800">Esclusa Sanitaria:</tspan> 3.00 m × 2.00 m con doble puerta y pediluvio.</text>
       </g>
     </g>
 
-    <line x1="550" y1="18" x2="550" y2="205" stroke="#1e293b" stroke-width="1.5"/>
+    <!-- COLUMNA 2: Bioclimatología NASA POWER & Dinámica de Viento -->
+    <g transform="translate(510, 48)">
+      <rect x="0" y="0" width="470" height="360" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="0" y="0" width="470" height="26" rx="6" fill="#fef3c7"/>
+      <text x="14" y="18" fill="#92400e" font-size="11.5" font-weight="800">2. BIOCLIMATOLOGÍA NASA POWER &amp; AERODINÁMICA</text>
+      
+      <g transform="translate(14, 40)" font-size="10" fill="#334155">
+        <text x="0" y="0">• <tspan fill="#0f172a" font-weight="800">Orientación Barlovento 20 m:</tspan> Eje frontal hacia el Este.</text>
+        <text x="10" y="15" fill="#0284c7" font-weight="700">Silueta 60 m² reduce un 60% la carga eólica vs fachada de 40 m.</text>
 
-    <!-- Columna 2: Ventajas Aerodinámicas y Bioclimáticas Quíbor -->
-    <g transform="translate(565, 18)">
-      <text x="0" y="16" fill="#f59e0b" font-size="12.5" font-weight="800">BIOCLIMATOLOGÍA NASA POWER &amp; DINÁMICA DE VIENTO</text>
-      <g font-size="10" fill="#94a3b8" transform="translate(0, 32)">
-        <text x="0" y="0">• <tspan fill="#f8fafc" font-weight="700">Fachada Barlovento 20 m:</tspan> Eje E-W (60 m² silueta) reduce 60% la solicitación frontal ante ráfagas 27 km/h.</text>
-        <text x="0" y="16">• <tspan fill="#38bdf8" font-weight="700">Capa Límite Hellmann (α=0.16):</tspan> 7.4 km/h en techo (3.00m, -17%) | 7.0 km/h en espaldar (2.00m, -23%).</text>
-        <text x="0" y="32">• <tspan fill="#fbbf24" font-weight="700">Efecto Venturi Tangencial:</tspan> Flujo del Este (88% anual) succiona calor del colchón libre de 1.00 m.</text>
-        <text x="0" y="48">• <tspan fill="#f8fafc" font-weight="700">NASA POWER / MERRA-2:</tspan> Rad 17.7 MJ/m²·d (4.93 kWh/m²·d) | T.Max 31.5°C | ETo pico 6.4 mm/d.</text>
-        <text x="0" y="64">• <tspan fill="#a7f3d0" font-weight="700">Horizonte 2024–2030:</tspan> El Niño 2024 ΔT +2.1°C / Horizonte 2030 SSP2-4.5 ΔT +1.3°C (+6.8% ETo).</text>
-        <text x="0" y="80">• <tspan fill="#34d399" font-weight="700">Protección Sanitaria:</tspan> Malla espaldera (-80% contacto) blinda contra virosis ToBRFV/TMV.</text>
-        <text x="0" y="96">• <tspan fill="#38bdf8" font-weight="700">Pozo Artesanal In Situ:</tspan> Inversión ~$4.848 USD (Ahorro 84% vs pozo rotario nuevo de $29.850 USD).</text>
+        <text x="0" y="38">• <tspan fill="#0f172a" font-weight="800">Gradiente de Viento Hellmann (α=0.16):</tspan></text>
+        <text x="10" y="53" fill="#64748b">Viento a 10m: 9.0 km/h | A 3.00m (techo): 7.4 km/h | A 2.00m: 7.0 km/h.</text>
+
+        <text x="0" y="76">• <tspan fill="#0f172a" font-weight="800">Efecto Venturi Tangencial:</tspan></text>
+        <text x="10" y="91" fill="#64748b">El viento rasante sobre laterales de 100 m succiona el aire caliente.</text>
+
+        <text x="0" y="114">• <tspan fill="#0f172a" font-weight="800">Radiación Solar NASA MERRA-2:</tspan> 17.7 MJ/m²·d (4.93 kWh/m²·d).</text>
+        <text x="10" y="129" fill="#0369a1" font-weight="700">Malla blanca 110gsm difunde radiación y disipa calor &gt;31.5°C.</text>
+
+        <text x="0" y="152">• <tspan fill="#0f172a" font-weight="800">Régimen Térmico Quíbor (707 msnm):</tspan></text>
+        <text x="10" y="167" fill="#64748b">T. Máx promedio: 31.5°C (Marzo). T. Mín: 19.0°C. 28 días bochorno/mes.</text>
+
+        <text x="0" y="190">• <tspan fill="#0f172a" font-weight="800">Proyecciones Climáticas 2024–2030:</tspan></text>
+        <text x="10" y="205" fill="#b45309" font-weight="700">SSP2-4.5 anticipa ΔT +1.3°C y aumento de evapotranspiración (+6.8%).</text>
+
+        <text x="0" y="228">• <tspan fill="#0f172a" font-weight="800">Manejo de Salinidad en Pozo (ECw 1.4 dS/m):</tspan></text>
+        <text x="10" y="243" fill="#0369a1" font-weight="700">Fracción de lixiviación LF=20% evita acumulación de cloruros/sodio.</text>
+
+        <text x="0" y="266">• <tspan fill="#0f172a" font-weight="800">Blindaje Fitosanitario ToBRFV:</tspan></text>
+        <text x="10" y="281" fill="#059669" font-weight="700">Tutorado Hortomalla reduce 80% contacto manual, frenando virosis.</text>
+
+        <text x="0" y="304">• <tspan fill="#0f172a" font-weight="800">Ahorro Pozo Artesanal In Situ:</tspan> Inversión de $4.848 USD vs $29.850 USD.</text>
       </g>
     </g>
 
-    <line x1="1075" y1="18" x2="1075" y2="205" stroke="#1e293b" stroke-width="1.5"/>
+    <!-- COLUMNA 3: Cuadro de Aprobación y Certificación Oficial -->
+    <g transform="translate(1005, 48)">
+      <rect x="0" y="0" width="470" height="360" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="0" y="0" width="470" height="26" rx="6" fill="#ecfdf5"/>
+      <text x="14" y="18" fill="#065f46" font-size="11.5" font-weight="800">3. CERTIFICACIÓN TÉCNICA OFICIAL &amp; METADATOS</text>
 
-    <!-- Columna 3: Aprobación Técnica Oficial -->
-    <g transform="translate(1095, 18)">
-      <text x="0" y="16" fill="#10b981" font-size="12.5" font-weight="800">CERTIFICACIÓN TÉCNICA OFICIAL</text>
-      <g font-size="9.5" fill="#cbd5e1" transform="translate(0, 30)">
-        <text x="0" y="0">Estructura: Parral Tensado con Guayas 3/8" a 3.00 m (Cero Tubos Techo)</text>
-        <text x="0" y="15">Dimensiones: 20.00 m ancho × 100.00 m largo (2.000 m²)</text>
-        <text x="0" y="30">Pilares Sch 40: 96 Unidades (3.00 m libre + 0.80 m empotrado)</text>
-        <text x="0" y="45">Anclajes: 34 Tirantes 3/8" a 45° + Dados 40×40×60 cm (FS ≥ 1.5)</text>
-        <text x="0" y="60">Cultivo: Tomate en Espaldar Hortomalla (4.400 pl / 37.4 Toneladas)</text>
-        <text x="0" y="75" fill="#38bdf8" font-weight="700">Coord: 9°53'20.0"N 69°35'35.0"W (707 msnm, Quíbor, Lara)</text>
-        
-        <rect x="0" y="86" width="375" height="42" rx="4" fill="#022c22" stroke="#10b981" stroke-width="1"/>
-        <text x="12" y="102" fill="#34d399" font-weight="700" font-size="10">MODULACIÓN APROBADA 20m × 100m (2.000 m²)</text>
-        <text x="12" y="118" fill="#a7f3d0" font-size="8.5">5 Rollos Techo al 100% | Colchón 1.00m | Espaldar 2.00m | NASA 2024-2030</text>
+      <g transform="translate(14, 40)" font-size="10.5" fill="#334155">
+        <text x="0" y="0" fill="#64748b">PROYECTO:</text>
+        <text x="110" y="0" fill="#0f172a" font-weight="800">Casa de Malla Tecnificada La Cigarronera</text>
+
+        <text x="0" y="24" fill="#64748b">UBICACIÓN:</text>
+        <text x="110" y="24" fill="#0284c7" font-weight="800">Valle de Quíbor, Jiménez, Lara (707 msnm)</text>
+
+        <text x="0" y="48" fill="#64748b">COORDENADAS:</text>
+        <text x="110" y="48" fill="#0f172a" font-family="'JetBrains Mono', monospace" font-weight="700">9°53'20.0"N, 69°35'35.0"W</text>
+
+        <text x="0" y="72" fill="#64748b">DIMENSIONES:</text>
+        <text x="110" y="72" fill="#0f172a" font-weight="800">20.00 m ancho × 100.00 m largo (2.000 m²)</text>
+
+        <text x="0" y="96" fill="#64748b">ESTRUCTURA:</text>
+        <text x="110" y="96" fill="#0f172a" font-weight="800">Parral Tensado con Guayas 3/8" a 3.00 m</text>
+
+        <text x="0" y="120" fill="#64748b">PILARIZACIÓN:</text>
+        <text x="110" y="120" fill="#0f172a" font-weight="800">204 Pilares Sch 40 (Malla 4.0m × 3.0m)</text>
+
+        <text x="0" y="144" fill="#64748b">CULTIVO:</text>
+        <text x="110" y="144" fill="#059669" font-weight="800">Tomate Indeterminado Tutorado (4.400 pl)</text>
+
+        <text x="0" y="168" fill="#64748b">PRODUCCIÓN:</text>
+        <text x="110" y="168" fill="#059669" font-weight="800">37.40 Toneladas (8.5 kg/planta estimada)</text>
+
+        <text x="0" y="192" fill="#64748b">SUMINISTRO:</text>
+        <text x="110" y="192" fill="#0284c7" font-weight="800">Pozo Artesanal 60 m + Tanque 80 m³</text>
+      </g>
+
+      <!-- Sello de Validación de Ingeniería -->
+      <g transform="translate(14, 250)">
+        <rect x="0" y="0" width="440" height="96" rx="6" fill="#ffffff" stroke="#059669" stroke-width="1.5"/>
+        <circle cx="45" cy="48" r="30" fill="#f0fdf4" stroke="#059669" stroke-width="1.8"/>
+        <text x="45" y="44" fill="#059669" font-size="16" font-weight="900" text-anchor="middle">✓</text>
+        <text x="45" y="58" fill="#166534" font-size="8.5" font-weight="800" text-anchor="middle">APROBADO</text>
+
+        <text x="90" y="28" fill="#065f46" font-size="11" font-weight="900">DICTAMEN TÉCNICO: APTO PARA CONSTRUCCIÓN</text>
+        <text x="90" y="44" fill="#334155" font-size="9.5">Modulación 4.0m × 3.0m validada contra ráfagas de 27 km/h.</text>
+        <text x="90" y="58" fill="#334155" font-size="9.5">Cumple norma de ventilación convectiva Quíbor y FAO-56.</text>
+        <text x="90" y="74" fill="#64748b" font-size="8.5" font-family="'JetBrains Mono', monospace">
+          FLECHA: -64% | COLCHÓN: 1.00m | DESPERDICIO: 0.0m | 2026-09
+        </text>
       </g>
     </g>
   </g>

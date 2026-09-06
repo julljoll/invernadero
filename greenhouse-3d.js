@@ -21,7 +21,7 @@ class Greenhouse3DViewer {
       trellisHeight: 2.00, // Altura espaldar Hortomalla (m)
       numBays: 5,       // 5 franjas de 4.00 m
       bayWidth: 4.0,    // Ancho de cada rollo en cubierta (m)
-      pillarSpacingZ: 5.0 // Espaciamiento postes en fondo (m)
+      pillarSpacingZ: 3.0 // Espaciamiento postes en fondo (m) — Cuadrícula 4.0m × 3.0m
     }, options);
 
     // Estado del visor
@@ -196,7 +196,8 @@ class Greenhouse3DViewer {
     const stepZ = this.options.pillarSpacingZ;
 
     const xCoords = [-10, -6, -2, 2, 6, 10]; // 6 líneas de pilares = 5 naves de 4m
-    const zSteps = Math.round(L / stepZ);     // 20 vanos = 21 líneas en Z
+    const zSteps = Math.round(L / stepZ);     // 33 vanos de 3.00 m nominal = 34 líneas en Z (204 pilares Sch 40)
+    const actualStepZ = L / zSteps;           // 100.0 / 33 = 3.0303 m (módulo 3.0 m)
 
     // Geometrías compartidas
     const pillarGeo = new THREE.CylinderGeometry(0.04, 0.04, H, 12);
@@ -227,7 +228,7 @@ class Greenhouse3DViewer {
       const x = xCoords[i];
 
       for (let j = 0; j <= zSteps; j++) {
-        const z = -L / 2 + j * stepZ;
+        const z = -L / 2 + j * actualStepZ;
 
         // Tubo vertical
         const pillar = new THREE.Mesh(pillarGeo, pillarMat);
@@ -256,6 +257,9 @@ class Greenhouse3DViewer {
     const W = this.options.width;
     const L = this.options.length;
     const H = this.options.height;
+    const stepZ = this.options.pillarSpacingZ;
+    const zSteps = Math.round(L / stepZ);
+    const actualStepZ = L / zSteps;
     const xCoords = [-10, -6, -2, 2, 6, 10];
 
     const cableMat = new THREE.MeshStandardMaterial({
@@ -286,9 +290,10 @@ class Greenhouse3DViewer {
       this.layers.cables.add(cable);
     }
 
-    // B. Guayas Transversales cada 20 m
-    for (let z = -L / 2; z <= L / 2; z += 20.0) {
-      const transGeo = new THREE.CylinderGeometry(0.012, 0.012, W, 8);
+    // B. Guayas Transversales en cada nodo de pilares (34 líneas cada 3.00 m)
+    for (let j = 0; j <= zSteps; j++) {
+      const z = -L / 2 + j * actualStepZ;
+      const transGeo = new THREE.CylinderGeometry(0.010, 0.010, W, 8);
       const transCable = new THREE.Mesh(transGeo, cableMat);
       transCable.rotation.z = Math.PI / 2;
       transCable.position.set(0, H + 0.05, z);
@@ -343,7 +348,7 @@ class Greenhouse3DViewer {
     this.layers.cables.add(anchor);
   }
 
-  // 4. Cubierta y Paredes de Malla 50×25 HDPE (5 Rollos de 4.00 m)
+  // 4. Cubierta y Paredes de Malla 110 gsm, 50 Mesh HDPE Color Blanco (5 Rollos de 4.00 m)
   buildMeshCover() {
     const W = this.options.width;
     const L = this.options.length;
@@ -352,8 +357,8 @@ class Greenhouse3DViewer {
 
     this.meshMaterials = [];
 
-    // Colores alternados sutiles para identificar las 5 franjas de 4m×100m
-    const colors = [0x10b981, 0x06b6d4, 0x10b981, 0x06b6d4, 0x10b981];
+    // Malla Blanca 110 gsm 50 mesh: tonos blancos difusores alternados sutiles para identificar las 5 franjas
+    const colors = [0xffffff, 0xf1f5f9, 0xffffff, 0xf1f5f9, 0xffffff];
 
     for (let i = 0; i < this.options.numBays; i++) {
       const xCenter = -W / 2 + (i + 0.5) * bayW;
@@ -362,8 +367,8 @@ class Greenhouse3DViewer {
         color: colors[i],
         transparent: true,
         opacity: this.meshOpacity,
-        roughness: 0.6,
-        metalness: 0.1,
+        roughness: 0.8,
+        metalness: 0.05,
         side: THREE.DoubleSide
       });
       this.meshMaterials.push(stripMat);
@@ -375,12 +380,12 @@ class Greenhouse3DViewer {
       this.layers.mesh.add(strip);
     }
 
-    // Paredes Perimetrales (3.00m visible + 0.20m faldón enterrado)
+    // Paredes Perimetrales Malla Blanca 110 gsm (3.00m visible + 0.20m faldón enterrado)
     const wallMat = new THREE.MeshStandardMaterial({
-      color: 0x0ea5e9,
+      color: 0xf8fafc,
       transparent: true,
-      opacity: this.meshOpacity * 0.85,
-      roughness: 0.5,
+      opacity: this.meshOpacity * 0.9,
+      roughness: 0.8,
       side: THREE.DoubleSide
     });
     this.meshMaterials.push(wallMat);
@@ -493,11 +498,11 @@ class Greenhouse3DViewer {
       dimMat
     );
 
-    // B. Cota de Fondo Longitudinal: 100.00 m
+    // B. Cota de Fondo Longitudinal: 100.00 m (33 Vanos × 3.00 m = 204 Pilares)
     this.createDimensionLine(
       new THREE.Vector3(W / 2 + 1.5, 0.3, -L / 2),
       new THREE.Vector3(W / 2 + 1.5, 0.3, L / 2),
-      '100.00 m Fondo (2.000 m²)',
+      '100.00 m Fondo (33 Vanos × 3.00 m — 204 Pilares)',
       dimMat
     );
 

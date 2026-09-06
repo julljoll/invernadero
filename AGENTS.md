@@ -39,7 +39,8 @@ Al emitir recomendaciones o cálculos en este proyecto, básate siempre en los p
 
 ## 3. Manejo Fitosanitario y Selección de Malla
 
-*   **Malla Estándar de Referencia:** **50×25 hilos/pulgada HDPE monofilamento** (apertura $\le 192\ \mu\text{m}$).
+*   **Malla Estándar de Referencia:** **110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, COLOR BLANCO** (apertura $\le 192\ \mu\text{m}$).
+    *   **Beneficio Bioclimático Quíbor:** El gramaje de **110 gsm** optimiza la permeabilidad aerodinámica y la tasa de renovación de aire convectiva, mientras que el **color blanco** difumina la radiación solar y refleja el exceso térmico infrarrojo (opacidad solar difusa), evitando el sobrecalentamiento interno (>31.5 °C) y el aborto floral.
     *   Efectiva al 100% como barrera física contra: Mosca blanca (*Bemisia tabaci*), Trips (*Frankliniella occidentalis*), Pulgones (*Aphis gossypii*, *Myzus persicae*), Minador (*Liriomyza spp.*) y Lepidópteros (*Spodoptera*, *Helicoverpa*).
 *   **Punto Crítico (Ácaros):**
     *   La araña roja (*Tetranychus urticae*) y el ácaro blanco (*Polyphagotarsonemus latus*) **NO son retenidos por ninguna malla comercial**. Su control es 100% de manejo: material vegetal certificado, cuarentena, control de HR% (evitar sequedad extrema) y fauna depredadora (*Amblyseius swirskii*, *Phytoseiulus persimilis*).

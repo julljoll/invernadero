@@ -1,10 +1,12 @@
 # Matriz Fitosanitaria, Selección de Malla y Manejo Integrado (IPM) en Quíbor
 
 ## 1. Características Técnicas de la Malla Estándar Seleccionada
-*   **Especificación:** 50×25 hilos/pulgada monofilamento HDPE virgen estabilizado anti-UV.
+*   **Especificación:** Malla 110 gsm, 50 mesh (50×25 hilos/pulgada) monofilamento HDPE virgen estabilizado anti-UV.
+*   **Color:** Blanco / Cristal (White).
+*   **Opacidad y Difusión Solar:** Proporciona difusión de la luz fotosintéticamente activa (PAR) y reflectancia de la radiación infrarroja, evitando puntos calientes, quemaduras foliares y sobrecalentamiento térmico (>31.5 °C).
 *   **Apertura de poro:** $\le 192\ \mu\text{m} \times 340\ \mu\text{m}$ (área libre aprox. 32-36%).
-*   **Resistencia mecánica:** Alta resistencia a la tracción por vientos sostenidos del Este.
-*   **Porosidad aerodinámica:** Reduce la velocidad del viento interno en un 40-55%, lo que incrementa la resistencia al flujo de aire pero otorga barrera física completa a plagas aladas.
+*   **Circulación y Ventilación Convectiva:** La calibración a 110 gsm y 50 mesh equilibra la barrera física contra insectos con una óptima permeabilidad aerodinámica, favoreciendo el barrido eólico del Este y la disipación por el colchón térmico superior de 1.00 m.
+*   **Resistencia mecánica:** Alta resistencia a la tracción ante ráfagas sostenidas de 27 km/h del Valle de Quíbor.
 
 ---
 

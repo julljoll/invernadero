@@ -40,9 +40,12 @@ Los datos provienen de modelos climáticos asimilados NASA MERRA-2 centrados en 
 
 ---
 
-## 2. Matriz Fitosanitaria y Comportamiento de la Malla 50×25 HDPE
+## 2. Matriz Fitosanitaria y Comportamiento de la Malla 110 gsm, 50 Mesh HDPE Color Blanco
 
-La elección de una malla monofilamento de polietileno de alta densidad (HDPE) de **50×25 hilos/pulgada** ($\le 192\ \mu\text{m}$ de apertura libre) es el estándar comercial anti-trips más estricto.
+La elección de una malla monofilamento de polietileno de alta densidad (HDPE) virgen de **110 gsm, 50 mesh (50×25 hilos/pulgada) en COLOR BLANCO** ($\le 192\ \mu\text{m}$ de apertura libre) es el estándar agronómico óptimo para el Valle de Quíbor:
+1. **Circulación Convectiva de Aire:** Su gramaje de 110 gsm optimiza el coeficiente de fricción aerodinámica, permitiendo un flujo laminar continuo del viento del Este hacia el colchón disipativo superior de 1.00 m.
+2. **Opacidad y Difusión Solar:** El color blanco refleja la radiación térmica infrarroja y difunde la luz fotosintética PAR, previniendo el sobrecalentamiento de la nave (>31.5 °C en horas pico) y el consecuente aborto floral.
+3. **Barrera Fitosanitaria Anti-Trips:** Bloqueo físico absoluto contra insectos vectores.
 
 ```mermaid
 graph TD
@@ -153,8 +156,8 @@ Para pimentón ($EC_e = 1.5\ \text{dS/m}$) con agua de $1.4\ \text{dS/m}$, $LF \
 ```
 
 1. **Estructura Tipo Parral Tensado (20.00 m × 100.00 m):**
-   * Pilares verticales tubulares Schedule 40 de $\varnothing\ 2\ 1/2"$ a **3.00 m libre** (tubos de $3.80\text{ m}$ con $0.80\text{ m}$ empotrados).
-   * Techo sustentado al 100% por red ortogonal de guayas de acero galvanizado de $3/8"$ en cuadrícula de $4.0\text{ m}$ (transversal) $\times 5.0\text{ m}$ (longitudinal).
+   * Pilares verticales tubulares Schedule 40 de $\varnothing\ 2\ 1/2"$ a **3.00 m libre** (**204 pilares** en tubos de $3.80\text{ m}$ con $0.80\text{ m}$ empotrados en dados de concreto).
+   * Techo sustentado al 100% por red ortogonal de guayas de acero galvanizado de $3/8"$ en cuadrícula de $4.0\text{ m}$ (transversal) $\times \mathbf{3.0\text{ m}}$ (longitudinal — 33 vanos, 34 líneas de postes, reducción de flecha en $-64\%$).
    * Cero tubos en techo; 60% de ahorro en acero frente a galpones rígidos y ventilación convectiva cenital 100% abierta.
    * **Orientación Este-Oeste:** El eje de 100 m paralelo a los vientos dominantes del Este reduce en un 50% la superficie frontal expuesta a ráfagas de 27 km/h ($60\text{ m}^2$ frente a $120\text{ m}^2$).
 2. **Sistema de Tutorado Óptimo: Malla Espaldera Biorientada (Hortomalla 15×15 cm):**

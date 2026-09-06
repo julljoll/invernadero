@@ -34,11 +34,18 @@ const CONFIG = Object.freeze({
     minHeightGutterM: 3.0,
     optRidgeHeightM: 3.0,
     trellisHeightM: 2.0,
+    pillarSpacingXM: 4.0,
+    pillarSpacingZM: 3.0,
+    totalPillarsDefault: 204,
     densityPlantM2: 2.2,
     totalPlantsDefault: 4400
   },
   MESH: {
-    spec: "50×25 hilos/pulgada HDPE monofilamento",
+    spec: "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+    color: "Blanco / Cristal",
+    weightGsm: 110,
+    meshCount: "50 mesh (50×25)",
+    benefits: "Máxima circulación convectiva de aire y difusión/opacidad solar reflectiva anti-sobrecalentamiento (>31.5 °C)",
     maxPoreMicrons: 192,
     pestExclusion: ["Bemisia tabaci", "Frankliniella occidentalis", "Myzus persicae", "Liriomyza spp.", "Tuta absoluta"]
   },
@@ -229,10 +236,10 @@ const PEST_DATA = [
     estado: "retiene",
     estadoTexto: "Retenida 100% por Malla",
     dano: "Succiona savia, debilita la planta, secreta melaza (fumagina) y transmite virus graves como TYLCV (cuchara del tomate) y Begomovirus.",
-    vuelo: "Vuelo activo débil (<2 m), pero es arrastrada por el viento a kilómetros. La malla 50×25 es la barrera indispensable.",
+    vuelo: "Vuelo activo débil (<2 m), pero es arrastrada por el viento a kilómetros. La malla 110 gsm 50 mesh blanca es la barrera indispensable.",
     quimico: "IRAC 4A (Imidacloprid), IRAC 7C (Piriproxifen - ovicida/larvicida), IRAC 23 (Spiromesifen). Rotar estrictamente.",
     biologico: "Parasitoides de ninfas: Eretmocerus mundus y Encarsia formosa.",
-    malla: "Malla 50×25 HDPE monofilamento (apertura ≤ 192 µm)."
+    malla: "Malla 110 gsm 50 mesh HDPE blanca (apertura ≤ 192 µm). Ventilación y opacidad solar reflectiva."
   },
   {
     id: "trips",
@@ -244,7 +251,7 @@ const PEST_DATA = [
     vuelo: "Insecto alargado de 1-2 mm, aprovecha corrientes de aire. Es la plaga más exigente en micraje de poro.",
     quimico: "IRAC 5 (Spinosad / Spinetoram), IRAC 6 (Abamectina), IRAC 1B (Acefato).",
     biologico: "Ácaros depredadores benéficos: Amblyseius swirskii y Orius laevigatus.",
-    malla: "Malla 50×25 HDPE (≤ 192 micras). Mallas inferiores permiten su colado."
+    malla: "Malla 110 gsm 50 mesh HDPE blanca (≤ 192 micras). Estándar anti-trips y anti-calor."
   },
   {
     id: "pulgones",
@@ -256,7 +263,7 @@ const PEST_DATA = [
     vuelo: "Plancton aéreo: dispersión masiva arrastrada por turbulencias de viento.",
     quimico: "IRAC 1A (Pirimicarb específico), IRAC 29 (Flonicamid), IRAC 3A (Piretroides).",
     biologico: "Crisopas (Chrysoperla carnea) y coleópteros Coccinellidae (mariquitas).",
-    malla: "Malla 50×25 HDPE."
+    malla: "Malla 110 gsm 50 mesh HDPE blanca."
   },
   {
     id: "acaros",
@@ -280,7 +287,7 @@ const PEST_DATA = [
     vuelo: "Díptero pequeño que vuela a ras de planta; el viento lateral lo arrastra hacia las naves.",
     quimico: "IRAC 17 (Cyromazina, inhibidor de muda altamente selectivo), Abamectina.",
     biologico: "Avispilla parasitoide Diglyphus isaea.",
-    malla: "Malla 50×25 HDPE."
+    malla: "Malla 110 gsm 50 mesh HDPE blanca."
   },
   {
     id: "lepidopteros",
@@ -292,7 +299,7 @@ const PEST_DATA = [
     vuelo: "Polillas nocturnas de vuelo potente. Cualquier malla mosquitera de 1 mm ya las detiene.",
     quimico: "IRAC 11A (Bacillus thuringiensis kurstaki), IRAC 28 (Clorantraniliprol / Rynaxypyr).",
     biologico: "Trichogramma spp. (parasitoide de huevos), trampas con feromonas de confusión sexual.",
-    malla: "Malla 50×25 HDPE."
+    malla: "Malla 110 gsm 50 mesh HDPE blanca."
   }
 ];
 
@@ -636,7 +643,7 @@ const STAGE_MODULE_MAP = {
   "tab-clima": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Climatología & Viento (MERRA-2)" },
   "tab-ventilacion": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Ventilación Convectiva & Extractores" },
   "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 2.000 m² (Visor 3D & Planos)" },
-  "tab-plagas": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Matriz de Plagas (Malla 50×25)" },
+  "tab-plagas": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Matriz de Plagas (110gsm 50mesh Blanca)" },
   "tab-riego": { stage: "Etapa 3: Acuífero & Hidrogeología", module: "Riego FAO-56 & Salinidad" },
   "tab-produccion": { stage: "Etapa 4: Operación & Producción", module: "Plan Maestro de Producción Tomate" },
 };
@@ -1312,7 +1319,7 @@ function updateClimateDisplays(monthIndex) {
       alertBox.innerHTML = `
         <div class="alert-icon">💨</div>
         <div class="alert-content">
-          <strong>${data.mes} ${data.year} (Pico Eólico — Viento ${data.viento.toFixed(1)} km/h, Ráfagas ${data.rafaga} km/h):</strong> Flujo sostenido del Este. Verifique la tensión de los 34 tirantes perimetrales a 45° y la sujeción de la malla 50×25 en la fachada barlovento Este de 20.00 m.
+          <strong>${data.mes} ${data.year} (Pico Eólico — Viento ${data.viento.toFixed(1)} km/h, Ráfagas ${data.rafaga} km/h):</strong> Flujo sostenido del Este. Verifique la tensión de los 34 tirantes perimetrales a 45° y la sujeción de la malla 110 gsm 50 mesh blanca en la fachada barlovento Este de 20.00 m.
         </div>`;
     } else {
       alertBox.className = "alert-box alert-warning";
