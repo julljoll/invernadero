@@ -824,13 +824,13 @@ function initSidebar() {
       document.body.classList.add("light-theme");
       document.body.classList.remove("dark-theme");
       if (sunlightText) sunlightText.textContent = "Modo Luz Campo";
-      if (themeIcon) themeIcon.textContent = "☀️";
+      if (themeIcon) themeIcon.innerHTML = `<span class="material-symbols-outlined">wb_sunny</span>`;
     } else {
       document.body.classList.remove("sunlight-mode");
       document.body.classList.remove("light-theme");
       document.body.classList.add("dark-theme");
       if (sunlightText) sunlightText.textContent = "Modo Cockpit (Noche)";
-      if (themeIcon) themeIcon.textContent = "🌙";
+      if (themeIcon) themeIcon.innerHTML = `<span class="material-symbols-outlined">dark_mode</span>`;
     }
   }
 
@@ -847,7 +847,7 @@ function initSidebar() {
       const newIsSunlight = !isSunlightNow;
       updateThemeUI(newIsSunlight);
       localStorage.setItem("agroquibor_theme", newIsSunlight ? "sunlight" : "cockpit");
-      showToast(newIsSunlight ? "Modo Luz de Campo activado (Alta Claridad)" : "Modo Cockpit Nocturno activado", newIsSunlight ? "☀️" : "🌙");
+      showToast(newIsSunlight ? "Modo Luz de Campo activado (Alta Claridad)" : "Modo Cockpit Nocturno activado", newIsSunlight ? "wb_sunny" : "dark_mode");
       requestAnimationFrame(() => drawGreenhouseStructure());
     });
   }
@@ -870,12 +870,18 @@ function initSidebar() {
 /**
  * Notificaciones flotantes Toast para acciones de campo
  */
-function showToast(message, icon = "📋", duration = 3200) {
+function showToast(message, icon = "check_circle", duration = 3200) {
   const toast = document.getElementById("agro-toast");
   const msg = document.getElementById("agro-toast-msg");
   if (!toast || !msg) return;
   const iconEl = toast.querySelector(".agro-toast-icon");
-  if (iconEl) iconEl.textContent = icon;
+  if (iconEl) {
+    if (/^[a-z0-9_]+$/.test(icon)) {
+      iconEl.innerHTML = `<span class="material-symbols-outlined" style="font-size:22px; color:var(--emerald-light); vertical-align:middle;">${icon}</span>`;
+    } else {
+      iconEl.textContent = icon;
+    }
+  }
   msg.textContent = message;
   toast.classList.add("show");
   if (window._agroToastTimer) clearTimeout(window._agroToastTimer);
@@ -1087,16 +1093,16 @@ ${acidText}
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(pauta).then(() => {
-        showToast("¡Ficha copiada al portapapeles! Abriendo WhatsApp...", "📲", 3500);
+        showToast("¡Ficha copiada al portapapeles! Abriendo WhatsApp...", "send_to_mobile", 3500);
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
         setTimeout(() => window.open(whatsappUrl, '_blank'), 300);
       }).catch(() => {
-        showToast("Abriendo WhatsApp con la ficha...", "📲", 3000);
+        showToast("Abriendo WhatsApp con la ficha...", "send_to_mobile", 3000);
         const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
         window.open(whatsappUrl, '_blank');
       });
     } else {
-      showToast("Abriendo WhatsApp con la ficha...", "📲", 3000);
+      showToast("Abriendo WhatsApp con la ficha...", "send_to_mobile", 3000);
       const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(pauta)}`;
       window.open(whatsappUrl, '_blank');
     }

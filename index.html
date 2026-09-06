@@ -5,9 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LA CIGARRONERA — Casa de Malla en Quíbor (Lara)</title>
   <meta name="description" content="LA CIGARRONERA — Suite de ingeniería agronómica, bioclimática y diseño estructural para casas de malla en el Valle de Quíbor, Lara, Venezuela. Cálculo de ventilación, extractores eólicos, riego FAO-56 y matriz fitosanitaria.">
+  <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono & Material Symbols Outlined -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Bootstrap 5.3.3 CSS via CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+  <!-- Custom Agro-Tech UI Theme (loads after Bootstrap to maintain high-contrast styling) -->
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#10b981">
@@ -28,7 +34,7 @@
   <!-- Splash Screen / Loader Inicial -->
   <div id="app-loader" class="app-loader" onclick="this.classList.add('hidden'); setTimeout(()=>this.style.display='none', 200);">
     <div class="loader-spinner-box">
-      <div class="loader-logo">🌱</div>
+      <div class="loader-logo"><span class="material-symbols-outlined" style="font-size:3rem; color:var(--emerald-light);">eco</span></div>
       <div class="loader-title">LA CIGARRONERA</div>
       <div class="loader-sub">Cargando Suite Agronómica & Hidrogeológica...</div>
       <div class="loader-spinner"></div>
@@ -46,9 +52,7 @@
       <div class="sidebar-header">
         <div class="sidebar-brand">
           <div class="brand-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-            </svg>
+            <span class="material-symbols-outlined">yard</span>
           </div>
           <div class="brand-info">
             <h1 class="brand-title">LA CIGARRONERA</h1>
@@ -56,9 +60,7 @@
           </div>
         </div>
         <button id="btn-collapse-sidebar" class="btn-sidebar-collapse" type="button" title="Colapsar / Expandir Menú">
-          <svg class="icon-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
-          </svg>
+          <span class="material-symbols-outlined icon-collapse">menu_open</span>
         </button>
       </div>
 
@@ -74,14 +76,14 @@
           <div class="nav-group-items">
             <button class="nav-item active" data-tab="tab-clima" id="nav-item-clima" role="tab" aria-selected="true" aria-controls="tab-clima" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+                <span class="material-symbols-outlined">air</span>
               </span>
               <span class="nav-item-label">Climatología & Viento</span>
               <span class="nav-item-badge">MERRA-2</span>
             </button>
             <button class="nav-item" data-tab="tab-ventilacion" id="nav-item-ventilacion" role="tab" aria-selected="false" aria-controls="tab-ventilacion" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+                <span class="material-symbols-outlined">cyclone</span>
               </span>
               <span class="nav-item-label">Ventilación & Eólicos</span>
               <span class="nav-item-badge">Hellmann</span>
@@ -98,21 +100,21 @@
           <div class="nav-group-items">
             <button class="nav-item" data-tab="tab-estructura" id="nav-item-estructura" role="tab" aria-selected="false" aria-controls="tab-estructura" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                <span class="material-symbols-outlined">view_in_ar</span>
               </span>
               <span class="nav-item-label">Estructura 2.000 m²</span>
               <span class="nav-item-badge">3D CAD</span>
             </button>
             <button class="nav-item" data-tab="tab-estructura" data-scroll="container-planos-2d" id="nav-item-planos" role="tab" aria-selected="false" aria-controls="tab-estructura" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M10 9v12M14 9v12"/></svg>
+                <span class="material-symbols-outlined">architecture</span>
               </span>
               <span class="nav-item-label">Planos Constructivos</span>
               <span class="nav-item-badge">Cortes</span>
             </button>
             <button class="nav-item" data-tab="tab-plagas" id="nav-item-plagas" role="tab" aria-selected="false" aria-controls="tab-plagas" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a4 4 0 0 0-4 4v2H6a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h2v4a4 4 0 0 0 8 0v-4h2a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-2V6a4 4 0 0 0-4-4z"/></svg>
+                <span class="material-symbols-outlined">pest_control</span>
               </span>
               <span class="nav-item-label">Matriz de Plagas</span>
               <span class="nav-item-badge">50 Mesh</span>
@@ -129,14 +131,14 @@
           <div class="nav-group-items">
             <button class="nav-item" data-tab="tab-riego" id="nav-item-riego" role="tab" aria-selected="false" aria-controls="tab-riego" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                <span class="material-symbols-outlined">water_drop</span>
               </span>
               <span class="nav-item-label">Riego FAO-56</span>
               <span class="nav-item-badge">Salinidad</span>
             </button>
             <button class="nav-item" data-tab="tab-riego" data-scroll="well-drilling-section" id="nav-item-pozo" role="tab" aria-selected="false" aria-controls="tab-riego" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="material-symbols-outlined">layers</span>
               </span>
               <span class="nav-item-label">Pozo Profundo</span>
               <span class="nav-item-badge">120 m</span>
@@ -153,28 +155,28 @@
           <div class="nav-group-items">
             <button class="nav-item" data-tab="tab-produccion" id="nav-item-produccion" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                <span class="material-symbols-outlined">agriculture</span>
               </span>
               <span class="nav-item-label">Plan Maestro Tomate</span>
               <span class="nav-item-badge">37.4 Ton</span>
             </button>
             <button class="nav-item" data-tab="tab-produccion" data-scroll="hydraulic-section" id="nav-item-hidraulica" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9m-4-4l4 4 4-4"/></svg>
+                <span class="material-symbols-outlined">speed</span>
               </span>
               <span class="nav-item-label">Cadena Hidráulica</span>
               <span class="nav-item-badge">1.5 HP</span>
             </button>
             <button class="nav-item" data-tab="tab-produccion" data-scroll="field-action-sheet" id="nav-item-ficha" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span class="material-symbols-outlined">receipt_long</span>
               </span>
               <span class="nav-item-label">Ficha de Turno</span>
               <span class="nav-item-badge">WhatsApp</span>
             </button>
             <button class="nav-item" data-tab="tab-produccion" data-scroll="economic-simulator-section" id="nav-item-simulador" role="tab" aria-selected="false" aria-controls="tab-produccion" type="button">
               <span class="nav-item-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span class="material-symbols-outlined">payments</span>
               </span>
               <span class="nav-item-label">Simulador Económico</span>
               <span class="nav-item-badge">AIFA</span>
@@ -187,11 +189,11 @@
       <!-- Sidebar Footer / Controls -->
       <div class="sidebar-footer">
         <button id="btn-theme-toggle" class="btn-sunlight-toggle" type="button" title="Alternar entre Modo Luz Campo y Modo Nocturno Cockpit">
-          <span class="sunlight-icon" id="theme-icon">☀️</span> <span id="sunlight-btn-text">Modo Luz Campo</span>
+          <span class="sunlight-icon" id="theme-icon"><span class="material-symbols-outlined">wb_sunny</span></span> <span id="sunlight-btn-text">Modo Luz Campo</span>
         </button>
         <div class="sidebar-footer-status">
-          <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline">🟢 Offline Listo</span>
-          <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps">📍 Quíbor 700m</a>
+          <span id="pwa-status-badge" class="badge-offline" title="PWA instalable y disponible 100% offline"><span class="material-symbols-outlined" style="font-size:14px; color:#10b981;">offline_pin</span> Offline Listo</span>
+          <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="badge badge-geo" style="text-decoration:none;" title="Ver ubicación en Google Maps"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> Quíbor 700m</a>
         </div>
       </div>
     </aside>
@@ -202,14 +204,10 @@
       <header class="app-topbar" id="app-topbar">
         <div class="topbar-left">
           <button id="btn-toggle-sidebar" class="btn-hamburger" type="button" aria-label="Abrir Menú Lateral">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
+            <span class="material-symbols-outlined">menu</span>
           </button>
           <div class="breadcrumb" id="topbar-breadcrumb">
-            <span class="breadcrumb-root">🌱 LA CIGARRONERA</span>
+            <span class="breadcrumb-root"><span class="material-symbols-outlined" style="font-size:16px; color:var(--emerald-light);">eco</span> LA CIGARRONERA</span>
             <span class="breadcrumb-separator">›</span>
             <span class="breadcrumb-stage" id="breadcrumb-stage">Etapa 1: Bioclima</span>
             <span class="breadcrumb-separator">›</span>
@@ -218,11 +216,11 @@
         </div>
         <div class="topbar-right">
           <div class="topbar-telemetry">
-            <span class="telemetry-pill pill-wind" title="Viento dominante del Este (88% anual)">💨 88% ESTE</span>
-            <span class="telemetry-pill pill-geo" title="Elevación base del predio">📍 ~700 msnm</span>
+            <span class="telemetry-pill pill-wind" title="Viento dominante del Este (88% anual)"><span class="material-symbols-outlined" style="font-size:14px;">air</span> 88% ESTE</span>
+            <span class="telemetry-pill pill-geo" title="Elevación base del predio"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> ~700 msnm</span>
           </div>
           <button id="btn-topbar-export" class="btn-topbar-action" type="button" title="Copiar y Enviar Ficha de Turno por WhatsApp">
-            <span>📲</span> <span class="btn-topbar-label">Ficha Turno</span>
+            <span class="material-symbols-outlined" style="font-size:16px;">send_to_mobile</span> <span class="btn-topbar-label">Ficha Turno</span>
           </button>
         </div>
       </header>
@@ -325,8 +323,8 @@
           </div>
 
           <!-- Weather Alert Box -->
-          <div class="alert-box alert-warning" id="box-clima-alert">
-            <div class="alert-icon">⚠️</div>
+          <div class="alert-box alert-warning alert alert-warning d-flex align-items-center gap-3" id="box-clima-alert">
+            <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">warning</span></div>
             <div class="alert-content">
               <strong>Marzo 2026 (Pico Térmico Crítico):</strong> Coinciden las máximas del año (>31.5 °C) con radiación solar pico. En estructuras bajas (&lt;2.5 m), el interior superará los 34-37 °C provocando aborto floral en tomate. El parral a 3.00 m con técnica de espaldar a 2.00 m (y 1.00 m de colchón térmico libre) disipa el calor convectivo hacia los laterales.
             </div>
@@ -522,7 +520,7 @@
               </select>
             </div>
             <div class="input-item">
-              <label for="select-month-et0">Mes de Operación (<span class="tooltip-term">ETo MERRA-2 <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración Referencial (ETo)</span><span class="tooltip-tag">NASA MERRA-2</span></span><span class="tooltip-simple">Radiación y demanda atmosférica real mes a mes en el Valle de Quíbor (695 msnm). Pico en Marzo (6.4 mm/d) y mínimo en Julio (4.8 mm/d).</span><span class="tooltip-tech">Penman-Monteith FAO-56 calibrado</span></span></span>):</label>
+              <label for="select-month-et0">Mes de Operación (<span class="tooltip-term">ETo MERRA-2 <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración Referencial (ETo)</span><span class="tooltip-tag">NASA MERRA-2</span></span><span class="tooltip-simple">Radiación y demanda atmosférica real mes a mes en el Valle de Quíbor (695 msnm). Pico en Marzo (6.4 mm/d) y mínimo en Julio (4.8 mm/d).</span><span class="tooltip-tech">Penman-Monteith FAO-56 calibrado</span></span></span>):</label>
               <select id="select-month-et0" class="input-select">
                 <option value="0">Enero (ETo 5.4 mm/día)</option>
                 <option value="1">Febrero (ETo 5.8 mm/día)</option>
@@ -546,11 +544,11 @@
               </select>
             </div>
             <div class="input-item">
-              <label for="input-well-ec">Conductividad Agua Pozo (<span class="tooltip-term">ECw <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Conductividad Eléctrica (ECw)</span><span class="tooltip-tag">dS/m</span></span><span class="tooltip-simple">Cantidad de sales disueltas en el agua del pozo. En Quíbor oscila entre 0.9 y 2.5 dS/m. Valores &gt; 1.5 exigen sobre-riego de lavado.</span><span class="tooltip-tech">1 dS/m ≈ 640 ppm sales totales (TDS)</span></span></span> dS/m):</label>
+              <label for="input-well-ec">Conductividad Agua Pozo (<span class="tooltip-term">ECw <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Conductividad Eléctrica (ECw)</span><span class="tooltip-tag">dS/m</span></span><span class="tooltip-simple">Cantidad de sales disueltas en el agua del pozo. En Quíbor oscila entre 0.9 y 2.5 dS/m. Valores &gt; 1.5 exigen sobre-riego de lavado.</span><span class="tooltip-tech">1 dS/m ≈ 640 ppm sales totales (TDS)</span></span></span> dS/m):</label>
               <div style="display:flex; gap:0.5rem; align-items:center;">
                 <input type="number" id="input-well-ec" value="1.4" min="0.4" max="3.5" step="0.1" class="input-field" style="flex:1;">
-                <button type="button" id="btn-quick-yacambu" class="btn-sm" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica del Sistema Yacambú (0.5 dS/m)">💧 Yacambú (0.5)</button>
-                <button type="button" id="btn-quick-well" class="btn-sm" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica de Pozo Profundo Quíbor (1.4 dS/m)">🏜️ Pozo (1.4)</button>
+                <button type="button" id="btn-quick-yacambu" class="btn btn-sm" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica del Sistema Yacambú (0.5 dS/m)"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">water_drop</span> Yacambú (0.5)</button>
+                <button type="button" id="btn-quick-well" class="btn btn-sm" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:0.4rem 0.6rem; font-size:0.75rem; cursor:pointer; white-space:nowrap;" title="Fijar ECw típica de Pozo Profundo Quíbor (1.4 dS/m)"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">layers</span> Pozo (1.4)</button>
               </div>
             </div>
             <div class="input-item">
@@ -566,19 +564,19 @@
           <!-- Calculation Summary -->
           <div class="results-panel">
             <div class="result-row">
-              <span>Evapotranspiración Base (<span class="tooltip-term">ETo <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Atmosférica (ETo)</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Consumo de un cultivo de pasto de referencia según temperatura, radiación y viento local de Quíbor.</span><span class="tooltip-tech">NASA MERRA-2 1990-2023</span></span></span>):</span>
+              <span>Evapotranspiración Base (<span class="tooltip-term">ETo <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Atmosférica (ETo)</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Consumo de un cultivo de pasto de referencia según temperatura, radiación y viento local de Quíbor.</span><span class="tooltip-tech">NASA MERRA-2 1990-2023</span></span></span>):</span>
               <strong id="res-fao-eto">6.40 mm/día</strong>
             </div>
             <div class="result-row">
-              <span>Coeficiente (<span class="tooltip-term">Kc corregido <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Coeficiente de Cultivo Efectivo</span><span class="tooltip-tag">FAO-56</span></span><span class="tooltip-simple">Factor de cultivo ajustado por el acolchado plástico (suprime 75% del componente Ke de evaporación del suelo).</span><span class="tooltip-tech">Kc_efectivo = Kcb + Ke_mulch</span></span></span>):</span>
+              <span>Coeficiente (<span class="tooltip-term">Kc corregido <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Coeficiente de Cultivo Efectivo</span><span class="tooltip-tag">FAO-56</span></span><span class="tooltip-simple">Factor de cultivo ajustado por el acolchado plástico (suprime 75% del componente Ke de evaporación del suelo).</span><span class="tooltip-tech">Kc_efectivo = Kcb + Ke_mulch</span></span></span>):</span>
               <strong id="res-fao-kc">0.95</strong>
             </div>
             <div class="result-row">
-              <span>Evapotranspiración Neta (<span class="tooltip-term">ETc <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Neta del Cultivo</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Agua consumida directamente por transpiración de la planta y evaporación de bulbo protegido.</span><span class="tooltip-tech">ETc = ETo × Kc_corregido</span></span></span>):</span>
+              <span>Evapotranspiración Neta (<span class="tooltip-term">ETc <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Demanda Neta del Cultivo</span><span class="tooltip-tag">mm/día</span></span><span class="tooltip-simple">Agua consumida directamente por transpiración de la planta y evaporación de bulbo protegido.</span><span class="tooltip-tech">ETc = ETo × Kc_corregido</span></span></span>):</span>
               <strong id="res-fao-etc">6.08 mm/día (~19.3 L/pl/sem)</strong>
             </div>
             <div class="result-row">
-              <span>Fracción de Lavado Requerida (<span class="tooltip-term">LF <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Fracción de Lixiviación (LF)</span><span class="tooltip-tag">Manejo Salino</span></span><span class="tooltip-simple">Lámina de agua extra para lavar sulfatos y cloruros por debajo del bulbo radicular activo (0-40 cm).</span><span class="tooltip-tech">LF = ECw / [5(ECe) - ECw] (Rhoades / FAO)</span></span></span>):</span>
+              <span>Fracción de Lavado Requerida (<span class="tooltip-term">LF <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Fracción de Lixiviación (LF)</span><span class="tooltip-tag">Manejo Salino</span></span><span class="tooltip-simple">Lámina de agua extra para lavar sulfatos y cloruros por debajo del bulbo radicular activo (0-40 cm).</span><span class="tooltip-tech">LF = ECw / [5(ECe) - ECw] (Rhoades / FAO)</span></span></span>):</span>
               <strong class="highlight-cyan" id="res-fao-lf">23.0 % de sobre-riego</strong>
             </div>
             <div class="result-row">
@@ -590,7 +588,7 @@
               <strong class="highlight-yellow" id="res-fao-daily-m3">15.78 m³ / día</strong>
             </div>
             <div class="result-row">
-              <span>Impacto Salino Sin Lavado (<span class="tooltip-term">Maas-Hoffman <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Ecuación Maas & Hoffman</span><span class="tooltip-tag">Rendimiento</span></span><span class="tooltip-simple">Pérdida potencial de rendimiento acumulado si no se aplica la fracción de lixiviación correspondiente.</span><span class="tooltip-tech">Y = 100 - b(ECe - a)</span></span></span>):</span>
+              <span>Impacto Salino Sin Lavado (<span class="tooltip-term">Maas-Hoffman <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Ecuación Maas & Hoffman</span><span class="tooltip-tag">Rendimiento</span></span><span class="tooltip-simple">Pérdida potencial de rendimiento acumulado si no se aplica la fracción de lixiviación correspondiente.</span><span class="tooltip-tech">Y = 100 - b(ECe - a)</span></span></span>):</span>
               <strong id="res-fao-yield-risk" style="color:#f87171;">-0.0% (Lavado Activo Requerido)</strong>
             </div>
           </div>
@@ -1000,7 +998,7 @@
         <!-- Banner de Diagnóstico Específico para Pozo Artesanal Ø 50 cm -->
         <div class="info-card artesanal-diagnosis-card" id="artesanal-diagnosis-box">
           <div class="artesanal-diag-header">
-            <h4 class="artesanal-diag-title">💡 Diagnóstico Hidráulico de tu Pozo Artesanal (Ø 50 cm, 50 m actual ➔ 60 m):</h4>
+            <h4 class="artesanal-diag-title"><span class="material-symbols-outlined" style="font-size:18px; color:var(--amber-main); vertical-align:middle;">lightbulb</span> Diagnóstico Hidráulico de tu Pozo Artesanal (Ø 50 cm, 50 m actual ➔ 60 m):</h4>
             <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.7rem;">Capacidad de Almacenamiento: 196 L/m</span>
           </div>
           <div class="artesanal-diag-body">
@@ -1013,11 +1011,11 @@
         <!-- Tabla Comparativa Técnica & Financiera (5 Opciones de Captación) -->
         <div class="info-card" id="well-comparison-card" style="margin-top:1.25rem;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
-            <h4 style="color:var(--cyan-light); font-size:0.95rem; margin:0;">📊 Comparativa Técnica y Financiera de las 5 Opciones de Captación</h4>
-            <span class="tag" style="background:rgba(56,189,248,0.15); color:var(--cyan-light); font-size:0.72rem;">💡 Clic en cualquier fila para seleccionarla</span>
+            <h4 style="color:var(--cyan-light); font-size:0.95rem; margin:0;"><span class="material-symbols-outlined" style="font-size:18px; vertical-align:middle;">query_stats</span> Comparativa Técnica y Financiera de las 5 Opciones de Captación</h4>
+            <span class="tag" style="background:rgba(56,189,248,0.15); color:var(--cyan-light); font-size:0.72rem;"><span class="material-symbols-outlined" style="font-size:13px; vertical-align:middle;">lightbulb</span> Clic en cualquier fila para seleccionarla</span>
           </div>
           <div class="table-container" style="overflow-x:auto;">
-            <table class="data-table well-comparison-table" id="table-well-comparison">
+            <table class="table table-hover align-middle data-table well-comparison-table" id="table-well-comparison">
               <thead>
                 <tr>
                   <th>Modalidad / Ubicación</th>
@@ -1409,8 +1407,8 @@
           <!-- Dynamically populated or rendered via JS -->
         </div>
 
-        <div class="alert-box alert-caution" style="margin-top: 1.5rem;">
-          <div class="alert-icon">⚡</div>
+        <div class="alert-box alert-caution alert alert-warning d-flex align-items-center gap-3" style="margin-top: 1.5rem;">
+          <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">bolt</span></div>
           <div class="alert-content">
             <strong>Conclusión Inapelable sobre la Malla 110 gsm, 50 Mesh (Color Blanco):</strong> Su gramaje de 110 g/m² optimiza la circulación convectiva del aire y aporta opacidad/difusión solar que previene el sobrecalentamiento (>31.5 °C). Detiene de forma absoluta a trips, moscas blancas, pulgones, minadores y mariposas. <em>El único punto ciego estructural son los ácaros (araña roja y ácaro blanco)</em>, que por su tamaño microscópico atraviesan cualquier malla física comercial. Su blindaje depende 100% de la sanidad de plántulas, control biológico (*Phytoseiulus*) y manejo de humedad.
           </div>
@@ -1427,11 +1425,11 @@
             <span class="subtitle">Simulador 3D en Tiempo Real (WebGL / Blender CAD) | 204 Pilares Sch 40 (4m × 3m) | 5 Rollos Cubierta 4m × 100m | Malla 110 gsm 50 Mesh Blanca</span>
           </div>
           <div class="filter-group">
-            <button class="filter-btn active" id="btn-mode-3d-interactive">🎮 Visor 3D Interactivo</button>
-            <button class="filter-btn" id="btn-mode-2d-blueprints">📐 Planos 2D Técnicos (SVG / Corte)</button>
-            <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver ubicación satelital en Google Maps">📍 9°53'20.0"N 69°35'35.0"W ↗</a>
-            <a href="plano_3d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(6,182,212,0.2); color:#38bdf8; border-color:rgba(6,182,212,0.4);">Abrir 3D SVG ↗</a>
-            <a href="plano_2d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);">Abrir 2D SVG ↗</a>
+            <button class="filter-btn active" id="btn-mode-3d-interactive"><span class="material-symbols-outlined" style="font-size:16px;">view_in_ar</span> Visor 3D Interactivo</button>
+            <button class="filter-btn" id="btn-mode-2d-blueprints"><span class="material-symbols-outlined" style="font-size:16px;">architecture</span> Planos 2D Técnicos (SVG / Corte)</button>
+            <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver ubicación satelital en Google Maps"><span class="material-symbols-outlined" style="font-size:15px;">location_on</span> 9°53'20.0"N 69°35'35.0"W <span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span></a>
+            <a href="plano_3d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(6,182,212,0.2); color:#38bdf8; border-color:rgba(6,182,212,0.4);">Abrir 3D SVG <span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span></a>
+            <a href="plano_2d_invernadero_quibor.svg" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(16,185,129,0.2); color:#34d399; border-color:rgba(16,185,129,0.4);">Abrir 2D SVG <span class="material-symbols-outlined" style="font-size:12px;">open_in_new</span></a>
           </div>
         </div>
 
@@ -1441,16 +1439,16 @@
           <div class="viewport-3d-toolbar">
             <div class="toolbar-group">
               <span class="toolbar-label">Vistas:</span>
-              <button class="v3d-btn active" id="btn-v3d-iso" title="Vista Isométrica 3D [0]">📐 Isométrica [0]</button>
-              <button class="v3d-btn" id="btn-v3d-front" title="Corte Transversal 20m [1]">🏢 Frontal 20m [1]</button>
-              <button class="v3d-btn" id="btn-v3d-side" title="Fachada Lateral Este 100m [3]">📏 Lateral 100m [3]</button>
-              <button class="v3d-btn" id="btn-v3d-top" title="Planta Cenital Techo [7]">🗺️ Cenital [7]</button>
-              <button class="v3d-btn" id="btn-v3d-walk" title="Modo Paseo en Campo [W]">🚶 Paseo Interior [W]</button>
+              <button class="v3d-btn active" id="btn-v3d-iso" title="Vista Isométrica 3D [0]"><span class="material-symbols-outlined" style="font-size:15px;">view_in_ar</span> Iso [0]</button>
+              <button class="v3d-btn" id="btn-v3d-front" title="Corte Transversal 20m [1]"><span class="material-symbols-outlined" style="font-size:15px;">view_agenda</span> Frontal [1]</button>
+              <button class="v3d-btn" id="btn-v3d-side" title="Fachada Lateral Este 100m [3]"><span class="material-symbols-outlined" style="font-size:15px;">view_column</span> Lateral [3]</button>
+              <button class="v3d-btn" id="btn-v3d-top" title="Planta Cenital Techo [7]"><span class="material-symbols-outlined" style="font-size:15px;">view_quilt</span> Cenital [7]</button>
+              <button class="v3d-btn" id="btn-v3d-walk" title="Modo Paseo en Campo [W]"><span class="material-symbols-outlined" style="font-size:15px;">directions_walk</span> Paseo [W]</button>
             </div>
 
             <div class="toolbar-group">
               <button class="v3d-btn btn-turntable" id="btn-3d-autorotate" title="Iniciar / Detener Rotación 360° en Movimiento [Espacio]">
-                <span class="pulse-indicator"></span> 🔄 Auto-rotar [Espacio]
+                <span class="pulse-indicator"></span> <span class="material-symbols-outlined" style="font-size:15px;">sync</span> Auto-rotar [Espacio]
               </button>
             </div>
 
@@ -1462,8 +1460,8 @@
             </div>
 
             <div class="toolbar-group toolbar-actions">
-              <button class="v3d-btn" id="btn-v3d-screenshot" title="Descargar Captura de Render PNG">📸 Captura HD</button>
-              <button class="v3d-btn" id="btn-v3d-fullscreen" title="Pantalla Completa">⛶ Pantalla Completa</button>
+              <button class="v3d-btn" id="btn-v3d-screenshot" title="Descargar Captura de Render PNG"><span class="material-symbols-outlined" style="font-size:15px;">photo_camera</span> Captura HD</button>
+              <button class="v3d-btn" id="btn-v3d-fullscreen" title="Pantalla Completa"><span class="material-symbols-outlined" style="font-size:15px;">fullscreen</span> Pantalla Completa</button>
             </div>
           </div>
 
@@ -1500,16 +1498,16 @@
           <!-- Barra Inferior de Capas de Inspección Estructural -->
           <div class="viewport-layers-bar">
             <span class="layers-title">Capas:</span>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-pillars" checked> <span>🏛️ Pilares Sch 40</span></label>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-cables" checked> <span>⛓️ Guayas & Tensores 45°</span></label>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-mesh" checked> <span>🛡️ Malla 110gsm 50mesh Blanca</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-pillars" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">account_balance</span> Pilares Sch 40</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-cables" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">link</span> Guayas & Tensores 45°</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-mesh" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">grid_view</span> Malla 110gsm Blanca</span></label>
             <div class="layer-opacity-box">
               <span style="font-size:0.75rem; color:var(--text-muted);">Opacidad:</span>
               <input type="range" id="layer-slider-mesh-opacity" min="0.05" max="0.9" step="0.05" value="0.45" style="width:65px; accent-color:var(--emerald-main);">
             </div>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-crop" checked> <span>🍅 Cultivo Tomate</span></label>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-dims" checked> <span>📏 Cotas 3D</span></label>
-            <label class="layer-chk"><input type="checkbox" id="layer-chk-wind" checked> <span>💨 Viento Este (88%)</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-crop" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">agriculture</span> Cultivo Tomate</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-dims" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">straighten</span> Cotas 3D</span></label>
+            <label class="layer-chk"><input type="checkbox" id="layer-chk-wind" checked> <span><span class="material-symbols-outlined" style="font-size:15px;">air</span> Viento Este (88%)</span></label>
           </div>
         </div>
 
@@ -1583,8 +1581,8 @@
               </div>
             </div>
 
-            <div class="alert-box alert-success" style="margin-top: 1rem;">
-              <div class="alert-icon">✓</div>
+            <div class="alert-box alert-success alert alert-success d-flex align-items-center gap-3" style="margin-top: 1rem;">
+              <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">check_circle</span></div>
               <div class="alert-content">
                 <strong>Estructura Optimizada 2.000 m²:</strong> Orientación Este-Oeste reduce en 50% el empuje eólico frontal de ráfagas (27 km/h) y aprovecha el efecto Venturi tangencial.
               </div>
@@ -1752,10 +1750,10 @@
           </div>
           <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
             <button type="button" id="btn-export-shift" class="btn-export-shift" title="Generar pauta formateada para WhatsApp o impresión rápida">
-              <span>📲 Compartir por WhatsApp / Imprimir</span>
+              <span class="material-symbols-outlined" style="font-size:16px;">send_to_mobile</span> <span>Compartir por WhatsApp / Imprimir</span>
             </button>
-            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-weight:700;">💧 Caudal Total: 8.0 m³/h</span>
-            <span class="tag" style="background:rgba(168,85,247,0.2); color:#c084fc; font-weight:700;">⚡ 2.5 – 3.2 bar</span>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-weight:700;"><span class="material-symbols-outlined" style="font-size:14px;">water_drop</span> Caudal Total: 8.0 m³/h</span>
+            <span class="tag" style="background:rgba(168,85,247,0.2); color:#c084fc; font-weight:700;"><span class="material-symbols-outlined" style="font-size:14px;">bolt</span> 2.5 – 3.2 bar</span>
           </div>
         </div>
 
@@ -1764,7 +1762,7 @@
           <div class="action-sector-box sector-current" id="action-box-sec1">
             <span class="action-sector-badge" style="background:rgba(168,85,247,0.25); color:#c084fc;">Turno 1</span>
             <div class="action-sector-title">Sector 1: Camellones 1 al 3 (8 Filas)</div>
-            <div class="action-time-window">⏱️ 06:00 – 06:28 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-time-window"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">schedule</span> 06:00 – 06:28 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
             <div class="action-params-list">
               <div class="action-param-item">
                 <span>Válvula de Campo:</span>
@@ -1789,7 +1787,7 @@
           <div class="action-sector-box" id="action-box-sec2">
             <span class="action-sector-badge" style="background:rgba(56,189,248,0.25); color:#38bdf8;">Turno 2</span>
             <div class="action-sector-title">Sector 2: Camellones 4 al 7 (8 Filas)</div>
-            <div class="action-time-window">⏱️ 06:35 – 07:03 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-time-window"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">schedule</span> 06:35 – 07:03 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
             <div class="action-params-list">
               <div class="action-param-item">
                 <span>Válvula de Campo:</span>
@@ -1814,7 +1812,7 @@
           <div class="action-sector-box" id="action-box-sec3">
             <span class="action-sector-badge" style="background:rgba(168,85,247,0.25); color:#c084fc;">Turno 3</span>
             <div class="action-sector-title">Sector 3: Camellones 8 al 10 (8 Filas)</div>
-            <div class="action-time-window">⏱️ 07:10 – 07:38 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
+            <div class="action-time-window"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">schedule</span> 07:10 – 07:38 AM <span style="font-size:0.75rem; color:#94a3b8; font-weight:400;">(28 min)</span></div>
             <div class="action-params-list">
               <div class="action-param-item">
                 <span>Válvula de Campo:</span>
@@ -1839,7 +1837,7 @@
         <!-- Checklist del Operador -->
         <div class="operator-checklist">
           <div class="checklist-title">
-            <span>✅ Lista de Comprobación y Seguridad del Regador:</span>
+            <span><span class="material-symbols-outlined" style="font-size:18px; color:var(--emerald-light); vertical-align:middle;">verified</span> Lista de Comprobación y Seguridad del Regador:</span>
           </div>
           <div class="checklist-items">
             <label class="checklist-item">
@@ -1866,21 +1864,21 @@
       <div class="hydraulic-circuit-card" id="hydraulic-section">
         <div class="circuit-header">
           <div>
-            <h3 style="font-size:1.1rem; font-weight:800; color:#fff; margin:0;">🌊 Esquema Dinámico de la Cadena Hidráulica: Laguna ➔ Bomba ➔ 3 Sectores</h3>
+            <h3 style="font-size:1.1rem; font-weight:800; color:#fff; margin:0;"><span class="material-symbols-outlined" style="font-size:22px; vertical-align:middle; color:#38bdf8;">water</span> Esquema Dinámico de la Cadena Hidráulica: Laguna ➔ Bomba ➔ 3 Sectores</h3>
             <span style="font-size:0.8rem; color:#94a3b8;">Haz clic en los botones de sector para simular la ruta del agua y verificar la telemetría hidráulica</span>
           </div>
           <div class="circuit-selector-bar">
             <button type="button" class="circuit-btn active" id="btn-circuit-sec1" data-circuit-sector="1">
-              <span>📍 Sector 1 (Cam 1-3)</span>
+              <span><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">pin_drop</span> Sector 1 (Cam 1-3)</span>
             </button>
             <button type="button" class="circuit-btn" id="btn-circuit-sec2" data-circuit-sector="2">
-              <span>📍 Sector 2 (Cam 4-7)</span>
+              <span><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">pin_drop</span> Sector 2 (Cam 4-7)</span>
             </button>
             <button type="button" class="circuit-btn" id="btn-circuit-sec3" data-circuit-sector="3">
-              <span>📍 Sector 3 (Cam 8-10)</span>
+              <span><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">pin_drop</span> Sector 3 (Cam 8-10)</span>
             </button>
             <button type="button" class="circuit-btn" id="btn-circuit-all" data-circuit-sector="all">
-              <span>🔄 Tren Completo</span>
+              <span><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">sync</span> Tren Completo</span>
             </button>
           </div>
         </div>
@@ -1888,42 +1886,42 @@
         <!-- Flujo Visual de Nodos -->
         <div class="circuit-flow-display">
           <div class="flow-node active-flow" id="node-laguna">
-            <div class="flow-icon">🌊</div>
+            <div class="flow-icon"><span class="material-symbols-outlined" style="font-size:24px;">water</span></div>
             <div class="flow-node-title">Laguna de Tierra</div>
             <div class="flow-node-sub">Sedimentador Limo</div>
           </div>
           <div class="flow-connector">➔</div>
 
           <div class="flow-node active-flow" id="node-pichincha">
-            <div class="flow-icon">🛟</div>
+            <div class="flow-icon"><span class="material-symbols-outlined" style="font-size:24px;">adjust</span></div>
             <div class="flow-node-title">Pichincha Boya</div>
             <div class="flow-node-sub">Succión -50 cm</div>
           </div>
           <div class="flow-connector">➔</div>
 
           <div class="flow-node active-flow" id="node-bomba">
-            <div class="flow-icon">⚡</div>
+            <div class="flow-icon"><span class="material-symbols-outlined" style="font-size:24px;">bolt</span></div>
             <div class="flow-node-title">Motor 1.5 HP</div>
             <div class="flow-node-sub">1" 220V Alta Presión</div>
           </div>
           <div class="flow-connector">➔</div>
 
           <div class="flow-node active-flow" id="node-filtro">
-            <div class="flow-icon">🌀</div>
+            <div class="flow-icon"><span class="material-symbols-outlined" style="font-size:24px;">filter_alt</span></div>
             <div class="flow-node-title">Filtro Discos 120M</div>
             <div class="flow-node-sub">130 µm Tridimensional</div>
           </div>
           <div class="flow-connector">➔</div>
 
           <div class="flow-node active-flow" id="node-matriz">
-            <div class="flow-icon">🚰</div>
+            <div class="flow-icon"><span class="material-symbols-outlined" style="font-size:24px;">view_stream</span></div>
             <div class="flow-node-title">Matriz PVC 2"</div>
             <div class="flow-node-sub">hf &lt; 0.8 mca</div>
           </div>
           <div class="flow-connector">➔</div>
 
           <div class="flow-node active-flow" id="node-sector-target">
-            <div class="flow-icon" id="node-target-icon">🌾</div>
+            <div class="flow-icon" id="node-target-icon"><span class="material-symbols-outlined" style="font-size:24px;">yard</span></div>
             <div class="flow-node-title" id="node-target-title">Sector 1 Activo</div>
             <div class="flow-node-sub" id="node-target-sub">1.500 goteros PC 40cm</div>
           </div>
@@ -1980,8 +1978,8 @@
             </select>
           </div>
 
-          <div id="water-source-alert" class="alert-box alert-caution" style="margin-bottom:1rem; font-size:0.825rem; padding:0.6rem 0.8rem;">
-            <div class="alert-icon">⚡</div>
+          <div id="water-source-alert" class="alert-box alert-caution alert alert-warning d-flex align-items-center gap-3" style="margin-bottom:1rem; font-size:0.825rem; padding:0.6rem 0.8rem;">
+            <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:20px;">bolt</span></div>
             <div class="alert-content" id="water-source-alert-text">
               <strong>Escenario Pozo Abatido:</strong> Acuífero sobreexplotado en 29% (extracción 22 Mm³ vs recarga 17 Mm³). Requiere 20% de lavado salino y 22 L/sem de ácido nítrico para neutralizar bicarbonatos.
             </div>
@@ -1996,8 +1994,8 @@
             </select>
           </div>
 
-          <div id="fertilizer-source-alert" class="alert-box alert-success" style="margin-bottom:1rem; font-size:0.825rem; padding:0.6rem 0.8rem;">
-            <div class="alert-icon" id="fertilizer-source-alert-icon">✨</div>
+          <div id="fertilizer-source-alert" class="alert-box alert-success alert alert-success d-flex align-items-center gap-3" style="margin-bottom:1rem; font-size:0.825rem; padding:0.6rem 0.8rem;">
+            <div class="alert-icon" id="fertilizer-source-alert-icon"><span class="material-symbols-outlined" style="font-size:20px;">star</span></div>
             <div class="alert-content" id="fertilizer-source-alert-text">
               <strong>Línea AIFA Hidrosoluble:</strong> Inyección continua por cinta a 40 cm. Eficiencia del 85-90% sin picos salinos. Proyecta 7.5 a 8.5 kg/planta (33 a 37.4 Ton) con 75-80% de fruta de Primera.
             </div>
@@ -2156,8 +2154,8 @@
             </div>
           </div>
 
-          <div class="alert-box alert-success" style="margin-top:1.25rem;">
-            <div class="alert-icon">💧</div>
+          <div class="alert-box alert-success alert alert-success d-flex align-items-center gap-3" style="margin-top:1.25rem;">
+            <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">water_drop</span></div>
             <div class="alert-content">
               <strong>Hidráulica Calibrada para Quíbor:</strong> La sectorización en 3 bloques garantiza presión constante (2.5 - 3.2 bar) para los goteros PC con el motor de 1.5 HP, y el filtro de discos de 120 mesh protege la red de las algas de la laguna de tierra.
             </div>
@@ -2325,8 +2323,8 @@
         </div>
 
         <!-- Conclusión Financiera -->
-        <div class="alert-box alert-success" style="margin-top:1rem; font-size:0.85rem;">
-          <div class="alert-icon">💡</div>
+        <div class="alert-box alert-success alert alert-success d-flex align-items-center gap-3" style="margin-top:1rem; font-size:0.85rem;">
+          <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">lightbulb</span></div>
           <div class="alert-content" id="disp-econ-conclusion">
             <strong>Veredicto Económico para el Productor en Quíbor:</strong> Aunque el abono hidrosoluble AIFA requiere $1.286 USD adicionales de inversión inicial frente al granulado, genera <strong>+$6.094 USD netos adicionales de ganancia</strong> por ciclo productivo, gracias a su mayor cuajado, menor aborto floral y 75% de frutos de Primera calidad.
           </div>
@@ -2421,20 +2419,106 @@
 
   </main>
 
+  <!-- ==================== AGRO-FOOTER PRO ==================== -->
   <footer class="app-footer">
     <div class="footer-container">
-      <span>Sistema Diseñado para Productores del Valle de Quíbor, Lara — Pimentón & Tomate en Casa de Malla (<a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" style="color:var(--amber-light); text-decoration:none;">📍 9°53'20.0"N 69°35'35.0"W</a>)</span>
-      <span class="footer-meta">Asistente Antigravity IDE | Ecuaciones FAO-56 & CIDIAT-ULA / SHYQ (Jégat et al., 2012)</span>
+      
+      <!-- Banda Superior: Branding y Telemetría en Vivo -->
+      <div class="footer-top-band">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="material-symbols-outlined" style="font-size:2rem; color:var(--emerald-light);">eco</span>
+          </div>
+          <div>
+            <div class="footer-brand-title">LA CIGARRONERA</div>
+            <div class="footer-brand-sub">Suite de Horticultura Protegida, Climatología e Hidrogeología de Pozos</div>
+          </div>
+        </div>
+        <div class="footer-telemetry-pills">
+          <span class="footer-pill pill-green" title="Aplicación Web Progresiva instalable y disponible 100% offline">
+            <span class="material-symbols-outlined" style="font-size:15px;">offline_pin</span> Offline Listo PWA
+          </span>
+          <span class="footer-pill pill-cyan" title="Viento dominante de diseño para tensores y anclajes">
+            <span class="material-symbols-outlined" style="font-size:15px;">air</span> 88% ESTE (Junio 10.4 km/h)
+          </span>
+          <span class="footer-pill pill-amber" title="Cota sobre el nivel del mar en el predio">
+            <span class="material-symbols-outlined" style="font-size:15px;">pin_drop</span> 695–710 msnm
+          </span>
+          <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="footer-pill pill-link" title="Abrir ubicación satelital en Google Maps">
+            <span class="material-symbols-outlined" style="font-size:15px;">satellite_alt</span> 9°53'20.0"N 69°35'35.0"W <span class="material-symbols-outlined" style="font-size:13px;">open_in_new</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Cuadrícula Principal de 3 Columnas -->
+      <div class="footer-grid">
+        <!-- Col 1: Módulos de la Suite -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Módulos de Ingeniería</h4>
+          <ul class="footer-links">
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-clima')">Climatología & Viento MERRA-2</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-ventilacion')">Ventilación Convectiva & Eólicos</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-estructura')">Estructura Parral 2.000 m² (Visor 3D)</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-estructura', 'container-planos-2d')">Planos Constructivos & Cortes SVG</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-plagas')">Matriz Fitosanitaria (50 Mesh Blanca)</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-riego')">Balance Hídrico FAO-56 & Salinidad</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-riego', 'well-drilling-section')">Perforación Pozo Profundo 120 m</button></li>
+            <li><button type="button" class="footer-link-btn" onclick="activateTab('tab-produccion')">Plan Maestro Tomate (37.4 Ton)</button></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Respaldo Científico & Ecuaciones -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Bases Técnicas & Normativas</h4>
+          <ul class="footer-tech-list">
+            <li><strong>NASA MERRA-2 & POWER:</strong> Reanálisis bioclimático satelital calibrado 2001–2024 en Quíbor.</li>
+            <li><strong>FAO-56 Penman-Monteith:</strong> Evapotranspiración ETo, Kc fenológico y fracción de lavado LF (Rhoades).</li>
+            <li><strong>Ley de Hellmann ($\alpha=0.16$):</strong> Gradiente vertical de viento sobre capa límite semiárida.</li>
+            <li><strong>CIDIAT-ULA & SHYQ (2012):</strong> Hidrodinámica del acuífero y abatimiento del pozo a 120 m.</li>
+            <li><strong>Protocolo IRAC / FRAC:</strong> Rotación química por modo de acción contra resistencia de plagas.</li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Operación en Campo & Acciones Rápidas -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Operación en Campo</h4>
+          <p class="footer-col-desc">Herramientas diseñadas para operarios, regadores y mayordomos bajo radiación solar intensa en el Municipio Jiménez.</p>
+          <div class="footer-actions">
+            <button type="button" id="btn-footer-shift" class="btn-footer-action" onclick="document.getElementById('btn-export-shift')?.click() || activateTab('tab-produccion','field-action-sheet')">
+              <span class="material-symbols-outlined" style="font-size:18px;">send_to_mobile</span> <span>Ficha de Turno WhatsApp</span>
+            </button>
+            <button type="button" class="btn-footer-action-secondary" onclick="document.getElementById('btn-theme-toggle')?.click()">
+              <span class="material-symbols-outlined" style="font-size:18px;">contrast</span> <span>Alternar Modo Luz / Noche</span>
+            </button>
+          </div>
+          <div class="footer-specs-badge">
+            <span><span class="material-symbols-outlined" style="font-size:16px;">shield</span> Solicitación Eólica: <strong>Ráfagas 27 km/h (FS ≥ 1.5)</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra Inferior de Copyright y Reconocimiento -->
+      <div class="footer-bottom-bar">
+        <div class="footer-copy">
+          © 2026 <strong>LA CIGARRONERA</strong> — Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela.
+        </div>
+        <div class="footer-credits">
+          Ingeniería de Invernaderos y Casas de Malla de Alta Eficiencia para Horticultura Tropical.
+        </div>
+      </div>
+
     </div>
   </footer>
     </div> <!-- /app-main-area -->
   </div> <!-- /app-layout -->
 
   <div id="agro-toast" class="agro-toast" role="status" aria-live="polite">
-    <span class="agro-toast-icon">📋</span>
+    <span class="agro-toast-icon"><span class="material-symbols-outlined" style="font-size:22px; color:var(--emerald-light);">check_circle</span></span>
     <span id="agro-toast-msg">¡Copiado con éxito!</span>
   </div>
 
+  <!-- Bootstrap 5.3.3 JS Bundle via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="app.js?v=2.0.0"></script>
 </body>
 </html>
