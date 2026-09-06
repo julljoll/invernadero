@@ -1,76 +1,86 @@
 /* ==========================================================================
    ESTILOS PRINCIPALES: LA CIGARRONERA — VALLE DE QUÍBOR
-   Tema: Modo Luz Permanente / High-Contrast Tech de Precisión
+   Tema: Solo Modo Oscuro (Pure DarkMode) | Paleta Agro Verde Manzana & Bootstrap 5.3
    ========================================================================== */
 
 :root {
-  --bg-main: #f8fafc;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-card-hover: #f1f5f9;
-  --bg-input: #ffffff;
+  /* Fondos y Superficies Dark Agro (Obsidiana Vegetal & Suelo Profundo) */
+  --bg-main: #090e0b;
+  --bg-secondary: #0e1611;
+  --bg-card: #132018;
+  --bg-card-hover: #1a2c22;
+  --bg-input: #0e1812;
   
-  --border-subtle: #cbd5e1;
-  --border-focus: #059669;
-  --border-accent: #0284c7;
+  --border-subtle: rgba(132, 204, 22, 0.15);
+  --border-focus: #84cc16;
+  --border-accent: #a3e635;
 
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
   --text-muted: #64748b;
 
-  --emerald-main: #059669;
-  --emerald-light: #10b981;
-  --emerald-glow: rgba(5, 150, 105, 0.15);
+  /* Paleta Verde Manzana (Apple Green / Clorofila AgTech) */
+  --apple-green-main: #84cc16;
+  --apple-green-light: #a3e635;
+  --apple-green-dark: #65a30d;
+  --apple-green-glow: rgba(132, 204, 22, 0.25);
+  --apple-green-bg: rgba(132, 204, 22, 0.12);
+
+  --emerald-main: #10b981;
+  --emerald-light: #34d399;
+  --emerald-glow: rgba(16, 185, 129, 0.25);
 
   --cyan-main: #0284c7;
-  --cyan-light: #0ea5e9;
-  --cyan-glow: rgba(2, 132, 199, 0.15);
+  --cyan-light: #38bdf8;
+  --cyan-glow: rgba(56, 189, 248, 0.25);
 
   --amber-main: #d97706;
-  --amber-glow: rgba(217, 119, 6, 0.15);
+  --amber-light: #fbbf24;
+  --amber-glow: rgba(245, 158, 11, 0.25);
 
   --rose-main: #dc2626;
-  --rose-glow: rgba(220, 38, 38, 0.15);
+  --rose-light: #f43f5e;
+  --rose-glow: rgba(244, 63, 94, 0.25);
 
   /* Semántica Agrícola Específica (Skill agri-ux-ui) */
-  --agri-water: #0284c7;
-  --agri-water-glow: rgba(2, 132, 199, 0.15);
-  --agri-water-bg: #e0f2fe;
-  --agri-plant: #059669;
-  --agri-plant-glow: rgba(5, 150, 105, 0.15);
-  --agri-plant-bg: #d1fae5;
-  --agri-sun: #d97706;
-  --agri-sun-glow: rgba(217, 119, 6, 0.15);
-  --agri-sun-bg: #fef3c7;
-  --agri-danger: #dc2626;
-  --agri-danger-glow: rgba(220, 38, 38, 0.15);
-  --agri-danger-bg: #fee2e2;
-  --agri-pump: #7c3aed;
-  --agri-pump-glow: rgba(124, 58, 237, 0.15);
-  --agri-pump-bg: #f3e8ff;
-  --agri-soil: #92400e;
+  --agri-water: #38bdf8;
+  --agri-water-glow: rgba(56, 189, 248, 0.2);
+  --agri-water-bg: rgba(56, 189, 248, 0.12);
+  --agri-plant: #84cc16;
+  --agri-plant-glow: rgba(132, 204, 22, 0.22);
+  --agri-plant-bg: rgba(132, 204, 22, 0.12);
+  --agri-sun: #f59e0b;
+  --agri-sun-glow: rgba(245, 158, 11, 0.2);
+  --agri-sun-bg: rgba(245, 158, 11, 0.12);
+  --agri-danger: #f43f5e;
+  --agri-danger-glow: rgba(244, 63, 94, 0.2);
+  --agri-danger-bg: rgba(244, 63, 94, 0.12);
+  --agri-pump: #a855f7;
+  --agri-pump-glow: rgba(168, 85, 247, 0.2);
+  --agri-pump-bg: rgba(168, 85, 247, 0.12);
+  --agri-soil: #b45309;
 
   /* Paleta Unificada y Tokens de Diseño */
-  --color-emerald-400: #10b981;
-  --color-emerald-500: #059669;
-  --color-sky-400: #0ea5e9;
+  --color-emerald-400: #34d399;
+  --color-emerald-500: #10b981;
+  --color-sky-400: #38bdf8;
   --color-sky-500: #0284c7;
-  --color-amber-400: #f59e0b;
-  --color-amber-500: #d97706;
-  --color-red-400: #ef4444;
-  --color-red-500: #dc2626;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
   --color-slate-300: #cbd5e1;
-  --color-slate-400: #64748b;
-  --color-slate-800: #1e293b;
-  --color-slate-900: #0f172a;
-  --color-dark-bg: #f8fafc;
+  --color-slate-400: #94a3b8;
+  --color-slate-800: #132018;
+  --color-slate-900: #090e0b;
+  --color-dark-bg: #090e0b;
 
   /* Semántica de Pozo & Riego */
-  --color-artesanal: var(--amber-main);
-  --color-water-source: var(--cyan-main);
-  --color-success: var(--emerald-main);
-  --color-warning: var(--amber-main);
-  --color-danger: var(--rose-main);
+  --color-artesanal: var(--amber-light);
+  --color-water-source: var(--cyan-light);
+  --color-success: var(--apple-green-main);
+  --color-warning: var(--amber-light);
+  --color-danger: var(--rose-light);
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -83,20 +93,25 @@
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Sincronización de Bootstrap con Tokens AgTech Quíbor */
-  --bs-primary: #059669;
-  --bs-primary-rgb: 5, 150, 105;
+  /* Sincronización de Bootstrap 5.3 con Tokens AgTech Quíbor */
+  --bs-primary: #84cc16;
+  --bs-primary-rgb: 132, 204, 22;
   --bs-success: #10b981;
   --bs-success-rgb: 16, 185, 129;
-  --bs-info: #0284c7;
-  --bs-info-rgb: 2, 132, 199;
-  --bs-warning: #d97706;
-  --bs-warning-rgb: 217, 119, 6;
-  --bs-danger: #dc2626;
-  --bs-danger-rgb: 220, 38, 38;
+  --bs-info: #38bdf8;
+  --bs-info-rgb: 56, 189, 248;
+  --bs-warning: #f59e0b;
+  --bs-warning-rgb: 245, 158, 11;
+  --bs-danger: #f43f5e;
+  --bs-danger-rgb: 244, 63, 94;
   --bs-body-font-family: var(--font-sans);
   --bs-body-color: var(--text-primary);
   --bs-body-bg: var(--bg-main);
+  --bs-card-bg: var(--bg-card);
+  --bs-card-border-color: var(--border-subtle);
+  --bs-border-color: rgba(255, 255, 255, 0.1);
+  --bs-link-color: #a3e635;
+  --bs-link-hover-color: #bef264;
 }
 
 /* ==========================================================================
@@ -232,12 +247,12 @@ body {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--emerald-main), var(--cyan-main));
+  background: linear-gradient(135deg, var(--apple-green-main), var(--emerald-main));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  box-shadow: 0 4px 14px var(--emerald-glow);
+  color: #090e0b;
+  box-shadow: 0 4px 14px var(--apple-green-glow);
   flex-shrink: 0;
 }
 
@@ -335,8 +350,8 @@ body {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--emerald-light);
-  background: rgba(16, 185, 129, 0.12);
+  color: var(--apple-green-light);
+  background: rgba(132, 204, 22, 0.15);
   padding: 0.1rem 0.35rem;
   border-radius: 4px;
 }
@@ -421,21 +436,22 @@ body {
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18), rgba(6, 182, 212, 0.12));
-  border-color: rgba(16, 185, 129, 0.4);
+  background: linear-gradient(135deg, rgba(132, 204, 22, 0.22), rgba(16, 185, 129, 0.12));
+  border-color: rgba(132, 204, 22, 0.5);
+  border-left: 3px solid var(--apple-green-main);
   color: #fff;
   font-weight: 700;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 4px 14px rgba(132, 204, 22, 0.18);
 }
 
 .nav-item.active .nav-item-icon {
-  color: var(--emerald-light);
+  color: var(--apple-green-light);
 }
 
 .nav-item.active .nav-item-badge {
-  background: rgba(16, 185, 129, 0.25);
-  color: var(--emerald-light);
-  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(132, 204, 22, 0.25);
+  color: var(--apple-green-light);
+  border-color: rgba(132, 204, 22, 0.4);
 }
 
 /* Footer del Sidebar */
@@ -521,8 +537,8 @@ body {
 }
 
 .breadcrumb-root {
-  font-weight: 700;
-  color: var(--emerald-light);
+  font-weight: 800;
+  color: var(--apple-green-light);
 }
 
 .breadcrumb-separator {
@@ -569,19 +585,28 @@ body {
 }
 
 .pill-geo {
-  color: var(--amber-main);
+  color: var(--amber-light);
   border-color: rgba(245, 158, 11, 0.3);
   background: rgba(245, 158, 11, 0.1);
 }
 
 .btn-topbar-action {
-  background: #10b981;
-  color: #ffffff;
-  border: 1px solid #059669;
+  background: linear-gradient(135deg, var(--apple-green-main), var(--apple-green-dark));
+  color: #090e0b;
+  border: none;
   padding: 0.35rem 0.75rem;
   border-radius: var(--radius-md);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(132, 204, 22, 0.3);
+}
+
+.btn-topbar-action:hover {
+  background: linear-gradient(135deg, var(--apple-green-light), var(--apple-green-main));
+  color: #090e0b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(132, 204, 22, 0.4);
+}
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -1306,9 +1331,111 @@ body {
 }
 
 .filter-btn.active {
-  background: var(--emerald-main);
-  color: #ffffff;
-  border-color: var(--emerald-main);
+  background: var(--apple-green-main);
+  color: #090e0b;
+  font-weight: 800;
+  border-color: var(--apple-green-main);
+  box-shadow: 0 0 12px var(--apple-green-glow);
+}
+
+/* Conmutador de Estrategia Fitosanitaria (Biológico vs Químico vs MIP) */
+.spray-plan-switcher {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.spray-plan-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.825rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.spray-plan-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.spray-plan-btn.active.recommended {
+  background: linear-gradient(135deg, rgba(132, 204, 22, 0.28), rgba(16, 185, 129, 0.35));
+  border-color: var(--apple-green-main);
+  color: var(--apple-green-light);
+  box-shadow: 0 0 16px rgba(132, 204, 22, 0.35);
+}
+
+.spray-plan-btn.active.chemical {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(220, 38, 38, 0.25));
+  border-color: #f59e0b;
+  color: #fbbf24;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.3);
+}
+
+.spray-plan-btn.active.integrated {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(30, 64, 175, 0.3));
+  border-color: #38bdf8;
+  color: #7dd3fc;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+}
+
+.spray-plan-banner {
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.15rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-left: 4px solid var(--apple-green-main);
+  background: rgba(19, 32, 24, 0.85);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-normal);
+}
+
+.spray-plan-banner.banner-bio {
+  border-left-color: var(--apple-green-main);
+  background: linear-gradient(90deg, rgba(132, 204, 22, 0.14) 0%, rgba(19, 32, 24, 0.9) 100%);
+}
+
+.spray-plan-banner.banner-chem {
+  border-left-color: #f59e0b;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.14) 0%, rgba(19, 32, 24, 0.9) 100%);
+}
+
+.spray-plan-banner.banner-mip {
+  border-left-color: #38bdf8;
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.14) 0%, rgba(19, 32, 24, 0.9) 100%);
+}
+
+.spray-dose-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.78rem;
+}
+
+.spray-dose-backpack {
+  display: block;
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
 }
 
 .pest-grid {
@@ -2950,874 +3077,301 @@ body.sunlight-mode .footer-copy strong {
 }
 
 /* ==========================================================================
-   AGRI-UX-UI: MODO LUZ DE CAMPO (ALTO CONTRASTE EXTERIOR & PRECISIÓN WCAG AAA)
-   Diseñado específicamente para operabilidad técnica bajo sol intenso en Quíbor.
-   Contraste extremo sin agresividad visual, tipografía nítida de alta legibilidad,
-   acabado AgTech moderno y pulido, sin bordes toscos de cómic ni sombras duras.
+   AGRI-UX-UI: MODO OSCURO INTEGRAL (COCKPIT AGRO & VERDE MANZANA)
+   Suite agronómica de alta inmersión con fondo obsidiana vegetal,
+   tarjetas de cristal ahumado y acentos luminiscentes en Verde Manzana.
+   Optimizado para legibilidad nocturna y en sombra sin fatiga visual.
    ========================================================================== */
 
-body.sunlight-mode {
-  --bg-main: #f8fafc !important;
-  --bg-secondary: #ffffff !important;
-  --bg-card: #ffffff !important;
-  --bg-card-hover: #f1f5f9 !important;
-  --bg-input: #ffffff !important;
-  --border-subtle: #cbd5e1 !important;
-  --border-focus: #059669 !important;
-  --border-accent: #0284c7 !important;
-  --text-primary: #0f172a !important;
-  --text-secondary: #334155 !important;
-  --text-muted: #64748b !important;
-
-  /* Tokens Agronómicos de Alta Precisión Solar */
-  --emerald-main: #059669 !important;
-  --emerald-light: #10b981 !important;
-  --emerald-glow: rgba(5, 150, 105, 0.12) !important;
-  --cyan-main: #0284c7 !important;
-  --cyan-light: #0ea5e9 !important;
-  --cyan-glow: rgba(2, 132, 199, 0.12) !important;
-  --amber-main: #d97706 !important;
-  --amber-glow: rgba(217, 119, 6, 0.12) !important;
-  --rose-main: #dc2626 !important;
-  --rose-glow: rgba(220, 38, 38, 0.12) !important;
-
-  --agri-water: #0284c7 !important;
-  --agri-water-glow: rgba(2, 132, 199, 0.12) !important;
-  --agri-water-bg: #e0f2fe !important;
-  --agri-plant: #059669 !important;
-  --agri-plant-glow: rgba(5, 150, 105, 0.12) !important;
-  --agri-plant-bg: #d1fae5 !important;
-  --agri-sun: #d97706 !important;
-  --agri-sun-glow: rgba(217, 119, 6, 0.12) !important;
-  --agri-sun-bg: #fef3c7 !important;
-  --agri-danger: #dc2626 !important;
-  --agri-danger-glow: rgba(220, 38, 38, 0.12) !important;
-  --agri-danger-bg: #fee2e2 !important;
-  --agri-pump: #7c3aed !important;
-  --agri-pump-glow: rgba(124, 58, 237, 0.12) !important;
-  --agri-pump-bg: #f3e8ff !important;
-  --agri-soil: #92400e !important;
-
-  background-color: #f8fafc !important;
-  background-image: none !important;
-  color: #0f172a !important;
-}
-
-/* Sidebar & Topbar en Modo Luz de Campo */
-body.sunlight-mode .app-sidebar {
-  background: #ffffff !important;
-  border-right: 1px solid #e2e8f0 !important;
-  box-shadow: 2px 0 16px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .sidebar-header {
-  border-bottom: 1px solid #e2e8f0 !important;
-}
-
-body.sunlight-mode .brand-icon {
-  background: linear-gradient(135deg, #059669, #0284c7) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2) !important;
-}
-
-body.sunlight-mode .brand-title {
-  color: #0f172a !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .brand-subtitle {
-  color: #64748b !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .btn-sidebar-collapse {
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #475569 !important;
-}
-
-body.sunlight-mode .btn-sidebar-collapse:hover {
-  background: #e2e8f0 !important;
-  color: #0f172a !important;
-  border-color: #94a3b8 !important;
-}
-
-body.sunlight-mode .nav-group-num {
-  background: rgba(5, 150, 105, 0.1) !important;
-  color: #059669 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .nav-group-title {
-  color: #64748b !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .nav-item {
-  background: transparent !important;
-  color: #334155 !important;
-  border: 1px solid transparent !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .nav-item:hover {
-  background: #f1f5f9 !important;
-  border-color: #e2e8f0 !important;
-  color: #0f172a !important;
-}
-
-body.sunlight-mode .nav-item.active {
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.12), rgba(2, 132, 199, 0.08)) !important;
-  border: 1px solid rgba(5, 150, 105, 0.35) !important;
-  color: #065f46 !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.1) !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .nav-item.active .nav-item-icon {
-  color: #059669 !important;
-}
-
-body.sunlight-mode .nav-item.active .nav-item-badge {
-  background: rgba(5, 150, 105, 0.18) !important;
-  color: #065f46 !important;
-  border-color: rgba(5, 150, 105, 0.3) !important;
-}
-
-body.sunlight-mode .nav-item-badge {
-  background: #f8fafc !important;
-  color: #475569 !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-body.sunlight-mode .sidebar-footer {
-  border-top: 1px solid #e2e8f0 !important;
-}
-
-body.sunlight-mode .btn-sunlight-toggle,
-body.sunlight-mode .badge-daylight-mode {
-  background: #f1f5f9 !important;
-  color: #0f172a !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05) !important;
-  font-weight: 700 !important;
-  cursor: pointer;
-}
-
-body.sunlight-mode .btn-sunlight-toggle:hover {
-  background: #e2e8f0 !important;
-}
-
-body.sunlight-mode .badge-offline {
-  background: #dcfce7 !important;
-  border: 1px solid #86efac !important;
-  color: #15803d !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .badge-geo {
-  background: #fef3c7 !important;
-  border: 1px solid #fde68a !important;
-  color: #92400e !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .app-topbar {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid #e2e8f0 !important;
-  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .btn-hamburger {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #1e293b !important;
-}
-
-body.sunlight-mode .breadcrumb-root {
-  color: #059669 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .breadcrumb-separator {
-  color: #94a3b8 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .breadcrumb-stage {
-  color: #475569 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .breadcrumb-module {
-  color: #0f172a !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .telemetry-pill {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #0f172a !important;
-  font-weight: 700 !important;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .pill-wind {
-  background: #e0f2fe !important;
-  border-color: #bae6fd !important;
-  color: #0369a1 !important;
-}
-
-body.sunlight-mode .pill-geo {
-  background: #fef3c7 !important;
-  border-color: #fde68a !important;
-  color: #92400e !important;
-}
-
-body.sunlight-mode .btn-topbar-action {
-  background: linear-gradient(135deg, #059669, #047857) !important;
-  color: #ffffff !important;
-  border: 1px solid #047857 !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25) !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .btn-topbar-action:hover {
-  background: #047857 !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Tarjetas y Contenedores AgTech de Alta Definición */
-body.sunlight-mode .card,
-body.sunlight-mode .glass-card,
-body.sunlight-mode .field-action-card,
-body.sunlight-mode .hydraulic-circuit-card,
-body.sunlight-mode .metric-box,
-body.sunlight-mode .info-card,
-body.sunlight-mode .action-card,
-body.sunlight-mode .action-sector-box,
-body.sunlight-mode .well-drilling-card,
-body.sunlight-mode .drill-budget-card,
-body.sunlight-mode .location-option-card,
-body.sunlight-mode .comp-card,
-body.sunlight-mode .formula-box,
-body.sunlight-mode .results-panel,
-body.sunlight-mode .demand-target-box,
-body.sunlight-mode .pest-card,
-body.sunlight-mode .spec-item,
-body.sunlight-mode .economic-simulator-card,
-body.sunlight-mode .econ-input-item,
-body.sunlight-mode .econ-result-card,
-body.sunlight-mode .operator-checklist,
-body.sunlight-mode .sector-telemetry-box,
-body.sunlight-mode .blueprint-viewer-container,
-body.sunlight-mode .drill-visual-container,
-body.sunlight-mode .canvas-container {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03) !important;
-  color: #0f172a !important;
-  backdrop-filter: none !important;
-}
-
-body.sunlight-mode .card:hover,
-body.sunlight-mode .pest-card:hover,
-body.sunlight-mode .field-action-card:hover {
-  border-color: #94a3b8 !important;
-  box-shadow: 0 8px 24px -3px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04) !important;
-}
-
-/* Tipografía de Alto Contraste */
-body.sunlight-mode h1,
-body.sunlight-mode h2,
-body.sunlight-mode h3,
-body.sunlight-mode h4,
-body.sunlight-mode h5,
-body.sunlight-mode strong,
-body.sunlight-mode b,
-body.sunlight-mode .metric-val,
-body.sunlight-mode .metric-value,
-body.sunlight-mode .telemetry-val,
-body.sunlight-mode .target-val,
-body.sunlight-mode .versus-num,
-body.sunlight-mode .comp-speed,
-body.sunlight-mode .flow-node-title,
-body.sunlight-mode .action-sector-title,
-body.sunlight-mode .pest-title,
-body.sunlight-mode .econ-net-val,
-body.sunlight-mode .econ-result-title {
-  color: #0f172a !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode p,
-body.sunlight-mode span,
-body.sunlight-mode li,
-body.sunlight-mode td,
-body.sunlight-mode th,
-body.sunlight-mode label,
-body.sunlight-mode .card-desc,
-body.sunlight-mode .subtitle,
-body.sunlight-mode .metric-label,
-body.sunlight-mode .metric-sub,
-body.sunlight-mode .target-title,
-body.sunlight-mode .target-note,
-body.sunlight-mode .pest-latin,
-body.sunlight-mode .pest-damage,
-body.sunlight-mode .pest-control-text,
-body.sunlight-mode .pest-section-title,
-body.sunlight-mode .spec-body p,
-body.sunlight-mode .spec-body h4,
-body.sunlight-mode .flow-node-sub,
-body.sunlight-mode .telemetry-lbl,
-body.sunlight-mode .checklist-item,
-body.sunlight-mode .checklist-title,
-body.sunlight-mode .drill-layer-depth,
-body.sunlight-mode .drill-layer-desc,
-body.sunlight-mode .drill-layer-component,
-body.sunlight-mode .econ-metric-row,
-body.sunlight-mode .action-time-window,
-body.sunlight-mode .action-param-item {
-  color: #334155 !important;
-}
-
-/* Alert Boxes */
-body.sunlight-mode .alert-box {
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
-  border-radius: var(--radius-md) !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .alert-warning {
-  background: #fef3c7 !important;
-  border-color: #fcd34d !important;
-  border-left: 4px solid #d97706 !important;
-  color: #92400e !important;
-}
-body.sunlight-mode .alert-warning strong,
-body.sunlight-mode .alert-warning .alert-content {
-  color: #78350f !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .alert-caution {
-  background: #fee2e2 !important;
-  border-color: #fca5a5 !important;
-  border-left: 4px solid #dc2626 !important;
-  color: #991b1b !important;
-}
-body.sunlight-mode .alert-caution strong,
-body.sunlight-mode .alert-caution .alert-content {
-  color: #7f1d1d !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .alert-success {
-  background: #dcfce7 !important;
-  border-color: #86efac !important;
-  border-left: 4px solid #16a34a !important;
-  color: #14532d !important;
-}
-body.sunlight-mode .alert-success strong,
-body.sunlight-mode .alert-success .alert-content {
-  color: #14532d !important;
-  font-weight: 700 !important;
-}
-
-/* Controles Climáticos y Fórmulas */
-body.sunlight-mode .formula-box {
-  background: #f8fafc !important;
-  color: #047857 !important;
-  border: 1px solid #cbd5e1 !important;
-  border-left: 4px solid #059669 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .clima-controls-grid {
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .clima-select-group label {
-  color: #334155 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .clima-phase-banner {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  border-left: 5px solid #059669 !important;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .phase-desc {
-  color: #334155 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .tag-enso-warm {
-  background: #fee2e2 !important;
-  color: #991b1b !important;
-  border: 1px solid #fca5a5 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .tag-enso-cool {
-  background: #e0f2fe !important;
-  color: #0369a1 !important;
-  border: 1px solid #bae6fd !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .tag-enso-neutral {
-  background: #dcfce7 !important;
-  color: #15803d !important;
-  border: 1px solid #86efac !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .tag-anomaly {
-  background: #fef3c7 !important;
-  color: #92400e !important;
-  border: 1px solid #fde68a !important;
-  font-weight: 700 !important;
-}
-
-/* Metric Colors */
-body.sunlight-mode .metric-value.highlight-orange { color: #ea580c !important; }
-body.sunlight-mode .metric-value.highlight-cyan   { color: #0284c7 !important; }
-body.sunlight-mode .metric-value.highlight-blue   { color: #2563eb !important; }
-body.sunlight-mode .metric-value.highlight-amber  { color: #d97706 !important; }
-body.sunlight-mode .metric-value.highlight-green  { color: #059669 !important; }
-body.sunlight-mode .metric-value.highlight-yellow { color: #ca8a04 !important; }
-
-body.sunlight-mode .comp-card {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .comp-card.highlight-card {
-  background: #f0fdf4 !important;
-  border: 1.5px solid #059669 !important;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.1) !important;
-}
-
-body.sunlight-mode .demand-target-box {
-  background: #f0fdf4 !important;
-  border: 1px solid #86efac !important;
-}
-
-body.sunlight-mode .target-title {
-  color: #15803d !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .target-val {
-  color: #0f172a !important;
-  font-weight: 900 !important;
-}
-
-body.sunlight-mode .versus-box.bad {
-  background: #fee2e2 !important;
-  border: 1px solid #fca5a5 !important;
-}
-
-body.sunlight-mode .versus-box.bad h3,
-body.sunlight-mode .versus-box.bad .versus-num {
-  color: #b91c1c !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .versus-box.good {
-  background: #dcfce7 !important;
-  border: 1px solid #86efac !important;
-}
-
-body.sunlight-mode .versus-box.good h3,
-body.sunlight-mode .versus-box.good .versus-num {
-  color: #15803d !important;
-  font-weight: 800 !important;
-}
-
-/* Tablas Agronómicas */
-body.sunlight-mode .table-container {
-  border: 1px solid #cbd5e1 !important;
-  border-radius: var(--radius-md) !important;
-  overflow: hidden !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03) !important;
-}
-
-body.sunlight-mode .data-table {
-  border-collapse: collapse !important;
-}
-
-body.sunlight-mode .data-table th {
-  background: #f8fafc !important;
-  color: #1e293b !important;
-  border-bottom: 2px solid #cbd5e1 !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .data-table td {
-  background: #ffffff !important;
-  color: #334155 !important;
-  border-bottom: 1px solid #f1f5f9 !important;
-  font-weight: 500 !important;
-}
-
-body.sunlight-mode .data-table tr:hover td {
-  background: #f8fafc !important;
-}
-
-body.sunlight-mode .row-highlight td {
-  background: #fefce8 !important;
-  color: #854d0e !important;
-  font-weight: 700 !important;
-}
-
-/* Plagas & Status */
-body.sunlight-mode .pest-card {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .pest-status.status-retiene {
-  background: #dcfce7 !important;
-  color: #15803d !important;
-  border: 1px solid #86efac !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .pest-status.status-pasa {
-  background: #fee2e2 !important;
-  color: #b91c1c !important;
-  border: 1px solid #fca5a5 !important;
-  font-weight: 700 !important;
-}
-
-/* Inputs, Selects & Sliders */
-body.sunlight-mode .input-field,
-body.sunlight-mode .input-select {
-  background: #ffffff !important;
-  color: #0f172a !important;
-  border: 1px solid #94a3b8 !important;
-  font-weight: 600 !important;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .input-field:focus,
-body.sunlight-mode .input-select:focus {
-  border-color: #059669 !important;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15) !important;
-}
-
-body.sunlight-mode .custom-slider {
-  background: #cbd5e1 !important;
-}
-
-body.sunlight-mode .custom-slider::-webkit-slider-thumb {
-  background: #0284c7 !important;
-  border: 2px solid #ffffff !important;
-  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4) !important;
-}
-
-/* Botones y Filtros */
-body.sunlight-mode .filter-btn,
-body.sunlight-mode .tag,
-body.sunlight-mode .badge {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #334155 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .filter-btn:hover {
-  background: #f1f5f9 !important;
-  border-color: #94a3b8 !important;
-}
-
-body.sunlight-mode .filter-btn.active {
-  background: #ecfdf5 !important;
-  color: #065f46 !important;
-  border: 1px solid #059669 !important;
-  box-shadow: 0 1px 3px rgba(5, 150, 105, 0.15) !important;
-  font-weight: 700 !important;
-}
-
-/* Viewport 3D en Modo Sol Directo */
-body.sunlight-mode .viewport-3d-wrapper {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06) !important;
+/* Componentes de Estado y Cockpit en Sidebar */
+.sidebar-theme-status {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.85rem;
+  background: rgba(132, 204, 22, 0.08);
+  border: 1px solid rgba(132, 204, 22, 0.22);
+  border-radius: var(--radius-md);
+  color: #f8fafc;
+  font-size: 0.8rem;
+  font-weight: 700;
+  user-select: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--apple-green-main);
+  box-shadow: 0 0 8px var(--apple-green-main);
+  animation: pulse-apple 2.2s infinite ease-in-out;
+}
+
+@keyframes pulse-apple {
+  0% { transform: scale(0.92); box-shadow: 0 0 0 0 rgba(132, 204, 22, 0.7); }
+  70% { transform: scale(1.08); box-shadow: 0 0 0 7px rgba(132, 204, 22, 0); }
+  100% { transform: scale(0.92); box-shadow: 0 0 0 0 rgba(132, 204, 22, 0); }
+}
+
+.footer-theme-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(132, 204, 22, 0.08);
+  border: 1px solid rgba(132, 204, 22, 0.25);
+  border-radius: var(--radius-md);
+  color: var(--apple-green-light);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* Tarjetas y Contenedores Glassmorphism Dark Agro */
+.card,
+.glass-card,
+.field-action-card,
+.hydraulic-circuit-card,
+.well-drilling-card,
+.drill-budget-card,
+.location-option-card,
+.comp-card,
+.pest-card,
+.economic-simulator-card,
+.econ-result-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: all var(--transition-normal);
 }
 
-body.sunlight-mode .viewport-3d-toolbar,
-body.sunlight-mode .viewport-layers-bar {
-  background: #f8fafc !important;
-  border-color: #e2e8f0 !important;
+.card:hover,
+.pest-card:hover,
+.field-action-card:hover {
+  border-color: rgba(132, 204, 22, 0.35);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), 0 0 16px rgba(132, 204, 22, 0.08);
 }
 
-body.sunlight-mode .viewport-3d-stage {
-  background: #f8fafc !important;
+/* Encabezados de Tarjeta */
+.card-header h2,
+.card-header h3 {
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
-body.sunlight-mode .v3d-btn {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #334155 !important;
-  font-weight: 600 !important;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
-}
-
-body.sunlight-mode .v3d-btn:hover {
-  background: #f1f5f9 !important;
-  border-color: #94a3b8 !important;
-  color: #0f172a !important;
-}
-
-body.sunlight-mode .v3d-btn.active {
-  background: #ecfdf5 !important;
-  color: #065f46 !important;
-  border-color: #059669 !important;
-  box-shadow: 0 1px 4px rgba(5, 150, 105, 0.15) !important;
+/* Badges y Tags en Verde Manzana */
+.tag-apple,
+.badge-apple-green {
+  background: rgba(132, 204, 22, 0.15) !important;
+  color: var(--apple-green-light) !important;
+  border: 1px solid rgba(132, 204, 22, 0.35) !important;
   font-weight: 700 !important;
+  border-radius: var(--radius-full);
 }
 
-body.sunlight-mode .btn-turntable {
-  background: #fef3c7 !important;
-  border-color: #fcd34d !important;
-  color: #92400e !important;
+.tag-accent {
+  background: rgba(132, 204, 22, 0.2) !important;
+  color: var(--apple-green-light) !important;
+  border: 1px solid rgba(132, 204, 22, 0.4) !important;
 }
 
-body.sunlight-mode .btn-turntable.active {
-  background: #fde68a !important;
-  border-color: #d97706 !important;
-  color: #78350f !important;
+/* Simulador Económico AIFA en Dark Agro */
+.econ-result-card.recommended,
+.econ-result-card.featured {
+  background: linear-gradient(180deg, rgba(132, 204, 22, 0.08) 0%, rgba(19, 32, 24, 0.95) 100%);
+  border: 2px solid var(--apple-green-main);
+  box-shadow: 0 8px 32px rgba(132, 204, 22, 0.15), 0 0 20px rgba(132, 204, 22, 0.12);
 }
 
-body.sunlight-mode .viewport-hud-topleft,
-body.sunlight-mode .viewport-hud-bottomright {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
-  color: #0f172a !important;
+.recommended-ribbon {
+  background: linear-gradient(135deg, var(--apple-green-main), var(--apple-green-dark));
+  color: #090e0b;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 10px rgba(132, 204, 22, 0.35);
 }
 
-body.sunlight-mode .hud-key {
-  background: #1e293b !important;
+.econ-input-item {
+  background: #0e1812;
+  border: 1px solid rgba(132, 204, 22, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  transition: border-color var(--transition-fast);
+}
+
+.econ-input-item:hover,
+.econ-input-item:focus-within {
+  border-color: var(--apple-green-main);
+  box-shadow: 0 0 10px rgba(132, 204, 22, 0.15);
+}
+
+.econ-input-wrapper input {
+  background: #132018;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.6rem;
+}
+
+.econ-input-wrapper input:focus {
+  border-color: var(--apple-green-main);
+  box-shadow: 0 0 0 2px rgba(132, 204, 22, 0.25);
+  outline: none;
+}
+
+.stepper-btn {
+  background: #1a2c22;
+  border: 1px solid rgba(132, 204, 22, 0.25);
+  color: var(--apple-green-light);
+  border-radius: var(--radius-sm);
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.stepper-btn:hover {
+  background: var(--apple-green-main);
+  color: #090e0b;
+  transform: scale(1.05);
+}
+
+.econ-net-val {
+  color: var(--apple-green-light);
+  font-weight: 900;
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+}
+
+/* Tablas de Datos Dark Agro */
+.table-container {
+  background: #0d1510;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background: #0f1a14;
+  color: #f8fafc;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid rgba(132, 204, 22, 0.3);
+}
+
+.data-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  font-size: 0.825rem;
+}
+
+.data-table tr:hover td {
+  background: rgba(132, 204, 22, 0.05);
+}
+
+.row-highlight td {
+  background: rgba(132, 204, 22, 0.12) !important;
   color: #ffffff !important;
-  border: 1px solid #334155 !important;
+  font-weight: 700;
 }
 
-body.sunlight-mode .viewport-gizmo-box {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+/* Controles de Formulario Bootstrap */
+.form-control,
+.form-select,
+.input-field,
+.input-select {
+  background-color: #0e1812 !important;
+  border: 1px solid rgba(132, 204, 22, 0.25) !important;
+  color: #f8fafc !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600;
 }
 
-/* Tooltips */
-body.sunlight-mode .tooltip-term {
-  border-bottom: 1.5px dashed #059669 !important;
-  color: #0f172a !important;
+.form-control:focus,
+.form-select:focus,
+.input-field:focus,
+.input-select:focus {
+  border-color: var(--apple-green-main) !important;
+  box-shadow: 0 0 0 3px rgba(132, 204, 22, 0.25) !important;
+  background-color: #132018 !important;
+  color: #ffffff !important;
+  outline: none;
 }
 
-body.sunlight-mode .tooltip-bubble {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.15) !important;
-  color: #0f172a !important;
-}
-
-body.sunlight-mode .tooltip-title {
-  color: #0f172a !important;
+/* Botones de Acción Primaria */
+.btn-primary,
+.btn-topbar-action,
+.btn-export-shift {
+  background: linear-gradient(135deg, var(--apple-green-main), var(--apple-green-dark)) !important;
+  color: #090e0b !important;
   font-weight: 800 !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(132, 204, 22, 0.3) !important;
+  transition: all var(--transition-fast) !important;
 }
 
-body.sunlight-mode .tooltip-tag {
-  background: #059669 !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .tooltip-tech {
-  background: #f8fafc !important;
-  color: #059669 !important;
-  border-top: 1px solid #e2e8f0 !important;
-  font-weight: 600 !important;
-}
-
-/* Acciones de Campo & Operador */
-body.sunlight-mode .action-sector-box {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #0f172a !important;
-}
-
-body.sunlight-mode .action-sector-box.sector-current {
-  background: #f0fdf4 !important;
-  border: 1.5px solid #059669 !important;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.12) !important;
-}
-
-body.sunlight-mode .action-sector-badge {
-  background: #059669 !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .action-time-window {
-  background: #f1f5f9 !important;
-  color: #1e293b !important;
-  border: 1px solid #cbd5e1 !important;
-  font-weight: 600 !important;
-}
-
-body.sunlight-mode .operator-checklist {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-body.sunlight-mode .checklist-item input[type="checkbox"] {
-  accent-color: #059669 !important;
-  width: 18px;
-  height: 18px;
-}
-
-body.sunlight-mode .flow-node {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-body.sunlight-mode .flow-node.active-flow {
-  background: #ecfdf5 !important;
-  border: 1.5px solid #059669 !important;
-}
-
-body.sunlight-mode .flow-connector {
-  color: #059669 !important;
-  font-weight: 800 !important;
-}
-
-body.sunlight-mode .btn-export-shift {
-  background: linear-gradient(135deg, #059669, #047857) !important;
-  color: #ffffff !important;
-  border: 1px solid #047857 !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25) !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .btn-export-shift:hover {
-  background: #047857 !important;
+.btn-primary:hover,
+.btn-topbar-action:hover,
+.btn-export-shift:hover {
+  background: linear-gradient(135deg, var(--apple-green-light), var(--apple-green-main)) !important;
+  color: #090e0b !important;
   transform: translateY(-1px) !important;
+  box-shadow: 0 6px 20px rgba(132, 204, 22, 0.4) !important;
 }
 
-/* Simulador Económico */
-body.sunlight-mode .econ-input-item {
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
+/* Insignias de Alerta Bootstrap */
+.alert-box {
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-body.sunlight-mode .econ-input-wrapper span {
-  color: #059669 !important;
-  font-weight: 700 !important;
+.alert-success {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-left: 4px solid var(--apple-green-main) !important;
+  color: #d1fae5 !important;
 }
 
-body.sunlight-mode .econ-input-wrapper input {
-  background: #ffffff !important;
-  border: 1px solid #94a3b8 !important;
-  color: #0f172a !important;
-  font-weight: 700 !important;
+.alert-warning {
+  background: rgba(245, 158, 11, 0.12) !important;
+  border-left: 4px solid #f59e0b !important;
+  color: #fef3c7 !important;
 }
 
-body.sunlight-mode .econ-result-card {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+.alert-caution {
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-left: 4px solid #f43f5e !important;
+  color: #ffe4e6 !important;
 }
 
-body.sunlight-mode .econ-result-card.featured,
-body.sunlight-mode .econ-result-card.recommended {
-  background: #f0fdf4 !important;
-  border: 2px solid #059669 !important;
-  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.15) !important;
-}
-
-body.sunlight-mode .econ-result-card.warning-card {
-  background: #fffbeb !important;
-  border: 1.5px solid #d97706 !important;
-}
-
-body.sunlight-mode .recommended-ribbon {
-  background: #059669 !important;
-  color: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3) !important;
-}
-
-body.sunlight-mode .econ-products-details {
-  background: #ffffff !important;
-  border: 1px solid #cbd5e1 !important;
-}
-
-body.sunlight-mode .econ-products-summary {
-  background: #f0f9ff !important;
-  color: #0369a1 !important;
-}
-
-body.sunlight-mode .econ-products-summary:hover {
-  background: #e0f2fe !important;
-  color: #0284c7 !important;
-}
-
-body.sunlight-mode .econ-products-content {
-  border-top-color: #e2e8f0 !important;
-}
-
-body.sunlight-mode .econ-products-table th {
-  background: #f8fafc !important;
-  color: #475569 !important;
-  border-bottom-color: #cbd5e1 !important;
-}
-
-body.sunlight-mode .econ-products-table td {
-  color: #1e293b !important;
-  border-bottom-color: #f1f5f9 !important;
-}
-
-body.sunlight-mode .econ-products-table tr:hover td {
-  background: #f8fafc !important;
-}
-
-body.sunlight-mode .econ-warning-box {
-  background: #fef2f2 !important;
-  border-left: 3.5px solid #dc2626 !important;
-  color: #7f1d1d !important;
-}
-
-body.sunlight-mode .econ-warning-box strong {
-  color: #991b1b !important;
-}
-
-body.sunlight-mode .econ-net-val {
-  color: #059669 !important;
-  font-weight: 900 !important;
-}
-
-body.sunlight-mode .stepper-btn {
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #1e293b !important;
-  font-weight: 700 !important;
-}
-
-body.sunlight-mode .stepper-btn:hover {
-  background: #e2e8f0 !important;
-}
+/* Clases de Utilidad Verde Manzana */
+.text-apple-green { color: var(--apple-green-main) !important; }
+.text-apple-light { color: var(--apple-green-light) !important; }
+.bg-apple-green   { background-color: var(--apple-green-main) !important; color: #090e0b !important; }
+.border-apple-green { border-color: var(--apple-green-main) !important; }
+.glow-apple-green { box-shadow: 0 0 16px var(--apple-green-glow) !important; }
 
 /* Toast & Progressive Disclosure */
 .agro-toast {

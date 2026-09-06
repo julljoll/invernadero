@@ -28,17 +28,17 @@ const CONFIG = Object.freeze({
     hellmannAlpha: 0.16
   },
   GREENHOUSE: {
-    defaultSurfaceM2: 2000,
-    lengthM: 100.0,
+    defaultSurfaceM2: 1000,
+    lengthM: 50.0,
     widthM: 20.0,
     minHeightGutterM: 3.0,
     optRidgeHeightM: 3.0,
     trellisHeightM: 2.0,
     pillarSpacingXM: 4.0,
-    pillarSpacingZM: 3.0,
-    totalPillarsDefault: 204,
+    pillarSpacingZM: 2.94,
+    totalPillarsDefault: 108,
     densityPlantM2: 2.2,
-    totalPlantsDefault: 4400
+    totalPlantsDefault: 2200
   },
   MESH: {
     spec: "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
@@ -125,7 +125,7 @@ const QUIBOR_YEAR_SCENARIOS = {
     deltaT: 0.4,      // Tendencia global sostenida (+0.4 °C sobre climatología 2001-2020)
     deltaRain: 0,
     windFactor: 1.00,
-    desc: "Línea base representativa calibrada con reanálisis MERRA-2 y NASA POWER. Condiciones óptimas para producción protegida en invernadero parral de 2.000 m² a 3.00 m con técnica de espaldar."
+    desc: "Línea base representativa calibrada con reanálisis MERRA-2 y NASA POWER. Condiciones óptimas para producción protegida en invernadero parral de 1.000 m² a 3.00 m con técnica de espaldar."
   },
   "2027": {
     year: 2027,
@@ -320,12 +320,12 @@ const FarmState = {
   activeSector: '1', // '1', '2', '3', 'all'
   fertilizerRegime: 'aifa', // 'aifa' | 'granulado' | 'hibrido'
   prodStageIdx: 3,
-  sunlightMode: true,
+  sunlightMode: false,
 
-  // Precios dinámicos mercado venezolano
-  priceAifaBag25kg: 65.0,
-  priceGranulatedBag50kg: 38.0,
-  priceTomatoCesta20kg: 18.0,
+  // Precios dinámicos mercado venezolano 2026 (Quíbor / MERCABAR)
+  priceAifaBag25kg: 68.0,
+  priceGranulatedBag50kg: 42.0,
+  priceTomatoCesta20kg: 22.0,
 
   listeners: [],
   subscribe(fn) {
@@ -355,7 +355,7 @@ const FarmState = {
         wellDepthM: this.wellDepthM,
         wellLocation: this.wellLocation,
         fertilizerRegime: this.fertilizerRegime,
-        sunlightMode: this.sunlightMode,
+        sunlightMode: false,
         priceAifaBag25kg: this.priceAifaBag25kg,
         priceGranulatedBag50kg: this.priceGranulatedBag50kg,
         priceTomatoCesta20kg: this.priceTomatoCesta20kg
@@ -372,10 +372,10 @@ const FarmState = {
         if (p.wellDepthM) this.wellDepthM = Number(p.wellDepthM);
         if (p.wellLocation) this.wellLocation = p.wellLocation;
         if (p.fertilizerRegime) this.fertilizerRegime = p.fertilizerRegime;
-        if (typeof p.sunlightMode === "boolean") this.sunlightMode = p.sunlightMode;
-        if (p.priceAifaBag25kg) this.priceAifaBag25kg = Number(p.priceAifaBag25kg);
-        if (p.priceGranulatedBag50kg) this.priceGranulatedBag50kg = Number(p.priceGranulatedBag50kg);
-        if (p.priceTomatoCesta20kg) this.priceTomatoCesta20kg = Number(p.priceTomatoCesta20kg);
+        this.sunlightMode = false;
+        if (p.priceAifaBag25kg) this.priceAifaBag25kg = p.priceAifaBag25kg === 65.0 ? 68.0 : Number(p.priceAifaBag25kg);
+        if (p.priceGranulatedBag50kg) this.priceGranulatedBag50kg = p.priceGranulatedBag50kg === 38.0 ? 42.0 : Number(p.priceGranulatedBag50kg);
+        if (p.priceTomatoCesta20kg) this.priceTomatoCesta20kg = p.priceTomatoCesta20kg === 18.0 ? 22.0 : Number(p.priceTomatoCesta20kg);
       }
     } catch (e) {}
   }
@@ -396,7 +396,7 @@ function initApp() {
 
   try { FarmState.loadPersisted(); } catch (e) { console.error(e); }
   try { initPwaOffline(); } catch (e) { console.error(e); }
-  try { initSunlightMode(); } catch (e) { console.error(e); }
+  try { initDarkTheme(); } catch (e) { console.error(e); }
   try { initSidebar(); } catch (e) { console.error(e); }
   try { initHydraulicCircuit(); } catch (e) { console.error(e); }
   try { initShiftExport(); } catch (e) { console.error(e); }
@@ -642,7 +642,7 @@ function initBlueprintViewers() {
 const STAGE_MODULE_MAP = {
   "tab-clima": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Climatología & Viento (MERRA-2)" },
   "tab-ventilacion": { stage: "Etapa 1: Bioclima & Emplazamiento", module: "Ventilación Convectiva & Extractores" },
-  "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 2.000 m² (Visor 3D & Planos)" },
+  "tab-estructura": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Estructura Parral 1.000 m² (Visor 3D & Planos)" },
   "tab-plagas": { stage: "Etapa 2: Estructura & Fitosanidad", module: "Matriz de Plagas (110gsm 50mesh Blanca)" },
   "tab-riego": { stage: "Etapa 3: Acuífero & Hidrogeología", module: "Riego FAO-56 & Salinidad" },
   "tab-produccion": { stage: "Etapa 4: Operación & Producción", module: "Plan Maestro de Producción Tomate" },
@@ -813,44 +813,10 @@ function initSidebar() {
     });
   }
 
-  // Alternancia entre Modo Luz Campo (Sunlight) y Modo Cockpit (Noche)
-  const btnTheme = document.getElementById("btn-theme-toggle");
-  const sunlightText = document.getElementById("sunlight-btn-text");
-  const themeIcon = document.getElementById("theme-icon");
-
-  function updateThemeUI(isSunlight) {
-    if (isSunlight) {
-      document.body.classList.add("sunlight-mode");
-      document.body.classList.add("light-theme");
-      document.body.classList.remove("dark-theme");
-      if (sunlightText) sunlightText.textContent = "Modo Luz Campo";
-      if (themeIcon) themeIcon.innerHTML = `<span class="material-symbols-outlined">wb_sunny</span>`;
-    } else {
-      document.body.classList.remove("sunlight-mode");
-      document.body.classList.remove("light-theme");
-      document.body.classList.add("dark-theme");
-      if (sunlightText) sunlightText.textContent = "Modo Cockpit (Noche)";
-      if (themeIcon) themeIcon.innerHTML = `<span class="material-symbols-outlined">dark_mode</span>`;
-    }
-  }
-
-  const savedTheme = localStorage.getItem("agroquibor_theme");
-  if (savedTheme === "cockpit") {
-    updateThemeUI(false);
-  } else {
-    updateThemeUI(true);
-  }
-
-  if (btnTheme) {
-    btnTheme.addEventListener("click", () => {
-      const isSunlightNow = document.body.classList.contains("sunlight-mode");
-      const newIsSunlight = !isSunlightNow;
-      updateThemeUI(newIsSunlight);
-      localStorage.setItem("agroquibor_theme", newIsSunlight ? "sunlight" : "cockpit");
-      showToast(newIsSunlight ? "Modo Luz de Campo activado (Alta Claridad)" : "Modo Cockpit Nocturno activado", newIsSunlight ? "wb_sunny" : "dark_mode");
-      requestAnimationFrame(() => drawGreenhouseStructure());
-    });
-  }
+  // Modo Oscuro Permanente (Cockpit Agro Dark con Verde Manzana)
+  document.documentElement.setAttribute("data-bs-theme", "dark");
+  document.body.classList.remove("sunlight-mode", "light-theme");
+  document.body.classList.add("dark-theme");
 
   // Atajos de teclado Pro: [M] o [B] alterna el menú lateral
   document.addEventListener("keydown", (e) => {
@@ -916,52 +882,52 @@ function initHydraulicCircuit() {
 
   const sectorConfigs = {
     "1": {
-      name: "Sector 1 (Camellones 1 al 3)",
-      rows: "6 Hileras de Tomate (100 m)",
-      flow: "2.40 m³/h",
-      lmin: "40.0 L/minuto",
-      emitters: "1.500 Goteros PC (40 cm)",
-      plants: "1.320 Plantas (1.60 L/h)",
+      name: "Sector 1 (Camellones 1 al 5)",
+      rows: "10 Hileras de Tomate (50 m)",
+      flow: "2.00 m³/h",
+      lmin: "33.3 L/minuto",
+      emitters: "1.250 Goteros PC (40 cm)",
+      plants: "1.100 Plantas (1.60 L/h)",
       pulse: "28 Minutos (Turno 1: 06:00-06:28)",
-      pressure: "2.8 a 3.2 bar (Cabezal)",
+      pressure: "2.5 a 2.8 bar (Cabezal)",
       targetTitle: "Sector 1 Activo",
-      targetSub: "1.500 goteros PC 40cm"
+      targetSub: "1.250 goteros PC 40cm"
     },
     "2": {
-      name: "Sector 2 (Camellones 4 al 7)",
-      rows: "8 Hileras de Tomate (100 m)",
-      flow: "3.20 m³/h",
-      lmin: "53.3 L/minuto",
-      emitters: "2.000 Goteros PC (40 cm)",
-      plants: "1.760 Plantas (1.60 L/h)",
+      name: "Sector 2 (Camellones 6 al 10)",
+      rows: "10 Hileras de Tomate (50 m)",
+      flow: "2.00 m³/h",
+      lmin: "33.3 L/minuto",
+      emitters: "1.250 Goteros PC (40 cm)",
+      plants: "1.100 Plantas (1.60 L/h)",
       pulse: "28 Minutos (Turno 2: 06:35-07:03)",
-      pressure: "2.5 a 2.9 bar (Cabezal)",
+      pressure: "2.5 a 2.8 bar (Cabezal)",
       targetTitle: "Sector 2 Activo",
-      targetSub: "2.000 goteros PC 40cm"
+      targetSub: "1.250 goteros PC 40cm"
     },
     "3": {
-      name: "Sector 3 (Camellones 8 al 10)",
-      rows: "6 Hileras de Tomate (100 m)",
-      flow: "2.40 m³/h",
-      lmin: "40.0 L/minuto",
-      emitters: "1.500 Goteros PC (40 cm)",
-      plants: "1.320 Plantas (1.60 L/h)",
-      pulse: "28 Minutos (Turno 3: 07:10-07:38)",
-      pressure: "2.8 a 3.2 bar (Cabezal)",
-      targetTitle: "Sector 3 Activo",
-      targetSub: "1.500 goteros PC 40cm"
+      name: "Sector 2 (Camellones 6 al 10)",
+      rows: "10 Hileras de Tomate (50 m)",
+      flow: "2.00 m³/h",
+      lmin: "33.3 L/minuto",
+      emitters: "1.250 Goteros PC (40 cm)",
+      plants: "1.100 Plantas (1.60 L/h)",
+      pulse: "28 Minutos (Turno 2: 06:35-07:03)",
+      pressure: "2.5 a 2.8 bar (Cabezal)",
+      targetTitle: "Sector 2 Activo",
+      targetSub: "1.250 goteros PC 40cm"
     },
     "all": {
-      name: "Ciclo Completo (3 Sectores)",
-      rows: "20 Hileras Totales (2.000 m²)",
-      flow: "2.4 a 3.2 m³/h (Rotativo)",
-      lmin: "Total Nave: 8.0 m³/h",
-      emitters: "5.000 Goteros PC Totales",
-      plants: "4.400 Plantas Productivas",
-      pulse: "84 Minutos Total (3×28m)",
+      name: "Ciclo Completo (2 Sectores)",
+      rows: "20 Hileras Totales (1.000 m²)",
+      flow: "2.00 m³/h (Rotativo)",
+      lmin: "Total Nave: 4.0 m³/h",
+      emitters: "2.500 Goteros PC Totales",
+      plants: "2.200 Plantas Productivas",
+      pulse: "56 Minutos Total (2×28m)",
       pressure: "Auto-compensación Activa",
-      targetTitle: "Tren Secuencial 1➔2➔3",
-      targetSub: "84 min de bombeo diario"
+      targetTitle: "Tren Secuencial 1➔2",
+      targetSub: "56 min de bombeo diario"
     }
   };
 
@@ -1020,14 +986,14 @@ function initPwaOffline() {
 }
 
 // ==========================================================================
-// 4.2 MODO SOL DIRECTO (AGRI-UX-UI ALTO CONTRASTE EXTERIOR)
+// 4.2 MODO OSCURO INTEGRAL (COCKPIT AGRO & VERDE MANZANA)
 // ==========================================================================
-function initSunlightMode() {
-  // Modo Diurno permanente para alta visibilidad y ergonomía de campo (Skill agri-ux-ui)
-  document.body.classList.add('sunlight-mode');
-  document.body.classList.add('light-theme');
+function initDarkTheme() {
+  document.documentElement.setAttribute('data-bs-theme', 'dark');
+  document.body.classList.remove('sunlight-mode', 'light-theme');
+  document.body.classList.add('dark-theme');
   if (window.greenhouse3dViewer) {
-    window.greenhouse3dViewer.setThemeMode(true);
+    window.greenhouse3dViewer.setThemeMode(false);
   }
 }
 
@@ -1045,39 +1011,34 @@ function initShiftExport() {
 
     let fertText = "";
     if (fertRegime === 'granulado') {
-      fertText = "• Régimen: Abono Granulado Manual NPK 12-12-17 SOP (32 g/planta cada 20 días en banda a 15 cm del tallo).\n• Tanque A: Fe-EDDHA (6%) 1.10 kg/sem.\n• Tanque B: Microelementos 0.60 kg + Ácido Bórico 0.30 kg/sem.";
+      fertText = "• Régimen: Abono Granulado Manual NPK 12-12-17 SOP (32 g/planta cada 20 días en banda a 15 cm del tallo).\n• Tanque A: Fe-EDDHA (6%) 0.55 kg/sem.\n• Tanque B: Microelementos 0.30 kg + Ácido Bórico 0.15 kg/sem.";
     } else if (fertRegime === 'hibrido') {
-      fertText = "• Régimen: Estrategia Híbrida (Fondo granulado + AIFA en goteo).\n• Tanque A: Nitrato de Calcio AIFA 25 kg + KNO3 12 kg + Fe-EDDHA 1 kg/sem.\n• Tanque B: AIFA 12-6-36 35 kg + MKP 6 kg + SOP 14 kg + MgSO4 10 kg/sem.";
+      fertText = "• Régimen: Estrategia Híbrida (Fondo granulado + AIFA en goteo).\n• Tanque A: Nitrato de Calcio AIFA 12.5 kg + KNO3 6.0 kg + Fe-EDDHA 0.50 kg/sem.\n• Tanque B: AIFA 12-6-36 17.5 kg + MKP 3.0 kg + SOP 7.0 kg + MgSO4 5.0 kg/sem.";
     } else {
-      fertText = "• Régimen: 100% AIFA Hidrosoluble.\n• Tanque A: Nitrato de Calcio AIFA 36 kg + KNO3 15 kg + Fe-EDDHA 1.1 kg/sem.\n• Tanque B: KNO3 30 kg + MKP 10 kg + K2SO4 24 kg + MgSO4 16 kg + Micro 0.6 kg/sem.";
+      fertText = "• Régimen: 100% AIFA Hidrosoluble.\n• Tanque A: Nitrato de Calcio AIFA 18.0 kg + KNO3 7.5 kg + Fe-EDDHA 0.55 kg/sem.\n• Tanque B: KNO3 15.0 kg + MKP 5.0 kg + K2SO4 12.0 kg + MgSO4 8.0 kg + Micro 0.30 kg/sem.";
     }
 
-    const acidText = isYacambu ? "• Tanque C: ~8.0 L/sem Ácido Nítrico 60% (Agua dulce Yacambú CE 0.5 dS/m)" : "• Tanque C: ~22.0 L/sem Ácido Nítrico 60% (Pozo salino CE 1.4 dS/m - Bicarbonatos altos)";
+    const acidText = isYacambu ? "• Tanque C: ~4.0 L/sem Ácido Nítrico 60% (Agua dulce Yacambú CE 0.5 dS/m)" : "• Tanque C: ~12.5 L/sem Ácido Nítrico 60% (Pozo salino CE 1.4 dS/m - Bicarbonatos altos)";
 
     const now = new Date();
     const dateStr = now.toLocaleDateString("es-VE", { year: 'numeric', month: 'long', day: 'numeric' });
 
-    const pauta = `📋 PAUTA DIARIA DE RIEGO Y FERTILIZACIÓN — CASA DE MALLA QUÍBOR (2.000 m²)
+    const pauta = `📋 PAUTA DIARIA DE RIEGO Y FERTILIZACIÓN — CASA DE MALLA QUÍBOR (1.000 m²)
 📅 Fecha: ${dateStr}
-🌱 Etapa: ${stageName} (4.400 Plantas)
+🌱 Etapa: ${stageName} (2.200 Plantas)
 💧 Fuente de Agua: ${isYacambu ? "Trasvase Yacambú (CE 0.5 dS/m | LF 6.5%)" : "Pozo Profundo Abatido (CE 1.4 dS/m | LF 20%)"}
 ⚡ Equipo de Bombeo: Motor 1.5 HP 220V + Filtro Discos 120 Mesh
 
 ⏰ TURNOS SECUENCIALES OBLIGATORIOS (BOMBA 1.5 HP):
-1️⃣ SECTOR 1 (Camellones 1 al 3 | 1.320 pl):
+1️⃣ SECTOR 1 (Camellones 1 al 5 | 1.100 pl):
    • Horario: 06:00 – 06:28 AM (28 minutos)
-   • Válvula 1 ABIERTA (2 y 3 CERRADAS)
-   • Caudal: 2.40 m³/h | Presión: 2.8 a 3.2 bar
+   • Válvula 1 ABIERTA (Válvula 2 CERRADA)
+   • Caudal: 2.00 m³/h | Presión: 2.5 a 2.8 bar
 
-2️⃣ SECTOR 2 (Camellones 4 al 7 | 1.760 pl):
+2️⃣ SECTOR 2 (Camellones 6 al 10 | 1.100 pl):
    • Horario: 06:35 – 07:03 AM (28 minutos)
-   • Válvula 2 ABIERTA (1 y 3 CERRADAS)
-   • Caudal: 3.20 m³/h | Presión: 2.5 a 2.9 bar
-
-3️⃣ SECTOR 3 (Camellones 8 al 10 | 1.320 pl):
-   • Horario: 07:10 – 07:38 AM (28 minutos)
-   • Válvula 3 ABIERTA (1 y 2 CERRADAS)
-   • Caudal: 2.40 m³/h | Presión: 2.8 a 3.2 bar
+   • Válvula 2 ABIERTA (Válvula 1 CERRADA)
+   • Caudal: 2.00 m³/h | Presión: 2.5 a 2.8 bar
 
 🧪 NUTRICIÓN & FERTIRRIEGO:
 ${fertText}
@@ -1132,9 +1093,9 @@ function initEconomicSimulator() {
   inputCesta.value = FarmState.priceTomatoCesta20kg;
 
   function calculateAndRenderEcon() {
-    const pAifa = Math.max(10, parseFloat(inputAifa.value) || 65);
-    const pGran = Math.max(10, parseFloat(inputGran.value) || 38);
-    const pCesta = Math.max(1, parseFloat(inputCesta.value) || 18);
+    const pAifa = Math.max(10, parseFloat(inputAifa.value) || 68);
+    const pGran = Math.max(10, parseFloat(inputGran.value) || 42);
+    const pCesta = Math.max(1, parseFloat(inputCesta.value) || 22);
     const pKg = pCesta / 20.0;
 
     FarmState.setState({
@@ -1146,30 +1107,45 @@ function initEconomicSimulator() {
     const elPriceKg = document.getElementById('disp-price-kg');
     if (elPriceKg) elPriceKg.textContent = `$${pKg.toFixed(2)} USD/kg`;
 
+    // Sincronizar estado visual de los botones de preset de cesta
+    const presetBtns = document.querySelectorAll('.btn-cesta-preset');
+    presetBtns.forEach(btn => {
+      const pVal = parseFloat(btn.getAttribute('data-price'));
+      if (Math.abs(pVal - pCesta) < 0.1) {
+        btn.classList.add('active');
+        btn.style.borderColor = '#34d399';
+        btn.style.color = '#34d399';
+      } else {
+        btn.classList.remove('active');
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      }
+    });
+
     // 1. AIFA 100% Hidrosoluble (OPCIÓN RECOMENDADA)
-    // 35.2 Ton = 1.760 cestas, 42 sacos 25kg, 0 jornales extra (inyección automatizada por cabezal)
-    const yieldAifaKg = 35200;
-    const cestasAifa = 1760;
-    const bagsAifa = 42;
+    // 17.6 Ton = 880 cestas, 21 sacos 25kg, 0 jornales extra (inyección automatizada por cabezal)
+    const yieldAifaKg = 17600;
+    const cestasAifa = 880;
+    const bagsAifa = 21;
     const grossAifa = cestasAifa * pCesta;
     const costAifa = bagsAifa * pAifa;
     const netAifa = grossAifa - costAifa;
     const unitCostAifa = costAifa / yieldAifaKg;
 
-    // 2. Estrategia Híbrida (33.5 Ton = 1.675 cestas, 16 sacos gran 50kg + 23 sacos aifa 25kg + 2 jornales $26)
-    const yieldHibridoKg = 33500;
-    const cestasHibrido = 1675;
-    const laborHibrido = 26; // 2 jornales de fondo manual
+    // 2. Estrategia Híbrida (16.75 Ton = 838 cestas, 8 sacos gran 50kg + 12 sacos aifa 25kg + 1 jornal $15)
+    const yieldHibridoKg = 16750;
+    const cestasHibrido = 838;
+    const laborHibrido = 15; // 1 jornal de fondo manual (Quíbor 2026)
     const grossHibrido = cestasHibrido * pCesta;
-    const costHibrido = (16 * pGran) + (23 * pAifa) + laborHibrido;
+    const costHibrido = (8 * pGran) + (12 * pAifa) + laborHibrido;
     const netHibrido = grossHibrido - costHibrido;
     const unitCostHibrido = costHibrido / yieldHibridoKg;
 
-    // 3. Granulado Manual (27.0 Ton = 1.350 cestas, 38 sacos gran 50kg + 9 jornales ciclo $120)
-    const yieldGranKg = 27000;
-    const cestasGran = 1350;
-    const bagsGran = 38;
-    const laborGran = 120; // 9 jornales manuales de abonado en banda
+    // 3. Granulado Manual (13.5 Ton = 675 cestas, 19 sacos gran 50kg + 4.5 jornales ciclo $65)
+    const yieldGranKg = 13500;
+    const cestasGran = 675;
+    const bagsGran = 19;
+    const laborGran = 65; // 4.5 jornales manuales de abonado en banda ($14.4/jornal Quíbor 2026)
     const grossGran = cestasGran * pCesta;
     const costGran = (bagsGran * pGran) + laborGran;
     const netGran = grossGran - costGran;
@@ -1178,7 +1154,7 @@ function initEconomicSimulator() {
     // Diferencial AIFA vs Granulado
     const diffNet = netAifa - netGran;
     const extraInvest = costAifa - costGran;
-    const extraCestas = cestasAifa - cestasGran; // 410 cestas
+    const extraCestas = cestasAifa - cestasGran; // 205 cestas
 
     // Actualizar UI AIFA
     const dispGrossAifa = document.getElementById('disp-econ-gross-aifa');
@@ -1239,6 +1215,18 @@ function initEconomicSimulator() {
 
   if (btnCestaMinus) btnCestaMinus.addEventListener('click', () => { inputCesta.value = Math.max(1, (parseFloat(inputCesta.value) - 0.5).toFixed(1)); calculateAndRenderEcon(); });
   if (btnCestaPlus) btnCestaPlus.addEventListener('click', () => { inputCesta.value = (parseFloat(inputCesta.value) + 0.5).toFixed(1); calculateAndRenderEcon(); });
+
+  // Event Listeners para Presets Rápidos de Mercado
+  const presetBtns = document.querySelectorAll('.btn-cesta-preset');
+  presetBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pVal = parseFloat(btn.getAttribute('data-price'));
+      if (pVal) {
+        inputCesta.value = pVal;
+        calculateAndRenderEcon();
+      }
+    });
+  });
 
   calculateAndRenderEcon();
 }
@@ -1334,8 +1322,8 @@ function updateClimateDisplays(monthIndex) {
 
   const dispEtoVol = document.getElementById("disp-eto-vol");
   if (dispEtoVol) {
-    const volDia = (data.eto * 2000) / 1000;
-    dispEtoVol.textContent = `${volDia.toFixed(1)} m³/d (2.000 m²)`;
+    const volDia = (data.eto * 1000) / 1000;
+    dispEtoVol.textContent = `${volDia.toFixed(1)} m³/d (1.000 m²)`;
   }
 
   const dispRad = document.getElementById("disp-solar-rad");
@@ -1395,7 +1383,7 @@ function updateClimateDisplays(monthIndex) {
       alertBox.innerHTML = `
         <div class="alert-icon">ℹ️</div>
         <div class="alert-content">
-          <strong>Condiciones ${data.mes} ${data.year}:</strong> Temperatura media de ${data.tmed.toFixed(1)} °C, viento de ${data.viento.toFixed(1)} km/h (${data.dir}) y evapotranspiración de ${data.eto.toFixed(2)} mm/d (${(data.eto * 2).toFixed(1)} m³/d en 2.000 m²). Mantenga la fracción de lavado LF por salinidad del pozo.
+          <strong>Condiciones ${data.mes} ${data.year}:</strong> Temperatura media de ${data.tmed.toFixed(1)} °C, viento de ${data.viento.toFixed(1)} km/h (${data.dir}) y evapotranspiración de ${data.eto.toFixed(2)} mm/d (${(data.eto * 1).toFixed(1)} m³/d en 1.000 m²). Mantenga la fracción de lavado LF por salinidad del pozo.
         </div>`;
     }
   }
@@ -1712,9 +1700,9 @@ function calculateIrrigation() {
   const grossLitersPlantWeek = netLitersPlantWeek / (1.0 - lf);
   const grossLitersPlantDay = grossLitersPlantWeek / 7.0;
 
-  // Demanda diaria total módulo configurable (por defecto 2.000 m²)
+  // Demanda diaria total módulo configurable (por defecto 1.000 m²)
   const elSurface = document.getElementById("input-surface-m2");
-  const surfaceM2 = elSurface ? parseFloat(elSurface.value) || 2000.0 : 2000.0;
+  const surfaceM2 = elSurface ? parseFloat(elSurface.value) || 1000.0 : 1000.0;
   const totalPlants = surfaceM2 * density;
   const dailyM3Total = (grossLitersPlantDay * totalPlants) / 1000.0;
 
@@ -2115,22 +2103,16 @@ function drawGreenhouseStructure(angle = 0) {
   const w = canvas.width;
   const h = canvas.height;
 
-  const isSunlight = document.body.classList.contains("sunlight-mode");
+  const isSunlight = false;
 
   // Clear
   ctx.clearRect(0, 0, w, h);
 
-  // Background gradient
+  // Background gradient (Obsidiana Vegetal Dark Agro)
   const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
-  if (isSunlight) {
-    bgGrad.addColorStop(0, "#f8fafc");
-    bgGrad.addColorStop(0.7, "#ffffff");
-    bgGrad.addColorStop(1, "#f1f5f9");
-  } else {
-    bgGrad.addColorStop(0, "#080c16");
-    bgGrad.addColorStop(0.7, "#0f172a");
-    bgGrad.addColorStop(1, "#111b2e");
-  }
+  bgGrad.addColorStop(0, "#070c09");
+  bgGrad.addColorStop(0.7, "#0c1510");
+  bgGrad.addColorStop(1, "#111f17");
   ctx.fillStyle = bgGrad;
   ctx.fillRect(0, 0, w, h);
 
@@ -2441,7 +2423,7 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY, isSunl
   // Flechas
   ctx.strokeRect(startX, dimY - 4, 1, 8);
   ctx.strokeRect(startX + totalWidth, dimY - 4, 1, 8);
-  ctx.fillText("20.00 m ANCHO (5 Franjas de 4.00 m) × 100.00 m LARGO (2.000 m²)", startX + totalWidth / 2 - 165, dimY - 6);
+  ctx.fillText("20.00 m ANCHO (5 Franjas de 4.00 m) × 50.00 m LARGO (1.000 m²)", startX + totalWidth / 2 - 165, dimY - 6);
 
   // Cotas de Altura (Izquierda)
   const dimX = startX - 45;
@@ -2463,7 +2445,7 @@ function drawDimensions(ctx, startX, totalWidth, groundY, techoY, tutorY, isSunl
 }
 
 // ==========================================================================
-// 10. TAB 6: PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA (2.000 m² / 4.400 PLANTAS)
+// 10. TAB 6: PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA (1.000 m² / 2.200 PLANTAS)
 // ==========================================================================
 const PROD_STAGES = [
   {
@@ -2472,22 +2454,22 @@ const PROD_STAGES = [
     grossLiters: 11.1,
     netLiters: 9.4,
     lf: 15,
-    dailyM3: 7.00,
+    dailyM3: 3.50,
     pulses: 3,
     pulseTime: 18,
-    schedule: "08:00 | 11:30 | 15:00 (Sectores 1, 2 y 3 en secuencia)",
+    schedule: "08:00 | 11:30 | 15:00 (Sectores 1 y 2 en secuencia)",
     ec: "1.9 dS/m",
     ph: "5.8 - 6.0 (Relación N:K 1:1.3)",
     tankA: {
-      total: "22.45 kg/sem",
-      detail: "Nitrato de Calcio: 12.0 kg | Nitrato de Potasio: 10.0 kg | Fe-EDDHA: 0.45 kg"
+      total: "11.23 kg/sem",
+      detail: "Nitrato de Calcio: 6.0 kg | Nitrato de Potasio: 5.0 kg | Fe-EDDHA: 0.23 kg"
     },
     tankB: {
-      total: "15.28 kg/sem",
-      detail: "MKP (0-52-34): 6.0 kg | K₂SO₄: 4.0 kg | MgSO₄: 5.0 kg | Boro: 0.08 kg | Micro: 0.20 kg"
+      total: "7.64 kg/sem",
+      detail: "MKP (0-52-34): 3.0 kg | K₂SO₄: 2.0 kg | MgSO₄: 2.5 kg | Boro: 0.04 kg | Micro: 0.10 kg"
     },
     tankC: {
-      total: "~7.0 L/sem",
+      total: "~3.5 L/sem",
       detail: "Ácido Nítrico 60% (regula pH de gotero a 5.8 y neutraliza bicarbonatos)"
     }
   },
@@ -2497,22 +2479,22 @@ const PROD_STAGES = [
     grossLiters: 15.8,
     netLiters: 13.0,
     lf: 18,
-    dailyM3: 9.95,
+    dailyM3: 4.98,
     pulses: 4,
     pulseTime: 19,
-    schedule: "08:00 | 10:30 | 13:00 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
+    schedule: "08:00 | 10:30 | 13:00 | 15:30 (Sectores 1 y 2 en secuencia)",
     ec: "2.2 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:1.5)",
     tankA: {
-      total: "42.70 kg/sem",
-      detail: "AIFA Nitrato de Calcio: 22.0 kg | AIFA Nitrato de Potasio: 20.0 kg | Fe-EDDHA: 0.70 kg"
+      total: "21.35 kg/sem",
+      detail: "AIFA Nitrato de Calcio: 11.0 kg | AIFA Nitrato de Potasio: 10.0 kg | Fe-EDDHA: 0.35 kg"
     },
     tankB: {
-      total: "27.50 kg/sem",
-      detail: "AIFA MKP: 8.0 kg | K₂SO₄: 10.0 kg | AIFA MgSO₄: 9.0 kg | Boro: 0.15 kg | Micro: 0.35 kg"
+      total: "13.75 kg/sem",
+      detail: "AIFA MKP: 4.0 kg | K₂SO₄: 5.0 kg | AIFA MgSO₄: 4.5 kg | Boro: 0.08 kg | Micro: 0.17 kg"
     },
     tankC: {
-      total: "~14.0 L/sem",
+      total: "~7.0 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor a pH 5.9)"
     }
   },
@@ -2522,22 +2504,22 @@ const PROD_STAGES = [
     grossLiters: 23.6,
     netLiters: 18.9,
     lf: 20,
-    dailyM3: 14.85,
+    dailyM3: 7.42,
     pulses: 5,
     pulseTime: 22,
-    schedule: "07:30 | 09:30 | 11:30 | 13:30 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
+    schedule: "07:30 | 09:30 | 11:30 | 13:30 | 15:30 (Sectores 1 y 2 en secuencia)",
     ec: "2.5 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:1.9)",
     tankA: {
-      total: "67.90 kg/sem",
-      detail: "AIFA Nitrato de Calcio: 32.0 kg | AIFA Nitrato de Potasio: 35.0 kg | Fe-EDDHA: 0.90 kg"
+      total: "33.95 kg/sem",
+      detail: "AIFA Nitrato de Calcio: 16.0 kg | AIFA Nitrato de Potasio: 17.5 kg | Fe-EDDHA: 0.45 kg"
     },
     tankB: {
-      total: "44.75 kg/sem",
-      detail: "AIFA MKP: 12.0 kg | K₂SO₄: 18.0 kg | AIFA MgSO₄: 14.0 kg | Boro: 0.25 kg | Micro: 0.50 kg"
+      total: "22.38 kg/sem",
+      detail: "AIFA MKP: 6.0 kg | K₂SO₄: 9.0 kg | AIFA MgSO₄: 7.0 kg | Boro: 0.13 kg | Micro: 0.25 kg"
     },
     tankC: {
-      total: "~20.0 L/sem",
+      total: "~10.0 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza agua alcalina de pozo)"
     }
   },
@@ -2547,22 +2529,22 @@ const PROD_STAGES = [
     grossLiters: 27.2,
     netLiters: 21.8,
     lf: 20,
-    dailyM3: 17.10,
+    dailyM3: 8.55,
     pulses: 5,
     pulseTime: 28,
-    schedule: "07:00 | 09:30 | 11:45 | 14:00 | 16:00 (Sectores 1, 2 y 3 en secuencia)",
+    schedule: "07:00 | 09:30 | 11:45 | 14:00 | 16:00 (Sectores 1 y 2 en secuencia)",
     ec: "2.7 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 1:2.2)",
     tankA: {
-      total: "52.10 kg/sem",
-      detail: "AIFA Nitrato de Calcio: 36.0 kg | AIFA Nitrato de Potasio: 15.0 kg | Fe-EDDHA (6%): 1.10 kg"
+      total: "26.05 kg/sem",
+      detail: "AIFA Nitrato de Calcio: 18.0 kg | AIFA Nitrato de Potasio: 7.5 kg | Fe-EDDHA (6%): 0.55 kg"
     },
     tankB: {
-      total: "80.90 kg/sem",
-      detail: "AIFA Fructificación 12-6-36: 50.0 kg | AIFA MKP: 8.0 kg | K₂SO₄: 20.0 kg | AIFA MgSO₄: 16.0 kg | Boro: 0.30 kg"
+      total: "40.45 kg/sem",
+      detail: "AIFA Fructificación 12-6-36: 25.0 kg | AIFA MKP: 4.0 kg | K₂SO₄: 10.0 kg | AIFA MgSO₄: 8.0 kg | Boro: 0.15 kg"
     },
     tankC: {
-      total: "~25.0 L/sem",
+      total: "~12.5 L/sem",
       detail: "Ácido Nítrico 60% (neutraliza bicarbonatos de Quíbor y aporta nitrógeno nítrico)"
     }
   },
@@ -2572,167 +2554,349 @@ const PROD_STAGES = [
     grossLiters: 18.8,
     netLiters: 16.0,
     lf: 15,
-    dailyM3: 11.80,
+    dailyM3: 5.90,
     pulses: 4,
     pulseTime: 22,
-    schedule: "08:00 | 11:00 | 13:30 | 15:30 (Sectores 1, 2 y 3 en secuencia)",
+    schedule: "08:00 | 11:00 | 13:30 | 15:30 (Sectores 1 y 2 en secuencia)",
     ec: "2.3 dS/m",
     ph: "5.8 - 6.2 (Relación N:K 2.0)",
     tankA: {
-      total: "32.60 kg/sem",
-      detail: "AIFA Nitrato de Calcio: 20.0 kg | Nitrato de Potasio: 12.0 kg | Fe-EDDHA: 0.60 kg"
+      total: "16.30 kg/sem",
+      detail: "AIFA Nitrato de Calcio: 10.0 kg | Nitrato de Potasio: 6.0 kg | Fe-EDDHA: 0.30 kg"
     },
     tankB: {
-      total: "42.30 kg/sem",
-      detail: "AIFA 12-6-36: 25.0 kg | AIFA MKP: 6.0 kg | K₂SO₄: 10.0 kg | AIFA MgSO₄: 9.0 kg"
+      total: "21.15 kg/sem",
+      detail: "AIFA 12-6-36: 12.5 kg | AIFA MKP: 3.0 kg | K₂SO₄: 5.0 kg | AIFA MgSO₄: 4.5 kg"
     },
     tankC: {
-      total: "~16.0 L/sem",
+      total: "~8.0 L/sem",
       detail: "Ácido Nítrico 60% (limpieza y desincrustación de goteros)"
     }
   }
 ];
 
 const SPRAY_MATRIX = [
+  // =========================================================================
+  // 1. PROGRAMA PREVENTIVO BIOLÓGICO & BIORACIONAL (RECOMENDADO POR DEFECTO)
+  // =========================================================================
   {
+    plan: "biologico",
     categoria: "acaros",
     blanco: "Araña Roja (Tetranychus urticae)",
-    activo: "Abamectina 1.8% EC",
-    comercial: "Vertimec / Acaramik",
-    grupo: "IRAC 6",
-    dosis: "75 – 100 mL",
-    modo: "Translaminar. Aspersión al envés foliar con boquilla cónica fina.",
-    pc: "3 días"
-  },
-  {
-    categoria: "acaros",
-    blanco: "Huevos y Ninfas de Ácaro",
-    activo: "Hexitiazox 10% WP",
-    comercial: "Caesar / Nissorun",
-    grupo: "IRAC 10A",
-    dosis: "50 – 60 g",
-    modo: "Ovicida-larvicida selectivo. Inhibe la muda. Rotar con IRAC 6.",
-    pc: "7 días"
-  },
-  {
-    categoria: "acaros",
-    blanco: "Ácaro Blanco y Mosca Blanca",
-    activo: "Spiromesifen 24% SC",
-    comercial: "Oberon",
-    grupo: "IRAC 23",
-    dosis: "60 – 80 mL",
-    modo: "Inhibidor de la síntesis de lípidos. Larga persistencia preventiva.",
-    pc: "3 días"
-  },
-  {
-    categoria: "vectores",
-    blanco: "Trips Occidental (Frankliniella)",
-    activo: "Spinosad 48% SC",
-    comercial: "Tracer",
-    grupo: "IRAC 5",
-    dosis: "20 – 25 mL",
-    modo: "Modulador nicotínico GABA. Aplicar al atardecer fresco.",
-    pc: "1 día"
-  },
-  {
-    categoria: "vectores",
-    blanco: "Trips y Mosca Blanca (Adultos)",
-    activo: "Acetamiprid 20% SP",
-    comercial: "Mospilan",
-    grupo: "IRAC 4A",
-    dosis: "35 – 50 g",
-    modo: "Sistémico acropétalo. Alta eficacia de choque.",
-    pc: "3 días"
-  },
-  {
-    categoria: "vectores",
-    blanco: "Pulgones / Áfidos y Mosca",
-    activo: "Flonicamid 50% WG",
-    comercial: "Teppeki / Beleaf",
-    grupo: "IRAC 29",
-    dosis: "15 – 20 g",
-    modo: "Inhibidor de la succión por estilete. Cero impacto a benéficos.",
-    pc: "1 día"
-  },
-  {
-    categoria: "vectores",
-    blanco: "Gusano Perforador del Fruto",
-    activo: "Clorantraniliprol 20% SC",
-    comercial: "Coragen",
-    grupo: "IRAC 28",
-    dosis: "15 – 20 mL",
-    modo: "Modulador receptor de rianodina. Ovicida y larvicida ingestión.",
-    pc: "1 día"
-  },
-  {
-    categoria: "hongos",
-    blanco: "Oídio / Cenicilla (Leveillula taurica)",
-    activo: "Azufre Micronizado 80% WP",
-    comercial: "Kumulus / Microthiol",
+    enfoque: "Acaristático Multisitio",
+    activo: "Azufre Micronizado Elemental 80% WP",
+    comercial: "Kumulus DF / Microthiol Special",
+    distribuidor: "Agrotodo / Disagro",
     grupo: "FRAC M02",
-    dosis: "250 – 300 g",
-    modo: "Multisitio preventivo. No aplicar a temperaturas >32 °C.",
-    pc: "0 días"
+    dosis100: "200 – 250 g",
+    dosis20: "40 – 50 g / mochila",
+    modo: "Preventivo de contacto al envés foliar. Aplicar en horas frescas (<28 °C). Cero riesgo de resistencia.",
+    pc: "0 días",
+    pcDias: 0
   },
   {
+    plan: "biologico",
+    categoria: "acaros",
+    blanco: "Ácaros y Oídio (Derribo Rápido)",
+    enfoque: "Bioracional Desecante",
+    activo: "Extracto de Canela (Cinnamaldehído 70%)",
+    comercial: "Cinnacure / E-Canela / Botánico",
+    distribuidor: "Casas Agrícolas Quíbor",
+    grupo: "Extracto Botánico",
+    dosis100: "150 – 200 mL",
+    dosis20: "30 – 40 mL / mochila",
+    modo: "Deshidrata la cutícula de ácaros y micelio de oídio al contacto físico. Inocuo para la fauna benéfica.",
+    pc: "0 días",
+    pcDias: 0
+  },
+  {
+    plan: "biologico",
+    categoria: "acaros",
+    blanco: "Limpieza de Melazas y Cutículas",
+    enfoque: "Tensioactivo Limpiador",
+    activo: "Sales Potásicas de Ácidos Grasos 50%",
+    comercial: "Bioclean / Jabón Potásico Quíbor",
+    distribuidor: "Agroquímicas Lara",
+    grupo: "Jabón Potásico",
+    dosis100: "300 – 400 mL",
+    dosis20: "60 – 80 mL / mochila",
+    modo: "Disuelve la capa cerosa de ninfas de mosca y ácaros y lava la fumagina. Facilita la acción de entomopatógenos.",
+    pc: "0 días",
+    pcDias: 0
+  },
+  {
+    plan: "biologico",
+    categoria: "vectores",
+    blanco: "Mosca Blanca, Trips y Pulgones",
+    enfoque: "Hongo Entomopatógeno",
+    activo: "Beauveria bassiana (Cepa autóctona)",
+    comercial: "Botanigard / Beauveril / Biostat UCLA",
+    distribuidor: "FUSAGRI / UCLA / Agrotodo",
+    grupo: "Microbiológico",
+    dosis100: "150 – 200 g",
+    dosis20: "30 – 40 g / mochila",
+    modo: "Conidias parasitan ninfas y adultos. Aplicar al atardecer (>16:30 h) para evitar degradación solar UV.",
+    pc: "0 días",
+    pcDias: 0
+  },
+  {
+    plan: "biologico",
+    categoria: "vectores",
+    blanco: "Repelencia y Supresión de Muda",
+    enfoque: "Regulador Natural (Limonoide)",
+    activo: "Extracto Puro de Neem (Azadiractina 1%)",
+    comercial: "Neem-X / NeemAzal / BioNeem",
+    distribuidor: "Agrotodo / Disagro",
+    grupo: "Botánico Bioracional",
+    dosis100: "150 – 200 mL",
+    dosis20: "30 – 40 mL / mochila",
+    modo: "Inhibidor de ecdisona (muda) y repelente de ovipostura. Aplicar perimetralmente en cortinas de malla.",
+    pc: "0 días",
+    pcDias: 0
+  },
+  {
+    plan: "biologico",
+    categoria: "lepidopteros",
+    blanco: "Gusano Perforador y Cogollero",
+    enfoque: "Bacteria Entomopatógena",
+    activo: "Bacillus thuringiensis (kurstaki / aizawai)",
+    comercial: "Dipel 2X / Thuricide / Bactospeine",
+    distribuidor: "Disagro / Agrotodo",
+    grupo: "IRAC 11A",
+    dosis100: "100 – 150 g",
+    dosis20: "20 – 30 g / mochila",
+    modo: "Cristal endotoxina paraliza el tracto digestivo de orugas al alimentarse. Inocuo para abejas y fauna útil.",
+    pc: "0 días",
+    pcDias: 0
+  },
+  {
+    plan: "biologico",
     categoria: "hongos",
-    blanco: "Oídio y Tizón Temprano",
-    activo: "Difenoconazol 25% EC",
-    comercial: "Score",
-    grupo: "FRAC 3",
-    dosis: "40 – 50 mL",
-    modo: "Triazol sistémico DMI. Acción curativa y erradicante.",
-    pc: "7 días"
+    blanco: "Enfermedades Radiculares (Fusarium/Pythium)",
+    enfoque: "Antagonista Fúngico de Suelo",
+    activo: "Trichoderma harzianum / asperellum",
+    comercial: "Trichosan / Tusal / FUSAGRI",
+    distribuidor: "FUSAGRI / Agrotodo",
+    grupo: "Fungicida Biológico",
+    dosis100: "150 g en drench",
+    dosis20: "30 g / mochila (cuello)",
+    modo: "Micoparasitismo y competencia de espacio en el bulbo húmedo. Inocular en fertirriego cada 21 días.",
+    pc: "0 días",
+    pcDias: 0
   },
   {
+    plan: "biologico",
     categoria: "hongos",
-    blanco: "Tizón Temprano (Alternaria solani)",
-    activo: "Clorotalonil 72% SC",
-    comercial: "Daconil / Bravo",
-    grupo: "FRAC M05",
-    dosis: "200 – 250 mL",
-    modo: "Contacto multisitio puro. Bloquea germinación de conidias.",
-    pc: "3 días"
+    blanco: "Oídio / Cenicilla (Leveillula)",
+    enfoque: "Fungistático de Contacto",
+    activo: "Bicarbonato de Potasio / Azufre Preventivo",
+    comercial: "Kumulus DF / Bicarbonato Técnico",
+    distribuidor: "Agroquímicas Quíbor",
+    grupo: "FRAC M02",
+    dosis100: "250 – 300 g",
+    dosis20: "50 – 60 g / mochila",
+    modo: "Altera el pH en la superficie de la hoja impidiendo la penetración de haustorios del oídio.",
+    pc: "0 días",
+    pcDias: 0
   },
   {
-    categoria: "hongos",
-    blanco: "Moho Gris (Botrytis cinerea)",
-    activo: "Boscalid 50% WG",
-    comercial: "Cantus",
-    grupo: "FRAC 7",
-    dosis: "50 – 60 g",
-    modo: "Inhibidor respiratorio complejo II SDHI. Clave en floración.",
-    pc: "3 días"
-  },
-  {
-    categoria: "hongos",
-    blanco: "Bacteriosis (Xanthomonas / Clavibacter)",
-    activo: "Oxicloruro Cobre + Mancozeb",
-    comercial: "Cobrethane / Cupravit",
-    grupo: "FRAC M01+M03",
-    dosis: "250 g + 200 g",
-    modo: "Bactericida y fungicida de contacto protector. Post-poda.",
-    pc: "7 días"
-  },
-  {
+    plan: "biologico",
     categoria: "virus",
     blanco: "Virus Rugoso (ToBRFV) y Mosaico (TMV)",
-    activo: "Leche en Polvo Descremada 10%",
-    comercial: "Leche descremada",
+    enfoque: "Inactivador Capsídico en Esclusa",
+    activo: "Leche en Polvo Descremada al 10%",
+    comercial: "Leche Descremada Comercial",
+    distribuidor: "Distribución Local",
     grupo: "Bioseguridad",
-    dosis: "100 g / L agua",
-    modo: "Inmersión de manos en la esclusa. Desactiva la cápside viral.",
-    pc: "Exento"
+    dosis100: "100 g / L agua",
+    dosis20: "Batea de esclusa",
+    modo: "Inmersión obligatoria de manos antes de ingresar. Las proteínas lácteas neutralizan la cápside viral.",
+    pc: "Exento",
+    pcDias: 0
   },
   {
+    plan: "biologico",
     categoria: "virus",
     blanco: "Desinfección de Tijeras y Pediluvios",
-    activo: "Amonio Cuaternario / Virkon S",
-    comercial: "Virkon S al 1%",
+    enfoque: "Viricida / Bactericida de Contacto",
+    activo: "Virkon S al 1% / Amonio Cuaternario",
+    comercial: "Virkon S / Saniquat 500",
+    distribuidor: "Disagro / Agrotodo",
     grupo: "Bioseguridad",
-    dosis: "10 g / L agua",
-    modo: "Inmersión de tijeras entre camellón y bandeja de pies en entrada.",
-    pc: "Exento"
+    dosis100: "10 g / L agua",
+    dosis20: "Pediluvio y tijeras",
+    modo: "Desinfección de tijeras entre camellones de tomate y bandejas de calzado en la doble puerta.",
+    pc: "Exento",
+    pcDias: 0
+  },
+
+  // =========================================================================
+  // 2. PROGRAMA QUÍMICO DE CHOQUE & RESCATE ROTACIONAL (IRAC / FRAC)
+  // =========================================================================
+  {
+    plan: "quimico",
+    categoria: "acaros",
+    blanco: "Araña Roja y Ácaro Blanco (Choque)",
+    enfoque: "Acaricida Translaminar",
+    activo: "Abamectina 1.8% EC",
+    comercial: "Vertimec / Acaramik / Agrimec",
+    distribuidor: "Syngenta / Agrotodo",
+    grupo: "IRAC 6",
+    dosis100: "75 – 100 mL",
+    dosis20: "15 – 20 mL / mochila",
+    modo: "Translaminar. Parálisis muscular del ácaro. Dirigir rigurosamente al envés de la hoja.",
+    pc: "3 días",
+    pcDias: 3
+  },
+  {
+    plan: "quimico",
+    categoria: "acaros",
+    blanco: "Huevos y Ninfas de Ácaro",
+    enfoque: "Ovicida-Larvicida Químico",
+    activo: "Hexitiazox 10% WP",
+    comercial: "Caesar / Nissorun",
+    distribuidor: "Arysta / UPL / Disagro",
+    grupo: "IRAC 10A",
+    dosis100: "50 – 60 g",
+    dosis20: "10 – 12 g / mochila",
+    modo: "Inhibidor de la muda. Corta el relevo generacional. Rotar estrictamente con IRAC 6.",
+    pc: "7 días",
+    pcDias: 7
+  },
+  {
+    plan: "quimico",
+    categoria: "acaros",
+    blanco: "Ácaro Blanco y Mosca Blanca (Ninfas)",
+    enfoque: "Inhibidor Síntesis de Lípidos",
+    activo: "Spiromesifen 24% SC",
+    comercial: "Oberon",
+    distribuidor: "Bayer CropScience / Disagro",
+    grupo: "IRAC 23",
+    dosis100: "60 – 80 mL",
+    dosis20: "12 – 16 mL / mochila",
+    modo: "Bloquea síntesis de ácidos grasos (LBI). Larga residualidad curativa y ovicida.",
+    pc: "3 días",
+    pcDias: 3
+  },
+  {
+    plan: "quimico",
+    categoria: "vectores",
+    blanco: "Trips Occidental (Frankliniella)",
+    enfoque: "Modulador Receptor Nicotínico",
+    activo: "Spinosad 48% SC / Spinetoram 6% SC",
+    comercial: "Tracer / Delegate",
+    distribuidor: "Corteva / Agrotodo",
+    grupo: "IRAC 5",
+    dosis100: "20 – 25 mL",
+    dosis20: "4 – 5 mL / mochila",
+    modo: "Activador alostérico nicotínico GABA. Aplicar al atardecer fresco en floración.",
+    pc: "1 día",
+    pcDias: 1
+  },
+  {
+    plan: "quimico",
+    categoria: "vectores",
+    blanco: "Mosca Blanca y Pulgones Adultos",
+    enfoque: "Neonicotinoide Sistémico",
+    activo: "Acetamiprid 20% SP",
+    comercial: "Mospilan",
+    distribuidor: "UPL / Disagro",
+    grupo: "IRAC 4A",
+    dosis100: "35 – 50 g",
+    dosis20: "7 – 10 g / mochila",
+    modo: "Sistémico acropétalo de choque. Rotar con IRAC 29 para evitar tolerancia de mosca.",
+    pc: "3 días",
+    pcDias: 3
+  },
+  {
+    plan: "quimico",
+    categoria: "vectores",
+    blanco: "Pulgones / Áfidos y Mosca",
+    enfoque: "Bloqueador Selectivo de Estilete",
+    activo: "Flonicamid 50% WG",
+    comercial: "Teppeki / Beleaf",
+    distribuidor: "ISK / Belchim / Disagro",
+    grupo: "IRAC 29",
+    dosis100: "15 – 20 g",
+    dosis20: "3 – 4 g / mochila",
+    modo: "Inhibe la alimentación en 30 minutos sin matar depredadores ni abejas.",
+    pc: "1 día",
+    pcDias: 1
+  },
+  {
+    plan: "quimico",
+    categoria: "lepidopteros",
+    blanco: "Gusano Perforador del Fruto",
+    enfoque: "Modulador Receptor Rianodina",
+    activo: "Clorantraniliprol 20% SC",
+    comercial: "Coragen / Rynaxypyr",
+    distribuidor: "FMC / Agrotodo",
+    grupo: "IRAC 28",
+    dosis100: "15 – 20 mL",
+    dosis20: "3 – 4 mL / mochila",
+    modo: "Ovi-larvicida de alta potencia. Protege racimos florales y frutos en desarrollo.",
+    pc: "1 día",
+    pcDias: 1
+  },
+  {
+    plan: "quimico",
+    categoria: "hongos",
+    blanco: "Oídio y Tizón Temprano",
+    enfoque: "Triazol Sistémico Curativo",
+    activo: "Difenoconazol 25% EC",
+    comercial: "Score",
+    distribuidor: "Syngenta / Agrotodo",
+    grupo: "FRAC 3",
+    dosis100: "40 – 50 mL",
+    dosis20: "8 – 10 mL / mochila",
+    modo: "Inhibidor de la desmetilación (DMI). Frena el avance de manchas necróticas.",
+    pc: "7 días",
+    pcDias: 7
+  },
+  {
+    plan: "quimico",
+    categoria: "hongos",
+    blanco: "Tizón Temprano (Alternaria solani)",
+    enfoque: "Fungicida Multisitio Protector",
+    activo: "Clorotalonil 72% SC",
+    comercial: "Daconil / Bravo",
+    distribuidor: "Syngenta / Disagro",
+    grupo: "FRAC M05",
+    dosis100: "200 – 250 mL",
+    dosis20: "40 – 50 mL / mochila",
+    modo: "Bloquea la germinación de conidias. Excelente adherencia foliar ante rocío.",
+    pc: "3 días",
+    pcDias: 3
+  },
+  {
+    plan: "quimico",
+    categoria: "hongos",
+    blanco: "Moho Gris (Botrytis cinerea)",
+    enfoque: "Inhibidor Respiratorio SDHI",
+    activo: "Boscalid 50% WG",
+    comercial: "Cantus",
+    distribuidor: "BASF / Agrotodo",
+    grupo: "FRAC 7",
+    dosis100: "50 – 60 g",
+    dosis20: "10 – 12 g / mochila",
+    modo: "Inhibidor complejo II mitocondrial. Clave en floración y heridas de despunte apical.",
+    pc: "3 días",
+    pcDias: 3
+  },
+  {
+    plan: "quimico",
+    categoria: "hongos",
+    blanco: "Bacteriosis (Xanthomonas / Clavibacter)",
+    enfoque: "Bactericida y Fungicida Protector",
+    activo: "Oxicloruro de Cobre + Mancozeb",
+    comercial: "Cobrethane / Cupravit",
+    distribuidor: "Disagro / Agrotodo",
+    grupo: "FRAC M01+M03",
+    dosis100: "250 g + 200 g",
+    dosis20: "50 g + 40 g / mochila",
+    modo: "Barrera protectora de iones Cu++ tras deschuponado y deshoje basal.",
+    pc: "7 días",
+    pcDias: 7
   }
 ];
 
@@ -2778,8 +2942,10 @@ function initProductionTab() {
   });
 
   updateProductionStage();
+  initSprayPlanControls();
   initSprayFilterButtons();
-  renderSprayMatrix("all");
+  updateSprayPlanBanner();
+  renderSprayMatrix();
 }
 
 function updateProductionStage() {
@@ -2791,7 +2957,7 @@ function updateProductionStage() {
   const lfPercent = isYacambu ? 6.5 : data.lf;
   const lfFactor = lfPercent / 100.0;
   const grossLiters = data.netLiters / (1.0 - lfFactor);
-  const dailyM3 = (grossLiters * 4400) / 7.0 / 1000.0;
+  const dailyM3 = (grossLiters * 2200) / 7.0 / 1000.0;
   const pulseQty = isYacambu ? Math.max(3, data.pulses - 1) : data.pulses;
   const pulseTime = isYacambu ? data.pulseTime - 2 : data.pulseTime;
 
@@ -2799,8 +2965,8 @@ function updateProductionStage() {
   let acidText = data.tankC.total;
   let acidDetail = data.tankC.detail;
   if (isYacambu) {
-    const rawVal = parseFloat(data.tankC.total.replace("~", "").replace(" L/sem", "")) || 22;
-    const reducedAcid = Math.max(3, Math.round(rawVal * 0.36));
+    const rawVal = parseFloat(data.tankC.total.replace("~", "").replace(" L/sem", "")) || 12.5;
+    const reducedAcid = Math.max(2, Math.round(rawVal * 0.36));
     acidText = `~${reducedAcid}.0 L/sem (-64% gasto)`;
     acidDetail = "Ácido Nítrico 60% reducido (agua dulce Yacambú con bajos bicarbonatos, CE = 0.5 dS/m)";
   }
@@ -2819,49 +2985,49 @@ function updateProductionStage() {
   const elKpiYieldTag = document.getElementById("disp-kpi-yield-tag");
 
   if (FarmState.fertilizerRegime === "granulado") {
-    if (elKpiYield) elKpiYield.textContent = "24.2 – 29.9 Ton";
-    if (elKpiYieldSub) elKpiYieldSub.textContent = "5.5 a 6.8 kg/planta (1.210 – 1.495 cajas | 60-65% 1ª)";
-    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 24.2 a 29.9 Ton (Granulado)";
+    if (elKpiYield) elKpiYield.textContent = "12.1 – 15.0 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "5.5 a 6.8 kg/planta (605 – 750 cajas | 60-65% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 12.1 a 15.0 Ton (Granulado)";
 
     if (fertAlertBox && fertAlertText) {
       fertAlertBox.className = "alert-box alert-caution";
       if (fertAlertIcon) fertAlertIcon.textContent = "⚠️";
-      fertAlertText.innerHTML = `<strong>Abonado Granulado Manual Edáfico (NPK 12-12-17 SOP + Sulfato de Potasio Granular):</strong> Aplicación manual a suelo descubierto cada 20 días en banda a 15 cm del tallo (32 g/planta = 140.8 kg/abonada = 3 sacos de 50 kg). Costo por saco 45% menor, pero causa <strong>merma productiva del 20-25% (24.2 a 29.9 Ton)</strong> por picos osmóticos de salinidad y absorción discontinua.`;
+      fertAlertText.innerHTML = `<strong>Abonado Granulado Manual Edáfico (NPK 12-12-17 SOP + Sulfato de Potasio Granular):</strong> Aplicación manual a suelo descubierto cada 20 días en banda a 15 cm del tallo (32 g/planta = 70.4 kg/abonada = 1.5 sacos de 50 kg). Costo por saco 45% menor, pero causa <strong>merma productiva del 20-25% (12.1 a 15.0 Ton)</strong> por picos osmóticos de salinidad y absorción discontinua.`;
     }
 
     if (stageIdx === 3) {
-      tankATotal = "1.10 kg/sem (Solo Quelato Fe)";
-      tankADetail = "Fe-EDDHA (6%): 1.10 kg inyectado en goteo | Calcio y Potasio aportados al suelo vía Nitrato de Calcio granular y Sulfato de Potasio (SOP) granulado comercial.";
-      tankBTotal = "3.00 kg/sem (Solo Foliar / B-Micro)";
-      tankBDetail = "Microelementos quelatados: 0.60 kg | Ácido Bórico: 0.30 kg | Fósforo, Magnesio y K de fondo en suelo vía NPK 12-12-17+2MgO SOP.";
+      tankATotal = "0.55 kg/sem (Solo Quelato Fe)";
+      tankADetail = "Fe-EDDHA (6%): 0.55 kg inyectado en goteo | Calcio y Potasio aportados al suelo vía Nitrato de Calcio granular y Sulfato de Potasio (SOP) granulado comercial.";
+      tankBTotal = "1.50 kg/sem (Solo Foliar / B-Micro)";
+      tankBDetail = "Microelementos quelatados: 0.30 kg | Ácido Bórico: 0.15 kg | Fósforo, Magnesio y K de fondo en suelo vía NPK 12-12-17+2MgO SOP.";
     }
   } else if (FarmState.fertilizerRegime === "hibrido") {
-    if (elKpiYield) elKpiYield.textContent = "31.5 – 35.5 Ton";
-    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.1 a 8.0 kg/planta (1.575 – 1.775 cajas | 72-76% 1ª)";
-    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 31.5 a 35.5 Ton (Híbrido)";
+    if (elKpiYield) elKpiYield.textContent = "15.8 – 17.8 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.1 a 8.0 kg/planta (790 – 890 cajas | 72-76% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 15.8 a 17.8 Ton (Híbrido)";
 
     if (fertAlertBox && fertAlertText) {
       fertAlertBox.className = "alert-box alert-success";
       if (fertAlertIcon) fertAlertIcon.textContent = "💡";
-      fertAlertText.innerHTML = `<strong>Estrategia Híbrida Óptima para Quíbor:</strong> Fondo granulado al preparar el camellón (NPK 12-12-17 SOP a 30 g/m lin) + Fertirriego hidrosoluble AIFA en floración y cosecha. Proyecta <strong>31.5 a 35.5 Ton (7.1 a 8.0 kg/pl)</strong> con excelente relación costo/beneficio en Venezuela.`;
+      fertAlertText.innerHTML = `<strong>Estrategia Híbrida Óptima para Quíbor:</strong> Fondo granulado al preparar el camellón (NPK 12-12-17 SOP a 30 g/m lin) + Fertirriego hidrosoluble AIFA en floración y cosecha. Proyecta <strong>15.8 a 17.8 Ton (7.1 a 8.0 kg/pl)</strong> con excelente relación costo/beneficio en Venezuela.`;
     }
 
     if (stageIdx === 3) {
-      tankATotal = "38.00 kg/sem";
-      tankADetail = "AIFA Nitrato de Calcio: 25.0 kg | AIFA Nitrato de Potasio: 12.0 kg | Fe-EDDHA (6%): 1.00 kg (complementa reserva de fondo en suelo).";
-      tankBTotal = "55.00 kg/sem";
-      tankBDetail = "AIFA Fructificación 12-6-36: 35.0 kg | AIFA MKP: 6.0 kg | K₂SO₄ soluble: 14.0 kg | AIFA MgSO₄: 10.0 kg.";
+      tankATotal = "19.00 kg/sem";
+      tankADetail = "AIFA Nitrato de Calcio: 12.5 kg | AIFA Nitrato de Potasio: 6.0 kg | Fe-EDDHA (6%): 0.50 kg (complementa reserva de fondo en suelo).";
+      tankBTotal = "27.50 kg/sem";
+      tankBDetail = "AIFA Fructificación 12-6-36: 17.5 kg | AIFA MKP: 3.0 kg | K₂SO₄ soluble: 7.0 kg | AIFA MgSO₄: 5.0 kg.";
     }
   } else {
     // "aifa" (100% hidrosoluble)
-    if (elKpiYield) elKpiYield.textContent = "33.0 – 37.4 Ton";
-    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.5 a 8.5 kg/planta (1.650 – 1.870 cajas | 75-80% 1ª)";
-    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 33.0 a 37.4 Ton (AIFA Hidrosoluble)";
+    if (elKpiYield) elKpiYield.textContent = "16.5 – 18.7 Ton";
+    if (elKpiYieldSub) elKpiYieldSub.textContent = "7.5 a 8.5 kg/planta (825 – 935 cajas | 75-80% 1ª)";
+    if (elKpiYieldTag) elKpiYieldTag.textContent = "Meta: 16.5 a 18.7 Ton (AIFA Hidrosoluble)";
 
     if (fertAlertBox && fertAlertText) {
       fertAlertBox.className = "alert-box alert-success";
       if (fertAlertIcon) fertAlertIcon.textContent = "✨";
-      fertAlertText.innerHTML = `<strong>Línea AIFA Hidrosoluble (Venezuela):</strong> Inyección continua y dosificada por cinta a 40 cm en 3 sectores (AIFA Fructificación 12-6-36 + Nitrato de Calcio AIFA + MKP AIFA). Eficiencia del 85-90% sin picos salinos. Proyecta <strong>7.5 a 8.5 kg/planta (33.0 a 37.4 Ton)</strong> con 75-80% fruta de Primera calidad.`;
+      fertAlertText.innerHTML = `<strong>Línea AIFA Hidrosoluble (Venezuela):</strong> Inyección continua y dosificada por cinta a 40 cm en 2 sectores (AIFA Fructificación 12-6-36 + Nitrato de Calcio AIFA + MKP AIFA). Eficiencia del 85-90% sin picos salinos. Proyecta <strong>7.5 a 8.5 kg/planta (16.5 a 18.7 Ton)</strong> con 75-80% fruta de Primera calidad.`;
     }
   }
 
@@ -2912,52 +3078,172 @@ function updateProductionStage() {
   }
 }
 
+let currentSprayPlan = "biologico"; // 'biologico' (Recomendado) | 'quimico' | 'mip'
+let currentSprayCategory = "all";
+
+function initSprayPlanControls() {
+  const planButtons = document.querySelectorAll("[data-spray-plan]");
+  planButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      planButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentSprayPlan = btn.getAttribute("data-spray-plan");
+      updateSprayPlanBanner();
+      renderSprayMatrix();
+    });
+  });
+}
+
+function updateSprayPlanBanner() {
+  const banner = document.getElementById("spray-plan-banner");
+  if (!banner) return;
+
+  banner.className = "spray-plan-banner";
+
+  if (currentSprayPlan === "biologico") {
+    banner.classList.add("banner-bio");
+    banner.innerHTML = `
+      <div style="flex:1; min-width:280px;">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem;">
+          <span class="tag" style="background:rgba(16,185,129,0.25); color:#34d399; font-weight:800; font-size:0.75rem;">⭐ PLAN PREVENTIVO RECOMENDADO (Base IPM)</span>
+          <span style="font-size:0.85rem; color:#f8fafc; font-weight:700;">Blindaje Fitosanitario Permanente en Casa de Malla 50 Mesh</span>
+        </div>
+        <p style="font-size:0.8rem; color:#cbd5e1; margin:0 0 0.45rem 0; line-height:1.45;">
+          Al retener físicamente al 98% de trips, moscas y polillas, la casa de malla permite operar con <strong>cero residuos químicos</strong>, preservando los ácaros depredadores naturales (<em>Phytoseiulus persimilis</em> y <em>Amblyseius swirskii</em>). La base se sustenta en hongos entomopatógenos, azufres protectores, jabones potásicos y extractos botánicos con <strong>0 días de carencia</strong> (cosecha diaria continua).
+        </p>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; font-size:0.72rem;">
+          <span class="tag" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);">⏱️ Carencia Promedio: 0 Días</span>
+          <span class="tag" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3);">🐝 Inocuo para Polinizadores</span>
+          <span class="tag" style="background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);">🛡️ Cero Riesgo de Resistencia</span>
+        </div>
+      </div>
+    `;
+  } else if (currentSprayPlan === "quimico") {
+    banner.classList.add("banner-chem");
+    banner.innerHTML = `
+      <div style="flex:1; min-width:280px;">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem;">
+          <span class="tag" style="background:rgba(245,158,11,0.25); color:#fbbf24; font-weight:800; font-size:0.75rem;">⚡ PROTOCOLO DE RESCATE QUÍMICO (IRAC / FRAC)</span>
+          <span style="font-size:0.85rem; color:#f8fafc; font-weight:700;">Rotación Estricta por Modo de Acción contra Resistencia en Quíbor</span>
+        </div>
+        <p style="font-size:0.8rem; color:#cbd5e1; margin:0 0 0.45rem 0; line-height:1.45;">
+          Intervención curativa de choque que se activa <strong>únicamente si el monitoreo supera los umbrales económicos de daño</strong> (ej. focos de ácaros &gt;5 ind/hoja). Prohibido aplicar el mismo grupo IRAC más de 2 veces consecutivas en el ciclo. Respete estrictamente los <strong>períodos de carencia (1 a 7 días)</strong> antes del corte comercial.
+        </p>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; font-size:0.72rem;">
+          <span class="tag" style="background:rgba(244,63,94,0.15); color:#f43f5e; border:1px solid rgba(244,63,94,0.3);">⚠️ Respetar Carencia (1 a 7 días)</span>
+          <span class="tag" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);">🔄 Rotar 7 Familias Químicas</span>
+          <span class="tag" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3);">🥽 Equipo de Protección Obligatorio</span>
+        </div>
+      </div>
+    `;
+  } else {
+    banner.classList.add("banner-mip");
+    banner.innerHTML = `
+      <div style="flex:1; min-width:280px;">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap; margin-bottom:0.3rem;">
+          <span class="tag" style="background:rgba(56,189,248,0.25); color:#38bdf8; font-weight:800; font-size:0.75rem;">🔄 MANEJO INTEGRADO DE PLAGAS (MIP Completo)</span>
+          <span style="font-size:0.85rem; color:#f8fafc; font-weight:700;">Visión Integral: Barrera de Malla + Base Biológica + Rescate Químico Rotacional</span>
+        </div>
+        <p style="font-size:0.8rem; color:#cbd5e1; margin:0 0 0.45rem 0; line-height:1.45;">
+          Muestra la matriz completa de 21 herramientas fitosanitarias disponibles en Venezuela para el ciclo de 2.200 plantas de tomate en Quíbor. Prioriza siempre el control biológico y activa el químico solo ante contingencias puntuales.
+        </p>
+        <div style="display:flex; gap:0.4rem; flex-wrap:wrap; font-size:0.72rem;">
+          <span class="tag" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);">🌿 10 Herramientas Biológicas</span>
+          <span class="tag" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);">⚡ 11 Rescates Químicos</span>
+          <span class="tag" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3);">🛡️ Bioseguridad ToBRFV</span>
+        </div>
+      </div>
+    `;
+  }
+}
+
 function initSprayFilterButtons() {
   const buttons = document.querySelectorAll("[data-spray-filter]");
   buttons.forEach(btn => {
     btn.addEventListener("click", () => {
       buttons.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      const filter = btn.getAttribute("data-spray-filter");
-      renderSprayMatrix(filter);
+      currentSprayCategory = btn.getAttribute("data-spray-filter");
+      renderSprayMatrix();
     });
   });
 }
 
-function renderSprayMatrix(filter = "all") {
+function renderSprayMatrix() {
   const tbody = document.getElementById("spray-table-body");
   if (!tbody) return;
 
   tbody.innerHTML = "";
 
-  const filtered = filter === "all" 
-    ? SPRAY_MATRIX 
-    : SPRAY_MATRIX.filter(item => item.categoria === filter);
+  // 1. Filtrar por Plan
+  let filtered = SPRAY_MATRIX.filter(item => {
+    if (currentSprayPlan === "mip") return true;
+    if (currentSprayPlan === "biologico") {
+      return item.plan === "biologico" || item.plan === "bioseguridad";
+    }
+    if (currentSprayPlan === "quimico") {
+      return item.plan === "quimico" || item.plan === "bioseguridad";
+    }
+    return true;
+  });
+
+  // 2. Filtrar por Categoría
+  if (currentSprayCategory !== "all") {
+    filtered = filtered.filter(item => item.categoria === currentSprayCategory);
+  }
+
+  if (filtered.length === 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td colspan="8" style="text-align:center; padding:1.5rem; color:#94a3b8;">No se encontraron registros para este filtro bajo el plan seleccionado.</td>`;
+    tbody.appendChild(tr);
+    return;
+  }
 
   filtered.forEach(item => {
     const tr = document.createElement("tr");
 
-    let badgeColor = "#38bdf8";
-    let badgeBg = "rgba(56,189,248,0.15)";
-    if (item.categoria === "acaros") {
-      badgeColor = "#f43f5e";
-      badgeBg = "rgba(244,63,94,0.2)";
-    } else if (item.categoria === "virus") {
-      badgeColor = "#10b981";
-      badgeBg = "rgba(16,185,129,0.2)";
-    } else if (item.categoria === "hongos") {
-      badgeColor = "#f59e0b";
-      badgeBg = "rgba(245,158,11,0.2)";
+    // Badge Enfoque
+    let planBadge = `<span class="tag" style="background:rgba(16,185,129,0.2); color:#34d399; font-weight:700; font-size:0.7rem;">Biológico</span>`;
+    if (item.plan === "quimico") {
+      planBadge = `<span class="tag" style="background:rgba(245,158,11,0.2); color:#fbbf24; font-weight:700; font-size:0.7rem;">Químico Choque</span>`;
+    } else if (item.plan === "bioseguridad" || item.categoria === "virus") {
+      planBadge = `<span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-weight:700; font-size:0.7rem;">Bioseguridad</span>`;
+    }
+
+    // Badge Carencia
+    let pcBadge = `<span class="status-badge" style="background:rgba(16,185,129,0.2); color:#34d399; font-weight:700; border:1px solid rgba(16,185,129,0.3);">${item.pc}</span>`;
+    if (item.pcDias >= 7) {
+      pcBadge = `<span class="status-badge" style="background:rgba(244,63,94,0.2); color:#f43f5e; font-weight:700; border:1px solid rgba(244,63,94,0.4);">${item.pc}</span>`;
+    } else if (item.pcDias > 0) {
+      pcBadge = `<span class="status-badge" style="background:rgba(245,158,11,0.2); color:#fbbf24; font-weight:700; border:1px solid rgba(245,158,11,0.3);">${item.pc}</span>`;
+    }
+
+    // Grupo IRAC / FRAC color
+    let groupBadge = `<span class="tag" style="background:rgba(255,255,255,0.06); color:#cbd5e1; font-size:0.72rem; padding:0.15rem 0.45rem; border:1px solid rgba(255,255,255,0.1);">${item.grupo}</span>`;
+    if (item.grupo.includes("IRAC")) {
+      groupBadge = `<span class="tag" style="background:rgba(168,85,247,0.2); color:#c084fc; border:1px solid rgba(168,85,247,0.35); font-size:0.72rem; font-weight:700;">${item.grupo}</span>`;
+    } else if (item.grupo.includes("FRAC")) {
+      groupBadge = `<span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; border:1px solid rgba(56,189,248,0.35); font-size:0.72rem; font-weight:700;">${item.grupo}</span>`;
     }
 
     tr.innerHTML = `
-      <td><strong>${item.blanco}</strong></td>
-      <td>${item.activo}</td>
-      <td style="color:#cbd5e1;">${item.comercial}</td>
-      <td><span class="tag" style="background:${badgeBg}; color:${badgeColor}; border:1px solid ${badgeColor}40; font-size:0.75rem; padding:0.2rem 0.5rem;">${item.grupo}</span></td>
-      <td><strong style="color:#f8fafc;">${item.dosis}</strong></td>
-      <td style="font-size:0.8rem; color:#94a3b8;">${item.modo}</td>
-      <td><span class="status-badge" style="background:rgba(255,255,255,0.06); color:#f8fafc; font-size:0.8rem;">${item.pc}</span></td>
+      <td>
+        <strong style="color:#ffffff; font-size:0.85rem;">${item.blanco}</strong>
+        <div style="font-size:0.72rem; color:#94a3b8; margin-top:0.2rem;">${item.enfoque || ''}</div>
+      </td>
+      <td>${planBadge}</td>
+      <td style="font-size:0.8rem; color:#f1f5f9;">${item.activo}</td>
+      <td>
+        <strong style="color:#38bdf8; font-size:0.82rem;">${item.comercial}</strong>
+        <div style="font-size:0.68rem; color:#64748b; margin-top:0.15rem;">${item.distribuidor || 'Disponible en Lara'}</div>
+      </td>
+      <td>${groupBadge}</td>
+      <td>
+        <span class="spray-dose-badge">${item.dosis100}</span>
+        <span class="spray-dose-backpack">${item.dosis20}</span>
+      </td>
+      <td style="font-size:0.78rem; color:#cbd5e1; max-width:240px; line-height:1.35;">${item.modo}</td>
+      <td>${pcBadge}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -2997,11 +3283,11 @@ function calculateWellValidation() {
 
   FarmState.setState({ wellFlowLs: flowLs });
 
-  // 1. Demanda diaria pico para 4.400 plantas de tomate
+  // 1. Demanda diaria pico para 2.200 plantas de tomate
   // Neta: 18.5 L/planta/semana = 2.643 L/planta/día
   const lfFrac = Math.min(Math.max(lfPercent / 100.0, 0.05), 0.40);
   const grossLitersPlantDay = FarmState.grossLitersPlantDay || (2.642857 / (1.0 - lfFrac));
-  const dailyDemandM3 = FarmState.dailyDemandM3 || ((4400 * grossLitersPlantDay) / 1000.0);
+  const dailyDemandM3 = FarmState.dailyDemandM3 || ((2200 * grossLitersPlantDay) / 1000.0);
 
   // 2. Caudal horario del pozo (m³/h)
   const flowM3h = flowLs * 3.6;
@@ -3057,7 +3343,7 @@ function calculateWellValidation() {
     if (flowLs >= 2.0 && autonomyDays >= 3.0) {
       boxVerdict.className = "alert-box alert-success";
       iconVerdict.textContent = "✅";
-      titleVerdict.textContent = "Pozo Aprobado para Casa de Malla (2.000 m²)";
+      titleVerdict.textContent = "Pozo Aprobado para Casa de Malla (1.000 m²)";
       descVerdict.textContent = `El caudal de ${flowLs.toFixed(2)} L/s repone la demanda pico (${dailyDemandM3.toFixed(2)} m³/día) en apenas ${pumpHours.toFixed(2)} horas al día, con ${autonomyDays.toFixed(1)} días de reserva protegida en reservorio.`;
     } else if (flowLs >= 1.2) {
       boxVerdict.className = "alert-box alert-warning";
@@ -3087,7 +3373,7 @@ const QUIBOR_AQUIFER = {
 
 const WELL_LOCATIONS = {
   ARTESANAL: {
-    name: "Pozo Artesanal a Pico Ø 80 cm (Bomba 1\" Continuo 24/7)",
+    name: "Pozo Artesanal a Pico Ø 80 cm (Bomba Sumergible 5.5 HP — Tandas al Achique)",
     cota: 700,
     depthDefault: 60,
     neBase: 52.0,
@@ -3097,15 +3383,15 @@ const WELL_LOCATIONS = {
     lf: 23.0,
     adductionCost: 0,
     adductionDesc: "Aducción directa 0 m al reservorio de 80 m³",
-    pumpHp: "1.5 HP (Sumergible 1\" Continuo 24/7)",
+    pumpHp: "5.5 HP (Sumergible Industrial 120m — Tandas al Achique)",
     pumpDepth: 58,
-    hmtBase: 63.5,
+    hmtBase: 65.0,
     isArtesanal: true,
     layers: [
       { depth: "0 – 15 m", desc: "Brocal y fuste superior excavado a pico Ø 80 cm encofrado con formaletas de 3 m", comp: "Formaletas 3m", cls: "layer-sanitary" },
       { depth: "15 – 50 m", desc: "Fuste excavado a pico Ø 80 cm encofrado en concreto y arena (Nivel actual 50 m)", comp: "Fuste Existente", cls: "layer-confining" },
-      { depth: "50 – 55 m", desc: "<strong>Primer contacto freático (húmedo / recarga lateral)</strong> | Nivel Estático NE ≈ 52 m", comp: "Afloramiento Somero", cls: "layer-aquifer-1" },
-      { depth: "55 – 60 m", desc: "<strong>Profundización proyectada a pico (+10 m) en arenas con gravilla</strong> | Encofrado formaletas 3m", comp: "Profundización 10m", cls: "layer-aquifer-main" }
+      { depth: "50 – 55 m", desc: "<strong>Primer contacto freático (húmedo / recarga lateral 0.8-1.2 L/s)</strong> | NE ≈ 52 m", comp: "Afloramiento Somero", cls: "layer-aquifer-1" },
+      { depth: "55 – 60 m", desc: "<strong>Profundización proyectada a pico (+10 m) en gravillas</strong> | Bomba 5.5 HP a 58 m con sondas", comp: "Profundización 10m", cls: "layer-aquifer-main" }
     ]
   },
   A60: {
@@ -3444,17 +3730,17 @@ function initWellDrillingCalculator() {
       gravelBags = 48;
       sealVol = 0.50;
 
-      // Presupuesto artesanal: excavación a pico a $100/m + formaletas 3m a $40 ($13.33/m) + bomba 1.5 HP (1") + control
+      // Presupuesto artesanal: excavación a pico a $100/m + formaletas 3m a $40 ($13.33/m) + electrobomba 5.5 HP (120m) + VFD + PEAD 2"
       const costDeepening = 10.0 * 100.0; // $1.000 (excavación manual a pico Ø 80 cm a $100/m)
       const costLining = (10.0 / 3.0) * 40.0; // ~$133.33 (encofrado formaletas 3m: $40 c/u entre concreto y arena)
-      const costPumpArtesanal = 850.0;   // Bomba sumergible 1.5 HP descarga 1" continuo 24/7 con sondas de pozo
-      const costVfdArtesanal = 650.0;    // Tablero de mando automático con guardamotor y relé
-      const costColumnArtesanal = 55.0 * 4.5; // Tubería PEAD PN10 1" ($247.50)
-      const costAirliftArtesanal = 350.0;// Limpieza y desarenado con compresor
+      const costPumpArtesanal = 1950.0;  // Electrobomba sumergible industrial 5.5 HP trifásica 220V/440V (idéntica a Opción A1 120m)
+      const costVfdArtesanal = 950.0;    // Tablero con Variador de Frecuencia (VFD), doble sonda de pozo (alta/baja) y corte por marcha en seco
+      const costColumnArtesanal = 55.0 * 12.0; // Tubería de columna PEAD 2" PN16 reforzada ($660.00)
+      const costAirliftArtesanal = 350.0;// Limpieza y desarenado con compresor de aire (Air-Lift artesanal)
       const costGravelArtesanal = 1.5 * 65.0; // Tapón de fondo gravilla cuarzosa 1/4" ($97.50)
       subtotal = costDeepening + costLining + costPumpArtesanal + costVfdArtesanal + costColumnArtesanal + costAirliftArtesanal + costGravelArtesanal;
       const contingencies = subtotal * 0.05;
-      totalCost = subtotal + contingencies; // ~$3.494 USD
+      totalCost = subtotal + contingencies; // ~$5.345 USD
     } else {
       // Perforación industrial mecanizada con máquina Ø 300 mm: $70/m con grava y entubado incluidos
       if (depth <= 90) {
@@ -3560,7 +3846,7 @@ function initWellDrillingCalculator() {
     if (elPumpSub) {
       let pipeClass = "PEAD PN16 o Sch 40";
       if (locKey === "ARTESANAL") {
-        pipeClass = "PEAD 1\" PN10 (a 58 m) - Régimen Continuo 24/7";
+        pipeClass = "PEAD 2\" PN16 (a 55 m) - Tandas al Achique con Sondas";
       } else if (correctedHMT > 100) {
         pipeClass = `Acero Sch 40 o PEAD PN16 (a ${locData.pumpDepth} m)`;
       } else {
@@ -3573,7 +3859,7 @@ function initWellDrillingCalculator() {
     if (elTotalCost) elTotalCost.textContent = `$${totalCost.toLocaleString("es-ES", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USD`;
     if (elSummaryDesc) {
       if (locKey === "ARTESANAL") {
-        elSummaryDesc.textContent = `Profundización manual a pico de 50 m a 60 m (+10 m a $100/m) en fuste Ø 80 cm, encofrado con formaletas de 3 m ($40 c/u entre concreto y arena). Con electrobomba sumergible de 1.5 HP y descarga de 1" (0.75 L/s = 45 L/min = 2.7 m³/h), EL BOMBEO CONTINUO 24/7 ES 100% VIABLE: la extracción no supera la recarga lateral del estrato (0.8 - 1.2 L/s), estabilizando el nivel dinámico permanentemente a 57.0 m (1.5 m de agua sobre la bomba). En 24 horas continuas produce 64.8 m³/día, superando con creces los 18.5 m³/día requeridos por el cultivo en 2.000 m², con un Capex de solo ~$3.490 USD.`;
+        elSummaryDesc.textContent = `Profundización manual a pico de 50 m a 60 m (+10 m a $100/m) en fuste Ø 80 cm, encofrado con formaletas de 3 m ($40 c/u). Equipada con la MISMA electrobomba sumergible industrial de 5.5 HP (descarga 2", 150 L/min) proyectada para el pozo de 120 m, operando en RÉGIMEN DE TANDAS AL ACHIQUE: extrae ~2.200 L en 15 minutos achicando la columna activa hasta la sonda de nivel baja (protección contra marcha en seco en el VFD); el estrato aluvial se recarga lateralmente en 40-50 min (0.8 - 1.2 L/s). Con 8 a 10 tandas al día cosecha 18 a 22 m³/día hacia el reservorio regulador de 80 m³ (duplica el consumo pico de 9.25 m³/día de la nave de 1.000 m²), con un Capex de solo ~$5.350 USD y 100% de reutilización del equipo para el futuro pozo de 120 m.`;
       } else {
         elSummaryDesc.textContent = `Perforación con máquina Ø 300 mm a $70/metro lineal (incluye perforación, entubado y empaque de grava), más ${screenLen}m filtros ${screenType === "johnson" ? "Johnson AISI 304" : "Puente"}, sello tremie, perfilaje SP/Res, air-lift, bomba ${locData.pumpHp} y ${locData.adductionDesc}.`;
       }
@@ -3609,15 +3895,15 @@ function initWellDrillingCalculator() {
       let budgetItems = [];
 
       if (locKey === "ARTESANAL") {
-        if (budgetTitle) budgetTitle.textContent = "📋 Presupuesto Itemizado: Pozo Artesanal a Pico Ø 80 cm (+10 m con Bomba 1\")";
-        if (budgetBadge) budgetBadge.textContent = "Bombeo 24/7 Viable | Ahorro ~$21.400 USD";
+        if (budgetTitle) budgetTitle.textContent = "📋 Presupuesto Itemizado: Pozo Artesanal a Pico Ø 80 cm (+10 m con Bomba Industrial 5.5 HP)";
+        if (budgetBadge) budgetBadge.textContent = "Bomba 5.5 HP 100% Transferible a 120m | Ahorro ~$19.530 USD";
 
         budgetItems = [
           { num: "01", desc: "Profundización manual de fuste a pico (+10 m) a Ø 80 cm en gravillas y arenas aluviales con torno de izado", qty: "10 m", pu: 100.00, total: 1000.00 },
           { num: "02", desc: "Encofrado de fuste con formaletas de 3 metros (concreto y arena vaciado in situ a $40 c/u)", qty: "10 m (3.3 u)", pu: 13.33, total: 133.33 },
-          { num: "03", desc: "Electrobomba sumergible de pozo 1.5 HP monofásica 220V (Descarga 1\", 45 L/min a 65 mca para 24/7 continuo)", qty: "1 u.", pu: 850.00, total: 850.00 },
-          { num: "04", desc: "Tablero automático con relé de nivel, sondas de pozo (alta/baja), guardamotor y contactor", qty: "1 u.", pu: 650.00, total: 650.00 },
-          { num: "05", desc: "Tubería de impulsión PEAD 1\" PN10 (55 m) con uniones rápidas, válvula check y codos a reservorio", qty: "55 m", pu: 4.50, total: 247.50 },
+          { num: "03", desc: "Electrobomba sumergible industrial 5.5 HP trifásica 220V/440V (idéntica a Opción A1 120m, descarga 2\", 150 L/min a 65-90 mca)", qty: "1 u.", pu: 1950.00, total: 1950.00 },
+          { num: "04", desc: "Tablero de control con Variador de Frecuencia (VFD), doble sonda de nivel (alta/baja) y protección contra marcha en seco", qty: "1 u.", pu: 950.00, total: 950.00 },
+          { num: "05", desc: "Tubería de columna de impulsión PEAD 2\" PN16 (55 m) con uniones reforzadas, válvula check y codos a reservorio", qty: "55 m", pu: 12.00, total: 660.00 },
           { num: "06", desc: "Limpieza y purga inicial con compresor de aire (Air-Lift artesanal), desarenado y aforo volumétrico", qty: "1 gl.", pu: 350.00, total: 350.00 },
           { num: "07", desc: "Empaque de fondo con gravilla cuarzosa lavada 1/4\" (tapón de fondo anti-arenamiento)", qty: "1.5 m³", pu: 65.00, total: 97.50 }
         ];

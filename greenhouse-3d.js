@@ -1,7 +1,7 @@
 /**
  * ====================================================================
  * LA CIGARRONERA — Motor 3D Interactivo Estilo Blender (WebGL / Three.js)
- * Estructura: Casa de Malla 2.000 m² (20.00 m Ancho × 100.00 m Fondo)
+ * Estructura: Casa de Malla 1.000 m² (20.00 m Ancho × 50.00 m Fondo)
  * Coordenadas: 9°53'20.0"N 69°35'35.0"W (Valle de Quíbor, Lara)
  * ====================================================================
  */
@@ -16,19 +16,19 @@ class Greenhouse3DViewer {
 
     this.options = Object.assign({
       width: 20.0,      // Ancho transversal (m)
-      length: 100.0,    // Fondo longitudinal (m)
+      length: 50.0,     // Fondo longitudinal (m)
       height: 3.00,     // Altura libre pilares (m)
       trellisHeight: 2.00, // Altura espaldar Hortomalla (m)
       numBays: 5,       // 5 franjas de 4.00 m
       bayWidth: 4.0,    // Ancho de cada rollo en cubierta (m)
-      pillarSpacingZ: 3.0 // Espaciamiento postes en fondo (m) — Cuadrícula 4.0m × 3.0m
+      pillarSpacingZ: 2.94 // Espaciamiento postes en fondo (m) — Cuadrícula 4.0m × 2.94m (17 vanos = 108 pilares)
     }, options);
 
     // Estado del visor
     this.isAutoRotating = false;
     this.shadingMode = 'solid'; // 'solid' | 'wireframe' | 'xray'
     this.isWalkMode = false;
-    this.isSunlightMode = true;
+    this.isSunlightMode = false;
     this.meshOpacity = 0.45;
     
     // Grupos de capas para inspección
@@ -131,9 +131,9 @@ class Greenhouse3DViewer {
   }
 
   updateSceneBackground() {
-    // Escena diurna permanente para máxima visibilidad (Modo Luz / Campo)
-    this.scene.background = new THREE.Color(0xf1f5f9);
-    this.scene.fog = new THREE.FogExp2(0xf1f5f9, 0.0035);
+    // Escena nocturna técnica Cockpit Agro (Obsidiana Vegetal)
+    this.scene.background = new THREE.Color(0x090e0b);
+    this.scene.fog = new THREE.FogExp2(0x090e0b, 0.0035);
   }
 
   /**
@@ -154,7 +154,7 @@ class Greenhouse3DViewer {
     const W = this.options.width;
     const L = this.options.length;
 
-    // Plano de suelo interior (huella 2.000 m²)
+    // Plano de suelo interior (huella 1.000 m²)
     const groundGeo = new THREE.PlaneGeometry(W, L);
     const groundMat = new THREE.MeshStandardMaterial({
       color: this.isSunlightMode ? 0xe2e8f0 : 0x0a101f,
@@ -196,8 +196,8 @@ class Greenhouse3DViewer {
     const stepZ = this.options.pillarSpacingZ;
 
     const xCoords = [-10, -6, -2, 2, 6, 10]; // 6 líneas de pilares = 5 naves de 4m
-    const zSteps = Math.round(L / stepZ);     // 33 vanos de 3.00 m nominal = 34 líneas en Z (204 pilares Sch 40)
-    const actualStepZ = L / zSteps;           // 100.0 / 33 = 3.0303 m (módulo 3.0 m)
+    const zSteps = Math.round(L / stepZ);     // 17 vanos de 2.94 m nominal = 18 líneas en Z (108 pilares Sch 40)
+    const actualStepZ = L / zSteps;           // 50.0 / 17 = 2.9412 m (módulo 2.94 m)
 
     // Geometrías compartidas
     const pillarGeo = new THREE.CylinderGeometry(0.04, 0.04, H, 12);
@@ -498,11 +498,11 @@ class Greenhouse3DViewer {
       dimMat
     );
 
-    // B. Cota de Fondo Longitudinal: 100.00 m (33 Vanos × 3.00 m = 204 Pilares)
+    // B. Cota de Fondo Longitudinal: 50.00 m (17 Vanos × 2.94 m = 108 Pilares)
     this.createDimensionLine(
       new THREE.Vector3(W / 2 + 1.5, 0.3, -L / 2),
       new THREE.Vector3(W / 2 + 1.5, 0.3, L / 2),
-      '100.00 m Fondo (33 Vanos × 3.00 m — 204 Pilares)',
+      '50.00 m Fondo (17 Vanos × 2.94 m — 108 Pilares)',
       dimMat
     );
 
@@ -666,31 +666,31 @@ class Greenhouse3DViewer {
 
     switch (presetName) {
       case 'iso': // Vista Isométrica 3D (Blender [0])
-        targetPos.set(45, 32, 60);
+        targetPos.set(32, 24, 38);
         break;
       case 'front': // Vista Frontal Transversal 20m (Blender [1])
-        targetPos.set(0, 4.0, 75);
+        targetPos.set(0, 4.0, 45);
         break;
       case 'back':
-        targetPos.set(0, 4.0, -75);
+        targetPos.set(0, 4.0, -45);
         break;
-      case 'side': // Vista Lateral Este 100m (Blender [3])
-        targetPos.set(65, 5.0, 0);
+      case 'side': // Vista Lateral Este 50m (Blender [3])
+        targetPos.set(45, 5.0, 0);
         break;
       case 'side-w': // Vista Lateral Oeste
-        targetPos.set(-65, 5.0, 0);
+        targetPos.set(-45, 5.0, 0);
         break;
       case 'top': // Vista Cenital Techo (Blender [7])
-        targetPos.set(0, 110, 0);
+        targetPos.set(0, 65, 0);
         targetLookAt.set(0, 0, 0);
         break;
       case 'walk': // Modo Paseo Interior (Cámara a 1.70m dentro del cultivo)
         this.isWalkMode = true;
-        targetPos.set(-2.0, 1.70, -35.0);
-        targetLookAt.set(-2.0, 1.70, 20.0);
+        targetPos.set(-2.0, 1.70, -20.0);
+        targetLookAt.set(-2.0, 1.70, 15.0);
         break;
       default:
-        targetPos.set(45, 32, 60);
+        targetPos.set(32, 24, 38);
     }
 
     if (this.controls) {
@@ -800,7 +800,7 @@ class Greenhouse3DViewer {
     this.renderer.render(this.scene, this.camera);
     const dataURL = this.renderer.domElement.toDataURL('image/png');
     const link = document.createElement('a');
-    link.download = 'plano_3d_invernadero_quibor_2000m2.png';
+    link.download = 'plano_3d_invernadero_quibor_1000m2.png';
     link.href = dataURL;
     link.click();
   }

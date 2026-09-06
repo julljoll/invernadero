@@ -589,22 +589,22 @@ Precios referenciales validados de contratistas de perforación mecanizada rotar
 
 ---
 
-### 8.7.2. Cómputos Métricos y Presupuesto Detallado: Opción Pozo Artesanal a Pico (+10 m con Bomba de 1")
+### 8.7.2. Cómputos Métricos y Presupuesto Detallado: Opción Pozo Artesanal a Pico (+10 m con Bomba Industrial 5.5 HP)
 
-Presupuesto de inversión real en campo para profundizar el pozo artesanal existente de 50 m a 60 m (+10 m) a pico, encofrado con formaletas de 3 metros y equipado con bomba sumergible de 1.5 HP (descarga 1" continuo 24/7):
+Presupuesto de inversión real en campo para profundizar el pozo artesanal existente de 50 m a 60 m (+10 m) a pico, encofrado con formaletas de 3 metros y equipado con la misma electrobomba sumergible industrial de 5.5 HP proyectada para el pozo de 120 m (operando en régimen de tandas al achique hacia reservorio de 80 m³):
 
 | Ítem | Descripción de la Partida | Unidad | Cantidad | P. Unitario (USD) | Total (USD) |
 | :---: | :--- | :---: | :---: | :---: | :---: |
 | **01** | Profundización manual de fuste a pico (+10 m) a Ø 80 cm en gravillas y arenas aluviales con torno de izado y balde de extracción. | Metro | 10.00 | $100,00 | $1.000,00 |
 | **02** | Encofrado de fuste con formaletas de 3 metros (concreto y arena vaciado in situ a $40 c/u de formaleta de 3 m). | Metro (u) | 10.00 (3.33 u) | $13,33 | $133,33 |
-| **03** | Suministro de electrobomba sumergible de 1.5 HP monofásica 220V (Descarga 1", caudal continuo 45 L/min a 65 mca) con cable sumergible. | Unidad | 1.00 | $850,00 | $850,00 |
-| **04** | Tablero de automatización eléctrica con relé de nivel, sondas de pozo (alta/baja), guardamotor y temporizador para ciclos de reposición. | Global | 1.00 | $650,00 | $650,00 |
-| **05** | Tubería de impulsión en PEAD 1" PN10 (55 m) con conectores de compresión rápidos, válvula de retención check y codos a reservorio. | Metro | 55.00 | $4,50 | $247,50 |
+| **03** | Electrobomba sumergible industrial de 5.5 HP trifásica 220V/440V (idéntica a Opción A1 120m, descarga 2", 150 L/min a 65-90 mca). | Unidad | 1.00 | $1.950,00 | $1.950,00 |
+| **04** | Tablero de control con Variador de Frecuencia (VFD), doble sonda de pozo (alta/baja), relé de nivel y protección contra marcha en seco. | Global | 1.00 | $950,00 | $950,00 |
+| **05** | Tubería de columna de impulsión en PEAD 2" PN16 (55 m) con uniones reforzadas, válvula de retención check pesada y codos a reservorio. | Metro | 55.00 | $12,00 | $660,00 |
 | **06** | Limpieza y purga inicial de fondo con compresor de aire (Air-Lift artesanal), purga de lodos finos y aforo volumétrico. | Global | 1.00 | $350,00 | $350,00 |
 | **07** | Suministro y colocación de tapón filtrante de gravilla cuarzosa lavada 1/4" en el fondo (1.50 m³) anti-arenamiento. | m³ | 1.50 | $65,00 | $97,50 |
-| **SUBTOTAL** | **Habilitación Integral de Pozo Artesanal a Pico Ø 80 cm a 60 m con Bomba de 1" (24/7)** | | | | **$3.328,33** |
-| **IMPREVISTOS** | Contingencias locales y maniobras de instalación (5%) | | | | **$166,42** |
-| **TOTAL GENERAL** | **Inversión Llave en Mano Pozo Artesanal a Pico con Bomba de 1" hacia Reservorio de 80 m³** | | | | **$3.494,75** |
+| **SUBTOTAL** | **Habilitación Integral de Pozo Artesanal a Pico Ø 80 cm a 60 m con Bomba Industrial 5.5 HP** | | | | **$5.090,83** |
+| **IMPREVISTOS** | Contingencias locales y maniobras de instalación (5%) | | | | **$254,54** |
+| **TOTAL GENERAL** | **Inversión Llave en Mano Pozo Artesanal con Bomba 5.5 HP (100% Transferible a 120m)** | | | | **$5.345,37** |
 
 ---
 
@@ -681,51 +681,46 @@ $$t_{achique} = \frac{4.021\text{ Litros}}{150\text{ L/min}} \approx \mathbf{26.
 
 ---
 
-### 9.3. Análisis de Viabilidad Hidrodinámica: Bomba de 1" en Régimen Continuo 24/7
+### 9.3. Análisis de Viabilidad Hidrodinámica: Bomba Industrial 5.5 HP en Régimen de Tandas al Achique
 
-#### A. Demanda y Caudal de una Bomba Sumergible de 1" (1.5 HP):
-Una electrobomba sumergible de **$1.5\text{ HP}$** multietapa (4" exterior) con descarga en tubería de **$1''$** ($25.4\text{ mm}$ de diámetro interior) operando a una carga manométrica total de $63.5\text{ mca}$ entrega:
-$$Q_{\text{bomba\_1"}} = 0.70\text{ a }0.80\text{ L/s} \approx \mathbf{0.75\text{ L/s}} = \mathbf{45\text{ Litros/minuto}} = \mathbf{2.70\text{ m}^3\text{/hora}}$$
+#### A. Demanda y Caudal de la Electrobomba Sumergible Industrial 5.5 HP:
+La electrobomba sumergible trifásica de **$5.5\text{ HP}$** (la misma seleccionada para el pozo de 120 m) con descarga en tubería de **$2''$** ($50.8\text{ mm}$ de diámetro interior) operando a una carga de $65.0\text{ mca}$ entrega:
+$$Q_{\text{bomba\_5.5HP}} \approx \mathbf{2.50\text{ L/s}} = \mathbf{150\text{ Litros/minuto}} = \mathbf{9.00\text{ m}^3\text{/hora}}$$
 
-#### B. Tasa de Recarga Hidrogeológica Lateral del Estrato a 60 Metros:
-A $50-60\text{ m}$ de profundidad en el predio geolocalizado de Quíbor, el estrato permeable de arenas medias con gravilla aluvial entrega un caudal radial en régimen de Dupuit:
-$$Q_{\text{recarga}} \approx \mathbf{0.80\text{ a }1.20\text{ L/s}} = \mathbf{48\text{ a }72\text{ Litros/minuto}}$$
+#### B. Dinámica del Achique en el Fuste de Ø 80 cm:
+* Con un volumen de **$503\text{ L/metro}$** lineal de columna, y una columna útil entre la cota estática ($52\text{ m}$) y la sonda baja ($56.5\text{ m}$) de $4.5\text{ m}$, el volumen activo disponible por tanda es de **$2.260\text{ Litros}$**.
+* A un caudal neto de bombeo (extracción 150 L/min − recarga lateral ~60 L/min = ~90 L/min), la bomba **achica el fuste en 15 a 18 minutos**.
+* Al llegar el agua a $56.5\text{ m}$, la **sonda de nivel baja** corta inmediatamente el funcionamiento del motor a través del tablero VFD, impidiendo totalmente la marcha en seco o la cavitación.
 
-#### C. Balance de Masas y Estabilidad Permanente:
-$$Q_{\text{bomba\_1"}} (0.75\text{ L/s}) \le Q_{\text{recarga}} (0.80 - 1.20\text{ L/s})$$
+#### C. Tiempo de Recarga y Régimen por Tandas:
+* Tras el corte por sonda baja, la infiltración lateral natural del acuífero ($0.80 - 1.20\text{ L/s} = 50 - 72\text{ L/min}$) repone los 4.5 m de columna en **$40\text{ a }50\text{ minutos}$**.
+* La sonda de nivel alta (calibrada a $54.0\text{ m}$) o el temporizador del VFD reanuda el ciclo de bombeo.
+* **Ciclo Estándar:** 15 min de bombeo intensivo + 45 min de recuperación = **1 tanda cada 60 minutos**.
 
-> [!NOTE]
-> **VEREDICTO TÉCNICO: EL BOMBEO CONTINUO 24/7 CON BOMBA DE 1" ES 100% VIABLE.**
-> Al ser la velocidad de extracción menor o igual a la velocidad natural de reposición del acuífero, **el cono de abatimiento no avanza indefinidamente**. 
-> El Nivel Dinámico ($ND$) se estabiliza de manera permanente entre **$56.5\text{ m}$ y $57.5\text{ m}$**, dejando **$1.0\text{ a }2.0\text{ metros}$ de columna de agua sumergida constante por encima de la bomba** (instalada a $58.5\text{ m}$). **El pozo NUNCA se seca.**
-
-#### D. Producción Diaria y Gestión con Reservorio de 80 m³:
-* **Producción Diaria Continua 24h:**
-  $$V_{24h} = 2.70\text{ m}^3\text{/h} \times 24\text{ horas} = \mathbf{64.80\text{ m}^3\text{/día}}$$
-* **Consumo Máximo del Invernadero de 2.000 m² (4.400 plantas):** **$18.50\text{ m}^3\text{/día}$**.
-* **Excedente Hidráulico:** La bomba de 1" entrega **3.5 veces más agua** que la requerida en el día pico.
-* **Llenado del Reservorio:** Si el reservorio de $80\text{ m}^3$ está vacío, la bomba de 1" lo llena al 100% en:
-  $$t_{\text{llenado}} = \frac{80\text{ m}^3}{2.70\text{ m}^3\text{/h}} = \mathbf{29.6\text{ horas}}$$
-* **Operación de Régimen Diario Estable:** Instalando una boya eléctrica de corte superior en el reservorio de $80\text{ m}^3$, para reponer los $18.5\text{ m}^3$ consumidos al día por el tomate, la bomba de 1" solo necesitará operar **$6.8\text{ a }7.5\text{ horas al día}$** de forma suave y continua, eliminando arrancadas bruscas, golpes de ariete y arrastre de sedimentos finos.
+#### D. Producción Diaria y Llenado del Reservorio de 80 m³:
+* **Producción por Tanda:** $\sim 2.200\text{ Litros}$ cosechados directamente hacia el reservorio regulador de 80 m³.
+* **Producción Diaria en 8 a 10 Tandas:** **$18.0\text{ a }22.0\text{ m}^3\text{/día}$** (con solo 2.0 a 2.5 horas de funcionamiento acumulado del motor de 5.5 HP).
+* **Cobertura de la Demanda:** Duplica con holgura el consumo máximo de la nave de 1.000 m² ($9.25\text{ m}^3\text{/día}$).
+* **Protección Total del Capital:** Al perforar el pozo de 120 m en el futuro, el productor **ya tiene comprado el motor sumergible de 5.5 HP, el tablero VFD y la columna de impulsión de 2"**, ahorrando compras dobles y garantizando 100% de reutilización del equipamiento.
 
 ---
 
-### 9.4. Presupuesto de Campo: Profundización a Pico (+10 m) con Bomba de 1" (24/7)
+### 9.4. Presupuesto de Campo: Profundización a Pico (+10 m) con Bomba Industrial 5.5 HP (Tandas al Achique)
 
 | Ítem | Partida | Cantidad | P. Unitario (USD) | Total (USD) |
 | :---: | :--- | :---: | :---: | :---: |
 | **01** | Profundización manual de fuste a pico (+10 m) a Ø 80 cm con torno de izado y achique | 10 m | $100,00 | $1.000,00 |
 | **02** | Encofrado con formaletas de 3 metros (concreto y arena vaciado in situ a $40 c/u) | 10 m (3.33 u) | $13,33 | $133,33 |
-| **03** | Electrobomba sumergible de 1.5 HP monofásica 220V (Descarga 1", 45 L/min a 65 mca para 24/7) | 1 u. | $850,00 | $850,00 |
-| **04** | Tablero de control automático con relé de nivel por sondas (alta/baja), guardamotor y contactor | 1 u. | $650,00 | $650,00 |
-| **05** | Tubería de impulsión PEAD 1" PN10 (55 m) con uniones rápidas y válvula check | 55 m | $4,50 | $247,50 |
+| **03** | Electrobomba sumergible industrial 5.5 HP trifásica 220V/440V (idéntica a Opción A1 120m, descarga 2", 150 L/min) | 1 u. | $1.950,00 | $1.950,00 |
+| **04** | Tablero con Variador de Frecuencia (VFD), doble sonda de pozo (alta/baja), relé de nivel y protección marcha en seco | 1 u. | $950,00 | $950,00 |
+| **05** | Tubería de columna de impulsión PEAD 2" PN16 (55 m) con uniones reforzadas y válvula check pesada | 55 m | $12,00 | $660,00 |
 | **06** | Limpieza inicial, purga de lodos con Air-Lift artesanal y aforo volumétrico | 1 gl. | $350,00 | $350,00 |
 | **07** | Empaque filtrante de fondo con gravilla cuarzosa lavada 1/4" (1.5 m³) anti-arenamiento | 1.5 m³ | $65,00 | $97,50 |
-| **SUBTOTAL** | **Adecuación y Puesta en Marcha Pozo Artesanal con Bomba de 1" (24/7)** | | | **$3.328,33** |
-| **CONTINGENCIA** | Imprevistos de fondo (5%) | | | **$166,42** |
-| **TOTAL GENERAL** | **Inversión Mínima para Garantizar Agua al Invernadero de 2.000 m²** | | | **$3.494,75** |
+| **SUBTOTAL** | **Adecuación Integral Pozo Artesanal con Bomba Industrial 5.5 HP** | | | **$5.090,83** |
+| **CONTINGENCIA** | Imprevistos de fondo y maniobras de campo (5%) | | | **$254,54** |
+| **TOTAL GENERAL** | **Inversión Llave en Mano Pozo Artesanal (100% Transferible a Pozo de 120 m)** | | | **$5.345,37** |
 
-*Comparación de Ahorro:* Frente a una perforación rotaria mecanizada de 120 m ($24.880 USD), la adecuación del pozo artesanal a pico con bomba de 1" continua representa un **ahorro neto del 86.0% (~$21.385 USD)**, minimizando el consumo eléctrico (motor de 1.1 kW vs 2.2 kW) y garantizando agua permanente sin vaciar el fuste.
+*Comparación de Ahorro:* Frente a una perforación rotaria mecanizada de 120 m ($24.880 USD), la adecuación del pozo artesanal a pico con la bomba industrial de 5.5 HP representa un **ahorro neto del 78.5% (~$19.530 USD)**, adquiriendo de inmediato el equipamiento electromecánico definitivo que quedará operativo de por vida para el pozo profundo de 120 m.
 
 
 
