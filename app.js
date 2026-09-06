@@ -1254,33 +1254,535 @@ function initTooltips() {
 }
 
 // ==========================================================================
+// 5. SERVICIO DE TELEMETRÍA EN TIEMPO REAL & TAB 1: CLIMA & CAPA LÍMITE
+//    API Abierta: Open-Meteo | Quíbor: 9°53'20.0"N, 69°35'35.0"W | 707 msnm
+// ==========================================================================
+
+const RealTimeWeatherService = {
+  LAT: 9.8889,
+  LON: -69.5931,
+  ELEVATION: 707,
+  TIMEZONE: "America/Caracas",
+  CACHE_KEY: "quibor_live_weather_v1",
+  CACHE_TTL_MS: 10 * 60 * 1000, // 10 minutos
+  currentMode: "live", // "live" | "historical"
+  lastData: null,
+  isFetching: false,
+
+  // Mapeo WMO OMM para horticultura y fitosanidad en Quíbor
+  WMO_CODES: {
+    0: { label: "Cielo Despejado", icon: "☀️", class: "clear", isRain: false },
+    1: { label: "Principalmente Despejado", icon: "🌤️", class: "mostly-clear", isRain: false },
+    2: { label: "Parcialmente Nublado", icon: "⛅", class: "partly-cloudy", isRain: false },
+    3: { label: "Nublado / Convectivo", icon: "☁️", class: "cloudy", isRain: false },
+    45: { label: "Neblina / Bochorno", icon: "🌫️", class: "fog", isRain: false },
+    48: { label: "Niebla con Escarcha", icon: "🌫️", class: "fog", isRain: false },
+    51: { label: "Llovizna Ligera", icon: "🌦️", class: "drizzle", isRain: true },
+    53: { label: "Llovizna Moderada", icon: "🌦️", class: "drizzle", isRain: true },
+    55: { label: "Llovizna Densa", icon: "🌧️", class: "drizzle", isRain: true },
+    61: { label: "Lluvia Ligera", icon: "🌧️", class: "rain", isRain: true },
+    63: { label: "Lluvia Moderada", icon: "🌧️", class: "rain", isRain: true },
+    65: { label: "Lluvia Fuerte Continua", icon: "🌧️", class: "heavy-rain", isRain: true },
+    80: { label: "Chubascos Dispersos", icon: "🌦️", class: "showers", isRain: true },
+    81: { label: "Chubascos Moderados", icon: "🌧️", class: "showers", isRain: true },
+    82: { label: "Chubascos Violentos", icon: "⛈️", class: "heavy-showers", isRain: true },
+    95: { label: "Tormenta Eléctrica", icon: "⛈️", class: "thunderstorm", isRain: true },
+    96: { label: "Tormenta con Granizo", icon: "⛈️", class: "thunderstorm", isRain: true },
+    99: { label: "Tormenta Severa con Granizo", icon: "⛈️", class: "severe-thunderstorm", isRain: true }
+  },
+
+  getCardinal(deg) {
+    if (deg == null) return "ESTE";
+    const d = (deg % 360 + 360) % 360;
+    if (d >= 337.5 || d < 22.5) return "NORTE";
+    if (d >= 22.5 && d < 67.5) return "NORESTE (NE)";
+    if (d >= 67.5 && d < 112.5) return "ESTE (Alisio Dominante)";
+    if (d >= 112.5 && d < 157.5) return "SURESTE (SE)";
+    if (d >= 157.5 && d < 202.5) return "SUR (S)";
+    if (d >= 202.5 && d < 247.5) return "SUROESTE (SW)";
+    if (d >= 247.5 && d < 292.5) return "OESTE (W)";
+    return "NOROESTE (NW)";
+  },
+
+  getWmoInfo(code) {
+    return this.WMO_CODES[code] || { label: "Condición Variable", icon: "⛅", class: "cloudy", isRain: false };
+  },
+
+  getLiveEto() {
+    if (this.lastData && this.lastData.daily && this.lastData.daily.et0_fao_evapotranspiration) {
+      return this.lastData.daily.et0_fao_evapotranspiration[0] || 6.36;
+    }
+    return 6.36;
+  },
+
+  getLiveTemp() {
+    return this.lastData && this.lastData.current ? this.lastData.current.temperature_2m : 25.0;
+  },
+
+  getLiveWind() {
+    return this.lastData && this.lastData.current ? this.lastData.current.wind_speed_10m : 8.6;
+  },
+
+  async fetchData(forceRefresh = false) {
+    if (this.isFetching) return;
+    this.isFetching = true;
+    this.setLoadingState(true);
+
+    // 1. Revisar caché si no es forzado
+    if (!forceRefresh) {
+      try {
+        const rawCache = localStorage.getItem(this.CACHE_KEY);
+        if (rawCache) {
+          const cached = JSON.parse(rawCache);
+          if (Date.now() - cached.timestamp < this.CACHE_TTL_MS) {
+            this.lastData = cached.data;
+            this.updateUI(cached.data, false, cached.timestamp);
+            this.setLoadingState(false);
+            this.isFetching = false;
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn("Error leyendo caché meteorológica:", e);
+      }
+    }
+
+    // 2. Consulta API Open-Meteo directa para el predio en Quíbor
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${this.LAT}&longitude=${this.LON}&elevation=${this.ELEVATION}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m,wind_gusts_10m&hourly=temperature_2m,relative_humidity_2m,precipitation_probability,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,et0_fao_evapotranspiration,shortwave_radiation_sum&timezone=${encodeURIComponent(this.TIMEZONE)}&forecast_days=3`;
+
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`HTTP Error ${resp.status}`);
+      const data = await resp.json();
+
+      this.lastData = data;
+      const nowTs = Date.now();
+
+      try {
+        localStorage.setItem(this.CACHE_KEY, JSON.stringify({ timestamp: nowTs, data }));
+      } catch (e) {
+        console.warn("No se pudo guardar en localStorage:", e);
+      }
+
+      this.updateUI(data, true, nowTs);
+    } catch (err) {
+      console.warn("Fallo al conectar con Open-Meteo, intentando usar último caché:", err);
+      try {
+        const rawCache = localStorage.getItem(this.CACHE_KEY);
+        if (rawCache) {
+          const cached = JSON.parse(rawCache);
+          this.lastData = cached.data;
+          this.updateUI(cached.data, false, cached.timestamp, true);
+        } else {
+          this.setOfflineFallbackUI();
+        }
+      } catch (e) {
+        this.setOfflineFallbackUI();
+      }
+    } finally {
+      this.setLoadingState(false);
+      this.isFetching = false;
+    }
+  },
+
+  setLoadingState(loading) {
+    const icon = document.getElementById("icon-refresh-weather");
+    if (icon) {
+      if (loading) icon.classList.add("spin-icon");
+      else icon.classList.remove("spin-icon");
+    }
+  },
+
+  updateUI(data, isLive, timestamp, isErrorOffline = false) {
+    if (!data || !data.current || !data.daily) return;
+    const cur = data.current;
+    const daily = data.daily;
+    const wmo = this.getWmoInfo(cur.weather_code);
+    const cardinal = this.getCardinal(cur.wind_direction_10m);
+
+    const tMax = daily.temperature_2m_max ? daily.temperature_2m_max[0] : cur.temperature_2m;
+    const tMin = daily.temperature_2m_min ? daily.temperature_2m_min[0] : cur.temperature_2m;
+    const pSum = daily.precipitation_sum ? daily.precipitation_sum[0] : cur.precipitation;
+    const pProb = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
+    const et0 = daily.et0_fao_evapotranspiration ? daily.et0_fao_evapotranspiration[0] : 6.36;
+    const rad = daily.shortwave_radiation_sum ? daily.shortwave_radiation_sum[0] : 20.0;
+
+    // Formatear hora de lectura local Venezuela
+    const dateObj = new Date(timestamp || Date.now());
+    const timeStr = dateObj.toLocaleTimeString("es-VE", { hour: "2-digit", minute: "2-digit", hour12: true });
+
+    // 1. Topbar Telemetry
+    const topbarText = document.getElementById("topbar-live-text");
+    if (topbarText) {
+      const rainIcon = cur.precipitation > 0 ? "🌧️" : (wmo.icon || "☀️");
+      topbarText.innerHTML = `${rainIcon} ${cur.temperature_2m.toFixed(1)}°C | 💨 ${cur.wind_speed_10m.toFixed(0)} km/h | 🌧️ ${pSum.toFixed(1)} mm`;
+    }
+
+    const topbarDot = document.getElementById("topbar-radar-dot");
+    const panelDot = document.getElementById("live-panel-radar-dot");
+    const modeDot = document.getElementById("dot-mode-live");
+    [topbarDot, panelDot, modeDot].forEach(dot => {
+      if (!dot) return;
+      dot.className = "radar-pulse-dot";
+      if (cur.temperature_2m >= 31.5) dot.classList.add("dot-alert");
+      else if (cur.precipitation > 0 || pSum > 2) dot.classList.add("dot-rain");
+    });
+
+    // 2. Header de Panel en Vivo
+    const statusText = document.getElementById("live-station-status-text");
+    if (statusText) {
+      statusText.textContent = isErrorOffline 
+        ? "Caché Offline (Sin conexión a satélite)"
+        : (isLive ? "Estación Satelital Open-Meteo Activa" : "Lectura Satelital en Caché");
+    }
+
+    const timeElem = document.getElementById("live-update-timestamp");
+    if (timeElem) timeElem.textContent = `Actualizado: ${timeStr}`;
+
+    // 3. Panel en Vivo Principal
+    const liveIcon = document.getElementById("live-weather-icon");
+    if (liveIcon) liveIcon.textContent = wmo.icon;
+
+    const liveTemp = document.getElementById("live-temp-val");
+    if (liveTemp) liveTemp.textContent = `${cur.temperature_2m.toFixed(1)} °C`;
+
+    const liveCond = document.getElementById("live-condition-lbl");
+    if (liveCond) {
+      liveCond.textContent = `${wmo.label} (${cur.relative_humidity_2m}% HR)`;
+    }
+
+    const liveSub = document.getElementById("live-temp-sub");
+    if (liveSub) {
+      liveSub.textContent = `Sensación: ${cur.apparent_temperature.toFixed(1)} °C | Mín: ${tMin.toFixed(1)} °C / Máx: ${tMax.toFixed(1)} °C`;
+    }
+
+    // Quick Metrics
+    const mRain = document.getElementById("live-metric-rain");
+    if (mRain) {
+      mRain.textContent = cur.precipitation > 0 ? `${cur.precipitation.toFixed(1)} mm/h` : `${pSum.toFixed(1)} mm`;
+    }
+    const mRainSub = document.getElementById("live-metric-rain-sub");
+    if (mRainSub) {
+      mRainSub.textContent = cur.precipitation > 0 ? `Lloviendo ahora | Hoy: ${pSum.toFixed(1)} mm` : `Hoy: ${pSum.toFixed(1)} mm (Prob. ${pProb}%)`;
+    }
+
+    const mWind = document.getElementById("live-metric-wind");
+    if (mWind) mWind.textContent = `${cur.wind_speed_10m.toFixed(1)} km/h`;
+    const mWindSub = document.getElementById("live-metric-wind-sub");
+    if (mWindSub) mWindSub.textContent = `${cardinal} | Ráfaga: ${cur.wind_gusts_10m.toFixed(1)} km/h`;
+
+    const mEto = document.getElementById("live-metric-eto");
+    if (mEto) mEto.textContent = `${et0.toFixed(2)} mm/d`;
+    const mEtoSub = document.getElementById("live-metric-eto-sub");
+    if (mEtoSub) mEtoSub.textContent = `Rad: ${rad.toFixed(1)} MJ/m²·d`;
+
+    // 4. Renderizar Tira Horaria
+    this.renderForecastStrip(data.hourly);
+
+    // 5. Actualizar la opción de ETo en vivo en Riego
+    const optEto = document.getElementById("opt-live-et0");
+    if (optEto) {
+      optEto.textContent = `🔴 Hoy en Vivo (Open-Meteo FAO-56: ${et0.toFixed(2)} mm/d)`;
+    }
+
+    // 6. Si el modo activo es "live", actualizar las 6 métricas y la alerta principal
+    if (this.currentMode === "live") {
+      this.applyLiveToMainDashboard(data);
+    }
+  },
+
+  renderForecastStrip(hourly) {
+    const container = document.getElementById("forecast-strip-container");
+    if (!container || !hourly || !hourly.time) return;
+
+    // Buscar el índice de la hora actual
+    const nowIso = new Date().toISOString().slice(0, 13);
+    let startIdx = 0;
+    for (let i = 0; i < hourly.time.length; i++) {
+      if (hourly.time[i].startsWith(nowIso)) {
+        startIdx = i;
+        break;
+      }
+    }
+
+    let html = "";
+    const count = Math.min(12, hourly.time.length - startIdx);
+    for (let i = 0; i < count; i++) {
+      const idx = startIdx + i;
+      const timeStr = hourly.time[idx];
+      const hourPart = timeStr.split("T")[1] || "";
+      const temp = hourly.temperature_2m[idx];
+      const prob = hourly.precipitation_probability ? hourly.precipitation_probability[idx] : 0;
+      const rainMm = hourly.precipitation ? hourly.precipitation[idx] : 0;
+      const code = hourly.weather_code[idx];
+      const wind = hourly.wind_speed_10m[idx];
+      const wmo = this.getWmoInfo(code);
+
+      const isNow = i === 0;
+      const cardClass = isNow ? "forecast-card now-card" : "forecast-card";
+      const hourLabel = isNow ? "Ahora" : hourPart;
+
+      html += `
+        <div class="${cardClass}" title="${wmo.label} a las ${hourPart} (${rainMm} mm)">
+          <span class="f-hour">${hourLabel}</span>
+          <span class="f-icon">${wmo.icon}</span>
+          <span class="f-temp">${temp.toFixed(1)}°</span>
+          <span class="f-rain" title="Probabilidad de lluvia ${prob}% | ${rainMm} mm">
+            ${prob > 0 ? `💧 ${prob}%` : `0%`}
+          </span>
+          <span class="f-wind">💨 ${wind.toFixed(0)}k</span>
+        </div>
+      `;
+    }
+    container.innerHTML = html;
+  },
+
+  applyLiveToMainDashboard(data) {
+    if (!data || !data.current || !data.daily) return;
+    const cur = data.current;
+    const daily = data.daily;
+    const cardinal = this.getCardinal(cur.wind_direction_10m);
+
+    const tMax = daily.temperature_2m_max ? daily.temperature_2m_max[0] : cur.temperature_2m;
+    const tMin = daily.temperature_2m_min ? daily.temperature_2m_min[0] : cur.temperature_2m;
+    const pSum = daily.precipitation_sum ? daily.precipitation_sum[0] : cur.precipitation;
+    const pProb = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : 0;
+    const et0 = daily.et0_fao_evapotranspiration ? daily.et0_fao_evapotranspiration[0] : 6.36;
+    const rad = daily.shortwave_radiation_sum ? daily.shortwave_radiation_sum[0] : 20.0;
+
+    // 1. Métricas Principales (6 cards)
+    const dispMax = document.getElementById("disp-temp-max");
+    if (dispMax) dispMax.textContent = `${tMax.toFixed(1)} °C`;
+
+    const dispMin = document.getElementById("disp-temp-min");
+    if (dispMin) dispMin.textContent = `Mín: ${tMin.toFixed(1)} °C | Actual: ${cur.temperature_2m.toFixed(1)} °C`;
+
+    const dispWind = document.getElementById("disp-wind-speed");
+    if (dispWind) dispWind.textContent = `${cur.wind_speed_10m.toFixed(1)} km/h`;
+
+    const dispWindDir = document.getElementById("disp-wind-dir");
+    if (dispWindDir) dispWindDir.textContent = `Dir: ${cardinal} | Ráfaga: ${cur.wind_gusts_10m.toFixed(1)} km/h`;
+
+    const dispRain = document.getElementById("disp-rain");
+    if (dispRain) dispRain.textContent = `${pSum.toFixed(1)} mm`;
+
+    const dispRainDesc = document.getElementById("disp-rain-desc");
+    if (dispRainDesc) {
+      dispRainDesc.textContent = cur.precipitation > 0 
+        ? `Lloviendo ahora (${cur.precipitation.toFixed(1)} mm/h)` 
+        : `Prob. lluvia hoy: ${pProb}%`;
+    }
+
+    const dispMuggy = document.getElementById("disp-muggy");
+    if (dispMuggy) {
+      const isMuggyNow = cur.relative_humidity_2m > 70 && cur.temperature_2m > 26;
+      dispMuggy.textContent = isMuggyNow ? "Activo" : "Normal";
+    }
+
+    const dispMuggyRh = document.getElementById("disp-muggy-rh");
+    if (dispMuggyRh) {
+      dispMuggyRh.textContent = `HR actual: ${cur.relative_humidity_2m.toFixed(1)}% (${cur.relative_humidity_2m > 75 ? "bochorno húmedo" : "ambiente seco"})`;
+    }
+
+    const dispEto = document.getElementById("disp-eto");
+    if (dispEto) dispEto.textContent = `${et0.toFixed(2)} mm/d`;
+
+    const dispEtoVol = document.getElementById("disp-eto-vol");
+    if (dispEtoVol) {
+      const vol = (et0 * 1000) / 1000;
+      dispEtoVol.textContent = `${vol.toFixed(1)} m³/d (1.000 m²)`;
+    }
+
+    const dispRad = document.getElementById("disp-solar-rad");
+    if (dispRad) dispRad.textContent = `${rad.toFixed(1)} MJ/m²·d`;
+
+    const dispSolarSub = document.getElementById("disp-solar-sub");
+    if (dispSolarSub) {
+      dispSolarSub.textContent = `${(rad / 3.6).toFixed(2)} kWh/m²·d (Open-Meteo Hoy)`;
+    }
+
+    // 2. Alerta Agroclimática en Tiempo Real
+    const alertBox = document.getElementById("box-clima-alert");
+    if (alertBox) {
+      if (cur.temperature_2m >= 31.5 || tMax >= 32.0) {
+        alertBox.className = "alert-box alert-warning";
+        alertBox.innerHTML = `
+          <div class="alert-icon">🔥</div>
+          <div class="alert-content">
+            <strong>🔴 ALERTA EN VIVO — Estrés Térmico en Quíbor (Actual ${cur.temperature_2m.toFixed(1)} °C | Máx prevista ${tMax.toFixed(1)} °C):</strong>
+            La radiación acumulada (${rad.toFixed(1)} MJ/m²·d) y las altas temperaturas superan el umbral crítico (>31.5 °C). En tomate indeterminado existe riesgo inminente de aborto floral y deshidratación del polen. El parral a 3.00 m (con 1.00 m de colchón térmico sobre espaldera) drena el aire caliente lateralmente; mantenga pulsos de riego matutinos para sostener la turgencia foliar.
+          </div>`;
+      } else if (cur.precipitation > 0 || pSum >= 3.0 || pProb >= 40) {
+        alertBox.className = "alert-box alert-success";
+        alertBox.innerHTML = `
+          <div class="alert-icon">🌧️</div>
+          <div class="alert-content">
+            <strong>🌧️ ALERTA EN VIVO — Previsión de Lluvias & Humedad en Quíbor (${cur.precipitation > 0 ? `${cur.precipitation.toFixed(1)} mm/h en curso` : `${pSum.toFixed(1)} mm previstos hoy, ${pProb}% prob.`}):</strong>
+            La humedad relativa actual (${cur.relative_humidity_2m}%) eleva drásticamente el riesgo de <em>Botrytis cinerea</em> (moho gris) y tizón temprano (<em>Alternaria solani</em>). Se recomienda máxima ventilación convectiva a lo largo de las paredes laterales de 100 m para evacuar humedad acumulada y reducir temporalmente la lámina de riego.
+          </div>`;
+      } else if (cur.wind_gusts_10m >= 25.0) {
+        alertBox.className = "alert-box alert-warning";
+        alertBox.innerHTML = `
+          <div class="alert-icon">💨</div>
+          <div class="alert-content">
+            <strong>💨 ALERTA EN VIVO — Ráfagas Eólicas Intensas en Quíbor (${cur.wind_speed_10m.toFixed(1)} km/h, ráfagas de ${cur.wind_gusts_10m.toFixed(1)} km/h desde ${cardinal}):</strong>
+            Viento procedente del sector Este solicita la fachada barlovento de 20.00 m. Verifique la tensión de los 18 tirantes de guaya galvanizada de 3/8" y los anclajes de concreto ciclópeo a 45°.
+          </div>`;
+      } else {
+        alertBox.className = "alert-box alert-warning";
+        alertBox.innerHTML = `
+          <div class="alert-icon">ℹ️</div>
+          <div class="alert-content">
+            <strong>🔴 CONDICIONES EN VIVO — Valle de Quíbor:</strong> Temperatura actual ${cur.temperature_2m.toFixed(1)} °C, viento ${cur.wind_speed_10m.toFixed(1)} km/h (${cardinal}), humedad ${cur.relative_humidity_2m}% y evapotranspiración FAO-56 de hoy de ${et0.toFixed(2)} mm/d (${(et0*1.0).toFixed(1)} m³/d en 1.000 m²). Condiciones óptimas para fotosíntesis protegida bajo malla 110 gsm.
+          </div>`;
+      }
+    }
+
+    // 3. Sincronizar Capa Límite de Hellmann con el viento en vivo
+    const sliderHeight = document.getElementById("input-wind-height");
+    if (sliderHeight) {
+      updateBoundaryLayerDisplays(parseFloat(sliderHeight.value));
+    }
+  },
+
+  setOfflineFallbackUI() {
+    const statusText = document.getElementById("live-station-status-text");
+    if (statusText) statusText.textContent = "Estación en Modo Desconectado";
+    const topbarText = document.getElementById("topbar-live-text");
+    if (topbarText) topbarText.textContent = "📡 Quíbor (Sin Red)";
+  },
+
+  syncAllToModules() {
+    if (!this.lastData || !this.lastData.current) {
+      alert("Aún no se han recibido datos de la estación satelital. Conéctese a internet o pulse Actualizar.");
+      return;
+    }
+    const cur = this.lastData.current;
+    const daily = this.lastData.daily;
+    const et0 = daily && daily.et0_fao_evapotranspiration ? daily.et0_fao_evapotranspiration[0] : 6.36;
+
+    // 1. Sincronizar Ventilación
+    const inputExtTemp = document.getElementById("input-ext-temp");
+    if (inputExtTemp) inputExtTemp.value = cur.temperature_2m.toFixed(1);
+    const inputExtWind = document.getElementById("input-ext-wind");
+    if (inputExtWind) inputExtWind.value = cur.wind_speed_10m.toFixed(1);
+
+    if (typeof calculateVentilation === "function") {
+      try { calculateVentilation(); } catch (e) { console.error(e); }
+    }
+
+    // 2. Sincronizar Riego
+    const selectMonthEto = document.getElementById("select-month-et0");
+    if (selectMonthEto) {
+      selectMonthEto.value = "live";
+    }
+
+    if (typeof calculateIrrigation === "function") {
+      try { calculateIrrigation(); } catch (e) { console.error(e); }
+    }
+
+    alert(`✅ Telemetría en vivo sincronizada con éxito:\n\n• Temp. Ambiente: ${cur.temperature_2m.toFixed(1)} °C\n• Viento a 10m: ${cur.wind_speed_10m.toFixed(1)} km/h\n• Demanda FAO-56 ETo: ${et0.toFixed(2)} mm/día\n\nLas calculadoras de Ventilación y Fertirriego han sido actualizadas.`);
+  }
+};
+window.RealTimeWeatherService = RealTimeWeatherService;
+
+// ==========================================================================
 // 5. TAB 1: CLIMA & CAPA LÍMITE (MOTOR MULTIANUAL NASA POWER/MERRA-2 2024-2030)
 // ==========================================================================
 function initClimateTab() {
+  const btnModeLive = document.getElementById("btn-mode-live");
+  const btnModeHist = document.getElementById("btn-mode-hist");
+  const panelLive = document.getElementById("box-clima-live-panel");
+  const boxControls = document.getElementById("box-climate-controls");
+  const boxPhase = document.getElementById("box-climate-phase");
+
+  function setClimateMode(mode) {
+    RealTimeWeatherService.currentMode = mode;
+    if (mode === "live") {
+      if (btnModeLive) btnModeLive.classList.add("active");
+      if (btnModeHist) btnModeHist.classList.remove("active");
+      if (panelLive) panelLive.style.display = "block";
+      if (boxControls) boxControls.style.display = "none";
+      if (boxPhase) boxPhase.style.display = "none";
+      if (RealTimeWeatherService.lastData) {
+        RealTimeWeatherService.applyLiveToMainDashboard(RealTimeWeatherService.lastData);
+      } else {
+        RealTimeWeatherService.fetchData();
+      }
+    } else {
+      if (btnModeLive) btnModeLive.classList.remove("active");
+      if (btnModeHist) btnModeHist.classList.add("active");
+      if (panelLive) panelLive.style.display = "none";
+      if (boxControls) boxControls.style.display = "grid";
+      if (boxPhase) boxPhase.style.display = "block";
+      const selectMonth = document.getElementById("select-month");
+      const mIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
+      updateClimateDisplays(mIdx);
+    }
+  }
+
+  if (btnModeLive) btnModeLive.addEventListener("click", () => setClimateMode("live"));
+  if (btnModeHist) btnModeHist.addEventListener("click", () => setClimateMode("historical"));
+
+  const btnRefresh = document.getElementById("btn-refresh-weather");
+  if (btnRefresh) {
+    btnRefresh.addEventListener("click", () => {
+      RealTimeWeatherService.fetchData(true);
+    });
+  }
+
+  const btnSyncAll = document.getElementById("btn-sync-telemetry-all");
+  if (btnSyncAll) {
+    btnSyncAll.addEventListener("click", () => {
+      RealTimeWeatherService.syncAllToModules();
+    });
+  }
+
+  const topbarLive = document.getElementById("topbar-live-weather");
+  if (topbarLive) {
+    topbarLive.addEventListener("click", () => {
+      const tabClimaBtn = document.getElementById("nav-item-clima");
+      if (tabClimaBtn) tabClimaBtn.click();
+      RealTimeWeatherService.fetchData(true);
+    });
+  }
+
+  // Multianual Controls
   const selectYear = document.getElementById("select-climate-year");
   const selectMonth = document.getElementById("select-month");
   const sliderHeight = document.getElementById("input-wind-height");
 
   if (selectYear) {
     selectYear.addEventListener("change", () => {
-      const mIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
-      updateClimateDisplays(mIdx);
+      if (RealTimeWeatherService.currentMode === "historical") {
+        const mIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
+        updateClimateDisplays(mIdx);
+      }
     });
   }
   
   if (selectMonth) {
     selectMonth.addEventListener("change", () => {
-      updateClimateDisplays(parseInt(selectMonth.value, 10));
+      if (RealTimeWeatherService.currentMode === "historical") {
+        updateClimateDisplays(parseInt(selectMonth.value, 10));
+      }
     });
-    updateClimateDisplays(parseInt(selectMonth.value, 10));
   }
 
   if (sliderHeight) {
     sliderHeight.addEventListener("input", () => {
       updateBoundaryLayerDisplays(parseFloat(sliderHeight.value));
     });
-    updateBoundaryLayerDisplays(parseFloat(sliderHeight.value));
   }
+
+  // Inicializar en modo En Vivo e iniciar lectura
+  setClimateMode("live");
+  RealTimeWeatherService.fetchData();
+
+  // Polling automático cada 10 minutos
+  setInterval(() => {
+    RealTimeWeatherService.fetchData(false);
+  }, 10 * 60 * 1000);
 }
 
 function updateClimateDisplays(monthIndex) {
@@ -1406,12 +1908,17 @@ function getWindAtHeight(v10, z) {
 }
 
 function updateBoundaryLayerDisplays(userHeight) {
-  const selectYear = document.getElementById("select-climate-year");
-  const selectMonth = document.getElementById("select-month");
-  const yearStr = selectYear ? selectYear.value : "2026";
-  const monthIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
-  const currentClimate = getCalculatedClimate(yearStr, monthIdx);
-  const v10 = currentClimate.viento;
+  let v10 = 8.6;
+  if (RealTimeWeatherService.currentMode === "live" && RealTimeWeatherService.lastData && RealTimeWeatherService.lastData.current) {
+    v10 = RealTimeWeatherService.lastData.current.wind_speed_10m;
+  } else {
+    const selectYear = document.getElementById("select-climate-year");
+    const selectMonth = document.getElementById("select-month");
+    const yearStr = selectYear ? selectYear.value : "2026";
+    const monthIdx = selectMonth ? parseInt(selectMonth.value, 10) : 2;
+    const currentClimate = getCalculatedClimate(yearStr, monthIdx);
+    v10 = currentClimate.viento;
+  }
 
   // Cota de espaldar según planos actuales (2.00 m) y altura evaluada (por defecto 3.00 m techo parral)
   const v20 = getWindAtHeight(v10, 2.0);
@@ -1489,6 +1996,19 @@ function initVentilationCalculator() {
       elem.addEventListener("change", calculateVentilation);
     }
   });
+
+  const btnSyncVent = document.getElementById("btn-sync-vent-live");
+  if (btnSyncVent) {
+    btnSyncVent.addEventListener("click", () => {
+      const liveTemp = (window.RealTimeWeatherService && window.RealTimeWeatherService.getLiveTemp()) || 25.0;
+      const liveWind = (window.RealTimeWeatherService && window.RealTimeWeatherService.getLiveWind()) || 8.6;
+      const elTemp = document.getElementById("input-ext-temp");
+      const elWind = document.getElementById("input-ext-wind");
+      if (elTemp) elTemp.value = liveTemp.toFixed(1);
+      if (elWind) elWind.value = liveWind.toFixed(1);
+      calculateVentilation();
+    });
+  }
 
   calculateVentilation();
 }
@@ -1663,8 +2183,11 @@ function calculateIrrigation() {
   const bicarbWater = elBicarb ? parseFloat(elBicarb.value) || 4.2 : 4.2;
   const bicarbTarget = elBicarbTarget ? parseFloat(elBicarbTarget.value) || 0.5 : 0.5;
 
-  // 1. Evapotranspiración base mensual NASA MERRA-2
-  const et0 = QUIBOR_MONTHLY_ETO[monthIdx] || 6.4;
+  // 1. Evapotranspiración base: En vivo Open-Meteo o mensual NASA MERRA-2
+  let et0 = QUIBOR_MONTHLY_ETO[monthIdx] || 6.4;
+  if (elMonth && elMonth.value === "live") {
+    et0 = (window.RealTimeWeatherService && window.RealTimeWeatherService.getLiveEto()) || 6.36;
+  }
 
   // 2. Coeficiente Kc corregido por cobertura
   const stageData = FAO_STAGES_DATA[stageIdx] || FAO_STAGES_DATA[3];
@@ -1741,7 +2264,10 @@ function calculateIrrigation() {
   const elResDailyM3 = document.getElementById("res-fao-daily-m3");
   const elResYieldRisk = document.getElementById("res-fao-yield-risk");
 
-  if (elResEto) elResEto.textContent = `${et0.toFixed(2)} mm/día`;
+  if (elResEto) {
+    const isLive = elMonth && elMonth.value === "live";
+    elResEto.innerHTML = `${et0.toFixed(2)} mm/día ${isLive ? '<span class="tag" style="background:rgba(132,204,22,0.15); color:var(--apple-green-light); font-size:0.68rem; margin-left:0.3rem;">🔴 En Vivo</span>' : ''}`;
+  }
   if (elResKc) elResKc.textContent = `${kc.toFixed(2)} ${hasMulch ? '(con Mulch)' : '(Suelo Desnudo)'}`;
   if (elResEtc) elResEtc.textContent = `${etcMmDay.toFixed(2)} mm/día (~${netLitersPlantWeek.toFixed(1)} L/pl/sem neto)`;
   if (elResLf) elResLf.textContent = `${(lf * 100).toFixed(1)} % de sobre-riego`;

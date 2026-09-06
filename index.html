@@ -218,6 +218,10 @@
         </div>
         <div class="topbar-right">
           <div class="topbar-telemetry">
+            <span class="telemetry-pill pill-live" id="topbar-live-weather" title="Estación Satelital Open-Meteo en Quíbor (Clic para actualizar)">
+              <span class="radar-pulse-dot" id="topbar-radar-dot"></span>
+              <span id="topbar-live-text">📡 Quíbor: En Vivo...</span>
+            </span>
             <span class="telemetry-pill pill-wind" title="Viento dominante del Este (88% anual)"><span class="material-symbols-outlined" style="font-size:14px;">air</span> 88% ESTE</span>
             <span class="telemetry-pill pill-geo" title="Elevación base del predio"><span class="material-symbols-outlined" style="font-size:14px;">location_on</span> ~700 msnm</span>
           </div>
@@ -246,8 +250,85 @@
             Base meteorológica satelital calibrada con <strong>NASA POWER &amp; MERRA-2</strong> (reanálisis 2001–2020 y observaciones recientes 2021–2024). Permite evaluar el régimen histórico y proyectar el impacto térmico, hídrico y eólico en el invernadero de 1.000 m² desde el año en curso hasta el 2030:
           </p>
           
-          <!-- Controles de Clima: Año (2024 a 2030) y Mes -->
-          <div class="clima-controls-grid">
+          <!-- Selector de Modo: En Vivo vs Simulación Histórica -->
+          <div class="clima-mode-switch" role="group" aria-label="Modo de Operación Meteorológica">
+            <button type="button" class="btn-clima-mode active" id="btn-mode-live">
+              <span class="radar-pulse-dot" id="dot-mode-live"></span>
+              <span>🔴 En Vivo (Tiempo Real Quíbor)</span>
+            </button>
+            <button type="button" class="btn-clima-mode mode-hist" id="btn-mode-hist">
+              <span class="material-symbols-outlined" style="font-size:16px;">calendar_month</span>
+              <span>📅 Simulación Multianual (NASA MERRA-2)</span>
+            </button>
+          </div>
+
+          <!-- Panel de Telemetría en Tiempo Real (Open-Meteo Satélite Quíbor) -->
+          <div class="clima-live-panel" id="box-clima-live-panel">
+            <div class="live-panel-header">
+              <div class="live-station-info">
+                <span class="live-title-badge">
+                  <span class="radar-pulse-dot" id="live-panel-radar-dot"></span>
+                  <span id="live-station-status-text">Estación Satelital Open-Meteo Activa</span>
+                </span>
+                <span class="live-station-geo">📍 Quíbor ~707 msnm | <span id="live-update-timestamp">Actualizado: --:--</span></span>
+              </div>
+              <div class="live-header-actions">
+                <button type="button" class="btn-live-action" id="btn-refresh-weather" title="Consultar última lectura satelital ahora">
+                  <span class="material-symbols-outlined" id="icon-refresh-weather" style="font-size:15px;">sync</span> Actualizar
+                </button>
+                <button type="button" class="btn-live-action btn-sync-telemetry" id="btn-sync-telemetry-all" title="Cargar temperatura, viento y ETo en las calculadoras de Ventilación y Riego">
+                  <span class="material-symbols-outlined" style="font-size:15px;">bolt</span> Sincronizar App
+                </button>
+              </div>
+            </div>
+
+            <!-- Grilla Principal en Vivo -->
+            <div class="live-current-grid">
+              <div class="live-primary-card">
+                <div class="live-weather-icon" id="live-weather-icon">☀️</div>
+                <div class="live-temp-display">
+                  <div class="live-temp-value" id="live-temp-val">--.- °C</div>
+                  <div class="live-condition-label" id="live-condition-lbl">Consultando satélite...</div>
+                  <div class="live-temp-sub" id="live-temp-sub">Sensación: --.- °C | Mín: -- °C / Máx: -- °C</div>
+                </div>
+              </div>
+
+              <div class="live-quick-metrics">
+                <div class="live-metric-pill">
+                  <span class="live-metric-lbl"><span class="material-symbols-outlined" style="font-size:13px; color:#38bdf8;">water_drop</span> Precipitación & Lluvia</span>
+                  <span class="live-metric-val val-rain" id="live-metric-rain">0.0 mm</span>
+                  <span style="font-size:0.7rem; color:var(--text-secondary);" id="live-metric-rain-sub">Prob. hoy: --%</span>
+                </div>
+                <div class="live-metric-pill">
+                  <span class="live-metric-lbl"><span class="material-symbols-outlined" style="font-size:13px; color:#22d3ee;">air</span> Viento a 10m & Ráfagas</span>
+                  <span class="live-metric-val val-wind" id="live-metric-wind">--.- km/h</span>
+                  <span style="font-size:0.7rem; color:var(--text-secondary);" id="live-metric-wind-sub">Ráfagas: -- km/h</span>
+                </div>
+                <div class="live-metric-pill">
+                  <span class="live-metric-lbl"><span class="material-symbols-outlined" style="font-size:13px; color:var(--apple-green-light);">eco</span> FAO-56 ETo & Sol</span>
+                  <span class="live-metric-val val-eto" id="live-metric-eto">--.-- mm/d</span>
+                  <span style="font-size:0.7rem; color:var(--text-secondary);" id="live-metric-eto-sub">Rad: --.- MJ/m²</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tira Horaria de Pronóstico de Temperaturas y Lluvias -->
+            <div class="forecast-strip-wrapper">
+              <div class="forecast-strip-header">
+                <span class="forecast-strip-title">
+                  <span class="material-symbols-outlined" style="font-size:15px; color:#38bdf8;">schedule</span>
+                  Previsión Horaria Quíbor (Próximas 12h: Temperatura & Lluvias)
+                </span>
+                <span style="font-size:0.7rem; color:var(--text-tertiary);">Horario Local (UTC-4)</span>
+              </div>
+              <div class="forecast-strip" id="forecast-strip-container">
+                <!-- Forecast cards generados dinámicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Controles de Clima Multianual (Modo Histórico) -->
+          <div class="clima-controls-grid" id="box-climate-controls" style="display:none;">
             <div class="clima-select-group">
               <label for="select-climate-year">Año / Horizonte Climático:</label>
               <select id="select-climate-year" class="input-select">
@@ -392,7 +473,10 @@
         <div class="card glass-card">
           <div class="card-header">
             <h2>Calculadora Ficha TurboExtractor (Ecuación Oficial)</h2>
-            <span class="tag tag-formula">Modelo Termomecánico</span>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-live-action" id="btn-sync-vent-live" title="Cargar temperatura ambiente y viento actual en tiempo real de Quíbor"><span class="material-symbols-outlined" style="font-size:14px; color:var(--apple-green-light);">bolt</span> Usar Clima en Vivo</button>
+              <span class="tag tag-formula">Modelo Termomecánico</span>
+            </div>
           </div>
           <div class="formula-box">
             $$Q = (0.818 + 0.0303 \cdot A) \times (121.5 + 103.4 \cdot V + 11.6 \cdot G + 5.6 \cdot T)$$
@@ -524,9 +608,10 @@
             <div class="input-item">
               <label for="select-month-et0">Mes de Operación (<span class="tooltip-term">ETo MERRA-2 <span class="tooltip-icon"><span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">info</span></span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Evapotranspiración Referencial (ETo)</span><span class="tooltip-tag">NASA MERRA-2</span></span><span class="tooltip-simple">Radiación y demanda atmosférica real mes a mes en el Valle de Quíbor (695 msnm). Pico en Marzo (6.4 mm/d) y mínimo en Julio (4.8 mm/d).</span><span class="tooltip-tech">Penman-Monteith FAO-56 calibrado</span></span></span>):</label>
               <select id="select-month-et0" class="input-select">
+                <option value="live" id="opt-live-et0" selected>🔴 Hoy en Vivo (Open-Meteo FAO-56)</option>
                 <option value="0">Enero (ETo 5.4 mm/día)</option>
                 <option value="1">Febrero (ETo 5.8 mm/día)</option>
-                <option value="2" selected>Marzo (ETo 6.4 mm/día - Pico de Calor)</option>
+                <option value="2">Marzo (ETo 6.4 mm/día - Pico de Calor)</option>
                 <option value="3">Abril (ETo 6.2 mm/día)</option>
                 <option value="4">Mayo (ETo 5.6 mm/día)</option>
                 <option value="5">Junio (ETo 5.2 mm/día)</option>
