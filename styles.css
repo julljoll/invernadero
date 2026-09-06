@@ -2803,47 +2803,117 @@ body.sunlight-mode .footer-copy strong {
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 1.1rem;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.econ-result-card.featured,
+.econ-result-card.recommended {
+  background: linear-gradient(155deg, rgba(16, 185, 129, 0.16) 0%, rgba(6, 78, 59, 0.28) 100%), rgba(15, 23, 42, 0.92);
+  border: 2px solid #10b981;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.econ-result-card.warning-card {
+  background: linear-gradient(155deg, rgba(245, 158, 11, 0.08) 0%, rgba(120, 53, 15, 0.15) 100%), rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.recommended-ribbon {
+  background: linear-gradient(90deg, #10b981, #059669);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+  align-self: flex-start;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.4);
+}
+
+.econ-products-details {
+  margin-top: 1.25rem;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-md);
   overflow: hidden;
 }
 
-.econ-result-card.featured {
-  border-color: rgba(16, 185, 129, 0.5);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+.econ-products-summary {
+  padding: 0.85rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #38bdf8;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+  background: rgba(56, 189, 248, 0.08);
+  transition: var(--transition-fast);
 }
 
-.econ-result-title {
-  font-size: 0.95rem;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.econ-products-summary:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
 }
 
-.econ-metric-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.35rem 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+.econ-products-content {
+  padding: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
   font-size: 0.8rem;
+  line-height: 1.5;
 }
 
-.econ-net-margin {
+.econ-products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0.75rem 0;
+  font-size: 0.78rem;
+}
+
+.econ-products-table th {
+  background: rgba(255, 255, 255, 0.06);
+  color: #94a3b8;
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.econ-products-table td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+}
+
+.econ-products-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.econ-warning-box {
+  background: rgba(239, 68, 68, 0.1);
+  border-left: 3px solid #ef4444;
+  padding: 0.65rem 0.85rem;
+  border-radius: 4px;
   margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 2px dashed rgba(255, 255, 255, 0.15);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 0.78rem;
+  color: #f1f5f9;
+  line-height: 1.45;
 }
 
-.econ-net-val {
-  font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 800;
+.econ-warning-box strong {
+  color: #fca5a5;
 }
 
 /* Stepper Controls para dedos enguantados en campo */
@@ -3671,10 +3741,66 @@ body.sunlight-mode .econ-result-card {
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
 }
 
-body.sunlight-mode .econ-result-card.featured {
+body.sunlight-mode .econ-result-card.featured,
+body.sunlight-mode .econ-result-card.recommended {
   background: #f0fdf4 !important;
-  border: 1.5px solid #059669 !important;
-  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.12) !important;
+  border: 2px solid #059669 !important;
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.15) !important;
+}
+
+body.sunlight-mode .econ-result-card.warning-card {
+  background: #fffbeb !important;
+  border: 1.5px solid #d97706 !important;
+}
+
+body.sunlight-mode .recommended-ribbon {
+  background: #059669 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3) !important;
+}
+
+body.sunlight-mode .econ-products-details {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+body.sunlight-mode .econ-products-summary {
+  background: #f0f9ff !important;
+  color: #0369a1 !important;
+}
+
+body.sunlight-mode .econ-products-summary:hover {
+  background: #e0f2fe !important;
+  color: #0284c7 !important;
+}
+
+body.sunlight-mode .econ-products-content {
+  border-top-color: #e2e8f0 !important;
+}
+
+body.sunlight-mode .econ-products-table th {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  border-bottom-color: #cbd5e1 !important;
+}
+
+body.sunlight-mode .econ-products-table td {
+  color: #1e293b !important;
+  border-bottom-color: #f1f5f9 !important;
+}
+
+body.sunlight-mode .econ-products-table tr:hover td {
+  background: #f8fafc !important;
+}
+
+body.sunlight-mode .econ-warning-box {
+  background: #fef2f2 !important;
+  border-left: 3.5px solid #dc2626 !important;
+  color: #7f1d1d !important;
+}
+
+body.sunlight-mode .econ-warning-box strong {
+  color: #991b1b !important;
 }
 
 body.sunlight-mode .econ-net-val {
@@ -4204,6 +4330,18 @@ body.sunlight-mode .shaft-svg-box {
   background: #f8fafc;
   border: 1px solid #cbd5e1;
 }
+
+body.sunlight-mode .shaft-svg-box text {
+  fill: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+body.sunlight-mode .well-drilling-card .card-desc,
+body.sunlight-mode .well-drilling-card p,
+body.sunlight-mode .well-drilling-card span {
+  color: #1e293b !important;
+}
+
 
 
 

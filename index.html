@@ -790,7 +790,7 @@
         </div>
 
         <p class="card-desc" style="margin-top:0.5rem;">
-          Simulador de ingeniería para certificar si el pozo perforado en el predio satisface la demanda hídrica máxima ($15.75\text{ m}^3\text{/día}$ con 20% de fracción de lavado salino). Ingrese los datos de la prueba de bombeo para calcular tiempo de operación, altura manométrica, potencia de bomba y autonomía del reservorio.
+          Simulador de ingeniería para certificar si el pozo en el predio satisface la demanda hídrica máxima (15.75 a 18.50 m³/día con fracción de lavado salino LF = 20-23%). Calcule el tiempo de bombeo diario, la altura manométrica de presión (HMT en mca, PSI y bar), potencia de bomba requerida y autonomía del reservorio.
         </p>
 
         <div class="grid-2col" style="margin-top:1rem;">
@@ -799,11 +799,11 @@
             <h4 style="color:#38bdf8; font-size:0.95rem; margin-bottom:0.75rem;">1. Parámetros de Prueba del Pozo y Reservorio:</h4>
             <div class="inputs-grid" style="grid-template-columns: repeat(2, 1fr); gap:0.75rem;">
               <div class="input-item">
-                <label for="well-test-flow">Caudal de Prueba ($Q$ en L/s):</label>
+                <label for="well-test-flow">Caudal de Prueba (Q en L/s):</label>
                 <input type="number" id="well-test-flow" value="2.5" min="0.5" max="15.0" step="0.1" class="input-field">
               </div>
               <div class="input-item">
-                <label for="well-test-nd">Nivel Dinámico Estabilizado ($ND$ m):</label>
+                <label for="well-test-nd">Nivel Dinámico Estabilizado (ND en m):</label>
                 <input type="number" id="well-test-nd" value="87.0" min="20.0" max="150.0" step="1.0" class="input-field">
               </div>
               <div class="input-item">
@@ -829,7 +829,7 @@
 
           <!-- Resultados Hidráulicos del Pozo -->
           <div class="info-card">
-            <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.75rem;">2. Diagnóstico Hidráulico y Electromecánico:</h4>
+            <h4 style="color:#34d399; font-size:0.95rem; margin-bottom:0.75rem;">2. Diagnóstico Hidráulico, Presión y Potencia:</h4>
             <div class="metrics-grid" style="grid-template-columns: repeat(2, 1fr); gap:0.75rem;">
               <div class="metric-box" style="padding:0.6rem;">
                 <span class="metric-label">Demanda Diaria Pico</span>
@@ -842,9 +842,9 @@
                 <span class="metric-sub" id="well-calc-pump-rate">Caudal: 9.0 m³/h</span>
               </div>
               <div class="metric-box" style="padding:0.6rem;">
-                <span class="metric-label">Carga Manométrica (<span class="tooltip-term">HMT <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Altura Manométrica Total (HMT)</span><span class="tooltip-tag">mca / PSI</span></span><span class="tooltip-simple">Esfuerzo hidrostático total que vence la bomba: profundidad del agua en el pozo + fricción de tuberías + presión de filtrado.</span><span class="tooltip-tech">HMT = Nivel Dinámico + hf + P_entrega</span></span></span>)</span>
+                <span class="metric-label">Presión Total (<span class="tooltip-term">HMT <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Altura Manométrica Total (HMT)</span><span class="tooltip-tag">mca / PSI / bar</span></span><span class="tooltip-simple">Esfuerzo hidrostático total que vence la bomba: profundidad del agua en el pozo + fricción de tuberías + altura al reservorio.</span><span class="tooltip-tech">HMT = Nivel Dinámico + hf_fricción + h_elevación + P_residual</span></span></span>)</span>
                 <span class="metric-val" id="well-calc-hmt" style="color:#f59e0b; font-size:1.2rem;">100.0 mca</span>
-                <span class="metric-sub" id="well-calc-psi">~142 PSI total</span>
+                <span class="metric-sub" id="well-calc-psi">~142 PSI | ~9.8 bar</span>
               </div>
               <div class="metric-box" style="padding:0.6rem;">
                 <span class="metric-label">Potencia Sugerida Bomba</span>
@@ -856,7 +856,7 @@
             <div class="metric-box full-width" style="margin-top:0.75rem; padding:0.6rem 0.8rem;">
               <span class="metric-label">Autonomía Total en Reservorio:</span>
               <div class="metric-value" id="well-calc-autonomy" style="font-size:1.3rem; color:#10b981;">5.1 Días Continuos</div>
-              <span class="metric-sub">Respaldo ante cortes eléctricos de Corpoelec o mantenimiento preventivo de la electrobomba.</span>
+              <span class="metric-sub">Respaldo ante contingencias eléctricas de Corpoelec o mantenimiento de la electrobomba.</span>
             </div>
           </div>
         </div>
@@ -875,15 +875,15 @@
             </div>
             <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
               <strong style="color:#f59e0b; font-size:0.85rem;">Fase 3: Prueba Escalonada (Jacob)</strong>
-              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">4 escalones (1.0, 2.0, 3.0 y 4.5 L/s) para separar pérdidas de formación ($BQ$) y pérdidas de pozo ($CQ^2$). Eficiencia $\ge 70\%$.</p>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">4 escalones (1.0, 2.0, 3.0 y 4.5 L/s) para separar pérdidas de formación (BQ) y pérdidas de pozo (CQ²). Eficiencia ≥ 70%.</p>
             </div>
             <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
               <strong style="color:#a855f7; font-size:0.85rem;">Fase 4: Caudal Constante 24-48h</strong>
-              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Bombeo continuo a 2.5 L/s midiendo abatimiento y prueba de recuperación Theis ($\ge 90\%$ de reposición del nivel estático).</p>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Bombeo continuo a 2.5 L/s midiendo abatimiento y prueba de recuperación Theis (≥ 90% de reposición del nivel estático).</p>
             </div>
             <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.75rem;">
               <strong style="color:#ec4899; font-size:0.85rem;">Fase 5: Aforos Químicos y Desinfección</strong>
-              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Laboratorio completo (ECw, RAS, SAR, HCO₃⁻, Cl⁻, Boro) y desinfección de entubado con hipoclorito a 50 ppm residual.</p>
+              <p style="font-size:0.8rem; color:#cbd5e1; margin-top:0.3rem; line-height:1.4;">Laboratorio completo (CE, RAS, SAR, HCO₃⁻, Cl⁻, Boro) y desinfección de entubado con hipoclorito a 50 ppm residual.</p>
             </div>
           </div>
         </div>
@@ -908,60 +908,63 @@
         </div>
 
         <p class="card-desc" style="margin-top:0.6rem;">
-          Dimensionamiento mecánico, hidráulico y económico para la captación subterránea en el Valle de Quíbor. Basado en parámetros calibrados de <strong>Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ)</strong>: Transmisividad $T = 180\text{ m}^2\text{/día}$ ($2.08\times 10^{-3}\text{ m}^2\text{/s}$), Almacenamiento $S = 2.5\times 10^{-3}$, Conductividad hidráulica $K = 22\text{ m/día}$ y Radio de influencia $R_0 \approx 260\text{ m}$.
+          Dimensionamiento mecánico, hidráulico y económico para la captación subterránea en el Valle de Quíbor. Basado en parámetros calibrados de <strong>Visual MODFLOW 4.1 (CIDIAT-ULA / SHYQ)</strong>: Transmisividad <em>T = 180 m²/día</em> (2.08 × 10⁻³ m²/s), Almacenamiento <em>S = 2.5 × 10⁻³</em>, Conductividad hidráulica <em>K = 22 m/día</em> y Radio de influencia <em>R₀ ≈ 260 m</em>.
         </p>
 
         <!-- Selector de Ubicación / Distancia al Frente Freático -->
         <div class="info-card" style="margin-top:1.2rem; background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.3);">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
             <h4 style="color:#38bdf8; font-size:0.95rem; margin:0;">📍 1. Selección de Ubicación y Modalidad del Pozo (5 Escenarios Hidrogeológicos):</h4>
-            <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.75rem;" id="badge-selected-location">Pozo Artesanal Ø 50 cm (60 m)</span>
+            <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.75rem;" id="badge-selected-location">Pozo Artesanal a Pico Ø 80 cm (60 m)</span>
           </div>
 
           <div class="location-options-grid">
-            <!-- Opción Artesanal (Ø 50 cm, 50m -> 60m) -->
+            <!-- Opción Artesanal (Ø 80 cm a pico, 50m -> 60m con Bomba 1" Continuo 24/7) -->
             <div class="location-option-card card-artesanal active" id="loc-card-optArtesanal">
               <div class="location-card-header">
-                <strong class="location-card-title" style="color:var(--amber-main);">Pozo Artesanal Ø 50 cm (50m ➔ 60m)</strong>
-                <span class="status-badge" style="background:var(--amber-main); color:#0f172a; font-weight:800; font-size:0.68rem;">EXISTENTE + 10m</span>
+                <strong class="location-card-title" style="color:var(--amber-main);">Pozo Artesanal a Pico Ø 80 cm (Bomba 1" Continuo 24/7)</strong>
+                <span class="status-badge" style="background:var(--amber-main); color:#0f172a; font-weight:800; font-size:0.68rem;">EXISTENTE + 10m | 24/7 VIABLE</span>
               </div>
               <div class="location-card-body">
-                <div>• Estado: <strong>50 m excavados</strong> | Meta: <strong>+10 m (60 m total)</strong></div>
-                <div>• Sección: <strong>Ø 50 cm</strong> (Almacenamiento: <strong>196 L / metro</strong>)</div>
-                <div>• Caudal Continuo Sin Achicar: <strong style="color:var(--amber-main);">1" a 1¼" (0.8 - 1.2 L/s)</strong></div>
-                <div>• ¿Tira 2" continuo?: <strong style="color:var(--rose-main);">NO (Se achica en 12-15 min)</strong></div>
-                <div>• Estrategia: <strong>Bombeo por tandas al reservorio 80 m³</strong></div>
-                <div>• Inversión adicional (+10 m + bomba): <strong style="color:var(--emerald-light);">~$4.500 USD</strong></div>
+                <div>• Estado: <strong>50 m excavados a pico</strong> | Meta: <strong>+10 m (60 m total)</strong></div>
+                <div>• Sección: <strong>Ø 80 cm</strong> | Encofrado: <strong>Formaletas 3 m ($40 c/u)</strong></div>
+                <div>• Bomba y Diámetro: <strong style="color:var(--emerald-light);">1.5 HP (Descarga 1") | VIABLE 24/7 CONTINUO</strong></div>
+                <div>• Caudal Continuo 24/7: <strong style="color:var(--amber-main);">1" a tubo lleno (0.75 L/s = 45 L/min = 2.7 m³/h)</strong></div>
+                <div>• Dinámica de Fondo: <strong>Extracción (0.75 L/s) ≤ Recarga (0.8-1.2 L/s) ➔ ND estable a 57 m</strong></div>
+                <div>• Producción Diaria 24h: <strong style="color:var(--cyan-light);">64.8 m³/día</strong> (cubre 3.5 veces los 18.5 m³ de la nave)</div>
+                <div>• Inversión adicional (+10m a pico + formaletas + bomba 1.5HP): <strong style="color:var(--emerald-light);">~$3.490 USD</strong></div>
               </div>
             </div>
 
-            <!-- Opción A1 (60m) Perforado Mecánico -->
+            <!-- Opción A1 (60m) Perforado Mecánico Ø 300 mm -->
             <div class="location-option-card card-a60" id="loc-card-optA60">
               <div class="location-card-header">
-                <strong class="location-card-title" style="color:var(--cyan-light);">Opción A1: Perforado 120m (NE = 60 m)</strong>
+                <strong class="location-card-title" style="color:var(--cyan-light);">Opción A1: Máquina Ø 300 mm 120m (NE = 60 m)</strong>
                 <span class="tag" style="background:rgba(56,189,248,0.2); color:var(--cyan-light); font-size:0.68rem;">2" CONTINUO 24/7</span>
               </div>
               <div class="location-card-body">
-                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (Gravas 86-112m)</div>
+                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (Broca Ø 300 mm)</div>
+                <div>• Tarifa perforación: <strong>$70/m con grava y entubado incluidos</strong></div>
                 <div>• Espejo de agua: <strong>NE = 60 m</strong> | Dinámico: <strong>ND = 78 m</strong></div>
                 <div>• Caudal Continuo: <strong style="color:var(--emerald-light);">2" a tubo lleno (2.5 - 3.2 L/s)</strong></div>
-                <div>• Bomba y Carga: <strong>5.5 HP</strong> (HMT = 91 mca) | <strong>Aducción 0 m</strong></div>
-                <div>• Capex Estimado Llave en Mano: <strong style="color:var(--cyan-light);">~$29.850 USD</strong></div>
+                <div>• Bomba y Carga: <strong>5.5 HP</strong> (HMT = 91 mca / ~129 PSI) | <strong>Aducción 0 m</strong></div>
+                <div>• Capex Estimado Llave en Mano: <strong style="color:var(--cyan-light);">~$24.880 USD</strong></div>
               </div>
             </div>
 
-            <!-- Opción A2 (70m) Perforado Mecánico Estival -->
+            <!-- Opción A2 (70m) Perforado Mecánico Estival Ø 300 mm -->
             <div class="location-option-card card-a70" id="loc-card-optA70">
               <div class="location-card-header">
-                <strong class="location-card-title" style="color:var(--text-secondary);">Opción A2: Perforado 120m (NE = 70 m)</strong>
+                <strong class="location-card-title" style="color:var(--text-secondary);">Opción A2: Máquina Ø 300 mm 120m (NE = 70 m)</strong>
                 <span class="tag" style="background:rgba(148,163,184,0.2); color:var(--text-secondary); font-size:0.68rem;">LÍNEA ESTIVAL</span>
               </div>
               <div class="location-card-body">
-                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong></div>
+                <div>• Cota: <strong>700 msnm</strong> | Profundidad: <strong>120 m</strong> (Broca Ø 300 mm)</div>
+                <div>• Tarifa perforación: <strong>$70/m con grava y entubado incluidos</strong></div>
                 <div>• Sequía de marzo: <strong>NE = 70 m</strong> | Dinámico: <strong>ND = 88 m</strong></div>
-                <div>• Carga y Bomba: <strong>HMT = 100.5 mca</strong> | Bomba <strong>7.5 HP</strong></div>
+                <div>• Carga y Bomba: <strong>HMT = 100.5 mca (~143 PSI)</strong> | Bomba <strong>7.5 HP</strong></div>
                 <div>• Caudal Continuo: <strong style="color:var(--emerald-light);">2" a tubo lleno (2.5 L/s)</strong></div>
-                <div>• Capex Estimado: <strong style="color:var(--text-secondary);">~$31.400 USD</strong></div>
+                <div>• Capex Estimado: <strong style="color:var(--text-secondary);">~$25.800 USD</strong></div>
               </div>
             </div>
 
@@ -975,7 +978,7 @@
                 <div>• Cota: <strong>750 msnm</strong> (Recarga) | Profundidad: <strong>100 m</strong></div>
                 <div>• Freático somero: <strong>NE = 50 m</strong> | Dinámico: <strong>ND = 68 m</strong></div>
                 <div>• Calidad superior: <strong>ECw = 0.9 dS/m</strong> | 3.000 m PEAD + Booster</div>
-                <div>• Capex Estimado: <strong style="color:var(--emerald-light);">~$48.500 USD</strong></div>
+                <div>• Capex Estimado: <strong style="color:var(--emerald-light);">~$39.180 USD</strong></div>
               </div>
             </div>
 
@@ -988,23 +991,24 @@
               <div class="location-card-body">
                 <div>• Cota: <strong>660 msnm</strong> | Profundidad: <strong>140 m</strong> (Salinidad alta)</div>
                 <div>• Freático profundo: <strong>NE = 98 m</strong> | Dinámico: <strong>ND = 122 m</strong></div>
-                <div>• Bomba <strong>12.5 HP</strong> ($HMT = 138\text{ mca}$) | $LF \ge 35\%$</div>
-                <div>• Capex Estimado: <strong style="color:var(--rose-main);">~$36.800 USD</strong></div>
+                <div>• Bomba <strong>12.5 HP</strong> (HMT = 135 mca / ~192 PSI) | LF ≥ 35%</div>
+                <div>• Capex Estimado: <strong style="color:var(--rose-main);">~$33.100 USD</strong></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Banner de Diagnóstico Específico para Pozo Artesanal Ø 50 cm -->
+        <!-- Banner de Diagnóstico Específico para Pozo Artesanal a Pico Ø 80 cm -->
         <div class="info-card artesanal-diagnosis-card" id="artesanal-diagnosis-box">
           <div class="artesanal-diag-header">
-            <h4 class="artesanal-diag-title"><span class="material-symbols-outlined" style="font-size:18px; color:var(--amber-main); vertical-align:middle;">lightbulb</span> Diagnóstico Hidráulico de tu Pozo Artesanal (Ø 50 cm, 50 m actual ➔ 60 m):</h4>
-            <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.7rem;">Capacidad de Almacenamiento: 196 L/m</span>
+            <h4 class="artesanal-diag-title"><span class="material-symbols-outlined" style="font-size:18px; color:var(--amber-main); vertical-align:middle;">lightbulb</span> Diagnóstico Hidráulico: Pozo Artesanal a Pico Ø 80 cm con Bomba de 1" (Régimen Continuo 24/7):</h4>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:var(--emerald-light); font-size:0.7rem; font-weight:700;">✓ BOMBEO 24/7 100% VIABLE</span>
           </div>
           <div class="artesanal-diag-body">
-            <div>• <strong>Probabilidad de sacar 2" continuas a 60 m:</strong> <span style="color:var(--rose-main); font-weight:700;">MENOS DEL 15% (Muy Baja)</span>. Una bomba de 2" saca 150 L/min y vaciará los ~1.500 L acumulados en el fondo en <strong>solo 10 a 13 minutos</strong>.</div>
-            <div>• <strong>Caudal Continuo Real Sin Achicar a 60 m:</strong> <span style="color:var(--emerald-light); font-weight:700;">1" a 1¼" (0.8 a 1.2 L/s = 3.0 a 4.3 m³/h)</span>. Este caudal iguala la recarga lateral del suelo sin agotar el vaso.</div>
-            <div>• <strong>Solución Agronómica Perfecta (Bombeo por Tandas al Reservorio de 80 m³):</strong> Bombeando 15 min a 2" cada 1 hora con electrobomba sumergible de 2.0-3.0 HP y sondas de nivel, cosechas <strong>18 a 22 m³/día</strong>, cubriendo el 100% de la nave de 2.000 m² sin perforar un pozo nuevo.</div>
+            <div>• <strong>¿Es viable mantener un bombeo 24/7 continuo con bomba de 1"?:</strong> <span style="color:var(--emerald-light); font-weight:800;">SÍ, TOTALMENTE VIABLE.</span> Una electrobomba sumergible de 1.5 HP con descarga de 1" extrae <strong>0.75 L/s (45 L/min = 2.70 m³/h)</strong>. En el estrato de arenas medias con gravilla de Quíbor a 60 m, la recarga lateral por filtración radial entrega <strong>0.80 a 1.20 L/s</strong>. Al ser la extracción menor a la recarga ($Q_{bomba} \le Q_{recarga}$), el nivel dinámico se estabiliza de forma permanente a <strong>57.0 m</strong> (dejando 1.5 m de agua sobre la bomba a 58.5 m). <strong>El pozo NUNCA se seca en régimen 24/7.</strong></div>
+            <div>• <strong>Producción Hidráulica Continua 24h:</strong> Bombeando 24 horas continuas a 1" cosechas <strong>64.8 m³/día</strong> (2.70 m³/h × 24h), lo que representa <strong>3.5 veces</strong> la demanda máxima del invernadero de 2.000 m² (18.5 m³/día).</div>
+            <div>• <strong>Operación Recomendada con Reservorio de 80 m³:</strong> Una bomba de 1" llena el reservorio de 80 m³ en <strong>solo 29.6 horas</strong>. Instalando una boya eléctrica de corte superior en el reservorio, para reponer el consumo diario de la nave la bomba solo operará <strong>6.8 a 7.5 horas al día</strong> de forma continua y suave, eliminando arrastres de arena, cavitación y picos eléctricos.</div>
+            <div>• <strong>Ahorro en Equipamiento:</strong> Al usar electrobomba de 1.5 HP ($850 USD) y manguera PEAD 1" PN10 ($247.50 USD), la inversión adicional total baja a <strong>~$3.490 USD</strong> (ahorrando <strong>~$21.390 USD</strong> frente a perforar con máquina).</div>
           </div>
         </div>
 
@@ -1022,7 +1026,7 @@
                   <th>Prof.</th>
                   <th>NE</th>
                   <th>ND</th>
-                  <th>HMT</th>
+                  <th>Presión HMT</th>
                   <th>Bomba</th>
                   <th>Caudal Continuo</th>
                   <th>Capex Estimado</th>
@@ -1031,36 +1035,36 @@
               </thead>
               <tbody id="tbody-well-comparison">
                 <tr class="well-comparison-row row-artesanal active" id="comp-row-ARTESANAL" data-loc="ARTESANAL">
-                  <td><strong style="color:var(--amber-main);">Pozo Artesanal Ø 50 cm</strong> (50m ➔ 60m)</td>
+                  <td><strong style="color:var(--amber-main);">Pozo Artesanal a Pico Ø 80 cm</strong> (Bomba 1" Continuo)</td>
                   <td>60 m (+10m)</td>
                   <td>52 m</td>
-                  <td>58.5 m</td>
-                  <td>65 mca</td>
-                  <td>3.0 HP</td>
-                  <td><span style="color:var(--amber-main); font-weight:700;">1" a 1¼"</span> (0.8-1.2 L/s)</td>
-                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$4.850 USD</strong></td>
-                  <td><span class="well-feasibility-badge feasibility-high">Máximo Ahorro</span></td>
+                  <td>57.0 m</td>
+                  <td>63.5 mca (~90 PSI)</td>
+                  <td>1.5 HP (1")</td>
+                  <td><span style="color:var(--emerald-light); font-weight:700;">1" Continuo 24/7</span> (0.75 L/s = 2.7 m³/h)</td>
+                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$3.490 USD</strong></td>
+                  <td><span class="well-feasibility-badge feasibility-high">24/7 Viable / Máximo Ahorro</span></td>
                 </tr>
                 <tr class="well-comparison-row" id="comp-row-A60" data-loc="A60">
-                  <td><strong style="color:var(--cyan-light);">Opción A1: In Situ 120m</strong> (NE 60m)</td>
+                  <td><strong style="color:var(--cyan-light);">Opción A1: Máquina Ø 300 mm 120m</strong> (NE 60m)</td>
                   <td>120 m</td>
                   <td>60 m</td>
                   <td>78 m</td>
-                  <td>91 mca</td>
+                  <td>91 mca (~129 PSI)</td>
                   <td>5.5 HP</td>
                   <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (2.5-3.2 L/s)</td>
-                  <td><strong style="color:var(--cyan-light); font-family:var(--font-mono);">~$29.850 USD</strong></td>
+                  <td><strong style="color:var(--cyan-light); font-family:var(--font-mono);">~$24.880 USD</strong></td>
                   <td><span class="well-feasibility-badge feasibility-high">Industrial Óptimo</span></td>
                 </tr>
                 <tr class="well-comparison-row" id="comp-row-A70" data-loc="A70">
-                  <td><strong style="color:var(--text-secondary);">Opción A2: In Situ 120m</strong> (NE 70m Estival)</td>
+                  <td><strong style="color:var(--text-secondary);">Opción A2: Máquina Ø 300 mm 120m</strong> (NE 70m Estival)</td>
                   <td>120 m</td>
                   <td>70 m</td>
                   <td>88 m</td>
-                  <td>100.5 mca</td>
+                  <td>100.5 mca (~143 PSI)</td>
                   <td>7.5 HP</td>
                   <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (2.5 L/s)</td>
-                  <td><strong style="color:var(--text-secondary); font-family:var(--font-mono);">~$31.400 USD</strong></td>
+                  <td><strong style="color:var(--text-secondary); font-family:var(--font-mono);">~$25.800 USD</strong></td>
                   <td><span class="well-feasibility-badge feasibility-medium">Línea Estival</span></td>
                 </tr>
                 <tr class="well-comparison-row" id="comp-row-B" data-loc="B">
@@ -1071,7 +1075,7 @@
                   <td>81 mca + Boost</td>
                   <td>5.5 HP</td>
                   <td><span style="color:var(--emerald-light); font-weight:700;">2" Continuo</span> (0.9 dS/m)</td>
-                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$48.500 USD</strong></td>
+                  <td><strong style="color:var(--emerald-light); font-family:var(--font-mono);">~$39.180 USD</strong></td>
                   <td><span class="well-feasibility-badge feasibility-medium">Agua Dulce / Capex Alto</span></td>
                 </tr>
                 <tr class="well-comparison-row" id="comp-row-C" data-loc="C">
@@ -1079,10 +1083,10 @@
                   <td>140 m</td>
                   <td>98 m</td>
                   <td>122 m</td>
-                  <td>138 mca</td>
+                  <td>135 mca (~192 PSI)</td>
                   <td>12.5 HP</td>
                   <td><span style="color:var(--rose-main); font-weight:700;">2.8 L/s</span> (2.4 dS/m)</td>
-                  <td><strong style="color:var(--rose-main); font-family:var(--font-mono);">~$36.800 USD</strong></td>
+                  <td><strong style="color:var(--rose-main); font-family:var(--font-mono);">~$33.100 USD</strong></td>
                   <td><span class="well-feasibility-badge feasibility-risk">Riesgo Salino / Cono</span></td>
                 </tr>
               </tbody>
@@ -1095,9 +1099,9 @@
           <div class="input-item">
             <label for="select-drill-location"><strong>Ubicación y Modalidad:</strong></label>
             <select id="select-drill-location" class="input-select" style="border-color:#38bdf8;">
-              <option value="ARTESANAL" selected>Pozo Artesanal In Situ Ø 50 cm (50m actual ➔ 60m)</option>
-              <option value="A60">Opción A1: Predio In Situ Perforado 120m (NE 60m, 2" continuo)</option>
-              <option value="A70">Opción A2: Predio In Situ Perforado 120m (NE 70m Estival)</option>
+              <option value="ARTESANAL" selected>Pozo Artesanal a Pico Ø 80 cm (50m actual ➔ 60m con formaletas 3m)</option>
+              <option value="A60">Opción A1: Máquina Ø 300 mm 120m (NE 60m, 2" continuo a $70/m)</option>
+              <option value="A70">Opción A2: Máquina Ø 300 mm 120m (NE 70m Estival a $70/m)</option>
               <option value="B">Opción B: Piedemonte Sur (+3.0 km, Cota 750)</option>
               <option value="C">Opción C: Centro Valle (+2.5 km N, Cota 660)</option>
             </select>
@@ -1144,11 +1148,11 @@
             <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b; font-size:0.7rem;">Radio de Influencia R₀ ≈ 260 m</span>
           </div>
           <p style="font-size:0.78rem; color:#94a3b8; margin-bottom:0.75rem; line-height:1.4;">
-            En el acuífero de Quíbor ($T = 180\text{ m}^2\text{/día}$, $S = 2.5\times 10^{-3}$), dos pozos que bombean a menos de 250 m solapan sus conos de depresión, produciendo un abatimiento mutuo adicional $\Delta s_{interf} = \frac{Q}{4\pi T}\ln\left(\frac{2.25 T t}{r^2 S}\right)$ que eleva el consumo eléctrico y puede descebar la bomba.
+            En el acuífero de Quíbor (<em>T = 180 m²/día</em>, <em>S = 2.5 × 10⁻³</em>), si un pozo vecino bombea a menos de 260 m de distancia, los conos de depresión se intersectan, produciendo un abatimiento mutuo adicional <em>Δs = (Q / 4πT) · ln(2.25 T t / r² S)</em> que eleva la presión manométrica (HMT) y el consumo eléctrico del motor.
           </p>
           <div class="inputs-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; align-items:center;">
             <div class="input-item">
-              <label for="input-well-distance" style="font-size:0.75rem;">Distancia al Pozo Vecino Más Cercano ($r$ en metros):</label>
+              <label for="input-well-distance" style="font-size:0.75rem;">Distancia al Pozo Vecino Más Cercano (r en metros):</label>
               <div style="display:flex; gap:0.5rem; align-items:center;">
                 <input type="range" id="input-well-distance-slider" min="50" max="600" step="10" value="250" style="flex:1;">
                 <input type="number" id="input-well-distance" value="250" min="50" max="600" step="10" class="input-field" style="width:75px; padding:0.3rem;">
@@ -1156,23 +1160,23 @@
             </div>
             <div class="metric-box" style="padding:0.5rem;">
               <span class="metric-label" style="font-size:0.7rem;">Abatimiento por Interferencia (Δs):</span>
-              <span class="metric-val" id="disp-interf-drawdown" style="color:#f59e0b; font-size:1.1rem;">+0.12 m</span>
+              <span class="metric-val" id="disp-interf-drawdown" style="color:#f59e0b; font-size:1.1rem;">+0.09 m</span>
               <span class="metric-sub" id="disp-interf-sub">A 250 m con pozo a 2.5 L/s</span>
             </div>
             <div class="metric-box" style="padding:0.5rem;">
               <span class="metric-label" style="font-size:0.7rem;">Nivel Dinámico Corregido:</span>
-              <span class="metric-val" id="disp-corrected-nd" style="color:#38bdf8; font-size:1.1rem;">88.12 m</span>
-              <span class="metric-sub" id="disp-corrected-hmt">HMT Corregida = 101.1 mca</span>
+              <span class="metric-val" id="disp-corrected-nd" style="color:#38bdf8; font-size:1.1rem;">78.09 m</span>
+              <span class="metric-sub" id="disp-corrected-hmt">HMT = 91.1 mca (~129 PSI)</span>
             </div>
             <div class="metric-box" style="padding:0.5rem;" id="box-interf-status">
-              <span class="metric-label" style="font-size:0.7rem;">Diagnóstico de Cono Eólico:</span>
+              <span class="metric-label" style="font-size:0.7rem;">Cono de Abatimiento Hidráulico:</span>
               <span class="metric-val" id="disp-interf-status" style="color:#34d399; font-size:0.95rem;">Distancia Segura</span>
-              <span class="metric-sub" id="disp-interf-status-sub">Interferencia hidrodinámica mínima</span>
+              <span class="metric-sub" id="disp-interf-status-sub">Separación ≥ Radio de Influencia (R₀ ≈ 260 m)</span>
             </div>
           </div>
         </div>
 
-        <!-- Métricas Dinámicas del Pozo Perforado -->
+        <!-- Métricas Dinámicas del Pozo Perforado (Con Presión Integral y Pérdida de Carga) -->
         <div class="metrics-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin-top:1.25rem;">
           <div class="metric-box">
             <span class="metric-label">Tubería Ciega</span>
@@ -1191,17 +1195,22 @@
           </div>
           <div class="metric-box">
             <span class="metric-label">Sello Sanitario Cemento</span>
-            <span class="metric-val" id="disp-drill-seal" style="color:#fda4af;">1.38 m³</span>
+            <span class="metric-val" id="disp-drill-seal" style="color:#fda4af;">1.39 m³</span>
             <span class="metric-sub">0 a 15 m (~28 sacos cemento)</span>
           </div>
           <div class="metric-box">
-            <span class="metric-label">Bomba Sumergible</span>
-            <span class="metric-val" id="disp-drill-pump" style="color:#a855f7;">7.5 HP</span>
-            <span class="metric-sub" id="disp-drill-pump-sub">HMT = 100.5 mca (a 98 m)</span>
+            <span class="metric-label">Presión Dinámica (HMT)</span>
+            <span class="metric-val" id="disp-drill-pressure" style="color:#38bdf8;">91.1 mca</span>
+            <span class="metric-sub" id="disp-drill-pressure-sub">129.5 PSI | 8.93 bar</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Bomba y Timbrado Columna</span>
+            <span class="metric-val" id="disp-drill-pump" style="color:#a855f7;">5.5 HP</span>
+            <span class="metric-sub" id="disp-drill-pump-sub">PEAD PN16 o Sch 40</span>
           </div>
           <div class="metric-box">
             <span class="metric-label">Inversión Llave en Mano</span>
-            <span class="metric-val" id="disp-drill-cost" style="color:#38bdf8;">$31.400 USD</span>
+            <span class="metric-val" id="disp-drill-cost" style="color:#10b981;">$30.393 USD</span>
             <span class="metric-sub">Perforación, entubado y bomba</span>
           </div>
         </div>
@@ -1215,14 +1224,14 @@
               <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8; font-size:0.7rem;">Visual MODFLOW</span>
             </div>
             <p style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;" id="strat-column-desc">
-              Corte hidrogeológico calibrado para las coordenadas $9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$ (Cota 700 msnm):
+              Corte hidrogeológico calibrado para las coordenadas 9°53'20.0"N 69°35'35.0"W (Cota 700 msnm):
             </p>
 
-            <!-- Esquema Gráfico del Pozo Artesanal Ø 50 cm (50m -> 60m) -->
+            <!-- Esquema Gráfico del Pozo Artesanal a Pico Ø 80 cm (50m -> 60m) -->
             <div class="artesanal-shaft-schematic" id="artesanal-shaft-box" style="margin-bottom:0.9rem;">
               <div class="artesanal-shaft-header">
-                <h5 class="artesanal-shaft-title">📐 Corte Transversal de Fuste Artesanal (Ø 50 cm)</h5>
-                <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.68rem;">196 L / metro lineal</span>
+                <h5 class="artesanal-shaft-title">📐 Corte Transversal de Fuste Artesanal a Pico (Ø 80 cm)</h5>
+                <span class="tag" style="background:rgba(245,158,11,0.2); color:var(--amber-main); font-size:0.68rem;">503 L / metro lineal (Vaso Buffer)</span>
               </div>
               <div class="shaft-svg-box">
                 <svg viewBox="0 0 520 230" style="width:100%; height:auto; display:block;" id="svg-artesanal-shaft">
@@ -1230,84 +1239,40 @@
                   <rect x="10" y="20" width="500" height="20" fill="#334155" rx="3"/>
                   <text x="25" y="34" fill="#94a3b8" font-size="10" font-family="'JetBrains Mono', monospace">0.0 m (Cota 700 msnm - Brocal de Concreto)</text>
 
-                  <!-- Fuste Seco 0 - 50 m -->
-                  <rect x="120" y="40" width="80" height="75" fill="#1e293b" stroke="#f59e0b" stroke-dasharray="4,2" stroke-width="1.5"/>
-                  <text x="215" y="75" fill="#cbd5e1" font-size="10">0 a 50 m: Fuste excavado Ø 50 cm (Seco)</text>
-                  <text x="215" y="90" fill="#94a3b8" font-size="9">Limos arcillosos y arenas medias compactas</text>
+                  <!-- Fuste Seco 0 - 50 m (Formaletas 3m) -->
+                  <rect x="110" y="40" width="100" height="75" fill="#1e293b" stroke="#f59e0b" stroke-dasharray="4,2" stroke-width="1.5"/>
+                  <text x="225" y="72" fill="#cbd5e1" font-size="10">0 a 50 m: Fuste excavado a pico Ø 80 cm (Seco)</text>
+                  <text x="225" y="86" fill="#94a3b8" font-size="9">Encofrado con formaletas de 3 m ($40 c/u concreto y arena)</text>
+                  <text x="225" y="100" fill="#64748b" font-size="8.5">Limos arcillosos compactos de la Fm. Morán</text>
 
                   <!-- Contacto y Columna de Agua 50 - 60 m -->
-                  <rect x="120" y="115" width="80" height="85" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="2"/>
-                  <line x1="100" y1="125" x2="200" y2="125" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
-                  <text x="215" y="128" fill="#38bdf8" font-weight="700" font-size="10">NE ≈ 52 m (Nivel Estático de Agua)</text>
+                  <rect x="110" y="115" width="100" height="85" fill="#0284c7" fill-opacity="0.3" stroke="#38bdf8" stroke-width="2"/>
+                  <line x1="90" y1="125" x2="210" y2="125" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,3"/>
+                  <text x="225" y="126" fill="#38bdf8" font-weight="700" font-size="10">NE ≈ 52 m (Nivel Estático - Columna 8.0 m / 4.020 L)</text>
 
-                  <!-- Tramo Profundización +10 m -->
-                  <rect x="120" y="150" width="80" height="50" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
-                  <text x="215" y="152" fill="#f59e0b" font-weight="700" font-size="10">ND ≈ 58.5 m (Nivel Dinámico)</text>
-                  <text x="215" y="168" fill="#cbd5e1" font-size="9">Meta: +10 m (50m ➔ 60m en arenas con gravilla)</text>
+                  <!-- Tramo Profundización +10 m a Pico -->
+                  <rect x="110" y="150" width="100" height="50" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+                  <line x1="90" y1="145" x2="210" y2="145" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,3"/>
+                  <text x="225" y="145" fill="#10b981" font-weight="700" font-size="10">ND ≈ 57.0 m (Nivel Dinámico Estable en Bombeo 24/7)</text>
+                  <text x="225" y="160" fill="#cbd5e1" font-size="9">Meta: +10 m a pico ($100/m) en arenas aluviales con gravilla</text>
+                  <text x="225" y="172" fill="#94a3b8" font-size="8.5">Encofrado 3.3 formaletas de 3m ($133,3 USD en concreto/arena)</text>
 
                   <!-- Bomba Sumergible a 58 m -->
                   <rect x="145" y="165" width="30" height="22" rx="3" fill="#a855f7" stroke="#e9d5ff" stroke-width="1"/>
-                  <text x="160" y="180" fill="#ffffff" font-size="8" text-anchor="middle" font-weight="800">3 HP</text>
+                  <text x="160" y="180" fill="#ffffff" font-size="7.5" text-anchor="middle" font-weight="800">1.5 HP</text>
                   <line x1="160" y1="40" x2="160" y2="165" stroke="#10b981" stroke-width="2"/>
-                  <text x="215" y="185" fill="#c084fc" font-size="9">Bomba sumergible 3.0 HP con sondas de nivel a 58 m</text>
-                  <text x="215" y="198" fill="#10b981" font-size="9">Manguera PEAD 2" PN10 hacia reservorio 80 m³</text>
+                  <text x="225" y="190" fill="#c084fc" font-size="9">Electrobomba 1.5 HP (Descarga 1" Continuo 24/7 a 58 m)</text>
+                  <text x="225" y="202" fill="#10b981" font-size="9">Manguera PEAD 1" PN10 hacia reservorio de 80 m³</text>
 
                   <!-- Fondo y Gravilla -->
-                  <rect x="120" y="200" width="80" height="15" fill="#475569" stroke="#94a3b8" stroke-width="1"/>
-                  <text x="215" y="212" fill="#94a3b8" font-size="8.5">60.0 m: Fondo filtrante con tapón de gravilla 1/4"</text>
+                  <rect x="110" y="200" width="100" height="15" fill="#475569" stroke="#94a3b8" stroke-width="1"/>
+                  <text x="225" y="215" fill="#94a3b8" font-size="8.5">60.0 m: Fondo filtrante artesanal con tapón de gravilla cuarzosa 1/4"</text>
                 </svg>
               </div>
             </div>
 
             <div class="drill-visual-container" id="drill-layers-list">
-              <!-- 0 a 15 m: Sello Sanitario -->
-              <div class="drill-layer layer-sanitary">
-                <span class="drill-layer-depth">0 – 15 m</span>
-                <span class="drill-layer-desc">Arcillas limosas impermeables | <strong>Sello Sanitario Cemento-Bentonita Tremie</strong></span>
-                <span class="drill-layer-component badge-seal">Sello 15 m</span>
-              </div>
-
-              <!-- 15 a 68 m: Acuífero Colgado & Confinante -->
-              <div class="drill-layer layer-confining">
-                <span class="drill-layer-depth">15 – 68 m</span>
-                <span class="drill-layer-desc">Arenas medias secas y arcillas plásticas grisáceas compactas</span>
-                <span class="drill-layer-component badge-casing">Tubo Ciego ASTM A53</span>
-              </div>
-
-              <!-- 68 a 82 m: Acuífero Superior -->
-              <div class="drill-layer layer-aquifer-1">
-                <span class="drill-layer-depth">68 – 82 m</span>
-                <span class="drill-layer-desc"><strong>Lente de Grava Fina y Arena Cuarzosa</strong> | Nivel Estático NE = 70 m</span>
-                <span class="drill-layer-component badge-screen">Filtro Johnson 12 m</span>
-              </div>
-
-              <!-- 82 a 86 m: Lente Arcilloso Intermedio -->
-              <div class="drill-layer layer-confining">
-                <span class="drill-layer-depth">82 – 86 m</span>
-                <span class="drill-layer-desc">Arcilla limosa arenosa firme (Separador) | <em>Posición Bomba Sumergible a 98 m</em></span>
-                <span class="drill-layer-component badge-pump">Zona Bomba 7.5 HP</span>
-              </div>
-
-              <!-- 86 a 112 m: Acuífero Principal -->
-              <div class="drill-layer layer-aquifer-main">
-                <span class="drill-layer-depth">86 – 112 m</span>
-                <span class="drill-layer-desc"><strong>Acuífero Principal Quíbor: Gravas de Cuarzo y Arenas Gruesas Limpias</strong></span>
-                <span class="drill-layer-component badge-screen">Filtro Johnson 26 m</span>
-              </div>
-
-              <!-- 112 a 116 m: Transición -->
-              <div class="drill-layer layer-confining">
-                <span class="drill-layer-depth">112 – 116 m</span>
-                <span class="drill-layer-desc">Arenas finas limosas transicionales</span>
-                <span class="drill-layer-component badge-casing">Tubo Ciego ASTM A53</span>
-              </div>
-
-              <!-- 116 a 120 m: Basamento y Calderín -->
-              <div class="drill-layer layer-bedrock">
-                <span class="drill-layer-depth">116 – 120 m</span>
-                <span class="drill-layer-desc">Lutitas terciarias (Basamento Formación Morán) | <strong>Tubo Decantador + Tapón Cónico</strong></span>
-                <span class="drill-layer-component badge-casing">Decantador 4 m</span>
-              </div>
+              <!-- Renderizado dinámicamente según la opción activa -->
             </div>
           </div>
 
@@ -1324,9 +1289,9 @@
               </div>
 
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #10b981;">
-                <strong style="color:#34d399;">2. Filtros Johnson AISI 304 y Velocidad $V_e \le 0.03\text{ m/s}$:</strong>
+                <strong style="color:#34d399;">2. Filtros Johnson AISI 304 y Velocidad Ve ≤ 0.03 m/s:</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  La ranura continua tipo V de 0.030" (0.75 mm) garantiza un área abierta del 18-22%, manteniendo la velocidad de entrada del agua en $V_e \approx 0.0007\text{ m/s}$, 40 veces por debajo del límite crítico de incrustación de carbonatos.
+                  La ranura continua tipo V de 0.030" (0.75 mm) garantiza un área abierta del 18-22%, manteniendo la velocidad de entrada del agua en Ve ≈ 0.0007 m/s, 40 veces por debajo del límite crítico de incrustación de carbonatos.
                 </span>
               </div>
 
@@ -1340,7 +1305,7 @@
               <div style="background:rgba(255,255,255,0.03); padding:0.6rem; border-radius:6px; border-left:3px solid #f43f5e;">
                 <strong style="color:#fda4af;">4. Sello Sanitario Tremie y Límites de Calidad:</strong>
                 <span style="display:block; margin-top:0.2rem; font-size:0.78rem; color:#94a3b8;">
-                  Lechada de cemento Portland + 4% bentonita inyectada con tubería tremie desde 15 m hacia brocal, aislando escorrentías agrícolas contaminadas y garantizando la sanidad fitosanitaria del predio.
+                  Lechada de cemento Portland + 4% bentonita inyectada con tubería tremie desde 15 m hacia brocal, aislando escorrentías agrícolas superficiales y garantizando la bioseguridad del predio.
                 </span>
               </div>
             </div>
@@ -1350,12 +1315,12 @@
               <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div>
                   <span style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.05em;">Presupuesto de Obra Llave en Mano:</span>
-                  <div style="font-size:1.3rem; font-weight:800; color:#38bdf8; font-family:var(--font-mono);" id="drill-summary-total">$31.401,83 USD</div>
+                  <div style="font-size:1.3rem; font-weight:800; color:#38bdf8; font-family:var(--font-mono);" id="drill-summary-total">$30.392,61 USD</div>
                 </div>
                 <a href="PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md#87-cómputos-métricos-y-presupuesto-referencial-de-perforación-valle-de-quíbor" target="_blank" class="filter-btn" style="text-decoration:none; font-size:0.75rem;">Ver Cómputos Detallados ↗</a>
               </div>
               <span style="display:block; font-size:0.72rem; color:#94a3b8; margin-top:0.3rem;" id="drill-summary-desc">
-                Incluye perforación 12¼", entubado 6", 38m filtros Johnson AISI 304, grava, sello, perfilaje, air-lift, bomba 7.5 HP y tablero VFD.
+                Incluye perforación 12¼", entubado 6", 38m filtros Johnson AISI 304, grava, sello, perfilaje, air-lift, bomba 5.5 HP y tablero VFD.
               </span>
             </div>
 
@@ -1385,6 +1350,44 @@
           </div>
 
         </div>
+
+        <!-- Tarjeta de Amortización Financiera: Pozo Propio vs Camión Cisterna (Precios Venezuela 2026) -->
+        <div class="info-card" style="margin-top:1.25rem; background:linear-gradient(135deg, rgba(16,185,129,0.08), rgba(15,23,42,0.85)); border:1px solid rgba(16,185,129,0.35);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+            <h4 style="color:var(--emerald-light); font-size:0.95rem; margin:0;"><span class="material-symbols-outlined" style="font-size:19px; vertical-align:middle;">savings</span> Análisis Financiero: Pozo Propio vs Compra de Agua en Camión Cisterna (Valle de Quíbor 2026)</h4>
+            <span class="tag" style="background:rgba(16,185,129,0.2); color:var(--emerald-light); font-size:0.72rem;">Cisterna en Finca: $30 USD / 10.000 L ($3.00/m³)</span>
+          </div>
+
+          <div class="grid-2col" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+            <!-- Comparativa Cisterna -->
+            <div style="background:rgba(0,0,0,0.3); padding:0.85rem; border-radius:8px; border-left:3px solid var(--rose-main);">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="color:var(--rose-main); font-size:0.86rem;">Gasto Continuo con Camión Cisterna ($30 / 10.000 L)</strong>
+                <span class="tag" style="background:rgba(239,68,68,0.2); color:var(--rose-main); font-size:0.68rem;">ALTO COSTO OPERATIVO</span>
+              </div>
+              <div style="margin-top:0.5rem; font-size:0.8rem; color:#cbd5e1; line-height:1.5;">
+                <div>• Demanda mensual de la nave 2.000 m²: <strong>~472 a 555 m³/mes</strong></div>
+                <div>• Cisternas requeridas al mes: <strong>47 a 55 viajes</strong> de 10.000 L</div>
+                <div>• Factura mensual en agua comprada: <strong style="color:var(--rose-main); font-family:var(--font-mono); font-size:1.05rem;">$1.410 a $1.665 USD/mes</strong></div>
+                <div>• Gasto acumulado en 1 año (2 ciclos de tomate): <strong style="color:var(--rose-main); font-family:var(--font-mono); font-size:1.1rem;">~$17.000 a $18.500 USD / año</strong></div>
+              </div>
+            </div>
+
+            <!-- Retorno Pozo Artesanal vs Perforado -->
+            <div style="background:rgba(0,0,0,0.3); padding:0.85rem; border-radius:8px; border-left:3px solid var(--emerald-light);">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <strong style="color:var(--emerald-light); font-size:0.86rem;">Retorno de Inversión (ROI) y Ahorro Neto</strong>
+                <span class="tag" style="background:rgba(16,185,129,0.2); color:var(--emerald-light); font-size:0.68rem;">AUTONOMÍA 100%</span>
+              </div>
+              <div style="margin-top:0.5rem; font-size:0.8rem; color:#cbd5e1; line-height:1.5;">
+                <div>• <strong>Pozo Artesanal (+10 m, ~$3.490 USD):</strong> Se amortiza en <strong>solo 2.1 a 2.4 meses</strong> de operación. Genera un ahorro de <strong>+$13.500 a $14.500 USD</strong> en el primer año.</div>
+                <div>• <strong>Pozo Industrial 120 m (~$24.880 USD):</strong> Se amortiza en <strong>15 a 17 meses (~1.3 años)</strong>, eliminando de raíz la dependencia de camiones y garantizando agua para 4 naves futuras.</div>
+                <div>• <strong>Blindaje Eléctrico:</strong> El reservorio regulador de 80 m³ garantiza <strong>4.3 a 5.1 días de riego continuo</strong> si falla el suministro eléctrico de Corpoelec.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1988,9 +1991,9 @@
           <div class="month-selector" style="margin-bottom:0.75rem;">
             <label for="select-fertilizer-source"><strong>Estrategia Nutricional en Fructificación (Mercado Venezuela):</strong></label>
             <select id="select-fertilizer-source" class="input-select" style="border-color:#10b981;">
-              <option value="aifa" selected>1. Fertirriego 100% Hidrosoluble Marca AIFA (12-6-36 + Ca + MKP) — Meta: 33.0 a 37.4 Ton</option>
-              <option value="granulado">2. Abonado Granulado Manual Edáfico (NPK 12-12-17 SOP + Ca Granular) — Meta: 24.2 a 29.9 Ton</option>
-              <option value="hibrido">3. Estrategia Híbrida Óptima (Fondo Granulado + Fertirriego AIFA) — Meta: 31.5 a 35.5 Ton</option>
+              <option value="aifa" selected>1. Fertirriego 100% Hidrosoluble AIFA (⭐ Opción Recomendada) — Meta: 33.0 a 37.4 Ton</option>
+              <option value="granulado">2. Abonado Granulado Manual Edáfico (⚠️ Desaconsejado en Goteo) — Meta: 24.2 a 29.9 Ton</option>
+              <option value="hibrido">3. Estrategia Híbrida Óptima (Fondo Granulado + AIFA Goteo) — Meta: 31.5 a 35.5 Ton</option>
             </select>
           </div>
 
@@ -2185,15 +2188,15 @@
         <div class="card-header" style="flex-wrap:wrap; gap:1rem;">
           <div>
             <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
-              <span class="action-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">💰 Análisis Financiero en Campo</span>
+              <span class="action-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">💰 Análisis Financiero & Fertirriego en Campo</span>
               <h2 style="margin:0;">Simulador de Rentabilidad Neta: AIFA Hidrosoluble vs Granulado Nacional</h2>
             </div>
-            <span class="subtitle">Ajusta los precios de mercado en Venezuela para calcular en tiempo real el Retorno de Inversión (ROI) y el diferencial de ganancia neta en 2.000 m²</span>
+            <span class="subtitle">Calibrado con insumos comerciales en Venezuela (Lara 2026). Calcula en tiempo real el Retorno de Inversión (ROI), diferencial de calibres y ganancia neta en 2.000 m² (4.400 plantas)</span>
           </div>
-          <span class="tag tag-accent" id="tag-econ-best" style="background:#059669; color:#fff;">Mayor Beneficio: AIFA Hidrosoluble</span>
+          <span class="tag tag-accent" id="tag-econ-best" style="background:#059669; color:#fff; font-weight:700;"><span class="material-symbols-outlined" style="font-size:16px; vertical-align:middle; margin-right:4px;">verified</span>Opción Recomendada: AIFA Hidrosoluble</span>
         </div>
 
-        <!-- Inputs de Precios Dinámicos -->
+        <!-- Inputs de Precios Dinámicos con Referencias Reales de Venezuela -->
         <div class="econ-inputs-grid">
           <div class="econ-input-item">
             <label for="input-price-aifa">Precio Saco AIFA Soluble (25 kg):</label>
@@ -2201,11 +2204,11 @@
               <span>$</span>
               <input type="number" id="input-price-aifa" min="30" max="150" step="1" value="65">
               <div class="stepper-control">
-                <button type="button" class="stepper-btn" id="btn-aifa-minus">-</button>
-                <button type="button" class="stepper-btn" id="btn-aifa-plus">+</button>
+                <button type="button" class="stepper-btn" id="btn-aifa-minus" aria-label="Disminuir precio AIFA">-</button>
+                <button type="button" class="stepper-btn" id="btn-aifa-plus" aria-label="Aumentar precio AIFA">+</button>
               </div>
             </div>
-            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Promedio Venezuela: $60 - $75 USD</span>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Canasta AIFA Quíbor: $60 - $75 USD (Nitrato Ca $46, NPK 12-6-36 $65, MKP $82)</span>
           </div>
 
           <div class="econ-input-item">
@@ -2214,11 +2217,11 @@
               <span>$</span>
               <input type="number" id="input-price-granulado" min="20" max="90" step="1" value="38">
               <div class="stepper-control">
-                <button type="button" class="stepper-btn" id="btn-gran-minus">-</button>
-                <button type="button" class="stepper-btn" id="btn-gran-plus">+</button>
+                <button type="button" class="stepper-btn" id="btn-gran-minus" aria-label="Disminuir precio granulado">-</button>
+                <button type="button" class="stepper-btn" id="btn-gran-plus" aria-label="Aumentar precio granulado">+</button>
               </div>
             </div>
-            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Promedio Venezuela: $35 - $45 USD</span>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Pequiven Nacional: $35 - $45 USD | Especial SOP libre cloro: $48 - $58 USD</span>
           </div>
 
           <div class="econ-input-item">
@@ -2227,32 +2230,45 @@
               <span>$</span>
               <input type="number" id="input-price-cesta" min="8" max="40" step="0.5" value="18">
               <div class="stepper-control">
-                <button type="button" class="stepper-btn" id="btn-cesta-minus">-</button>
-                <button type="button" class="stepper-btn" id="btn-cesta-plus">+</button>
+                <button type="button" class="stepper-btn" id="btn-cesta-minus" aria-label="Disminuir precio cesta">-</button>
+                <button type="button" class="stepper-btn" id="btn-cesta-plus" aria-label="Aumentar precio cesta">+</button>
               </div>
             </div>
-            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Equivale a <strong id="disp-price-kg" style="color:#38bdf8;">$0.90 USD/kg</strong></span>
+            <span style="font-size:0.7rem; color:#94a3b8; display:block; margin-top:0.3rem;">Equivale a <strong id="disp-price-kg" style="color:#38bdf8;">$0.90 USD/kg</strong> en MERCABAR / Quíbor</span>
           </div>
         </div>
 
         <!-- Grid Comparativo de Resultados -->
         <div class="econ-results-grid">
-          <!-- 1. AIFA 100% Hidrosoluble -->
-          <div class="econ-result-card featured" id="econ-card-aifa">
+          <!-- 1. AIFA 100% Hidrosoluble (OPCIÓN RECOMENDADA) -->
+          <div class="econ-result-card featured recommended" id="econ-card-aifa">
+            <div class="recommended-ribbon"><span class="material-symbols-outlined" style="font-size:16px;">verified</span> ⭐ OPCIÓN RECOMENDADA TÉCNICAMENTE</div>
             <div class="econ-result-title">
-              <span style="color:#34d399;">1. AIFA 100% Hidrosoluble</span>
-              <span class="tag" style="background:rgba(16,185,129,0.25); color:#34d399;">Máxima Productividad</span>
+              <span style="color:#34d399; font-size:1.05rem;">1. AIFA 100% Hidrosoluble</span>
+              <span class="tag" style="background:rgba(16,185,129,0.25); color:#34d399; font-weight:700;">Grado Fertirriego Quíbor</span>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
-              <strong style="color:#fff;" id="disp-econ-yield-aifa">35.2 Ton (1.760 cestas)</strong>
+              <strong style="color:#fff;" id="disp-econ-yield-aifa">35.2 Ton (1.760 cestas) — 8.0 kg/planta</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Calibre Extra / 1ra (>180g):</span>
+              <strong style="color:#34d399;">78% Fruta Premium</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Riesgo Goteros a 40 cm:</span>
+              <strong style="color:#38bdf8;">0% Taponamiento (100% Soluble)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Mano de Obra Nutrición:</span>
+              <strong style="color:#cbd5e1;">0 Jornales Extra (Automatizado)</strong>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
               <strong style="color:#34d399;" id="disp-econ-gross-aifa">$31.680 USD</strong>
             </div>
             <div class="econ-metric-row">
-              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
+              <span style="color:#94a3b8;">Insumos AIFA (42 sacos 25kg):</span>
               <strong style="color:#f43f5e;" id="disp-econ-cost-aifa">$2.730 USD</strong>
             </div>
             <div class="econ-metric-row">
@@ -2265,68 +2281,177 @@
             </div>
           </div>
 
-          <!-- 2. Estrategia Híbrida -->
+          <!-- 2. Estrategia Híbrida Óptima -->
           <div class="econ-result-card" id="econ-card-hibrido">
             <div class="econ-result-title">
               <span style="color:#38bdf8;">2. Estrategia Híbrida Óptima</span>
-              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8;">Equilibrio Costo/Beneficio</span>
+              <span class="tag" style="background:rgba(56,189,248,0.2); color:#38bdf8;">Transición / Ahorro Inicial</span>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
-              <strong style="color:#fff;" id="disp-econ-yield-hibrido">33.5 Ton (1.675 cestas)</strong>
+              <strong style="color:#fff;" id="disp-econ-yield-hibrido">33.5 Ton (1.675 cestas) — 7.6 kg/planta</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Calibre Extra / 1ra (>180g):</span>
+              <strong style="color:#cbd5e1;">70% Fruta Primera</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Riesgo Goteros a 40 cm:</span>
+              <strong style="color:#38bdf8;">Bajo (Fondo camellón + AIFA goteo)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Mano de Obra Nutrición:</span>
+              <strong style="color:#cbd5e1;">2 Jornales (Fondo en camellón)</strong>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
               <strong style="color:#38bdf8;" id="disp-econ-gross-hibrido">$30.150 USD</strong>
             </div>
             <div class="econ-metric-row">
-              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
-              <strong style="color:#f43f5e;" id="disp-econ-cost-hibrido">$2.110 USD</strong>
+              <span style="color:#94a3b8;">Costo Insumos (16 gran + 23 aifa):</span>
+              <strong style="color:#f43f5e;" id="disp-econ-cost-hibrido">$2.136 USD</strong>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Costo Nutrición / kg Tomate:</span>
-              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-hibrido">$0.063 USD/kg</strong>
+              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-hibrido">$0.064 USD/kg</strong>
             </div>
             <div class="econ-net-margin">
               <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Margen Neto Nutricional:</span>
-              <span class="econ-net-val" style="color:#38bdf8;" id="disp-econ-net-hibrido">$28.040 USD</span>
+              <span class="econ-net-val" style="color:#38bdf8;" id="disp-econ-net-hibrido">$28.014 USD</span>
             </div>
           </div>
 
-          <!-- 3. Granulado Manual Edáfico -->
-          <div class="econ-result-card" id="econ-card-granulado">
+          <!-- 3. Granulado Manual Nacional (DESACONSEJADO) -->
+          <div class="econ-result-card warning-card" id="econ-card-granulado">
             <div class="econ-result-title">
               <span style="color:#f59e0b;">3. Granulado Manual Nacional</span>
-              <span class="tag" style="background:rgba(245,158,11,0.2); color:#f59e0b;">Baja Inversión Inicial</span>
+              <span class="tag" style="background:rgba(245,158,11,0.25); color:#f59e0b;">⚠️ Desaconsejado en Goteo</span>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Rendimiento Proyectado:</span>
-              <strong style="color:#fff;" id="disp-econ-yield-granulado">27.0 Ton (1.350 cestas)</strong>
+              <strong style="color:#fff;" id="disp-econ-yield-granulado">27.0 Ton (1.350 cestas) — 6.1 kg/planta</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Calibre Extra / 1ra (>180g):</span>
+              <strong style="color:#f59e0b;">58% (Picos Salinos y Aborto)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Riesgo Goteros / Raíz:</span>
+              <strong style="color:#f43f5e;">Alto (Insolubles + Salinidad Cloro)</strong>
+            </div>
+            <div class="econ-metric-row">
+              <span style="color:#94a3b8;">Mano de Obra Nutrición:</span>
+              <strong style="color:#f59e0b;">9 Jornales Ciclo (~$120 USD)</strong>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Ingreso Bruto de Venta:</span>
               <strong style="color:#f59e0b;" id="disp-econ-gross-granulado">$24.300 USD</strong>
             </div>
             <div class="econ-metric-row">
-              <span style="color:#94a3b8;">Costo Insumos Nutricionales:</span>
-              <strong style="color:#f43f5e;" id="disp-econ-cost-granulado">$1.444 USD</strong>
+              <span style="color:#94a3b8;">Costo Insumos + Labor (38 sacos):</span>
+              <strong style="color:#f43f5e;" id="disp-econ-cost-granulado">$1.564 USD</strong>
             </div>
             <div class="econ-metric-row">
               <span style="color:#94a3b8;">Costo Nutrición / kg Tomate:</span>
-              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-granulado">$0.053 USD/kg</strong>
+              <strong style="color:#cbd5e1;" id="disp-econ-unitcost-granulado">$0.058 USD/kg</strong>
             </div>
             <div class="econ-net-margin">
               <span style="font-size:0.85rem; color:#94a3b8; font-weight:700;">Margen Neto Nutricional:</span>
-              <span class="econ-net-val" style="color:#f59e0b;" id="disp-econ-net-granulado">$22.856 USD</span>
+              <span class="econ-net-val" style="color:#f59e0b;" id="disp-econ-net-granulado">$22.736 USD</span>
             </div>
           </div>
         </div>
 
+        <!-- Desglose Interactivo de Productos Comerciales en Venezuela -->
+        <details class="econ-products-details">
+          <summary class="econ-products-summary">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="material-symbols-outlined" style="font-size:20px;">inventory_2</span>
+              <span>📦 Ver Ficha de Productos Fertilizantes AIFA y Precios Comerciales en Venezuela (Lara / Quíbor 2026)</span>
+            </div>
+            <span class="material-symbols-outlined">expand_more</span>
+          </summary>
+          <div class="econ-products-content">
+            <p style="margin:0 0 0.6rem 0; color:var(--text-secondary); line-height:1.5;">
+              Los fertilizantes de la marca <strong>AIFA (Fertilizantes AIFA C.A.)</strong> se distribuyen comercialmente en el Estado Lara (Barquisimeto y Quíbor a través de Agrotodo, Disagro y casas agrícolas). Son sales 100% solubles sin turbidez, libres de insolubles y con micronutrientes quelatados, diseñadas específicamente para inyección directa por cinta de goteo autocompensante:
+            </p>
+            <div style="overflow-x:auto;">
+              <table class="econ-products-table">
+                <thead>
+                  <tr>
+                    <th>Producto Comercial en Venezuela</th>
+                    <th>Riqueza / Composición</th>
+                    <th>Presentación</th>
+                    <th>Precio Frecuente (USD)</th>
+                    <th>Función Clave en Quíbor (4.400 Plantas)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong style="color:#34d399;">AIFA Fructificación</strong></td>
+                    <td>NPK 12-06-36 + ME (B, Zn, Mn, Cu, Mo)</td>
+                    <td>Saco 25 kg</td>
+                    <td><strong>$65.00</strong> ($62 - $72)</td>
+                    <td>Engorde sostenido, potasio soluble libre de cloro para floración y cuajado masivo.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#34d399;">AIFA Nitrato de Calcio</strong></td>
+                    <td>15.5% N nítrico + 26.0% CaO soluble</td>
+                    <td>Saco 25 kg</td>
+                    <td><strong>$46.00</strong> ($42 - $50)</td>
+                    <td>Firmeza celular y prevención radical de culillo (blossom end rot). Tanque A.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#34d399;">AIFA MKP</strong></td>
+                    <td>Fosfato Monopotásico 0-52-34</td>
+                    <td>Saco 25 kg</td>
+                    <td><strong>$82.00</strong> ($78 - $88)</td>
+                    <td>Fósforo de alta asimilación radicular con mínimo índice de salinidad. Tanque B.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#34d399;">AIFA Sulfato de Magnesio</strong></td>
+                    <td>16.0% MgO + 13.0% S heptahidratado</td>
+                    <td>Saco 25 kg</td>
+                    <td><strong>$32.00</strong> ($28 - $36)</td>
+                    <td>Activación de clorofila bajo alta radiación solar en Quíbor. Tanque B.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#34d399;">AIFA Desarrollo</strong></td>
+                    <td>NPK 20-20-20 + Microelementos</td>
+                    <td>Saco 25 kg</td>
+                    <td><strong>$60.00</strong> ($56 - $65)</td>
+                    <td>Arranque vegetativo en semanas 4 a 7 antes del cuajado de racimos.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#fbbf24;">Quelato de Hierro Fe-EDDHA</strong></td>
+                    <td>6% Fe soluble orto-orto</td>
+                    <td>Bolsa 1 kg</td>
+                    <td><strong>$22.00</strong> ($20 - $25)</td>
+                    <td>Blindaje contra pH alcalino (7.8-8.2) del pozo de Quíbor (evita clorosis). Tanque A.</td>
+                  </tr>
+                  <tr>
+                    <td><strong style="color:#f43f5e;">Ácido Nítrico Técnico 60%</strong></td>
+                    <td>HNO3 concentrado comercial</td>
+                    <td>Bidón 20 L</td>
+                    <td><strong>$24.00</strong> ($1.20/L)</td>
+                    <td>Neutraliza bicarbonatos del pozo salino, mantiene pH en 5.8-6.2 y limpia goteros. Tanque C.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="econ-warning-box">
+              <strong>⚠️ Advertencia Técnica de Incompatibilidad Química y Salinidad en Quíbor:</strong><br>
+              1. <strong>Tanque A (Calcio + Hierro)</strong> nunca debe mezclarse en concentración madre con <strong>Tanque B (Fosfatos + Sulfatos)</strong> porque genera precipitado blanco de fosfato/sulfato tricálcico insoluble que atasca filtros y goteros.<br>
+              2. Queda <strong>terminantemente prohibido el uso de Cloruro de Potasio (KCl) o fórmulas NPK genéricas con cloro</strong> en Quíbor: el agua de pozo ya aporta 3.5 meq/L de cloruros; agregar más cloro destruye raíces y quema bordes foliares.
+            </div>
+          </div>
+        </details>
+
         <!-- Conclusión Financiera -->
         <div class="alert-box alert-success alert alert-success d-flex align-items-center gap-3" style="margin-top:1rem; font-size:0.85rem;">
-          <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">lightbulb</span></div>
+          <div class="alert-icon"><span class="material-symbols-outlined" style="font-size:24px;">verified</span></div>
           <div class="alert-content" id="disp-econ-conclusion">
-            <strong>Veredicto Económico para el Productor en Quíbor:</strong> Aunque el abono hidrosoluble AIFA requiere $1.286 USD adicionales de inversión inicial frente al granulado, genera <strong>+$6.094 USD netos adicionales de ganancia</strong> por ciclo productivo, gracias a su mayor cuajado, menor aborto floral y 75% de frutos de Primera calidad.
+            <strong>Veredicto Agronómico & Financiero en Quíbor:</strong> La nutrición <strong>100% AIFA Hidrosoluble</strong> es la opción recomendada. Aunque requiere $1.166 USD adicionales de inversión en insumos frente al granulado edáfico, genera <strong>+$6.214 USD netos adicionales de ganancia</strong> por ciclo (+410 cestas de fruta). Cada $1.00 USD extra invertido retorna <strong>+$5.30 USD en ganancia neta</strong>, garantizando 78% de tomate de Primera calidad y cero riesgo de taponamiento de goteros.
           </div>
         </div>
       </div>
