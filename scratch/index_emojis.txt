@@ -1,0 +1,15 @@
+﻿L289:           ⏱️ <strong>Tiempo estimado de ejecución:</strong> 10 a 12 días continuos con avance de 0.8 a 1.2 m/día utilizando el martillo demoledor industrial.
+L349:           <span class="material-symbols-outlined">nutrition</span> 🥇 Principal: Pimentón
+L352:           <span class="material-symbols-outlined">nature</span> 🥈 Secundario: Tomate
+L355:           <span class="material-symbols-outlined">spa</span> 🥉 Terciario: Pepino
+L410:           💡 <strong>Conclusión para el Inversor:</strong> Con solo el <strong>59% del beneficio neto del primer ciclo ($6.750 USD)</strong> se amortiza el 100% de la inversión del pozo ($4.000 USD). El activo hídrico y la bomba quedan como patrimonio productivo para los siguientes 15 años.
+L555:               <strong style="color:#53C942; font-size:0.9rem;">50 – 60 m: Acuífero Cuarzo-Lidita ✅</strong>
+L646:               📖 <strong style="color:#94a3b8;">IGVSB (2003)</strong> — <em>"Mapa Hidrogeológico del Estado Lara, Escala 1:100.000"</em>. Instituto Geográfico de Venezuela Simón Bolívar, Caracas.
+L649:               📖 <strong style="color:#94a3b8;">MARN / MINAMB (1998–2019)</strong> — <em>"Evaluación de Acuíferos del Valle de Quíbor — Cuencas Turbio y Moroturo"</em>. Dirección de Hidrología y Meteorología, Venezuela.
+L652:               📖 <strong style="color:#94a3b8;">Mogollón, J. et al. (2007)</strong> — <em>"Geología y Recursos Hídricos Subterráneos del Municipio Jiménez, Lara"</em>. Boletín Geológico, Vol. 39, INGEOMIN.
+L655:               📖 <strong style="color:#94a3b8;">Custodio & Llamas (1996)</strong> — <em>"Hidrología Subterránea"</em>. 2ª Ed. Ediciones Omega, Barcelona. Cap. 11: Acuíferos Fisurados en Medios Sedimentarios Consolidados.
+L658:               📡 <strong style="color:#94a3b8;">NASA MERRA-2 / POWER API (2024)</strong> — <em>Serie temporal de precipitación y recarga (1981–2023)</em>. Coord. 9.888°N, 69.593°W. Resolución 0.5° × 0.625°.
+L749:             <h4>🎥 Video 01: Inspección Principal del Pozo (2 min)</h4>
+L758:             <h4>🎥 Video 02: Descenso Cenital por el Fuste (28 s)</h4>
+L767:             <h4>🎥 Video 03: Predio y Entorno Agrícola (30 s)</h4>
+L811:           <li><span style="color:#53C942;">📍 Finca La Cigarronera</span></li>

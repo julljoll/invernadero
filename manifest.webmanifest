@@ -1,16 +1,28 @@
 {
-  "name": "LA CIGARRONERA — Invernadero y Casa de Malla",
+  "name": "LA CIGARRONERA — Invernadero y Pozo Artesanal",
   "short_name": "LA CIGARRONERA",
-  "description": "LA CIGARRONERA — Suite de cálculo agronómico, ingeniería de pozo profundo y gestión de riego para Casa de Malla de 1.000 m² en Quíbor, Lara.",
+  "description": "LA CIGARRONERA — Plataforma de Inversión Agrícola, Ingeniería de Casa de Malla y Pozo Artesanal en el Valle de Quíbor, Lara, Venezuela.",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0a0e17",
-  "theme_color": "#10b981",
+  "background_color": "#090e0b",
+  "theme_color": "#53C942",
   "orientation": "any",
   "icons": [
     {
+      "src": "./assets/logo/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
       "src": "./icon-192.svg",
       "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/logo/icon-512.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
@@ -21,7 +33,7 @@
       "purpose": "any maskable"
     },
     {
-      "src": "./plano_3d_invernadero_quibor.svg",
+      "src": "./assets/logo/agrovenecua_logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"

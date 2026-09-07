@@ -1,0 +1,76 @@
+﻿app.js (L887): * Simulación de ruta del caudal (Laguna ➔ Pichincha ➔ Bomba ➔ Filtro ➔ Matriz ➔ Sector)
+app.js (L955): targetTitle: "Tren Secuencial 1➔2",
+app.js (L1005): badge.textContent = '🟢 Offline Listo (PWA)';
+app.js (L1052): const pauta = `📋 PAUTA DIARIA DE RIEGO Y FERTILIZACIÓN — CASA DE MALLA QUÍBOR (1.000 m²)
+app.js (L1053): 📅 Fecha: ${dateStr}
+app.js (L1054): 🌱 Etapa: ${stageName} (2.200 Plantas)
+app.js (L1055): 💧 Fuente de Agua: ${isYacambu ? "Trasvase Yacambú (CE 0.5 dS/m | LF 6.5%)" : "Pozo Profundo Abatido (CE 1.4 dS/m | LF 20%)"}
+app.js (L1056): ⚡ Equipo de Bombeo: Motor 1.5 HP 220V + Filtro Discos 120 Mesh
+app.js (L1059): 1️⃣ SECTOR 1 (Camellones 1 al 5 | 1.100 pl):
+app.js (L1064): 2️⃣ SECTOR 2 (Camellones 6 al 10 | 1.100 pl):
+app.js (L1069): 🧪 NUTRICIÓN & FERTIRRIEGO:
+app.js (L1073): ⚠️ REGLAS DE ORO DE SEGURIDAD:
+app.js (L1300): 0: { label: "Cielo Despejado", icon: "☀️", class: "clear", isRain: false },
+app.js (L1301): 1: { label: "Principalmente Despejado", icon: "🌤️", class: "mostly-clear", isRain: false },
+app.js (L1302): 2: { label: "Parcialmente Nublado", icon: "⛅", class: "partly-cloudy", isRain: false },
+app.js (L1303): 3: { label: "Nublado / Convectivo", icon: "☁️", class: "cloudy", isRain: false },
+app.js (L1304): 45: { label: "Neblina / Bochorno", icon: "🌫️", class: "fog", isRain: false },
+app.js (L1305): 48: { label: "Niebla con Escarcha", icon: "🌫️", class: "fog", isRain: false },
+app.js (L1306): 51: { label: "Llovizna Ligera", icon: "🌦️", class: "drizzle", isRain: true },
+app.js (L1307): 53: { label: "Llovizna Moderada", icon: "🌦️", class: "drizzle", isRain: true },
+app.js (L1308): 55: { label: "Llovizna Densa", icon: "🌧️", class: "drizzle", isRain: true },
+app.js (L1309): 61: { label: "Lluvia Ligera", icon: "🌧️", class: "rain", isRain: true },
+app.js (L1310): 63: { label: "Lluvia Moderada", icon: "🌧️", class: "rain", isRain: true },
+app.js (L1311): 65: { label: "Lluvia Fuerte Continua", icon: "🌧️", class: "heavy-rain", isRain: true },
+app.js (L1312): 80: { label: "Chubascos Dispersos", icon: "🌦️", class: "showers", isRain: true },
+app.js (L1313): 81: { label: "Chubascos Moderados", icon: "🌧️", class: "showers", isRain: true },
+app.js (L1314): 82: { label: "Chubascos Violentos", icon: "⛈️", class: "heavy-showers", isRain: true },
+app.js (L1315): 95: { label: "Tormenta Eléctrica", icon: "⛈️", class: "thunderstorm", isRain: true },
+app.js (L1316): 96: { label: "Tormenta con Granizo", icon: "⛈️", class: "thunderstorm", isRain: true },
+app.js (L1317): 99: { label: "Tormenta Severa con Granizo", icon: "⛈️", class: "severe-thunderstorm", isRain: true }
+app.js (L1334): return this.WMO_CODES[code] || { label: "Condición Variable", icon: "⛅", class: "cloudy", isRain: false };
+app.js (L1443): const rainIcon = cur.precipitation > 0 ? "🌧️" : (wmo.icon || "☀️");
+app.js (L1444): topbarText.innerHTML = `${rainIcon} ${cur.temperature_2m.toFixed(1)}°C | 💨 ${cur.wind_speed_10m.toFixed(0)} km/h | 🌧️ ${pSum.toFixed(1)} mm`;
+app.js (L1511): optEto.textContent = `🔴 Hoy en Vivo (Open-Meteo FAO-56: ${et0.toFixed(2)} mm/d)`;
+app.js (L1557): ${prob > 0 ? `💧 ${prob}%` : `0%`}
+app.js (L1559): <span class="f-wind">💨 ${wind.toFixed(0)}k</span>
+app.js (L1636): <div class="alert-icon">🔥</div>
+app.js (L1638): <strong>🔴 ALERTA EN VIVO — Estrés Térmico en Quíbor (Actual ${cur.temperature_2m.toFixed(1)} °C | Máx prevista ${tMax.toFixed(1)} °C):</strong>
+app.js (L1644): <div class="alert-icon">🌧️</div>
+app.js (L1646): <strong>🌧️ ALERTA EN VIVO — Previsión de Lluvias & Humedad en Quíbor (${cur.precipitation > 0 ? `${cur.precipitation.toFixed(1)} mm/h en curso` : `${pSum.toFixed(1)} mm previstos hoy, ${pProb}% prob.`}):</strong>
+app.js (L1652): <div class="alert-icon">💨</div>
+app.js (L1654): <strong>💨 ALERTA EN VIVO — Ráfagas Eólicas Intensas en Quíbor (${cur.wind_speed_10m.toFixed(1)} km/h, ráfagas de ${cur.wind_gusts_10m.toFixed(1)} km/h desde ${cardinal}):</strong>
+app.js (L1660): <div class="alert-icon">ℹ️</div>
+app.js (L1662): <strong>🔴 CONDICIONES EN VIVO — Valle de Quíbor:</strong> Temperatura actual ${cur.temperature_2m.toFixed(1)} °C, viento ${cur.wind_speed_10m.toFixed(1)} km/h (${cardinal}), humedad ${cur.relative_humidity_2m}% y evapotranspiración FAO-56 de hoy de ${et0.toFixed(2)} mm/d (${(et0*1.0).toFixed(1)} m³/d en 1.000 m²). Condiciones óptimas para fotosíntesis protegida bajo malla 110 gsm.
+app.js (L1678): if (topbarText) topbarText.textContent = "📡 Quíbor (Sin Red)";
+app.js (L1710): alert(`✅ Telemetría en vivo sincronizada con éxito:\n\n• Temp. Ambiente: ${cur.temperature_2m.toFixed(1)} °C\n• Viento a 10m: ${cur.wind_speed_10m.toFixed(1)} km/h\n• Demanda FAO-56 ETo: ${et0.toFixed(2)} mm/día\n\nLas calculadoras de Ventilación y Fertirriego han sido actualizadas.`);
+app.js (L1891): <div class="alert-icon">🔥</div>
+app.js (L1898): <div class="alert-icon">🌧️</div>
+app.js (L1905): <div class="alert-icon">💨</div>
+app.js (L1912): <div class="alert-icon">ℹ️</div>
+app.js (L2295): elResEto.innerHTML = `${et0.toFixed(2)} mm/día ${isLive ? '<span class="tag" style="background:rgba(132,204,22,0.15); color:var(--apple-green-light); font-size:0.68rem; margin-left:0.3rem;">🔴 En Vivo</span>' : ''}`;
+app.js (L2342): adviceText.innerHTML = `<strong>⚠️ ALERTA DE SALINIDAD ALTA EN PIMENTÓN:</strong> El agua (${ecW} dS/m) supera el umbral crítico ($1.5\\text{ dS/m}$). Requiere obligatoriamente un <strong>${(lf * 100).toFixed(0)}% de sobre-riego de lavado</strong>. Si no se aplica, la merma productiva alcanzará el <strong>-${yieldLossNoLeach.toFixed(1)}%</strong> por quemado apical y necrosis radicular. Fraccione en los 4 pulsos calculados.`;
+app.js (L2348): adviceText.innerHTML = `<strong>⚠️ ALERTA TOMATE:</strong> Con agua de ${ecW} dS/m se excede el umbral de 2.5 dS/m. Requiere un <strong>${(lf * 100).toFixed(1)}% de lavado</strong> para evitar pudrición apical (*blossom-end rot*) por interferencia de calcio.`;
+app.js (L2410): <td><strong>${m.name}</strong> ${m.peak ? '🔥' : (m.min ? '❄️' : '')}</td>
+app.js (L3546): if (fertAlertIcon) fertAlertIcon.textContent = "⚠️";
+app.js (L3563): if (fertAlertIcon) fertAlertIcon.textContent = "💡";
+app.js (L3581): if (fertAlertIcon) fertAlertIcon.textContent = "✨";
+app.js (L3667): <span class="tag" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);">⏱️ Carencia Promedio: 0 Días</span>
+app.js (L3668): <span class="tag" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3);">🐝 Inocuo para Polinizadores</span>
+app.js (L3669): <span class="tag" style="background:rgba(168,85,247,0.15); color:#c084fc; border:1px solid rgba(168,85,247,0.3);">🛡️ Cero Riesgo de Resistencia</span>
+app.js (L3678): <span class="tag" style="background:rgba(245,158,11,0.25); color:#fbbf24; font-weight:800; font-size:0.75rem;">⚡ PROTOCOLO DE RESCATE QUÍMICO (IRAC / FRAC)</span>
+app.js (L3685): <span class="tag" style="background:rgba(244,63,94,0.15); color:#f43f5e; border:1px solid rgba(244,63,94,0.3);">⚠️ Respetar Carencia (1 a 7 días)</span>
+app.js (L3686): <span class="tag" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);">🔄 Rotar 7 Familias Químicas</span>
+app.js (L3687): <span class="tag" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3);">🥽 Equipo de Protección Obligatorio</span>
+app.js (L3696): <span class="tag" style="background:rgba(56,189,248,0.25); color:#38bdf8; font-weight:800; font-size:0.75rem;">🔄 MANEJO INTEGRADO DE PLAGAS (MIP Completo)</span>
+app.js (L3703): <span class="tag" style="background:rgba(16,185,129,0.15); color:#34d399; border:1px solid rgba(16,185,129,0.3);">🌿 10 Herramientas Biológicas</span>
+app.js (L3704): <span class="tag" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);">⚡ 11 Rescates Químicos</span>
+app.js (L3705): <span class="tag" style="background:rgba(56,189,248,0.15); color:#38bdf8; border:1px solid rgba(56,189,248,0.3);">🛡️ Bioseguridad ToBRFV</span>
+app.js (L3897): iconVerdict.textContent = "✅";
+app.js (L3902): iconVerdict.textContent = "⚠️";
+app.js (L3907): iconVerdict.textContent = "❌";
+app.js (L4253): elInterfStatus.textContent = "⚠️ Alerta Crítica (Solapamiento)";
+app.js (L4257): elInterfStatus.textContent = "⚠️ Interferencia Moderada";
+app.js (L4261): elInterfStatus.textContent = "✅ Distancia Segura";
+app.js (L4450): if (budgetTitle) budgetTitle.textContent = "📋 Presupuesto Itemizado: Pozo Artesanal a Pico Ø 80 cm (+10 m con Bomba Industrial 5.5 HP)";
+app.js (L4463): if (budgetTitle) budgetTitle.textContent = `📋 Presupuesto de Obra: ${locData.name}`;

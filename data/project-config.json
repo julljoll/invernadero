@@ -1,0 +1,98 @@
+{
+  "project": {
+    "name": "LA CIGARRONERA",
+    "company": "Agrovenecua Ingeniería C.A.",
+    "location": "Cuara, Municipio Jiménez, Estado Lara, Venezuela",
+    "region": "Valle de Quíbor",
+    "elevationMsnm": 700,
+    "gps": {
+      "greenhouse": "9°53'20.0\"N 69°35'35.0\"W",
+      "well": "9°53'15.79\"N 69°35'37.25\"W"
+    }
+  },
+  "wellProject": {
+    "title": "Culminación Artesanal de Pozo (50 m a 60 m)",
+    "currentDepthM": 50.0,
+    "targetDepthM": 60.0,
+    "remainingExcavationM": 10.0,
+    "excavationRatePerMUSD": 100.0,
+    "electricDemolitionHammerUSD": 1000.0,
+    "excavationSubtotalUSD": 2000.0,
+    "casingRingsDiameterM": 0.60,
+    "casingTotalRings": 60,
+    "casingMaterialsSubtotalUSD": 1200.0,
+    "electroMechanicalSubtotalUSD": 800.0,
+    "totalInvestmentUSD": 4000.0,
+    "staticWaterLevelM": 49.5,
+    "usableWaterColumnM": 10.5,
+    "wellWaterVolumeLiters": 8240,
+    "rechargeFlowRateLps": 2.0,
+    "rechargeFlowRateM3h": 7.2,
+    "executionDays": "10 a 12 días",
+    "savingsVsDeepMechanicalWellUSD": 20880.0,
+    "savingsPercent": 84
+  },
+  "crops": {
+    "pepper": {
+      "scientificName": "Capsicum annuum",
+      "commonName": "Pimentón",
+      "greenhouseAreaM2": 1000,
+      "plantCount": 2500,
+      "cropDurationWeeks": 20,
+      "cyclesPerYear": 2.4,
+      "yieldKgPerPlant": 5.0,
+      "totalYieldKgPerCycle": 12500,
+      "farmgatePriceUSDPerKg": 0.90,
+      "grossRevenueUSDPerCycle": 11250,
+      "operatingCostUSDPerCycle": 4500,
+      "netProfitUSDPerCycle": 6750,
+      "annualGrossRevenueUSD": 27000,
+      "annualNetProfitUSD": 16200,
+      "paybackMonths": 3.6,
+      "firstCycleROIOnWellPercent": 168.75
+    },
+    "tomato": {
+      "scientificName": "Solanum lycopersicum",
+      "commonName": "Tomate Indeterminado de Hilo Alto",
+      "greenhouseAreaM2": 1000,
+      "plantCount": 2200,
+      "cropDurationWeeks": 24,
+      "cyclesPerYear": 2.0,
+      "yieldKgPerPlant": 8.0,
+      "totalYieldKgPerCycle": 17600,
+      "farmgatePriceUSDPerKg": 0.85,
+      "grossRevenueUSDPerCycle": 14960,
+      "operatingCostUSDPerCycle": 5500,
+      "netProfitUSDPerCycle": 9460,
+      "annualNetProfitUSD": 18920,
+      "paybackMonths": 2.8,
+      "firstCycleROIOnWellPercent": 236.5
+    },
+    "cucumber": {
+      "scientificName": "Cucumis sativus",
+      "commonName": "Pepino Holandés / Americano",
+      "greenhouseAreaM2": 1000,
+      "plantCount": 2000,
+      "cropDurationWeeks": 16,
+      "cyclesPerYear": 3.2,
+      "yieldKgPerPlant": 8.5,
+      "totalYieldKgPerCycle": 17000,
+      "farmgatePriceUSDPerKg": 0.75,
+      "grossRevenueUSDPerCycle": 12750,
+      "operatingCostUSDPerCycle": 4200,
+      "netProfitUSDPerCycle": 8550,
+      "annualGrossRevenueUSD": 40800,
+      "annualNetProfitUSD": 27360,
+      "paybackMonths": 2.9,
+      "firstCycleROIOnWellPercent": 213.75
+    }
+  },
+  "greenhouseStructure": {
+    "type": "Casa de Malla Parral Tensado Sch 40",
+    "meshSpec": "110 gsm, 50 mesh (50x25) HDPE Monofilamento Virgen Blanco",
+    "poreSizeMicrons": 192,
+    "dimensions": { "widthM": 20.0, "lengthM": 50.0, "heightM": 3.0 },
+    "shadingFactor": 0.18,
+    "thermalBufferColchoneM": 1.0
+  }
+}

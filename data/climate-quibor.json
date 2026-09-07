@@ -1,0 +1,45 @@
+{
+  "project": "LA CIGARRONERA",
+  "location": {
+    "name": "Valle de Quíbor",
+    "municipality": "Jiménez",
+    "state": "Lara",
+    "country": "Venezuela",
+    "coordinates": {
+      "greenhouse": {
+        "lat": 9.888889,
+        "lng": -69.593056,
+        "dms": "9°53'20.0\"N 69°35'35.0\"W",
+        "elevation_msnm": 700
+      },
+      "artesian_well": {
+        "lat": 9.887719,
+        "lng": -69.593681,
+        "dms": "9°53'15.79\"N 69°35'37.25\"W",
+        "elevation_msnm": 734
+      }
+    },
+    "koppen": "BSh (Semiárido cálido / Bosque seco premontano)"
+  },
+  "source": "NASA MERRA-2 (1980-2016) & Estaciones Hidrometeorológicas Regionales Quíbor",
+  "monthly": [
+    { "month": "Enero", "tempMax": 30, "tempMin": 19, "rainMm": 11, "windKmH": 8.5, "sultryDays": 16.0, "dominantWind": "ESTE", "et0MmDay": 4.8 },
+    { "month": "Febrero", "tempMax": 30, "tempMin": 20, "rainMm": 14, "windKmH": 8.9, "sultryDays": 14.5, "dominantWind": "ESTE", "et0MmDay": 5.2 },
+    { "month": "Marzo", "tempMax": 31, "tempMin": 20, "rainMm": 26, "windKmH": 9.0, "sultryDays": 18.6, "dominantWind": "ESTE", "et0MmDay": 5.8 },
+    { "month": "Abril", "tempMax": 30, "tempMin": 20, "rainMm": 73, "windKmH": 8.9, "sultryDays": 22.6, "dominantWind": "ESTE", "et0MmDay": 5.4 },
+    { "month": "Mayo", "tempMax": 29, "tempMin": 20, "rainMm": 104, "windKmH": 9.4, "sultryDays": 28.1, "dominantWind": "ESTE", "et0MmDay": 5.0 },
+    { "month": "Junio", "tempMax": 28, "tempMin": 20, "rainMm": 96, "windKmH": 10.4, "sultryDays": 27.6, "dominantWind": "ESTE", "et0MmDay": 4.6 },
+    { "month": "Julio", "tempMax": 28, "tempMin": 19, "rainMm": 95, "windKmH": 10.2, "sultryDays": 28.0, "dominantWind": "ESTE", "et0MmDay": 4.7 },
+    { "month": "Agosto", "tempMax": 28, "tempMin": 19, "rainMm": 91, "windKmH": 9.5, "sultryDays": 28.6, "dominantWind": "ESTE", "et0MmDay": 5.1 },
+    { "month": "Septiembre", "tempMax": 29, "tempMin": 19, "rainMm": 94, "windKmH": 8.4, "sultryDays": 27.6, "dominantWind": "SUR", "et0MmDay": 5.0 },
+    { "month": "Octubre", "tempMax": 29, "tempMin": 20, "rainMm": 93, "windKmH": 7.1, "sultryDays": 28.5, "dominantWind": "ESTE", "et0MmDay": 4.6 },
+    { "month": "Noviembre", "tempMax": 29, "tempMin": 20, "rainMm": 64, "windKmH": 7.0, "sultryDays": 26.4, "dominantWind": "ESTE", "et0MmDay": 4.3 },
+    { "month": "Diciembre", "tempMax": 29, "tempMin": 19, "rainMm": 28, "windKmH": 7.9, "sultryDays": 22.0, "dominantWind": "ESTE", "et0MmDay": 4.4 }
+  ],
+  "windDesign": {
+    "annualDominanceEastPercent": 88,
+    "designGustKmH": 27.0,
+    "safetyFactor": 1.5,
+    "hellmannAlpha": 0.16
+  }
+}

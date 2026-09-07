@@ -1,0 +1,830 @@
+/* ==========================================================================
+   AGROVENECUA INGENIERÍA — ESTILOS DE LA LANDING PAGE DE INVERSIÓN
+   Finca La Cigarronera — Cuara, Valle de Quíbor, Lara, Venezuela
+   Paleta: #53C942 (Verde Lima Logo) & #0F4D06 (Verde Bosque Logo)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. NAVBAR SUPERIOR LANDING
+   -------------------------------------------------------------------------- */
+.landing-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: rgba(9, 14, 11, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(83, 201, 66, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.5rem;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.landing-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+}
+
+.landing-brand-logo {
+  height: 44px;
+  width: auto;
+  filter: drop-shadow(0 2px 8px rgba(83, 201, 66, 0.45));
+}
+
+.landing-brand-text h1 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #f8fafc;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.landing-brand-text span {
+  font-size: 0.72rem;
+  color: var(--brand-light, #76E063);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.landing-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.landing-nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.landing-nav-links a:hover {
+  color: var(--brand-green, #53C942);
+}
+
+.landing-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-landing-cta {
+  background: linear-gradient(135deg, #53C942 0%, #0F4D06 100%);
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 0.88rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 16px rgba(83, 201, 66, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid rgba(118, 224, 99, 0.4);
+}
+
+.btn-landing-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(83, 201, 66, 0.55);
+  color: #ffffff;
+}
+
+.btn-landing-secondary {
+  background: rgba(83, 201, 66, 0.08);
+  color: var(--brand-light, #76E063) !important;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 1px solid rgba(83, 201, 66, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.btn-landing-secondary:hover {
+  background: rgba(83, 201, 66, 0.16);
+  border-color: var(--brand-green, #53C942);
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO SECTION
+   -------------------------------------------------------------------------- */
+.landing-hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 2.5rem 60px;
+  background: radial-gradient(circle at 75% 20%, rgba(15, 77, 6, 0.35) 0%, rgba(9, 14, 11, 1) 70%);
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-content {
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(83, 201, 66, 0.12);
+  border: 1px solid rgba(83, 201, 66, 0.3);
+  color: var(--brand-light, #76E063);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #f8fafc;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-title .highlight-green {
+  color: #53C942;
+  text-shadow: 0 0 30px rgba(83, 201, 66, 0.45);
+}
+
+.hero-lead {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  margin-bottom: 2rem;
+  max-width: 640px;
+}
+
+.hero-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.2rem;
+}
+
+.kpi-card-hero {
+  background: rgba(19, 32, 24, 0.7);
+  border: 1px solid rgba(83, 201, 66, 0.2);
+  border-radius: 14px;
+  padding: 1.1rem;
+  backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.kpi-card-hero:hover {
+  transform: translateY(-3px);
+  border-color: rgba(83, 201, 66, 0.45);
+}
+
+.kpi-card-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #53C942, #0F4D06);
+}
+
+.kpi-card-hero .kpi-val {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  display: block;
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+
+.kpi-card-hero .kpi-val.green { color: #53C942; }
+.kpi-card-hero .kpi-val.cyan { color: #38bdf8; }
+.kpi-card-hero .kpi-val.amber { color: #fbbf24; }
+
+.kpi-card-hero .kpi-lbl {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Visor 3D en Hero */
+.hero-3d-box {
+  position: relative;
+  height: 580px;
+  border-radius: 20px;
+  background: rgba(14, 22, 17, 0.85);
+  border: 1px solid rgba(83, 201, 66, 0.25);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 60px rgba(15, 77, 6, 0.2);
+}
+
+.hero-3d-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* --------------------------------------------------------------------------
+   3. HUD DEL VISOR 3D (OVERLAY EN THREE.JS)
+   -------------------------------------------------------------------------- */
+.well-3d-hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.hud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+.hud-badge {
+  background: rgba(9, 14, 11, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #53C942;
+  border: 1px solid rgba(83, 201, 66, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.hud-depth-label {
+  background: rgba(9, 14, 11, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hud-controls {
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  pointer-events: auto;
+}
+
+.hud-btn {
+  background: rgba(9, 14, 11, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.hud-btn .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.hud-btn:hover {
+  background: rgba(83, 201, 66, 0.2);
+  border-color: #53C942;
+  color: #ffffff;
+}
+
+.hud-btn.active {
+  background: #53C942;
+  color: #090e0b;
+  font-weight: 700;
+  border-color: #76E063;
+}
+
+.hud-strata-legend {
+  background: rgba(9, 14, 11, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(83, 201, 66, 0.2);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  pointer-events: auto;
+  margin-top: auto;
+}
+
+.strata-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.strata-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.strata-item.highlight {
+  color: #53C942;
+  font-weight: 700;
+}
+
+.color-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   4. SECCIÓN DE DIAGNÓSTICO Y VOZ TÉCNICA
+   -------------------------------------------------------------------------- */
+.landing-section {
+  padding: 90px 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3.5rem;
+}
+
+.section-tag {
+  color: #53C942;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.section-title {
+  font-size: 2.35rem;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* Grid de los 4 Pilares */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.pillar-card {
+  background: rgba(19, 32, 24, 0.5);
+  border: 1px solid rgba(83, 201, 66, 0.15);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(83, 201, 66, 0.4);
+  background: rgba(19, 32, 24, 0.85);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.pillar-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(83, 201, 66, 0.15);
+  border: 1px solid rgba(83, 201, 66, 0.3);
+  color: #53C942;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+.pillar-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 0.6rem;
+}
+
+.pillar-card p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. SECCIÓN FINANCIERA & COMPARATIVA DE INVERSIÓN
+   -------------------------------------------------------------------------- */
+.investor-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.budget-card-landing {
+  background: rgba(14, 22, 17, 0.85);
+  border: 1px solid rgba(83, 201, 66, 0.2);
+  border-radius: 20px;
+  padding: 2.2rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+.budget-table-pro {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.budget-table-pro th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.budget-table-pro td {
+  padding: 0.85rem 0.8rem;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.budget-table-pro tr.total-row td {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #53C942;
+  border-top: 2px solid rgba(83, 201, 66, 0.35);
+  border-bottom: none;
+  padding-top: 1.1rem;
+}
+
+/* Tarjeta de Comparación vs Pozo Mecánico */
+.comparison-card {
+  background: linear-gradient(145deg, rgba(15, 77, 6, 0.15) 0%, rgba(14, 22, 17, 0.9) 100%);
+  border: 1px solid rgba(83, 201, 66, 0.3);
+  border-radius: 20px;
+  padding: 2.2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.savings-banner {
+  background: rgba(83, 201, 66, 0.15);
+  border: 1px solid rgba(83, 201, 66, 0.4);
+  border-radius: 12px;
+  padding: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.8rem;
+}
+
+.savings-banner .pct {
+  font-size: 2.8rem;
+  font-weight: 900;
+  font-family: var(--font-mono, monospace);
+  color: #53C942;
+  line-height: 1;
+}
+
+.savings-banner .txt {
+  font-size: 0.92rem;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   6. SECCIÓN SIMULADOR ROI DE COSECHA (PIMENTÓN / TOMATE)
+   -------------------------------------------------------------------------- */
+.roi-simulator-box {
+  background: rgba(14, 22, 17, 0.85);
+  border: 1px solid rgba(83, 201, 66, 0.25);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-top: 2rem;
+}
+
+.crop-selector-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.crop-tab-btn {
+  flex: 1;
+  background: rgba(19, 32, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.2s ease;
+}
+
+.crop-tab-btn.active {
+  background: rgba(83, 201, 66, 0.18);
+  border-color: #53C942;
+  color: #53C942;
+  box-shadow: 0 4px 20px rgba(83, 201, 66, 0.2);
+}
+
+.roi-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 1.8rem 0;
+}
+
+.roi-metric-item {
+  background: rgba(19, 32, 24, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.roi-metric-item .val {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: #53C942;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.roi-metric-item .lbl {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   7. GALERÍA DE EVIDENCIA RAG & VIDEOS DE CAMPO
+   -------------------------------------------------------------------------- */
+.evidence-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.evidence-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(19, 32, 24, 0.7);
+  border: 1px solid rgba(83, 201, 66, 0.15);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.evidence-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(83, 201, 66, 0.4);
+}
+
+.evidence-card img,
+.evidence-card video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+.evidence-card-info {
+  padding: 1rem;
+}
+
+.evidence-card-info h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 0.3rem;
+}
+
+.evidence-card-info p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER LANDING
+   -------------------------------------------------------------------------- */
+.landing-footer {
+  border-top: 1px solid rgba(83, 201, 66, 0.15);
+  background: #090e0b;
+  padding: 60px 2.5rem 30px;
+  margin-top: 80px;
+}
+
+.footer-grid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 40px;
+}
+
+.footer-brand p {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-top: 1rem;
+}
+
+.footer-col h4 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #f8fafc;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.2rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 0.65rem;
+}
+
+.footer-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #53C942;
+}
+
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+/* --------------------------------------------------------------------------
+   9. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .hero-3d-box {
+    height: 480px;
+  }
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .investor-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+  .roi-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .evidence-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-nav {
+    padding: 0 1.2rem;
+  }
+  .landing-nav-links {
+    display: none;
+  }
+  .landing-hero {
+    padding: 100px 1.2rem 40px;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  .hero-kpis {
+    grid-template-columns: 1fr;
+  }
+  .pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .evidence-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+}

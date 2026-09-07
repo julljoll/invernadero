@@ -1,0 +1,26 @@
+# Videos y archivos multimedia pesados (>25MB) para evitar bloqueo de cuota en GitHub (límite 100MB)
+*.mp4
+*.MOV
+*.mov
+*.3gp
+*.avi
+*.mkv
+*.wmv
+
+# Sistema Operativo y Caches
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Logs y temporales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Entornos y dependencias
+node_modules/
+dist/
+build/

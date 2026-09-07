@@ -1,0 +1,54 @@
+﻿L1002:                 <span class="metric-label">Presión Total (<span class="tooltip-term">HMT <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Altura Manométrica Total (HMT)</span><span class="tooltip-tag">mca / PSI / bar</span></span><span class="tooltip-simple">Esfuerzo hidrostático total que vence la bomba: profundidad del agua en el pozo + fricción de tuberías + altura al reservorio.</span><span class="tooltip-tech">HMT = Nivel Dinámico + hf_fricción + h_elevación + P_residual</span></span></span>)</span>
+L1163:             <span class="tag" style="background:rgba(16,185,129,0.2); color:var(--emerald-light); font-size:0.7rem; font-weight:700;">✓ BOMBEO POR TANDAS 100% VIABLE & TRANSFERIBLE</span>
+L1260:               <option value="ARTESANAL" selected>Pozo Artesanal a Pico Ø 80 cm (50m actual ➔ 60m con formaletas 3m)</option>
+L1305:             <h4 style="color:#f59e0b; font-size:0.92rem; margin:0;">⚡ Interferencia Hidrodinámica de Pozos Vecinos (Modelo Cooper-Jacob)</h4>
+L1391:                 <h5 class="artesanal-shaft-title">📐 Corte Transversal de Fuste Artesanal a Pico (Ø 80 cm)</h5>
+L1488:                 <h5 style="color:var(--emerald-light); font-size:0.86rem; margin:0;" id="itemized-budget-title">📋 Cómputos Métricos & Desglose Itemizado</h5>
+L1605:             📍 <strong>Georreferenciación:</strong> 9°53'20.0" N, 69°35'35.0" W (Cuara, 695 msnm)
+L1608:             💰 <strong>Inversión Total:</strong> $4.000 USD Llave en Mano
+L1611:             ⚡ <strong>Acometida Eléctrica:</strong> Poste contiguo existente
+L1614:             ⏱️ <strong>Plazo de Ejecución:</strong> 10 a 12 Días
+L2206:               <div class="pozo-gantt-fill" style="margin-left:20%; width:35%; background:#10b981;">Excavación 50m ➔ 60m</div>
+L2438:                 <span style="background:rgba(16,185,129,0.2); color:#10b981; font-weight:800; font-size:0.75rem; padding:0.25rem 0.7rem; border-radius:6px;">🫑 ESCENARIO PIMENTÓN (CAPSICUM ANNUUM)</span>
+L2468:               🎯 <strong>Repago del Pozo:</strong> La inversión de $4.000 USD representa el <strong>59.3% del margen neto</strong> de un solo ciclo de pimentón (a $0.90 USD/kg). Se amortiza al 100% en las <strong>primeras 7 a 8 semanas de cosecha</strong> (dentro del primer ciclo).
+L2476:                 <span style="background:rgba(244,63,94,0.2); color:#fb7185; font-weight:800; font-size:0.75rem; padding:0.25rem 0.7rem; border-radius:6px;">🍅 ESCENARIO TOMATE INDETERMINADO</span>
+L2506:               🎯 <strong>Repago del Pozo:</strong> La inversión de $4.000 USD representa el <strong>35.9% del margen neto</strong> de un ciclo de tomate. Amortización total en <strong>4.3 meses de cosecha</strong>.
+L2619:               <button class="v3d-btn active" id="btn-gh3d-crop-pepper" onclick="if(window.greenhouse3dViewer){window.greenhouse3dViewer.setCropVisualization('pepper'); document.querySelectorAll('.toolbar-crops .v3d-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');}" title="🥇 Pimentón (Cultivo Principal: porte 0.8-1.2 m)">🥇 Pimentón</button>
+L2620:               <button class="v3d-btn" id="btn-gh3d-crop-tomato" onclick="if(window.greenhouse3dViewer){window.greenhouse3dViewer.setCropVisualization('tomato'); document.querySelectorAll('.toolbar-crops .v3d-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');}" title="🥈 Tomate (Cultivo Secundario: hilo alto 2.2 m)">🥈 Tomate</button>
+L2621:               <button class="v3d-btn" id="btn-gh3d-crop-cucumber" onclick="if(window.greenhouse3dViewer){window.greenhouse3dViewer.setCropVisualization('cucumber'); document.querySelectorAll('.toolbar-crops .v3d-btn').forEach(b=>b.classList.remove('active')); this.classList.add('active');}" title="🥉 Pepino (Cultivo Terciario: espaldera 1.9 m)">🥉 Pepino</button>
+L2686:             <button class="filter-btn active" id="btn-sub-plano2d">📐 Plano 2D: Multi-Ángulo (Cortes, Fachadas & Planta)</button>
+L2687:             <button class="filter-btn" id="btn-sub-plano3d">📦 Plano Isométrico 3D Técnico (SVG)</button>
+L2688:             <button class="filter-btn" id="btn-sub-cross-section">📊 Corte Transversal Dinámico (Canvas)</button>
+L2871:         <span class="section-tag">Cultivo Principal: Pimentón 🥇 · Secundario: Tomate 🥈 · Tercero: Pepino 🥉</span>
+L2893:             <a href="https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8" target="_blank" class="filter-btn" style="text-decoration:none; background:rgba(245,158,11,0.18); color:#f59e0b; border-color:rgba(245,158,11,0.4);" title="Ver predio satelital en Google Maps">📍 9°53'20.0"N 69°35'35.0"W ↗</a>
+L2918:             <span class="metric-sub">2.00 m³/h | 2.500 <span class="tooltip-term">goteros PC <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Gotero Autocompensante (PC)</span><span class="tooltip-tag">Presión Constante</span></span><span class="tooltip-simple">Gotero con diafragma de silicona que descarga exactamente 1.60 L/h aunque varíe la presión de la manguera entre 0.8 y 3.5 bar.</span><span class="tooltip-tech">Q = cte (elimina desbalances entre inicio y fin de fila)</span></span></span></span>
+L2933:               <span class="action-badge">📋 Ficha de Turno Diario</span>
+L3031:             <h3 style="font-size:1.1rem; font-weight:800; color:#fff; margin:0;"><span class="material-symbols-outlined" style="font-size:22px; vertical-align:middle; color:#38bdf8;">water</span> Esquema Dinámico de la Cadena Hidráulica: Laguna ➔ Bomba ➔ 2 Sectores</h3>
+L3054:           <div class="flow-connector">➔</div>
+L3061:           <div class="flow-connector">➔</div>
+L3068:           <div class="flow-connector">➔</div>
+L3075:           <div class="flow-connector">➔</div>
+L3082:           <div class="flow-connector">➔</div>
+L3153:               <option value="granulado">2. Abonado Granulado Manual Edáfico (⚠️ Desaconsejado en Goteo) — Meta: 12.1 a 15.0 Ton</option>
+L3168:               <h4 style="color:#c084fc; font-size:0.92rem; margin:0;">⚡ Sectorización Hidráulica: Motor 1" 1.5 HP (220V)</h4>
+L3187:               ⏱️ En fructificación máxima cada sector recibe <strong>28 min de riego secuencial</strong> (56 min diarios de bombeo).
+L3344:               <span class="action-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">💰 Análisis Financiero & Fertirriego en Campo</span>
+L3392:               <button type="button" class="btn-cesta-preset filter-btn" data-price="16" style="padding:0.2rem 0.55rem; font-size:0.68rem;" title="Precio en pico de cosecha o zafra alta">📉 Zafra Baja ($16)</button>
+L3394:               <button type="button" class="btn-cesta-preset filter-btn" data-price="26" style="padding:0.2rem 0.55rem; font-size:0.68rem;" title="Precio en sequía o escasez nacional">📈 Pico Seco ($26)</button>
+L3395:               <button type="button" class="btn-cesta-preset filter-btn" data-price="30" style="padding:0.2rem 0.55rem; font-size:0.68rem;" title="Mercado premium o Coche Caracas">🏆 Mercado Coche ($30)</button>
+L3487:               <span class="tag" style="background:rgba(245,158,11,0.25); color:#f59e0b;">⚠️ Desaconsejado en Goteo</span>
+L3529:               <span>📦 Ver Ficha de Productos Fertilizantes AIFA y Precios Comerciales en Venezuela (Lara / Quíbor 2026)</span>
+L3602:               <strong>⚠️ Advertencia Técnica de Incompatibilidad Química y Salinidad en Quíbor:</strong><br>
+L3623:               <span class="action-badge" style="background:rgba(16,185,129,0.25); color:#34d399;">🌿 Sanidad Integral & Manejo Rotacional (Lara 2026)</span>
+L3638:             ⚡ Plan Químico de Choque (IRAC / FRAC)
+L3642:             🔄 Manejo Integrado (MIP Completo)
+L3649:           <button class="filter-btn" data-spray-filter="acaros" id="filter-spray-acaros">🕷️ Ácaros (Crítico en Quíbor)</button>
+L3650:           <button class="filter-btn" data-spray-filter="vectores" id="filter-spray-vectores">🪰 Insectos Vectores</button>
+L3651:           <button class="filter-btn" data-spray-filter="lepidopteros" id="filter-spray-lepidopteros">🐛 Lepidópteros (Orugas)</button>
+L3652:           <button class="filter-btn" data-spray-filter="hongos" id="filter-spray-hongos">🍄 Hongos & Bacterias</button>
+L3653:           <button class="filter-btn" data-spray-filter="virus" id="filter-spray-virus">🛡️ Bioseguridad ToBRFV</button>
+L3670:                 <th>Grupo <span class="tooltip-term">IRAC / FRAC <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Comités de Acción IRAC / FRAC</span><span class="tooltip-tag">Anti-Resistencia</span></span><span class="tooltip-simple">Clasificación internacional del modo de acción químico. Alternar números en cada aplicación evita crear plagas o cepas resistentes en Quíbor.</span><span class="tooltip-tech">IRAC: Insecticidas | FRAC: Fungicidas</span></span></span></th>
+L3687:               ⚠️ El Blindaje Anti-Ácaro (Araña Roja y Ácaro Blanco en Quíbor):
+L3697:               🧪 Protocolo de Caldo: Acidificación de Agua de Pozo y Regla WALES:
+L3703:               <strong>Secuencia WALES en Tanque:</strong> 1. Acidificante ➔ 2. Gránulos Dispersables (WG) ➔ 3. Polvos Mojables (WP) ➔ 4. Suspensiones (SC) ➔ 5. Emulsiones (EC) ➔ 6. Coadyuvante penetrante.
+L3710:               🛡️ Protocolo Antiviral Estricto (<span class="tooltip-term">ToBRFV <span class="tooltip-icon">ℹ️</span><span class="tooltip-bubble"><span class="tooltip-header"><span class="tooltip-title">Virus Rugoso del Tomate (ToBRFV)</span><span class="tooltip-tag">Tobamovirus</span></span><span class="tooltip-simple">Virus letal transmitido por contacto mecánico de manos, ropa o tijeras. Provoca deformaciones y manchas rugosas en fruto.</span><span class="tooltip-tech">Se inactiva al 100% con leche descremada al 10%</span></span></span> y TMV):

@@ -3,20 +3,22 @@
  * Cache-First Strategy for 100% Offline Capability in rural field conditions
  */
 
-const CACHE_NAME = 'lacigarronera-v4.0.0-1000m2';
+const CACHE_NAME = 'lacigarronera-v4.1.0-quibor';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './styles.css',
-  './app.js',
-  './greenhouse-3d.js',
+  './cockpit.html',
+  './src/css/styles.css',
+  './src/css/landing.css',
+  './src/js/app.js',
+  './src/js/well-3d.js',
+  './src/js/greenhouse-3d.js',
   './lib/three.min.js',
   './lib/OrbitControls.js',
   './manifest.webmanifest',
-  './icon-192.svg',
-  './icon-512.svg',
-  './plano_2d_invernadero_quibor.svg',
-  './plano_3d_invernadero_quibor.svg'
+  './assets/logo/agrovenecua_logo.svg',
+  './assets/logo/icon-192.svg',
+  './assets/logo/icon-512.svg'
 ];
 
 // Install Event: Cache all core assets
