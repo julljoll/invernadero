@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Malla Antiáfido 50 Mesh | Protección Agronómica Valle de Quíbor</title>
+  <meta name="description" content="Malla antiáfido 50×25 mesh en variantes 110 gsm (tomate) y 125-130 gsm (pimentón). HDPE 100% virgen, 5 años de garantía UV (720 KLY). Barrera física certificada contra plagas en Valle de Quíbor.">
+  <link rel="canonical" href="https://agrovenecua.com/malla-50mesh.html">
+
+  <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono y Material Symbols Outlined -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Hojas de Estilos -->
+  <link rel="stylesheet" href="src/css/styles.css">
+  <link rel="stylesheet" href="src/css/malla-sales.css">
+
+  <!-- Metas Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Malla Antiáfido 50 Mesh | Protección Agronómica Valle de Quíbor">
+  <meta property="og:description" content="Blindaje fitosanitario de alta resistencia para pimentón y tomate. HDPE 100% virgen, 5 años de garantía UV certificada.">
+  <meta property="og:image" content="assets/malla-renders/mesh_micro_hero.jpg">
+</head>
+<body>
+
+  <!-- ========================================================================
+       NAVBAR (SOLO LOGO + UBICACIÓN QUIBOR, SIN NOMBRE DE EMPRESA, SIN PRECIOS)
+       ======================================================================== -->
+  <header class="malla-nav">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="index.html" title="Inicio" aria-label="Ir al inicio">
+          <img src="assets/logo/agrovenecua_logo.svg" alt="Logo" class="nav-logo-img">
+        </a>
+        <span class="nav-location-badge">
+          <span class="material-symbols-outlined" style="font-size: 1rem;">location_on</span>
+          Valle de Quíbor, Lara
+        </span>
+      </div>
+
+      <nav>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#visor-3d"><span class="material-symbols-outlined" style="font-size: 1.1rem;">view_in_ar</span> Visor 3D</a></li>
+          <li><a href="#plagas"><span class="material-symbols-outlined" style="font-size: 1.1rem;">pest_control</span> Plagas</a></li>
+          <li><a href="#ficha-tecnica"><span class="material-symbols-outlined" style="font-size: 1.1rem;">assignment</span> Ficha Técnica</a></li>
+          <li><a href="#films-cobertura"><span class="material-symbols-outlined" style="font-size: 1.1rem;">layers</span> Films &amp; Coberturas</a></li>
+          <li><a href="#modelos-estructura"><span class="material-symbols-outlined" style="font-size: 1.1rem;">warehouse</span> Modelos</a></li>
+          <li><a href="#estructura"><span class="material-symbols-outlined" style="font-size: 1.1rem;">domain</span> Estructura</a></li>
+          <li><a href="#calculadora"><span class="material-symbols-outlined" style="font-size: 1.1rem;">calculate</span> Calculadora</a></li>
+          <li><a href="index.html" style="color: var(--brand-green);"><span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span> Inicio</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Toggle Modo Claro / Oscuro -->
+        <button type="button" id="theme-toggle" class="btn-theme-toggle" aria-label="Cambiar a Modo Claro / Oscuro" title="Cambiar tema">
+          <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+        </button>
+
+        <!-- Botón Cotizar Malla WhatsApp -->
+        <a href="https://wa.me/584160000000" class="btn-nav-wa" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined" style="font-size: 1.1rem;">chat</span>
+          <span>Cotizar</span>
+        </a>
+
+        <!-- Botón Menú Móvil Hamburger -->
+        <button type="button" id="nav-hamburger" class="nav-hamburger" aria-label="Abrir menú de navegación" aria-expanded="false">
+          <span class="material-symbols-outlined" id="hamburger-icon">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       HERO SECTION & VISOR 3D WEBGL
+       ======================================================================== -->
+  <section class="malla-hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge-wrap">
+        <span class="pulse-dot"></span>
+        <span>Tecnología de Invernaderos • Valle de Quíbor</span>
+      </div>
+
+      <h1 class="hero-title">
+        Malla Antiáfido <span class="highlight-green">50 Mesh</span> de Alta Resistencia
+      </h1>
+
+      <p class="hero-lead">
+        Blindaje fitosanitario de monofilamento HDPE 100% virgen para casas de cultivo en Quíbor. 
+        Exclusión milimétrica de plagas sin comprometer la ventilación ni elevar la temperatura interior.
+      </p>
+
+      <!-- SELECTOR DE VARIANTE AGRONÓMICA (110 gsm vs 125-130 gsm) -->
+      <div class="variant-selector-card">
+        <div class="variant-selector-header">
+          <span class="material-symbols-outlined" style="font-size: 1.1rem; color: var(--brand-green);">eco</span>
+          <span>Selecciona la variante según tu cultivo:</span>
+        </div>
+        <div class="variant-selector">
+          <button type="button" class="btn-variant active" data-variant="110" id="btn-var-110">
+            <span class="variant-title">
+              <span>Variante 110 gsm</span>
+              <span class="badge-spec" style="padding: 2px 8px; font-size: 0.7rem;">
+                <span class="material-symbols-outlined" style="font-size: 0.85rem;">star</span>
+                Recomendado
+              </span>
+            </span>
+            <span class="variant-sub">
+              <span class="material-symbols-outlined" style="font-size: 0.9rem;">nutrition</span>
+              Óptima para Tomate Hilo Alto • Mayor ventilación
+            </span>
+          </button>
+          <button type="button" class="btn-variant" data-variant="130" id="btn-var-130">
+            <span class="variant-title">
+              <span>Variante 125–130 gsm</span>
+              <span class="badge-spec" style="padding: 2px 8px; font-size: 0.7rem;">
+                <span class="material-symbols-outlined" style="font-size: 0.85rem;">shield</span>
+                Ultra Robusta
+              </span>
+            </span>
+            <span class="variant-sub">
+              <span class="material-symbols-outlined" style="font-size: 0.9rem;">spa</span>
+              Óptima para Pimentón • Máxima tracción 1.530 N
+            </span>
+          </button>
+        </div>
+        <div class="variant-note" id="variant-note-text">
+          <strong>Variante 110 gsm seleccionada:</strong> Diseñada para maximizar la tasa de renovación de aire convectiva en casas de malla de <strong>tomate indeterminado</strong>. Permite mantener temperaturas internas ≤ 31 °C en horas de alta radiación en Quíbor, previniendo el aborto floral.
+        </div>
+      </div>
+
+      <!-- Badges de Especificaciones Técnicas -->
+      <div class="badges-row">
+        <span class="badge-spec" id="hero-variant-badge">
+          <span class="material-symbols-outlined" style="font-size: 0.9rem;">verified</span>
+          110 g/m² • 50×25 Mesh • 720 KLY
+        </span>
+        <span class="badge-spec">
+          <span class="material-symbols-outlined" style="font-size: 0.9rem;">filter_alt</span>
+          Poro ≤ 192 µm
+        </span>
+        <span class="badge-spec">
+          <span class="material-symbols-outlined" style="font-size: 0.9rem;">wb_sunny</span>
+          5 Años Garantía UV
+        </span>
+        <span class="badge-spec">
+          <span class="material-symbols-outlined" style="font-size: 0.9rem;">palette</span>
+          Blanco Difuso Antirradiación
+        </span>
+        <span class="badge-spec">
+          <span class="material-symbols-outlined" style="font-size: 0.9rem;">inventory_2</span>
+          Rollo 4m × 100m
+        </span>
+      </div>
+
+      <!-- CTAs de Acción Rápida -->
+      <div class="hero-ctas">
+        <a href="#calculadora" class="btn-primary-cta">
+          <span class="material-symbols-outlined">calculate</span>
+          Calcular Rollos para mi Finca
+        </a>
+        <a href="https://wa.me/584160000000" class="btn-secondary-cta" id="btn-hero-wa" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">send</span>
+          Solicitar Cotización Inmediata
+        </a>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         MENÚ HERO CARRUSEL: FOTOS DE MALLAS E INVERNADEROS (VALLE DE QUÍBOR)
+         ======================================================================== -->
+    <div class="hero-carousel-wrapper" id="hero-carousel">
+      <!-- Barra de Menú Rápido (Tabs Superiores) -->
+      <div class="carousel-menu-tabs" role="tablist" aria-label="Menú de productos y estructuras">
+        <button type="button" class="carousel-tab active" data-slide="0" role="tab" aria-selected="true">
+          <span class="material-symbols-outlined">warehouse</span>
+          <span>Casas de Malla</span>
+        </button>
+        <button type="button" class="carousel-tab" data-slide="1" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined">texture</span>
+          <span>Malla 50 Mesh</span>
+        </button>
+        <button type="button" class="carousel-tab" data-slide="2" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span>Rollos 4×100m</span>
+        </button>
+        <button type="button" class="carousel-tab" data-slide="3" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined">domain</span>
+          <span>Estructura 2"</span>
+        </button>
+        <button type="button" class="carousel-tab" data-slide="4" role="tab" aria-selected="false">
+          <span class="material-symbols-outlined">pest_control</span>
+          <span>Exclusión Plagas</span>
+        </button>
+      </div>
+
+      <!-- Ventana del Carrusel -->
+      <div class="hero-carousel-container" aria-roledescription="carousel">
+        <div class="carousel-track" id="carousel-track">
+          <!-- Slide 1: Casas de Malla e Invernaderos en Quíbor -->
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 de 5">
+            <img src="assets/malla-renders/mesh_greenhouse_crops.jpg" alt="Casas de malla e invernaderos con cultivo en Quíbor" class="carousel-slide-img">
+            <div class="carousel-slide-overlay">
+              <div class="carousel-slide-content">
+                <span class="carousel-slide-badge">
+                  <span class="material-symbols-outlined" style="font-size: 0.9rem;">verified</span>
+                  Ingeniería Bioclimática • Valle de Quíbor
+                </span>
+                <h3 class="carousel-slide-title">Casas de Malla e Invernaderos para Horticultura Intensiva</h3>
+                <p class="carousel-slide-desc">
+                  Estructuras de gran volumen con cumbrera de alta disipación térmica y cerramiento perimetral antiáfido para tomate indeterminado y pimentón.
+                </p>
+                <div class="carousel-slide-actions">
+                  <a href="#modelos-estructura" class="btn-carousel-cta">
+                    <span class="material-symbols-outlined">warehouse</span>
+                    Ver Modelos de Estructura
+                  </a>
+                  <a href="https://wa.me/584160000000?text=Hola,%20solicito%20asesoría%20para%20proyecto%20de%20Casa%20de%20Malla%20en%20Quíbor" class="btn-carousel-secondary" target="_blank" rel="noopener noreferrer">
+                    <span class="material-symbols-outlined">chat</span>
+                    Cotizar Proyecto
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Malla Antiáfido 50 Mesh Monofilamento Virgen -->
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 de 5">
+            <img src="assets/malla-renders/mesh_micro_hero.jpg" alt="Macro 3D del tejido monofilamento de la malla 50 mesh" class="carousel-slide-img">
+            <div class="carousel-slide-overlay">
+              <div class="carousel-slide-content">
+                <span class="carousel-slide-badge">
+                  <span class="material-symbols-outlined" style="font-size: 0.9rem;">verified</span>
+                  HDPE 100% Virgen • 720 KLY
+                </span>
+                <h3 class="carousel-slide-title">Tejido Microscópico de Poro Calibrado (0.27 mm)</h3>
+                <p class="carousel-slide-desc">
+                  Monofilamento cilíndrico de alta tenacidad con aditivos HALS anti-UV para 5 años garantizados y orillo verde reforzado anti-desgarre.
+                </p>
+                <div class="carousel-slide-actions">
+                  <a href="#ficha-tecnica" class="btn-carousel-cta">
+                    <span class="material-symbols-outlined">assignment</span>
+                    Ver Ficha Técnica ASTM
+                  </a>
+                  <a href="#visor-3d" class="btn-carousel-secondary">
+                    <span class="material-symbols-outlined">view_in_ar</span>
+                    Explorar Tejido 3D
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3: Rollo Industrial 4.00 m × 100 m -->
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 de 5">
+            <img src="assets/malla-renders/mesh_roll_product.jpg" alt="Rollo industrial de malla antiáfido 4x100 metros" class="carousel-slide-img">
+            <div class="carousel-slide-overlay">
+              <div class="carousel-slide-content">
+                <span class="carousel-slide-badge">
+                  <span class="material-symbols-outlined" style="font-size: 0.9rem;">inventory_2</span>
+                  Formato Comercial Estándar • 400 m²
+                </span>
+                <h3 class="carousel-slide-title">Rollos Industriales con Orillo Verde Reforzado</h3>
+                <p class="carousel-slide-desc">
+                  Doble costura perimetral que soporta el anclaje a guayas y perfilería sin rasgarse ante las ráfagas eólicas dominantes del Este.
+                </p>
+                <div class="carousel-slide-actions">
+                  <a href="#calculadora" class="btn-carousel-cta">
+                    <span class="material-symbols-outlined">calculate</span>
+                    Calcular Rollos para mi Finca
+                  </a>
+                  <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20de%20Rollos%20de%20Malla%2050%20Mesh%204x100m" class="btn-carousel-secondary" target="_blank" rel="noopener noreferrer">
+                    <span class="material-symbols-outlined">chat</span>
+                    Cotizar Rollos
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4: Estructura Galvanizada 2" con Tensores y Dados -->
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 de 5">
+            <img src="assets/malla-renders/mesh_structure_tubes.jpg" alt="Estructura de casa de malla con tubos galvanizados y dados de concreto" class="carousel-slide-img">
+            <div class="carousel-slide-overlay">
+              <div class="carousel-slide-content">
+                <span class="carousel-slide-badge">
+                  <span class="material-symbols-outlined" style="font-size: 0.9rem;">foundation</span>
+                  Resistencia a Ráfagas de 27 km/h
+                </span>
+                <h3 class="carousel-slide-title">Estructura Galvanizada 2" con Guayas y Tensores</h3>
+                <p class="carousel-slide-desc">
+                  Postes cuadrados de 2 pulgadas a 3.0 m de altura, empotrados 0.5 m en dados de concreto ciclópeo con refuerzos en esquinas a 45°.
+                </p>
+                <div class="carousel-slide-actions">
+                  <a href="#estructura" class="btn-carousel-cta">
+                    <span class="material-symbols-outlined">domain</span>
+                    Ver Detalles Estructurales
+                  </a>
+                  <a href="#garantias" class="btn-carousel-secondary">
+                    <span class="material-symbols-outlined">engineering</span>
+                    Asesoría de Instalación
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5: Blindaje y Exclusión Fitosanitaria -->
+          <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 de 5">
+            <img src="assets/malla-renders/mesh_pest_exclusion.jpg" alt="Exclusión mecánica de mosca blanca y plagas en malla 50 mesh" class="carousel-slide-img">
+            <div class="carousel-slide-overlay">
+              <div class="carousel-slide-content">
+                <span class="carousel-slide-badge">
+                  <span class="material-symbols-outlined" style="font-size: 0.9rem;">pest_control</span>
+                  Exclusión Física 100% Certificada
+                </span>
+                <h3 class="carousel-slide-title">Blindaje Mecánico Contra Mosca Blanca y Trips</h3>
+                <p class="carousel-slide-desc">
+                  Bloqueo absoluto de vectores de virus TYLCV y TSWV. Hasta un 70% menos aplicaciones químicas por ciclo en Quíbor.
+                </p>
+                <div class="carousel-slide-actions">
+                  <a href="#plagas" class="btn-carousel-cta">
+                    <span class="material-symbols-outlined">coronavirus</span>
+                    Ver Matriz de Plagas
+                  </a>
+                  <a href="#calculadora" class="btn-carousel-secondary">
+                    <span class="material-symbols-outlined">calculate</span>
+                    Dimensionar Ahorro
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de Navegación Flechas -->
+        <button type="button" class="carousel-nav-btn prev" id="carousel-prev-btn" aria-label="Slide anterior">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button type="button" class="carousel-nav-btn next" id="carousel-next-btn" aria-label="Slide siguiente">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+
+        <!-- Indicadores de Paginación (Dots) -->
+        <div class="carousel-pagination" id="carousel-pagination" role="tablist" aria-label="Paginación de diapositivas">
+          <button type="button" class="carousel-dot active" data-slide="0" aria-label="Ir a diapositiva 1"></button>
+          <button type="button" class="carousel-dot" data-slide="1" aria-label="Ir a diapositiva 2"></button>
+          <button type="button" class="carousel-dot" data-slide="2" aria-label="Ir a diapositiva 3"></button>
+          <button type="button" class="carousel-dot" data-slide="3" aria-label="Ir a diapositiva 4"></button>
+          <button type="button" class="carousel-dot" data-slide="4" aria-label="Ir a diapositiva 5"></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENEDOR VISOR 3D WEBGL INTERACTIVO -->
+    <div class="mesh-viewer-wrapper">
+      <div id="visor-3d" class="mesh-viewer-container">
+        <div class="viewer-badge-top">
+          <span class="material-symbols-outlined" style="font-size: 0.95rem;">3d_rotation</span>
+          <span>Modelo 3D Interactivo • Arrastra para rotar</span>
+        </div>
+
+        <!-- Controles de Modo del Visor -->
+        <div class="viewer-controls">
+          <button type="button" class="btn-mode active" data-mode="weave" id="btn-mode-weave">
+            <span class="material-symbols-outlined">zoom_in</span>
+            Tejido Microscópico (50×25)
+          </button>
+          <button type="button" class="btn-mode" data-mode="roll" id="btn-mode-roll">
+            <span class="material-symbols-outlined">inventory_2</span>
+            Rollo Industrial (4m × 100m)
+          </button>
+          <button type="button" class="btn-mode" data-mode="aero" id="btn-mode-aero">
+            <span class="material-symbols-outlined">air</span>
+            Simulación Viento y Plagas
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 2: MATRIZ FITOSANITARIA (EFICACIA COMPROBADA DE EXCLUSIÓN)
+       ======================================================================== -->
+  <section id="plagas">
+    <div class="section-header">
+      <span class="section-tag">Barrera Física Certificada</span>
+      <h2 class="section-title">Matriz de Exclusión Fitosanitaria</h2>
+      <p class="section-subtitle">
+        La malla antiáfido 50 Mesh cuenta con una luz de poro calibrada de <strong>0.27 mm × 0.70 mm</strong> 
+        (≤ 192 µm efectivos), bloqueando de raíz el ingreso de los principales vectores de virus en el Valle de Quíbor.
+      </p>
+    </div>
+
+    <!-- Infografía Render -->
+    <div class="pest-infographic-wrap">
+      <img src="assets/malla-renders/mesh_pest_exclusion.jpg" alt="Exclusión microscópica de mosca blanca en malla 50 mesh" class="pest-infographic-img">
+      <div class="pest-infographic-caption">
+        <div class="pest-infographic-text">
+          <h3>Exclusión Mecánica a Escala Microscópica</h3>
+          <p>El cuerpo de la mosca blanca mide 0.85 mm. El poro de 0.27 mm impide físicamente su penetración, cortando la infección de Begomovirus.</p>
+        </div>
+        <span class="badge-blocked" style="font-size: 0.82rem; padding: 6px 14px;">100% Barrera Mecánica</span>
+      </div>
+    </div>
+
+    <!-- Grid de Plagas -->
+    <div class="pest-grid">
+      <!-- 1. Mosca Blanca -->
+      <article class="pest-card pest-card--blocked">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Mosca Blanca</span>
+            <span class="pest-latin">Bemisia tabaci</span>
+          </div>
+          <span class="badge-blocked">100% EXCLUIDA</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 85%;">Insecto: 0.8 – 1.0 mm</div>
+            <div class="bar-pore" style="width: 32%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">coronavirus</span>
+          <span>Vector letal de <strong>TYLCV</strong> (Virus de la Cuchara) y Begomovirus que destruyen hasta el 80% de la cosecha de tomate.</span>
+        </div>
+      </article>
+
+      <!-- 2. Trips -->
+      <article class="pest-card pest-card--blocked">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Trips de las Flores</span>
+            <span class="pest-latin">Frankliniella occidentalis</span>
+          </div>
+          <span class="badge-blocked">≥ 95% EXCLUIDO</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 92%;">Insecto: 0.9 – 1.4 mm</div>
+            <div class="bar-pore" style="width: 32%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">coronavirus</span>
+          <span>Vector del <strong>TSWV</strong> (Virus del Bronceado del Tomate) y manchas necróticas severas en frutos de pimentón.</span>
+        </div>
+      </article>
+
+      <!-- 3. Pulgón Verde -->
+      <article class="pest-card pest-card--blocked">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Pulgón Verde</span>
+            <span class="pest-latin">Myzus persicae</span>
+          </div>
+          <span class="badge-blocked">100% EXCLUIDO</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 100%;">Insecto: 1.2 – 2.5 mm</div>
+            <div class="bar-pore" style="width: 25%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">coronavirus</span>
+          <span>Transmite virus CMV y PVY (Virus Y de la Papa). Provoca enrollamiento foliar y colonias asfixiantes.</span>
+        </div>
+      </article>
+
+      <!-- 4. Minador de la Hoja -->
+      <article class="pest-card pest-card--blocked">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Minador de la Hoja</span>
+            <span class="pest-latin">Liriomyza sativae</span>
+          </div>
+          <span class="badge-blocked">100% EXCLUIDO</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 95%;">Adulto: 1.5 – 2.0 mm</div>
+            <div class="bar-pore" style="width: 28%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">disabled_by_default</span>
+          <span>Previene la oviposición de moscas adultas, eliminando galerías destructivas y pérdida del área fotosintética.</span>
+        </div>
+      </article>
+
+      <!-- 5. Lepidópteros y Polillas -->
+      <article class="pest-card pest-card--blocked">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Gusanos y Polillas</span>
+            <span class="pest-latin">Spodoptera / Tuta absoluta</span>
+          </div>
+          <span class="badge-blocked">100% EXCLUIDOS</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 100%;">Envergadura: 10 – 25 mm</div>
+            <div class="bar-pore" style="width: 15%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">pest_control</span>
+          <span>Barrera total contra perforadores de fruto y cogolleros. Cero posturas nocturnas dentro de la casa de cultivo.</span>
+        </div>
+      </article>
+
+      <!-- 6. Ácaros (Alerta de Honestidad Técnica y Manejo Agronómico) -->
+      <article class="pest-card pest-card--warning">
+        <div class="pest-card-header">
+          <div class="pest-title-wrap">
+            <span class="pest-name">Ácaro Rojo y Blanco</span>
+            <span class="pest-latin">Tetranychus urticae / P. latus</span>
+          </div>
+          <span class="badge-warning">MANEJO INTEGRADO (MIP)</span>
+        </div>
+        <div class="pest-size-bar-wrapper">
+          <label>Comparativa Milimétrica:</label>
+          <div class="pest-size-bar">
+            <div class="bar-insect" style="width: 25%; background: rgba(245,158,11,0.25); border-color: rgba(245,158,11,0.6); color: var(--accent-amber);">Micro-ácaro: 0.1 – 0.3 mm</div>
+            <div class="bar-pore" style="width: 32%;">Luz Poro: 0.27 mm</div>
+          </div>
+        </div>
+        <div class="pest-damage">
+          <span class="material-symbols-outlined">warning</span>
+          <span><strong>Honestidad Agronómica:</strong> Ninguna malla comercial del mundo retiene micro-ácaros sin asfixiar el cultivo. Su control se logra con humedad relativa óptima, material sano y fauna depredadora (<em>Amblyseius swirskii</em>).</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 3: FICHA TÉCNICA Y COMPARATIVA ASTM
+       ======================================================================== -->
+  <section id="ficha-tecnica">
+    <div class="section-header">
+      <span class="section-tag">Ingeniería Textil Agronómica</span>
+      <h2 class="section-title">Ficha Técnica y Comparativa ASTM</h2>
+      <p class="section-subtitle">
+        Especificaciones certificadas según normas internacionales ASTM D 5034 y control de calidad industrial.
+      </p>
+    </div>
+
+    <div class="specs-layout">
+      <!-- Tabla Comparativa con Wrapper Responsivo -->
+      <div class="specs-table-card">
+        <div class="table-responsive">
+          <table class="specs-table">
+            <thead>
+              <tr>
+                <th>Parámetro de Ensayo</th>
+                <th class="col-variant-a">Variante A (110 gsm)</th>
+                <th class="col-variant-b">Variante B (125-130 gsm)</th>
+                <th class="col-generic">Genérica de Mercado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight">
+                <td>Gramaje Certificado</td>
+                <td class="col-variant-a"><strong>110 g/m²</strong></td>
+                <td class="col-variant-b"><strong>125 – 130 g/m²</strong></td>
+                <td class="cell-generic">100 g/m²</td>
+              </tr>
+              <tr>
+                <td>Densidad de Tejido</td>
+                <td class="col-variant-a">50×25 hilos / pulgada</td>
+                <td class="col-variant-b">50×25 hilos / pulgada</td>
+                <td class="cell-generic">40×20 hilos / pulg.</td>
+              </tr>
+              <tr class="highlight">
+                <td>Apertura de Poro</td>
+                <td class="col-variant-a"><strong>0.27 × 0.70 mm (192 µm)</strong></td>
+                <td class="col-variant-b"><strong>0.27 × 0.70 mm (192 µm)</strong></td>
+                <td class="cell-generic">0.42–0.55 mm (Entra Trips)</td>
+              </tr>
+              <tr>
+                <td>Diámetro Monofilamento</td>
+                <td class="col-variant-a">0.21 mm virgen</td>
+                <td class="col-variant-b">0.22 mm virgen</td>
+                <td class="cell-generic">0.17 mm reciclado</td>
+              </tr>
+              <tr class="highlight">
+                <td>Resistencia Urdimbre (ASTM D 5034)</td>
+                <td class="col-variant-a"><strong>1.280 N / 5cm</strong></td>
+                <td class="col-variant-b"><strong>1.530 N / 5cm</strong></td>
+                <td class="cell-generic">~650 N</td>
+              </tr>
+              <tr>
+                <td>Resistencia Trama</td>
+                <td class="col-variant-a">700 N / 5cm</td>
+                <td class="col-variant-b">800 N / 5cm</td>
+                <td class="cell-generic">~380 N</td>
+              </tr>
+              <tr class="highlight">
+                <td>Estabilización UV</td>
+                <td class="col-variant-a"><strong>720 KLY — 5 Años Quíbor</strong></td>
+                <td class="col-variant-b"><strong>720 KLY — 5 Años Quíbor</strong></td>
+                <td class="cell-generic">360 KLY (12-18 meses)</td>
+              </tr>
+              <tr>
+                <td>Transmisión Luz PAR</td>
+                <td class="col-variant-a">78 – 82% (Difusa)</td>
+                <td class="col-variant-b">76 – 80% (Difusa)</td>
+                <td class="cell-generic">68 – 72% (Calienta)</td>
+              </tr>
+              <tr class="highlight">
+                <td>Efecto Térmico en Quíbor</td>
+                <td class="col-variant-a"><strong>Hasta 2 °C más fresca</strong></td>
+                <td class="col-variant-b">Térmico estándar</td>
+                <td class="cell-generic">Sobrecalienta casa</td>
+              </tr>
+              <tr>
+                <td>Formato Comercial</td>
+                <td class="col-variant-a">4.00 m × 100 m (400 m²)</td>
+                <td class="col-variant-b">4.00 m × 100 m (400 m²)</td>
+                <td class="cell-generic">2–3 m × 50–100 m</td>
+              </tr>
+              <tr>
+                <td>Opciones Disponibles</td>
+                <td class="col-variant-a">Anchos 1.0 a 5.0 m | 40 a 135 gsm</td>
+                <td class="col-variant-b">Anchos 1.0 a 5.0 m | 40 a 135 gsm</td>
+                <td class="cell-generic">Solo medida fija</td>
+              </tr>
+              <tr>
+                <td>Orillo Perimetral</td>
+                <td class="col-variant-a">Verde reforzado doble costura</td>
+                <td class="col-variant-b">Verde reforzado doble costura</td>
+                <td class="cell-generic">Simple sin refuerzo</td>
+              </tr>
+              <tr class="highlight">
+                <td>Cultivo Recomendado</td>
+                <td class="col-variant-a"><strong>Tomate Hilo Alto</strong></td>
+                <td class="col-variant-b"><strong>Pimentón / Densos</strong></td>
+                <td class="cell-generic">Riesgoso en Quíbor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="specs-note">* Ensayos de laboratorio según norma ASTM D 5034 y ensayos de intemperismo acelerado Q-LAB.</p>
+      </div>
+
+      <!-- Galería Lateral de Renders 3D Técnicos -->
+      <div class="specs-gallery">
+        <div class="specs-media-card">
+          <img src="assets/malla-renders/mesh_roll_product.jpg" alt="Rollo industrial 4x100m con orillo verde reforzado">
+          <div class="specs-media-caption">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>Rollo de 4.00 m × 100 m con Orillo Verde Reforzado</span>
+          </div>
+        </div>
+        <div class="specs-media-card">
+          <img src="assets/malla-renders/mesh_micro_hero.jpg" alt="Macro 3D del tejido blanco cristalino">
+          <div class="specs-media-caption">
+            <span class="material-symbols-outlined">texture</span>
+            <span>Monofilamento Cilíndrico HDPE 100% Virgen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANNER DE GARANTÍA UV 5 AÑOS CONTEXTUALIZADO A QUIBOR -->
+    <div class="uv-guarantee-banner">
+      <div class="uv-banner-icon">
+        <span class="material-symbols-outlined">wb_sunny</span>
+      </div>
+      <div class="uv-banner-body">
+        <h3>Garantía UV 5 Años Certificada en el Valle de Quíbor</h3>
+        <p>
+          El Valle de Quíbor (695 msnm, clima semiárido BSh) registra una radiación solar de <strong>720 KLY/año</strong>. 
+          Las mallas genéricas de 100 gsm con aditivos básicos (360 KLY) se quiebran y pierden tensión en <strong>12 a 18 meses</strong>, 
+          obligando a recomprar hasta 3 veces. Nuestra malla cuenta con estabilizantes HALS de última generación 
+          que garantizan <strong>5 años de integridad estructural continua</strong> bajo el sol y las ráfagas del Este de Quíbor.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 4: FILMS Y PLÁSTICOS DE COBERTURA
+       ======================================================================== -->
+  <section id="films-cobertura">
+    <div class="section-header">
+      <span class="section-tag">Coberturas Complementarias</span>
+      <h2 class="section-title">Films Agrícolas y Pantallas Térmicas</h2>
+      <p class="section-subtitle">
+        Tecnología de polietileno multicapa para techos cenitales y control radiativo, diseñados para soportar las lluvias torrenciales y la alta radiación del Valle de Quíbor.
+      </p>
+    </div>
+
+    <div class="films-grid">
+      <!-- Film 1: Transparente PE Anti-UV -->
+      <article class="film-card">
+        <div class="film-card-header">
+          <div class="film-icon">
+            <span class="material-symbols-outlined">wb_sunny</span>
+          </div>
+          <div>
+            <h3>Film Plástico Transparente PE Anti-UV</h3>
+            <span class="badge-spec" style="font-size: 0.72rem; padding: 2px 8px;">3 a 5 Años UV</span>
+          </div>
+        </div>
+        <ul class="film-specs-list">
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Espesor:</strong> 80 µm a 200 µm (800 galgas) de alta tenacidad.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Formato:</strong> Anchos de 1.0 m hasta 10.0 m (rollos 50m / 100m).</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Aditivos:</strong> Estabilizadores UV HALS, antipolvo y antigoteo.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Transmisión lumínica:</strong> ≥ 88–90% radiación PAR fotosintética.</span>
+          </li>
+        </ul>
+        <div class="film-quibor-alert">
+          <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; color: var(--brand-green);">info</span>
+          <strong>Aplicación en Quíbor:</strong> Protección en cumbrera cenital contra aguaceros de mayo a octubre (104 mm/mes), conservando las paredes de malla 50 mesh para máxima ventilación natural.
+        </div>
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Film%20Plástico%20Transparente%20PE%20Anti-UV" class="btn-primary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.88rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar Film Transparente
+        </a>
+      </article>
+
+      <!-- Film 2: Difuso Térmico PE -->
+      <article class="film-card">
+        <div class="film-card-header">
+          <div class="film-icon">
+            <span class="material-symbols-outlined">blur_on</span>
+          </div>
+          <div>
+            <h3>Film Difuso Térmico Antirradiación</h3>
+            <span class="badge-spec" style="font-size: 0.72rem; padding: 2px 8px;">Certificado Q-LAB</span>
+          </div>
+        </div>
+        <ul class="film-specs-list">
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Espesor:</strong> 150 µm a 200 µm con microdifusores de luz.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Coloración:</strong> Blanco translúcido / amarillo térmico anti-infrarrojo.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Difusión de luz:</strong> 55% a 70% de radiación dispersa omnidireccional.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Control térmico:</strong> Bloqueo selectivo de radiación IR corta y larga.</span>
+          </li>
+        </ul>
+        <div class="film-quibor-alert">
+          <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; color: var(--brand-green);">info</span>
+          <strong>Efecto en Quíbor:</strong> Elimina sombras duras y evita quemaduras apicales ("golpe de sol") en pimentón y tomate en marzo-abril, favoreciendo la fotosíntesis en estratos medios y bajos.
+        </div>
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Film%20Difuso%20Térmico" class="btn-primary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.88rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar Film Difuso
+        </a>
+      </article>
+
+      <!-- Film 3: Malla de Sombreo Aluminizada -->
+      <article class="film-card">
+        <div class="film-card-header">
+          <div class="film-icon">
+            <span class="material-symbols-outlined">grid_view</span>
+          </div>
+          <div>
+            <h3>Pantalla Térmica Aluminizada Reflectiva</h3>
+            <span class="badge-spec" style="font-size: 0.72rem; padding: 2px 8px;">Reflexión Infrarroja</span>
+          </div>
+        </div>
+        <ul class="film-specs-list">
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Estructura:</strong> Hilos planos de poliéster FDY con tiras de aluminio PET.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Grados de sombreo:</strong> 30%, 40%, 50% hasta 85% de bloqueo solar.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Anchos:</strong> 3.0 m hasta 6.0 m continuos con bordes reforzados.</span>
+          </li>
+          <li>
+            <span class="material-symbols-outlined">check_circle</span>
+            <span><strong>Vida útil:</strong> 5 a 6 años de durabilidad garantizada al exterior.</span>
+          </li>
+        </ul>
+        <div class="film-quibor-alert">
+          <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; color: var(--brand-green);">info</span>
+          <strong>Efecto en Quíbor:</strong> Refleja hasta el 45% de la radiación infrarroja al mediodía, bajando la temperatura foliar entre 3 °C y 5 °C durante los meses más calurosos.
+        </div>
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Pantalla%20Térmica%20Aluminizada" class="btn-primary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.88rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar Pantalla Aluminizada
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 5: MODELOS DE CASAS DE MALLA E INVERNADEROS
+       ======================================================================== -->
+  <section id="modelos-estructura">
+    <div class="section-header">
+      <span class="section-tag">Ingeniería de Estructuras Protegidas</span>
+      <h2 class="section-title">Modelos de Casas de Malla e Invernaderos</h2>
+      <p class="section-subtitle">
+        Dimensionamiento bioclimático y cálculo de altura estructural según los requerimientos fisiológicos del cultivo en el Valle de Quíbor.
+      </p>
+    </div>
+
+    <div class="models-grid">
+      <!-- Modelo 1: Estructura Básica Modular -->
+      <article class="model-card">
+        <span class="model-badge-top">
+          <span class="material-symbols-outlined" style="font-size: 0.85rem;">straighten</span>
+          Altura Cumbrera: ~3.0 m
+        </span>
+        <h3>Estructura Básica Modular</h3>
+        <p class="model-suitability">Casa de cultivo semicircular de arco simple con tubo galvanizado en caliente de 25–32 mm.</p>
+        
+        <div class="model-specs-grid">
+          <div class="model-stat-item">
+            <span class="model-stat-label">Ancho de Nave</span>
+            <span class="model-stat-val">≤ 8.0 m</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Altura Lateral</span>
+            <span class="model-stat-val">1.8 – 2.0 m</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Arco Galvanizado</span>
+            <span class="model-stat-val">Ø 25–32 mm</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Cultivo Idóneo</span>
+            <span class="model-stat-val">Pimentón / Hoja</span>
+          </div>
+        </div>
+
+        <div class="model-warning-box">
+          <span class="material-symbols-outlined">warning</span>
+          <span><strong>Advertencia Agronómica:</strong> No apto para Tomate Indeterminado de Hilo Alto. La baja altura reduce el colchón de aire térmico, superando los 33 °C en Quíbor y provocando aborto de flores.</span>
+        </div>
+
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Estructura%20Básica%20Modular%20para%20Pimentón" class="btn-secondary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar para Pimentón
+        </a>
+      </article>
+
+      <!-- Modelo 2: Estructura Estándar Multitúnel -->
+      <article class="model-card">
+        <span class="model-badge-top">
+          <span class="material-symbols-outlined" style="font-size: 0.85rem;">straighten</span>
+          Altura Cumbrera: ~3.8 m
+        </span>
+        <h3>Estructura Estándar Multitúnel</h3>
+        <p class="model-suitability">Diseño de gotas góticas con mayor volumen de ventilación cenital y cerchas de refuerzo eólico.</p>
+        
+        <div class="model-specs-grid">
+          <div class="model-stat-item">
+            <span class="model-stat-label">Ancho de Nave</span>
+            <span class="model-stat-val">≤ 15.0 m</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Altura Lateral</span>
+            <span class="model-stat-val">2.2 – 2.5 m</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Arco Galvanizado</span>
+            <span class="model-stat-val">Ø 32–42 mm</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Cultivo Idóneo</span>
+            <span class="model-stat-val">Pimentón / Densos</span>
+          </div>
+        </div>
+
+        <div class="model-warning-box">
+          <span class="material-symbols-outlined">info</span>
+          <span><strong>Cálculo Bioclimático:</strong> Excelente para pimentón de alta densidad y semilleros. Para tomate se aconseja complementar con extractores de cumbrera por gradiente térmico.</span>
+        </div>
+
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Estructura%20Estándar%20Multitúnel" class="btn-secondary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar Estándar Multitúnel
+        </a>
+      </article>
+
+      <!-- Modelo 3: Estructura Profesional Multicapilla Hilo Alto -->
+      <article class="model-card featured">
+        <span class="model-badge-top" style="background: var(--brand-green); color: #fff;">
+          <span class="material-symbols-outlined" style="font-size: 0.85rem;">verified</span>
+          Cumbrera: 5.5 m – 6.5 m
+        </span>
+        <h3>Estructura Profesional Hilo Alto</h3>
+        <p class="model-suitability">Ingeniería de gran volumen buffer de aire con cumbrera de 5.5 a 6.5 m y alero mínimo de 3.0 m.</p>
+        
+        <div class="model-specs-grid">
+          <div class="model-stat-item">
+            <span class="model-stat-label">Ancho de Nave</span>
+            <span class="model-stat-val">≤ 10.0 m (Módulo)</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Altura al Alero</span>
+            <span class="model-stat-val">≥ 3.0 – 3.5 m</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Pilares Perfil</span>
+            <span class="model-stat-val">Tubos 2"–3" / 60×60</span>
+          </div>
+          <div class="model-stat-item">
+            <span class="model-stat-label">Cultivo Idóneo</span>
+            <span class="model-stat-val">Tomate Indeterminado</span>
+          </div>
+        </div>
+
+        <div class="model-optimal-box">
+          <span class="material-symbols-outlined">recommend</span>
+          <span><strong>Recomendación Agronómica Quíbor:</strong> Cumple la regla agronómica de cumbrera ≥ 5.5 m para Tomate Tutorado (2.2 m). Disipa el calor por efecto termosifón manteniendo el microclima ≤ 31 °C.</span>
+        </div>
+
+        <a href="https://wa.me/584160000000?text=Hola,%20solicito%20cotización%20técnica%20para%20Estructura%20Profesional%20Hilo%20Alto%20(Tomate)" class="btn-primary-cta" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; padding: 0.75rem 1.25rem;">
+          <span class="material-symbols-outlined">chat</span>
+          Cotizar para Tomate Hilo Alto
+        </a>
+      </article>
+    </div>
+
+    <!-- Sistema Mecánico de Fijación Lock Channel + Wiggle Wire -->
+    <div class="lock-channel-card">
+      <div class="lock-channel-icon">
+        <span class="material-symbols-outlined">handyman</span>
+      </div>
+      <div class="lock-channel-content">
+        <h4>Sistema de Fijación Mecánica: Lock Channel + Wiggle Wire (Alambre Zigzag)</h4>
+        <p>
+          Perfil C de acero galvanizado o aleación de aluminio con resorte zigzag plastificado en PVC. 
+          Garantiza una sujeción continua y hermética de la malla 50 mesh y plásticos en todo el perímetro, eliminando puntos de fuga 
+          de plagas y resistiendo las ráfagas eólicas dominantes del Este (27 km/h) en Quíbor sin rasgar ni desgastar los monofilamentos de la malla.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 6: ESTRUCTURA METÁLICA DE CASA DE MALLA (RENDER 5)
+       ======================================================================== -->
+  <section id="estructura">
+    <div class="section-header">
+      <span class="section-tag">Ingeniería Estructural para Quíbor</span>
+      <h2 class="section-title">Estructura Estándar — Tubo Galvanizado 2" con Tensores y Refuerzo de Esquinas</h2>
+      <p class="section-subtitle">
+        Diseño optimizado para resistir las ráfagas eólicas dominantes del Este (27 km/h) y mantener la máxima tensión sobre la malla 50 mesh.
+      </p>
+    </div>
+
+    <div class="structure-section-card">
+      <div class="structure-img-wrapper">
+        <img src="assets/malla-renders/mesh_structure_tubes.jpg" alt="Render 3D de casa de malla con tubos de 2 pulgadas, tensores y dados de concreto">
+      </div>
+
+      <div class="structure-details-grid">
+        <div class="struct-feature">
+          <div class="struct-feature-title">
+            <span class="material-symbols-outlined">straighten</span>
+            <span>Columnas 2" a 3.0 m</span>
+          </div>
+          <p class="struct-feature-desc">
+            Postes de tubo cuadrado galvanizado de 2 pulgadas a 3.0 m de altura visible sobre el suelo, modulados cada 4 metros.
+          </p>
+        </div>
+
+        <div class="struct-feature">
+          <div class="struct-feature-title">
+            <span class="material-symbols-outlined">foundation</span>
+            <span>Anclaje 0.5 m en Concreto</span>
+          </div>
+          <p class="struct-feature-desc">
+            Base empotrada 50 cm en dados de concreto ciclópeo a nivel de suelo para soportar solicitaciones de arranque por viento.
+          </p>
+        </div>
+
+        <div class="struct-feature">
+          <div class="struct-feature-title">
+            <span class="material-symbols-outlined">all_inclusive</span>
+            <span>Guayas 3/8" y Tensores</span>
+          </div>
+          <p class="struct-feature-desc">
+            Red reticular de guayas de acero galvanizado con tensores de tornillo ojo-ojo perimetrales para evitar pandeo de cubierta.
+          </p>
+        </div>
+
+        <div class="struct-feature">
+          <div class="struct-feature-title">
+            <span class="material-symbols-outlined">change_history</span>
+            <span>Refuerzo Esquinas Tubo 1"</span>
+          </div>
+          <p class="struct-feature-desc">
+            Riostras diagonales de hierro de 1 pulgada soldadas a 45° en las cuatro esquinas y doble poste en la fachada Este.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 7: CALCULADORA AGRONÓMICA DE ROLLOS Y AMORTIZACIÓN
+       ======================================================================== -->
+  <section id="calculadora">
+    <div class="section-header">
+      <span class="section-tag">Dimensionamiento Inmediato</span>
+      <h2 class="section-title">Calculadora Agronómica de Malla</h2>
+      <p class="section-subtitle">
+        Ingresa las dimensiones de tu área de siembra y calcula de forma exacta la cantidad de rollos requeridos y los beneficios agronómicos.
+      </p>
+    </div>
+
+    <div class="calculator-card">
+      <div class="calc-inputs">
+        <div class="calc-field">
+          <label for="calc-area">Superficie de Suelo (m²)</label>
+          <input type="number" id="calc-area" value="1000" min="200" max="50000" step="100">
+        </div>
+
+        <div class="calc-field">
+          <label for="calc-crop">Cultivo Proyectado</label>
+          <select id="calc-crop">
+            <option value="tomate" selected>Tomate Hilo Alto (Var. 110 gsm)</option>
+            <option value="pimenton">Pimentón (Var. 125-130 gsm)</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <label for="calc-location">Ubicación de la Finca</label>
+          <input type="text" id="calc-location" value="Valle de Quíbor, Lara">
+        </div>
+      </div>
+
+      <!-- Resultados de Cálculo -->
+      <div class="calc-results">
+        <div class="roll-output">
+          <span class="result-number" id="result-rolls">8</span>
+          <span class="result-label">Rollos de Malla 50 Mesh (4.00 m × 100 m) Requeridos</span>
+          <p class="result-sub">Incluye cálculo de cubierta cenital, cerramiento perimetral lateral y solapes de anclaje</p>
+        </div>
+
+        <div class="roi-grid">
+          <div class="roi-card">
+            <span class="roi-value" id="result-pesticide">-70%</span>
+            <span class="roi-label">Menos Aplicaciones de Insecticidas por Ciclo</span>
+          </div>
+
+          <div class="roi-card">
+            <span class="roi-value" id="result-virosis">95%</span>
+            <span class="roi-label">Protección Efectiva Contra Virus TYLCV / TSWV</span>
+          </div>
+
+          <div class="roi-card">
+            <span class="roi-value" id="result-roi">1 Ciclo</span>
+            <span class="roi-label">Amortización Completa de la Estructura Protegida</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-actions">
+        <a href="https://wa.me/584160000000" class="btn-primary-cta" id="btn-whatsapp-quote" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">send</span>
+          Solicitar Cotización de estos Rollos por WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 8: GARANTÍAS Y SERVICIO TÉCNICO EN CAMPO
+       ======================================================================== -->
+  <section id="garantias">
+    <div class="section-header">
+      <span class="section-tag">Compromiso en Campo</span>
+      <h2 class="section-title">Garantía y Respaldo Técnico Local</h2>
+      <p class="section-subtitle">
+        Acompañamiento agronómico integral y despacho directo en el estado Lara.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined">verified</span>
+        </div>
+        <h3 class="service-title">5 Años de Garantía UV</h3>
+        <p class="service-desc">
+          Malla estabilizada a 720 KLY. Respaldo certificado ante la fotodegradación solar en las condiciones extremas de radiación de Quíbor.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined">local_shipping</span>
+        </div>
+        <h3 class="service-title">Despacho Inmediato en Lara</h3>
+        <p class="service-desc">
+          Inventario continuo y entrega directa a pie de finca en el Valle de Quíbor, Cuara, Guadalupe, Tintorero y zonas aledañas.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined">psychology</span>
+        </div>
+        <h3 class="service-title">Asesoría Agronómica y MIP</h3>
+        <p class="service-desc">
+          Cálculo exacto de despiece para tu nave, protocolo de instalación con tensores y programa integrado de manejo fitosanitario (MIP).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="malla-footer">
+    <div class="footer-cta">
+      <h2>¿Listo para blindar tu cultivo de Tomate o Pimentón?</h2>
+      <p>Comunícate con nuestro equipo técnico y recibe atención personalizada para tu proyecto en el Valle de Quíbor.</p>
+      <a href="https://wa.me/584160000000" class="btn-primary-cta" id="btn-footer-wa" target="_blank" rel="noopener noreferrer">
+        <span class="material-symbols-outlined">chat</span>
+        Contactar por WhatsApp
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        <span>
+          <span class="material-symbols-outlined" style="font-size: 1rem; vertical-align: middle; color: var(--brand-green);">pin_drop</span>
+          Proyecto Hortícola Protegido • Valle de Quíbor, Municipio Jiménez, Lara, Venezuela
+        </span>
+      </div>
+      <div>
+        <a href="index.html" style="color: var(--brand-green); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+          <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span>
+          Volver al Sitio Principal
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a href="https://wa.me/584160000000" class="cta-float" id="btn-float-wa" title="Cotizar por WhatsApp" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 32 32" fill="white" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16 .5C7.439.5.5 7.44.5 16c0 2.84.742 5.506 2.04 7.823L.5 31.5l7.914-2.068A15.44 15.44 0 0016 31.5C24.56 31.5 31.5 24.56 31.5 16S24.56.5 16 .5zm0 28.25a13.2 13.2 0 01-6.76-1.853l-.483-.287-5.002 1.31 1.331-4.87-.315-.5A13.217 13.217 0 012.75 16C2.75 8.682 8.682 2.75 16 2.75S29.25 8.682 29.25 16 23.318 28.75 16 28.75zm7.26-9.885c-.398-.199-2.355-1.163-2.72-1.295-.366-.133-.632-.199-.898.199-.266.398-1.03 1.295-1.263 1.561-.233.266-.465.299-.863.1-.398-.2-1.682-.621-3.203-1.976-1.184-1.056-1.982-2.36-2.215-2.758-.232-.398-.024-.613.175-.811.18-.179.398-.465.597-.698.2-.233.266-.398.399-.664.133-.267.067-.499-.033-.698-.1-.2-.898-2.164-1.23-2.963-.325-.78-.655-.674-.898-.686l-.765-.013a1.467 1.467 0 00-1.064.499c-.366.398-1.396 1.362-1.396 3.325 0 1.963 1.43 3.86 1.628 4.127.2.266 2.815 4.299 6.82 6.028.953.411 1.696.657 2.275.841.956.305 1.827.262 2.515.16.767-.114 2.355-.963 2.688-1.893.332-.93.332-1.727.232-1.893-.1-.166-.366-.266-.764-.465z"/>
+    </svg>
+  </a>
+
+  <!-- SCRIPTS EN ORDEN ESPECIFICADO -->
+  <script src="lib/three.min.js"></script>
+  <script src="lib/OrbitControls.js"></script>
+  <script src="src/js/mesh-3d-viewer.js"></script>
+  <script src="src/js/malla-funnel.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Inicializar visor 3D WebGL
+      if (typeof Mesh3DViewer === 'function' && document.getElementById('visor-3d')) {
+        window.meshViewer = new Mesh3DViewer('visor-3d');
+      }
+
+      // 2. Inicializar calculadora y selector de variante
+      if (typeof window.initFunnel === 'function') {
+        window.initFunnel();
+      }
+
+      // 3. Controlador de Tema (Modo Claro / Modo Oscuro)
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const savedTheme = localStorage.getItem('malla_theme') || 'dark';
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (themeIcon) {
+          themeIcon.textContent = theme === 'light' ? 'dark_mode' : 'light_mode';
+        }
+        localStorage.setItem('malla_theme', theme);
+      }
+
+      applyTheme(savedTheme);
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme');
+          const next = current === 'light' ? 'dark' : 'light';
+          applyTheme(next);
+        });
+      }
+
+      // 4. Controlador de Menú Móvil Hamburger
+      const hamburgerBtn = document.getElementById('nav-hamburger');
+      const navMenu = document.getElementById('nav-menu');
+      const hamburgerIcon = document.getElementById('hamburger-icon');
+
+      if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+          const isExpanded = navMenu.classList.toggle('is-active');
+          hamburgerBtn.setAttribute('aria-expanded', isExpanded);
+          if (hamburgerIcon) {
+            hamburgerIcon.textContent = isExpanded ? 'close' : 'menu';
+          }
+        });
+
+        // Cerrar menú al hacer clic en cualquier enlace
+        navMenu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            navMenu.classList.remove('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            if (hamburgerIcon) hamburgerIcon.textContent = 'menu';
+          });
+        });
+      }
+
+      // 5. Controlador de Menú Hero Carrusel
+      (function initHeroCarousel() {
+        const track = document.getElementById('carousel-track');
+        const slides = track ? Array.from(track.children) : [];
+        const prevBtn = document.getElementById('carousel-prev-btn');
+        const nextBtn = document.getElementById('carousel-next-btn');
+        const tabs = Array.from(document.querySelectorAll('.carousel-tab'));
+        const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+        const container = document.querySelector('.hero-carousel-container');
+
+        if (!track || slides.length === 0) return;
+
+        let currentIndex = 0;
+        let autoplayTimer = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function goToSlide(index) {
+          if (index < 0) index = slides.length - 1;
+          if (index >= slides.length) index = 0;
+          currentIndex = index;
+
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+          // Sincronizar tabs del menú
+          tabs.forEach((tab, i) => {
+            const isActive = i === currentIndex;
+            tab.classList.toggle('active', isActive);
+            tab.setAttribute('aria-selected', isActive);
+            if (isActive) {
+              tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+          });
+
+          // Sincronizar dots de paginación
+          dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+          });
+        }
+
+        function nextSlide() {
+          goToSlide(currentIndex + 1);
+        }
+
+        function prevSlide() {
+          goToSlide(currentIndex - 1);
+        }
+
+        function startAutoplay() {
+          stopAutoplay();
+          autoplayTimer = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoplay() {
+          if (autoplayTimer) {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+          }
+        }
+
+        // Event listeners para botones y tabs
+        if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoplay(); });
+        if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoplay(); });
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const slideIdx = parseInt(tab.dataset.slide, 10);
+            if (!isNaN(slideIdx)) {
+              goToSlide(slideIdx);
+              startAutoplay();
+            }
+          });
+        });
+
+        dots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            const slideIdx = parseInt(dot.dataset.slide, 10);
+            if (!isNaN(slideIdx)) {
+              goToSlide(slideIdx);
+              startAutoplay();
+            }
+          });
+        });
+
+        // Pausa al interactuar / hover
+        if (container) {
+          container.addEventListener('mouseenter', stopAutoplay);
+          container.addEventListener('mouseleave', startAutoplay);
+
+          // Soporte Touch Swipe para móviles (95% teléfonos)
+          container.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoplay();
+          }, { passive: true });
+
+          container.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            startAutoplay();
+          }, { passive: true });
+        }
+
+        function handleSwipe() {
+          const swipeThreshold = 45;
+          const diff = touchStartX - touchEndX;
+          if (diff > swipeThreshold) {
+            nextSlide(); // Swipe hacia la izquierda
+          } else if (diff < -swipeThreshold) {
+            prevSlide(); // Swipe hacia la derecha
+          }
+        }
+
+        // Iniciar en slide 0
+        goToSlide(0);
+        startAutoplay();
+      })();
+    });
+  </script>
+</body>
+</html>
