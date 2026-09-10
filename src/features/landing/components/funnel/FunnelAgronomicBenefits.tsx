@@ -56,11 +56,11 @@ export const FunnelAgronomicBenefits: React.FC = () => {
   return (
     <section id="beneficios-tecnicos" className="py-5 border-top border-secondary-subtle bg-white">
       <div className="container-xl py-3">
-        {/* Encabezado del Embudo */}
+        {/* Encabezado de Beneficios Técnicos */}
         <div className="text-center max-w-2xl mx-auto mb-5">
           <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-success bg-opacity-10 border border-success border-opacity-25 text-success text-xs fw-bold text-uppercase mb-2">
             <span className="material-symbols-outlined ms-sm">verified_user</span>
-            <span>Embudo de Valor · Factores Clave de Éxito</span>
+            <span>Propuesta de Valor · Factores Clave de Éxito</span>
           </div>
           <h2 className="display-6 fw-bold text-dark mb-3">
             ¿Por Qué Reactivar la Nave de 1.000 m² en Quíbor?

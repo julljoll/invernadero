@@ -3,27 +3,27 @@ import React from 'react';
 export const FunnelEvidenceGeology: React.FC = () => {
   const points = [
     {
-      title: 'Perforación Manual en 50 Metros',
-      metric: '83% Consolidado',
-      desc: 'Brocal artesanal de 1 metro de diámetro con encofrado in situ de anillos de concreto armado con malla electrosoldada.',
+      title: 'Excavación Manual a 50 Metros',
+      metric: '83% Ejecutado',
+      desc: 'Fuste vertical a pico Ø 80 cm en arcillas masivas autoportantes (Su > 120 kPa). Camisa de anillos de concreto Ø 70 cm ext. (Ø útil 60 cm).',
       icon: 'verified',
     },
     {
-      title: 'Espejo de Agua Dulce Libre',
+      title: 'Espejo de Agua & Gravas de Lidita',
       metric: '49.5 m Estático',
-      desc: 'Nivel freático comprobado en reposo en la formación aluvial de Cuara. Solo faltan 10 metros para activar la columna de 10.5 m.',
+      desc: 'Techo del acuífero cortado a 49.5 m. Profundizar 10 m capta el 100% del espesor saturado del Sector Sur documentado por Jégat & Mora (2012).',
       icon: 'water',
     },
     {
-      title: 'Caudal Estable para Fertirriego',
-      metric: '2.5 L/s Constante',
-      desc: 'Capacidad de recarga continua con electrobomba sumergible de 2.0 HP, suficiente para alimentar 3 naves protegidas simultáneas.',
+      title: 'Caudal Continuo Anti-Achique',
+      metric: '1.5 a 2.0 L/s Continuo',
+      desc: 'Recarga radial del paleocauce ~33.2 L/s (K ≈ 10⁻³ m/s). Electrobomba de 2.0 HP abastece la nave de 1.000 m² en solo 1 hora al día.',
       icon: 'electric_bolt',
     },
     {
-      title: 'Georreferenciación Satelital',
-      metric: 'Cota 700 msnm',
-      desc: 'Coordenadas 9°53\'20.0"N, 69°35\'35.0"W (Municipio Jiménez). Pendiente de 1.2% para drenaje de escorrentías pluviales.',
+      title: 'Georreferenciación y Acometida',
+      metric: 'Cota 732–734 msnm',
+      desc: 'Coordenadas 9°53\'15.8"N, 69°35\'37.3"W (La Cigarronera, Cuara). Poste con tendido eléctrico de baja tensión y tablero a pie de pozo.',
       icon: 'location_on',
     },
   ];

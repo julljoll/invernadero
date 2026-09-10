@@ -9,7 +9,7 @@ export const FunnelHero: React.FC = () => {
           <div className="col-12 col-lg-7">
             <div className="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-success bg-opacity-10 border border-success border-opacity-30 text-success text-xs fw-bold text-uppercase mb-3">
               <span className="material-symbols-outlined ms-sm">verified</span>
-              <span>Embudo de Reactivación Hortícola · Quíbor, Lara</span>
+              <span>Programa de Reactivación Hortícola · Quíbor, Lara</span>
             </div>
 
             <h1 className="display-4 fw-black text-dark tracking-tight lh-sm mb-3">
@@ -64,21 +64,45 @@ export const FunnelHero: React.FC = () => {
             <div className="card card-agro p-4 shadow-sm border-success border-opacity-50 position-relative overflow-hidden">
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <span className="badge bg-success bg-opacity-25 text-success rounded-pill font-monospace">
-                  Oportunidad Llave en Mano
+                  Calculo total
                 </span>
                 <span className="badge bg-light text-secondary border border-secondary-subtle font-monospace">
-                  Pimentón Quíbor
+                  Pimentón Quíbor · 1.000 m²
                 </span>
               </div>
 
               <div className="display-5 fw-bold font-mono text-dark mb-1">
-                $4.000 <span className="fs-6 text-secondary">USD</span>
+                $10.575 <span className="fs-6 text-secondary">USD</span>
               </div>
               <div className="text-secondary small mb-3">
-                Presupuesto estimado para culminación de pozo, malla y siembra de pimentón
+                Costo total integrado: Reactivación casa de cultivo 1.000 m² + Culminación pozo a 60 metros
               </div>
 
-              <div className="p-3 bg-light rounded-3 border border-secondary-subtle mb-3">
+              {/* Desglose visual de los 2 grandes rubros */}
+              <div className="p-2.5 bg-success bg-opacity-10 rounded-3 border border-success border-opacity-25 mb-3 text-xs">
+                <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-success border-opacity-20">
+                  <span className="text-dark fw-semibold d-flex align-items-center gap-1">
+                    <span className="material-symbols-outlined text-success fs-6">agriculture</span>
+                    <span>Casa de Cultivo (1.000 m²):</span>
+                  </span>
+                  <strong className="font-mono text-dark">$6.575 USD</strong>
+                </div>
+                <div className="text-muted text-xxs pb-1 pt-0.5">
+                  Malla 50 mesh 130 gsm + Hortomalla + riego 1:1 + semilla Magistral F1 y nutrición AIFA
+                </div>
+                <div className="d-flex justify-content-between align-items-center py-1 border-top border-success border-opacity-20">
+                  <span className="text-dark fw-semibold d-flex align-items-center gap-1">
+                    <span className="material-symbols-outlined text-info fs-6">water_drop</span>
+                    <span>Pozo a 60 Metros:</span>
+                  </span>
+                  <strong className="font-mono text-dark">$4.000 USD</strong>
+                </div>
+                <div className="text-muted text-xxs pt-0.5">
+                  10m excavación grava + anillos concreto Ø 70cm + bomba sumergible 2 HP y tablero
+                </div>
+              </div>
+
+              <div className="p-3 bg-light rounded-3 border border-secondary-subtle mb-0">
                 <div className="row g-2 text-xs">
                   <div className="col-6">
                     <span className="text-secondary">Producción Ciclo:</span>
@@ -89,30 +113,14 @@ export const FunnelHero: React.FC = () => {
                     <div className="fs-6 fw-bold font-mono text-success">60% a 70% ROI</div>
                   </div>
                   <div className="col-6">
+                    <span className="text-secondary">Autosuficiencia Hídrica:</span>
+                    <div className="fs-6 fw-bold font-mono text-info">100% Agua Propia</div>
+                  </div>
+                  <div className="col-6">
                     <span className="text-secondary">Tiempo Activación:</span>
                     <div className="fs-6 fw-bold font-mono text-dark">3 - 4 Semanas</div>
                   </div>
-                  <div className="col-6">
-                    <span className="text-secondary">Blindaje Virosis:</span>
-                    <div className="fs-6 fw-bold font-mono text-info">100% Vectores</div>
-                  </div>
                 </div>
-              </div>
-
-              <a
-                href="https://wa.me/584160000000?text=Hola%20Agrovenecua,%20deseo%20evaluar%20la%20reactivación%20de%20la%20nave%20de%201000m2%20en%20Quíbor"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-success w-100 touch-target-48 rounded-pill fw-bold py-2.5 d-flex align-items-center justify-content-center gap-2 shadow-sm text-white mb-2"
-              >
-                <span className="material-symbols-outlined ms-sm">handshake</span>
-                <span>Contactar con el Agrónomo Responsable</span>
-              </a>
-
-              <div className="text-center">
-                <Link to="/cockpit" className="text-secondary text-xxs font-mono text-decoration-none">
-                  ¿Prefieres ver los cálculos técnicos? <span className="text-success fw-bold">Abrir Cockpit →</span>
-                </Link>
               </div>
             </div>
           </div>

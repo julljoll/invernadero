@@ -368,7 +368,7 @@ export const WellViewer: React.FC<WellViewerProps> = ({
 
     // Cilindro de agua activa (desde ND hasta fondo)
     const waterColumnHeight = Math.max(0.5, totalDepthM - dynamicWaterLevelM);
-    const waterGeo = new THREE.CylinderGeometry(casingRadius - 0.04, casingRadius - 0.04, waterColumnHeight, 16);
+    const waterGeo = new THREE.CylinderGeometry(usefulInnerRadius, usefulInnerRadius, waterColumnHeight, 16);
     const waterMeshMat = new THREE.MeshBasicMaterial({ 
       color: 0x0284c7, 
       transparent: true, 
@@ -383,8 +383,8 @@ export const WellViewer: React.FC<WellViewerProps> = ({
     const coneLineMat = new THREE.LineBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.8 });
     const conePoints = [];
     conePoints.push(new THREE.Vector3(5.0, -staticWaterLevelM, 0));
-    conePoints.push(new THREE.Vector3(casingRadius, -dynamicWaterLevelM, 0));
-    conePoints.push(new THREE.Vector3(-casingRadius, -dynamicWaterLevelM, 0));
+    conePoints.push(new THREE.Vector3(usefulInnerRadius, -dynamicWaterLevelM, 0));
+    conePoints.push(new THREE.Vector3(-usefulInnerRadius, -dynamicWaterLevelM, 0));
     conePoints.push(new THREE.Vector3(-5.0, -staticWaterLevelM, 0));
     const coneGeo = new THREE.BufferGeometry().setFromPoints(conePoints);
     const coneLine = new THREE.Line(coneGeo, coneLineMat);

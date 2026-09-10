@@ -7,7 +7,7 @@ import { FunnelCockpitCTA } from './components/funnel/FunnelCockpitCTA';
 export const LandingPage: React.FC = () => {
   return (
     <div className="landing-funnel-wrapper">
-      {/* 1. Hero del Embudo de Ventas: Propuesta de Valor, Oportunidad de Reactivación y CTAs */}
+      {/* 1. Hero de Reactivación: Propuesta de Valor, Oportunidad y CTAs */}
       <FunnelHero />
 
       {/* 2. Factores Clave y Beneficios Técnicos extraídos del Cockpit (Rendimiento, Malla 50 Mesh, Riego FAO-56, VPD) */}
