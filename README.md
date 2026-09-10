@@ -7,7 +7,8 @@
   <p>
     <a href="landing.html"><strong>🚀 Abrir Landing Page de Inversión</strong></a> •
     <a href="index.html"><strong>⚙️ Abrir Suite Técnica Cockpit</strong></a> •
-    <a href="docs/README.md"><strong>📚 Documentación Técnica</strong></a>
+    <a href="docs/README.md"><strong>📚 Documentación Técnica</strong></a> •
+    <a href="GUIA_REPLICACION_INDEX_REACTIVACION.md"><strong>📖 Guía Maestra de Replicación Index</strong></a>
   </p>
 </div>
 

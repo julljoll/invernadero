@@ -43,3 +43,11 @@
   * Rendimiento meta: 16.5 a 18.7 toneladas de tomate de primera.
 * **[PLAN_PRODUCCION_TOMATE_2000M2_QUIBOR.md](04-produccion/PLAN_PRODUCCION_TOMATE_2000M2_QUIBOR.md)**
   * Plan de escalamiento para 2.000 m² (4.400 plantas, 3 sectores hidráulicos, 28.6 a 37.4 Ton).
+
+### 5. Suite Frontend y Embudo de Reactivación (`/`)
+* **[GUIA_REPLICACION_INDEX_REACTIVACION.md](../GUIA_REPLICACION_INDEX_REACTIVACION.md)**
+  * Guía maestra para replicar el embudo de reactivación de 1.000 m² (2.500 plantas de pimentón Magistral F1).
+  * Arquitectura técnica de los 7 módulos de la Index, sincronía dimensional 1:1 y sistema de diseño Agri-UX/UI.
+  * Clasificación comercial de cestas en Venezuela (Grande $14, Mediana $8, Maraña $3.5) y erradicación de descarte.
+  * Desglose exhaustivo de los 15 rubros operativos y fórmulas matemáticas de retorno.
+

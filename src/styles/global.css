@@ -1,0 +1,476 @@
+/* ====================================================================
+   AGROVENECUA — ESTILOS GLOBALES BOOTSTRAP 5.3 & GOOGLE FONTS
+   Valle de Quíbor, Lara, Venezuela · Paleta Agrícola Oficial (Logo)
+   ==================================================================== */
+
+:root {
+  /* Tipografía Google Fonts */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ====================================================================
+     PALETA CROMÁTICA AGRÍCOLA BASADA EN EL LOGO AGROVENECUA
+     ==================================================================== */
+  /* 1. Verde Logo Primario Brillante (Brote, Clorofila, Resalte Activo) */
+  --logo-green-bright: #53C942;
+  --logo-green-bright-rgb: 83, 201, 66;
+
+  /* 2. Verde Logo Profundo (Tierra fértil, Follaje maduro, Títulos de Autoridad) */
+  --logo-green-deep: #0F4D06;
+  --logo-green-deep-rgb: 15, 77, 6;
+
+  /* 3. Verde de Acción / Botones (Contraste accesible WCAG AAA con texto blanco) */
+  --agro-action: #248a15;
+  --agro-action-hover: #1b6d0f;
+
+  /* 4. Semántica Agronómica Universal (agri-ux-ui) */
+  --agro-water: #0284c7;           /* Riego, goteros PC, pozo profundo, hidrología */
+  --agro-water-rgb: 2, 132, 199;
+  --agro-sun: #d97706;             /* Radiación, temperatura, boro, floración */
+  --agro-sun-rgb: 217, 119, 6;
+  --agro-alert: #dc2626;           /* Estrés osmótico, plagas críticas, salinidad */
+  --agro-alert-rgb: 220, 38, 38;
+
+  /* 5. Fondos y Superficies de Alto Contraste */
+  --agro-bg: #f3f3f3;              /* Fondo de página solicitado: #f3f3f3 */
+  --agro-surface: #ffffff;         /* Superficie de tarjetas y módulos elevados */
+  --agro-surface-alt: #f8fafc;     /* Fondos de tablas y micro-bloques */
+
+  /* 6. Jerarquía de Textos (Legibilidad extrema bajo luz solar de campo) */
+  --agro-text-primary: #0a2007;    /* Verde-bosque ultra oscuro para máxima agudeza */
+  --agro-text-secondary: #475569;  /* Gris pizarra para descripciones técnicas */
+  --agro-text-muted: #64748b;      /* Metadatos y unidades de ingeniería */
+
+  /* 7. Bordes y Divisores de Sección */
+  --agro-border-subtle: rgba(15, 77, 6, 0.12);
+  --agro-border-accent: rgba(83, 201, 66, 0.35);
+  --agro-border-card: rgba(15, 77, 6, 0.14);
+}
+
+/* Sobrescritura de Variables Bootstrap 5.3 en Modo Claro */
+[data-bs-theme="light"], body.light-theme {
+  --bs-body-bg: var(--agro-bg);
+  --bs-body-color: var(--agro-text-primary);
+  --bs-body-font-family: var(--font-sans);
+  
+  --bs-primary: var(--logo-green-deep);
+  --bs-primary-rgb: var(--logo-green-deep-rgb);
+  --bs-success: var(--agro-action);
+  --bs-success-rgb: 36, 138, 21;
+  --bs-info: var(--agro-water);
+  --bs-info-rgb: var(--agro-water-rgb);
+  --bs-warning: var(--agro-sun);
+  --bs-warning-rgb: var(--agro-sun-rgb);
+  --bs-danger: var(--agro-alert);
+  --bs-danger-rgb: var(--agro-alert-rgb);
+
+  --bs-card-bg: var(--agro-surface);
+  --bs-card-border-color: var(--agro-border-card);
+  --bs-border-color: #e2e8f0;
+}
+
+body {
+  background-color: var(--agro-bg);
+  color: var(--agro-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Tipografía Numérica de Alta Precisión */
+.font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+/* ====================================================================
+   GOOGLE MATERIAL SYMBOLS OUTLINED
+   ==================================================================== */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined' !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25rem;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
+}
+
+/* Tamaños de Íconos de Material Symbols */
+.ms-sm { font-size: 1rem !important; }
+.ms-md { font-size: 1.25rem !important; }
+.ms-lg { font-size: 1.75rem !important; }
+.ms-xl { font-size: 2.5rem !important; }
+
+/* ====================================================================
+   UX/UI: DISTINCIÓN Y SEPARACIÓN RÍTMICA ENTRE SECCIONES
+   ==================================================================== */
+.section-agro-white {
+  background-color: #ffffff;
+  border-top: 1px solid var(--agro-border-subtle);
+  border-bottom: 1px solid var(--agro-border-subtle);
+}
+
+.section-agro-alt {
+  background-color: #f3f3f3;
+  border-top: 1px solid var(--agro-border-subtle);
+  border-bottom: 1px solid var(--agro-border-subtle);
+}
+
+/* Kicker de Categoría de Sección */
+.section-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 50rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background-color: rgba(83, 201, 66, 0.12);
+  border: 1px solid rgba(83, 201, 66, 0.35);
+  color: var(--logo-green-deep);
+}
+
+.section-kicker-info {
+  background-color: rgba(2, 132, 199, 0.12);
+  border: 1px solid rgba(2, 132, 199, 0.35);
+  color: #0369a1;
+}
+
+/* ====================================================================
+   ESTILIZACIÓN DE TARJETAS AGRO-TECH (Superficie Blanca Elevada)
+   ==================================================================== */
+.card-agro {
+  background-color: #ffffff;
+  border: 1px solid var(--agro-border-card);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 77, 6, 0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-agro:hover {
+  border-color: var(--logo-green-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(83, 201, 66, 0.16);
+}
+
+.card-agro-water {
+  border-color: rgba(2, 132, 199, 0.25);
+}
+.card-agro-water:hover {
+  border-color: rgba(2, 132, 199, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
+}
+
+.card-agro-sun {
+  border-color: rgba(217, 119, 6, 0.25);
+}
+.card-agro-sun:hover {
+  border-color: rgba(217, 119, 6, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(217, 119, 6, 0.15);
+}
+
+/* ====================================================================
+   BOTONES DE ACCIÓN BASADOS EN EL VERDE DEL LOGO
+   ==================================================================== */
+.btn-success {
+  background: linear-gradient(135deg, #53C942 0%, #248a15 100%) !important;
+  border: none !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(36, 138, 21, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn-success:hover {
+  background: linear-gradient(135deg, #48b837 0%, #1b6d0f 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(36, 138, 21, 0.35);
+}
+
+.btn-outline-success {
+  color: var(--logo-green-deep) !important;
+  border-color: var(--logo-green-bright) !important;
+}
+
+.btn-outline-success:hover {
+  background-color: var(--logo-green-bright) !important;
+  border-color: var(--logo-green-bright) !important;
+  color: #ffffff !important;
+}
+
+/* Textos de Color Brand */
+.text-brand-bright {
+  color: var(--logo-green-bright) !important;
+}
+
+.text-brand-deep {
+  color: var(--logo-green-deep) !important;
+}
+
+/* ====================================================================
+   SLIDERS DE FORMULARIO BOOTSTRAP (FORM-RANGE AGRO)
+   ==================================================================== */
+.form-range::-webkit-slider-thumb {
+  background-color: var(--logo-green-bright);
+  box-shadow: 0 0 10px rgba(83, 201, 66, 0.5);
+}
+.form-range::-moz-range-thumb {
+  background-color: var(--logo-green-bright);
+  box-shadow: 0 0 10px rgba(83, 201, 66, 0.5);
+}
+
+.form-range-water::-webkit-slider-thumb {
+  background-color: var(--agro-water);
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+}
+.form-range-water::-moz-range-thumb {
+  background-color: var(--agro-water);
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.5);
+}
+
+/* ====================================================================
+   SCROLLBAR AGRO-TECH (Modo Claro)
+   ==================================================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--logo-green-bright);
+}
+
+/* ====================================================================
+   FONDOS SUAVES AGRO-TECH CON CONTRASTE GARANTIZADO (WCAG AAA)
+   ==================================================================== */
+.bg-agro-success-soft {
+  background-color: #f0fdf4 !important;
+}
+.bg-agro-danger-soft {
+  background-color: #fef2f2 !important;
+}
+.bg-agro-warning-soft {
+  background-color: #fffbeb !important;
+}
+.bg-agro-info-soft {
+  background-color: #f0f9ff !important;
+}
+
+/* ====================================================================
+   AGRI-UX/UI COCKPIT: MODO CLARO HIGH-CONTRAST & SEMÁNTICA DE CAMPO
+   Valle de Quíbor (700 msnm) · Legibilidad Solar · Touch Targets 48px
+   ==================================================================== */
+
+.cockpit-view-wrapper {
+  background-color: var(--agro-bg);
+  color: var(--agro-text-primary);
+  min-height: 100vh;
+}
+
+.card-cockpit {
+  background-color: #ffffff;
+  border: 1px solid var(--agro-border-card);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 77, 6, 0.05);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  color: var(--agro-text-primary);
+}
+
+.card-cockpit:hover {
+  border-color: var(--logo-green-bright);
+  box-shadow: 0 10px 30px rgba(83, 201, 66, 0.16);
+}
+
+.card-cockpit-water {
+  border-color: rgba(2, 132, 199, 0.25);
+}
+.card-cockpit-water:hover {
+  border-color: rgba(2, 132, 199, 0.55);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.15);
+}
+
+.card-cockpit-sun {
+  border-color: rgba(217, 119, 6, 0.25);
+}
+.card-cockpit-sun:hover {
+  border-color: rgba(217, 119, 6, 0.55);
+  box-shadow: 0 10px 30px rgba(217, 119, 6, 0.15);
+}
+
+.card-cockpit-alert {
+  border-color: rgba(220, 38, 38, 0.25);
+}
+.card-cockpit-alert:hover {
+  border-color: rgba(220, 38, 38, 0.55);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.15);
+}
+
+/* Touch Targets de 48px para uso rudo con guantes/campo */
+.touch-target-48 {
+  min-height: 48px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Formula Box de KaTeX */
+.formula-box {
+  background: #f8fafc;
+  border: 1px solid rgba(15, 77, 6, 0.15);
+  border-left: 4px solid var(--logo-green-bright);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--agro-text-primary);
+}
+
+.formula-box-water {
+  border-color: rgba(2, 132, 199, 0.25);
+  border-left-color: var(--agro-water);
+}
+
+.formula-box-sun {
+  border-color: rgba(217, 119, 6, 0.25);
+  border-left-color: var(--agro-sun);
+}
+
+/* KaTeX custom contrast in light mode */
+.katex {
+  color: var(--agro-text-primary) !important;
+  font-size: 1.15em !important;
+}
+.katex-display {
+  margin: 0.5rem 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+}
+
+/* Pulsing Live Telemetry Beacon */
+.telemetry-pulse {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #53C942;
+  box-shadow: 0 0 0 0 rgba(83, 201, 66, 0.7);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(83, 201, 66, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 8px rgba(83, 201, 66, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(83, 201, 66, 0);
+  }
+}
+
+/* Utilities de Escala Tipográfica Fina */
+.text-xs { font-size: 0.75rem !important; }
+.text-xxs { font-size: 0.6875rem !important; }
+.tracking-wider { letter-spacing: 0.05em; }
+.text-slate-400 { color: #64748b !important; }
+.text-slate-300 { color: #475569 !important; }
+
+/* Tarjeta y Navegación Lateral Light Agro */
+.cockpit-sidebar-card {
+  background: #ffffff;
+  border: 1px solid var(--agro-border-card);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 77, 6, 0.05);
+}
+
+.cockpit-tab-pill {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: var(--agro-text-secondary);
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cockpit-tab-pill:hover {
+  background: #ffffff;
+  color: var(--logo-green-deep);
+  border-color: var(--logo-green-bright);
+}
+
+@media (min-width: 992px) {
+  .cockpit-tab-pill:hover {
+    transform: translateX(3px);
+  }
+}
+
+.cockpit-tab-pill.active {
+  background: linear-gradient(135deg, rgba(83, 201, 66, 0.15) 0%, rgba(36, 138, 21, 0.25) 100%) !important;
+  color: var(--logo-green-deep) !important;
+  border-color: var(--logo-green-bright) !important;
+  box-shadow: 0 4px 14px rgba(83, 201, 66, 0.2);
+  font-weight: 700 !important;
+}
+
+/* Indicadores de Micro-Métricas */
+.agro-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: var(--agro-text-secondary);
+}
+
+.agro-chip-green {
+  background: rgba(83, 201, 66, 0.12);
+  border-color: rgba(83, 201, 66, 0.35);
+  color: var(--logo-green-deep);
+}
+
+.agro-chip-water {
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.3);
+  color: #0369a1;
+}
+
+.agro-chip-sun {
+  background: rgba(217, 119, 6, 0.1);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #b45309;
+}
+
+.agro-chip-alert {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #b91c1c;
+}
+
+
+
