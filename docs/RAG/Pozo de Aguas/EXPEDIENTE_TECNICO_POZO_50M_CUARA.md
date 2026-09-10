@@ -28,7 +28,7 @@
     0 a ~8 m: CONGLOMERADO ALUBIAL SUPERIOR     │  Matriz arenosa ocre, gravas de 1 a 4 cm
     (Fotos 172447, 172530; Video 02 y 03)       │  de cuarzo y lidita. Nódulos de caliche (CaCO3).
                                                 │
-    8 a ~48 m: ACUITARDO ARCILLOSO CONTINUO     │ ◄── Diámetro fuste: 0.90 m - 1.15 m
+    8 a ~48 m: ACUITARDO ARCILLOSO CONTINUO     │ ◄── Diámetro fuste: 80 cm
     (Videos 01, 02, 03, 04)                     │     Paredes autoportantes a "Tierra Viva".
                                                 │     Verticalidad geodésica (desvío < 1°).
                                                 │     Peldaños labrados en la arcilla intactos.
@@ -74,7 +74,7 @@
 ## 3. Estado Físico y Estructural del Pozo
 
 1. **Geometría y Verticalidad:**
-   * Diámetro uniforme de **0.90 m a 1.15 m**, cilíndrico regular.
+   * Diámetro de **80 cm**, excavado manualmente.
    * Desviación axial nula ($< 1^\circ$). La luz solar en el cenit penetra verticalmente los 50 metros e ilumina el espejo de agua de fondo sin sombras de pared.
 2. **Estabilidad a "Tierra Viva":**
    * El fuste se mantiene en terreno natural desnudo sin ademe desde hace años, sin presentar desconchamientos ni pérdida de sección.
@@ -116,7 +116,7 @@ La excavación y profundización del pozo de 50 a 60 metros es **plenamente viab
 | **Mano de Obra Especializada** | Excavación manual a pico de 10 metros en estrato de grava con achique (poceros calificados, 10 a 15 días) | \$600 – \$900 |
 | **Ventilación Forzada de Seguridad** | Compresor/soplador de aire industrial + 60 m de manguera corrugada espiralada de 4"-6" (obligatorio por vida de operarios) | \$250 – \$350 |
 | **Bomba de Achique para Obra** | Electrobomba sumergible de lodos 1 HP para evacuación continua de agua durante la pica | \$180 – \$250 |
-| **Entubado Filtrante Basal** | 12 metros de camisa PVC de 8"-10" ranurada + empaque de grava seleccionada (gravel pack 1/4") | \$350 – \$500 |
+| **Entubado Filtrante Basal y Camisa** | Camisa de concreto de **70 cm** de diámetro + empaque de grava seleccionada (gravel pack 1/4") | \$350 – \$500 |
 | **Bomba Sumergible Definitiva** | Bomba tipo bala multietapas 2 HP (descarga 1.5"-2") + cable sumergible + tablero de arranque y protecciones | \$450 – \$650 |
 | **Acometida Eléctrica y Tubería** | Conexión desde el poste existente + 60 m de tubería PEAD 1.5" alta densidad | \$200 – \$300 |
 | **TOTAL ESTIMADO DE FINALIZACIÓN** | **Inversión total para poner el pozo en operación productiva** | **\$2.030 – \$2.950** |
@@ -133,58 +133,6 @@ La excavación y profundización del pozo de 50 a 60 metros es **plenamente viab
    * Conectar la bomba de achique directamente al poste eléctrico verificado en las fotos `IMG_...172455.jpg`, garantizando bombeo continuo sin riesgo de paradas por combustible.
 3. **Blindaje del Fondo (Filtro Ranurado):**
    * Una vez alcanzada la cota de 60 metros, vaciar de inmediato la grava seleccionada y asentar la camisa ranurada para evitar que el estrato basal se colmate con las arcillas superiores al entrar en régimen de bombeo constante.
-
----
-
-## 6. Análisis de Heterogeneidad Hidrogeológica Espacial
-### ¿Por qué un vecino a 300 metros excavó a 50 metros y no encontró agua? (La "Paradoja" Hidrogeológica de Cuara)
-
-Es muy común en el campo que los productores se desconcierten cuando un pozo a escasos 200 o 300 metros de distancia resulta completamente seco, mientras que otro a la misma profundidad encuentra un acuífero activo. En el Valle de Quíbor y específicamente en Cuara, este fenómeno no solo es normal, sino que está **plenamente respaldado por la sedimentología y la geología estructural regional (Jégat et al., 2012 / CIDIAT)**:
-
-```
-           CORTE GEOLÓGICO TRANSVERSAL COMPARATIVO (300 METROS)
- 
-   TU POZO (EJE DEL PALEOCAUCE)               POZO VECINO (LLANURA DE DESBORDE)
-     Cota Superficie ~734 msnm                  Cota Superficie ~733 msnm
-               │                                          │
-               ▼  0.0 m                                   ▼  0.0 m
-        ┌──────────────┐                           ┌──────────────┐
-        │ Conglomerado │                           │ Conglomerado │
-        ├──────────────┤ ~8.0 m                    ├──────────────┤ ~8.0 m
-        │              │                           │              │
-        │              │                           │              │
-        │   ACUITARDO  │                           │   ACUITARDO  │
-        │   ARCILLOSO  │                           │   ARCILLOSO  │
-        │   MASIVO     │                           │   MASIVO     │
-        │ (Impermeable)│                           │ (Impermeable)│
-        │              │                           │              │
-        │              │                           │              │
- 48 m   ├──────────────┤                           │              │
-        │▓▓▓▓▓▓▓▓▓▓▓▓▓▓│◄── PALEOCAUCE FLUVIAL     │              │
- 50 m   │░░░░AGUA░░░░░░│    Lente de Grava Negra   │  SECO 100%   │ 50 m (Fondo)
-        │▓▓▓▓▓▓▓▓▓▓▓▓▓▓│    (Ancho: 50 a 100 m)    │  (Sigue en   │
-        └──────────────┘    Acuñamiento (Pinch-out)│   Arcilla)   │
-                                ──────► X ◄─────── └──────────────┘
-                           (Fuera del canal fluvial)
-```
-
-#### 1. Geometría de Paleocauces Estrechos vs. Llanura de Inundación (Overbank)
-* El acuífero de Cuara **no es una "sábana de agua" uniforme ni un lago subterráneo continuo**. Es un sistema de **paleocauces aluviales entrelazados** depositados durante el Pleistoceno-Holoceno por torrentes de alta energía que descendían de la serranía.
-* Estos antiguos lechos de ríos transportaban gravas gruesas y lavadas (lidita negra y cuarzo). Su faja activa o canal principal solía tener un ancho estrecho, típicamente de **50 a 100 metros** (raramente más de 150 m).
-* A los lados del canal corría agua lenta de desborde en épocas de crecida, depositando exclusivamente **arcillas masivas y limos densos (llanura de inundación / acuitardo regional)**.
-* **Diagnóstico:** Tu pozo perforó con precisión quirúrgica en el **eje axial de un paleocauce de grava lavada**. Tu vecino, ubicado a 300 metros hacia el frente, cayó de lleno en la llanura de inundación arcillosa continua. A 50 metros de profundidad, él seguía excavando en arcilla compacta estéril.
-
-#### 2. Acuñamiento Lateral Estratigráfico (*Pinch-Out*)
-* Los depósitos clásticos de abanicos aluviales forman **cuerpos lenticulares (con forma de lenteja)**.
-* El espesor de la grava es máximo en el centro del canal y se adelgaza bruscamente hacia los extremos hasta desaparecer por completo (*pinch-out* estratigráfico). En una distancia de 300 metros, el lente permeable se acuñó y fue sustituido al 100% por lutitas y arcillolitas impermeables.
-
-#### 3. Control Estructural y Microfallamiento Escalonado
-* La fosa tectónica de Quíbor está gobernada por el sistema de fallas de Boconó y el graben de Cuara-Jiménez.
-* En 300 metros es común atravesar una **microfalla normal o salto tectónico**. Si el predio de enfrente se encuentra en un bloque hundido (graben local), el estrato de grava puede no estar a 50 metros, sino a **70, 80 o 90 metros de profundidad**. Al detenerse a los 50 metros, el vecino abandonó la excavación antes de alcanzar el horizonte colector.
-
-#### 4. Conclusión y Valor Patrimonial para tu Proyecto
-* **Lejos de ser una señal de alerta, este dato es la mayor confirmación del valor de tu pozo:** Demuestra que estás ubicado en un **"sweet spot" (punto dulce hidrogeológico)** privilegiado dentro de Cuara.
-* **Cero interferencia hidráulica inmediata:** El hecho de que a 300 metros no haya agua a 50 m significa que no tienes pozos vecinos chupando del mismo horizonte somero, garantizando la sostenibilidad y recarga exclusiva de tu captación.
 
 ---
 *Expediente aprobado como base de conocimiento para la ejecución del proyecto de horticultura protegida en Cuara.*
