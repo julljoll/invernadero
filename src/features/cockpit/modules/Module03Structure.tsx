@@ -126,8 +126,8 @@ export const Module03Structure: React.FC = () => {
         </div>
       </div>
 
-      {/* Visor 3D Three.js */}
-      <div className="rounded-3 overflow-hidden border border-secondary-subtle shadow-sm">
+      {/* Visor 3D Three.js AutoCAD */}
+      <div className="rounded-3 overflow-hidden shadow-sm border border-secondary-subtle">
         <GreenhouseViewer
           widthM={greenhouseWidthM}
           lengthM={greenhouseLengthM}
@@ -138,13 +138,13 @@ export const Module03Structure: React.FC = () => {
 
       <div className="row g-2 mt-3 text-secondary small">
         <div className="col-12 col-md-4">
-          <span className="text-dark fw-bold">Refuerzo Fachada Este:</span> Viento dominante al 88%. Postes esquineros dobles con anclaje de concreto a 1.20m de profundidad.
+          <span className="text-dark fw-bold">Capa 01 Estructural:</span> 108 Pilares Tubo Sch 40 (Cian #00FFFF), cerchas a dos aguas, vigas maestras y zapatas de anclaje de 1.20m.
         </div>
         <div className="col-12 col-md-4">
-          <span className="text-dark fw-bold">Tensores de Guaya:</span> Cable de acero galvanizado 1/4" 7×19 con tensores ojo-ojo de 5/8".
+          <span className="text-dark fw-bold">Capa Barlovento (Este 88%):</span> Cruces de San Andrés y tensores de guaya galvanizada 1/4" 7×19 con tensores ojo-ojo 5/8" (FS ≥ 1.5).
         </div>
         <div className="col-12 col-md-4">
-          <span className="text-dark fw-bold">Cobertura Superior:</span> Malla 50 Mesh Blanca (110 gsm) con sujeción en perfil de aluminio tipo zigzag continuo.
+          <span className="text-dark fw-bold">Capa 02 Cobertura:</span> Malla 50 Mesh Blanca (110 gsm) con sellado perimetral hermético y alambre CAD de alta precisión.
         </div>
       </div>
     </div>

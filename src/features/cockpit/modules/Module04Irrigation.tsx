@@ -47,9 +47,12 @@ export const Module04Irrigation: React.FC = () => {
   const crop = CROPS_CATALOG[selectedCrop];
   const salinityResult = calculateSalinityImpact(waterEcDsM, selectedCrop);
 
+  // Densidad biológica recomendada: ~2.2 a 2.5 plantas/m² para Quíbor
+  const totalPlantsCount = Math.round(greenhouseLengthM * greenhouseWidthM * 2.2);
+
   const irrigationStages = calculateFao56IrrigationStages({
     surfaceM2: greenhouseLengthM * greenhouseWidthM,
-    totalPlants: 2200,
+    totalPlants: totalPlantsCount,
     et0MmDay: 5.6,
     leachingFactor: salinityResult.grossIrrigationFactor,
     uniformityEfficiency: 0.90,
@@ -67,8 +70,8 @@ export const Module04Irrigation: React.FC = () => {
   const rainData = QUIBOR_CLIMATE_MONTHS.map((m) => m.lluvia);
   // Demanda hídrica mensual ajustada por salinidad y Kc medio del cultivo (~0.95)
   const irrigationDemandData = QUIBOR_CLIMATE_MONTHS.map((m) => {
-    // Estimación de ETo en base a Tmax/Tmin Quíbor (aprox 120-165 mm/mes)
-    const baseEt0 = m.max * 4.4; 
+    // ETo mensual real basada en NASA MERRA-2 Quíbor (mm/mes = eto diario * 30.4 días)
+    const baseEt0 = m.eto * 30.4; 
     const grossDemand = baseEt0 * 0.95 * salinityResult.grossIrrigationFactor;
     return Math.round(grossDemand);
   });
@@ -80,22 +83,25 @@ export const Module04Irrigation: React.FC = () => {
         type: 'bar' as const,
         label: `Demanda Riego (${crop.name} + Lavado LF) [mm/mes]`,
         data: irrigationDemandData,
-        backgroundColor: 'rgba(56, 189, 248, 0.65)',
-        borderColor: '#38bdf8',
+        backgroundColor: 'rgba(14, 165, 233, 0.70)',
+        borderColor: '#0284c7',
         borderWidth: 1.5,
-        borderRadius: 4,
+        borderRadius: 6,
       },
       {
         type: 'line' as const,
         label: 'Precipitación Quíbor (NASA MERRA-2) [mm/mes]',
         data: rainData,
-        borderColor: '#53C942',
-        backgroundColor: 'rgba(83, 201, 66, 0.15)',
-        borderWidth: 2,
+        borderColor: '#16a34a',
+        backgroundColor: 'rgba(34, 197, 94, 0.20)',
+        borderWidth: 2.5,
         fill: true,
         tension: 0.35,
-        pointBackgroundColor: '#53C942',
-        pointRadius: 4,
+        pointBackgroundColor: '#16a34a',
+        pointBorderColor: '#ffffff',
+        pointBorderWidth: 1.5,
+        pointRadius: 5,
+        pointHoverRadius: 7,
       },
     ],
   };
@@ -107,31 +113,47 @@ export const Module04Irrigation: React.FC = () => {
       legend: {
         position: 'top' as const,
         labels: {
-          color: '#475569',
-          font: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+          color: '#1e293b',
+          boxWidth: 14,
+          boxHeight: 14,
+          padding: 16,
+          font: { family: "'Plus Jakarta Sans', system-ui, -apple-system, sans-serif", size: 12, weight: '600' },
         },
       },
       tooltip: {
         backgroundColor: 'rgba(15, 23, 42, 0.95)',
-        titleFont: { family: 'Plus Jakarta Sans', size: 12 },
-        bodyFont: { family: 'JetBrains Mono', size: 11 },
-        borderColor: '#e2e8f0',
+        titleColor: '#f8fafc',
+        bodyColor: '#f1f5f9',
+        titleFont: { family: "'Plus Jakarta Sans', system-ui, sans-serif", size: 13, weight: 'bold' },
+        bodyFont: { family: "'JetBrains Mono', monospace", size: 12 },
+        padding: 12,
+        cornerRadius: 8,
+        borderColor: 'rgba(255, 255, 255, 0.1)',
         borderWidth: 1,
       },
     },
     scales: {
       x: {
-        ticks: { color: '#475569', font: { family: 'Plus Jakarta Sans', size: 10 } },
-        grid: { color: '#e2e8f0' },
+        ticks: {
+          color: '#334155',
+          font: { family: "'Plus Jakarta Sans', system-ui, sans-serif", size: 12, weight: '500' },
+          padding: 6,
+        },
+        grid: { color: 'rgba(226, 232, 240, 0.8)' },
       },
       y: {
-        ticks: { color: '#475569', font: { family: 'JetBrains Mono', size: 10 } },
-        grid: { color: '#e2e8f0' },
+        ticks: {
+          color: '#334155',
+          font: { family: "'JetBrains Mono', monospace", size: 11, weight: '500' },
+          padding: 6,
+        },
+        grid: { color: 'rgba(226, 232, 240, 0.8)' },
         title: {
           display: true,
           text: 'Lámina de Agua (mm/mes)',
-          color: '#475569',
-          font: { size: 10, weight: 'bold' },
+          color: '#1e293b',
+          font: { family: "'Plus Jakarta Sans', system-ui, sans-serif", size: 12, weight: 'bold' },
+          padding: { bottom: 8 },
         },
       },
     },
@@ -215,7 +237,7 @@ export const Module04Irrigation: React.FC = () => {
                   <span className="material-symbols-outlined text-brand-bright ms-sm">water_drop</span>
                   <span>Consumo Hídrico Fenológico FAO-56</span>
                 </h3>
-                <span className="text-secondary small">Cultivo: {crop.name} ({crop.scientificName}) · 2.200 plantas</span>
+                <span className="text-secondary small">Cultivo: {crop.name} ({crop.scientificName}) · {totalPlantsCount.toLocaleString()} plantas</span>
               </div>
               <span className="badge bg-success bg-opacity-15 text-success border border-success border-opacity-30 font-monospace">
                 Penman-Monteith
@@ -264,7 +286,7 @@ export const Module04Irrigation: React.FC = () => {
           </span>
         </div>
 
-        <div style={{ height: '280px' }}>
+        <div style={{ height: '320px' }}>
           <Chart type="bar" data={chartData as any} options={chartOptions as any} />
         </div>
 

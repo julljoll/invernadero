@@ -8,6 +8,7 @@ import { Module03Structure } from './modules/Module03Structure';
 import { Module04Irrigation } from './modules/Module04Irrigation';
 import { Module05Well } from './modules/Module05Well';
 import { Module06PestControl } from './modules/Module06PestControl';
+import { Module07CropPlan } from './modules/Module07CropPlan';
 
 export const CockpitPage: React.FC = () => {
   const { selectedCrop } = useAgroStore();
@@ -30,6 +31,7 @@ export const CockpitPage: React.FC = () => {
     { id: 'riego', label: '04. Riego & Salinidad', subtitle: 'FAO-56 · Conductividad', icon: 'water_drop', color: 'water' },
     { id: 'pozo', label: '05. Hidrología Pozo 60m', subtitle: 'Nivel Dinámico · Aforo', icon: 'water_ph', color: 'water' },
     { id: 'plagas', label: '06. Fitosanidad IPM', subtitle: 'Rotación IRAC · Umbrales', icon: 'pest_control', color: 'alert' },
+    { id: 'siembra', label: '07. Siembra & Fertirriego', subtitle: 'FAO-56 · AIFA Hidrosoluble', icon: 'calendar_month', color: 'green' },
   ];
 
   return (
@@ -49,7 +51,7 @@ export const CockpitPage: React.FC = () => {
                   Módulos Técnicos
                 </span>
                 <span className="badge bg-success bg-opacity-20 text-success border border-success border-opacity-30 rounded-pill px-2 py-1 text-xxs">
-                  6 Módulos
+                  7 Módulos
                 </span>
               </div>
 
@@ -135,6 +137,7 @@ export const CockpitPage: React.FC = () => {
             {activeTab === 'riego' && <Module04Irrigation />}
             {activeTab === 'pozo' && <Module05Well />}
             {activeTab === 'plagas' && <Module06PestControl />}
+            {activeTab === 'siembra' && <Module07CropPlan />}
           </main>
         </div>
       </div>
