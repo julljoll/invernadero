@@ -1,113 +1,174 @@
-# 🌱 LA CIGARRONERA — Suite Agrotecnológica & Plan de Inversión
-
 <div align="center">
-  <img src="assets/logo/agrovenecua_logo.svg" alt="Agrovenecua Logo" width="130">
-  <h3>AGROVENECUA INGENIERÍA</h3>
-  <p><strong>Horticultura Protegida, Hidrogeología & Climatología de Precisión — Valle de Quíbor, Lara, Venezuela</strong></p>
-  <p>
-    <a href="landing.html"><strong>🚀 Abrir Landing Page de Inversión</strong></a> •
-    <a href="index.html"><strong>⚙️ Abrir Suite Técnica Cockpit</strong></a> •
-    <a href="docs/README.md"><strong>📚 Documentación Técnica</strong></a> •
-    <a href="GUIA_REPLICACION_INDEX_REACTIVACION.md"><strong>📖 Guía Maestra de Replicación Index</strong></a>
-  </p>
+
+# 🌱 LA CIGARRONERA — Suite Agrotecnológica & Gemelo Digital
+### Horticultura Protegida, Hidrogeología & Climatología de Precisión — Valle de Quíbor, Lara, Venezuela
+
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-Native_Node_22+-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-r170_WebGL-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Vercel](https://img.shields.io/badge/Vercel-Optimized_SSG-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
+<p align="center">
+  <a href="#-rutas-y-módulos-de-la-suite"><strong>🚀 Módulos y Rutas</strong></a> •
+  <a href="#-arquitectura-de-datos-sqlite--data-baking"><strong>💾 SQLite & Data Baking</strong></a> •
+  <a href="#-panel-de-control-administrativo"><strong>⚙️ Panel de Control</strong></a> •
+  <a href="#-guía-rápida-de-desarrollo"><strong>💻 Guía de Inicio</strong></a> •
+  <a href="#-base-bioclimática-nasa-merra-2"><strong>📊 Bioclima Quíbor</strong></a>
+</p>
+
 </div>
 
 ---
 
 ## 📍 Resumen Ejecutivo del Proyecto
 
-**La Cigarronera** es un desarrollo agroproductivo de alta eficiencia situado en **Cuara, Municipio Jiménez, Estado Lara, Venezuela** ($9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$, elevación base ~700 msnm), en pleno corazón del **Valle de Quíbor**.
+**La Cigarronera** es una plataforma agrotecnológica de alta eficiencia desarrollada para optimizar el diseño, operación y retorno de inversión en horticultura protegida en **Cuara, Municipio Jiménez, Estado Lara, Venezuela** ($9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$, 700 msnm).
 
-El proyecto integra:
-1. **Casa de Malla Tecnificada (1.000 m²):** Estructura de parral plano tensado en acero Sch 40 con malla anti-insectos monofilamento virgen **110 gsm, 50 mesh blanco** ($\le 192\ \mu\text{m}$) que previene el sobrecalentamiento interno (>31.5 °C), difumina la luz solar y bloquea el 100% de vectores plaga.
-2. **Activo Hídrico Subterráneo Estratégico:** Pozo artesanal excavado verticalmente a pico hasta **50 metros de profundidad** en paredes autoportantes a tierra viva (con estribos intactos y cero colapso), con nivel estático comprobado a **49.5 m** y piso en manto de grava permeable con cuarzo cristalino y lidita.
-3. **Plan de Inversión Llave en Mano ($4.000 USD):** Culminación de los últimos **10 metros** (de 50 a 60 m) con martillo eléctrico industrial de demolición, revestimiento en 60 anillos de concreto reforzado $f'c = 210\text{ kg/cm}^2$, y equipamiento electromecánico integral.
-4. **Retorno de Inversión Excepcional:**
-   * **Pimentón (*Capsicum annuum*):** 2.500 plantas, 12.5 Ton/ciclo a **$0.90 USD/kg** = **$11.250 USD brutos** / **$6.750 USD netos** por ciclo. Payback del pozo en **menos de 4 meses** (168% de ROI en el primer ciclo).
-   * **Tomate Indeterminado (*Solanum lycopersicum*):** 2.200 plantas tutoradas en Hortomalla a 2.0 m, 17.6 Ton/ciclo = **$14.960 USD brutos** / **$9.460 USD netos** por ciclo.
+```mermaid
+graph LR
+    A["☀️ Bioclima NASA MERRA-2"] --> C["🏛️ Gemelo Digital 3D"]
+    B["💧 Hidrogeología Pozo 50m"] --> C
+    D["🌱 Modelos FAO-56 & Salinidad"] --> C
+    C --> E["🚀 Vistas de Alta Conversión"]
+    C --> F["⚙️ Cockpit de Ingeniería"]
+    C --> G["🔒 Panel de Control SQLite"]
+```
+
+### Pilares Clave de Ingeniería:
+* **Casa de Malla Tecnificada (1.000 m²):** Altura bioclimática al alero $\ge 3.0\text{ m}$ y cumbrera $\ge 5.5\text{ m}$ con malla monofilamento virgen **110–130 gsm, 50 mesh blanco** ($\le 192\ \mu\text{m}$) que mitiga el bochorno térmico (>31.5 °C) y bloquea 100% de vectores plaga.
+* **Activo Hídrico Subterráneo Estratégico:** Pozo artesanal excavado verticalmente a **50 metros de profundidad** con nivel estático comprobado a **49.5 m** en manto de grava permeable con cuarzo cristalino.
+* **Cultivos Principales:** Pimentón (*Capsicum annuum*, 12.5 Ton/ciclo) y Tomate Indeterminado de Hilo Alto (*Solanum lycopersicum*, 18.7 Ton/ciclo).
 
 ---
 
-## 🗂️ Arquitectura del Repositorio
+## 🚀 Rutas y Módulos de la Suite
+
+| Ruta URL | Módulo | Propósito & Capacidades | Perfil de Usuario |
+| :--- | :--- | :--- | :--- |
+| [`/`](http://localhost:3000/) | **Landing Page de Inversión** | Funnel comercial, propuesta de valor, retorno de inversión y visor 3D interactivo de pozo. | Inversionista / Propietario |
+| [`/cockpit`](http://localhost:3000/cockpit) | **Cockpit de Ingeniería** | Gemelo digital 3D, telemetría MERRA-2, VPD foliar, riego FAO-56, cálculo de extractores y plan de cultivo. | Ingeniero Agrónomo / Asesor |
+| [`/admin`](http://localhost:3000/admin) | **Panel de Control BD** | Administración integral de la base de datos SQLite: parámetros, cultivos, clima mensual y textos. | Administrador Técnico |
+| [`/calculo-pozo`](http://localhost:3000/calculo-pozo) | **Calculadora de Pozo** | Modelo Theis/Cooper-Jacob, abatimiento dinámico, curvas de bombeo y estratigrafía de Cuara. | Hidrogeólogo / Regador |
+| [`/malla-50mesh`](http://localhost:3000/malla-50mesh) | **Cotizador de Malla** | Desglose técnico de rollos, gramajes (110 vs 130 gsm) y exclusión física de plagas. | Comprador / Mayordomo |
+| [`/catalogo-invernaderos`](http://localhost:3000/catalogo-invernaderos) | **Catálogo Leader Greenhouse** | Modelos góticos multicapilla (AGRO-U3, U4, U5), túneles y equipamiento de ventilación. | Productor Comercial |
+
+---
+
+## 💾 Arquitectura de Datos: SQLite & "Data Baking"
+
+Para garantizar **velocidad de carga instantánea en Vercel (CDN)** sin incurrir en costos de bases de datos remotas, la plataforma implementa la arquitectura de **Data Baking en Tiempo de Compilación**:
+
+```mermaid
+flowchart TD
+    subgraph LOCAL["💻 ENTORNO LOCAL (Desarrollo)"]
+        A["Panel de Control: /admin"] -->|Edición Visual| B["API Local Vite (/api/db/*)"]
+        B -->|Escritura SQL| C[("database.sqlite (Raíz)")]
+        C -->|node scripts/db.js| D["database.json (Export estático)"]
+    end
+
+    subgraph VERCEL["☁️ PRODUCCIÓN (Vercel CDN)"]
+        D -->|Data Baking (SSG)| E["Bundler Vite / React 18"]
+        E -->|Cero consultas remotas| F["⚡ Sitio Web Estático Ultra-Rápido"]
+    end
+```
+
+### Ventajas de esta Arquitectura:
+1. **Rendimiento Máximo en Vercel:** La interfaz consume un dataset estático pre-horneado (`database.json`), eliminando la latencia de red de consultar una base de datos externa.
+2. **Cero Costos de Infraestructura:** No requiere servicios de base de datos como Supabase o Vercel Postgres.
+3. **Seguridad Absoluta:** La base de datos SQLite y el panel de edición solo admiten mutaciones en tu máquina local.
+4. **Respaldo Versionado:** Cada cambio en la base de datos se refleja de inmediato en Git al hacer commit de `database.sqlite` y `database.json`.
+
+---
+
+## ⚙️ Panel de Control Administrativo (`/admin`)
+
+El nuevo Panel de Control permite actualizar todos los datos de la plataforma sin tocar una sola línea de código:
 
 ```text
-invernadero/
-├── landing.html              # Landing page ejecutiva para inversores (Three.js 3D Well Viewer)
-├── index.html                # Cockpit agronómico integral (Suite de 5 etapas técnicas)
-├── README.md                 # Documentación maestra del repositorio
-├── manifest.webmanifest      # PWA Manifest para instalación offline en móviles/tablets
-├── sw.js                     # Service Worker para funcionamiento 100% offline en campo
-├── sitemap.xml               # Mapa de sitio optimizado para indexación web
-│
-├── src/                      # Código fuente organizado de la aplicación
-│   ├── js/
-│   │   ├── app.js            # Lógica agronómica, cálculo FAO-56, reactividad y simuladores
-│   │   ├── well-3d.js        # Motor Three.js WebGL: Render interactivo 3D del pozo artesanal
-│   │   └── greenhouse-3d.js  # Motor Three.js WebGL: Render interactivo 3D de la casa de malla
-│   └── css/
-│       ├── styles.css        # Sistema de diseño Agro-Dark con tokens oficiales Agrovenecua
-│       └── landing.css       # Estilos específicos de alta gama para la landing page
-│
-├── assets/                   # Recursos gráficos vectoriales y multimedia
-│   ├── logo/                 # Logotipos oficiales Agrovenecua e iconos PWA
-│   │   ├── agrovenecua_logo.svg  # Logo oficial (Verde #53C942 y #0F4D06)
-│   │   ├── icon-192.svg
-│   │   └── icon-512.svg
-│   └── svg/                  # Planos constructivos 2D y 3D en SVG
-│       ├── plano_2d_invernadero_quibor.svg
-│       └── plano_3d_invernadero_quibor.svg
-│
-├── data/                     # Conjuntos de datos estructurados en formato JSON
-│   ├── climate-quibor.json   # Series temporales NASA MERRA-2 y parámetros eólicos
-│   └── project-config.json   # Ficha técnica maestra, presupuestos y modelos ROI
-│
-├── docs/                     # Documentación técnica de ingeniería organizada por disciplinas
-│   ├── README.md             # Índice temático de documentos técnicos
-│   ├── 01-bioclima/          # Climatología MERRA-2, vientos del Este y extractores eólicos
-│   ├── 02-estructura/        # Memoria de cálculo de malla 110 gsm 50 mesh y despiece
-│   ├── 03-hidrogeologia/     # Planes de inversión del pozo artesanal y estratigrafía
-│   └── 04-produccion/        # Planes maestros de cultivo para 1.000 m² y 2.000 m²
-│
-├── lib/                      # Librerías de terceros (Zero-CDN, offline first)
-│   ├── three.min.js          # Three.js r128 WebGL Engine
-│   └── OrbitControls.js      # Control orbital de cámara para inspección 3D
-│
-└── RAG/                      # Evidencias de campo (Fotografías y videos georreferenciados)
+/admin
+├── ⚙️ Configuración General  → Nombre de proyecto, ubicación, coordenadas satelitales, altitud msnm.
+├── 🏗️ Invernadero y Malla    → Largo, ancho, alturas alero/cumbrera, extractores eólicos, precio de malla.
+├── 💧 Pozo y Acuífero       → Caudal de bombeo (L/s), nivel estático (m), salinidad CE (dS/m), transmisividad.
+├── 🌤️ Climatología Quíbor   → 12 meses editables (T. Máx, T. Mín, T. Med, Lluvia mm, Viento km/h, ETo).
+├── 🌱 Cultivos Agronómicos  → Pimentón, tomate y pepino: umbral CE Mass-Hoffman, rendimientos y precios USD/kg.
+└── 📝 Textos y Contacto     → Títulos principales, llamadas a la acción (CTA), WhatsApp y correos oficiales.
 ```
 
----
-
-## 🎨 Identidad Gráfica y Sistema de Diseño
-
-El diseño de la plataforma se rige por los colores corporativos exactos de Agrovenecua:
-* **Verde Clorofila / Acento:** `#53C942` (borde del escudo y letra "A" superior).
-* **Verde Bosque Profundo:** `#0F4D06` (letra "V" inferior y fondos con glassmorphism).
-* **Suelo / Obsidiana:** `#090e0b` y `#0e1611` (contrastes nocturnos de alta legibilidad solar).
-* **Cian Hidráulico:** `#38bdf8` (acuífero, tuberías y balance de humedad).
-* **Ámbar Bioclimático:** `#f59e0b` (radiación solar y temperatura).
+> [!TIP]
+> **Botón "🔥 Hornear Datos (Bake)":** En la esquina superior del panel `/admin` puedes forzar en cualquier momento la exportación inmediata de la base de datos SQLite hacia el archivo JSON de producción.
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+## 💻 Guía Rápida de Desarrollo
 
-El proyecto está diseñado bajo una arquitectura **Zero-Dependency & Offline-First** en Vanilla HTML5, CSS3 y JavaScript ES6+. No requiere Node.js, compilar bundlers ni conexión a internet para funcionar.
+### Requisitos
+* **Node.js:** Versión `22.5.0` o superior (para soporte nativo de `node:sqlite` sin dependencias externas).
+* **NPM:** `10.0+`.
 
-### 1. Ejecución Local Directa
-Simplemente abre [`landing.html`](landing.html) o [`index.html`](index.html) en cualquier navegador moderno (Google Chrome, Microsoft Edge, Safari o Firefox).
-
-### 2. Con Servidor Local (Opcional)
+### Instalación y Ejecución
 ```bash
-# Con Python 3
-python -m http.server 8080
+# 1. Clonar el repositorio
+git clone https://github.com/julljoll/invernadero.git
+cd invernadero
 
-# Con Node.js npx
-npx serve .
+# 2. Instalar dependencias
+npm install
+
+# 3. Iniciar el servidor de desarrollo local
+npm run dev
 ```
-Luego accede a `http://localhost:8080/landing.html`.
+
+El servidor iniciará en:
+* **Sitio Web:** `http://localhost:3000/`
+* **Cockpit 3D:** `http://localhost:3000/cockpit`
+* **Panel de Control:** `http://localhost:3000/admin`
+
+### Scripts Disponibles en `package.json`
+| Comando | Acción |
+| :--- | :--- |
+| `npm run dev` | Inicia Vite con el plugin de API SQLite local activo en el puerto 3000. |
+| `npm run build` | Ejecuta automáticamente `prebuild` (Data Baking SQLite -> JSON) y compila para producción en `dist/`. |
+| `npm run test` | Ejecuta la suite de pruebas unitarias agronómicas con Vitest. |
+| `npm run db:bake` | Fuerza la regeneración de `src/core/constants/database.json` desde `database.sqlite`. |
+| `npm run preview` | Previsualiza localmente la compilación de producción de `dist/`. |
 
 ---
 
-## 👨‍🌾 Créditos y Autoría Técnica
-* **Ingeniería Agronómica y Bioclimática:** Especialista Senior en Horticultura Protegida.
-* **Hidrogeología y Geotecnia:** Consultor Senior en Recursos Hídricos Subterráneos del Valle de Quíbor.
-* **Desarrollo Tecnológico:** Agrovenecua Ingeniería C.A. — Finca La Cigarronera.
+## 📊 Base Bioclimática NASA MERRA-2
+
+| Mes | T. Máx (°C) | T. Mín (°C) | T. Med (°C) | Lluvia (mm) | Viento (km/h) | Días Bochorno | Dirección Dominante |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| **Enero** | 30.1 | 16.0 | 23.8 | 18.9 | 7.7 | 16.0 | 88% ESTE |
+| **Febrero** | 30.8 | 16.0 | 24.6 | 11.2 | 8.5 | 14.5 | 85% ESTE |
+| **Marzo** ☀️ *(Pico Calor)* | 31.0 | 16.0 | 25.4 | 23.9 | 8.6 | 18.6 | 84% ESTE |
+| **Abril** | 30.6 | 17.5 | 25.6 | 61.8 | 8.5 | 22.6 | 80% ESTE |
+| **Mayo** 🌧️ *(Máx Lluvia)* | 29.8 | 18.4 | 25.1 | 104.0 | 8.8 | 28.1 | 78% ESTE |
+| **Junio** 💨 *(Máx Viento)* | 28.6 | 18.0 | 24.2 | 99.0 | 10.4 | 27.6 | 82% ESTE |
+| **Julio** ❄️ *(Más Fresco)* | 28.0 | 19.0 | 23.8 | 99.8 | 9.1 | 28.0 | 85% ESTE |
+| **Agosto** 🔥 *(Pico Bochorno)*| 28.5 | 17.9 | 24.0 | 95.2 | 9.0 | 28.6 | 86% ESTE |
+| **Septiembre** 🔄 | 29.2 | 18.1 | 24.2 | 82.8 | 8.2 | 27.6 | 53% SUR *(Excepción)* |
+| **Octubre** | 29.4 | 16.7 | 24.0 | 98.3 | 6.7 | 28.5 | 79% ESTE |
+| **Noviembre** 🍃 *(Más Calmo)* | 29.2 | 17.6 | 23.9 | 72.0 | 7.0 | 26.4 | 84% ESTE |
+| **Diciembre** | 29.4 | 15.9 | 23.7 | 28.0 | 7.2 | 22.0 | 87% ESTE |
+
+---
+
+## 🎨 Sistema de Diseño Agrovenecua (`agri-ux-ui`)
+
+El diseño de la plataforma sigue los estándares estrictos de **Agri-UX/UI** para máxima legibilidad bajo sol intenso y semántica agronómica universal:
+
+* 🟢 **Verde Logo Primario (`#53C942`):** Brotes, clorofila activa, estados óptimos y acentos interactivos.
+* 🌲 **Verde Bosque Profundo (`#0F4D06`):** Títulos de autoridad, encabezados de módulo y contraste WCAG AAA.
+* 💧 **Azul Hidráulico (`#0284c7`):** Recursos hídricos, láminas FAO-56, goteros y abatimiento del pozo.
+* ☀️ **Ámbar Bioclimático (`#d97706`):** Radiación solar, grados-día y tasas de ventilación eólica.
+* 🚨 **Alerta Osmótica (`#dc2626`):** Salinidad de pozo crítica (>2.0 dS/m), riesgo de virosis y estrés hídrico.
+
+---
+
+## 👨‍🌾 Créditos & Autoría Técnica
+
+* **Ingeniería Agronómica y Bioclimática:** Agrovenecua Ingeniería C.A. — Especialista Senior en Horticultura Protegida.
+* **Hidrogeología y Geotecnia:** Consultoría en Recursos Hídricos Subterráneos de la Formación Cuara.
+* **Desarrollo Tecnológico:** Finca La Cigarronera, Cuara, Municipio Jiménez, Estado Lara, Venezuela.
