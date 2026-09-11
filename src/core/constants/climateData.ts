@@ -1,6 +1,7 @@
 import { ClimateMonth } from '../types/agronomy';
+import dbExport from './database.json';
 
-export const QUIBOR_CLIMATE_MONTHS: ClimateMonth[] = [
+export const QUIBOR_CLIMATE_MONTHS: ClimateMonth[] = (dbExport.climateMonths as ClimateMonth[]) || [
   { mes: "Enero", max: 30.1, min: 16.0, tmed: 23.8, lluvia: 18.9, viento: 7.7, bochorno: 16.0, rh: 69.2, rad: 18.7, eto: 5.4, dir: "88% ESTE" },
   { mes: "Febrero", max: 30.8, min: 16.0, tmed: 24.6, lluvia: 11.2, viento: 8.5, bochorno: 14.5, rh: 63.9, rad: 20.2, eto: 5.8, dir: "85% ESTE" },
   { mes: "Marzo", max: 31.0, min: 16.0, tmed: 25.4, lluvia: 23.9, viento: 8.6, bochorno: 18.6, rh: 62.2, rad: 19.2, eto: 6.4, dir: "84% ESTE", picoCalor: true },

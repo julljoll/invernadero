@@ -6,6 +6,7 @@ import { MallaSalesPage } from '../features/malla-sales/MallaSalesPage';
 import { PozoCalculatorPage } from '../features/pozo-calculator/PozoCalculatorPage';
 import { GreenhouseSalesPage } from '../features/greenhouse-sales/GreenhouseSalesPage';
 import { LeaderCatalogPage } from '../features/leader-catalog/LeaderCatalogPage';
+import { AdminControlPanel } from '../features/admin/AdminControlPanel';
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,10 @@ export const AppRoutes: React.FC = () => {
       <Route path="/catalogo-invernaderos" element={<LeaderCatalogPage />} />
       <Route path="/catalogo" element={<Navigate to="/catalogo-invernaderos" replace />} />
       <Route path="/leader-greenhouse" element={<Navigate to="/catalogo-invernaderos" replace />} />
+      
+      {/* Panel de Control para Actualización de Base de Datos SQLite */}
+      <Route path="/admin" element={<AdminControlPanel />} />
+      <Route path="/panel-control" element={<Navigate to="/admin" replace />} />
       {/* Redirección para URLs antiguas si las hubiera */}
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/cockpit.html" element={<Navigate to="/cockpit" replace />} />

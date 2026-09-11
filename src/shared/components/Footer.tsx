@@ -15,7 +15,13 @@ export const Footer: React.FC = () => {
           <span className="badge bg-light border border-success border-opacity-50 text-success rounded-pill font-monospace">
             NASA MERRA-2 · FAO-56
           </span>
-          <span>React 18 · Bootstrap 5.3</span>
+          <a
+            href="/admin"
+            className="text-secondary text-decoration-none hover-text-dark d-flex align-items-center gap-1"
+            title="Panel de Control SQLite"
+          >
+            <span>⚙️ Admin BD</span>
+          </a>
         </div>
       </div>
     </footer>

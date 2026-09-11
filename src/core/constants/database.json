@@ -1,0 +1,535 @@
+{
+  "_meta": {
+    "generatedAt": "2026-09-11T19:03:32.078Z",
+    "source": "database.sqlite",
+    "version": "2.0.0"
+  },
+  "settings": {
+    "CONTACT_EMAIL": "agrovenecua@gmail.com",
+    "CONTACT_WHATSAPP": "+58 412 000 0000",
+    "COTA_MSNM": 700,
+    "LATITUDE": 9.888889,
+    "LOCATION_NAME": "Valle de Quíbor, Municipio Jiménez, Lara, Venezuela",
+    "LONGITUDE": -69.593056,
+    "PROJECT_NAME": "LA CIGARRONERA",
+    "GH_DEFAULT_SURFACE_M2": 1000,
+    "GH_LENGTH_M": 50,
+    "GH_MIN_GUTTER_HEIGHT_M": 3,
+    "GH_OPT_RIDGE_HEIGHT_M": 5.5,
+    "GH_PLANT_DENSITY_M2": 2.2,
+    "GH_TRELLIS_HEIGHT_M": 2,
+    "GH_WIDTH_M": 20,
+    "GH_WIND_TURBINES_COUNT": 8,
+    "MESH_COLOR": "Blanco / Cristal",
+    "MESH_MAX_PORE_MICRONS": 192,
+    "MESH_PRICE_USD": 560,
+    "MESH_SPEC": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+    "MESH_WEIGHT_GSM": 130,
+    "AQUIFER_STORATIVITY": 0.0025,
+    "AQUIFER_TRANSMISSIVITY": 180,
+    "WATER_EC_DSM": 1.65,
+    "WELL_PUMPING_FLOW_LS": 2.5,
+    "WELL_STATIC_LEVEL_M": 49.5,
+    "WIND_DESIGN_GUST_KMH": 27,
+    "WIND_DOMINANT_DIRECTION": "ESTE",
+    "WIND_SAFETY_FACTOR": 1.5
+  },
+  "settingsRaw": [
+    {
+      "key": "CONTACT_EMAIL",
+      "category": "contact",
+      "label": "Email de Contacto",
+      "value": "agrovenecua@gmail.com",
+      "type": "text",
+      "description": "Correo oficial de atención"
+    },
+    {
+      "key": "CONTACT_WHATSAPP",
+      "category": "contact",
+      "label": "Número de WhatsApp",
+      "value": "+58 412 000 0000",
+      "type": "text",
+      "description": "Teléfono de contacto comercial"
+    },
+    {
+      "key": "COTA_MSNM",
+      "category": "general",
+      "label": "Altitud (msnm)",
+      "value": "700",
+      "type": "number",
+      "description": "Cota altitudinal sobre el nivel del mar"
+    },
+    {
+      "key": "LATITUDE",
+      "category": "general",
+      "label": "Latitud",
+      "value": "9.888889",
+      "type": "number",
+      "description": "Coordenada satelital Norte"
+    },
+    {
+      "key": "LOCATION_NAME",
+      "category": "general",
+      "label": "Ubicación",
+      "value": "Valle de Quíbor, Municipio Jiménez, Lara, Venezuela",
+      "type": "text",
+      "description": "Zona geográfica del proyecto"
+    },
+    {
+      "key": "LONGITUDE",
+      "category": "general",
+      "label": "Longitud",
+      "value": "-69.593056",
+      "type": "number",
+      "description": "Coordenada satelital Oeste"
+    },
+    {
+      "key": "PROJECT_NAME",
+      "category": "general",
+      "label": "Nombre del Proyecto",
+      "value": "LA CIGARRONERA",
+      "type": "text",
+      "description": "Nombre oficial del desarrollo agrícola"
+    },
+    {
+      "key": "GH_DEFAULT_SURFACE_M2",
+      "category": "greenhouse",
+      "label": "Superficie Base (m²)",
+      "value": "1000",
+      "type": "number",
+      "description": "Área estándar del módulo"
+    },
+    {
+      "key": "GH_LENGTH_M",
+      "category": "greenhouse",
+      "label": "Largo Estructural (m)",
+      "value": "50.0",
+      "type": "number",
+      "description": "Longitud de la nave"
+    },
+    {
+      "key": "GH_MIN_GUTTER_HEIGHT_M",
+      "category": "greenhouse",
+      "label": "Altura al Alero/Canal (m)",
+      "value": "3.0",
+      "type": "number",
+      "description": "Altura mínima para disipación térmica"
+    },
+    {
+      "key": "GH_OPT_RIDGE_HEIGHT_M",
+      "category": "greenhouse",
+      "label": "Altura a Cumbrera (m)",
+      "value": "5.5",
+      "type": "number",
+      "description": "Altura cenital recomendada"
+    },
+    {
+      "key": "GH_PLANT_DENSITY_M2",
+      "category": "greenhouse",
+      "label": "Densidad de Plantación (pl/m²)",
+      "value": "2.2",
+      "type": "number",
+      "description": "Densidad óptima para pimentón/tomate"
+    },
+    {
+      "key": "GH_TRELLIS_HEIGHT_M",
+      "category": "greenhouse",
+      "label": "Altura de Tutorado (m)",
+      "value": "2.0",
+      "type": "number",
+      "description": "Altura de hilo de soporte"
+    },
+    {
+      "key": "GH_WIDTH_M",
+      "category": "greenhouse",
+      "label": "Ancho Estructural (m)",
+      "value": "20.0",
+      "type": "number",
+      "description": "Ancho de la nave"
+    },
+    {
+      "key": "GH_WIND_TURBINES_COUNT",
+      "category": "greenhouse",
+      "label": "Extractores Eólicos Cenitales",
+      "value": "8",
+      "type": "number",
+      "description": "Unidades de cumbrera por 1000 m²"
+    },
+    {
+      "key": "MESH_COLOR",
+      "category": "mesh",
+      "label": "Color de Malla",
+      "value": "Blanco / Cristal",
+      "type": "text",
+      "description": "Color reflectivo para control térmico"
+    },
+    {
+      "key": "MESH_MAX_PORE_MICRONS",
+      "category": "mesh",
+      "label": "Apertura de Poro (µm)",
+      "value": "192",
+      "type": "number",
+      "description": "Límite de exclusión de trips y mosca blanca"
+    },
+    {
+      "key": "MESH_PRICE_USD",
+      "category": "mesh",
+      "label": "Precio Rollo de Malla (USD)",
+      "value": "560",
+      "type": "number",
+      "description": "Costo por rollo de malla anti-insectos"
+    },
+    {
+      "key": "MESH_SPEC",
+      "category": "mesh",
+      "label": "Especificación de Malla",
+      "value": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+      "type": "text",
+      "description": "Especificación técnica recomendada"
+    },
+    {
+      "key": "MESH_WEIGHT_GSM",
+      "category": "mesh",
+      "label": "Gramaje (gsm)",
+      "value": "130",
+      "type": "number",
+      "description": "Gramaje de referencia"
+    },
+    {
+      "key": "AQUIFER_STORATIVITY",
+      "category": "water",
+      "label": "Coeficiente de Almacenamiento S",
+      "value": "0.0025",
+      "type": "number",
+      "description": "Régimen semiconductor / confinado"
+    },
+    {
+      "key": "AQUIFER_TRANSMISSIVITY",
+      "category": "water",
+      "label": "Transmisividad Acuífero T (m²/día)",
+      "value": "180.0",
+      "type": "number",
+      "description": "Parámetro de la formación Cuara"
+    },
+    {
+      "key": "WATER_EC_DSM",
+      "category": "water",
+      "label": "Conductividad Eléctrica Agua (dS/m)",
+      "value": "1.65",
+      "type": "number",
+      "description": "Salinidad media de pozo en Cuara"
+    },
+    {
+      "key": "WELL_PUMPING_FLOW_LS",
+      "category": "water",
+      "label": "Caudal de Bombeo (L/s)",
+      "value": "2.5",
+      "type": "number",
+      "description": "Régimen de explotación del pozo"
+    },
+    {
+      "key": "WELL_STATIC_LEVEL_M",
+      "category": "water",
+      "label": "Nivel Estático de Agua (m)",
+      "value": "49.5",
+      "type": "number",
+      "description": "Profundidad del espejo de agua"
+    },
+    {
+      "key": "WIND_DESIGN_GUST_KMH",
+      "category": "wind",
+      "label": "Ráfaga de Diseño (km/h)",
+      "value": "27.0",
+      "type": "number",
+      "description": "Velocidad de ráfaga para cálculo de guayas y tensores"
+    },
+    {
+      "key": "WIND_DOMINANT_DIRECTION",
+      "category": "wind",
+      "label": "Dirección Dominante",
+      "value": "ESTE",
+      "type": "text",
+      "description": "Dirección predominante durante 11 meses"
+    },
+    {
+      "key": "WIND_SAFETY_FACTOR",
+      "category": "wind",
+      "label": "Factor de Seguridad Eólico",
+      "value": "1.5",
+      "type": "number",
+      "description": "Margen de sobrecarga estructural"
+    }
+  ],
+  "climateMonths": [
+    {
+      "mes": "Enero",
+      "max": 30.1,
+      "min": 16,
+      "tmed": 23.8,
+      "lluvia": 18.9,
+      "viento": 7.7,
+      "bochorno": 16,
+      "rh": 69.2,
+      "rad": 18.7,
+      "eto": 5.4,
+      "dir": "88% ESTE"
+    },
+    {
+      "mes": "Febrero",
+      "max": 30.8,
+      "min": 16,
+      "tmed": 24.6,
+      "lluvia": 11.2,
+      "viento": 8.5,
+      "bochorno": 14.5,
+      "rh": 63.9,
+      "rad": 20.2,
+      "eto": 5.8,
+      "dir": "85% ESTE"
+    },
+    {
+      "mes": "Marzo",
+      "max": 31,
+      "min": 16,
+      "tmed": 25.4,
+      "lluvia": 23.9,
+      "viento": 8.6,
+      "bochorno": 18.6,
+      "rh": 62.2,
+      "rad": 19.2,
+      "eto": 6.4,
+      "dir": "84% ESTE",
+      "picoCalor": true
+    },
+    {
+      "mes": "Abril",
+      "max": 30.6,
+      "min": 17.5,
+      "tmed": 25.6,
+      "lluvia": 61.8,
+      "viento": 8.5,
+      "bochorno": 22.6,
+      "rh": 67.7,
+      "rad": 16.7,
+      "eto": 6.2,
+      "dir": "80% ESTE"
+    },
+    {
+      "mes": "Mayo",
+      "max": 29.8,
+      "min": 18.4,
+      "tmed": 25.1,
+      "lluvia": 104,
+      "viento": 8.8,
+      "bochorno": 28.1,
+      "rh": 73.8,
+      "rad": 16.5,
+      "eto": 5.6,
+      "dir": "78% ESTE",
+      "maxLluvia": true
+    },
+    {
+      "mes": "Junio",
+      "max": 28.6,
+      "min": 18,
+      "tmed": 24.2,
+      "lluvia": 99,
+      "viento": 10.4,
+      "bochorno": 27.6,
+      "rh": 77.9,
+      "rad": 16.2,
+      "eto": 5.2,
+      "dir": "82% ESTE",
+      "maxViento": true
+    },
+    {
+      "mes": "Julio",
+      "max": 28,
+      "min": 19,
+      "tmed": 23.8,
+      "lluvia": 99.8,
+      "viento": 9.1,
+      "bochorno": 28,
+      "rh": 79.5,
+      "rad": 17.2,
+      "eto": 4.8,
+      "dir": "85% ESTE",
+      "masFresco": true
+    },
+    {
+      "mes": "Agosto",
+      "max": 28.5,
+      "min": 17.9,
+      "tmed": 24,
+      "lluvia": 95.2,
+      "viento": 9,
+      "bochorno": 28.6,
+      "rh": 80.1,
+      "rad": 18.2,
+      "eto": 5.1,
+      "dir": "86% ESTE",
+      "picoBochorno": true
+    },
+    {
+      "mes": "Septiembre",
+      "max": 29.2,
+      "min": 18.1,
+      "tmed": 24.2,
+      "lluvia": 82.8,
+      "viento": 8.2,
+      "bochorno": 27.6,
+      "rh": 79.1,
+      "rad": 18.7,
+      "eto": 5.3,
+      "dir": "53% SUR (Excepción)"
+    },
+    {
+      "mes": "Octubre",
+      "max": 29.4,
+      "min": 16.7,
+      "tmed": 24,
+      "lluvia": 98.3,
+      "viento": 6.7,
+      "bochorno": 28.5,
+      "rh": 80.3,
+      "rad": 17.6,
+      "eto": 4.6,
+      "dir": "79% ESTE"
+    },
+    {
+      "mes": "Noviembre",
+      "max": 29.2,
+      "min": 17.6,
+      "tmed": 23.9,
+      "lluvia": 72,
+      "viento": 7,
+      "bochorno": 26.4,
+      "rh": 80.3,
+      "rad": 16.5,
+      "eto": 4.9,
+      "dir": "84% ESTE",
+      "masCalmado": true
+    },
+    {
+      "mes": "Diciembre",
+      "max": 29.4,
+      "min": 15.9,
+      "tmed": 23.7,
+      "lluvia": 28,
+      "viento": 7.2,
+      "bochorno": 22,
+      "rh": 75.1,
+      "rad": 17.3,
+      "eto": 5,
+      "dir": "87% ESTE"
+    }
+  ],
+  "crops": {
+    "cucumber": {
+      "id": "cucumber",
+      "name": "Pepino (Cultivo Terciario / Rotación Rápida)",
+      "scientificName": "Cucumis sativus",
+      "ecThreshold": 2.5,
+      "slopePercentPerDs": 13,
+      "recommendedGsm": "110 gsm",
+      "pesticideReduction": "65%",
+      "virosisRiskReduction": "92%",
+      "targetYieldTons": 15,
+      "avgPriceUsdPerKg": 0.65
+    },
+    "pepper": {
+      "id": "pepper",
+      "name": "Pimentón (Cultivo Principal)",
+      "scientificName": "Capsicum annuum",
+      "ecThreshold": 1.5,
+      "slopePercentPerDs": 14,
+      "recommendedGsm": "125-130 gsm",
+      "pesticideReduction": "75%",
+      "virosisRiskReduction": "98%",
+      "targetYieldTons": 12.5,
+      "avgPriceUsdPerKg": 0.9
+    },
+    "tomato": {
+      "id": "tomato",
+      "name": "Tomate Indeterminado (Hilo Alto)",
+      "scientificName": "Solanum lycopersicum",
+      "ecThreshold": 2.5,
+      "slopePercentPerDs": 9.9,
+      "recommendedGsm": "110 gsm",
+      "pesticideReduction": "70%",
+      "virosisRiskReduction": "95%",
+      "targetYieldTons": 18.7,
+      "avgPriceUsdPerKg": 0.8
+    }
+  },
+  "cropsRaw": [
+    {
+      "id": "cucumber",
+      "name": "Pepino (Cultivo Terciario / Rotación Rápida)",
+      "scientific_name": "Cucumis sativus",
+      "ec_threshold": 2.5,
+      "slope_percent_per_ds": 13,
+      "recommended_gsm": "110 gsm",
+      "pesticide_reduction": "65%",
+      "virosis_risk_reduction": "92%",
+      "target_yield_tons": 15,
+      "avg_price_usd_per_kg": 0.65
+    },
+    {
+      "id": "pepper",
+      "name": "Pimentón (Cultivo Principal)",
+      "scientific_name": "Capsicum annuum",
+      "ec_threshold": 1.5,
+      "slope_percent_per_ds": 14,
+      "recommended_gsm": "125-130 gsm",
+      "pesticide_reduction": "75%",
+      "virosis_risk_reduction": "98%",
+      "target_yield_tons": 12.5,
+      "avg_price_usd_per_kg": 0.9
+    },
+    {
+      "id": "tomato",
+      "name": "Tomate Indeterminado (Hilo Alto)",
+      "scientific_name": "Solanum lycopersicum",
+      "ec_threshold": 2.5,
+      "slope_percent_per_ds": 9.9,
+      "recommended_gsm": "110 gsm",
+      "pesticide_reduction": "70%",
+      "virosis_risk_reduction": "95%",
+      "target_yield_tons": 18.7,
+      "avg_price_usd_per_kg": 0.8
+    }
+  ],
+  "siteContent": {
+    "cockpit_title": "Centro de Control y Gemelo Digital Bioclimático",
+    "hero_subtitle": "Ingeniería bioclimática y casas de malla optimizadas para pimentón y tomate indeterminado bajo condiciones de clima semiárido cálido.",
+    "hero_title": "Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor",
+    "malla_cta": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh de grado premium con despacho directo en Lara."
+  },
+  "siteContentRaw": [
+    {
+      "key": "cockpit_title",
+      "section": "cockpit",
+      "label": "Título Cockpit",
+      "value": "Centro de Control y Gemelo Digital Bioclimático"
+    },
+    {
+      "key": "hero_subtitle",
+      "section": "landing",
+      "label": "Subtítulo",
+      "value": "Ingeniería bioclimática y casas de malla optimizadas para pimentón y tomate indeterminado bajo condiciones de clima semiárido cálido."
+    },
+    {
+      "key": "hero_title",
+      "section": "landing",
+      "label": "Título Principal",
+      "value": "Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor"
+    },
+    {
+      "key": "malla_cta",
+      "section": "malla",
+      "label": "Llamado a la Acción Malla",
+      "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh de grado premium con despacho directo en Lara."
+    }
+  ]
+}

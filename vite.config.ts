@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { viteSqliteDbPlugin } from './scripts/vite-db-plugin.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), viteSqliteDbPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -1,6 +1,7 @@
 import { CropInfo, CropType } from '../types/agronomy';
+import dbExport from './database.json';
 
-export const CROPS_CATALOG: Record<CropType, CropInfo> = {
+export const CROPS_CATALOG: Record<CropType, CropInfo> = (dbExport.crops as unknown as Record<CropType, CropInfo>) || {
   pepper: {
     id: 'pepper',
     name: 'Pimentón (Cultivo Principal)',

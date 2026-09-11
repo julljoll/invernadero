@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/db.js",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:init": "node scripts/db.js",
+    "db:bake": "node scripts/db.js"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",
