@@ -391,7 +391,7 @@ export const AdminControlPanel: React.FC = () => {
             { id: 'greenhouse', label: '🏗️ Invernadero y Malla', count: settings.filter((s) => s.category === 'greenhouse' || s.category === 'mesh').length },
             { id: 'water', label: '💧 Pozo y Acuífero', count: settings.filter((s) => s.category === 'water').length },
             { id: 'climate', label: '🌤️ Climatología Quíbor', count: climateMonths.length },
-            { id: 'crops', label: '🌱 Cultivos (Tomate/Pimentón)', count: crops.length },
+            { id: 'crops', label: '🌱 Cultivo Exclusivo (Pimentón)', count: crops.length },
             { id: 'content', label: '📝 Textos y Contacto', count: siteContent.length + settings.filter((s) => s.category === 'contact').length }
           ].map((tab) => (
             <button

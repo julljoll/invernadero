@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card, Row, Col, Badge, Alert, Button, ButtonGroup } from 'react-bootstrap';
 
 interface PestItem {
   id: string;
@@ -23,7 +24,7 @@ const PEST_DATABASE: PestItem[] = [
     iracCode: 'IRAC 5 / 6',
     biologicalControl: 'Orius insidiosus · Trampas cromáticas azules',
     chemicalActive: 'Spinosad · Emamectina benzoato',
-    quiborRiskNotes: 'Vector del virus del bronceado del tomate (TSWV). La malla 50 mesh blanca detiene su ingreso perimetral.',
+    quiborRiskNotes: 'Vector del virus de la marchitez manchada (TSWV) en pimentón. La malla 50 mesh blanca detiene su ingreso perimetral.',
     severity: 'high',
   },
   {
@@ -35,7 +36,7 @@ const PEST_DATABASE: PestItem[] = [
     iracCode: 'IRAC 4A / 28',
     biologicalControl: 'Chrysoperla carnea · Encarsia formosa',
     chemicalActive: 'Flupyradifurone · Cyantraniliprole',
-    quiborRiskNotes: 'Vector de Geminivirus (TYLCV). El color blanco difuso de la malla desorienta su vuelo fototáctico.',
+    quiborRiskNotes: 'Vector de Geminivirus y virus del mosaico dorado en pimentón. El color blanco difuso de la malla desorienta su vuelo fototáctico.',
     severity: 'critical',
   },
   {
@@ -64,14 +65,14 @@ const PEST_DATABASE: PestItem[] = [
   },
   {
     id: 'lepidopteros',
-    name: 'Polilla del Tomate / Cogollero',
-    scientificName: 'Tuta absoluta / Spodoptera frugiperda',
+    name: 'Gusano Soldado & Barrenador del Fruto',
+    scientificName: 'Spodoptera frugiperda / Helicoverpa zea',
     physicalExclusion: true,
     meshEffectiveness: '100% Barrera Física Total',
     iracCode: 'IRAC 28 / 22A',
     biologicalControl: 'Bacillus thuringiensis · Feromonas sexuales',
     chemicalActive: 'Clorantraniliprol · Indoxacarb',
-    quiborRiskNotes: 'Daño directo en frutos y brotes apicales. Retenido completamente sin necesidad de insecticidas pesados.',
+    quiborRiskNotes: 'Daño directo por perforación en frutos de pimentón y brotes apicales. Retenido completamente sin necesidad de insecticidas pesados.',
     severity: 'high',
   },
   {
@@ -98,9 +99,9 @@ export const Module06PestControl: React.FC = () => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="d-flex flex-column gap-4">
       {/* Banner Especificación Malla Estándar Quíbor */}
-      <div className="card-cockpit p-4 mb-4">
+      <Card className="card-cockpit p-4 mb-4">
         <div className="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
           <div>
             <div className="d-flex align-items-center gap-2 mb-1">
@@ -133,7 +134,7 @@ export const Module06PestControl: React.FC = () => {
         </div>
 
         {/* Alerta Destacada sobre Ácaros */}
-        <div className="mt-3 p-3 bg-danger-subtle border border-danger-subtle rounded-3 d-flex align-items-start gap-2.5">
+        <Alert variant="danger" className="mt-3 p-3 bg-danger-subtle border border-danger-subtle rounded-3 d-flex align-items-start gap-2.5 mb-0">
           <span className="material-symbols-outlined text-danger ms-sm mt-0.5">report_problem</span>
           <div className="small">
             <strong className="text-danger">PUNTO CRÍTICO FITOSANITARIO (ÁCAROS Y ARAÑA ROJA):</strong>
@@ -141,54 +142,54 @@ export const Module06PestControl: React.FC = () => {
               La araña roja (<em>Tetranychus urticae</em>) y el ácaro blanco (<em>Polyphagotarsonemus latus</em>) <strong>NO son retenidos por ninguna malla comercial del mundo</strong> debido a su tamaño microscópico (&lt; 150 &mu;m). Su control en el Valle de Quíbor es <strong>100% de manejo integrado</strong>: material vegetal certificado, mantenimiento de Humedad Relativa &gt; 60% en horas cálidas para frenar su ovoposición, y depredadores <em>Amblyseius swirskii</em>.
             </span>
           </div>
-        </div>
-      </div>
+        </Alert>
+      </Card>
 
       {/* Filtros y Matriz de Plagas */}
-      <div className="card-cockpit p-4">
+      <Card className="card-cockpit p-4">
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
           <h4 className="fs-6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
             <span className="material-symbols-outlined text-danger ms-sm">pest_control</span>
             <span>Matriz de Manejo Integrado de Plagas &amp; Rotación IRAC</span>
           </h4>
 
-          <div className="btn-group btn-group-sm bg-light p-1 rounded-pill border border-secondary-subtle">
-            <button
-              type="button"
+          <ButtonGroup size="sm" className="bg-light p-1 rounded-pill border border-secondary-subtle">
+            <Button
+              variant={filter === 'all' ? 'success' : 'outline-secondary'}
               onClick={() => setFilter('all')}
-              className={`btn btn-sm rounded-pill px-3 fw-bold ${filter === 'all' ? 'btn-success text-white' : 'text-secondary border-0'}`}
+              className={`rounded-pill px-3 fw-bold ${filter !== 'all' ? 'border-0' : ''}`}
             >
               Todas (6)
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant={filter === 'excluded' ? 'success' : 'outline-secondary'}
               onClick={() => setFilter('excluded')}
-              className={`btn btn-sm rounded-pill px-3 fw-bold ${filter === 'excluded' ? 'btn-success text-white' : 'text-secondary border-0'}`}
+              className={`rounded-pill px-3 fw-bold ${filter !== 'excluded' ? 'border-0' : ''}`}
             >
               Excluidas por Malla (5)
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant={filter === 'critical' ? 'danger' : 'outline-secondary'}
               onClick={() => setFilter('critical')}
-              className={`btn btn-sm rounded-pill px-3 fw-bold ${filter === 'critical' ? 'btn-danger text-white' : 'text-secondary border-0'}`}
+              className={`rounded-pill px-3 fw-bold ${filter !== 'critical' ? 'border-0' : ''}`}
             >
               Críticas / No Retenidas (Ácaros)
-            </button>
-          </div>
+            </Button>
+          </ButtonGroup>
         </div>
 
-        <div className="row g-3">
+        <Row className="g-3">
           {filteredPests.map((pest) => (
-            <div className="col-12 col-md-6 col-lg-4" key={pest.id}>
-              <div className="card-cockpit p-3 h-100 d-flex flex-column border-secondary-subtle bg-light hover-border-success transition-all">
+            <Col xs={12} md={6} lg={4} key={pest.id}>
+              <Card className="p-3 h-100 d-flex flex-column border-secondary-subtle bg-light hover-border-success transition-all shadow-xs">
                 <div className="d-flex justify-content-between align-items-start mb-2">
                   <div>
                     <h5 className="fs-6 fw-bold text-dark mb-0">{pest.name}</h5>
                     <span className="text-secondary small font-monospace fst-italic">{pest.scientificName}</span>
                   </div>
-                  <span className={`badge font-monospace text-xs ${pest.physicalExclusion ? 'bg-success-subtle text-success-emphasis border border-success-subtle' : 'bg-danger-subtle text-danger border border-danger-subtle'}`}>
+                  <Badge bg={pest.physicalExclusion ? 'success-subtle' : 'danger-subtle'} text={pest.physicalExclusion ? 'success-emphasis' : 'danger'} className="font-monospace text-xs border">
                     {pest.iracCode}
-                  </span>
+                  </Badge>
                 </div>
 
                 <div className="mb-2">
@@ -214,11 +215,11 @@ export const Module06PestControl: React.FC = () => {
                     <span className="text-secondary">{pest.chemicalActive}</span>
                   </div>
                 </div>
-              </div>
-            </div>
+              </Card>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </Card>
     </div>
   );
 };

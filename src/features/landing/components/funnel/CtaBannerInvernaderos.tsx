@@ -16,7 +16,7 @@ export const CtaBannerInvernaderos: React.FC = () => {
                 ¿Planeas Construir un Invernadero o Casa de Malla Llave en Mano?
               </h3>
               <p className="text-secondary small mb-0">
-                Diseñamos y montamos estructuras agrícolas de 1.000 m² con cálculo eólico real para Quíbor: pilares Sch 40 galvanizados, cumbreras de hasta 6.8 m para tomate de hilo alto, ventilación convectiva antiahogo térmico y 10 años de garantía estructural.
+                Diseñamos y montamos estructuras agrícolas de 1.000 m² con cálculo eólico real para Quíbor: pilares Sch 40 galvanizados, cumbreras de hasta 5.5 m optimizadas para pimentón de alta densidad, ventilación convectiva antiahogo térmico y 10 años de garantía estructural.
               </p>
             </div>
 

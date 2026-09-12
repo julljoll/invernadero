@@ -16,7 +16,7 @@ export const CtaBannerMallas: React.FC = () => {
                 ¿Necesitas Blindar tu Cultivo con Malla Antiáfido 50 Mesh?
               </h3>
               <p className="text-secondary small mb-0">
-                Disponemos de rollos comerciales (4m × 100m) en <strong>110 gsm (flujo térmico para tomate)</strong> y <strong>130 gsm (alta tenacidad mecánica para pimentón)</strong>. 100% HDPE monofilamento virgen, poro ≤192 µm y 5 años de garantía UV contra el sol de Quíbor.
+                Disponemos de rollos comerciales (4m × 100m) en <strong>110 gsm (óptimo flujo térmico)</strong> y <strong>130 gsm (alta tenacidad mecánica para pimentón)</strong>. 100% HDPE monofilamento virgen, poro ≤192 µm y 5 años de garantía UV contra el sol de Quíbor.
               </p>
             </div>
 

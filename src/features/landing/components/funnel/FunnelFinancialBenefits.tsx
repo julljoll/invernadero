@@ -2,46 +2,25 @@ import React, { useState } from 'react';
 import { Slider } from '../../../../shared/components/Slider';
 import { Link } from 'react-router-dom';
 
-type CropType = 'pimenton' | 'tomate';
-
 export const FunnelFinancialBenefits: React.FC = () => {
-  const [selectedCrop, setSelectedCrop] = useState<CropType>('pimenton');
   const [sellingPrice, setSellingPrice] = useState<number>(0.90);
 
-  const cropData = {
-    pimenton: {
-      name: 'Pimentón (Capsicum)',
-      cycleMonths: '5 meses',
-      totalProductionKg: 12500, // 12.5 T en 1.000 m² a 2.2 pl/m²
-      plants: 2200,
-      operationalCosts: 4200,
-      defaultPrice: 0.90,
-      minPrice: 0.50,
-      maxPrice: 1.40,
-    },
-    tomate: {
-      name: 'Tomate Indeterminado',
-      cycleMonths: '6 meses',
-      totalProductionKg: 22800, // 22.8 T en 1.000 m² a 2.5 pl/m²
-      plants: 2500,
-      operationalCosts: 5200,
-      defaultPrice: 0.75,
-      minPrice: 0.40,
-      maxPrice: 1.20,
-    },
+  const current = {
+    name: 'Pimentón (Capsicum annuum)',
+    cycleMonths: '5 meses',
+    totalProductionKg: 12500, // 12.5 T en 1.000 m² a 2.5 pl/m²
+    plants: 2500,
+    operationalCosts: 4200,
+    defaultPrice: 0.90,
+    minPrice: 0.50,
+    maxPrice: 1.40,
   };
 
-  const current = cropData[selectedCrop];
   const grossRevenue = current.totalProductionKg * sellingPrice;
   const netProfit = Math.max(0, grossRevenue - current.operationalCosts);
   const investmentTotal = 4000;
   const investorReturn = netProfit * 0.40; // 40% participación por los $4.000 USD
   const roiPct = (investorReturn / investmentTotal) * 100;
-
-  const handleCropChange = (crop: CropType) => {
-    setSelectedCrop(crop);
-    setSellingPrice(cropData[crop].defaultPrice);
-  };
 
   return (
     <section id="financiero" className="py-5 border-top border-secondary-subtle bg-light">
@@ -56,35 +35,13 @@ export const FunnelFinancialBenefits: React.FC = () => {
             Proyección Financiera: Reactivación con $4.000 USD
           </h2>
           <p className="text-secondary small max-w-xl mx-auto">
-            Simula la recuperación de inversión en 1 solo ciclo con los rendimientos reales auditados en el Cockpit Agronómico.
+            Simula la recuperación de inversión en 1 solo ciclo con los rendimientos reales auditados en el Cockpit Agronómico para 2.500 plantas de pimentón.
           </p>
 
-          {/* Selector de Cultivo Activo (Pimentón Principal) */}
-          <div className="d-inline-flex p-1 rounded-pill bg-white border border-secondary-subtle shadow-sm mt-3 gap-1">
-            <button
-              type="button"
-              onClick={() => handleCropChange('pimenton')}
-              className={`btn btn-sm rounded-pill px-4 py-2 fw-bold text-xs d-inline-flex align-items-center gap-2 touch-target-48 ${
-                selectedCrop === 'pimenton'
-                  ? 'btn-success text-white shadow-sm'
-                  : 'btn-light text-secondary'
-              }`}
-            >
-              <span className="material-symbols-outlined ms-sm">psychiatry</span>
-              <span>Pimentón Híbrido (12.5 T) · Principal</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleCropChange('tomate')}
-              className={`btn btn-sm rounded-pill px-4 py-2 fw-bold text-xs d-inline-flex align-items-center gap-2 touch-target-48 ${
-                selectedCrop === 'tomate'
-                  ? 'btn-success text-white shadow-sm'
-                  : 'btn-light text-secondary'
-              }`}
-            >
-              <span className="material-symbols-outlined ms-sm">nutrition</span>
-              <span>Tomate Indeterminado (22.8 T)</span>
-            </button>
+          {/* Insignia de Cultivo Único */}
+          <div className="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-white border border-success border-opacity-30 shadow-sm mt-3">
+            <span className="material-symbols-outlined text-success ms-sm">psychiatry</span>
+            <span className="fw-bold text-success text-xs">Pimentón Híbrido Tecnificado (2.500 Plantas · 12.5 T)</span>
           </div>
         </div>
 

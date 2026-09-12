@@ -18,6 +18,14 @@ export function getDatabase() {
 export function initDatabase() {
   const db = getDatabase();
 
+  // Recrear tablas para sincronización limpia y fresca
+  db.exec(`
+    DROP TABLE IF EXISTS settings;
+    DROP TABLE IF EXISTS climate_months;
+    DROP TABLE IF EXISTS crops;
+    DROP TABLE IF EXISTS site_content;
+  `);
+
   // 1. Tabla de Parámetros y Configuración General
   db.exec(`
     CREATE TABLE IF NOT EXISTS settings (
@@ -49,7 +57,7 @@ export function initDatabase() {
     );
   `);
 
-  // 3. Tabla de Catálogo Agronómico de Cultivos
+  // 3. Tabla de Catálogo Agronómico de Cultivos (Exclusivo Pimentón)
   db.exec(`
     CREATE TABLE IF NOT EXISTS crops (
       id TEXT PRIMARY KEY,
@@ -75,7 +83,7 @@ export function initDatabase() {
     );
   `);
 
-  // Seed de Datos Iniciales si están vacías
+  // Seed de Datos Iniciales Sincronizados desde docs/
   seedSettings(db);
   seedClimate(db);
   seedCrops(db);
@@ -85,49 +93,59 @@ export function initDatabase() {
 }
 
 function seedSettings(db) {
-  const count = db.prepare('SELECT count(*) as count FROM settings').get().count;
-  if (count > 0) return;
-
   const insert = db.prepare(`
     INSERT INTO settings (key, category, label, value, type, description)
     VALUES (?, ?, ?, ?, ?, ?)
   `);
 
   const initialSettings = [
-    ['PROJECT_NAME', 'general', 'Nombre del Proyecto', 'LA CIGARRONERA', 'text', 'Nombre oficial del desarrollo agrícola'],
-    ['LOCATION_NAME', 'general', 'Ubicación', 'Valle de Quíbor, Municipio Jiménez, Lara, Venezuela', 'text', 'Zona geográfica del proyecto'],
-    ['COTA_MSNM', 'general', 'Altitud (msnm)', '700', 'number', 'Cota altitudinal sobre el nivel del mar'],
-    ['LATITUDE', 'general', 'Latitud', '9.888889', 'number', 'Coordenada satelital Norte'],
-    ['LONGITUDE', 'general', 'Longitud', '-69.593056', 'number', 'Coordenada satelital Oeste'],
+    ['PROJECT_NAME', 'general', 'Nombre del Proyecto', 'LA CIGARRONERA — QUÍBOR', 'text', 'Nombre oficial del desarrollo agrícola protegido'],
+    ['LOCATION_NAME', 'general', 'Ubicación Geográfica', 'Valle de Quíbor, Municipio Jiménez, Lara, Venezuela', 'text', 'Ubicación validada satelitalmente'],
+    ['COTA_MSNM', 'general', 'Altitud Valle (msnm)', '700', 'number', 'Cota altitudinal media del predio (695-710 msnm)'],
+    ['LATITUDE', 'general', 'Latitud Predio', '9.888889', 'number', 'Coordenada satelital Norte'],
+    ['LONGITUDE', 'general', 'Longitud Predio', '-69.593056', 'number', 'Coordenada satelital Oeste'],
     
-    // Invernadero
-    ['GH_DEFAULT_SURFACE_M2', 'greenhouse', 'Superficie Base (m²)', '1000', 'number', 'Área estándar del módulo'],
+    // Invernadero / Casa de Malla Pimentón
+    ['GH_DEFAULT_SURFACE_M2', 'greenhouse', 'Superficie Modular (m²)', '1000', 'number', 'Área estándar del módulo tecnificado'],
     ['GH_LENGTH_M', 'greenhouse', 'Largo Estructural (m)', '50.0', 'number', 'Longitud de la nave'],
     ['GH_WIDTH_M', 'greenhouse', 'Ancho Estructural (m)', '20.0', 'number', 'Ancho de la nave'],
-    ['GH_MIN_GUTTER_HEIGHT_M', 'greenhouse', 'Altura al Alero/Canal (m)', '3.0', 'number', 'Altura mínima para disipación térmica'],
-    ['GH_OPT_RIDGE_HEIGHT_M', 'greenhouse', 'Altura a Cumbrera (m)', '5.5', 'number', 'Altura cenital recomendada'],
-    ['GH_TRELLIS_HEIGHT_M', 'greenhouse', 'Altura de Tutorado (m)', '2.0', 'number', 'Altura de hilo de soporte'],
-    ['GH_PLANT_DENSITY_M2', 'greenhouse', 'Densidad de Plantación (pl/m²)', '2.2', 'number', 'Densidad óptima para pimentón/tomate'],
-    ['GH_WIND_TURBINES_COUNT', 'greenhouse', 'Extractores Eólicos Cenitales', '8', 'number', 'Unidades de cumbrera por 1000 m²'],
+    ['GH_PLANTS_COUNT', 'greenhouse', 'Población Total (plantas)', '2500', 'number', 'Población fija de pimentón en 1.000 m²'],
+    ['GH_PLANT_DENSITY_M2', 'greenhouse', 'Densidad de Siembra (pl/m²)', '2.5', 'number', 'Densidad agronómica óptima para pimentón'],
+    ['GH_MIN_GUTTER_HEIGHT_M', 'greenhouse', 'Altura al Alero/Canal (m)', '3.0', 'number', 'Altura alero para amortiguación térmica'],
+    ['GH_OPT_RIDGE_HEIGHT_M', 'greenhouse', 'Altura a Cumbrera (m)', '5.5', 'number', 'Altura cenital para escape de aire caliente'],
+    ['GH_TRELLIS_HEIGHT_M', 'greenhouse', 'Altura de Tutorado Malla (m)', '2.0', 'number', 'Altura alambre maestro Hortomalla 15x15'],
+    ['GH_WIND_TURBINES_COUNT', 'greenhouse', 'Extractores Eólicos Cenitales', '8', 'number', 'Extractores eólicos 24"-30" para romper bolsa cenital'],
 
-    // Malla
-    ['MESH_SPEC', 'mesh', 'Especificación de Malla', '130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco', 'text', 'Especificación técnica recomendada'],
-    ['MESH_COLOR', 'mesh', 'Color de Malla', 'Blanco / Cristal', 'text', 'Color reflectivo para control térmico'],
-    ['MESH_WEIGHT_GSM', 'mesh', 'Gramaje (gsm)', '130', 'number', 'Gramaje de referencia'],
-    ['MESH_MAX_PORE_MICRONS', 'mesh', 'Apertura de Poro (µm)', '192', 'number', 'Límite de exclusión de trips y mosca blanca'],
-    ['MESH_PRICE_USD', 'mesh', 'Precio Rollo de Malla (USD)', '560', 'number', 'Costo por rollo de malla anti-insectos'],
+    // Malla Anti-Insectos
+    ['MESH_SPEC', 'mesh', 'Especificación de Malla', '110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco', 'text', 'Especificación validada en docs/01-bioclima'],
+    ['MESH_COLOR', 'mesh', 'Color de Malla', 'Blanco / Cristal Reflectivo', 'text', 'Color difusor de luz y reflector infrarrojo térmico'],
+    ['MESH_WEIGHT_GSM', 'mesh', 'Gramaje Nominal (gsm)', '110', 'number', 'Gramaje de óptima permeabilidad aerodinámica'],
+    ['MESH_MAX_PORE_MICRONS', 'mesh', 'Apertura de Poro (µm)', '192', 'number', 'Exclusión absoluta de trips, mosca blanca y pulgones'],
+    ['MESH_PRICE_USD', 'mesh', 'Precio Rollo de Malla (USD)', '560', 'number', 'Costo estimado por rollo de malla anti-insectos'],
 
-    // Pozo y Acuífero
-    ['WELL_STATIC_LEVEL_M', 'water', 'Nivel Estático de Agua (m)', '49.5', 'number', 'Profundidad del espejo de agua'],
-    ['WELL_PUMPING_FLOW_LS', 'water', 'Caudal de Bombeo (L/s)', '2.5', 'number', 'Régimen de explotación del pozo'],
-    ['WATER_EC_DSM', 'water', 'Conductividad Eléctrica Agua (dS/m)', '1.65', 'number', 'Salinidad media de pozo en Cuara'],
+    // Pozo Profundo y Acuífero Cuara (docs/03-hidrogeologia)
+    ['WELL_BROCAL_LAT', 'water', 'Latitud Satelital Brocal', '9.887719', 'number', 'GPS Brocal: 9°53\'15.79" N'],
+    ['WELL_BROCAL_LON', 'water', 'Longitud Satelital Brocal', '-69.593681', 'number', 'GPS Brocal: 69°35\'37.25" W'],
+    ['WELL_COTA_MSNM', 'water', 'Cota Brocal Aljibe (msnm)', '734', 'number', 'Elevación del brocal en Cuara'],
+    ['WELL_STATIC_LEVEL_M', 'water', 'Nivel Estático de Agua (m)', '49.5', 'number', 'Profundidad medida del espejo de agua'],
+    ['WELL_CURRENT_DEPTH_M', 'water', 'Profundidad Actual Aljibe (m)', '50.0', 'number', 'Fuste actual excavado a mano'],
+    ['WELL_PROPOSED_DEPTH_M', 'water', 'Profundidad Proyectada (m)', '60.0', 'number', 'Meta recomendada de profundización (+10m)'],
+    ['WELL_WATER_COLUMN_M', 'water', 'Columna de Agua Proyectada (m)', '10.5', 'number', 'Columna útil sumergible a 60m'],
+    ['WELL_RESERVE_CAPACITY_L', 'water', 'Reserva Inmediata en Fuste (L)', '9000', 'number', '8.000 a 10.000 L de reserva inmediata en cilindro'],
+    ['WELL_PUMPING_FLOW_LS', 'water', 'Caudal Estimado Bombeo (L/s)', '2.5', 'number', 'Caudal promedio régimen continuo (1.5-3.5 L/s)'],
+    ['WATER_EC_DSM', 'water', 'Conductividad Eléctrica Pozo (dS/m)', '1.45', 'number', 'Salinidad real pozo acuífero Cuara'],
+    ['WATER_PH', 'water', 'pH Agua de Pozo', '7.8', 'number', 'Alcalinidad moderada a neutralizar con ácido nítrico'],
     ['AQUIFER_TRANSMISSIVITY', 'water', 'Transmisividad Acuífero T (m²/día)', '180.0', 'number', 'Parámetro de la formación Cuara'],
     ['AQUIFER_STORATIVITY', 'water', 'Coeficiente de Almacenamiento S', '0.0025', 'number', 'Régimen semiconductor / confinado'],
 
-    // Viento
-    ['WIND_DOMINANT_DIRECTION', 'wind', 'Dirección Dominante', 'ESTE', 'text', 'Dirección predominante durante 11 meses'],
-    ['WIND_DESIGN_GUST_KMH', 'wind', 'Ráfaga de Diseño (km/h)', '27.0', 'number', 'Velocidad de ráfaga para cálculo de guayas y tensores'],
+    // Dinámica de Viento y Clima (docs/01-bioclima)
+    ['WIND_DOMINANT_DIRECTION', 'wind', 'Dirección Dominante', 'ESTE (11 meses consecutivos)', 'text', 'Predominio horaria Este hasta 88%'],
+    ['WIND_DESIGN_GUST_KMH', 'wind', 'Ráfaga de Diseño (km/h)', '27.0', 'number', 'Ráfaga máxima para cálculo de tensores y guayas'],
     ['WIND_SAFETY_FACTOR', 'wind', 'Factor de Seguridad Eólico', '1.5', 'number', 'Margen de sobrecarga estructural'],
+
+    // Reducciones Fitosanitarias
+    ['PESTICIDE_REDUCTION_PCT', 'agronomy', 'Reducción de Plaguicidas Químicos', '75%', 'text', 'Ahorro gracias al cerramiento físico 50 mesh'],
+    ['VIROSIS_RISK_REDUCTION_PCT', 'agronomy', 'Reducción de Riesgo de Virosis', '98%', 'text', 'Exclusión mecánica de vectores'],
 
     // Contacto
     ['CONTACT_WHATSAPP', 'contact', 'Número de WhatsApp', '+58 412 000 0000', 'text', 'Teléfono de contacto comercial'],
@@ -140,9 +158,6 @@ function seedSettings(db) {
 }
 
 function seedClimate(db) {
-  const count = db.prepare('SELECT count(*) as count FROM climate_months').get().count;
-  if (count > 0) return;
-
   const insert = db.prepare(`
     INSERT INTO climate_months (id, mes, max, min, tmed, lluvia, viento, bochorno, rh, rad, eto, dir, flags)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -169,18 +184,14 @@ function seedClimate(db) {
 }
 
 function seedCrops(db) {
-  const count = db.prepare('SELECT count(*) as count FROM crops').get().count;
-  if (count > 0) return;
-
   const insert = db.prepare(`
     INSERT INTO crops (id, name, scientific_name, ec_threshold, slope_percent_per_ds, recommended_gsm, pesticide_reduction, virosis_risk_reduction, target_yield_tons, avg_price_usd_per_kg)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
 
+  // Exclusivamente Pimentón
   const crops = [
-    ['pepper', 'Pimentón (Cultivo Principal)', 'Capsicum annuum', 1.5, 14.0, '125-130 gsm', '75%', '98%', 12.5, 0.90],
-    ['tomato', 'Tomate Indeterminado (Hilo Alto)', 'Solanum lycopersicum', 2.5, 9.9, '110 gsm', '70%', '95%', 18.7, 0.80],
-    ['cucumber', 'Pepino (Cultivo Terciario / Rotación Rápida)', 'Cucumis sativus', 2.5, 13.0, '110 gsm', '65%', '92%', 15.0, 0.65]
+    ['pepper', 'Pimentón Híbrido F1 (Magno / Nathalie)', 'Capsicum annuum', 1.5, 14.0, '110-130 gsm Blanco', '75%', '98%', 12.5, 0.90]
   ];
 
   for (const c of crops) {
@@ -189,9 +200,6 @@ function seedCrops(db) {
 }
 
 function seedSiteContent(db) {
-  const count = db.prepare('SELECT count(*) as count FROM site_content').get().count;
-  if (count > 0) return;
-
   const insert = db.prepare(`
     INSERT INTO site_content (key, section, label, value)
     VALUES (?, ?, ?, ?)
@@ -199,9 +207,9 @@ function seedSiteContent(db) {
 
   const content = [
     ['hero_title', 'landing', 'Título Principal', 'Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor'],
-    ['hero_subtitle', 'landing', 'Subtítulo', 'Ingeniería bioclimática y casas de malla optimizadas para pimentón y tomate indeterminado bajo condiciones de clima semiárido cálido.'],
-    ['cockpit_title', 'cockpit', 'Título Cockpit', 'Centro de Control y Gemelo Digital Bioclimático'],
-    ['malla_cta', 'malla', 'Llamado a la Acción Malla', 'Cotiza tu rollo de Malla Anti-Insectos 50 Mesh de grado premium con despacho directo en Lara.']
+    ['hero_subtitle', 'landing', 'Subtítulo', 'Ingeniería bioclimática y casa de malla tecnificada de 1.000 m² para 2.500 plantas de Pimentón bajo condiciones de semiárido cálido.'],
+    ['cockpit_title', 'cockpit', 'Título Cockpit', 'Centro de Control Operativo & Gemelo Digital: Pimentón 2.500 Plantas'],
+    ['malla_cta', 'malla', 'Llamado a la Acción Malla', 'Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor.']
   ];
 
   for (const c of content) {

@@ -1,40 +1,67 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-11T19:03:32.078Z",
+    "generatedAt": "2026-09-12T00:26:55.021Z",
     "source": "database.sqlite",
     "version": "2.0.0"
   },
   "settings": {
+    "PESTICIDE_REDUCTION_PCT": "75%",
+    "VIROSIS_RISK_REDUCTION_PCT": "98%",
     "CONTACT_EMAIL": "agrovenecua@gmail.com",
     "CONTACT_WHATSAPP": "+58 412 000 0000",
     "COTA_MSNM": 700,
     "LATITUDE": 9.888889,
     "LOCATION_NAME": "Valle de Quíbor, Municipio Jiménez, Lara, Venezuela",
     "LONGITUDE": -69.593056,
-    "PROJECT_NAME": "LA CIGARRONERA",
+    "PROJECT_NAME": "LA CIGARRONERA — QUÍBOR",
     "GH_DEFAULT_SURFACE_M2": 1000,
     "GH_LENGTH_M": 50,
     "GH_MIN_GUTTER_HEIGHT_M": 3,
     "GH_OPT_RIDGE_HEIGHT_M": 5.5,
-    "GH_PLANT_DENSITY_M2": 2.2,
+    "GH_PLANTS_COUNT": 2500,
+    "GH_PLANT_DENSITY_M2": 2.5,
     "GH_TRELLIS_HEIGHT_M": 2,
     "GH_WIDTH_M": 20,
     "GH_WIND_TURBINES_COUNT": 8,
-    "MESH_COLOR": "Blanco / Cristal",
+    "MESH_COLOR": "Blanco / Cristal Reflectivo",
     "MESH_MAX_PORE_MICRONS": 192,
     "MESH_PRICE_USD": 560,
-    "MESH_SPEC": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
-    "MESH_WEIGHT_GSM": 130,
+    "MESH_SPEC": "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+    "MESH_WEIGHT_GSM": 110,
     "AQUIFER_STORATIVITY": 0.0025,
     "AQUIFER_TRANSMISSIVITY": 180,
-    "WATER_EC_DSM": 1.65,
+    "WATER_EC_DSM": 1.45,
+    "WATER_PH": 7.8,
+    "WELL_BROCAL_LAT": 9.887719,
+    "WELL_BROCAL_LON": -69.593681,
+    "WELL_COTA_MSNM": 734,
+    "WELL_CURRENT_DEPTH_M": 50,
+    "WELL_PROPOSED_DEPTH_M": 60,
     "WELL_PUMPING_FLOW_LS": 2.5,
+    "WELL_RESERVE_CAPACITY_L": 9000,
     "WELL_STATIC_LEVEL_M": 49.5,
+    "WELL_WATER_COLUMN_M": 10.5,
     "WIND_DESIGN_GUST_KMH": 27,
-    "WIND_DOMINANT_DIRECTION": "ESTE",
+    "WIND_DOMINANT_DIRECTION": "ESTE (11 meses consecutivos)",
     "WIND_SAFETY_FACTOR": 1.5
   },
   "settingsRaw": [
+    {
+      "key": "PESTICIDE_REDUCTION_PCT",
+      "category": "agronomy",
+      "label": "Reducción de Plaguicidas Químicos",
+      "value": "75%",
+      "type": "text",
+      "description": "Ahorro gracias al cerramiento físico 50 mesh"
+    },
+    {
+      "key": "VIROSIS_RISK_REDUCTION_PCT",
+      "category": "agronomy",
+      "label": "Reducción de Riesgo de Virosis",
+      "value": "98%",
+      "type": "text",
+      "description": "Exclusión mecánica de vectores"
+    },
     {
       "key": "CONTACT_EMAIL",
       "category": "contact",
@@ -54,15 +81,15 @@
     {
       "key": "COTA_MSNM",
       "category": "general",
-      "label": "Altitud (msnm)",
+      "label": "Altitud Valle (msnm)",
       "value": "700",
       "type": "number",
-      "description": "Cota altitudinal sobre el nivel del mar"
+      "description": "Cota altitudinal media del predio (695-710 msnm)"
     },
     {
       "key": "LATITUDE",
       "category": "general",
-      "label": "Latitud",
+      "label": "Latitud Predio",
       "value": "9.888889",
       "type": "number",
       "description": "Coordenada satelital Norte"
@@ -70,15 +97,15 @@
     {
       "key": "LOCATION_NAME",
       "category": "general",
-      "label": "Ubicación",
+      "label": "Ubicación Geográfica",
       "value": "Valle de Quíbor, Municipio Jiménez, Lara, Venezuela",
       "type": "text",
-      "description": "Zona geográfica del proyecto"
+      "description": "Ubicación validada satelitalmente"
     },
     {
       "key": "LONGITUDE",
       "category": "general",
-      "label": "Longitud",
+      "label": "Longitud Predio",
       "value": "-69.593056",
       "type": "number",
       "description": "Coordenada satelital Oeste"
@@ -87,17 +114,17 @@
       "key": "PROJECT_NAME",
       "category": "general",
       "label": "Nombre del Proyecto",
-      "value": "LA CIGARRONERA",
+      "value": "LA CIGARRONERA — QUÍBOR",
       "type": "text",
-      "description": "Nombre oficial del desarrollo agrícola"
+      "description": "Nombre oficial del desarrollo agrícola protegido"
     },
     {
       "key": "GH_DEFAULT_SURFACE_M2",
       "category": "greenhouse",
-      "label": "Superficie Base (m²)",
+      "label": "Superficie Modular (m²)",
       "value": "1000",
       "type": "number",
-      "description": "Área estándar del módulo"
+      "description": "Área estándar del módulo tecnificado"
     },
     {
       "key": "GH_LENGTH_M",
@@ -113,7 +140,7 @@
       "label": "Altura al Alero/Canal (m)",
       "value": "3.0",
       "type": "number",
-      "description": "Altura mínima para disipación térmica"
+      "description": "Altura alero para amortiguación térmica"
     },
     {
       "key": "GH_OPT_RIDGE_HEIGHT_M",
@@ -121,23 +148,31 @@
       "label": "Altura a Cumbrera (m)",
       "value": "5.5",
       "type": "number",
-      "description": "Altura cenital recomendada"
+      "description": "Altura cenital para escape de aire caliente"
+    },
+    {
+      "key": "GH_PLANTS_COUNT",
+      "category": "greenhouse",
+      "label": "Población Total (plantas)",
+      "value": "2500",
+      "type": "number",
+      "description": "Población fija de pimentón en 1.000 m²"
     },
     {
       "key": "GH_PLANT_DENSITY_M2",
       "category": "greenhouse",
-      "label": "Densidad de Plantación (pl/m²)",
-      "value": "2.2",
+      "label": "Densidad de Siembra (pl/m²)",
+      "value": "2.5",
       "type": "number",
-      "description": "Densidad óptima para pimentón/tomate"
+      "description": "Densidad agronómica óptima para pimentón"
     },
     {
       "key": "GH_TRELLIS_HEIGHT_M",
       "category": "greenhouse",
-      "label": "Altura de Tutorado (m)",
+      "label": "Altura de Tutorado Malla (m)",
       "value": "2.0",
       "type": "number",
-      "description": "Altura de hilo de soporte"
+      "description": "Altura alambre maestro Hortomalla 15x15"
     },
     {
       "key": "GH_WIDTH_M",
@@ -153,15 +188,15 @@
       "label": "Extractores Eólicos Cenitales",
       "value": "8",
       "type": "number",
-      "description": "Unidades de cumbrera por 1000 m²"
+      "description": "Extractores eólicos 24\"-30\" para romper bolsa cenital"
     },
     {
       "key": "MESH_COLOR",
       "category": "mesh",
       "label": "Color de Malla",
-      "value": "Blanco / Cristal",
+      "value": "Blanco / Cristal Reflectivo",
       "type": "text",
-      "description": "Color reflectivo para control térmico"
+      "description": "Color difusor de luz y reflector infrarrojo térmico"
     },
     {
       "key": "MESH_MAX_PORE_MICRONS",
@@ -169,7 +204,7 @@
       "label": "Apertura de Poro (µm)",
       "value": "192",
       "type": "number",
-      "description": "Límite de exclusión de trips y mosca blanca"
+      "description": "Exclusión absoluta de trips, mosca blanca y pulgones"
     },
     {
       "key": "MESH_PRICE_USD",
@@ -177,23 +212,23 @@
       "label": "Precio Rollo de Malla (USD)",
       "value": "560",
       "type": "number",
-      "description": "Costo por rollo de malla anti-insectos"
+      "description": "Costo estimado por rollo de malla anti-insectos"
     },
     {
       "key": "MESH_SPEC",
       "category": "mesh",
       "label": "Especificación de Malla",
-      "value": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+      "value": "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
       "type": "text",
-      "description": "Especificación técnica recomendada"
+      "description": "Especificación validada en docs/01-bioclima"
     },
     {
       "key": "MESH_WEIGHT_GSM",
       "category": "mesh",
-      "label": "Gramaje (gsm)",
-      "value": "130",
+      "label": "Gramaje Nominal (gsm)",
+      "value": "110",
       "type": "number",
-      "description": "Gramaje de referencia"
+      "description": "Gramaje de óptima permeabilidad aerodinámica"
     },
     {
       "key": "AQUIFER_STORATIVITY",
@@ -214,18 +249,74 @@
     {
       "key": "WATER_EC_DSM",
       "category": "water",
-      "label": "Conductividad Eléctrica Agua (dS/m)",
-      "value": "1.65",
+      "label": "Conductividad Eléctrica Pozo (dS/m)",
+      "value": "1.45",
       "type": "number",
-      "description": "Salinidad media de pozo en Cuara"
+      "description": "Salinidad real pozo acuífero Cuara"
+    },
+    {
+      "key": "WATER_PH",
+      "category": "water",
+      "label": "pH Agua de Pozo",
+      "value": "7.8",
+      "type": "number",
+      "description": "Alcalinidad moderada a neutralizar con ácido nítrico"
+    },
+    {
+      "key": "WELL_BROCAL_LAT",
+      "category": "water",
+      "label": "Latitud Satelital Brocal",
+      "value": "9.887719",
+      "type": "number",
+      "description": "GPS Brocal: 9°53'15.79\" N"
+    },
+    {
+      "key": "WELL_BROCAL_LON",
+      "category": "water",
+      "label": "Longitud Satelital Brocal",
+      "value": "-69.593681",
+      "type": "number",
+      "description": "GPS Brocal: 69°35'37.25\" W"
+    },
+    {
+      "key": "WELL_COTA_MSNM",
+      "category": "water",
+      "label": "Cota Brocal Aljibe (msnm)",
+      "value": "734",
+      "type": "number",
+      "description": "Elevación del brocal en Cuara"
+    },
+    {
+      "key": "WELL_CURRENT_DEPTH_M",
+      "category": "water",
+      "label": "Profundidad Actual Aljibe (m)",
+      "value": "50.0",
+      "type": "number",
+      "description": "Fuste actual excavado a mano"
+    },
+    {
+      "key": "WELL_PROPOSED_DEPTH_M",
+      "category": "water",
+      "label": "Profundidad Proyectada (m)",
+      "value": "60.0",
+      "type": "number",
+      "description": "Meta recomendada de profundización (+10m)"
     },
     {
       "key": "WELL_PUMPING_FLOW_LS",
       "category": "water",
-      "label": "Caudal de Bombeo (L/s)",
+      "label": "Caudal Estimado Bombeo (L/s)",
       "value": "2.5",
       "type": "number",
-      "description": "Régimen de explotación del pozo"
+      "description": "Caudal promedio régimen continuo (1.5-3.5 L/s)"
+    },
+    {
+      "key": "WELL_RESERVE_CAPACITY_L",
+      "category": "water",
+      "label": "Reserva Inmediata en Fuste (L)",
+      "value": "9000",
+      "type": "number",
+      "description": "8.000 a 10.000 L de reserva inmediata en cilindro"
     },
     {
       "key": "WELL_STATIC_LEVEL_M",
@@ -233,7 +324,15 @@
       "label": "Nivel Estático de Agua (m)",
       "value": "49.5",
       "type": "number",
-      "description": "Profundidad del espejo de agua"
+      "description": "Profundidad medida del espejo de agua"
+    },
+    {
+      "key": "WELL_WATER_COLUMN_M",
+      "category": "water",
+      "label": "Columna de Agua Proyectada (m)",
+      "value": "10.5",
+      "type": "number",
+      "description": "Columna útil sumergible a 60m"
     },
     {
       "key": "WIND_DESIGN_GUST_KMH",
@@ -241,15 +340,15 @@
       "label": "Ráfaga de Diseño (km/h)",
       "value": "27.0",
       "type": "number",
-      "description": "Velocidad de ráfaga para cálculo de guayas y tensores"
+      "description": "Ráfaga máxima para cálculo de tensores y guayas"
     },
     {
       "key": "WIND_DOMINANT_DIRECTION",
       "category": "wind",
       "label": "Dirección Dominante",
-      "value": "ESTE",
+      "value": "ESTE (11 meses consecutivos)",
       "type": "text",
-      "description": "Dirección predominante durante 11 meses"
+      "description": "Predominio horaria Este hasta 88%"
     },
     {
       "key": "WIND_SAFETY_FACTOR",
@@ -425,99 +524,51 @@
     }
   ],
   "crops": {
-    "cucumber": {
-      "id": "cucumber",
-      "name": "Pepino (Cultivo Terciario / Rotación Rápida)",
-      "scientificName": "Cucumis sativus",
-      "ecThreshold": 2.5,
-      "slopePercentPerDs": 13,
-      "recommendedGsm": "110 gsm",
-      "pesticideReduction": "65%",
-      "virosisRiskReduction": "92%",
-      "targetYieldTons": 15,
-      "avgPriceUsdPerKg": 0.65
-    },
     "pepper": {
       "id": "pepper",
-      "name": "Pimentón (Cultivo Principal)",
+      "name": "Pimentón Híbrido F1 (Magno / Nathalie)",
       "scientificName": "Capsicum annuum",
       "ecThreshold": 1.5,
       "slopePercentPerDs": 14,
-      "recommendedGsm": "125-130 gsm",
+      "recommendedGsm": "110-130 gsm Blanco",
       "pesticideReduction": "75%",
       "virosisRiskReduction": "98%",
       "targetYieldTons": 12.5,
       "avgPriceUsdPerKg": 0.9
-    },
-    "tomato": {
-      "id": "tomato",
-      "name": "Tomate Indeterminado (Hilo Alto)",
-      "scientificName": "Solanum lycopersicum",
-      "ecThreshold": 2.5,
-      "slopePercentPerDs": 9.9,
-      "recommendedGsm": "110 gsm",
-      "pesticideReduction": "70%",
-      "virosisRiskReduction": "95%",
-      "targetYieldTons": 18.7,
-      "avgPriceUsdPerKg": 0.8
     }
   },
   "cropsRaw": [
     {
-      "id": "cucumber",
-      "name": "Pepino (Cultivo Terciario / Rotación Rápida)",
-      "scientific_name": "Cucumis sativus",
-      "ec_threshold": 2.5,
-      "slope_percent_per_ds": 13,
-      "recommended_gsm": "110 gsm",
-      "pesticide_reduction": "65%",
-      "virosis_risk_reduction": "92%",
-      "target_yield_tons": 15,
-      "avg_price_usd_per_kg": 0.65
-    },
-    {
       "id": "pepper",
-      "name": "Pimentón (Cultivo Principal)",
+      "name": "Pimentón Híbrido F1 (Magno / Nathalie)",
       "scientific_name": "Capsicum annuum",
       "ec_threshold": 1.5,
       "slope_percent_per_ds": 14,
-      "recommended_gsm": "125-130 gsm",
+      "recommended_gsm": "110-130 gsm Blanco",
       "pesticide_reduction": "75%",
       "virosis_risk_reduction": "98%",
       "target_yield_tons": 12.5,
       "avg_price_usd_per_kg": 0.9
-    },
-    {
-      "id": "tomato",
-      "name": "Tomate Indeterminado (Hilo Alto)",
-      "scientific_name": "Solanum lycopersicum",
-      "ec_threshold": 2.5,
-      "slope_percent_per_ds": 9.9,
-      "recommended_gsm": "110 gsm",
-      "pesticide_reduction": "70%",
-      "virosis_risk_reduction": "95%",
-      "target_yield_tons": 18.7,
-      "avg_price_usd_per_kg": 0.8
     }
   ],
   "siteContent": {
-    "cockpit_title": "Centro de Control y Gemelo Digital Bioclimático",
-    "hero_subtitle": "Ingeniería bioclimática y casas de malla optimizadas para pimentón y tomate indeterminado bajo condiciones de clima semiárido cálido.",
+    "cockpit_title": "Centro de Control Operativo & Gemelo Digital: Pimentón 2.500 Plantas",
+    "hero_subtitle": "Ingeniería bioclimática y casa de malla tecnificada de 1.000 m² para 2.500 plantas de Pimentón bajo condiciones de semiárido cálido.",
     "hero_title": "Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor",
-    "malla_cta": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh de grado premium con despacho directo en Lara."
+    "malla_cta": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor."
   },
   "siteContentRaw": [
     {
       "key": "cockpit_title",
       "section": "cockpit",
       "label": "Título Cockpit",
-      "value": "Centro de Control y Gemelo Digital Bioclimático"
+      "value": "Centro de Control Operativo & Gemelo Digital: Pimentón 2.500 Plantas"
     },
     {
       "key": "hero_subtitle",
       "section": "landing",
       "label": "Subtítulo",
-      "value": "Ingeniería bioclimática y casas de malla optimizadas para pimentón y tomate indeterminado bajo condiciones de clima semiárido cálido."
+      "value": "Ingeniería bioclimática y casa de malla tecnificada de 1.000 m² para 2.500 plantas de Pimentón bajo condiciones de semiárido cálido."
     },
     {
       "key": "hero_title",
@@ -529,7 +580,7 @@
       "key": "malla_cta",
       "section": "malla",
       "label": "Llamado a la Acción Malla",
-      "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh de grado premium con despacho directo en Lara."
+      "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor."
     }
   ]
 }

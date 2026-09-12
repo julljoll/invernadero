@@ -1,12 +1,11 @@
 import React from 'react';
+import { Card, Row, Col, Badge, Alert } from 'react-bootstrap';
 import { useAgroStore } from '../../../shared/store/useAgroStore';
-import { CROPS_CATALOG } from '../../../core/constants/crops';
 import { GreenhouseViewer } from '../../3d-viewers/GreenhouseViewer/GreenhouseViewer';
 import { Slider } from '../../../shared/components/Slider';
 
 export const Module03Structure: React.FC = () => {
   const {
-    selectedCrop,
     greenhouseLengthM,
     greenhouseWidthM,
     gutterHeightM,
@@ -14,12 +13,8 @@ export const Module03Structure: React.FC = () => {
     setGreenhouseDimensions,
   } = useAgroStore();
 
-  const crop = CROPS_CATALOG[selectedCrop];
-  const isTomato = selectedCrop === 'tomato';
-  const isHeightTooLowForTomato = isTomato && (gutterHeightM < 3.0 || ridgeHeightM < 5.0);
-
   return (
-    <div className="card-cockpit p-4">
+    <Card className="card-cockpit p-4">
       <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
         <div>
           <h3 className="fs-6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
@@ -27,52 +22,35 @@ export const Module03Structure: React.FC = () => {
             <span>Inspección Estructural CAD 3D &amp; Parámetros Bioclimáticos</span>
           </h3>
           <span className="text-secondary small">
-            Nave Estándar Quíbor ({greenhouseWidthM}m × {greenhouseLengthM}m = {greenhouseWidthM * greenhouseLengthM} m²) · Orientación Este-Oeste
+            Nave Estándar Quíbor ({greenhouseWidthM}m × {greenhouseLengthM}m = {greenhouseWidthM * greenhouseLengthM} m² · 2.500 Plantas de Pimentón) · Orientación Este-Oeste
           </span>
         </div>
         <div className="d-flex align-items-center gap-2">
-          <span className="badge bg-success bg-opacity-15 border border-success border-opacity-30 text-success font-monospace">
+          <Badge bg="success" className="bg-opacity-15 border border-success border-opacity-30 text-success font-monospace">
             108 Pilares Tubo Sch 40
-          </span>
-          <span className="badge bg-warning bg-opacity-15 border border-warning border-opacity-30 text-warning-emphasis font-monospace">
+          </Badge>
+          <Badge bg="warning" className="bg-opacity-15 border border-warning border-opacity-30 text-warning-emphasis font-monospace">
             Viento Este: Ráfaga 27 km/h (FS ≥ 1.5)
-          </span>
+          </Badge>
         </div>
       </div>
 
-      {/* Regla de Oro Agronómica Quíbor: Alerta Bioclimática */}
-      {isHeightTooLowForTomato ? (
-        <div className="p-3 mb-3 bg-danger-subtle border border-danger-subtle rounded-3 d-flex align-items-start gap-2">
-          <span className="material-symbols-outlined text-danger ms-sm mt-0.5">warning</span>
-          <div>
-            <strong className="text-danger">RESTRICCIÓN AGRONÓMICA CRÍTICA PARA TOMATE INDETERMINADO:</strong>
-            <p className="text-dark small mb-1 mt-0.5">
-              El cultivo de tomate de hilo alto (tutorado a 2.2 m) requiere un volumen buffer de aire elevado. Diseñar con alero menor a <strong>3.0 m</strong> o cumbrera menor a <strong>5.5 m</strong> acumula calor radiante en la zona de fructificación (&gt; 32 °C – 34 °C), provocando <strong>aborto floral masivo y marchitez por calor</strong>.
-            </p>
-            <button
-              type="button"
-              onClick={() => setGreenhouseDimensions({ gutterHeightM: 3.5, ridgeHeightM: 5.8 })}
-              className="btn btn-sm btn-danger rounded-pill fw-bold text-xs mt-1"
-            >
-              Ajustar a Estándar Seguro (3.5m Alero / 5.8m Cumbrera)
-            </button>
-          </div>
+      {/* Regla Bioclimática Quíbor para Pimentón */}
+      <Alert variant="success" className="p-3 mb-3 bg-success bg-opacity-10 border border-success border-opacity-25 rounded-3 d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+        <div className="d-flex align-items-center gap-2">
+          <span className="material-symbols-outlined text-success ms-sm">verified</span>
+          <span className="text-dark small">
+            <strong>Geometría Bioclimática para Pimentón:</strong> Cumbrera a <strong>{ridgeHeightM}m</strong> y alero a <strong>{gutterHeightM}m</strong> garantizan el volumen buffer para disipar el calor y prevenir aborto floral en 2.500 plantas de <em>Capsicum annuum</em>.
+          </span>
         </div>
-      ) : (
-        <div className="p-2.5 mb-3 bg-success bg-opacity-10 border border-success border-opacity-25 rounded-3 d-flex align-items-center justify-content-between">
-          <div className="d-flex align-items-center gap-2">
-            <span className="material-symbols-outlined text-success ms-sm">verified</span>
-            <span className="text-dark small">
-              <strong>Geometría Bioclimática Adecuada:</strong> Altura a cumbrera de <strong>{ridgeHeightM}m</strong> y alero de <strong>{gutterHeightM}m</strong> para <em>{crop.name}</em> en Quíbor.
-            </span>
-          </div>
-          <span className="agro-chip agro-chip-green text-xs font-mono">Buffer Térmico Óptimo</span>
-        </div>
-      )}
+        <Badge bg="success" className="bg-opacity-20 text-success border border-success border-opacity-30 font-mono text-xs px-2.5 py-1 text-nowrap align-self-start align-self-md-auto">
+          Buffer Térmico Óptimo (2.50 pl/m²)
+        </Badge>
+      </Alert>
 
       {/* Controles Interactivos de Geometría */}
-      <div className="row g-3 mb-3 bg-light p-3 rounded-4 border border-secondary-subtle">
-        <div className="col-12 col-md-3">
+      <Row className="g-3 mb-3 bg-light p-3 rounded-4 border border-secondary-subtle">
+        <Col xs={12} md={3}>
           <Slider
             label="Ancho de Nave (m):"
             value={greenhouseWidthM}
@@ -84,8 +62,8 @@ export const Module03Structure: React.FC = () => {
             iconName="straighten"
             onChange={(val) => setGreenhouseDimensions({ widthM: val })}
           />
-        </div>
-        <div className="col-12 col-md-3">
+        </Col>
+        <Col xs={12} md={3}>
           <Slider
             label="Largo de Nave (m):"
             value={greenhouseLengthM}
@@ -97,8 +75,8 @@ export const Module03Structure: React.FC = () => {
             iconName="straighten"
             onChange={(val) => setGreenhouseDimensions({ lengthM: val })}
           />
-        </div>
-        <div className="col-12 col-md-3">
+        </Col>
+        <Col xs={12} md={3}>
           <Slider
             label="Altura Alero (Canal) (m):"
             value={gutterHeightM}
@@ -106,12 +84,12 @@ export const Module03Structure: React.FC = () => {
             max={5.0}
             step={0.25}
             unit="m"
-            accentColor={gutterHeightM < 3.0 && isTomato ? 'warning' : 'info'}
+            accentColor="info"
             iconName="vertical_align_bottom"
             onChange={(val) => setGreenhouseDimensions({ gutterHeightM: val })}
           />
-        </div>
-        <div className="col-12 col-md-3">
+        </Col>
+        <Col xs={12} md={3}>
           <Slider
             label="Altura Cumbrera (m):"
             value={ridgeHeightM}
@@ -123,8 +101,8 @@ export const Module03Structure: React.FC = () => {
             iconName="vertical_align_top"
             onChange={(val) => setGreenhouseDimensions({ ridgeHeightM: val })}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       {/* Visor 3D Three.js AutoCAD */}
       <div className="rounded-3 overflow-hidden shadow-sm border border-secondary-subtle">
@@ -136,17 +114,17 @@ export const Module03Structure: React.FC = () => {
         />
       </div>
 
-      <div className="row g-2 mt-3 text-secondary small">
-        <div className="col-12 col-md-4">
+      <Row className="g-2 mt-3 text-secondary small">
+        <Col xs={12} md={4}>
           <span className="text-dark fw-bold">Capa 01 Estructural:</span> 108 Pilares Tubo Sch 40 (Cian #00FFFF), cerchas a dos aguas, vigas maestras y zapatas de anclaje de 1.20m.
-        </div>
-        <div className="col-12 col-md-4">
+        </Col>
+        <Col xs={12} md={4}>
           <span className="text-dark fw-bold">Capa Barlovento (Este 88%):</span> Cruces de San Andrés y tensores de guaya galvanizada 1/4" 7×19 con tensores ojo-ojo 5/8" (FS ≥ 1.5).
-        </div>
-        <div className="col-12 col-md-4">
+        </Col>
+        <Col xs={12} md={4}>
           <span className="text-dark fw-bold">Capa 02 Cobertura:</span> Malla 50 Mesh Blanca (110 gsm) con sellado perimetral hermético y alambre CAD de alta precisión.
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Card>
   );
 };

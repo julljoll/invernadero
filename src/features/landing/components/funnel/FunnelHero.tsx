@@ -1,12 +1,13 @@
 import React from 'react';
+import { Container, Row, Col, Card, Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const FunnelHero: React.FC = () => {
   return (
     <section className="py-5 position-relative overflow-hidden">
-      <div className="container-xl">
-        <div className="row g-5 align-items-center">
-          <div className="col-12 col-lg-7">
+      <Container fluid="xl">
+        <Row className="g-5 align-items-center">
+          <Col xs={12} lg={7}>
             <div className="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-success bg-opacity-10 border border-success border-opacity-30 text-success text-xs fw-bold text-uppercase mb-3">
               <span className="material-symbols-outlined ms-sm">verified</span>
               <span>Programa de Reactivación Hortícola · Quíbor, Lara</span>
@@ -17,17 +18,20 @@ export const FunnelHero: React.FC = () => {
             </h1>
 
             <p className="lead text-secondary fs-6 mb-4">
-              En el Valle de Quíbor, sembrar a campo abierto significa arriesgar hasta el <strong className="text-danger">60% de tu cosecha</strong> por virosis y bochorno. Reactivar esta estructura protegida con fertirriego tecnificado y pozo a 60m asegura cosechar <strong className="text-dark">12.500 kg de pimentón de primera calidad</strong> (o hasta 22.800 kg de tomate) por ciclo con retorno acelerado.
+              En el Valle de Quíbor, sembrar a campo abierto significa arriesgar hasta el <strong className="text-danger">60% de tu cosecha</strong> por virosis y bochorno. Reactivar esta estructura protegida con fertirriego tecnificado y pozo a 60m asegura cosechar <strong className="text-dark">12.500 kg de pimentón de primera calidad</strong> (2.500 plantas tecnificadas) por ciclo con retorno acelerado.
             </p>
 
             <div className="d-flex flex-wrap gap-3 mb-4">
-              <a
+              <Button
+                as="a"
                 href="#financiero"
-                className="btn btn-success btn-lg touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2 shadow-sm text-white"
+                variant="success"
+                size="lg"
+                className="touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2 shadow-sm text-white"
               >
                 <span className="material-symbols-outlined ms-sm">trending_up</span>
                 <span>Ver Retorno Financiero (Pimentón)</span>
-              </a>
+              </Button>
 
               <Link
                 to="/cockpit"
@@ -57,18 +61,18 @@ export const FunnelHero: React.FC = () => {
                 <span>Malla 50 Mesh Virgen</span>
               </div>
             </div>
-          </div>
+          </Col>
 
           {/* Tarjeta de Resumen Ejecutivo / Ticket de Inversión */}
-          <div className="col-12 col-lg-5">
-            <div className="card card-agro p-4 shadow-sm border-success border-opacity-50 position-relative overflow-hidden">
+          <Col xs={12} lg={5}>
+            <Card className="card-agro p-4 shadow-sm border-success border-opacity-50 position-relative overflow-hidden">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <span className="badge bg-success bg-opacity-25 text-success rounded-pill font-monospace">
+                <Badge bg="success" className="bg-opacity-25 text-success rounded-pill font-monospace">
                   Calculo total
-                </span>
-                <span className="badge bg-light text-secondary border border-secondary-subtle font-monospace">
+                </Badge>
+                <Badge bg="light" text="secondary" className="border border-secondary-subtle font-monospace">
                   Pimentón Quíbor · 1.000 m²
-                </span>
+                </Badge>
               </div>
 
               <div className="display-5 fw-bold font-mono text-dark mb-1">
@@ -103,29 +107,29 @@ export const FunnelHero: React.FC = () => {
               </div>
 
               <div className="p-3 bg-light rounded-3 border border-secondary-subtle mb-0">
-                <div className="row g-2 text-xs">
-                  <div className="col-6">
+                <Row className="g-2 text-xs">
+                  <Col xs={6}>
                     <span className="text-secondary">Producción Ciclo:</span>
                     <div className="fs-6 fw-bold font-mono text-success">12.500 kg (12.5 T)</div>
-                  </div>
-                  <div className="col-6">
+                  </Col>
+                  <Col xs={6}>
                     <span className="text-secondary">Retorno Inversor:</span>
                     <div className="fs-6 fw-bold font-mono text-success">60% a 70% ROI</div>
-                  </div>
-                  <div className="col-6">
+                  </Col>
+                  <Col xs={6}>
                     <span className="text-secondary">Autosuficiencia Hídrica:</span>
                     <div className="fs-6 fw-bold font-mono text-info">100% Agua Propia</div>
-                  </div>
-                  <div className="col-6">
+                  </Col>
+                  <Col xs={6}>
                     <span className="text-secondary">Tiempo Activación:</span>
                     <div className="fs-6 fw-bold font-mono text-dark">3 - 4 Semanas</div>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </section>
   );
 };

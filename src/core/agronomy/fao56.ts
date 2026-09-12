@@ -13,7 +13,7 @@ export function calculateFao56IrrigationStages(
 ): IrrigationStage[] {
   const { totalPlants, et0MmDay, leachingFactor, uniformityEfficiency } = params;
 
-  // Etapas estándar FAO-56 para pimentón / tomate en Quíbor
+  // Etapas estándar FAO-56 para pimentón (Capsicum annuum) en Quíbor
   const stageDefinitions = [
     { stageName: "01. Trasplante y Enraizamiento", weeks: "Sem 1 a 3", kc: 0.60 },
     { stageName: "02. Crecimiento Vegetativo Rápido", weeks: "Sem 4 a 6", kc: 0.80 },

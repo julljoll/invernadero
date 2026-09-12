@@ -21,7 +21,7 @@ export const LeaderCatalogPage: React.FC = () => {
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
-        'Catálogo técnico de invernaderos en acero galvanizado, casas de malla, perfiles Lock Channel, alambre Wiggle Wire y sistemas de fertirriego para pimentón y tomate en el Valle de Quíbor, Venezuela.'
+        'Catálogo técnico de invernaderos en acero galvanizado, casas de malla, perfiles Lock Channel, alambre Wiggle Wire y sistemas de fertirriego para pimentón en el Valle de Quíbor, Venezuela.'
       );
     }
   }, []);
@@ -187,7 +187,7 @@ export const LeaderCatalogPage: React.FC = () => {
               Estructuras e Invernaderos AGROVENECUA
             </h2>
             <p className="text-secondary fs-6 mb-0">
-              Modelos prediseñados y configurables calculados bajo norma de solicitación eólica, con capacidad portante de tutorado de hasta 20 kg/m² para pimentón y tomate indeterminado.
+              Modelos prediseñados y configurables calculados bajo norma de solicitación eólica, con capacidad portante de tutorado de hasta 20 kg/m² para pimentón intensivo de alto rendimiento.
             </p>
           </div>
 

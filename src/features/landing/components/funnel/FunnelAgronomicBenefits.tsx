@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const FunnelAgronomicBenefits: React.FC = () => {
@@ -7,10 +8,10 @@ export const FunnelAgronomicBenefits: React.FC = () => {
       id: 'rendimiento',
       title: 'Multiplicación de Cosecha',
       metric: '12.5 Ton Pimentón',
-      submetric: '4x vs Campo Abierto · 2.2 pl/m²',
-      desc: 'En 1.000 m² protegidos se cosechan 12.500 kg de Pimentón de primera calidad (2.200 plantas tecnificadas) o hasta 22.800 kg de Tomate, eliminando el 60% de merma a campo abierto.',
+      submetric: '4x vs Campo Abierto · 2.50 pl/m²',
+      desc: 'En 1.000 m² protegidos se cosechan 12.500 kg de Pimentón de primera calidad (2.500 plantas tecnificadas), eliminando el 60% de merma habitual a campo abierto.',
       icon: 'trending_up',
-      badge: 'Pimentón Principal',
+      badge: 'Pimentón Exclusivo',
       color: 'text-success',
       borderAccent: 'border-success',
       bgGlow: 'rgba(83, 201, 66, 0.08)'
@@ -55,7 +56,7 @@ export const FunnelAgronomicBenefits: React.FC = () => {
 
   return (
     <section id="beneficios-tecnicos" className="py-5 border-top border-secondary-subtle bg-white">
-      <div className="container-xl py-3">
+      <Container fluid="xl" className="py-3">
         {/* Encabezado de Beneficios Técnicos */}
         <div className="text-center max-w-2xl mx-auto mb-5">
           <div className="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-success bg-opacity-10 border border-success border-opacity-25 text-success text-xs fw-bold text-uppercase mb-2">
@@ -71,11 +72,11 @@ export const FunnelAgronomicBenefits: React.FC = () => {
         </div>
 
         {/* Tarjetas de Beneficios */}
-        <div className="row g-4">
+        <Row className="g-4">
           {benefits.map((b) => (
-            <div className="col-12 col-md-6 col-lg-3" key={b.id}>
-              <div 
-                className="card card-agro p-4 h-100 shadow-sm border position-relative overflow-hidden d-flex flex-column justify-content-between"
+            <Col xs={12} md={6} lg={3} key={b.id}>
+              <Card 
+                className="card-agro p-4 h-100 shadow-sm border position-relative overflow-hidden d-flex flex-column justify-content-between"
                 style={{ backgroundColor: '#ffffff' }}
               >
                 {/* Micro-glow superior */}
@@ -89,9 +90,9 @@ export const FunnelAgronomicBenefits: React.FC = () => {
                     <span className={`material-symbols-outlined ${b.color} ms-lg`}>
                       {b.icon}
                     </span>
-                    <span className="badge bg-light border border-secondary-subtle text-dark font-monospace text-xxs">
+                    <Badge bg="light" text="dark" className="border border-secondary-subtle font-monospace text-xxs">
                       {b.badge}
-                    </span>
+                    </Badge>
                   </div>
 
                   <h3 className="fs-5 fw-bold text-dark mb-1">{b.title}</h3>
@@ -107,11 +108,11 @@ export const FunnelAgronomicBenefits: React.FC = () => {
                     <span className="material-symbols-outlined ms-sm">arrow_forward</span>
                   </Link>
                 </div>
-              </div>
-            </div>
+              </Card>
+            </Col>
           ))}
-        </div>
-      </div>
+        </Row>
+      </Container>
     </section>
   );
 };

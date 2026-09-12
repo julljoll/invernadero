@@ -1,4 +1,4 @@
-export type CropType = 'pepper' | 'tomato' | 'cucumber';
+export type CropType = 'pepper';
 
 export interface CropInfo {
   id: CropType;

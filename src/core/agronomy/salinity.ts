@@ -5,7 +5,7 @@ import { CROPS_CATALOG } from '../constants/crops';
  * Calcula la fracción de lixiviación y el factor de sobre-riego necesario
  * según la calidad de agua del pozo de Quíbor (fórmula de Rhodes / FAO-29)
  * @param ecWater Conductividad eléctrica del agua de riego (dS/m)
- * @param cropId Tipo de cultivo ('pepper' | 'tomato' | 'cucumber')
+ * @param cropId Tipo de cultivo ('pepper')
  */
 export function calculateSalinityImpact(
   ecWater: number,

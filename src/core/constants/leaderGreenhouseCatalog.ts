@@ -88,7 +88,7 @@ export const GREENHOUSE_MODELS: GreenhouseModel[] = [
     crossBracing: false,
     imageUrl: 'https://sc04.alicdn.com/kf/H75293243a7a84d8cac787032ff573d6f1/239438894/H75293243a7a84d8cac787032ff573d6f1.png',
     description: 'Nave de amplio vano de hasta 15 metros sin columnas centrales intermedias. Facilita el laboreo con motocultor o tractor ligero, la instalación de hasta 14 camellones dobles y el tendido directo de cintas de goteo con máxima uniformidad hidráulica.',
-    recommendedUse: 'Cultivos rastreros y semi-tutorados de alta productividad: pimentón, melón, sandía, calabacín y tomate a campo protegido.',
+    recommendedUse: 'Cultivos protegidos de alta productividad: pimentón en espaldera o tutorado intensivo a campo protegido.',
     structuralSpecs: {
       columnType: 'Perfiles ovales galvanizados de alta inercia a la flexión lateral',
       galvanization: 'Galvanizado Sendzimir Z275 de doble cara',
@@ -98,9 +98,9 @@ export const GREENHOUSE_MODELS: GreenhouseModel[] = [
   },
   {
     id: 'u1-pro',
-    name: 'AGRO-U1 Pro — Hilo Alto & Volumen Térmico 4.8m',
+    name: 'AGRO-U1 Pro — Volumen Térmico 4.8m & Tutorado Reforzado',
     category: 'Invernadero de Alto Rendimiento',
-    tag: 'Óptimo para Tomate y Pimentón',
+    tag: 'Óptimo para Pimentón de Alta Densidad',
     width: '≤ 10.00 m por módulo',
     roofHeight: '≈ 4.80 m cumbrera (Alero 3.20m)',
     bowSpacing: '1.00 ~ 2.00 m',
@@ -108,8 +108,8 @@ export const GREENHOUSE_MODELS: GreenhouseModel[] = [
     windBracing: true,
     crossBracing: true,
     imageUrl: 'https://sc04.alicdn.com/kf/He8062da9fca94fe09065e4818e40e9dfH/239438894/He8062da9fca94fe09065e4818e40e9dfH.png',
-    description: 'Diseño verticalizado de gran despeje cenital que maximiza el volumen de aire buffer interior. El aire caliente asciende por convección natural manteniendo la zona del racimo floral bajo los 30 °C para prevenir el aborto. Estructura calculada para soportar tutorados intensivos de hasta 20 kg/m².',
-    recommendedUse: 'Tomate indeterminado de hilo alto (con ganchos o bobinas Bato), pimentón en espaldera de 2.20m y producción hidropónica.',
+    description: 'Diseño verticalizado de gran despeje cenital que maximiza el volumen de aire buffer interior. El aire caliente asciende por convección natural manteniendo la zona de cuajado y floración bajo los 30 °C para prevenir el aborto. Estructura calculada para soportar tutorados intensivos de pimentón de hasta 20 kg/m².',
+    recommendedUse: 'Pimentón de alta densidad (2.5 pl/m² · 2.500 plantas), espalderas de 1.80m a 2.20m y fertirriego tecnificado.',
     structuralSpecs: {
       columnType: 'Pilares cuadrados de 80x80mm y arcos reforzados con cumbrera ventilada',
       galvanization: 'Inmersión térmica en caliente Z350 de máxima longevidad',

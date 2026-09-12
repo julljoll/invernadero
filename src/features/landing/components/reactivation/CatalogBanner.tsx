@@ -26,8 +26,8 @@ export const CatalogBanner: React.FC = () => {
     },
     {
       id: 'u1-pro',
-      name: 'AGRO-U1 Pro — Hilo Alto & Volumen Térmico',
-      category: 'Invernadero para Tomate y Pimentón',
+      name: 'AGRO-U1 Pro — Gran Volumen Térmico & Tutorado',
+      category: 'Invernadero de Alta Eficiencia para Pimentón',
       badge: 'Cumbrera 4.80m',
       specs: 'Ancho ≤ 10.00m · Cumbrera 4.80m · Tutorado 20 kg/m²',
       description: 'Gran altura cenital que acelera el tiro convectivo y desaloja bolsas de calor en horas pico. Soporta líneas de tutorado vertical pesado sin fatiga mecánica.',
@@ -120,7 +120,7 @@ export const CatalogBanner: React.FC = () => {
 
                 {/* Resumen Técnico con Lenguaje Agrícola Claro */}
                 <p className="lead text-white-50 fs-6 mb-4" style={{ lineHeight: '1.65' }}>
-                  Estructuras de acero galvanizado en caliente Sch 40 (HDG Z275/Z350) calculadas para resistir las ráfagas de viento del Este (27 km/h) en Quíbor. Disponemos de vanos modulares de 8m, 10m y 15m, perfiles Lock Channel C, alambre Wiggle Wire, canalones pluviales de alto caudal y sistemas de ventilación forzada para pimentón y tomate.
+                  Estructuras de acero galvanizado en caliente Sch 40 (HDG Z275/Z350) calculadas para resistir las ráfagas de viento del Este (27 km/h) en Quíbor. Disponemos de vanos modulares de 8m, 10m y 15m, perfiles Lock Channel C, alambre Wiggle Wire, canalones pluviales de alto caudal y sistemas de ventilación forzada para pimentón intensivo.
                 </p>
 
                 {/* Franja de 4 Métricas de Ingeniería para Fácil Comprensión */}
