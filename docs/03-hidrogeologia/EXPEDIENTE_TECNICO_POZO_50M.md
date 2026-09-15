@@ -1,3 +1,34 @@
+---
+doc_id: "HIDRO-001"
+titulo: "Expediente Técnico del Pozo de 50 Metros"
+dominio: "hidrogeologia"
+tipo: "expediente"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+cultivos: ["tomate_indeterminado", "pimenton_magistral_f1"]
+infraestructura: ["pozo_artesanal"]
+tags: ["pozo_artesanal", "geologia_campo", "estratigrafia", "formacion_cuara", "nivel_freatico", "video_campo"]
+fuentes_primarias:
+  - "YouTube: yxgjWNWU5eY, gwMPtGXPOcQ, 7a7gqASsa30, e95DzU4a7co"
+  - "GPS EXIF: Motorola moto e14, 2026-09-06"
+cross_references:
+  - doc_id: "HIDRO-002"
+    relacion: "expandido_por"
+  - doc_id: "HIDRO-003"
+    relacion: "plan_inversion"
+  - doc_id: "HIDRO-004"
+    relacion: "protocolo_formal"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 1500
+---
 # Expediente Técnico Consolidado del Pozo Artesanal de 50 Metros
 ## Cuara, Municipio Jiménez, Estado Lara — Valle de Quíbor
 
@@ -136,4 +167,3 @@ La excavación y profundización del pozo de 50 a 60 metros es **plenamente viab
 
 ---
 *Expediente aprobado como base de conocimiento para la ejecución del proyecto de horticultura protegida en Cuara.*
-

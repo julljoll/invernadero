@@ -4,35 +4,61 @@ import { WellViewer } from '../../3d-viewers/WellViewer/WellViewer';
 import { KpiCard } from '../../../shared/components/KpiCard';
 import { BlockMath, InlineMath } from 'react-katex';
 
+import { StratigraphyColumn } from './well/StratigraphyColumn';
+import { PumpingCurveChart } from './well/PumpingCurveChart';
+import { WaterBalanceFlow } from './well/WaterBalanceFlow';
+import { HydrochemistryTable } from './well/HydrochemistryTable';
+import { WellBudgetTable } from './well/WellBudgetTable';
+import { JegatMoraRegionalPanel } from './well/JegatMoraRegionalPanel';
+
+import {
+  calculateHMT,
+  calculateFusteBuffer,
+  calculateDailyWaterBalance
+} from '../../../core/agronomy/wellHydraulics';
+
 type WellScenario = '60m' | '120m';
 
 export const Module05Well: React.FC = () => {
   const [scenario, setScenario] = useState<WellScenario>('60m');
   const [showTheis, setShowTheis] = useState<boolean>(false);
+  const [viewMode, setViewMode] = useState<'both' | 'strata' | '3d'>('both');
 
-  // Demanda hídrica base del invernadero (1.000 m²)
-  const dailyDemandL = 7500; // 7.5 m³/día pico
-
-  // Parámetros por escenario validados en RAG (EXPEDIENTE_TECNICO_POZO_50M_CUARA.md y PLAN_VALIDACION_POZO_PROFUNDO_QUIBOR.md)
   const is60m = scenario === '60m';
-  
+  const dailyDemandL = 7500; // 7.5 m³/día pico para 1.000 m²
+
   const totalDepthM = is60m ? 60 : 120;
-  const staticWaterLevelM = is60m ? 49.5 : 70.0; // 49.5m acuífero libre superior vs 70.0m línea base estival profunda
-  const pumpFlowLs = is60m ? 2.0 : 2.8; // 2.0 L/s continuo (1" a 1½") vs 2.8 L/s continuo (~2")
-  const pumpFlowLh = pumpFlowLs * 3600; // 7,200 L/h vs 10,080 L/h
-  const drawdownM = is60m ? 3.7 : 18.0; // Abatimiento estabilizado
-  const dynamicWaterLevelM = staticWaterLevelM + drawdownM; // 53.2m vs 88.0m
-  const waterColumnM = Number((totalDepthM - dynamicWaterLevelM).toFixed(1)); // 6.8m vs 32.0m
-  const pumpingHoursNeeded = (dailyDemandL / pumpFlowLh).toFixed(2);
-  const pumpPowerHp = is60m ? '2.0 HP' : '7.5 HP';
-  const pumpSize = is60m ? '4" Sumergible (1.5"-2")' : '6" Industrial Sumergible';
-  const hmtTotal = is60m ? '63.5 mca' : '100.5 mca';
+  const staticWaterLevelM = is60m ? 49.5 : 70.0;
+  const pumpFlowLs = is60m ? 2.0 : 2.8;
+  const drawdownM = is60m ? 3.7 : 18.0;
+  const dynamicWaterLevelM = staticWaterLevelM + drawdownM;
+  const waterColumnM = Number((totalDepthM - dynamicWaterLevelM).toFixed(1));
+
+  // Cálculos desde el motor wellHydraulics
+  const hmtData = calculateHMT({
+    dynamicLevelM: dynamicWaterLevelM,
+    elevationDiffM: 3.0,
+    frictionLossM: is60m ? 2.5 : 7.5,
+    servicePressureM: is60m ? 10.0 : 5.0,
+    pumpFlowLs
+  });
+
+  const bufferData = calculateFusteBuffer(
+    is60m ? 0.30 : 0.10,
+    is60m ? 10.5 : 50.0,
+    is60m ? 0.40 : 0.155
+  );
+
+  const balanceData = calculateDailyWaterBalance({
+    pumpFlowLs,
+    dailyDemandM3: dailyDemandL / 1000,
+    reservoirCapacityM3: 80.0
+  });
 
   return (
     <div className="d-flex flex-column gap-4">
       <Card className="card-cockpit p-4">
-        
-        {/* Header y Toggle de Escenarios */}
+        {/* Header y Selector de Escenario */}
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
           <div>
             <h3 className="fs-6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
@@ -40,21 +66,21 @@ export const Module05Well: React.FC = () => {
               <span>Análisis de Viabilidad Hidrogeológica y Diseño de Captación</span>
             </h3>
             <span className="text-secondary small">
-              Valle de Quíbor (Municipio Jiménez, Lara) — Georref: 9°53'20.0"N, 69°35'35.0"W (Cota ~700 msnm)
+              Valle de Quíbor (Municipio Jiménez, Lara) — Georref: 9°53'15.8"N, 69°35'37.3"W (Cota ~734 msnm, Cuara)
             </span>
           </div>
 
           <ButtonGroup size="sm" className="shadow-sm">
-            <Button 
+            <Button
               variant={is60m ? 'success' : 'outline-secondary'}
-              className="fw-bold px-3"
+              className="fw-bold px-3 text-xs"
               onClick={() => setScenario('60m')}
             >
               Pozo Artesanal a Pico (60m / Ø80cm / Concreto Ø70cm)
             </Button>
-            <Button 
+            <Button
               variant={!is60m ? 'info' : 'outline-secondary'}
-              className="fw-bold px-3"
+              className="fw-bold px-3 text-xs"
               onClick={() => setScenario('120m')}
             >
               Expansión Industrial Rotaria (120m / Barreno 12¼" / Camisa 8" / Bomba 6" 7.5HP)
@@ -62,8 +88,8 @@ export const Module05Well: React.FC = () => {
           </ButtonGroup>
         </div>
 
-        {/* Tarjeta de Diagnóstico RAG y Garantía Científica */}
-        <Alert variant={is60m ? 'success' : 'info'} className="d-flex flex-column gap-3 mb-4 border bg-opacity-10">
+        {/* Resumen del Diagnóstico */}
+        <Alert variant={is60m ? 'success' : 'info'} className="d-flex flex-column gap-2 mb-4 border bg-opacity-10">
           <div className="d-flex align-items-start gap-3">
             <span className={`material-symbols-outlined fs-4 ${is60m ? 'text-success' : 'text-info'}`}>
               {is60m ? 'verified' : 'engineering'}
@@ -71,116 +97,157 @@ export const Module05Well: React.FC = () => {
             <div>
               <div className="d-flex flex-wrap align-items-center gap-2 mb-1">
                 <h4 className={`fs-6 fw-bold mb-0 ${is60m ? 'text-success' : 'text-info'}`}>
-                  {is60m 
-                    ? 'Fase 1: Culminación Inmediata de Pozo Artesanal a 60m (Manual Ø80cm / Camisa Concreto Ø70cm)' 
+                  {is60m
+                    ? 'Fase 1: Culminación Inmediata de Pozo Artesanal a 60m (Manual Ø80cm / Camisa Concreto Ø70cm)'
                     : 'Fase 2: Perforación Profunda 120m con Camisa de 8" y Bomba Industrial de 6" (7.5 HP)'}
                 </h4>
                 {is60m && (
-                  <Badge bg="success" pill className="text-xs px-2 py-1">
-                    Garantía Científica CIDIAT-ULA
+                  <Badge bg="success" pill className="text-2xs px-2 py-1">
+                    Garantía Científica CIDIAT-ULA (Jégat & Mora, 2012)
                   </Badge>
                 )}
               </div>
               <p className="mb-0 text-dark small font-sans">
-                {is60m 
-                  ? 'El pozo actual a 50m fue excavado manualmente a pico (fuste cilíndrico vertical Ø 80 cm a tierra viva en arcillas masivas autoportantes Su > 120 kPa y verticalidad < 1°). Requiere profundizar solo 10m adicionales en el paquete de gravas negras lavadas de lidita y cuarzo con achique continuo hasta 60m. Se reviste con camisa de anillos de concreto armado de Ø 70 cm exterior (diámetro interior útil 60 cm) y empaque de grava cuarzosa 1/4". Con nivel estático a 49.5m, la columna sumergida de 10.5m genera un vaso buffer de ~3.800 L en reposo dentro del fuste (283 L/m). Una electrobomba sumergible de 2.0 HP entrega 1.5 a 2.0 L/s continuos (1 pulgada continua), cubriendo los 7.5 m³/día del invernadero en solo 1.04 horas de bombeo. Inversión estimada: $2.030 a $2.950 USD (ahorro >85% frente a perforación nueva).'
-                  : 'Para bombear con una electrobomba sumergible industrial de 6" (7.5 HP), se requiere perforar a 12¼" (311 mm) con máquina rotaria y entubar con camisa de acero al carbono de 8" ASTM A53 Grado B (219.1 mm ext). Esto garantiza el espacio anular necesario para refrigerar el motor trifásico y colocar el empaque de grava cuarzosa 2-4 mm. Con 38m de filtros Johnson AISI 304 ranura 0.030", opera a un régimen ultra-laminar (Ve = 0.07 cm/s), venciendo un HMT de 100.5 mca con caudal continuo de 2.5 a 3.0 L/s para abastecer hasta 2.5 hectáreas (4 invernaderos).'}
+                {is60m
+                  ? 'El pozo a 50m excavado manualmente a pico (fuste vertical Ø 80 cm a plomo en arcillas masivas Su > 120 kPa) requiere profundizar 10m adicionales en el estrato de grava negra lavada de lidita y cuarzo con achique continuo hasta 60m. Con nivel estático a 49.5m, la columna sumergida de 10.5m genera un buffer útil de ~3.000 a 3.800 L en reposo. Una electrobomba de 2.0 HP multietapas cubre la demanda de 7.5 m³/día en solo 1.04 horas de bombeo continuo. Ahorro de $20.880 USD (>84%) frente a perforación nueva.'
+                  : 'Para bombear con bomba de 6" (7.5 HP), se requiere máquina rotaria a 12¼" (311 mm) y camisa de acero al carbono de 8" ASTM A53. Esto asegura espacio anular para refrigeración del motor trifásico y empaque de grava 2-4 mm, venciendo un HMT de 100.5 mca con caudal de 2.5 a 3.0 L/s para abastecer hasta 2.5 hectáreas.'}
               </p>
             </div>
           </div>
-
-          {is60m && (
-            <div className="bg-white p-3 rounded-2 border border-success border-opacity-25 shadow-xs">
-              <div className="d-flex align-items-center gap-2 mb-2 text-success fw-bold text-xs">
-                <span className="material-symbols-outlined fs-6">menu_book</span>
-                <span>Fundamentación Hidrogeológica Regional (Jégat, Mora et al., CIDIAT-ULA / SHYQ 2012)</span>
-              </div>
-              <Row className="g-2 text-xs font-sans text-secondary">
-                <Col xs={12} md={4}>
-                  <div className="p-2 bg-light rounded border border-secondary-subtle">
-                    <strong className="text-dark d-block mb-1">Espesor Saturado Cuara:</strong>
-                    <span>El estudio determina textualmente que en el Sector Sur el relleno sedimentario alcanza hasta 230m con un <strong>espesor máximo saturado de 10 metros</strong>. Al profundizar a 60m se capta el 100% de esta columna productiva.</span>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="p-2 bg-light rounded border border-secondary-subtle">
-                    <strong className="text-dark d-block mb-1">Litología de Paleocauce:</strong>
-                    <span>Sedimentología in situ de gravas negras limpias de lidita y cuarzo cristalino. Conductividad hidráulica medida mediante ensayos Lefranc de <strong className="text-dark">K ≈ 10⁻³ m/s (86 - 432 m/día)</strong> y transmisividad <strong className="text-dark">T ≈ 860 - 2.500 m²/día</strong>.</span>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="p-2 bg-light rounded border border-secondary-subtle">
-                    <strong className="text-dark d-block mb-1">Garantía Anti-Achique:</strong>
-                    <span>La recarga radial del manto al fuste es de <strong className="text-dark">~33.2 L/s</strong>. Extraer solo 1.5 a 2.0 L/s representa menos del 6% del potencial del estrato, garantizando un régimen dinámico permanente sin riesgo de secado.</span>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          )}
         </Alert>
 
-        {/* KPIs Hidráulicos del Pozo */}
+        {/* KPIs Hidráulicos Principales */}
         <Row className="g-3 mb-4">
-          <Col xs={12} md={3}>
+          <Col xs={12} sm={6} md={3}>
             <KpiCard
               label="Nivel Dinámico (ND)"
               value={`${dynamicWaterLevelM}`}
               unit="metros"
-              subtext={`Caudal continuo: ${pumpFlowLs} L/s`}
+              subtext={`Abatimiento s = ${drawdownM} m a ${pumpFlowLs} L/s`}
               iconName="compress"
               variant="success"
             />
           </Col>
 
-          <Col xs={12} md={3}>
+          <Col xs={12} sm={6} md={3}>
             <KpiCard
               label="Potencia Bomba & HMT"
-              value={pumpPowerHp}
-              unit={`HMT ${hmtTotal}`}
-              subtext={pumpSize}
+              value={`${hmtData.recommendedMotorHp} HP`}
+              unit={`HMT ${hmtData.hmtMca} mca`}
+              subtext={is60m ? 'Bala 4" Multietapas 220V' : 'Bomba 6" Industrial Trifásica'}
               iconName="bolt"
               variant={is60m ? 'success' : 'info'}
             />
           </Col>
 
-          <Col xs={12} md={3}>
+          <Col xs={12} sm={6} md={3}>
             <KpiCard
               label={is60m ? "Vaso Buffer en Fuste" : "Columna de Agua Útil"}
-              value={is60m ? "3.800 L" : `${waterColumnM} m`}
+              value={is60m ? `${bufferData.usefulVolumeLiters.toLocaleString()} L` : `${waterColumnM} m`}
               unit={is60m ? "en reposo" : "metros"}
-              subtext={is60m ? '283 L/m útil (Ø int 60cm)' : 'Reserva masiva para 4 naves'}
+              subtext={is60m ? `~${bufferData.litersPerMeter} L/m útil (Øint 60cm)` : 'Reserva masiva para 4 naves'}
               iconName="water_full"
               variant="success"
             />
           </Col>
 
-          <Col xs={12} md={3}>
+          <Col xs={12} sm={6} md={3}>
             <KpiCard
-              label="Tiempo Bombeo (1000m²)"
-              value={`${pumpingHoursNeeded}`}
+              label="Tiempo Bombeo Diario"
+              value={`${balanceData.pumpingHoursNeeded}`}
               unit="horas/día"
-              subtext={`Consumo: ${dailyDemandL / 1000} m³/día`}
+              subtext={`Acuífero en reposo: ${balanceData.restHoursPerDay} h/día`}
               iconName="timer"
               variant="success"
             />
           </Col>
         </Row>
 
-        {/* Visor 3D del Pozo (Modo AutoCAD) */}
-        <div className="rounded-3 overflow-hidden border border-secondary-subtle shadow-sm mb-4 position-relative">
-          <WellViewer 
-            scenario={scenario}
-            totalDepthM={totalDepthM} 
-            staticWaterLevelM={staticWaterLevelM}
-            dynamicWaterLevelM={dynamicWaterLevelM} 
-          />
+        {/* SELECTOR DE VISTA: Estratigrafía SVG vs 3D Three.js */}
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex align-items-center gap-2">
+            <span className="material-symbols-outlined text-primary fs-5">view_in_ar</span>
+            <span className="fw-bold text-dark small">Geología del Pozo y Visualización Estructural</span>
+          </div>
+          <ButtonGroup size="sm">
+            <Button
+              variant={viewMode === 'both' ? 'primary' : 'outline-secondary'}
+              className="text-xs"
+              onClick={() => setViewMode('both')}
+            >
+              Ambas Vistas
+            </Button>
+            <Button
+              variant={viewMode === 'strata' ? 'primary' : 'outline-secondary'}
+              className="text-xs"
+              onClick={() => setViewMode('strata')}
+            >
+              Estratigrafía SVG
+            </Button>
+            <Button
+              variant={viewMode === '3d' ? 'primary' : 'outline-secondary'}
+              className="text-xs"
+              onClick={() => setViewMode('3d')}
+            >
+              Cilindro 3D
+            </Button>
+          </ButtonGroup>
         </div>
 
-        {/* Ficha Técnica Comparativa de Ingeniería (Valle de Quíbor) */}
-        <Card className="border border-secondary-subtle bg-light p-3 rounded-3 mb-3">
+        {/* Sección Visual: Estratigrafía + 3D */}
+        <Row className="g-3 mb-4">
+          {(viewMode === 'both' || viewMode === 'strata') && (
+            <Col xs={12} lg={viewMode === 'both' ? 7 : 12}>
+              <StratigraphyColumn scenario={scenario} />
+            </Col>
+          )}
+
+          {(viewMode === 'both' || viewMode === '3d') && (
+            <Col xs={12} lg={viewMode === 'both' ? 5 : 12}>
+              <div className="rounded-3 overflow-hidden border border-secondary-subtle shadow-sm h-100 position-relative bg-dark" style={{ minHeight: '380px' }}>
+                <WellViewer
+                  scenario={scenario}
+                  totalDepthM={totalDepthM}
+                  staticWaterLevelM={staticWaterLevelM}
+                  dynamicWaterLevelM={dynamicWaterLevelM}
+                />
+              </div>
+            </Col>
+          )}
+        </Row>
+
+        {/* Curva de Bombeo y Balance Hídrico */}
+        <Row className="g-3 mb-4">
+          <Col xs={12} lg={6}>
+            <PumpingCurveChart scenario={scenario} />
+          </Col>
+          <Col xs={12} lg={6}>
+            <WaterBalanceFlow scenario={scenario} />
+          </Col>
+        </Row>
+
+        {/* Caracterización Hidroquímica y Calidad del Agua */}
+        <div className="mb-4">
+          <HydrochemistryTable />
+        </div>
+
+        {/* Presupuesto Interactivo de Obra */}
+        {is60m && (
+          <div className="mb-4">
+            <WellBudgetTable />
+          </div>
+        )}
+
+        {/* Respaldo Regional Jégat-Mora (2012) */}
+        <div className="mb-4">
+          <JegatMoraRegionalPanel />
+        </div>
+
+        {/* Tabla Comparativa de Ingeniería */}
+        <Card className="border border-secondary-subtle bg-light p-3 rounded-3 mb-4">
           <div className="d-flex align-items-center gap-2 mb-3">
             <span className="material-symbols-outlined text-primary fs-5">table_chart</span>
-            <h5 className="fs-6 fw-bold mb-0 text-dark">Especificaciones Técnicas Comparativas (RAG CIDIAT / Pozo Quíbor)</h5>
+            <h5 className="fs-6 fw-bold mb-0 text-dark">Matriz Comparativa de Ingeniería (Valle de Quíbor)</h5>
           </div>
 
           <Table responsive bordered size="sm" className="bg-white text-xs align-middle mb-0 font-sans">
@@ -248,34 +315,22 @@ export const Module05Well: React.FC = () => {
                 <td>ND dinámico + desnivel a cabezal + pérdidas de fricción y 1 bar de presión residual.</td>
               </tr>
               <tr>
-                <td className="fw-bold">Filtros de Captación</td>
-                <td className="text-center font-monospace">10 m ranurado continuo basal</td>
-                <td className="text-center font-monospace fw-bold">38 m Johnson AISI 304 (Slot 0.030")</td>
-                <td>Régimen laminar Ve &lt; 0.03 m/s (Sichardt) sin turbulencia ni arrastre de arena.</td>
-              </tr>
-              <tr>
                 <td className="fw-bold">Caudal Continuo de Diseño</td>
                 <td className="text-center font-monospace text-success fw-bold">1.5 - 2.0 L/s (1" continuo)</td>
                 <td className="text-center font-monospace text-info fw-bold">2.5 - 3.0 L/s (~2" continuo)</td>
                 <td>60m abastece 1 nave (1.000 m²); 120m abastece hasta 4 naves (2.5 ha).</td>
               </tr>
               <tr>
-                <td className="fw-bold">Garantía Anti-Achique</td>
-                <td className="text-center font-monospace text-success fw-bold">CERO RIESGO (Recarga &gt; 33 L/s)</td>
-                <td className="text-center font-monospace text-info fw-bold">Mínimo (Recarga regional)</td>
-                <td>Extracción requerida representa &lt; 6% de la capacidad de aporte radial de la grava.</td>
-              </tr>
-              <tr>
-                <td className="fw-bold">Presupuesto Llave en Mano</td>
-                <td className="text-center font-monospace text-success fw-bold">~$2.030 - $2.950 USD</td>
-                <td className="text-center font-monospace text-info fw-bold">~$18.500 - $25.800 USD</td>
-                <td>Amortización: &lt; 2 meses (60m) vs 1.3 años (120m) frente a camiones cisterna ($30/cisterna).</td>
+                <td className="fw-bold">Inversión Llave en Mano</td>
+                <td className="text-center font-monospace text-success fw-bold">~$4.000 USD</td>
+                <td className="text-center font-monospace text-info fw-bold">~$24.880 USD</td>
+                <td>Ahorro neto de $20.880 USD (84% de reducción en CAPEX).</td>
               </tr>
             </tbody>
           </Table>
         </Card>
 
-        {/* Progressive Disclosure de Ecuaciones Cooper-Jacob y HMT */}
+        {/* Ecuaciones KaTeX */}
         <div className="pt-2 border-top border-secondary-subtle">
           <Button
             variant="link"
@@ -286,7 +341,11 @@ export const Module05Well: React.FC = () => {
             <span className="material-symbols-outlined ms-sm">
               {showTheis ? 'expand_less' : 'functions'}
             </span>
-            <span>{showTheis ? 'Ocultar Ecuaciones Hidráulicas (KaTeX)' : 'Ver Fundamento Matemático: Ecuaciones de Recarga Radial, Abatimiento y Carga Dinámica HMT (KaTeX)'}</span>
+            <span>
+              {showTheis
+                ? 'Ocultar Ecuaciones Hidráulicas (KaTeX)'
+                : 'Ver Fundamento Matemático: Ecuaciones de Recarga Radial, Abatimiento y Carga Dinámica HMT (KaTeX)'}
+            </span>
           </Button>
 
           {showTheis && (
@@ -312,7 +371,7 @@ export const Module05Well: React.FC = () => {
                       <BlockMath math="HMT = ND + \Delta z_{\text{tanque}} + P_{\text{serv}} + h_f = 52.0 + 3.0 + 10.0 + 4.0 = \mathbf{69.0\ \text{mca}}" />
                       <div className="text-secondary small mt-2 font-sans lh-base text-xs">
                         Potencia requerida en el eje con rendimiento combinado (<InlineMath math="\eta_b = 72\%" />, <InlineMath math="\eta_m = 88\%" />):
-                        <InlineMath math="P_{HP} = \frac{\gamma \cdot Q \cdot HMT}{75 \cdot \eta} = \frac{1000 \cdot 0.0015 \cdot 69}{75 \cdot 0.633} \approx \mathbf{2.18\ \text{HP}} \rightarrow \mathbf{2.0\ \text{HP comercial}}" />.
+                        <InlineMath math="P_{HP} = \frac{\gamma \cdot Q \cdot HMT}{75 \cdot \eta} = \frac{1000 \cdot 0.0015 \cdot 69}{75 \cdot 0.633} \approx \mathbf{2.18\ \text{HP}} \rightarrow \mathbf{2.0\ \text{HP comercial con SF 1.15}}" />.
                       </div>
                     </Col>
                   </>
@@ -334,7 +393,7 @@ export const Module05Well: React.FC = () => {
                       </div>
                       <BlockMath math="HMT = H_{\text{geom}} + h_f + P_{\text{serv}} = 88.0 + 7.5 + 5.0 = \mathbf{100.5\ \text{mca}}" />
                       <div className="text-secondary small mt-2 font-sans lh-base text-xs">
-                        La potencia requerida con rendimiento del 65%: 
+                        La potencia requerida con rendimiento del 65%:
                         <InlineMath math="P_{HP} = \frac{\gamma \cdot Q \cdot HMT}{75 \cdot \eta} = \frac{1000 \cdot 0.0028 \cdot 100.5}{75 \cdot 0.65} \approx \mathbf{5.77\ \text{HP}} \rightarrow \mathbf{7.5\ \text{HP comercial}}" />.
                       </div>
                     </Col>
@@ -348,4 +407,3 @@ export const Module05Well: React.FC = () => {
     </div>
   );
 };
-

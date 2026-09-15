@@ -1,3 +1,23 @@
+---
+doc_id: "HIDRO-002"
+titulo: "Análisis Geológico del Aljibe de 50 Metros"
+dominio: "hidrogeologia"
+tipo: "analisis"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+infraestructura: ["pozo_artesanal"]
+tags: ["conglomerado_aluvial", "acuitardo", "grava_lidita", "espejo_agua"]
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 1600
+---
 # Registro Técnico de Investigación Geológica e Hidrogeológica Integral
 ## Análisis de los Videos de Campo del Aljibe de 50 Metros — Cuara, Valle de Quíbor (Serie Videos 01, 02, 03 y 04)
 

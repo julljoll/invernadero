@@ -1,42 +1,43 @@
 {
-  "name": "LA CIGARRONERA — Invernadero y Pozo Artesanal",
-  "short_name": "LA CIGARRONERA",
-  "description": "LA CIGARRONERA — Plataforma de Inversión Agrícola, Ingeniería de Casa de Malla y Pozo Artesanal en el Valle de Quíbor, Lara, Venezuela.",
-  "start_url": "./index.html",
+  "name": "Agrovenecua — La Cigarronera",
+  "short_name": "AgroQuíbor",
+  "description": "Suite Agrotecnológica para Horticultura Protegida, Pozo Profundo e Ingeniería de Precisión — Valle de Quíbor, Lara, Venezuela.",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#090e0b",
-  "theme_color": "#53C942",
+  "background_color": "#f3f3f3",
+  "theme_color": "#0F4D06",
   "orientation": "any",
+  "categories": ["productivity", "business", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Cockpit Agronómico",
+      "short_name": "Cockpit",
+      "description": "Centro de mando: Clima, VPD, Riego FAO-56 y Fenología",
+      "url": "/cockpit",
+      "icons": [{ "src": "/agrovenecua_logo.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Calculadora de Pozo",
+      "short_name": "Pozo 60m",
+      "description": "Modelo hidrogeológico Theis y aforo de bombeo",
+      "url": "/calculo-pozo",
+      "icons": [{ "src": "/agrovenecua_logo.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Malla 50 Mesh",
+      "short_name": "Malla 50M",
+      "description": "Cotizador de rollos de malla anti-insectos 110/130 gsm",
+      "url": "/malla-50mesh",
+      "icons": [{ "src": "/agrovenecua_logo.svg", "sizes": "any" }]
+    }
+  ],
   "icons": [
     {
-      "src": "./assets/logo/icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon-192.svg",
-      "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./assets/logo/icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./icon-512.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "./assets/logo/agrovenecua_logo.svg",
+      "src": "/agrovenecua_logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }

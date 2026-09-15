@@ -3,16 +3,18 @@ import { Container, Row, Col, Nav, Badge, Button } from 'react-bootstrap';
 import { useAgroStore } from '../../shared/store/useAgroStore';
 import { CROPS_CATALOG } from '../../core/constants/crops';
 import { CockpitHeader } from './components/CockpitHeader';
+import { AgroErrorBoundary } from '../../shared/components/AgroErrorBoundary';
 import { Module01Climate } from './modules/Module01Climate';
 import { Module03Structure } from './modules/Module03Structure';
 import { Module03Fertirriego } from './modules/Module03Fertirriego';
 import { Module05Well } from './modules/Module05Well';
 import { Module06PestControl } from './modules/Module06PestControl';
+import { Module07Phenology } from './modules/Module07Phenology';
 
 export const CockpitPage: React.FC = () => {
   const { selectedCrop } = useAgroStore();
   const [activeTab, setActiveTab] = useState<string>('clima');
-  const crop = CROPS_CATALOG[selectedCrop];
+  const crop = CROPS_CATALOG[selectedCrop] || CROPS_CATALOG.pepper;
 
   const waShiftText = encodeURIComponent(
     `🚜 *AGROVENECUA — FICHA DE TURNO DE CAMPO*\n` +
@@ -29,6 +31,7 @@ export const CockpitPage: React.FC = () => {
     { id: 'fertirriego', label: '03. Siembra & Fertirriego', subtitle: 'FAO-56 · AIFA Hidrosoluble', icon: 'water_drop', color: 'water' },
     { id: 'pozo', label: '04. Hidrología Pozo 60m', subtitle: 'Nivel Dinámico · Aforo', icon: 'water_ph', color: 'water' },
     { id: 'plagas', label: '05. Fitosanidad IPM', subtitle: 'Rotación IRAC · Umbrales', icon: 'pest_control', color: 'alert' },
+    { id: 'fenologia', label: '06. Fenología GDD', subtitle: 'Tiempo Térmico · Cosecha', icon: 'calendar_clock', color: 'sun' },
   ];
 
   return (
@@ -137,14 +140,14 @@ export const CockpitPage: React.FC = () => {
           </Col>
 
           {/* ====================================================================
-             WORKSPACE DE MÓDULOS AGRONÓMICOS (Columna Derecha)
+             WORKSPACE DE MÓDULOS AGRONÓMICOS CON ERROR BOUNDARIES
              ==================================================================== */}
           <Col xs={12} lg={8} xl={9} as="main">
             {/* Header Contextual del Módulo */}
             <div className="d-none d-md-flex align-items-center justify-content-between px-2 mb-3 text-secondary text-xs font-sans">
               <div className="d-flex align-items-center gap-2">
                 <span className="material-symbols-outlined text-success ms-sm">spa</span>
-                <span>Cultivo Objetivo: <strong className="text-dark">Pimentón Híbrido F1</strong> (2.500 plantas · 1.000 m²)</span>
+                <span>Cultivo Objetivo: <strong className="text-dark">{crop.name}</strong> (2.500 plantas · 1.000 m²)</span>
               </div>
               <div className="d-flex align-items-center gap-2 font-mono">
                 <Badge bg="light" text="secondary" className="border border-secondary-subtle">
@@ -153,11 +156,41 @@ export const CockpitPage: React.FC = () => {
               </div>
             </div>
 
-            {activeTab === 'clima' && <Module01Climate />}
-            {activeTab === 'estructura' && <Module03Structure />}
-            {(activeTab === 'fertirriego' || activeTab === 'riego' || activeTab === 'siembra') && <Module03Fertirriego />}
-            {activeTab === 'pozo' && <Module05Well />}
-            {activeTab === 'plagas' && <Module06PestControl />}
+            {activeTab === 'clima' && (
+              <AgroErrorBoundary moduleName="01. Clima & VPD NASA MERRA-2">
+                <Module01Climate />
+              </AgroErrorBoundary>
+            )}
+
+            {activeTab === 'estructura' && (
+              <AgroErrorBoundary moduleName="02. Estructura & Cargas 3D">
+                <Module03Structure />
+              </AgroErrorBoundary>
+            )}
+
+            {(activeTab === 'fertirriego' || activeTab === 'riego' || activeTab === 'siembra') && (
+              <AgroErrorBoundary moduleName="03. Fertirriego & Nutrición AIFA">
+                <Module03Fertirriego />
+              </AgroErrorBoundary>
+            )}
+
+            {activeTab === 'pozo' && (
+              <AgroErrorBoundary moduleName="04. Hidrogeología Pozo 60m">
+                <Module05Well />
+              </AgroErrorBoundary>
+            )}
+
+            {activeTab === 'plagas' && (
+              <AgroErrorBoundary moduleName="05. Fitosanidad IPM & Rotación IRAC">
+                <Module06PestControl />
+              </AgroErrorBoundary>
+            )}
+
+            {activeTab === 'fenologia' && (
+              <AgroErrorBoundary moduleName="06. Fenología GDD & Tiempo Térmico">
+                <Module07Phenology />
+              </AgroErrorBoundary>
+            )}
           </Col>
         </Row>
       </Container>

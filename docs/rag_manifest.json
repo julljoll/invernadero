@@ -1,0 +1,91 @@
+{
+  "project": "Agrovenecua",
+  "version": "3.0.0",
+  "updated_at": "2026-09-14",
+  "corpus": [
+    {
+      "doc_id": "BIO-001",
+      "file_path": "01-bioclima/ANALISIS_TECNICO_QUIBOR.md",
+      "domain": "bioclima",
+      "type": "analisis",
+      "estimated_tokens": 2500
+    },
+    {
+      "doc_id": "EST-001",
+      "file_path": "02-estructura/CALCULO_TECNICO_MALLA_2000M2.md",
+      "domain": "estructura",
+      "type": "expediente",
+      "estimated_tokens": 2000
+    },
+    {
+      "doc_id": "HIDRO-001",
+      "file_path": "03-hidrogeologia/EXPEDIENTE_TECNICO_POZO_50M.md",
+      "domain": "hidrogeologia",
+      "type": "expediente",
+      "estimated_tokens": 1500
+    },
+    {
+      "doc_id": "HIDRO-002",
+      "file_path": "03-hidrogeologia/ANALISIS_GEOLOGICO_ALJIBE_50M.md",
+      "domain": "hidrogeologia",
+      "type": "analisis",
+      "estimated_tokens": 1600
+    },
+    {
+      "doc_id": "HIDRO-003",
+      "file_path": "03-hidrogeologia/PLAN_INVERSION_POZO_60M.md",
+      "domain": "hidrogeologia",
+      "type": "plan",
+      "estimated_tokens": 4500
+    },
+    {
+      "doc_id": "HIDRO-004",
+      "file_path": "03-hidrogeologia/PLAN_VALIDACION_POZO_PROFUNDO.md",
+      "domain": "hidrogeologia",
+      "type": "protocolo",
+      "estimated_tokens": 8000
+    },
+    {
+      "doc_id": "HIDRO-005",
+      "file_path": "03-hidrogeologia/VERIFICACION_CAUDAL_60M.md",
+      "domain": "hidrogeologia",
+      "type": "analisis",
+      "estimated_tokens": 1500
+    },
+    {
+      "doc_id": "HIDRO-006",
+      "file_path": "03-hidrogeologia/JEGAT_MORA_2012_RECARGA.md",
+      "domain": "hidrogeologia",
+      "type": "paper_cientifico",
+      "estimated_tokens": 2500
+    },
+    {
+      "doc_id": "PROD-001",
+      "file_path": "04-produccion/PLAN_TOMATE_1000M2.md",
+      "domain": "produccion",
+      "type": "plan",
+      "estimated_tokens": 3000
+    },
+    {
+      "doc_id": "PROD-002",
+      "file_path": "04-produccion/PLAN_TOMATE_2000M2.md",
+      "domain": "produccion",
+      "type": "plan",
+      "estimated_tokens": 6000
+    },
+    {
+      "doc_id": "CAT-001",
+      "file_path": "05-catalogo/LEADERGREENHOUSE_PRODUCTOS.md",
+      "domain": "catalogo",
+      "type": "catalogo",
+      "estimated_tokens": 1500
+    },
+    {
+      "doc_id": "CANON-001",
+      "file_path": "MANUAL_CANONICO_AGROVENECUA.md",
+      "domain": "compendio",
+      "type": "compendio",
+      "estimated_tokens": 2500
+    }
+  ]
+}

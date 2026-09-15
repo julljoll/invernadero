@@ -1,3 +1,26 @@
+---
+doc_id: "HIDRO-003"
+titulo: "Plan de Inversión Pozo de 60 Metros"
+dominio: "hidrogeologia"
+tipo: "plan"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+infraestructura: ["pozo_artesanal"]
+tags: ["presupuesto", "inversion", "excavacion_manual", "equipamiento_electromecanico", "roi"]
+cross_references:
+  - doc_id: "HIDRO-006"
+    relacion: "cita_cientifica"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 4500
+---
 <div align="center">
   <img src="agrovenecua_logo.svg" alt="Logo Agrovenecua" width="95">
   <h3>AGROVENECUA INGENIERÍA</h3>
@@ -18,6 +41,8 @@
 
 ---
 
+<!-- chunk:HIDRO-003/C1 title:"Resumen + Estado Actual" tokens:~500 -->
+<!-- chunk:HIDRO-003/C1 title:"Resumen + Estado Actual" tokens:~500 -->
 ## 1. Resumen Ejecutivo y Diagnóstico Técnico
 
 La Finca La Cigarronera cuenta con un activo subterráneo de valor estratégico excepcional: un pozo artesanal excavado verticalmente a pico hasta los **50 metros de profundidad**, con diámetro regular de **0.90 m a 1.15 m**, paredes autoportantes a tierra viva sin colapso y desviación axial nula ($< 1^\circ$).
@@ -55,6 +80,8 @@ Profundizar **exactamente los 10 metros restantes** (de los 50 m consolidados ac
 
 ---
 
+<!-- chunk:HIDRO-003/C2 title:"Comparativa Financiera" tokens:~600 -->
+<!-- chunk:HIDRO-003/C2 title:"Comparativa Financiera" tokens:~600 -->
 ## 2. Comparativa Financiera: Culminación Artesanal vs. Perforación Mecánica
 
 La decisión entre culminar el pozo artesanal existente o contratar una empresa de perforación industrial de pozos profundos se resume en la siguiente matriz de evaluación de capital:
@@ -397,4 +424,3 @@ La culminación artesanal de 50 m a 60 m en Cuara es **la decisión más intelig
 6. Tanto en Tomate ($15.000 USD) como en Pimentón ($12.000 – $13.500 USD), el pozo se amortiza por completo en las primeras semanas de la cosecha inicial.
 
 **Recomendación:** Aprobar de inmediato el presupuesto de **$4.000 USD** y dar inicio a la adquisición de equipos y avance de los 10 metros finales.
-

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Slider } from '../../../../shared/components/Slider';
+import { GoogleSheetsSyncModal } from '../../../../shared/components/GoogleSheetsSyncModal';
 
 type BudgetCategory = 'all' | 'seed' | 'nutrition' | 'structure' | 'irrigation' | 'mesh';
 
@@ -9,6 +10,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
   const [targetYieldKg, setTargetYieldKg] = useState<number>(13000); // 13.0 Ton = 650 cestas (2.500 pl × 5.20 kg)
   const [activeCategory, setActiveCategory] = useState<BudgetCategory>('all');
   const [showTimelineDetails, setShowTimelineDetails] = useState<boolean>(false);
+  const [showGoogleSheetsModal, setShowGoogleSheetsModal] = useState<boolean>(false);
 
   // =========================================================================
   // DESGLOSE TÉCNICO EXHAUSTIVO DEL GASTO DE PRODUCCIÓN Y ADECUACIÓN (15 RUBROS)
@@ -149,6 +151,19 @@ export const InvestmentCalculatorSection: React.FC = () => {
               }`}
             >
               Óptimo ($16 / Cesta)
+            </button>
+          </div>
+
+          {/* Botón de Sincronización Google Sheets */}
+          <div className="mt-2.5">
+            <button
+              type="button"
+              onClick={() => setShowGoogleSheetsModal(true)}
+              className="btn btn-outline-success btn-sm rounded-pill fw-bold d-inline-flex align-items-center gap-1.5 px-3 py-1 shadow-2xs"
+              title="Exportar y guardar cálculo de gastos de los 15 rubros y ROI en Google Sheets oficial"
+            >
+              <span className="material-symbols-outlined ms-sm">table_chart</span>
+              <span>Guardar Presupuesto &amp; Gastos en Google Sheets</span>
             </button>
           </div>
         </div>
@@ -756,6 +771,13 @@ export const InvestmentCalculatorSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Modal de Sincronización Google Sheets */}
+      <GoogleSheetsSyncModal
+        show={showGoogleSheetsModal}
+        onHide={() => setShowGoogleSheetsModal(false)}
+        initialSheetId="05_Calculo_Gastos_ROI"
+      />
     </section>
   );
 };

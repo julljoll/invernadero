@@ -1,15 +1,18 @@
 ---
-tipo_instrumento: "Norma"
-nombre_oficial: "Evaluación de la recarga artificial del acuifero del Valle de Quibor"
-gaceta_oficial: ""
-fecha_publicacion: ""
-articulos_detectados: 0
-categorias: ["informatico", "internacional"]
-hash_pdf_sha256: "cedc0abe5ccb5a8f809f04c8e016dac28dd5728674e4daf260a0a709f2406353"
-autor_procesamiento: "Jull Ortiz (Arquitecto de Información IA y bases de datos vectoriales)"
-sistema: "IBM Docling + LegalProcessor v2"
-version_md: "2.0"
-procesado_en: "2026-09-06T11:23:42"
+doc_id: "HIDRO-006"
+titulo: "Evaluación de la Recarga Artificial del Acuífero del Valle de Quíbor"
+dominio: "hidrogeologia"
+tipo: "paper_cientifico"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Valle de Quíbor"
+  municipio: "Jiménez"
+  estado: "Lara"
+tags: ["acuifero", "recarga_artificial", "cidiat", "sobreexplotacion"]
+prioridad_retrieval: "media"
+es_fuente_primaria: false
+tamano_tokens_estimado: 2500
 ---
 # 🏛️ PROCESAMIENTO ESTRUCTURADO DE NORMATIVAS Y LEYES
 

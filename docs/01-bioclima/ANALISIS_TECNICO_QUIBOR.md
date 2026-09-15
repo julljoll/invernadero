@@ -1,3 +1,30 @@
+---
+doc_id: "BIO-001"
+titulo: "Análisis Técnico: Climatología y Bioclima de Quíbor"
+dominio: "bioclima"
+tipo: "analisis"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+cultivos: ["tomate_indeterminado", "pimenton_magistral_f1"]
+superficie_m2: [2000]
+infraestructura: ["casa_de_malla"]
+tags: ["climatologia", "merra-2", "vientos", "bochorno", "malla_50_mesh", "altura_estructural"]
+cross_references:
+  - doc_id: "EST-001"
+    relacion: "fundamenta"
+  - doc_id: "HIDRO-004"
+    relacion: "fundamenta_viento"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 2500
+---
 # Análisis Técnico Maestro: Casa de Malla en Quíbor (Municipio Jiménez, Lara)
 ## Cultivo Protegido de Pimentón (*Capsicum annuum*) y Tomate (*Solanum lycopersicum*)
 ### Coordenadas del Proyecto: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
@@ -197,5 +224,3 @@ El modelo matemático de CIDIAT-ULA / SHYQ (93 filas × 121 columnas, 11.253 nod
 1. **Escenario A (Actual - Pozo Profundo en Cono Abatido):** $EC_w = 1.4\text{ dS/m}$, pH 7.8, requiere **$LF = 20\%$** de lavado salino, consumo de **$15.08\text{ m}^3\text{/día}$** y neutralización con $22\text{ L/semana de Ácido Nítrico 60\%}$.
 2. **Escenario B (Conexión Yacambú / Recarga Artificial):** Agua dulce andina ($EC_w \approx 0.5\text{ dS/m}$), reduciendo la fracción de lavado a **$LF = 6.5\%$**, con consumo de **$12.45\text{ m}^3\text{/día}$ (ahorro de $2.63\text{ m}^3\text{/día} = 17.5\%$ de agua)** y 65% menos gasto en ácido nítrico.
 3. **Eficiencia Hídrica de la Casa de Malla:** Gracias a los goteros autorregulantes PC a 40 cm y al microclima protegido con riego sectorizado en 3 bloques, la Casa de Malla produce **2.3 a 2.5 kg de tomate por m³ de agua** frente a 0.9 kg/m³ en campo abierto, constituyendo la única alternativa sostenible ante el agotamiento del acuífero de Quíbor.
-
-

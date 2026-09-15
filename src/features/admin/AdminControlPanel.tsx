@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dbExport from '../../core/constants/database.json';
+import { GoogleSheetsSyncModal } from '../../shared/components/GoogleSheetsSyncModal';
+import { GOOGLE_SHEET_CONFIG } from '../../core/services/googleSheetsSync';
 
 interface SettingRow {
   key: string;
@@ -46,18 +48,30 @@ interface ContentRow {
   value: string;
 }
 
+interface RagDocumentRow {
+  doc_id: string;
+  titulo: string;
+  dominio: string;
+  tags: string;
+  tamano_tokens_estimado: number;
+  es_fuente_primaria: number;
+  ruta_archivo: string;
+}
+
 export const AdminControlPanel: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'settings' | 'greenhouse' | 'water' | 'climate' | 'crops' | 'content'>('settings');
+  const [activeTab, setActiveTab] = useState<'settings' | 'greenhouse' | 'water' | 'climate' | 'crops' | 'content' | 'sheets' | 'rag'>('settings');
   const [isLocalApiAvailable, setIsLocalApiAvailable] = useState<boolean | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [savingKey, setSavingKey] = useState<string | null>(null);
   const [toastMessage, setToastMessage] = useState<{ text: string; type: 'success' | 'error' | 'info' } | null>(null);
+  const [showGoogleSheetsModal, setShowGoogleSheetsModal] = useState<boolean>(false);
 
   // Estados de datos
   const [settings, setSettings] = useState<SettingRow[]>([]);
   const [climateMonths, setClimateMonths] = useState<ClimateRow[]>([]);
   const [crops, setCrops] = useState<CropRow[]>([]);
   const [siteContent, setSiteContent] = useState<ContentRow[]>([]);
+  const [ragDocuments, setRagDocuments] = useState<RagDocumentRow[]>([]);
 
   const showToast = (text: string, type: 'success' | 'error' | 'info' = 'success') => {
     setToastMessage({ text, type });
@@ -76,6 +90,7 @@ export const AdminControlPanel: React.FC = () => {
           setClimateMonths(json.data.climateMonths || []);
           setCrops(json.data.crops || []);
           setSiteContent(json.data.siteContent || []);
+          setRagDocuments(json.data.ragDocuments || []);
           setIsLocalApiAvailable(true);
           setLoading(false);
           return;
@@ -89,6 +104,7 @@ export const AdminControlPanel: React.FC = () => {
       setClimateMonths((dbExport.climateMonths as unknown as ClimateRow[]) || []);
       setCrops((dbExport.cropsRaw as unknown as CropRow[]) || []);
       setSiteContent((dbExport.siteContentRaw as unknown as ContentRow[]) || []);
+      setRagDocuments(((dbExport as any).ragDocuments as unknown as RagDocumentRow[]) || []);
       setLoading(false);
     }
   };
@@ -365,6 +381,27 @@ export const AdminControlPanel: React.FC = () => {
               </button>
             )}
 
+            <button
+              onClick={() => setShowGoogleSheetsModal(true)}
+              style={{
+                backgroundColor: '#1b4332',
+                color: '#ffffff',
+                border: '1px solid #53C942',
+                padding: '7px 14px',
+                borderRadius: '6px',
+                fontWeight: 700,
+                fontSize: '13px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+              }}
+              title="Abrir y sincronizar con el Google Sheet oficial del Valle de Quíbor"
+            >
+              📊 Google Sheet Oficial
+            </button>
+
             <Link
               to="/cockpit"
               style={{
@@ -388,6 +425,8 @@ export const AdminControlPanel: React.FC = () => {
         <div style={{ maxWidth: '1300px', margin: '0 auto', display: 'flex', overflowX: 'auto', gap: '8px', padding: '0 16px' }}>
           {[
             { id: 'settings', label: '⚙️ Configuración General', count: settings.filter((s) => s.category === 'general').length },
+            { id: 'rag', label: '🧠 Corpus RAG', count: ragDocuments.length },
+            { id: 'sheets', label: '📊 Google Sheet Oficial', count: settings.filter((s) => s.category === 'integration').length || 3 },
             { id: 'greenhouse', label: '🏗️ Invernadero y Malla', count: settings.filter((s) => s.category === 'greenhouse' || s.category === 'mesh').length },
             { id: 'water', label: '💧 Pozo y Acuífero', count: settings.filter((s) => s.category === 'water').length },
             { id: 'climate', label: '🌤️ Climatología Quíbor', count: climateMonths.length },
@@ -942,9 +981,185 @@ export const AdminControlPanel: React.FC = () => {
                 </div>
               </div>
             )}
+
+            {/* PESTAÑA: GOOGLE SHEET OFICIAL */}
+            {activeTab === 'sheets' && (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>
+                      📊 Integración con Google Sheet Oficial
+                    </h3>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+                      Almacena y sincroniza los datos de Siembra, Riego FAO-56, Nutrición AIFA, Plagas IPM y Gastos/ROI.
+                    </p>
+                  </div>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      onClick={() => setShowGoogleSheetsModal(true)}
+                      style={{ backgroundColor: '#0F4D06', color: '#ffffff', border: 'none', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}
+                    >
+                      ⚡ Abrir Sincronizador de 5 Hojas
+                    </button>
+                    <a
+                      href={GOOGLE_SHEET_CONFIG.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ backgroundColor: '#ffffff', color: '#0F4D06', border: '1px solid #0F4D06', textDecoration: 'none', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}
+                    >
+                      ↗️ Abrir en Google Sheets
+                    </a>
+                  </div>
+                </div>
+
+                {/* Tarjetas de Parámetros de Integración */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '16px', marginBottom: '24px' }}>
+                  {settings
+                    .filter((s) => s.category === 'integration')
+                    .map((item) => (
+                      <div key={item.key} style={{ backgroundColor: '#ffffff', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 1px 2px rgba(0,0,0,0.03)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
+                          <label style={{ fontSize: '13px', fontWeight: 700, color: '#1e293b' }}>
+                            {item.label}
+                          </label>
+                          <span style={{ fontSize: '10px', fontFamily: 'monospace', color: '#94a3b8', backgroundColor: '#f1f5f9', padding: '2px 6px', borderRadius: '4px' }}>
+                            {item.key}
+                          </span>
+                        </div>
+                        <p style={{ margin: '0 0 10px 0', fontSize: '11px', color: '#64748b' }}>
+                          {item.description}
+                        </p>
+                        <div style={{ display: 'flex', gap: '8px' }}>
+                          <input
+                            type="text"
+                            value={item.value}
+                            onChange={(e) => handleSettingChange(item.key, e.target.value)}
+                            style={{ flex: 1, padding: '8px 12px', borderRadius: '6px', border: '1px solid #cbd5e1', fontSize: '13px', fontFamily: 'monospace' }}
+                          />
+                          {isLocalApiAvailable && (
+                            <button
+                              onClick={() => saveSetting(item.key, item.value)}
+                              disabled={savingKey === item.key}
+                              style={{ backgroundColor: '#248a15', color: '#ffffff', border: 'none', padding: '8px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+                            >
+                              {savingKey === item.key ? '...' : 'Guardar'}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+
+                {/* Resumen de las 5 Hojas Estructuradas */}
+                <div style={{ backgroundColor: '#ffffff', padding: '20px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
+                  <h4 style={{ margin: '0 0 12px 0', fontSize: '15px', fontWeight: 700, color: '#0F4D06' }}>
+                    📑 Estructura de las 5 Hojas Sincronizadas
+                  </h4>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
+                    <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <strong style={{ fontSize: '13px', color: '#166534', display: 'block' }}>01_Plan_Siembra</strong>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>Variedad Magistral F1, 2.500 plantas, 10 camellones, densidad 2.5 pl/m²</span>
+                    </div>
+                    <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <strong style={{ fontSize: '13px', color: '#0369a1', display: 'block' }}>02_Plan_Riego_FAO56</strong>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>24 semanas, balance Kc, ET0, fracción lixiviación, m³/semana, minutos/día</span>
+                    </div>
+                    <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <strong style={{ fontSize: '13px', color: '#15803d', display: 'block' }}>03_Plan_Fertilizacion_AIFA</strong>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>Tanques A, B, C (Ácido Nítrico pH), gramos/planta/semana, conductividad</span>
+                    </div>
+                    <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <strong style={{ fontSize: '13px', color: '#b91c1c', display: 'block' }}>04_Plan_Fitosanitario_IPM</strong>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>Exclusión Malla 50 mesh, umbrales, control biológico y rotación IRAC</span>
+                    </div>
+                    <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                      <strong style={{ fontSize: '13px', color: '#c2410c', display: 'block' }}>05_Calculo_Gastos_ROI</strong>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>15 rubros ($7.375 total), OPEX, CAPEX, escenarios $11-$18/cesta, ROI</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* PESTAÑA: CORPUS RAG */}
+            {activeTab === 'rag' && (
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
+                  <div>
+                    <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>
+                      🧠 Base de Conocimiento RAG (Retrieval-Augmented Generation)
+                    </h3>
+                    <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: '#64748b' }}>
+                      Documentos técnicos fuente (Single Source of Truth) procesados desde la carpeta <code>docs/</code>.
+                    </p>
+                  </div>
+                  <div style={{ padding: '8px 12px', backgroundColor: '#e0e7ff', color: '#3730a3', borderRadius: '6px', fontSize: '13px', fontWeight: 600 }}>
+                    Total Tokens: {ragDocuments.reduce((acc, curr) => acc + curr.tamano_tokens_estimado, 0).toLocaleString()}
+                  </div>
+                </div>
+
+                <div style={{ overflowX: 'auto', backgroundColor: '#ffffff', borderRadius: '10px', border: '1px solid #e2e8f0', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                    <thead style={{ backgroundColor: '#f8fafc', borderBottom: '2px solid #e2e8f0' }}>
+                      <tr>
+                        <th style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 700, color: '#475569', textTransform: 'uppercase' }}>Doc ID</th>
+                        <th style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 700, color: '#475569', textTransform: 'uppercase' }}>Título y Dominio</th>
+                        <th style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 700, color: '#475569', textTransform: 'uppercase' }}>Tags</th>
+                        <th style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 700, color: '#475569', textTransform: 'uppercase', textAlign: 'center' }}>Tokens</th>
+                        <th style={{ padding: '12px 16px', fontSize: '12px', fontWeight: 700, color: '#475569', textTransform: 'uppercase', textAlign: 'center' }}>Fuente Primaria</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {ragDocuments.map((doc) => (
+                        <tr key={doc.doc_id} style={{ borderBottom: '1px solid #e2e8f0' }}>
+                          <td style={{ padding: '12px 16px' }}>
+                            <span style={{ backgroundColor: '#0f172a', color: '#38bdf8', fontSize: '12px', fontFamily: 'monospace', padding: '4px 8px', borderRadius: '4px', fontWeight: 700 }}>
+                              {doc.doc_id}
+                            </span>
+                          </td>
+                          <td style={{ padding: '12px 16px' }}>
+                            <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '14px', marginBottom: '4px' }}>{doc.titulo}</div>
+                            <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                              <span style={{ backgroundColor: '#f1f5f9', padding: '2px 6px', borderRadius: '4px', border: '1px solid #cbd5e1' }}>{doc.dominio}</span>
+                              <span style={{ fontFamily: 'monospace' }}>{doc.ruta_archivo}</span>
+                            </div>
+                          </td>
+                          <td style={{ padding: '12px 16px', maxWidth: '300px' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                              {doc.tags.split(',').map((t) => t.trim()).filter(Boolean).map((t, i) => (
+                                <span key={i} style={{ backgroundColor: '#e2e8f0', color: '#475569', fontSize: '11px', padding: '2px 6px', borderRadius: '10px' }}>
+                                  {t}
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                          <td style={{ padding: '12px 16px', textAlign: 'center' }}>
+                            <div style={{ fontSize: '13px', fontWeight: 600, color: '#0F4D06' }}>{doc.tamano_tokens_estimado.toLocaleString()}</div>
+                          </td>
+                          <td style={{ padding: '12px 16px', textAlign: 'center' }}>
+                            {doc.es_fuente_primaria === 1 ? (
+                              <span style={{ backgroundColor: '#dcfce7', color: '#166534', padding: '4px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 700 }}>Sí</span>
+                            ) : (
+                              <span style={{ backgroundColor: '#fef3c7', color: '#b45309', padding: '4px 8px', borderRadius: '20px', fontSize: '11px', fontWeight: 700 }}>No</span>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
           </>
         )}
       </main>
+
+      {/* Modal de Sincronización Google Sheets */}
+      <GoogleSheetsSyncModal
+        show={showGoogleSheetsModal}
+        onHide={() => setShowGoogleSheetsModal(false)}
+        initialSheetId="01_Plan_Siembra"
+      />
     </div>
   );
 };

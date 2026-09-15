@@ -1,3 +1,28 @@
+---
+doc_id: "PROD-002"
+titulo: "Plan de Producción Tomate 2000m2"
+dominio: "produccion"
+tipo: "plan"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+cultivos: ["tomate_indeterminado"]
+superficie_m2: [2000]
+infraestructura: ["casa_de_malla"]
+tags: ["marco_plantacion", "hidraulica", "fao-56", "nutricion", "ipm", "economia"]
+cross_references:
+  - doc_id: "HIDRO-004"
+    relacion: "requiere_agua"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 6000
+---
 # PROYECTO LA CIGARRONERA — PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA: TOMATE INDETERMINADO EN CASA DE MALLA (2.000 m²)
 ## Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela (695 – 710 msnm — Clima Semiárido Cálido BSh)
 ### Georreferenciación Satelital: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
@@ -33,6 +58,8 @@ graph TD
 
 ---
 
+<!-- chunk:PROD-002/C1 title:"Marco de Plantación" tokens:~600 -->
+<!-- chunk:PROD-002/C1 title:"Marco de Plantación" tokens:~600 -->
 ## CAPÍTULO 1: MARCO DE PLANTACIÓN Y ADECUACIÓN DEL SUELO
 
 ### 1.1. Distribución Espacial de Camellones (20.00 m de Ancho)

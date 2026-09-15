@@ -1,9 +1,11 @@
-import React from 'react';
-import { Container, Badge } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Badge, Button } from 'react-bootstrap';
 import { useOpenMeteo } from '../../../core/hooks/useOpenMeteo';
+import { GoogleSheetsSyncModal } from '../../../shared/components/GoogleSheetsSyncModal';
 
 export const CockpitHeader: React.FC = () => {
   const { telemetry } = useOpenMeteo();
+  const [showSyncModal, setShowSyncModal] = useState<boolean>(false);
 
   return (
     <header className="cockpit-header-glass py-3 px-3 px-md-4 mb-4 sticky-top" style={{ zIndex: 1020 }}>
@@ -25,21 +27,37 @@ export const CockpitHeader: React.FC = () => {
               </p>
             </div>
 
-            {/* Cultivo Activo Exclusivo: Pimentón (Capsicum annuum) */}
-            <div className="d-flex align-items-center gap-2.5 bg-success bg-opacity-10 border border-success border-opacity-30 px-3 py-2 rounded-4 shadow-sm flex-shrink-0">
-              <div className="bg-success text-white rounded-circle p-1.5 d-flex align-items-center justify-content-center shadow-xs">
-                <span className="material-symbols-outlined ms-sm">workspace_premium</span>
-              </div>
-              <div className="d-flex flex-column">
-                <div className="d-flex align-items-center gap-1.5">
-                  <span className="fw-bold text-success text-xs">Pimentón Híbrido</span>
-                  <Badge bg="success" className="bg-opacity-25 text-success font-monospace" style={{ fontSize: '10px' }}>
-                    Capsicum annuum
-                  </Badge>
+            {/* Botón de Sincronización Google Sheets Oficial & Cultivo Activo */}
+            <div className="d-flex align-items-center gap-2 flex-wrap flex-md-nowrap">
+              <Button
+                variant="success"
+                onClick={() => setShowSyncModal(true)}
+                className="d-flex align-items-center gap-2 px-3 py-2 rounded-4 shadow-sm border border-success fw-bold text-xs"
+                title="Abrir y sincronizar con el Google Sheet oficial del Valle de Quíbor"
+              >
+                <span className="material-symbols-outlined ms-sm">table_chart</span>
+                <span className="d-none d-sm-inline">Google Sheet Oficial</span>
+                <Badge bg="light" text="dark" className="font-mono text-2xs px-1.5 py-0.5">
+                  5 Hojas
+                </Badge>
+              </Button>
+
+              {/* Cultivo Activo Exclusivo: Pimentón (Capsicum annuum) */}
+              <div className="d-flex align-items-center gap-2.5 bg-success bg-opacity-10 border border-success border-opacity-30 px-3 py-2 rounded-4 shadow-sm flex-shrink-0">
+                <div className="bg-success text-white rounded-circle p-1.5 d-flex align-items-center justify-content-center shadow-xs">
+                  <span className="material-symbols-outlined ms-sm">workspace_premium</span>
                 </div>
-                <span className="text-secondary font-mono text-xxs mt-0.5">
-                  <strong className="text-dark">2.500 Plantas</strong> · Densidad <strong className="text-success">2.50 pl/m²</strong> (1.000 m²)
-                </span>
+                <div className="d-flex flex-column">
+                  <div className="d-flex align-items-center gap-1.5">
+                    <span className="fw-bold text-success text-xs">Pimentón Híbrido</span>
+                    <Badge bg="success" className="bg-opacity-25 text-success font-monospace" style={{ fontSize: '10px' }}>
+                      Capsicum annuum
+                    </Badge>
+                  </div>
+                  <span className="text-secondary font-mono text-xxs mt-0.5">
+                    <strong className="text-dark">2.500 Plantas</strong> · Densidad <strong className="text-success">2.50 pl/m²</strong> (1.000 m²)
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -90,6 +108,13 @@ export const CockpitHeader: React.FC = () => {
 
         </div>
       </Container>
+
+      {/* Modal de Sincronización Google Sheets */}
+      <GoogleSheetsSyncModal
+        show={showSyncModal}
+        onHide={() => setShowSyncModal(false)}
+        initialSheetId="01_Plan_Siembra"
+      />
     </header>
   );
 };

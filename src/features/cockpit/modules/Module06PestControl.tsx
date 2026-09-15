@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Badge, Alert, Button, ButtonGroup } from 'react-bootstrap';
+import { GoogleSheetsSyncModal } from '../../../shared/components/GoogleSheetsSyncModal';
 
 interface PestItem {
   id: string;
@@ -91,6 +92,7 @@ const PEST_DATABASE: PestItem[] = [
 
 export const Module06PestControl: React.FC = () => {
   const [filter, setFilter] = useState<'all' | 'excluded' | 'critical'>('all');
+  const [showGoogleSheetsModal, setShowGoogleSheetsModal] = useState<boolean>(false);
 
   const filteredPests = PEST_DATABASE.filter((p) => {
     if (filter === 'excluded') return p.physicalExclusion;
@@ -153,32 +155,58 @@ export const Module06PestControl: React.FC = () => {
             <span>Matriz de Manejo Integrado de Plagas &amp; Rotación IRAC</span>
           </h4>
 
-          <ButtonGroup size="sm" className="bg-light p-1 rounded-pill border border-secondary-subtle">
+          <div className="d-flex align-items-center gap-2 flex-wrap">
             <Button
-              variant={filter === 'all' ? 'success' : 'outline-secondary'}
-              onClick={() => setFilter('all')}
-              className={`rounded-pill px-3 fw-bold ${filter !== 'all' ? 'border-0' : ''}`}
+              variant="outline-success"
+              size="sm"
+              onClick={() => setShowGoogleSheetsModal(true)}
+              className="d-flex align-items-center gap-1.5 fw-bold rounded-pill px-3 shadow-xs"
+              title="Exportar Plan Fitosanitario y Rotación IRAC a Google Sheets"
             >
-              Todas (6)
+              <span className="material-symbols-outlined ms-sm">table_chart</span>
+              <span>Guardar en Google Sheets</span>
             </Button>
-            <Button
-              variant={filter === 'excluded' ? 'success' : 'outline-secondary'}
-              onClick={() => setFilter('excluded')}
-              className={`rounded-pill px-3 fw-bold ${filter !== 'excluded' ? 'border-0' : ''}`}
-            >
-              Excluidas por Malla (5)
-            </Button>
-            <Button
-              variant={filter === 'critical' ? 'danger' : 'outline-secondary'}
-              onClick={() => setFilter('critical')}
-              className={`rounded-pill px-3 fw-bold ${filter !== 'critical' ? 'border-0' : ''}`}
-            >
-              Críticas / No Retenidas (Ácaros)
-            </Button>
-          </ButtonGroup>
+
+            <ButtonGroup size="sm" className="bg-light p-1 rounded-pill border border-secondary-subtle">
+              <Button
+                variant={filter === 'all' ? 'success' : 'outline-secondary'}
+                onClick={() => setFilter('all')}
+                className={`rounded-pill px-3 fw-bold ${filter !== 'all' ? 'border-0' : ''}`}
+              >
+                Todas (6)
+              </Button>
+              <Button
+                variant={filter === 'excluded' ? 'success' : 'outline-secondary'}
+                onClick={() => setFilter('excluded')}
+                className={`rounded-pill px-3 fw-bold ${filter !== 'excluded' ? 'border-0' : ''}`}
+              >
+                Excluidas por Malla (5)
+              </Button>
+              <Button
+                variant={filter === 'critical' ? 'danger' : 'outline-secondary'}
+                onClick={() => setFilter('critical')}
+                className={`rounded-pill px-3 fw-bold ${filter !== 'critical' ? 'border-0' : ''}`}
+              >
+                Críticas / No Retenidas (Ácaros)
+              </Button>
+            </ButtonGroup>
+          </div>
         </div>
 
-        <Row className="g-3">
+        {/* ALERTA CRÍTICA DE EXCLUSIÓN DE ÁCAROS */}
+        <Alert variant="danger" className="border border-danger border-opacity-30 rounded-3 p-3 mb-4 d-flex align-items-start gap-3 bg-danger bg-opacity-10 shadow-xs">
+          <span className="material-symbols-outlined text-danger fs-4 mt-0.5">warning</span>
+          <div>
+            <h5 className="fs-6 fw-bold text-danger mb-1">
+              ⚠️ Punto Crítico de Bioseguridad: La Malla 50 Mesh NO Retiene Ácaros
+            </h5>
+            <p className="mb-0 text-dark small font-sans">
+              La araña roja (<em>Tetranychus urticae</em>, 120-150 µm) y el ácaro blanco (<em>Polyphagotarsonemus latus</em>, 80-120 µm) atraviesan fácilmente los 192 µm del poro de cualquier malla comercial. En Quíbor, su proliferación se acelera exponencialmente en períodos cálidos y secos (HR &lt; 50%, T &gt; 30°C), acortando su ciclo biológico de 14 a solo 5 días. <strong>Estrategia obligatoria:</strong> mantener humedad relativa foliar &gt; 60%, suelta temprana de <em>Amblyseius swirskii</em> y rotación química estricta por modo de acción (IRAC Grupo 10B / 21A / 23).
+            </p>
+          </div>
+        </Alert>
+
+        <Row className="g-3 mb-4">
           {filteredPests.map((pest) => (
             <Col xs={12} md={6} lg={4} key={pest.id}>
               <Card className="p-3 h-100 d-flex flex-column border-secondary-subtle bg-light hover-border-success transition-all shadow-xs">
@@ -192,7 +220,7 @@ export const Module06PestControl: React.FC = () => {
                   </Badge>
                 </div>
 
-                <div className="mb-2">
+                <div className="mb-2 d-flex flex-wrap gap-1">
                   <span className={`agro-chip text-xs ${pest.physicalExclusion ? 'agro-chip-green' : 'agro-chip-alert'}`}>
                     <span className="material-symbols-outlined ms-sm">
                       {pest.physicalExclusion ? 'check_circle' : 'cancel'}
@@ -219,7 +247,79 @@ export const Module06PestControl: React.FC = () => {
             </Col>
           ))}
         </Row>
+
+        {/* CALENDARIO DE LIBERACIÓN DE FAUNA BENÉFICA (IPM BIOLÓGICO) */}
+        <div className="p-3 bg-white rounded-3 border border-secondary-subtle shadow-xs">
+          <div className="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+            <div className="d-flex align-items-center gap-2">
+              <span className="material-symbols-outlined text-success fs-5">pest_control</span>
+              <h5 className="fs-6 fw-bold text-dark mb-0">
+                Calendario de Sueltas de Fauna Benéfica & Agentes Biológicos (Valle de Quíbor)
+              </h5>
+            </div>
+            <Badge bg="success" className="text-2xs">
+              Estrategia Preventiva Integrada
+            </Badge>
+          </div>
+
+          <Row className="g-3 text-xs">
+            <Col xs={12} md={4}>
+              <div className="p-3 bg-light rounded border border-success border-opacity-30 h-100">
+                <div className="d-flex justify-content-between align-items-center mb-1">
+                  <strong className="text-success">Semana 2: Post-Trasplante</strong>
+                  <Badge bg="success" className="font-monospace text-3xs">Preventivo</Badge>
+                </div>
+                <h6 className="fw-bold text-dark mb-1">Amblyseius swirskii</h6>
+                <p className="text-secondary text-2xs mb-2">
+                  Sobres de cría lenta (50 ácaros/m²) colgados en el tercio inferior. Depreda ninfas de trips y huevos de mosca blanca antes del cierre de calles.
+                </p>
+                <div className="text-muted text-3xs border-top pt-1">
+                  Compatibilidad: Tolera azufre tras 72h de aplicado.
+                </div>
+              </div>
+            </Col>
+
+            <Col xs={12} md={4}>
+              <div className="p-3 bg-light rounded border border-primary border-opacity-30 h-100">
+                <div className="d-flex justify-content-between align-items-center mb-1">
+                  <strong className="text-primary">Semana 4: Floración Inicial</strong>
+                  <Badge bg="primary" className="font-monospace text-3xs">Pecíolo & Flores</Badge>
+                </div>
+                <h6 className="fw-bold text-dark mb-1">Orius insidiosus (Chinche Pirata)</h6>
+                <p className="text-secondary text-2xs mb-2">
+                  Dosis de 1 a 2 ind/m² en las flores abiertas. Voraz depredador de trips adultos y larvas refugiadas dentro de la corola del pimentón.
+                </p>
+                <div className="text-muted text-3xs border-top pt-1">
+                  Requisito: Presencia de polen para establecimiento inicial.
+                </div>
+              </div>
+            </Col>
+
+            <Col xs={12} md={4}>
+              <div className="p-3 bg-light rounded border border-warning border-opacity-50 h-100">
+                <div className="d-flex justify-content-between align-items-center mb-1">
+                  <strong className="text-warning-emphasis">Semana 6: Pleno Vegetativo</strong>
+                  <Badge bg="warning" className="font-monospace text-3xs">Focos Foliares</Badge>
+                </div>
+                <h6 className="fw-bold text-dark mb-1">Chrysoperla carnea & Bacillus th.</h6>
+                <p className="text-secondary text-2xs mb-2">
+                  Sueltas en focos de pulgones y minadores (2-3 larvas L2/m²). Aplicación de <em>Bacillus thuringiensis</em> (Bt kurstaki) contra cogollero.
+                </p>
+                <div className="text-muted text-3xs border-top pt-1">
+                  Monitoreo: 1 trampa cromática azul y amarilla cada 150 m².
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Card>
+
+      {/* Modal de Sincronización Google Sheets */}
+      <GoogleSheetsSyncModal
+        show={showGoogleSheetsModal}
+        onHide={() => setShowGoogleSheetsModal(false)}
+        initialSheetId="04_Plan_Fitosanitario_IPM"
+      />
     </div>
   );
 };

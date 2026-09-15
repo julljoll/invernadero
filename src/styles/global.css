@@ -562,5 +562,108 @@ body {
   color: #b91c1c;
 }
 
+/* ====================================================================
+   SISTEMA DE DISEÑO AGRI-UX/UI v3.0: ESCALA FLUIDA Y MICRO-ANIMACIONES
+   ==================================================================== */
+:root {
+  /* Tipografía Fluid con clamp() para legibilidad extrema bajo sol */
+  --text-fluid-2xs: clamp(0.625rem, 0.58rem + 0.2vw, 0.75rem);   /* Metadatos */
+  --text-fluid-xs:  clamp(0.75rem,  0.70rem + 0.25vw, 0.875rem); /* Labels */
+  --text-fluid-sm:  clamp(0.875rem, 0.82rem + 0.3vw, 1rem);      /* Párrafos */
+  --text-fluid-base:clamp(1rem,     0.95rem + 0.35vw, 1.125rem); /* Cuerpo destacado */
+  --text-fluid-lg:  clamp(1.125rem, 1.05rem + 0.4vw, 1.35rem);  /* Subtítulos */
+  --text-fluid-xl:  clamp(1.35rem,  1.20rem + 0.8vw, 1.75rem);  /* Títulos tarjeta */
+  --text-fluid-kpi: clamp(1.65rem,  1.40rem + 1.2vw, 2.35rem);  /* KPIs principales */
+  --text-fluid-hero:clamp(2.1rem,   1.70rem + 2.0vw, 3.5rem);   /* Encabezados Hero */
+
+  /* Spacing armónico múltiplos de 4px */
+  --agro-space-1: 0.25rem;  /* 4px */
+  --agro-space-2: 0.5rem;   /* 8px */
+  --agro-space-3: 0.75rem;  /* 12px */
+  --agro-space-4: 1rem;     /* 16px */
+  --agro-space-5: 1.25rem;  /* 20px */
+  --agro-space-6: 1.5rem;   /* 24px */
+  --agro-space-8: 2rem;     /* 32px */
+  --agro-space-12: 3rem;    /* 48px — Altura de Touch Target */
+
+  /* Transiciones estándar de campo */
+  --agro-trans-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --agro-trans-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --agro-trans-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --agro-trans-bounce: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Micro-animaciones CSS */
+@keyframes agroFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes agroPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.02);
+  }
+}
+
+@keyframes agroShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-agro-fade-in-up {
+  animation: agroFadeInUp var(--agro-trans-slow) ease-out both;
+}
+
+.animate-agro-pulse {
+  animation: agroPulse 2.5s infinite ease-in-out;
+}
+
+/* Staggering para listados y cuadrículas */
+.agro-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.agro-stagger > *:nth-child(2) { animation-delay: 60ms; }
+.agro-stagger > *:nth-child(3) { animation-delay: 120ms; }
+.agro-stagger > *:nth-child(4) { animation-delay: 180ms; }
+.agro-stagger > *:nth-child(5) { animation-delay: 240ms; }
+.agro-stagger > *:nth-child(6) { animation-delay: 300ms; }
+
+/* Tarjetas elevadas con borde sutil de alta agudeza */
+.card-agro-interactive {
+  background-color: #ffffff;
+  border: 1px solid var(--agro-border-card);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px rgba(15, 77, 6, 0.05);
+  transition: transform var(--agro-trans-base), box-shadow var(--agro-trans-base), border-color var(--agro-trans-base);
+}
+
+.card-agro-interactive:hover {
+  transform: translateY(-2px);
+  border-color: var(--logo-green-bright);
+  box-shadow: 0 8px 24px rgba(15, 77, 6, 0.1);
+}
+
+/* Skeleton Loading para componentes lazy */
+.agro-skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: agroShimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+
 
 

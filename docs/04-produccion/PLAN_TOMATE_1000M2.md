@@ -1,3 +1,30 @@
+---
+doc_id: "PROD-001"
+titulo: "Plan de Producción Tomate 1000m2"
+dominio: "produccion"
+tipo: "plan"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+cultivos: ["tomate_indeterminado"]
+superficie_m2: [1000]
+infraestructura: ["casa_de_malla"]
+tags: ["marco_plantacion", "hidraulica", "fao-56", "nutricion", "ipm", "economia"]
+cross_references:
+  - doc_id: "PROD-002"
+    relacion: "escala_a"
+  - doc_id: "HIDRO-005"
+    relacion: "requiere_agua"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 3000
+---
 # PROYECTO LA CIGARRONERA — PLAN MAESTRO DE PRODUCCIÓN AGRONÓMICA: TOMATE INDETERMINADO EN CASA DE MALLA (1.000 m²)
 ## Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela (695 – 710 msnm — Clima Semiárido Cálido BSh)
 ### Georreferenciación Satelital: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)
@@ -34,6 +61,8 @@ graph TD
 
 ---
 
+<!-- chunk:PROD-001/C1 title:"Marco + Hidráulica" tokens:~1000 -->
+<!-- chunk:PROD-001/C1 title:"Marco + Hidráulica" tokens:~1000 -->
 ## CAPÍTULO 1: MARCO DE PLANTACIÓN Y ADECUACIÓN DEL SUELO
 
 ### 1.1. Distribución Espacial de Camellones (20.00 m Ancho × 50.00 m Fondo)
@@ -105,6 +134,8 @@ Un motor centrífugo monofásico/bifásico de $1.5\text{ HP}$ (1") rinde eficien
 
 ---
 
+<!-- chunk:PROD-001/C2 title:"Riego + Nutrición" tokens:~1000 -->
+<!-- chunk:PROD-001/C2 title:"Riego + Nutrición" tokens:~1000 -->
 ## CAPÍTULO 3: BALANCE HÍDRICO FAO-56 Y PROGRAMACIÓN DE PULSOS
 
 ### 3.1. Requerimiento Hídrico por Etapa Fenológica (Ajustado a Quíbor)

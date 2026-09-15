@@ -24,6 +24,7 @@ export function initDatabase() {
     DROP TABLE IF EXISTS climate_months;
     DROP TABLE IF EXISTS crops;
     DROP TABLE IF EXISTS site_content;
+    DROP TABLE IF EXISTS rag_documents;
   `);
 
   // 1. Tabla de Parámetros y Configuración General
@@ -83,11 +84,25 @@ export function initDatabase() {
     );
   `);
 
+  // 5. Tabla de Documentos del Corpus RAG
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS rag_documents (
+      doc_id TEXT PRIMARY KEY,
+      titulo TEXT NOT NULL,
+      dominio TEXT NOT NULL,
+      tags TEXT NOT NULL,
+      tamano_tokens_estimado INTEGER NOT NULL,
+      es_fuente_primaria INTEGER NOT NULL,
+      ruta_archivo TEXT NOT NULL
+    );
+  `);
+
   // Seed de Datos Iniciales Sincronizados desde docs/
   seedSettings(db);
   seedClimate(db);
   seedCrops(db);
   seedSiteContent(db);
+  seedRagDocuments(db);
 
   return db;
 }
@@ -149,7 +164,12 @@ function seedSettings(db) {
 
     // Contacto
     ['CONTACT_WHATSAPP', 'contact', 'Número de WhatsApp', '+58 412 000 0000', 'text', 'Teléfono de contacto comercial'],
-    ['CONTACT_EMAIL', 'contact', 'Email de Contacto', 'agrovenecua@gmail.com', 'text', 'Correo oficial de atención']
+    ['CONTACT_EMAIL', 'contact', 'Email de Contacto', 'agrovenecua@gmail.com', 'text', 'Correo oficial de atención'],
+
+    // Integración Google Sheets Oficial (Planes de Siembra, Riego, Fertirriego, Plagas y Gastos)
+    ['GOOGLE_SHEET_URL', 'integration', 'URL Google Sheet Oficial', 'https://docs.google.com/spreadsheets/d/1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE/edit?usp=sharing', 'text', 'Enlace directo al documento oficial de Google Sheets del proyecto'],
+    ['GOOGLE_SHEET_ID', 'integration', 'ID Hoja de Cálculo', '1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE', 'text', 'Identificador único del Google Sheet en Google Drive'],
+    ['GOOGLE_APPS_SCRIPT_WEBHOOK_URL', 'integration', 'Webhook Google Apps Script', '', 'text', 'URL de la aplicación web de Google Apps Script para auto-guardado en la nube']
   ];
 
   for (const s of initialSettings) {
@@ -217,6 +237,56 @@ function seedSiteContent(db) {
   }
 }
 
+function seedRagDocuments(db) {
+  const insert = db.prepare(`
+    INSERT INTO rag_documents (doc_id, titulo, dominio, tags, tamano_tokens_estimado, es_fuente_primaria, ruta_archivo)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
+  `);
+
+  const docsDir = path.join(ROOT_DIR, 'docs');
+  
+  function processDirectory(dirPath) {
+    if (!fs.existsSync(dirPath)) return;
+    const items = fs.readdirSync(dirPath);
+    for (const item of items) {
+      const fullPath = path.join(dirPath, item);
+      const stat = fs.statSync(fullPath);
+      if (stat.isDirectory()) {
+        processDirectory(fullPath);
+      } else if (item.endsWith('.md')) {
+        const content = fs.readFileSync(fullPath, 'utf8');
+        const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        if (match) {
+          const frontmatter = match[1];
+          const docIdMatch = frontmatter.match(/doc_id:\s*"([^"]+)"/);
+          if (docIdMatch) {
+            const docId = docIdMatch[1];
+            const tituloMatch = frontmatter.match(/titulo:\s*"([^"]+)"/);
+            const titulo = tituloMatch ? tituloMatch[1] : item;
+            const dominioMatch = frontmatter.match(/dominio:\s*"([^"]+)"/);
+            const dominio = dominioMatch ? dominioMatch[1] : 'general';
+            const tokensMatch = frontmatter.match(/tamano_tokens_estimado:\s*(\d+)/);
+            const tokens = tokensMatch ? parseInt(tokensMatch[1], 10) : 0;
+            const primariaMatch = frontmatter.match(/es_fuente_primaria:\s*(true|false)/);
+            const primaria = primariaMatch && primariaMatch[1] === 'true' ? 1 : 0;
+            
+            const tagsMatch = frontmatter.match(/tags:\s*\[(.*?)\]/);
+            let tagsStr = '';
+            if (tagsMatch) {
+              tagsStr = tagsMatch[1].replace(/"/g, '').split(',').map(s => s.trim()).join(', ');
+            }
+
+            const relativePath = path.relative(ROOT_DIR, fullPath).replace(/\\/g, '/');
+            insert.run(docId, titulo, dominio, tagsStr, tokens, primaria, relativePath);
+          }
+        }
+      }
+    }
+  }
+
+  processDirectory(docsDir);
+}
+
 export function exportToJson() {
   const db = initDatabase();
 
@@ -224,6 +294,7 @@ export function exportToJson() {
   const climateRows = db.prepare('SELECT * FROM climate_months ORDER BY id').all();
   const cropRows = db.prepare('SELECT * FROM crops ORDER BY id').all();
   const contentRows = db.prepare('SELECT * FROM site_content ORDER BY section, key').all();
+  const ragRows = db.prepare('SELECT * FROM rag_documents ORDER BY doc_id').all();
 
   // Mapear settings a objeto estructurado
   const settingsObj = {};
@@ -292,7 +363,8 @@ export function exportToJson() {
     crops: cropsCatalog,
     cropsRaw: cropRows,
     siteContent,
-    siteContentRaw: contentRows
+    siteContentRaw: contentRows,
+    ragDocuments: ragRows
   };
 
   // Asegurar directorio destino

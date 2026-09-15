@@ -1,3 +1,28 @@
+---
+doc_id: "EST-001"
+titulo: "Cálculo Técnico y Despiece de Malla 2000m2"
+dominio: "estructura"
+tipo: "expediente"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+cultivos: ["tomate_indeterminado", "pimenton_magistral_f1"]
+superficie_m2: [2000]
+infraestructura: ["casa_de_malla"]
+tags: ["despiece", "malla_110gsm", "guayas", "pilares", "zanja_sanitaria"]
+cross_references:
+  - doc_id: "CAT-001"
+    relacion: "material_de"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 2000
+---
 # Memoria de Cálculo y Validación Técnica Oficial: Casa de Malla en Quíbor (2.000 m²)
 ## Optimización Modular para Rollo Estándar de Malla 110 gsm, 50 Mesh HDPE Color Blanco (4.00 m × 100.00 m)
 ### Geometría: 20.00 m de Ancho × 100.00 m de Largo | Cultivo Intensivo de Tomate Indeterminado

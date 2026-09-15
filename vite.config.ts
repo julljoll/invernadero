@@ -19,4 +19,18 @@ export default defineConfig({
     open: false,
     host: true,
   },
+  build: {
+    chunkSizeWarningLimit: 800,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-charts': ['chart.js', 'react-chartjs-2'],
+          'vendor-3d': ['three'],
+          'vendor-math': ['katex', 'react-katex'],
+          'vendor-ui': ['bootstrap', 'react-bootstrap', 'canvas-confetti'],
+        },
+      },
+    },
+  },
 });

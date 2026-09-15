@@ -114,7 +114,7 @@ export const Module03Structure: React.FC = () => {
         />
       </div>
 
-      <Row className="g-2 mt-3 text-secondary small">
+      <Row className="g-2 mt-3 text-secondary small mb-3">
         <Col xs={12} md={4}>
           <span className="text-dark fw-bold">Capa 01 Estructural:</span> 108 Pilares Tubo Sch 40 (Cian #00FFFF), cerchas a dos aguas, vigas maestras y zapatas de anclaje de 1.20m.
         </Col>
@@ -125,6 +125,81 @@ export const Module03Structure: React.FC = () => {
           <span className="text-dark fw-bold">Capa 02 Cobertura:</span> Malla 50 Mesh Blanca (110 gsm) con sellado perimetral hermético y alambre CAD de alta precisión.
         </Col>
       </Row>
+
+      {/* PLAN DE CORTE DE MALLA 50 MESH (RAG EST-001) */}
+      <div className="p-3 bg-light rounded-3 border border-secondary-subtle">
+        <div className="d-flex flex-wrap justify-content-between align-items-center mb-2 pb-2 border-bottom">
+          <div className="d-flex align-items-center gap-2">
+            <span className="material-symbols-outlined text-success fs-5">content_cut</span>
+            <h5 className="fs-6 fw-bold text-dark mb-0">Plan de Corte y Despiece de Malla 50 Mesh Blanca (110 gsm)</h5>
+          </div>
+          <Badge bg="success" className="font-monospace text-xs">
+            8 Rollos (4.0m × 100m) · $560/rollo = $4.480 USD
+          </Badge>
+        </div>
+
+        <p className="text-secondary text-2xs mb-2">
+          Cálculo exacto de despiece según RAG EST-001 para la nave de 1.000 m² (50m × 20m, alero 3.5m, cumbrera 5.5m), considerando solapes de 20 cm cosidos con hilo monofilamento UV:
+        </p>
+
+        <div className="table-responsive bg-white rounded border shadow-2xs mb-2">
+          <table className="table table-hover table-sm mb-0 text-xs align-middle">
+            <thead className="table-light">
+              <tr>
+                <th className="py-1">Sector de la Nave</th>
+                <th className="py-1 text-center">Lienzos</th>
+                <th className="py-1 text-center">Dimensiones de Corte</th>
+                <th className="py-1 text-center">Área Neta</th>
+                <th className="py-1">Detalle de Fijación & Tensión</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="fw-bold text-dark py-1">Cubierta Techo a Dos Aguas</td>
+                <td className="text-center font-monospace py-1">4 paños</td>
+                <td className="text-center font-monospace py-1">4.0 m × 52.0 m</td>
+                <td className="text-center font-monospace fw-bold text-primary py-1">832 m²</td>
+                <td className="text-2xs text-secondary py-1">Solape central en cumbrera con perfil zigzag omega</td>
+              </tr>
+              <tr>
+                <td className="fw-bold text-dark py-1">Fachadas Laterales (Norte y Sur)</td>
+                <td className="text-center font-monospace py-1">2 paños</td>
+                <td className="text-center font-monospace py-1">4.0 m × 52.0 m</td>
+                <td className="text-center font-monospace fw-bold text-primary py-1">416 m²</td>
+                <td className="text-2xs text-secondary py-1">Faldón enterrado 30 cm en zanja perimetral de grava</td>
+              </tr>
+              <tr>
+                <td className="fw-bold text-dark py-1">Testero Frontal Este (Barlovento)</td>
+                <td className="text-center font-monospace py-1">2 paños</td>
+                <td className="text-center font-monospace py-1">4.0 m × 22.0 m</td>
+                <td className="text-center font-monospace fw-bold text-primary py-1">176 m²</td>
+                <td className="text-2xs text-secondary py-1">Refuerzo con cable tensor 1/4" contra ráfagas de 27 km/h</td>
+              </tr>
+              <tr>
+                <td className="fw-bold text-dark py-1">Testero Trasero Oeste (Sotavento)</td>
+                <td className="text-center font-monospace py-1">2 paños</td>
+                <td className="text-center font-monospace py-1">4.0 m × 22.0 m</td>
+                <td className="text-center font-monospace fw-bold text-primary py-1">176 m²</td>
+                <td className="text-2xs text-secondary py-1">Fijación con clips plásticos dobles cada 40 cm</td>
+              </tr>
+              <tr>
+                <td className="fw-bold text-dark py-1">Esclusa Sanitaria & Solapes</td>
+                <td className="text-center font-monospace py-1">1 lote</td>
+                <td className="text-center font-monospace py-1">4.0 m × 25.0 m</td>
+                <td className="text-center font-monospace fw-bold text-primary py-1">100 m²</td>
+                <td className="text-2xs text-secondary py-1">Doble puerta con antesala de desinfección sanitaria</td>
+              </tr>
+            </tbody>
+            <tfoot className="table-light border-top">
+              <tr>
+                <td colSpan={3} className="text-end fw-bold py-1">TOTAL METROS CUADRADOS REQUERIDOS:</td>
+                <td className="text-center fw-bold text-success font-monospace py-1">1.700 m²</td>
+                <td className="text-muted text-3xs py-1">Margen de merma y solapes: 12% cubierto por los 8 rollos</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
     </Card>
   );
 };

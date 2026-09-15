@@ -31,6 +31,7 @@ export function viteSqliteDbPlugin() {
             const climateMonths = db.prepare('SELECT * FROM climate_months ORDER BY id').all();
             const crops = db.prepare('SELECT * FROM crops ORDER BY id').all();
             const siteContent = db.prepare('SELECT * FROM site_content ORDER BY section, key').all();
+            const ragDocuments = db.prepare('SELECT * FROM rag_documents ORDER BY doc_id').all();
 
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({
@@ -39,7 +40,8 @@ export function viteSqliteDbPlugin() {
                 settings,
                 climateMonths,
                 crops,
-                siteContent
+                siteContent,
+                ragDocuments
               }
             }));
             return;

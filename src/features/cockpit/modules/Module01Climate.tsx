@@ -4,6 +4,9 @@ import { calculateVpd } from '../../../core/agronomy/vpd';
 import { QUIBOR_CLIMATE_MONTHS } from '../../../core/constants/climateData';
 import { Slider } from '../../../shared/components/Slider';
 import { BlockMath, InlineMath } from 'react-katex';
+import { WindRoseChart } from './climate/WindRoseChart';
+import { VentilationRahCalculator } from './climate/VentilationRahCalculator';
+import { DliSolarPanel } from './climate/DliSolarPanel';
 
 import {
   Chart as ChartJS,
@@ -390,6 +393,21 @@ export const Module01Climate: React.FC = () => {
           </div>
         </Alert>
       </Card>
+
+      {/* ====================================================================
+         SECCIÓN 3: VENTILACIÓN CONVECTIVA, ROSA DE VIENTOS & DLI SOLAR
+         ==================================================================== */}
+      <Row className="g-4">
+        <Col xs={12} lg={6}>
+          <VentilationRahCalculator />
+        </Col>
+        <Col xs={12} lg={6}>
+          <WindRoseChart />
+        </Col>
+        <Col xs={12}>
+          <DliSolarPanel />
+        </Col>
+      </Row>
     </div>
   );
 };

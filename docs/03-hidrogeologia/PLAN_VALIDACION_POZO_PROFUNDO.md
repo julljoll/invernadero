@@ -1,3 +1,26 @@
+---
+doc_id: "HIDRO-004"
+titulo: "Protocolo de Validación de Pozo Profundo"
+dominio: "hidrogeologia"
+tipo: "protocolo"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+infraestructura: ["pozo_profundo"]
+tags: ["aforo_escalonado", "cooper-jacob", "theis", "hidroquimica", "salinidad"]
+cross_references:
+  - doc_id: "HIDRO-005"
+    relacion: "requiere_bombeo"
+prioridad_retrieval: "media"
+es_fuente_primaria: true
+tamano_tokens_estimado: 8000
+---
 # PROYECTO LA CIGARRONERA — Protocolo Maestro de Validación y Certificación de Pozo Profundo (2.000 m²)
 ## Finca Agroproductiva Quíbor — Cultivo Intensivo de Tomate (*Solanum lycopersicum*)
 ### Coordenadas Satelitales Exactas: [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8) | Cota: ~700 msnm
@@ -43,6 +66,8 @@ El presente documento establece el **protocolo técnico, hidrogeológico, mecán
 
 ---
 
+<!-- chunk:HIDRO-004/C1 title:"Marco Geográfico + Hidrogeología" tokens:~400 -->
+<!-- chunk:HIDRO-004/C1 title:"Marco Geográfico + Hidrogeología" tokens:~400 -->
 ## 1. MARCO GEOGRÁFICO, GEOLÓGICO Y PIEZOMÉTRICO DEL SITIO
 
 ### 1.1. Localización y Fisiografía
@@ -721,6 +746,3 @@ $$Q_{\text{bomba\_5.5HP}} \approx \mathbf{2.50\text{ L/s}} = \mathbf{150\text{ L
 | **TOTAL GENERAL** | **Inversión Llave en Mano Pozo Artesanal (100% Transferible a Pozo de 120 m)** | | | **$5.345,37** |
 
 *Comparación de Ahorro:* Frente a una perforación rotaria mecanizada de 120 m ($24.880 USD), la adecuación del pozo artesanal a pico con la bomba industrial de 5.5 HP representa un **ahorro neto del 78.5% (~$19.530 USD)**, adquiriendo de inmediato el equipamiento electromecánico definitivo que quedará operativo de por vida para el pozo profundo de 120 m.
-
-
-

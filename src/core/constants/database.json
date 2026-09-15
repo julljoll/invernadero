@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-12T00:26:55.021Z",
+    "generatedAt": "2026-09-15T01:47:35.454Z",
     "source": "database.sqlite",
     "version": "2.0.0"
   },
@@ -23,6 +23,9 @@
     "GH_TRELLIS_HEIGHT_M": 2,
     "GH_WIDTH_M": 20,
     "GH_WIND_TURBINES_COUNT": 8,
+    "GOOGLE_APPS_SCRIPT_WEBHOOK_URL": "",
+    "GOOGLE_SHEET_ID": "1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE",
+    "GOOGLE_SHEET_URL": "https://docs.google.com/spreadsheets/d/1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE/edit?usp=sharing",
     "MESH_COLOR": "Blanco / Cristal Reflectivo",
     "MESH_MAX_PORE_MICRONS": 192,
     "MESH_PRICE_USD": 560,
@@ -189,6 +192,30 @@
       "value": "8",
       "type": "number",
       "description": "Extractores eólicos 24\"-30\" para romper bolsa cenital"
+    },
+    {
+      "key": "GOOGLE_APPS_SCRIPT_WEBHOOK_URL",
+      "category": "integration",
+      "label": "Webhook Google Apps Script",
+      "value": "",
+      "type": "text",
+      "description": "URL de la aplicación web de Google Apps Script para auto-guardado en la nube"
+    },
+    {
+      "key": "GOOGLE_SHEET_ID",
+      "category": "integration",
+      "label": "ID Hoja de Cálculo",
+      "value": "1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE",
+      "type": "text",
+      "description": "Identificador único del Google Sheet en Google Drive"
+    },
+    {
+      "key": "GOOGLE_SHEET_URL",
+      "category": "integration",
+      "label": "URL Google Sheet Oficial",
+      "value": "https://docs.google.com/spreadsheets/d/1flk-st-27PIKnTmO2q0KzUnGUR2RSdnvWXiupKHD8uE/edit?usp=sharing",
+      "type": "text",
+      "description": "Enlace directo al documento oficial de Google Sheets del proyecto"
     },
     {
       "key": "MESH_COLOR",
@@ -581,6 +608,116 @@
       "section": "malla",
       "label": "Llamado a la Acción Malla",
       "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor."
+    }
+  ],
+  "ragDocuments": [
+    {
+      "doc_id": "BIO-001",
+      "titulo": "Análisis Técnico: Climatología y Bioclima de Quíbor",
+      "dominio": "bioclima",
+      "tags": "climatologia, merra-2, vientos, bochorno, malla_50_mesh, altura_estructural",
+      "tamano_tokens_estimado": 2500,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/01-bioclima/ANALISIS_TECNICO_QUIBOR.md"
+    },
+    {
+      "doc_id": "CANON-001",
+      "titulo": "Manual Canónico Agrovenecua",
+      "dominio": "compendio",
+      "tags": "compendio, maestro, arquitectura_software, agri_ui, ssot",
+      "tamano_tokens_estimado": 2500,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/MANUAL_CANONICO_AGROVENECUA.md"
+    },
+    {
+      "doc_id": "CAT-001",
+      "titulo": "Catálogo Leader Greenhouse Productos",
+      "dominio": "catalogo",
+      "tags": "mallas, hdpe, insect_net, plasticos, especificaciones",
+      "tamano_tokens_estimado": 1500,
+      "es_fuente_primaria": 0,
+      "ruta_archivo": "docs/05-catalogo/LEADERGREENHOUSE_PRODUCTOS.md"
+    },
+    {
+      "doc_id": "EST-001",
+      "titulo": "Cálculo Técnico y Despiece de Malla 2000m2",
+      "dominio": "estructura",
+      "tags": "despiece, malla_110gsm, guayas, pilares, zanja_sanitaria",
+      "tamano_tokens_estimado": 2000,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/02-estructura/CALCULO_TECNICO_MALLA_2000M2.md"
+    },
+    {
+      "doc_id": "HIDRO-001",
+      "titulo": "Expediente Técnico del Pozo de 50 Metros",
+      "dominio": "hidrogeologia",
+      "tags": "pozo_artesanal, geologia_campo, estratigrafia, formacion_cuara, nivel_freatico, video_campo",
+      "tamano_tokens_estimado": 1500,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/03-hidrogeologia/EXPEDIENTE_TECNICO_POZO_50M.md"
+    },
+    {
+      "doc_id": "HIDRO-002",
+      "titulo": "Análisis Geológico del Aljibe de 50 Metros",
+      "dominio": "hidrogeologia",
+      "tags": "conglomerado_aluvial, acuitardo, grava_lidita, espejo_agua",
+      "tamano_tokens_estimado": 1600,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/03-hidrogeologia/ANALISIS_GEOLOGICO_ALJIBE_50M.md"
+    },
+    {
+      "doc_id": "HIDRO-003",
+      "titulo": "Plan de Inversión Pozo de 60 Metros",
+      "dominio": "hidrogeologia",
+      "tags": "presupuesto, inversion, excavacion_manual, equipamiento_electromecanico, roi",
+      "tamano_tokens_estimado": 4500,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/03-hidrogeologia/PLAN_INVERSION_POZO_60M.md"
+    },
+    {
+      "doc_id": "HIDRO-004",
+      "titulo": "Protocolo de Validación de Pozo Profundo",
+      "dominio": "hidrogeologia",
+      "tags": "aforo_escalonado, cooper-jacob, theis, hidroquimica, salinidad",
+      "tamano_tokens_estimado": 8000,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/03-hidrogeologia/PLAN_VALIDACION_POZO_PROFUNDO.md"
+    },
+    {
+      "doc_id": "HIDRO-005",
+      "titulo": "Verificación de Caudal Pozo 60 Metros",
+      "dominio": "hidrogeologia",
+      "tags": "caudal, dupuit-thiem, bombeo, recarga",
+      "tamano_tokens_estimado": 1500,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/03-hidrogeologia/VERIFICACION_CAUDAL_60M.md"
+    },
+    {
+      "doc_id": "HIDRO-006",
+      "titulo": "Evaluación de la Recarga Artificial del Acuífero del Valle de Quíbor",
+      "dominio": "hidrogeologia",
+      "tags": "acuifero, recarga_artificial, cidiat, sobreexplotacion",
+      "tamano_tokens_estimado": 2500,
+      "es_fuente_primaria": 0,
+      "ruta_archivo": "docs/03-hidrogeologia/JEGAT_MORA_2012_RECARGA.md"
+    },
+    {
+      "doc_id": "PROD-001",
+      "titulo": "Plan de Producción Tomate 1000m2",
+      "dominio": "produccion",
+      "tags": "marco_plantacion, hidraulica, fao-56, nutricion, ipm, economia",
+      "tamano_tokens_estimado": 3000,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/04-produccion/PLAN_TOMATE_1000M2.md"
+    },
+    {
+      "doc_id": "PROD-002",
+      "titulo": "Plan de Producción Tomate 2000m2",
+      "dominio": "produccion",
+      "tags": "marco_plantacion, hidraulica, fao-56, nutricion, ipm, economia",
+      "tamano_tokens_estimado": 6000,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/04-produccion/PLAN_TOMATE_2000M2.md"
     }
   ]
 }

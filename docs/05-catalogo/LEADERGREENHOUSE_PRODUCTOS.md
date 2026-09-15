@@ -1,3 +1,15 @@
+---
+doc_id: "CAT-001"
+titulo: "Catálogo Leader Greenhouse Productos"
+dominio: "catalogo"
+tipo: "catalogo"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+tags: ["mallas", "hdpe", "insect_net", "plasticos", "especificaciones"]
+prioridad_retrieval: "media"
+es_fuente_primaria: false
+tamano_tokens_estimado: 1500
+---
 # Base de Datos de Productos — Jiangsu Leader Greenhouse Equipment Co., Ltd.
 
 > **Fuente:** https://www.leadergreenhouse.com  

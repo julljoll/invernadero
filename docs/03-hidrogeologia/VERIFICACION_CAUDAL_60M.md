@@ -1,3 +1,26 @@
+---
+doc_id: "HIDRO-005"
+titulo: "Verificación de Caudal Pozo 60 Metros"
+dominio: "hidrogeologia"
+tipo: "analisis"
+version: "1.0.0"
+fecha_actualizacion: "2026-09-14"
+ubicacion:
+  nombre: "Finca La Cigarronera, Cuara, Valle de Quíbor"
+  lat: 9.887719
+  lon: -69.593681
+  elevacion_msnm: 734
+  municipio: "Jiménez"
+  estado: "Lara"
+infraestructura: ["pozo_artesanal"]
+tags: ["caudal", "dupuit-thiem", "bombeo", "recarga"]
+cross_references:
+  - doc_id: "HIDRO-006"
+    relacion: "cita_cientifica"
+prioridad_retrieval: "alta"
+es_fuente_primaria: true
+tamano_tokens_estimado: 1500
+---
 # 💧 Estudio Técnico de Verificación Hidrogeológica y Selección de Bombeo
 ## Pozo de 60 Metros — Sector La Cigarronera, Cuara (Valle de Quíbor, Lara)
 ### Sustentación con base en Jégat, Mora et al. (2012) y Expediente de Campo In-Situ

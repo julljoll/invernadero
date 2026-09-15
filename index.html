@@ -6,6 +6,7 @@
   <title>AGROVENECUA — La Cigarronera | Suite Agronómica & Oportunidad de Inversión Quíbor</title>
   <meta name="description" content="Plataforma tecnológica, hidrogeológica y suite de precisión agronómica para horticultura protegida intensiva en el Valle de Quíbor, Lara, Venezuela." />
   <link rel="icon" type="image/svg+xml" href="/agrovenecua_logo.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
 
   <!-- Google Fonts: Plus Jakarta Sans, JetBrains Mono & Material Symbols Outlined -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,11 +19,47 @@
   <!-- KaTeX CSS para fórmulas matemáticas agronómicas de precisión -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
 
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#0F4D06" />
+
+  <!-- Schema.org JSON-LD para SEO Agronómico -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AgriculturalBusiness",
+    "name": "Agrovenecua — Finca La Cigarronera",
+    "description": "Horticultura protegida en casa de malla 50 mesh, hidrogeología de pozo profundo y climatología NASA MERRA-2 en el Valle de Quíbor.",
+    "url": "https://agrovenecua.vercel.app/",
+    "logo": "https://agrovenecua.vercel.app/agrovenecua_logo.svg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cuara, Municipio Jiménez",
+      "addressRegion": "Estado Lara",
+      "addressCountry": "VE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 9.888889,
+      "longitude": -69.593056,
+      "elevation": 700
+    }
+  }
+  </script>
 </head>
 <body class="light-theme bg-light text-dark">
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Registro de Service Worker PWA para operación offline en campo -->
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          console.log('[Agrovenecua SW] Registrado con éxito:', reg.scope);
+        }).catch((err) => {
+          console.warn('[Agrovenecua SW] Error de registro:', err);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
-
