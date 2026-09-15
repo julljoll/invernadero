@@ -62,7 +62,7 @@ tamano_tokens_estimado: 1500
 
 #### Adaptación Quíbor
 
-- Variante A (Tomate hilo alto): **50 mesh · 110 gsm · Blanco** — apertura ≤ 192 µm, monofilamento HDPE virgen.
+- Variante A (Tomate hilo alto): **50 mesh · 130 gsm · Blanco** — apertura ≤ 192 µm, monofilamento HDPE virgen.
 - Variante B (Pimentón): **50 mesh · 125–130 gsm · Blanco** — mayor resistencia mecánica (tracción ~1.530 N, ASTM D 5034) para vientos Este hasta 27 km/h.
 - Rollo estándar **4 m × 100 m = 400 m²** → nave de 1.000 m² = **8 rollos**; 2.000 m² = **15 rollos** (5% solapamiento).
 

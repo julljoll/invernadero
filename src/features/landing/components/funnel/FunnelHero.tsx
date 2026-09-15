@@ -4,22 +4,54 @@ import { Link } from 'react-router-dom';
 
 export const FunnelHero: React.FC = () => {
   return (
-    <section className="py-5 position-relative overflow-hidden">
-      <Container fluid="xl">
+    <section className="landing-hero-dark py-5 position-relative">
+      {/* Patrón de malla bioclimática 50 mesh */}
+      <div className="mesh-pattern-overlay" />
+
+      <Container fluid="xl" className="position-relative py-4" style={{ zIndex: 1 }}>
         <Row className="g-5 align-items-center">
           <Col xs={12} lg={7}>
-            <div className="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-success bg-opacity-10 border border-success border-opacity-30 text-success text-xs fw-bold text-uppercase mb-3">
-              <span className="material-symbols-outlined ms-sm">verified</span>
-              <span>Programa de Reactivación Hortícola · Quíbor, Lara</span>
+            {/* Tag de georreferenciación oficial */}
+            <div className="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill bg-success bg-opacity-20 border border-success border-opacity-40 text-xs fw-bold text-uppercase mb-3 shadow-sm" style={{ color: '#53C942' }}>
+              <span className="material-symbols-outlined ms-sm" style={{ color: '#53C942' }}>verified</span>
+              <span>Oportunidad de Inversión Agrícola · Valle de Quíbor, Lara</span>
             </div>
 
-            <h1 className="display-4 fw-black text-dark tracking-tight lh-sm mb-3">
-              Multiplica tu Rendimiento Activando la Nave de <span className="text-success">1.000 m²</span> con Pimentón
+            <h1 className="display-4 fw-black text-white tracking-tight lh-sm mb-3">
+              Invierte en Alta Rentabilidad: <span style={{ color: '#53C942' }}>1.000 m² de Pimentón Magistral</span> en Casa de Malla
             </h1>
 
-            <p className="lead text-secondary fs-6 mb-4">
-              En el Valle de Quíbor, sembrar a campo abierto significa arriesgar hasta el <strong className="text-danger">60% de tu cosecha</strong> por virosis y bochorno. Reactivar esta estructura protegida con fertirriego tecnificado y pozo a 60m asegura cosechar <strong className="text-dark">12.500 kg de pimentón de primera calidad</strong> (2.500 plantas tecnificadas) por ciclo con retorno acelerado.
+            <p className="lead text-light text-opacity-90 fs-6 mb-4">
+              En el Valle de Quíbor, el cultivo a campo abierto sufre hasta un <strong className="text-danger">60% de pérdidas</strong> por virosis de mosca blanca y bochorno. Producir bajo una <strong className="text-white">casa de malla de 3.0 m</strong> con <strong className="text-white">espaldar Hortomalla</strong> y <strong className="text-white">fertirriego hidrosoluble</strong> asegura <strong style={{ color: '#53C942' }}>12.500 kg (625 cestas Lujo Grande)</strong> con 2.500 plantas y un retorno superior al <strong>100% de ROI</strong> en 5 meses.
             </p>
+
+            {/* Micro-puntos de valor agronómico del RAG */}
+            <div className="row g-2 mb-4">
+              <div className="col-sm-6">
+                <div className="p-2.5 rounded-3 bg-black bg-opacity-40 border border-white border-opacity-10 d-flex align-items-center gap-2 text-xs text-light">
+                  <span className="material-symbols-outlined text-success ms-sm">grid_4x4</span>
+                  <span><strong>Malla 50 Mesh 130 gsm:</strong> 100% libre de virosis</span>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="p-2.5 rounded-3 bg-black bg-opacity-40 border border-white border-opacity-10 d-flex align-items-center gap-2 text-xs text-light">
+                  <span className="material-symbols-outlined text-info ms-sm">format_line_spacing</span>
+                  <span><strong>Espaldar Hortomalla 15×15:</strong> -88% mano de obra</span>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="p-2.5 rounded-3 bg-black bg-opacity-40 border border-white border-opacity-10 d-flex align-items-center gap-2 text-xs text-light">
+                  <span className="material-symbols-outlined text-warning ms-sm">science</span>
+                  <span><strong>Sales Hidrosolubles AIFA:</strong> Nutrición pura</span>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="p-2.5 rounded-3 bg-black bg-opacity-40 border border-white border-opacity-10 d-flex align-items-center gap-2 text-xs text-light">
+                  <span className="material-symbols-outlined text-success ms-sm">payments</span>
+                  <span><strong>$15 USD / Cesta (20 kg):</strong> Venta puerta finca</span>
+                </div>
+              </div>
+            </div>
 
             <div className="d-flex flex-wrap gap-3 mb-4">
               <Button
@@ -27,104 +59,141 @@ export const FunnelHero: React.FC = () => {
                 href="#financiero"
                 variant="success"
                 size="lg"
-                className="touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2 shadow-sm text-white"
+                className="touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2 shadow text-white"
+                style={{
+                  background: 'linear-gradient(135deg, #53C942 0%, #248a15 100%)',
+                  border: 'none'
+                }}
               >
                 <span className="material-symbols-outlined ms-sm">trending_up</span>
-                <span>Ver Retorno Financiero (Pimentón)</span>
+                <span>Simular Retorno ($15/Cesta)</span>
               </Button>
 
               <Link
                 to="/cockpit"
-                className="btn btn-outline-dark btn-lg touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2"
+                className="btn btn-outline-light btn-lg touch-target-48 rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2"
               >
                 <span className="material-symbols-outlined ms-sm">speed</span>
                 <span>Cockpit Técnico Quíbor</span>
               </Link>
             </div>
 
-            {/* Micro métricas de Quíbor */}
-            <div className="d-flex flex-wrap align-items-center gap-3 text-xs text-secondary font-monospace border-top border-secondary-subtle pt-3">
+            {/* Georreferenciación Exacta de Quíbor (AGENTS.md) */}
+            <div className="d-flex flex-wrap align-items-center gap-3 text-xs text-light text-opacity-75 font-monospace border-top border-white border-opacity-10 pt-3">
               <div className="d-flex align-items-center gap-1.5">
-                <span className="material-symbols-outlined text-success ms-sm">check_circle</span>
-                <span>9°53'20"N 69°35'35"W</span>
+                <span className="material-symbols-outlined text-success ms-sm">location_on</span>
+                <span>9°53'20.0"N 69°35'35.0"W</span>
               </div>
               <div className="d-flex align-items-center gap-1.5">
-                <span className="material-symbols-outlined text-success ms-sm">check_circle</span>
-                <span>Cota 700 msnm</span>
+                <span className="material-symbols-outlined text-success ms-sm">height</span>
+                <span>Cota 695–710 msnm</span>
               </div>
               <div className="d-flex align-items-center gap-1.5">
-                <span className="material-symbols-outlined text-success ms-sm">check_circle</span>
-                <span>Pozo 60m Propio</span>
+                <span className="material-symbols-outlined text-info ms-sm">air</span>
+                <span>Viento Este (88% freq)</span>
               </div>
               <div className="d-flex align-items-center gap-1.5">
-                <span className="material-symbols-outlined text-success ms-sm">check_circle</span>
-                <span>Malla 50 Mesh Virgen</span>
+                <span className="material-symbols-outlined text-warning ms-sm">vertical_align_top</span>
+                <span>Altura 3.0 m (Óptima Pimentón)</span>
               </div>
             </div>
           </Col>
 
-          {/* Tarjeta de Resumen Ejecutivo / Ticket de Inversión */}
+          {/* Tarjeta Ejecutiva de Inversión y Producción */}
           <Col xs={12} lg={5}>
-            <Card className="card-agro p-4 shadow-sm border-success border-opacity-50 position-relative overflow-hidden">
+            <Card className="glass-card-dark p-4 shadow-lg position-relative overflow-hidden">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <Badge bg="success" className="bg-opacity-25 text-success rounded-pill font-monospace">
-                  Calculo total
+                <Badge bg="success" className="bg-opacity-25 text-white border border-success border-opacity-40 rounded-pill font-monospace px-3 py-1">
+                  Módulo 1.000 m² Tecnificado
                 </Badge>
-                <Badge bg="light" text="secondary" className="border border-secondary-subtle font-monospace">
-                  Pimentón Quíbor · 1.000 m²
-                </Badge>
+                <span className="text-white-50 font-monospace text-xs">
+                  Ciclo: 5 Meses (20 sem)
+                </span>
               </div>
 
-              <div className="display-5 fw-bold font-mono text-dark mb-1">
-                $10.575 <span className="fs-6 text-secondary">USD</span>
-              </div>
-              <div className="text-secondary small mb-3">
-                Costo total integrado: Reactivación casa de cultivo 1.000 m² + Culminación pozo a 60 metros
+              {/* KPI Principal: Retorno / Ganancia */}
+              <div className="mb-3">
+                <div className="text-uppercase text-xs tracking-wider fw-bold text-white-50">
+                  Ingreso Bruto Proyectado (625 Cestas)
+                </div>
+                <div className="display-5 fw-bold font-mono text-white mb-0">
+                  $9.375 <span className="fs-6 text-white-50">USD / ciclo</span>
+                </div>
+                <div className="text-xs text-light text-opacity-75 mt-1">
+                  A precio referencial auditado de <strong style={{ color: '#53C942' }}>$15 USD / cesta (20 kg)</strong> puerta de invernadero.
+                </div>
               </div>
 
-              {/* Desglose visual de los 2 grandes rubros */}
-              <div className="p-2.5 bg-success bg-opacity-10 rounded-3 border border-success border-opacity-25 mb-3 text-xs">
-                <div className="d-flex justify-content-between align-items-center py-1 border-bottom border-success border-opacity-20">
-                  <span className="text-dark fw-semibold d-flex align-items-center gap-1">
-                    <span className="material-symbols-outlined text-success fs-6">agriculture</span>
-                    <span>Casa de Cultivo (1.000 m²):</span>
+              {/* Ficha cuantitativa de la Nave */}
+              <div className="p-3 bg-black bg-opacity-50 rounded-3 border border-white border-opacity-10 mb-3 text-xs">
+                <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-success fs-6">potted_plant</span>
+                    <span>Plántulas Magistral F1:</span>
                   </span>
-                  <strong className="font-mono text-dark">$6.575 USD</strong>
+                  <strong className="font-mono text-white">2.500 plantas (2.5 pl/m²)</strong>
                 </div>
-                <div className="text-muted text-xxs pb-1 pt-0.5">
-                  Malla 50 mesh 130 gsm + Hortomalla + riego 1:1 + semilla Magistral F1 y nutrición AIFA
-                </div>
-                <div className="d-flex justify-content-between align-items-center py-1 border-top border-success border-opacity-20">
-                  <span className="text-dark fw-semibold d-flex align-items-center gap-1">
-                    <span className="material-symbols-outlined text-info fs-6">water_drop</span>
-                    <span>Pozo a 60 Metros:</span>
+
+                <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-info fs-6">scale</span>
+                    <span>Rendimiento Unitario:</span>
                   </span>
-                  <strong className="font-mono text-dark">$4.000 USD</strong>
+                  <strong className="font-mono text-white">5,0 kg / planta con espaldar</strong>
                 </div>
-                <div className="text-muted text-xxs pt-0.5">
-                  10m excavación grava + anillos concreto Ø 70cm + bomba sumergible 2 HP y tablero
+
+                <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-warning fs-6">inventory_2</span>
+                    <span>Producción Comercial Neta:</span>
+                  </span>
+                  <strong className="font-mono text-white" style={{ color: '#53C942' }}>12.500 kg (625 Cestas)</strong>
+                </div>
+
+                <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-danger fs-6">savings</span>
+                    <span>Costos Operativos Ciclo:</span>
+                  </span>
+                  <strong className="font-mono text-white">$2.035 USD (Hidrosolubles + MO)</strong>
+                </div>
+
+                <div className="d-flex justify-content-between align-items-center pt-1.5">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-success fs-6">paid</span>
+                    <span>Utilidad Neta Ciclo:</span>
+                  </span>
+                  <strong className="font-mono fw-bold fs-6" style={{ color: '#53C942' }}>$7.340 USD</strong>
                 </div>
               </div>
 
-              <div className="p-3 bg-light rounded-3 border border-secondary-subtle mb-0">
-                <Row className="g-2 text-xs">
-                  <Col xs={6}>
-                    <span className="text-secondary">Producción Ciclo:</span>
-                    <div className="fs-6 fw-bold font-mono text-success">12.500 kg (12.5 T)</div>
+              {/* Comparativa rápida de inversión */}
+              <div className="p-3 rounded-3 border border-success border-opacity-30 bg-success bg-opacity-10">
+                <Row className="g-2 text-center text-xs">
+                  <Col xs={4}>
+                    <span className="text-white-50 d-block text-xxs">Inversión Inicial:</span>
+                    <strong className="fs-6 font-mono text-white">$6.975</strong>
                   </Col>
-                  <Col xs={6}>
-                    <span className="text-secondary">Retorno Inversor:</span>
-                    <div className="fs-6 fw-bold font-mono text-success">60% a 70% ROI</div>
+                  <Col xs={4}>
+                    <span className="text-white-50 d-block text-xxs">ROI por Ciclo:</span>
+                    <strong className="fs-6 font-mono" style={{ color: '#53C942' }}>+105%</strong>
                   </Col>
-                  <Col xs={6}>
-                    <span className="text-secondary">Autosuficiencia Hídrica:</span>
-                    <div className="fs-6 fw-bold font-mono text-info">100% Agua Propia</div>
-                  </Col>
-                  <Col xs={6}>
-                    <span className="text-secondary">Tiempo Activación:</span>
-                    <div className="fs-6 fw-bold font-mono text-dark">3 - 4 Semanas</div>
+                  <Col xs={4}>
+                    <span className="text-white-50 d-block text-xxs">Recuperación:</span>
+                    <strong className="fs-6 font-mono text-info">4.5 Meses</strong>
                   </Col>
                 </Row>
+              </div>
+
+              <div className="mt-3 text-center">
+                <a
+                  href="#financiero"
+                  className="text-decoration-none text-xs fw-bold d-inline-flex align-items-center gap-1"
+                  style={{ color: '#53C942' }}
+                >
+                  <span>Ver simulador interactivo y desglose completo</span>
+                  <span className="material-symbols-outlined ms-sm">arrow_downward</span>
+                </a>
               </div>
             </Card>
           </Col>

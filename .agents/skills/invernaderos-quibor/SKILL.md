@@ -28,7 +28,7 @@ Para evaluar la renovación de aire (RAH) y la física de extractores eólicos:
 ### 3. Matriz Fitosanitaria y Selección de Malla Anti-Insectos
 Para determinar la permeabilidad de malla y el programa integrado de control de plagas:
 *   Ver matriz completa en [plagas_malla_ipm.md](./references/plagas_malla_ipm.md).
-*   **Malla Estándar:** 110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, COLOR BLANCO ($\le 192\ \mu\text{m}$), optimizada para circulación convectiva y opacidad/difusión solar anti-sobrecalentamiento.
+*   **Malla Estándar:** 130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, COLOR BLANCO ($\le 192\ \mu\text{m}$), optimizada para circulación convectiva y opacidad/difusión solar anti-sobrecalentamiento.
 *   **Monitoreo y Alerta Crítica:**
 *   *Trips y Mosca Blanca:* Controlados por barrera física 50 mesh y trampas cromotrópicas (azules para trips, amarillas para mosca/pulgón/minador).
     *   *Ácaros (Araña roja y Ácaro blanco):* No retenidos por la malla. Requieren control biológico (*Phytoseiulus*, *Amblyseius*) y control de humedad relativa.

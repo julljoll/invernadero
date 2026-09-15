@@ -31,7 +31,7 @@ export const DliSolarPanel: React.FC = () => {
         </div>
 
         <p className="text-secondary text-2xs mb-3">
-          El DLI mide la cantidad total de fotones útiles para fotosíntesis (400-700 nm) que reciben las hojas al día. La malla 50 mesh blanca (110 gsm) difunde la luz y reduce el estrés por quemadura foliar en los meses cálidos.
+          El DLI mide la cantidad total de fotones útiles para fotosíntesis (400-700 nm) que reciben las hojas al día. La malla 50 mesh blanca (130 gsm) difunde la luz y reduce el estrés por quemadura foliar en los meses cálidos.
         </p>
 
         <Row className="g-2 mb-3 text-2xs">

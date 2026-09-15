@@ -6,7 +6,7 @@ import { MeshRollCalculator } from './components/MeshRollCalculator';
 import { AgroCtaBanner } from '../../shared/components/AgroCtaBanner';
 
 export const MallaSalesPage: React.FC = () => {
-  const [variant, setVariant] = useState<'110' | '130'>('110');
+  const [variant, setVariant] = useState<'130'>('130');
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
@@ -168,7 +168,7 @@ export const MallaSalesPage: React.FC = () => {
                   <div className="d-flex align-items-center gap-2 mb-3">
                     <span className="material-symbols-outlined text-success fs-2">security</span>
                     <div>
-                      <h3 className="h5 fw-bold text-success mb-0">Solución AGROVENECUA 50 Mesh (110 / 130 gsm)</h3>
+                      <h3 className="h5 fw-bold text-success mb-0">Solución AGROVENECUA 50 Mesh (130 gsm)</h3>
                       <span className="text-success small fw-semibold">100% HDPE Virgen con Estabilizador HALS 720 KLY</span>
                     </div>
                   </div>
@@ -362,7 +362,7 @@ export const MallaSalesPage: React.FC = () => {
                   <tr>
                     <th style={{ width: '35%' }}>Parámetro Físico-Mecánico</th>
                     <th style={{ width: '32.5%' }} className="text-success">
-                      Variante A: 110 gsm (Flujo Térmico)
+                      Variante A: 130 gsm (Flujo Térmico)
                     </th>
                     <th style={{ width: '32.5%' }} className="text-warning-emphasis">
                       Variante B: 130 gsm (Alta Tenacidad)
@@ -510,7 +510,7 @@ export const MallaSalesPage: React.FC = () => {
           badgeKicker="Suministro Integral de Estructuras e Insumos AGROVENECUA"
           badgeTag="Almacén Quíbor"
           title={<>¿Deseas Asesoría Técnica para el <span style={{ color: '#53C942' }}>Enmallado y Estructura</span>?</>}
-          description="Contamos con stock de rollos de Malla 50 Mesh (110 y 130 gsm), perfiles Lock Channel C, alambre Wiggle Wire y asesoría agronómica directa en Finca La Cigarronera, Valle de Quíbor."
+          description="Contamos con stock de rollos de Malla 50 Mesh (130 gsm), perfiles Lock Channel C, alambre Wiggle Wire y asesoría agronómica directa en Finca La Cigarronera, Valle de Quíbor."
           primaryCtaText="Cotizar Pedido de Mallas"
           primaryCtaLink={`https://wa.me/584160000000?text=${encodeURIComponent('Hola AGROVENECUA, deseo cotizar rollos de Malla 50 Mesh para pimentón en Quíbor')}`}
           primaryCtaIcon="chat"

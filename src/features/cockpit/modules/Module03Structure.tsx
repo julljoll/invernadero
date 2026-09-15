@@ -122,7 +122,7 @@ export const Module03Structure: React.FC = () => {
           <span className="text-dark fw-bold">Capa Barlovento (Este 88%):</span> Cruces de San Andrés y tensores de guaya galvanizada 1/4" 7×19 con tensores ojo-ojo 5/8" (FS ≥ 1.5).
         </Col>
         <Col xs={12} md={4}>
-          <span className="text-dark fw-bold">Capa 02 Cobertura:</span> Malla 50 Mesh Blanca (110 gsm) con sellado perimetral hermético y alambre CAD de alta precisión.
+          <span className="text-dark fw-bold">Capa 02 Cobertura:</span> Malla 50 Mesh Blanca (130 gsm) con sellado perimetral hermético y alambre CAD de alta precisión.
         </Col>
       </Row>
 
@@ -131,7 +131,7 @@ export const Module03Structure: React.FC = () => {
         <div className="d-flex flex-wrap justify-content-between align-items-center mb-2 pb-2 border-bottom">
           <div className="d-flex align-items-center gap-2">
             <span className="material-symbols-outlined text-success fs-5">content_cut</span>
-            <h5 className="fs-6 fw-bold text-dark mb-0">Plan de Corte y Despiece de Malla 50 Mesh Blanca (110 gsm)</h5>
+            <h5 className="fs-6 fw-bold text-dark mb-0">Plan de Corte y Despiece de Malla 50 Mesh Blanca (130 gsm)</h5>
           </div>
           <Badge bg="success" className="font-monospace text-xs">
             8 Rollos (4.0m × 100m) · $560/rollo = $4.480 USD

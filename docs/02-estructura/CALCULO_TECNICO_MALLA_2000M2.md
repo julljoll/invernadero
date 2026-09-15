@@ -15,7 +15,7 @@ ubicacion:
 cultivos: ["tomate_indeterminado", "pimenton_magistral_f1"]
 superficie_m2: [2000]
 infraestructura: ["casa_de_malla"]
-tags: ["despiece", "malla_110gsm", "guayas", "pilares", "zanja_sanitaria"]
+tags: ["despiece", "malla_130gsm", "guayas", "pilares", "zanja_sanitaria"]
 cross_references:
   - doc_id: "CAT-001"
     relacion: "material_de"
@@ -24,14 +24,14 @@ es_fuente_primaria: true
 tamano_tokens_estimado: 2000
 ---
 # Memoria de Cálculo y Validación Técnica Oficial: Casa de Malla en Quíbor (2.000 m²)
-## Optimización Modular para Rollo Estándar de Malla 110 gsm, 50 Mesh HDPE Color Blanco (4.00 m × 100.00 m)
+## Optimización Modular para Rollo Estándar de Malla 130 gsm, 50 Mesh HDPE Color Blanco (4.00 m × 100.00 m)
 ### Geometría: 20.00 m de Ancho × 100.00 m de Largo | Cultivo Intensivo de Tomate Indeterminado
 
 **Ubicación:** Valle de Quíbor, Municipio Jiménez, Estado Lara, Venezuela  
 **Coordenadas Satelitales Exactas:** [9°53'20.0"N 69°35'35.0"W (9.8889°N, -69.5931°W)](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8) | Elevación: ~700 msnm  
 **Clasificación Climática:** Köppen BSh (Semiárido cálido tropical)  
 **Superficie Total del Proyecto:** **2.000 m² ($20.00\ \text{m} \times 100.00\ \text{m}$)**  
-**Formato de Fábrica de Malla Anti-Insectos:** Rollos de **4.00 m de ancho × 100.00 m de largo** ($400.00\ \text{m}^2/\text{rollo}$), **110 gsm, 50 mesh (50×25 hilos/pulgada), HDPE virgen monofilamento, Color Blanco** (especificada para facilitar la circulación convectiva de aire y conferir opacidad/difusión solar reflectiva que evita el sobrecalentamiento térmico >31.5 °C en la nave).
+**Formato de Fábrica de Malla Anti-Insectos:** Rollos de **4.00 m de ancho × 100.00 m de largo** ($400.00\ \text{m}^2/\text{rollo}$), **130 gsm, 50 mesh (50×25 hilos/pulgada), HDPE virgen monofilamento, Color Blanco** (especificada para facilitar la circulación convectiva de aire y conferir opacidad/difusión solar reflectiva que evita el sobrecalentamiento térmico >31.5 °C en la nave).
 
 ---
 
@@ -179,7 +179,7 @@ DISTRIBUCIÓN DE CULTIVO EN 20.00 m DE ANCHO (10 CAMELLONES DOBLES DE 100 m):
 
 | Elemento | Especificación Técnica | Cantidad / Dimensiones | Función Principal |
 | :--- | :--- | :--- | :--- |
-| **Malla Anti-Trips y Vectores** | Monofilamento virgen HDPE **110 gsm, 50 mesh (50×25 hilos/pulgada), Color Blanco** ($\le 192\ \mu\text{m}$) | **8 rollos de 4.00 m × 100.00 m** | Techo (500m) + paredes (240m) + esclusa (14m) + reserva (40m). Máxima ventilación convectiva y difusión solar anti-sobrecalentamiento. |
+| **Malla Anti-Trips y Vectores** | Monofilamento virgen HDPE **130 gsm, 50 mesh (50×25 hilos/pulgada), Color Blanco** ($\le 192\ \mu\text{m}$) | **8 rollos de 4.00 m × 100.00 m** | Techo (500m) + paredes (240m) + esclusa (14m) + reserva (40m). Máxima ventilación convectiva y difusión solar anti-sobrecalentamiento. |
 | **Pilares Verticales** | Tubo de acero galv. en caliente $\varnothing\ 2\ 1/2"\ \text{Sch 40}$ ($e=3.6\text{ mm}$) | **204 unidades de 3.80 m** (3.00m libre + 0.80m dado) | Sustentación vertical pura en cuadrícula $4.0\text{ m} \times 3.0\text{ m}$ (Flecha $-64\%$) |
 | **Guayas Maestras** | Cable de acero galv. $\varnothing\ 3/8"\ (9.52\text{ mm})$ clase 6×19 alma de acero | $\approx 1.300\ \text{m}$ lineales en cuadrícula $4.0\text{ m} \times 3.0\text{ m}$ | Soporte estructural de la cubierta sin tubos (34 líneas transversales) |
 | **Guayas de Tirante** | Cable de acero galv. $\varnothing\ 3/8"$ a 45° con tensores ojo-ojo de 5/8" | 34 tirantes perimetrales a muertos de concreto | Absorción de empuje eólico y tracción de cables |

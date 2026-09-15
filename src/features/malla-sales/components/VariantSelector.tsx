@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Row, Col, Badge } from 'react-bootstrap';
 
 interface VariantSelectorProps {
-  selectedVariant: '110' | '130';
-  onSelectVariant: (variant: '110' | '130') => void;
+  selectedVariant: '130';
+  onSelectVariant: (variant: '130') => void;
 }
 
 export const VariantSelector: React.FC<VariantSelectorProps> = ({
@@ -14,7 +14,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
 
   return (
     <Row className="g-4">
-      {/* Variante A: 110 gsm */}
+      {/* Variante A: 130 gsm */}
       <Col xs={12} md={6}>
         <Card
           onClick={() => onSelectVariant('110')}
@@ -32,7 +32,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
                   Variante A · Recomendada Quíbor
                 </Badge>
                 <h3 className="h5 fw-bold text-dark mb-1">
-                  110 gsm (Flujo Convectivo &amp; Alivio Térmico)
+                  130 gsm (Flujo Convectivo &amp; Alivio Térmico)
                 </h3>
                 <div className="text-success small fw-semibold font-monospace">
                   50 × 25 mesh · Poro ≤ 192 µm

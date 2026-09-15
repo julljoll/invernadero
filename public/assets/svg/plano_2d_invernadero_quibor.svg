@@ -64,13 +64,13 @@
 
     <!-- Título de Alto Contraste -->
     <text x="26" y="27" fill="#0f172a" font-size="20" font-weight="900" letter-spacing="-0.3">
-      PROYECTO LA CIGARRONERA — PLANO 2D MULTI-ÁNGULO: ARQUITECTURA &amp; INGENIERÍA
+      PROYECTO PIMENTÓN MAGISTRAL — PLANO 2D MULTI-ÁNGULO: ARQUITECTURA &amp; INGENIERÍA
     </text>
     
     <!-- Pills y Tags Descriptivos -->
     <g transform="translate(26, 38)">
       <rect x="0" y="0" width="190" height="20" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-      <text x="10" y="14" fill="#166534" font-size="10.5" font-weight="700">✓ SUPERFICIE: 2.000 m² (20m × 100m)</text>
+      <text x="10" y="14" fill="#166534" font-size="10.5" font-weight="700">✓ SUPERFICIE: 1.000 m² (20m × 100m)</text>
 
       <rect x="198" y="0" width="225" height="20" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
       <text x="208" y="14" fill="#0369a1" font-size="10.5" font-weight="700">⚡ 204 PILARES SCH 40 A 3.00 m LIBRE</text>
@@ -84,7 +84,7 @@
 
     <!-- Datos de Ubicación y Bioclima -->
     <text x="26" y="78" fill="#475569" font-size="11" font-family="'JetBrains Mono', 'Segoe UI', monospace">
-      <tspan fill="#0284c7" font-weight="700">📍 9°53'20.0"N 69°35'35.0"W (707 msnm)</tspan> • Valle de Quíbor, Lara • 4.400 Plantas Tomate (37.4 Ton) • Pozo 60m + Tanque 80m³ • Viento E: 7.4 km/h
+      <tspan fill="#0284c7" font-weight="700">📍 9°53'20.0"N 69°35'35.0"W (707 msnm)</tspan> • Valle de Quíbor, Lara • 2.500 Plantas Pimentón (12.5 Ton) • Pozo 60m + Tanque 80m³ • Viento E: 7.4 km/h
     </text>
 
     <!-- Badge Derecho: Formato 8 Rollos & Eficiencia -->
@@ -212,7 +212,7 @@
       <line x1="90" y1="159" x2="565" y2="159"/>
     </g>
 
-    <!-- Líneas de Cultivo de Tomate Indeterminado -->
+    <!-- Líneas de Cultivo de Pimentón -->
     <g stroke="#16a34a" stroke-width="1.4">
       <line x1="115" y1="170" x2="115" y2="109"/><line x1="135" y1="170" x2="135" y2="109"/>
       <line x1="165" y1="170" x2="165" y2="109"/><line x1="210" y1="170" x2="210" y2="109"/>
@@ -223,7 +223,7 @@
       <line x1="495" y1="170" x2="495" y2="109"/><line x1="520" y1="170" x2="520" y2="109"/>
       <line x1="545" y1="170" x2="545" y2="109"/>
     </g>
-    <!-- Tomates en racimo -->
+    <!-- Pimentón Magistral -->
     <g fill="#dc2626">
       <circle cx="115" cy="130" r="2.5"/><circle cx="210" cy="130" r="2.5"/>
       <circle cx="305" cy="130" r="2.5"/><circle cx="400" cy="130" r="2.5"/>
@@ -379,7 +379,7 @@
   </g>
 
   <!-- ====================================================================
-       4. VISTA C: PLANTA CENITAL (20m × 100m = 2.000 m²)
+       4. VISTA C: PLANTA CENITAL (20m × 100m = 1.000 m²)
        ==================================================================== -->
   <g id="vistaC_Light" transform="translate(50, 380)">
     <!-- Contenedor Tarjeta Blanca -->
@@ -388,7 +388,7 @@
     <!-- Barra Título de Vista -->
     <rect x="0" y="0" width="930" height="32" rx="8" fill="#f8fafc"/>
     <text x="14" y="21" fill="#0f172a" font-size="12.5" font-weight="800">
-      VISTA C: PLANTA CENITAL — MODULACIÓN 5 FRANJAS DE 4.00 m × 100.00 m (2.000 m²)
+      VISTA C: PLANTA CENITAL — MODULACIÓN 5 FRANJAS DE 4.00 m × 100.00 m (1.000 m²)
     </text>
     <rect x="790" y="6" width="125" height="20" rx="10" fill="#0369a1"/>
     <text x="802" y="20" fill="#ffffff" font-size="10" font-weight="700">PARRAL TENSADO</text>
@@ -514,7 +514,7 @@
       <!-- Item 1: Techo -->
       <rect x="0" y="0" width="518" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
       <text x="12" y="15" fill="#0369a1" font-weight="800">• ROLLOS 1 AL 5 (500 m lineales):</text>
-      <text x="12" y="28" fill="#334155">5 paños de 100.00 m → Techo Franjas F-1 a F-5 (20m × 100m = 2.000 m²). Desperdicio: 0.0 m.</text>
+      <text x="12" y="28" fill="#334155">5 paños de 100.00 m → Techo Franjas F-1 a F-5 (20m × 100m = 1.000 m²). Desperdicio: 0.0 m.</text>
 
       <!-- Item 2: Laterales -->
       <rect x="0" y="38" width="518" height="34" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
@@ -604,7 +604,7 @@
         <text x="0" y="190">• <tspan fill="#0f172a" font-weight="800">Tirantes Perimetrales a 45° (34 Unidades):</tspan></text>
         <text x="10" y="205" fill="#64748b">Guaya 3/8" con tensores ojo-ojo 5/8" a muertos de concreto ciclópeo.</text>
 
-        <text x="0" y="228">• <tspan fill="#0f172a" font-weight="800">Malla 110gsm 50mesh Blanca:</tspan> HDPE virgen anti-UV.</text>
+        <text x="0" y="228">• <tspan fill="#0f172a" font-weight="800">Malla 130gsm 50mesh Blanca:</tspan> HDPE virgen anti-UV.</text>
         <text x="10" y="243" fill="#047857" font-weight="700">Ventilación convectiva y difusión solar anti-sobrecalentamiento.</text>
 
         <text x="0" y="266">• <tspan fill="#0f172a" font-weight="800">Tutorado Hortomalla 15×15 cm:</tspan> 1.000 m lineales a 2.00 m.</text>
@@ -631,7 +631,7 @@
         <text x="10" y="91" fill="#64748b">El viento rasante sobre laterales de 100 m succiona el aire caliente.</text>
 
         <text x="0" y="114">• <tspan fill="#0f172a" font-weight="800">Radiación Solar NASA MERRA-2:</tspan> 17.7 MJ/m²·d (4.93 kWh/m²·d).</text>
-        <text x="10" y="129" fill="#0369a1" font-weight="700">Malla blanca 110gsm difunde radiación y disipa calor &gt;31.5°C.</text>
+        <text x="10" y="129" fill="#0369a1" font-weight="700">Malla blanca 130gsm difunde radiación y disipa calor &gt;31.5°C.</text>
 
         <text x="0" y="152">• <tspan fill="#0f172a" font-weight="800">Régimen Térmico Quíbor (707 msnm):</tspan></text>
         <text x="10" y="167" fill="#64748b">T. Máx promedio: 31.5°C (Marzo). T. Mín: 19.0°C. 28 días bochorno/mes.</text>
@@ -666,7 +666,7 @@
         <text x="110" y="48" fill="#0f172a" font-family="'JetBrains Mono', monospace" font-weight="700">9°53'20.0"N, 69°35'35.0"W</text>
 
         <text x="0" y="72" fill="#64748b">DIMENSIONES:</text>
-        <text x="110" y="72" fill="#0f172a" font-weight="800">20.00 m ancho × 100.00 m largo (2.000 m²)</text>
+        <text x="110" y="72" fill="#0f172a" font-weight="800">20.00 m ancho × 100.00 m largo (1.000 m²)</text>
 
         <text x="0" y="96" fill="#64748b">ESTRUCTURA:</text>
         <text x="110" y="96" fill="#0f172a" font-weight="800">Parral Tensado con Guayas 3/8" a 3.00 m</text>
@@ -675,7 +675,7 @@
         <text x="110" y="120" fill="#0f172a" font-weight="800">204 Pilares Sch 40 (Malla 4.0m × 3.0m)</text>
 
         <text x="0" y="144" fill="#64748b">CULTIVO:</text>
-        <text x="110" y="144" fill="#059669" font-weight="800">Tomate Indeterminado Tutorado (4.400 pl)</text>
+        <text x="110" y="144" fill="#059669" font-weight="800">Pimentón Magistral (2.500 pl)</text>
 
         <text x="0" y="168" fill="#64748b">PRODUCCIÓN:</text>
         <text x="110" y="168" fill="#059669" font-weight="800">37.40 Toneladas (8.5 kg/planta estimada)</text>

@@ -67,10 +67,10 @@ Los datos provienen de modelos climáticos asimilados NASA MERRA-2 centrados en 
 
 ---
 
-## 2. Matriz Fitosanitaria y Comportamiento de la Malla 110 gsm, 50 Mesh HDPE Color Blanco
+## 2. Matriz Fitosanitaria y Comportamiento de la Malla 130 gsm, 50 Mesh HDPE Color Blanco
 
-La elección de una malla monofilamento de polietileno de alta densidad (HDPE) virgen de **110 gsm, 50 mesh (50×25 hilos/pulgada) en COLOR BLANCO** ($\le 192\ \mu\text{m}$ de apertura libre) es el estándar agronómico óptimo para el Valle de Quíbor:
-1. **Circulación Convectiva de Aire:** Su gramaje de 110 gsm optimiza el coeficiente de fricción aerodinámica, permitiendo un flujo laminar continuo del viento del Este hacia el colchón disipativo superior de 1.00 m.
+La elección de una malla monofilamento de polietileno de alta densidad (HDPE) virgen de **130 gsm, 50 mesh (50×25 hilos/pulgada) en COLOR BLANCO** ($\le 192\ \mu\text{m}$ de apertura libre) es el estándar agronómico óptimo para el Valle de Quíbor:
+1. **Circulación Convectiva de Aire:** Su gramaje de 130 gsm optimiza el coeficiente de fricción aerodinámica, permitiendo un flujo laminar continuo del viento del Este hacia el colchón disipativo superior de 1.00 m.
 2. **Opacidad y Difusión Solar:** El color blanco refleja la radiación térmica infrarroja y difunde la luz fotosintética PAR, previniendo el sobrecalentamiento de la nave (>31.5 °C en horas pico) y el consecuente aborto floral.
 3. **Barrera Fitosanitaria Anti-Trips:** Bloqueo físico absoluto contra insectos vectores.
 

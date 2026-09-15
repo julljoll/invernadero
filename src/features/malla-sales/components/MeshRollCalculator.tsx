@@ -3,7 +3,7 @@ import { Card, Row, Col, Badge, Button, Alert } from 'react-bootstrap';
 import { Slider } from '../../../shared/components/Slider';
 
 interface MeshRollCalculatorProps {
-  selectedVariant: '110' | '130';
+  selectedVariant: '130';
 }
 
 export const MeshRollCalculator: React.FC<MeshRollCalculatorProps> = ({
@@ -24,7 +24,7 @@ export const MeshRollCalculator: React.FC<MeshRollCalculatorProps> = ({
 
   const is110 = selectedVariant === '110';
   const variantName = is110 
-    ? '110 gsm (Flujo Convectivo & Alivio Térmico)' 
+    ? '130 gsm (Flujo Convectivo & Alivio Térmico)' 
     : '130 gsm (Alta Tenacidad Perimetral)';
 
   const waMessage = encodeURIComponent(
@@ -52,7 +52,7 @@ export const MeshRollCalculator: React.FC<MeshRollCalculatorProps> = ({
             </div>
           </div>
           <Badge bg={is110 ? 'success' : 'warning'} text={is110 ? 'white' : 'dark'} className="px-3 py-2 fs-7 font-monospace rounded-pill">
-            Variante Activa: {is110 ? '110 gsm' : '130 gsm'}
+            Variante Activa: {is110 ? '130 gsm' : '130 gsm'}
           </Badge>
         </div>
 

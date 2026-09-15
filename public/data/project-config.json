@@ -89,7 +89,7 @@
   },
   "greenhouseStructure": {
     "type": "Casa de Malla Parral Tensado Sch 40",
-    "meshSpec": "110 gsm, 50 mesh (50x25) HDPE Monofilamento Virgen Blanco",
+    "meshSpec": "130 gsm, 50 mesh (50x25) HDPE Monofilamento Virgen Blanco",
     "poreSizeMicrons": 192,
     "dimensions": { "widthM": 20.0, "lengthM": 50.0, "heightM": 3.0 },
     "shadingFactor": 0.18,

@@ -18,14 +18,14 @@ export interface AgroState {
   gutterHeightM: number;
   ridgeHeightM: number;
   numWindTurbines: number;
-  meshGsmVariant: '110' | '130';
+  meshGsmVariant: '130';
   setGreenhouseDimensions: (dimensions: {
     lengthM?: number;
     widthM?: number;
     gutterHeightM?: number;
     ridgeHeightM?: number;
     numWindTurbines?: number;
-    meshGsmVariant?: '110' | '130';
+    meshGsmVariant?: '130';
   }) => void;
 
   // Parámetros Hídricos y Salinidad del Pozo
@@ -64,7 +64,7 @@ export const useAgroStore = create<AgroState>()(
       gutterHeightM: QUIBOR_CONFIG.GREENHOUSE.minHeightGutterM,
       ridgeHeightM: QUIBOR_CONFIG.GREENHOUSE.optRidgeHeightM,
       numWindTurbines: 8,
-      meshGsmVariant: '110',
+      meshGsmVariant: '130',
       setGreenhouseDimensions: (dims) =>
         set((state) => ({
           greenhouseLengthM: dims.lengthM ?? state.greenhouseLengthM,

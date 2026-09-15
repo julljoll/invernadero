@@ -132,7 +132,7 @@ function seedSettings(db) {
     ['GH_WIND_TURBINES_COUNT', 'greenhouse', 'Extractores Eólicos Cenitales', '8', 'number', 'Extractores eólicos 24"-30" para romper bolsa cenital'],
 
     // Malla Anti-Insectos
-    ['MESH_SPEC', 'mesh', 'Especificación de Malla', '110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco', 'text', 'Especificación validada en docs/01-bioclima'],
+    ['MESH_SPEC', 'mesh', 'Especificación de Malla', '130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco', 'text', 'Especificación validada en docs/01-bioclima'],
     ['MESH_COLOR', 'mesh', 'Color de Malla', 'Blanco / Cristal Reflectivo', 'text', 'Color difusor de luz y reflector infrarrojo térmico'],
     ['MESH_WEIGHT_GSM', 'mesh', 'Gramaje Nominal (gsm)', '110', 'number', 'Gramaje de óptima permeabilidad aerodinámica'],
     ['MESH_MAX_PORE_MICRONS', 'mesh', 'Apertura de Poro (µm)', '192', 'number', 'Exclusión absoluta de trips, mosca blanca y pulgones'],
@@ -229,7 +229,7 @@ function seedSiteContent(db) {
     ['hero_title', 'landing', 'Título Principal', 'Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor'],
     ['hero_subtitle', 'landing', 'Subtítulo', 'Ingeniería bioclimática y casa de malla tecnificada de 1.000 m² para 2.500 plantas de Pimentón bajo condiciones de semiárido cálido.'],
     ['cockpit_title', 'cockpit', 'Título Cockpit', 'Centro de Control Operativo & Gemelo Digital: Pimentón 2.500 Plantas'],
-    ['malla_cta', 'malla', 'Llamado a la Acción Malla', 'Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor.']
+    ['malla_cta', 'malla', 'Llamado a la Acción Malla', 'Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (130 gsm, Blanco) con despacho directo en el Valle de Quíbor.']
   ];
 
   for (const c of content) {

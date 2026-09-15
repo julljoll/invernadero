@@ -40,7 +40,7 @@ tamano_tokens_estimado: 3000
 
 El presente plan de producción establece las directrices agronómicas, hidráulicas, nutricionales y fitosanitarias de alta precisión para el cultivo intensivo de **tomate indeterminado de fruto redondo / saladette (*Solanum lycopersicum*)** dentro de la estructura de **Casa de Malla de 1.000 m² ($20.00\text{ m}\ \text{ancho} \times 50.00\text{ m}\ \text{largo} \times 3.00\text{ m}\ \text{altura libre}$)** localizada en las coordenadas **$9^\circ 53' 20.0''\ \text{N},\ 69^\circ 35' 35.0''\ \text{W}$** ([abrir en Google Maps](https://maps.app.goo.gl/yEVs9KCuuX1SvYJj8)).
 
-La estructura cuenta con cubierta de **malla anti-insectos 110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, color blanco** (diseñada para maximizar la ventilación convectiva natural y proveer opacidad/difusión solar que evita temperaturas internas superiores a 31.5 °C), estructura de parral plano tensado con guayas de acero galvanizado soportada por **108 pilares Sch 40** (en cuadrícula modular de $4.00\text{ m}\times 2.94\text{ m}$), y tutorado mecánico mediante **Malla Espaldera Biorientada (Hortomalla de 15×15 cm)** a 2.00 m de altura con despunte apical (dejando 1.00 m libre de colchón térmico superior).
+La estructura cuenta con cubierta de **malla anti-insectos 130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, color blanco** (diseñada para maximizar la ventilación convectiva natural y proveer opacidad/difusión solar que evita temperaturas internas superiores a 31.5 °C), estructura de parral plano tensado con guayas de acero galvanizado soportada por **108 pilares Sch 40** (en cuadrícula modular de $4.00\text{ m}\times 2.94\text{ m}$), y tutorado mecánico mediante **Malla Espaldera Biorientada (Hortomalla de 15×15 cm)** a 2.00 m de altura con despunte apical (dejando 1.00 m libre de colchón térmico superior).
 
 El objetivo agronómico es maximizar la eficiencia en el uso de agua salina de pozo ($EC_w \approx 1.2 - 1.5\text{ dS/m}$), suprimir el 88% de la mano de obra en guiado manual, blindar el cultivo contra virosis mecánicas (*ToBRFV* / *TMV*) y plagas del valle, logrando un rendimiento comercial proyectado de **7.5 a 8.5 kg/planta** (**16.5 a 18.7 toneladas métricas en la nave de 1.000 m²** = 825 a 935 cestas de 20 kg) en un ciclo de 22 a 24 semanas.
 
@@ -242,7 +242,7 @@ Comparativa económica entre los 3 modelos nutricionales evaluados para el merca
 ## CAPÍTULO 7: MANEJO FITOSANITARIO ROTACIONAL (IRAC / FRAC)
 
 ### 7.1. Estrategia Base: Plan Preventivo Biológico (Recomendado)
-Dado que la malla 110 gsm 50 mesh blanca detiene trips, moscas blancas, pulgones y minadores, el foco fitosanitario se centra en:
+Dado que la malla 130 gsm 50 mesh blanca detiene trips, moscas blancas, pulgones y minadores, el foco fitosanitario se centra en:
 1. **Control de Ácaros (Araña Roja *Tetranychus urticae* y Ácaro Blanco *Polyphagotarsonemus latus*):**
    * Pasan a través de la malla por su tamaño microscópico (<180 µm).
    * **Base de Manejo:** Azufre micronizado humectable (*Kumulus*) a $2.0\text{ g/L}$ + extracto de canela/neem + jabón potásico al 0.5% preventivo semanal.

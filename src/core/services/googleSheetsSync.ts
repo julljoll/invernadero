@@ -39,7 +39,7 @@ export function getPlanSiembraSheet(): SheetDefinition {
     ['Disposición de Hileras', 'Doble hilera a tresbolillo', 'Esquema', 'Separación de 40 cm entre hileras dentro del camellón'],
     ['Distancia Entre Plantas', 0.40, 'metros', '40 cm lineales entre plantas a lo largo de la cinta'],
     ['Sistema de Tutorado', 'Hortomalla 15×15 cm en cajón', 'Malla vertical', '2 líneas de malla + estacas de madera cada 3.0 m + alambre Cal 12'],
-    ['Cubierta de Protección', 'Malla Anti-Insectos 50 Mesh Blanca', '110 / 130 gsm', 'HDPE monofilamento virgen, poro ≤ 192 µm, difusor lumínico e infrarrojo'],
+    ['Cubierta de Protección', 'Malla Anti-Insectos 50 Mesh Blanca', '130 gsm', 'HDPE monofilamento virgen, poro ≤ 192 µm, difusor lumínico e infrarrojo'],
     ['Extractores Cenitales Eólicos', 8, 'unidades 24"-30"', 'Refuerzo eólico cenital para renovación convectiva en horas pico de calma'],
     ['Orientación Predominante', 'Eje largo Norte-Sur / Refuerzo Este', 'Brújula', 'Fachada Este reforzada por viento dominante durante 11 meses (hasta 27 km/h ráfaga)'],
     ['Duración del Ciclo', 20, 'semanas (140 días)', 'Ciclo completo de trasplante a final de cosecha'],

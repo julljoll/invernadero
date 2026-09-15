@@ -112,7 +112,7 @@ export const Module06PestControl: React.FC = () => {
             </div>
             <h3 className="fs-5 fw-bold text-dark mb-1 d-flex align-items-center gap-2">
               <span className="material-symbols-outlined text-brand-bright ms-sm">shield</span>
-              <span>Malla 50 Mesh Blanca (110 gsm · Monofilamento HDPE Virgen)</span>
+              <span>Malla 50 Mesh Blanca (130 gsm · Monofilamento HDPE Virgen)</span>
             </h3>
             <p className="text-secondary small mb-0">
               Poro hidráulico &le; 192 &mu;m (50&times;25 hilos/pulgada) · Tasa de bloqueo físico de insectos vectores sin asfixiar la renovación de aire (RAH).
@@ -122,7 +122,7 @@ export const Module06PestControl: React.FC = () => {
           <div className="d-flex flex-wrap gap-2">
             <div className="bg-light p-2.5 rounded-3 border border-secondary-subtle text-center">
               <div className="text-secondary text-xs">Gramaje Óptimo</div>
-              <div className="font-mono text-success fw-bold fs-6">110 g/m²</div>
+              <div className="font-mono text-success fw-bold fs-6">130 g/m²</div>
             </div>
             <div className="bg-light p-2.5 rounded-3 border border-secondary-subtle text-center">
               <div className="text-secondary text-xs">Poro Máximo</div>

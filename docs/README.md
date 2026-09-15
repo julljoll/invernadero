@@ -32,7 +32,7 @@
 
 ### 2. Ingeniería Estructural (`docs/02-estructura/`)
 * **[CALCULO_TECNICO_MALLA_2000M2.md](02-estructura/CALCULO_TECNICO_MALLA_2000M2.md)** (ID: `EST-001`)
-  * Memoria de cálculo modular para rollo comercial de malla 110 gsm, 50 mesh HDPE.
+  * Memoria de cálculo modular para rollo comercial de malla 130 gsm, 50 mesh HDPE.
 
 ### 3. Hidrogeología y Captación (`docs/03-hidrogeologia/`)
 * **[EXPEDIENTE_TECNICO_POZO_50M.md](03-hidrogeologia/EXPEDIENTE_TECNICO_POZO_50M.md)** (ID: `HIDRO-001`)

@@ -21,7 +21,7 @@ export const CockpitPage: React.FC = () => {
     `📍 *Ubicación:* Valle de Quíbor, Lara (9°53'20"N 69°35'35"W · 700 msnm)\n` +
     `🌱 *Cultivo Activo:* ${crop.name} (${crop.scientificName})\n` +
     `💧 *Pozo:* 60m profundidad · Nivel Estático 49.5m\n` +
-    `🛡️ *Malla:* 50 Mesh Blanca (110 gsm, poro ≤ 192 µm)\n` +
+    `🛡️ *Malla:* 50 Mesh Blanca (130 gsm, poro ≤ 192 µm)\n` +
     `📋 Ficha técnica verificada en Cockpit Agronómico Quíbor.`
   );
 

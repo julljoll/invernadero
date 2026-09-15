@@ -348,7 +348,7 @@ class Greenhouse3DViewer {
     this.layers.cables.add(anchor);
   }
 
-  // 4. Cubierta y Paredes de Malla 110 gsm, 50 Mesh HDPE Color Blanco (5 Rollos de 4.00 m)
+  // 4. Cubierta y Paredes de Malla 130 gsm, 50 Mesh HDPE Color Blanco (5 Rollos de 4.00 m)
   buildMeshCover() {
     const W = this.options.width;
     const L = this.options.length;
@@ -357,7 +357,7 @@ class Greenhouse3DViewer {
 
     this.meshMaterials = [];
 
-    // Malla Blanca 110 gsm 50 mesh: tonos blancos difusores alternados sutiles para identificar las 5 franjas
+    // Malla Blanca 130 gsm 50 mesh: tonos blancos difusores alternados sutiles para identificar las 5 franjas
     const colors = [0xffffff, 0xf1f5f9, 0xffffff, 0xf1f5f9, 0xffffff];
 
     for (let i = 0; i < this.options.numBays; i++) {
@@ -380,7 +380,7 @@ class Greenhouse3DViewer {
       this.layers.mesh.add(strip);
     }
 
-    // Paredes Perimetrales Malla Blanca 110 gsm (3.00m visible + 0.20m faldón enterrado)
+    // Paredes Perimetrales Malla Blanca 130 gsm (3.00m visible + 0.20m faldón enterrado)
     const wallMat = new THREE.MeshStandardMaterial({
       color: 0xf8fafc,
       transparent: true,

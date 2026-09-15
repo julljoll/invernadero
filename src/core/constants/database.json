@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-15T01:47:35.454Z",
+    "generatedAt": "2026-09-15T13:20:37.271Z",
     "source": "database.sqlite",
     "version": "2.0.0"
   },
@@ -29,7 +29,7 @@
     "MESH_COLOR": "Blanco / Cristal Reflectivo",
     "MESH_MAX_PORE_MICRONS": 192,
     "MESH_PRICE_USD": 560,
-    "MESH_SPEC": "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+    "MESH_SPEC": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
     "MESH_WEIGHT_GSM": 110,
     "AQUIFER_STORATIVITY": 0.0025,
     "AQUIFER_TRANSMISSIVITY": 180,
@@ -245,7 +245,7 @@
       "key": "MESH_SPEC",
       "category": "mesh",
       "label": "Especificación de Malla",
-      "value": "110 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
+      "value": "130 gsm, 50 mesh (50×25 hilos/pulgada) HDPE monofilamento virgen, Color Blanco",
       "type": "text",
       "description": "Especificación validada en docs/01-bioclima"
     },
@@ -582,7 +582,7 @@
     "cockpit_title": "Centro de Control Operativo & Gemelo Digital: Pimentón 2.500 Plantas",
     "hero_subtitle": "Ingeniería bioclimática y casa de malla tecnificada de 1.000 m² para 2.500 plantas de Pimentón bajo condiciones de semiárido cálido.",
     "hero_title": "Horticultura Protegida de Alta Eficiencia en el Valle de Quíbor",
-    "malla_cta": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor."
+    "malla_cta": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (130 gsm, Blanco) con despacho directo en el Valle de Quíbor."
   },
   "siteContentRaw": [
     {
@@ -607,7 +607,7 @@
       "key": "malla_cta",
       "section": "malla",
       "label": "Llamado a la Acción Malla",
-      "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (110 gsm, Blanco) con despacho directo en el Valle de Quíbor."
+      "value": "Cotiza tu rollo de Malla Anti-Insectos 50 Mesh (130 gsm, Blanco) con despacho directo en el Valle de Quíbor."
     }
   ],
   "ragDocuments": [
@@ -642,7 +642,7 @@
       "doc_id": "EST-001",
       "titulo": "Cálculo Técnico y Despiece de Malla 2000m2",
       "dominio": "estructura",
-      "tags": "despiece, malla_110gsm, guayas, pilares, zanja_sanitaria",
+      "tags": "despiece, malla_130gsm, guayas, pilares, zanja_sanitaria",
       "tamano_tokens_estimado": 2000,
       "es_fuente_primaria": 1,
       "ruta_archivo": "docs/02-estructura/CALCULO_TECNICO_MALLA_2000M2.md"

@@ -24,9 +24,9 @@ const SEO_DIRECTORY: Record<string, SeoMetadata> = {
     keywords: 'pozo quibor, aljibe cuara, theis hidrogeologia, bomba sumergible 2hp, abatimiento pozo',
   },
   '/malla-50mesh': {
-    title: 'Malla Anti-Insectos 50 Mesh 110gsm — Cotizador Oficial | Agrovenecua',
+    title: 'Malla Anti-Insectos 50 Mesh 130gsm — Cotizador Oficial | Agrovenecua',
     description: 'Cotizador oficial de rollos de malla anti-insectos 50×25 hilos/pulgada monofilamento virgen HDPE. Bloqueo 100% de mosca blanca y trips en Quíbor.',
-    keywords: 'malla 50 mesh quibor, rollo malla anti insectos venezuela, exclusion mosca blanca, malla 110 gsm',
+    keywords: 'malla 50 mesh quibor, rollo malla anti insectos venezuela, exclusion mosca blanca, malla 130 gsm',
   },
   '/catalogo-invernaderos': {
     title: 'Catálogo de Invernaderos Leader Greenhouse | Agrovenecua',

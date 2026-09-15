@@ -41,7 +41,7 @@ export function calculateVentilation(params: VentilationParams): VentilationResu
   const perimeterAreaM2 = 2 * (lengthM + widthM) * gutterHeightM;
   const ventAreaEffectiveM2 = perimeterAreaM2 * 0.40; // 40% área expuesta efectiva normal al viento
 
-  // Coeficiente de descarga aerodinámica Cd de malla 50 mesh (110 gsm)
+  // Coeficiente de descarga aerodinámica Cd de malla 50 mesh (130 gsm)
   const cdMesh = 0.24;
 
   // Caudal convectivo natural Qvent (m³/h)

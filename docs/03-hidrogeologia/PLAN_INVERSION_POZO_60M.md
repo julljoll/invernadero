@@ -99,7 +99,7 @@ La decisión entre culminar el pozo artesanal existente o contratar una empresa 
 | **Caudal de Explotación** | **2.0 L/s (7.200 L/h sostenidos)** | **2.5 a 3.2 L/s continuo** | Sobrado para 1.0 a 1.5 Ha protegidas |
 
 > [!TIP]
-> **Impacto en el Flujo de Caja:** Los **$20.880 USD liberados** al no perforar un pozo mecánico nuevo financian por completo los materiales de la nave de $1.000\text{ m}^2$ de casa de malla (postes, guayas, mallas 50 mesh anti-trips de 110 gsm, sistema de riego por goteo automatizado y tanques de fertilización).
+> **Impacto en el Flujo de Caja:** Los **$20.880 USD liberados** al no perforar un pozo mecánico nuevo financian por completo los materiales de la nave de $1.000\text{ m}^2$ de casa de malla (postes, guayas, mallas 50 mesh anti-trips de 130 gsm, sistema de riego por goteo automatizado y tanques de fertilización).
 
 ---
 

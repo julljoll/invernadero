@@ -73,13 +73,13 @@
 
     <!-- Título de Alto Contraste -->
     <text x="26" y="27" fill="#0f172a" font-size="20" font-weight="900" letter-spacing="-0.3">
-      PROYECTO LA CIGARRONERA — PLANO 1: ISOMÉTRICO 3D (2.000 m²: 20m × 100m)
+      PROYECTO PIMENTÓN MAGISTRAL — PLANO 1: ISOMÉTRICO 3D (1.000 m²)
     </text>
     
     <!-- Pills y Tags Descriptivos -->
     <g transform="translate(26, 38)">
       <rect x="0" y="0" width="190" height="20" rx="10" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-      <text x="10" y="14" fill="#166534" font-size="10.5" font-weight="700">✓ SUPERFICIE: 2.000 m² (20m × 100m)</text>
+      <text x="10" y="14" fill="#166534" font-size="10.5" font-weight="700">✓ SUPERFICIE: 1.000 m²</text>
 
       <rect x="198" y="0" width="225" height="20" rx="10" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
       <text x="208" y="14" fill="#0369a1" font-size="10.5" font-weight="700">⚡ 204 PILARES SCH 40 A 3.00 m LIBRE</text>
@@ -93,7 +93,7 @@
 
     <!-- Datos de Ubicación y Bioclima -->
     <text x="26" y="78" fill="#475569" font-size="11" font-family="'JetBrains Mono', 'Segoe UI', monospace">
-      <tspan fill="#0284c7" font-weight="700">📍 9°53'20.0"N 69°35'35.0"W (707 msnm)</tspan> • Valle de Quíbor, Lara • 4.400 Plantas Tomate (37.4 Ton) • Pozo 60m + Tanque 80m³ • Viento E: 7.4 km/h
+      <tspan fill="#0284c7" font-weight="700">📍 9°53'20.0"N 69°35'35.0"W (707 msnm)</tspan> • Valle de Quíbor, Lara • 2.500 Plantas Pimentón (12.5 Ton) • Pozo 60m + Tanque 80m³ • Viento E: 7.4 km/h
     </text>
 
     <!-- Badge Derecho: Formato 8 Rollos & Eficiencia -->
@@ -104,7 +104,7 @@
         FORMATO: 8 ROLLOS 4.00 m × 100.00 m
       </text>
       <text x="12" y="36" fill="#0f172a" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="700">
-        8 ROLLOS 110gsm 50mesh COLOR BLANCO
+        8 ROLLOS 130gsm 50mesh COLOR BLANCO
       </text>
       <text x="12" y="50" fill="#059669" font-size="10" font-weight="700">
         VENTILACIÓN Y OPACIDAD DIFUSA ANTI-CALOR
@@ -131,7 +131,7 @@
       </text>
     </g>
 
-    <!-- TERRENO / SUELO DE CIMENTACIÓN ±0.00 m (20m × 100m = 2.000 m²) -->
+    <!-- TERRENO / SUELO DE CIMENTACIÓN ±0.00 m (1.000 m²) -->
     <polygon points="180,680 580,560 1230,210 830,330" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
 
     <!-- CUADRÍCULA DE SUELO (5 MÓDULOS DE 4.00 m × 20 VANOS DE 5.00 m) -->
@@ -231,7 +231,7 @@
       <line x1="1230" y1="210" x2="1230" y2="70"/>
     </g>
 
-    <!-- ==================== CUBIERTA CENITAL (2.000 m² = 5 ROLLOS ENTEROS) ==================== -->
+    <!-- ==================== CUBIERTA CENITAL (1.000 m²) ==================== -->
     <g id="roof5Strips">
       <!-- FRANJA 1: Rollo 1 entero (4.00 m × 100.00 m = 400 m²) -->
       <polygon points="180,540 260,516 910,166 830,190" fill="url(#stripGradEmerald)" stroke="#059669" stroke-width="0.9"/>
@@ -408,7 +408,7 @@
     <!-- Barra Título del Cuadro -->
     <rect x="0" y="0" width="1480" height="30" rx="10" fill="#f8fafc"/>
     <text x="24" y="20" fill="#0f172a" font-size="12.5" font-weight="900">
-      MEMORIA TÉCNICA Y ESPECIFICACIONES ISOMÉTRICAS DE CAMPO — FORMATO 8 ROLLOS (2.000 m²)
+      MEMORIA TÉCNICA Y ESPECIFICACIONES ISOMÉTRICAS DE CAMPO (1.000 m²)
     </text>
     <text x="1350" y="20" fill="#64748b" font-size="10.5" font-family="'JetBrains Mono', monospace">REV: v2.2.0-3D</text>
 
@@ -417,7 +417,7 @@
       <rect x="0" y="0" width="460" height="255" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
       <rect x="0" y="0" width="460" height="24" rx="6" fill="#ecfdf5"/>
       <text x="12" y="16" fill="#065f46" font-size="11" font-weight="900">
-        1. PLAN DE CORTE OFICIAL: 8 ROLLOS 110gsm 50mesh BLANCA
+        1. PLAN DE CORTE OFICIAL: 8 ROLLOS 130gsm 50mesh BLANCA
       </text>
       
       <g font-size="10" fill="#334155" transform="translate(12, 36)">
@@ -452,17 +452,17 @@
       </text>
       
       <g font-size="10" fill="#334155" transform="translate(12, 36)">
-        <text x="0" y="0">• <tspan fill="#0f172a" font-weight="800">Malla 110gsm 50mesh Blanca:</tspan> 204 Pilares Sch 40 (4m × 3m).</text>
+        <text x="0" y="0">• <tspan fill="#0f172a" font-weight="800">Malla 130gsm 50mesh Blanca:</tspan> 204 Pilares Sch 40 (4m × 3m).</text>
         <text x="10" y="14" fill="#64748b">Permeabilidad convectiva y opacidad/difusión solar anti-calor.</text>
 
         <text x="0" y="36">• <tspan fill="#b45309" font-weight="800">Colchón Térmico Superior (1.00 m):</tspan> Entre +2.00m y +3.00m.</text>
         <text x="10" y="50" fill="#92400e">Disipación convectiva continua (&gt;31.5°C marzo) anti-aborto floral.</text>
 
         <text x="0" y="72">• <tspan fill="#d97706" font-weight="800">Espaldar Hortomalla 15×15 cm:</tspan> 10 camellones dobles a 2.00 m.</text>
-        <text x="10" y="86" fill="#64748b">Soporta 19.800 kgf vivos (4.400 pl). Cero atados y cero clips.</text>
+        <text x="10" y="86" fill="#64748b">Soporta 19.800 kgf vivos (2.500 pl). Cero atados y cero clips.</text>
 
-        <text x="0" y="108">• <tspan fill="#059669" font-weight="800">Producción Proyectada:</tspan> 37.40 Toneladas (1.870 cestas de 20 kg).</text>
-        <text x="10" y="122" fill="#047857" font-weight="700">Ahorro mano de obra: -88% vs holandés (2 jornales/mes para 2.000 m²).</text>
+        <text x="0" y="108">• <tspan fill="#059669" font-weight="800">Producción Proyectada:</tspan> 12.50 Toneladas (625 cestas de 20 kg).</text>
+        <text x="10" y="122" fill="#047857" font-weight="700">Ahorro mano de obra: -88% vs holandés (1 jornal/mes para 1.000 m²).</text>
 
         <text x="0" y="144">• <tspan fill="#0f172a" font-weight="800">Blindaje Fitosanitario ToBRFV:</tspan> -80% roce manual frena virosis.</text>
       </g>
