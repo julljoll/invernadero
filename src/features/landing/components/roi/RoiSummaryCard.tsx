@@ -22,7 +22,7 @@ export const RoiSummaryCard: React.FC<RoiSummaryCardProps> = ({
           <span className="material-symbols-outlined text-success ms-sm">analytics</span>
           <span>Proyección Económica (Ciclo 5 Meses)</span>
         </span>
-        <span className="badge bg-success text-dark font-monospace fw-bold">1.000 m²</span>
+        <span className="badge bg-success text-white font-monospace fw-bold">1.000 m²</span>
       </div>
 
       <div className="row g-3 mb-4">
