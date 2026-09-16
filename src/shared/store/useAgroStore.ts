@@ -18,14 +18,14 @@ export interface AgroState {
   gutterHeightM: number;
   ridgeHeightM: number;
   numWindTurbines: number;
-  meshGsmVariant: '130';
+  meshGsmVariant: '110' | '130';
   setGreenhouseDimensions: (dimensions: {
     lengthM?: number;
     widthM?: number;
     gutterHeightM?: number;
     ridgeHeightM?: number;
     numWindTurbines?: number;
-    meshGsmVariant?: '130';
+    meshGsmVariant?: '110' | '130';
   }) => void;
 
   // Parámetros Hídricos y Salinidad del Pozo

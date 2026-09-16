@@ -206,6 +206,45 @@ export const NutritionTanks: React.FC = () => {
           </Row>
         </div>
       )}
+
+      {/* Referencia Técnica UF/IFAS (EDIS HS228 / HS979) - Pimentón Protegido */}
+      <div className="mt-3 p-3 bg-white rounded-3 border border-info border-opacity-30">
+        <div className="d-flex align-items-center justify-content-between mb-2">
+          <div className="d-flex align-items-center gap-2">
+            <span className="badge bg-info text-dark font-sans text-3xs fw-bold">REF. UF/IFAS HS228</span>
+            <span className="fw-bold text-dark text-xs">Parámetros Canónicos de Fertirriego en Pimentón Protegido</span>
+          </div>
+          <span className="text-muted text-3xs">Doc. RAG: PROD-003</span>
+        </div>
+
+        <Row className="g-2 text-xs">
+          <Col xs={12} md={6}>
+            <div className="p-2.5 bg-light rounded border border-secondary-subtle">
+              <span className="fw-bold text-dark d-block mb-1 text-2xs">Concentraciones Elementales Objetivo (Plena Producción):</span>
+              <div className="d-flex flex-wrap gap-2 text-3xs font-monospace">
+                <span className="badge bg-white text-dark border">N: 160 ppm</span>
+                <span className="badge bg-white text-dark border">P: 50 ppm</span>
+                <span className="badge bg-white text-dark border">K: 200 ppm</span>
+                <span className="badge bg-white text-dark border">Ca: 190 ppm</span>
+                <span className="badge bg-white text-dark border">Mg: 48 ppm</span>
+                <span className="badge bg-white text-dark border">S: 65 ppm</span>
+              </div>
+              <span className="text-muted text-3xs d-block mt-1">
+                Conductividad eléctrica objetivo: 1.5 a 2.5 dS/m | Drenaje / Lixiviación: 15% – 20%
+              </span>
+            </div>
+          </Col>
+          <Col xs={12} md={6}>
+            <div className="p-2.5 bg-light rounded border border-secondary-subtle">
+              <span className="fw-bold text-dark d-block mb-1 text-2xs">Protocolo Clave: Prevención de "Elephant's Foot" (Pie de Elefante):</span>
+              <ul className="mb-0 ps-3 text-3xs text-secondary">
+                <li>Trasplantar plántula (35 días) enterrando el cepellón hasta el 1er nudo foliar verdadero.</li>
+                <li>Alejar los emisores de gotero a 5 – 8 cm (2-3") del tallo durante las primeras 3 semanas para evitar acumulación de sales y encharcamiento basal que atrae <em>Fusarium</em>.</li>
+              </ul>
+            </div>
+          </Col>
+        </Row>
+      </div>
     </Card>
   );
 };

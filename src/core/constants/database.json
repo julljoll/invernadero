@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-15T13:20:37.271Z",
+    "generatedAt": "2026-09-16T02:24:42.647Z",
     "source": "database.sqlite",
     "version": "2.0.0"
   },
@@ -718,6 +718,15 @@
       "tamano_tokens_estimado": 6000,
       "es_fuente_primaria": 1,
       "ruta_archivo": "docs/04-produccion/PLAN_TOMATE_2000M2.md"
+    },
+    {
+      "doc_id": "PROD-003",
+      "titulo": "Manual Técnico UF/IFAS: Producción de Pimentón Protegido y Fertirriego (Ref. EDIS HS228 / HS979) Adaptado al Valle de Quíbor",
+      "dominio": "produccion",
+      "tags": "pimenton, uf_ifas, hs228, fertirriego_ppm, blossom_end_rot, elephants_foot, tutorado_espanol, control_biologico, poscosecha",
+      "tamano_tokens_estimado": 3800,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/04-produccion/HS22800_FICHA_INSUMO_PIMENTON.md"
     }
   ]
 }

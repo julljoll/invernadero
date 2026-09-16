@@ -8,31 +8,7 @@ import { WindRoseChart } from './climate/WindRoseChart';
 import { VentilationRahCalculator } from './climate/VentilationRahCalculator';
 import { DliSolarPanel } from './climate/DliSolarPanel';
 
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from 'chart.js';
 import { Chart } from 'react-chartjs-2';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
 
 export const Module01Climate: React.FC = () => {
   const [simTemp, setSimTemp] = useState<number>(29.5);

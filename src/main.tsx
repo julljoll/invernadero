@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './app/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'katex/dist/katex.min.css';
+import './core/chartRegistry';
 import './styles/global.css';
 
 const rootElement = document.getElementById('root');

@@ -6,7 +6,7 @@ import { MeshRollCalculator } from './components/MeshRollCalculator';
 import { AgroCtaBanner } from '../../shared/components/AgroCtaBanner';
 
 export const MallaSalesPage: React.FC = () => {
-  const [variant, setVariant] = useState<'130'>('130');
+  const [variant, setVariant] = useState<'110' | '130'>('130');
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);

@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, Row, Col, Badge } from 'react-bootstrap';
 
 interface VariantSelectorProps {
-  selectedVariant: '130';
-  onSelectVariant: (variant: '130') => void;
+  selectedVariant: '110' | '130';
+  onSelectVariant: (variant: '110' | '130') => void;
 }
 
 export const VariantSelector: React.FC<VariantSelectorProps> = ({

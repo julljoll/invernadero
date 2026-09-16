@@ -74,6 +74,14 @@
       "estimated_tokens": 6000
     },
     {
+      "doc_id": "PROD-003",
+      "file_path": "04-produccion/HS22800_FICHA_INSUMO_PIMENTON.md",
+      "domain": "produccion",
+      "type": "manual_agronomico",
+      "source_pdf": "multimedia/HS22800.pdf",
+      "estimated_tokens": 3800
+    },
+    {
       "doc_id": "CAT-001",
       "file_path": "05-catalogo/LEADERGREENHOUSE_PRODUCTOS.md",
       "domain": "catalogo",

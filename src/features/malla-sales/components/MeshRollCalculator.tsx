@@ -3,7 +3,7 @@ import { Card, Row, Col, Badge, Button, Alert } from 'react-bootstrap';
 import { Slider } from '../../../shared/components/Slider';
 
 interface MeshRollCalculatorProps {
-  selectedVariant: '130';
+  selectedVariant: '110' | '130';
 }
 
 export const MeshRollCalculator: React.FC<MeshRollCalculatorProps> = ({
