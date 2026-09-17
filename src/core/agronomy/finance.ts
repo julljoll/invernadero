@@ -20,6 +20,9 @@ export const DEFAULT_BASKET_PRICES: BasketPricesUsd = {
   kgPerBasket: 20.0,
 };
 
+export const FRUIT_WEIGHT_G = 350;
+export const FRUITS_PER_BASKET = 57;
+
 export interface SystemFinancialComparison {
   totalKgHarvested: number;
   totalBaskets: number;
@@ -53,8 +56,8 @@ export interface CycleFinancialAnalysis {
  */
 export function calculateCycleFinancials(
   crop: CropType = 'pepper',
-  totalPlants: number = 2500,
-  yieldKgPerPlantTechnified: number = 5.2, // 5.2 kg/pl para Magistral F1 tecnificado
+  totalPlants: number = 3500,
+  yieldKgPerPlantTechnified: number = 5.0, // 5.0 kg/pl para Magistral F1 tecnificado
   customPrices: Partial<BasketPricesUsd> = {},
   customTechnifiedCostsUsd: number = 2277 // Costo operativo insumos ciclo 1000m2
 ): CycleFinancialAnalysis {
@@ -62,10 +65,10 @@ export function calculateCycleFinancials(
   const cycleWeeks = crop === 'tomato' ? 24 : 20;
 
   // 1. SISTEMA TECNIFICADO (AGROVENECUA)
-  // Distribución calibrada: 88% Cesta Grande, 12% Mediana, 0% Maraña
+  // Distribución calibrada: 75% Cesta Grande, 25% Mediana, 0% Maraña
   const techDist: BasketDistribution = {
-    largePct: 88,
-    mediumPct: 12,
+    largePct: 75,
+    mediumPct: 25,
     smallPct: 0,
   };
 

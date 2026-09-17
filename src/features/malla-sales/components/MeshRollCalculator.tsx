@@ -29,7 +29,7 @@ export const MeshRollCalculator: React.FC<MeshRollCalculatorProps> = ({
 
   const waMessage = encodeURIComponent(
     `Hola AGROVENECUA, solicito cotización técnica para Malla Antiáfido 50 Mesh en el Valle de Quíbor:\n\n` +
-    `• Rubro: Pimentón (2.500 plantas)\n` +
+    `• Rubro: Pimentón (3.500 plantas)\n` +
     `• Variante Seleccionada: ${variantName}\n` +
     `• Área de Nave: ${greenhouseAreaM2.toLocaleString()} m² de suelo\n` +
     `• Malla Total Estimada: ${requiredMeshAreaM2.toLocaleString()} m² (con solapes y falda enterrada)\n` +

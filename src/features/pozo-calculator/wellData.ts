@@ -48,7 +48,7 @@ export const WELL_PARAMS = {
   // Reservorio australiano
   reservoirVolumeM3: 80,         // m³ (tanque australiano)
   reservoirAutonomyDays: 5.1,    // días de autonomía continua
-  // Demanda agronómica nave 1.000 m² (2.500 plantas pimentón)
+  // Demanda agronómica nave 1.000 m² (3.500 plantas pimentón)
   irrigationDemandPeakM3Day: 15.75,  // m³/día pico (floración-cosecha)
   irrigationDemandAvgM3Day: 10.5,    // m³/día promedio ciclo
 };
@@ -262,7 +262,7 @@ export const WATER_EFFICIENCY_COMPARISON = [
     advantage: '-25% estrés hídrico por viento',
   },
   {
-    parameter: 'Consumo pico en cosecha (2.500 pl)',
+    parameter: 'Consumo pico en cosecha (3.500 pl)',
     openField: '28 – 35 m³/día (gravedad)',
     greenhouse: '14.53 – 15.75 m³/día (goteo)',
     advantage: '-50% extracción neta del pozo',

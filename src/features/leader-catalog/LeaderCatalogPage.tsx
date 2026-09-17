@@ -501,10 +501,15 @@ export const LeaderCatalogPage: React.FC = () => {
                       }}
                     />
                     <div
-                      className="position-absolute bottom-0 start-0 end-0 p-3 text-white"
+                      className="position-absolute bottom-0 start-0 end-0 p-3 text-white d-flex justify-content-between align-items-end"
                       style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85), transparent)' }}
                     >
-                      <h3 className="fs-6 fw-bold mb-0 text-white">{facility.title}</h3>
+                      <h3 className="fs-6 fw-bold mb-0 text-white pe-2">{facility.title}</h3>
+                      {facility.priceUsd && (
+                        <span className="badge bg-success font-mono text-xs px-2.5 py-1 rounded-pill flex-shrink-0 shadow">
+                          ${facility.priceUsd} USD
+                        </span>
+                      )}
                     </div>
                   </div>
 
@@ -525,14 +530,14 @@ export const LeaderCatalogPage: React.FC = () => {
 
                     <div className="mt-auto pt-2 border-top border-secondary-subtle">
                       <a
-                        href={getWaLinkForAccessory(facility.title, 'Sistema Llave en Mano para Finca')}
+                        href={getWaLinkForAccessory(facility.title, facility.priceUsd ? `$${facility.priceUsd} USD` : 'Sistema Llave en Mano para Finca')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-success w-100 rounded-pill fw-bold py-2 d-flex align-items-center justify-content-center gap-2 shadow-sm"
                         title={`Cotizar ${facility.title}`}
                       >
                         <span className="material-symbols-outlined ms-sm">chat</span>
-                        <span>Cotizar Sistema</span>
+                        <span>Cotizar Sistema {facility.priceUsd ? `($${facility.priceUsd} USD)` : ''}</span>
                       </a>
                     </div>
                   </div>
@@ -646,7 +651,7 @@ export const LeaderCatalogPage: React.FC = () => {
         badgeKicker="AGROVENECUA · Cobertura y Suministro en Venezuela"
         badgeTag="Malla 130 gsm 50 Mesh"
         title={<>¿Necesitas <span style={{ color: '#53C942' }}>Malla 50 Mesh (130 gsm)</span> para tu Estructura en Quíbor?</>}
-        description="Complementa estas estructuras con nuestra Malla Antiáfido de 130 gsm monofilamento virgen blanco (con 5 años de garantía UV y poro de 192 micras) o consulta el plan agronómico completo de reactivación para 2.500 plantas de pimentón."
+        description="Complementa estas estructuras con nuestra Malla Antiáfido de 130 gsm monofilamento virgen blanco (con 5 años de garantía UV y poro de 192 micras) o consulta el plan agronómico completo de reactivación para 3.500 plantas de pimentón."
         primaryCtaText="Ver Malla 50 Mesh (130 gsm)"
         primaryCtaLink="/malla-50mesh"
         primaryCtaIcon="grid_view"

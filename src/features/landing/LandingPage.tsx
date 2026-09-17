@@ -17,7 +17,7 @@ export const LandingPage: React.FC = () => {
       {/* 3. Evidencia Técnica y Planos de Ingeniería 2D (Valle de Quíbor / Formación Cuara) */}
       <FunnelTechEvidence />
 
-      {/* 4. Simulador Financiero y Retorno de Inversión (ROI) para 2.500 plantas de Pimentón */}
+      {/* 4. Simulador Financiero y Retorno de Inversión (ROI) para 3.500 plantas de Pimentón */}
       <FunnelFinancialBenefits />
 
       {/* 5. Banner CTA Principal hacia el Cockpit Técnico */}

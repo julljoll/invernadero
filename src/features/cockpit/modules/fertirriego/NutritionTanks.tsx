@@ -71,7 +71,7 @@ export const NutritionTanks: React.FC = () => {
               <span className="text-muted text-xs">Aporte de Calcio, Nitrógeno Nítrico y Hierro Quelado</span>
             </div>
             <span className="badge bg-primary text-white font-monospace px-2.5 py-1 text-xs">
-              Total: 26.05 kg / semana (2.500 pl)
+              Total: 36.47 kg / semana (3.500 pl)
             </span>
           </div>
 
@@ -89,19 +89,19 @@ export const NutritionTanks: React.FC = () => {
                 <tr>
                   <td><strong>Nitrato de Calcio AIFA</strong></td>
                   <td className="font-monospace text-muted">15.5-0-0 + 26% CaO</td>
-                  <td className="font-monospace fw-bold text-primary">18.00 kg/sem</td>
+                  <td className="font-monospace fw-bold text-primary">25.20 kg/sem</td>
                   <td>Calcio móvil. Previene pudrición apical ("culillo") inducida por estrés salino.</td>
                 </tr>
                 <tr>
                   <td><strong>Nitrato de Potasio Soluble</strong></td>
                   <td className="font-monospace text-muted">13-0-46</td>
-                  <td className="font-monospace fw-bold text-primary">7.50 kg/sem</td>
+                  <td className="font-monospace fw-bold text-primary">10.50 kg/sem</td>
                   <td>Nitrógeno nítrico de asimilación rápida para calibre y grosor de pericarpio.</td>
                 </tr>
                 <tr>
                   <td><strong>Quelato de Hierro Fe-EDDHA 6%</strong></td>
                   <td className="font-monospace text-muted">orto-orto soluble</td>
-                  <td className="font-monospace fw-bold text-primary">0.55 kg/sem (550 g)</td>
+                  <td className="font-monospace fw-bold text-primary">0.77 kg/sem (770 g)</td>
                   <td>Estable en pH alcalino (7.4 - 7.8) de Quíbor. Previene clorosis férrica.</td>
                 </tr>
               </tbody>
@@ -119,7 +119,7 @@ export const NutritionTanks: React.FC = () => {
               <span className="text-muted text-xs">Fósforo, Potasio, Magnesio, Azufre y Microelementos</span>
             </div>
             <span className="badge bg-success text-white font-monospace px-2.5 py-1 text-xs">
-              Total: 40.45 kg / semana (2.500 pl)
+              Total: 56.63 kg / semana (3.500 pl)
             </span>
           </div>
 
@@ -137,37 +137,37 @@ export const NutritionTanks: React.FC = () => {
                 <tr>
                   <td><strong>Nitrato de Potasio Soluble</strong></td>
                   <td className="font-monospace text-muted">13-0-46</td>
-                  <td className="font-monospace fw-bold text-success">15.00 kg/sem</td>
+                  <td className="font-monospace fw-bold text-success">21.00 kg/sem</td>
                   <td>Presión osmótica en frutos, grados Brix y consistencia de pared celular.</td>
                 </tr>
                 <tr>
                   <td><strong>Fosfato Monopotásico MKP</strong></td>
                   <td className="font-monospace text-muted">0-52-34</td>
-                  <td className="font-monospace fw-bold text-success">5.00 kg/sem</td>
+                  <td className="font-monospace fw-bold text-success">7.00 kg/sem</td>
                   <td>Fósforo sin amonio libre, induce floración profusa y arquitectura radicular.</td>
                 </tr>
                 <tr>
                   <td><strong>Sulfato de Potasio K₂SO₄</strong></td>
                   <td className="font-monospace text-muted">0-0-50 + 18% S</td>
-                  <td className="font-monospace fw-bold text-success">12.00 kg/sem</td>
+                  <td className="font-monospace fw-bold text-success">16.80 kg/sem</td>
                   <td>Potasio libre de cloro. Antagonista para reducir absorción de cloruros del pozo.</td>
                 </tr>
                 <tr>
                   <td><strong>Sulfato de Magnesio</strong></td>
                   <td className="font-monospace text-muted">16% MgO + 13% S</td>
-                  <td className="font-monospace fw-bold text-success">8.00 kg/sem</td>
+                  <td className="font-monospace fw-bold text-success">11.20 kg/sem</td>
                   <td>Átomo central de clorofila. Mantiene fotosíntesis en insolación máxima.</td>
                 </tr>
                 <tr>
                   <td><strong>Boro Soluble (Octaborato)</strong></td>
                   <td className="font-monospace text-muted">20.5% B</td>
-                  <td className="font-monospace fw-bold text-success">0.15 kg/sem (150 g)</td>
+                  <td className="font-monospace fw-bold text-success">0.21 kg/sem (210 g)</td>
                   <td>Tubo polínico. Vital para cuajado y evitar caída de botones florales.</td>
                 </tr>
                 <tr>
                   <td><strong>Micronutrientes Quelatados</strong></td>
                   <td className="font-monospace text-muted">Mn, Zn, Cu, Mo</td>
-                  <td className="font-monospace fw-bold text-success">0.30 kg/sem (300 g)</td>
+                  <td className="font-monospace fw-bold text-success">0.42 kg/sem (420 g)</td>
                   <td>Cofactores enzimáticos para amortiguar estrés de bochorno y calor.</td>
                 </tr>
               </tbody>
@@ -185,7 +185,7 @@ export const NutritionTanks: React.FC = () => {
               <span className="text-muted text-xs">Neutralización de Bicarbonatos y Calibración de pH a 5.8 - 6.2</span>
             </div>
             <span className="badge bg-danger text-white font-monospace px-2.5 py-1 text-xs">
-              Consumo: 11.0 – 12.5 L / semana
+              Consumo: 15.4 – 17.5 L / semana
             </span>
           </div>
 
@@ -193,7 +193,7 @@ export const NutritionTanks: React.FC = () => {
             <Col xs={12} md={4}>
               <div className="p-3 bg-white rounded border text-center">
                 <span className="text-muted text-2xs d-block mb-1">Inyección Diaria:</span>
-                <span className="fs-4 fw-bold font-monospace text-danger">1.60</span>
+                <span className="fs-4 fw-bold font-monospace text-danger">2.24</span>
                 <span className="text-muted text-xs ms-1">L/día</span>
                 <span className="d-block text-3xs text-secondary mt-1">HNO₃ 55% comercial</span>
               </div>
@@ -342,7 +342,7 @@ export const NutritionTanks: React.FC = () => {
           <div className="mb-4">
             <h5 className="fs-6 fw-bold text-dark mb-2 d-flex align-items-center gap-2">
               <span className="material-symbols-outlined text-warning ms-sm">schedule</span>
-              Programa de Dosificación Granulado — 2.500 Plantas / 1.000 m²
+              Programa de Dosificación Granulado — 3.500 Plantas / 1.000 m²
             </h5>
             <div className="table-responsive bg-white rounded border">
               <Table hover size="sm" className="align-middle mb-0 font-sans text-xs">
@@ -362,60 +362,60 @@ export const NutritionTanks: React.FC = () => {
                   <tr>
                     <td><Badge bg="info" text="dark">Enraizamiento</Badge></td>
                     <td className="font-monospace">1 – 3</td>
-                    <td className="font-monospace fw-bold">4.5</td>
-                    <td className="font-monospace fw-bold">6.0</td>
-                    <td className="font-monospace fw-bold">5.0</td>
-                    <td className="font-monospace fw-bold">3.0</td>
+                    <td className="font-monospace fw-bold">6.3</td>
+                    <td className="font-monospace fw-bold">8.4</td>
+                    <td className="font-monospace fw-bold">7.0</td>
+                    <td className="font-monospace fw-bold">4.2</td>
                     <td>Banda lateral a 10 cm del tallo. Regar inmediato.</td>
                     <td><Badge bg="warning" text="dark" className="text-xs">Quema radicular si lluvia</Badge></td>
                   </tr>
                   <tr>
                     <td><Badge bg="success">Vegetativo</Badge></td>
                     <td className="font-monospace">4 – 7</td>
-                    <td className="font-monospace fw-bold">9.0</td>
-                    <td className="font-monospace fw-bold">8.0</td>
-                    <td className="font-monospace fw-bold">8.0</td>
-                    <td className="font-monospace fw-bold">4.0</td>
+                    <td className="font-monospace fw-bold">12.6</td>
+                    <td className="font-monospace fw-bold">11.2</td>
+                    <td className="font-monospace fw-bold">11.2</td>
+                    <td className="font-monospace fw-bold">5.6</td>
                     <td>Incorporar en banda. 2 aplicaciones / semana.</td>
                     <td><Badge bg="warning" text="dark" className="text-xs">Salinidad superficial acumulada</Badge></td>
                   </tr>
                   <tr>
                     <td><Badge bg="warning" text="dark">Floración</Badge></td>
                     <td className="font-monospace">8 – 12</td>
-                    <td className="font-monospace fw-bold">8.0</td>
-                    <td className="font-monospace fw-bold">4.0</td>
-                    <td className="font-monospace fw-bold">10.0</td>
-                    <td className="font-monospace fw-bold">5.0</td>
+                    <td className="font-monospace fw-bold">11.2</td>
+                    <td className="font-monospace fw-bold">5.6</td>
+                    <td className="font-monospace fw-bold">14.0</td>
+                    <td className="font-monospace fw-bold">7.0</td>
                     <td>Reducir N, elevar K₂SO₄. Foliar de Boro 0.3 g/L.</td>
                     <td><Badge bg="danger" className="text-xs">P fijado en pH 7.4+: aborto floral</Badge></td>
                   </tr>
                   <tr>
                     <td><Badge bg="primary">Cosecha Pico</Badge></td>
                     <td className="font-monospace">13 – 20</td>
-                    <td className="font-monospace fw-bold">10.0</td>
-                    <td className="font-monospace fw-bold">2.0</td>
                     <td className="font-monospace fw-bold">14.0</td>
-                    <td className="font-monospace fw-bold">6.0</td>
+                    <td className="font-monospace fw-bold">2.8</td>
+                    <td className="font-monospace fw-bold">19.6</td>
+                    <td className="font-monospace fw-bold">8.4</td>
                     <td>Énfasis en K₂SO₄. Monitorear CE con conductímetro.</td>
                     <td><Badge bg="warning" text="dark" className="text-xs">Maduración desuniforme por exceso N tardío</Badge></td>
                   </tr>
                   <tr>
                     <td><Badge bg="secondary">Cierre / Pos-cosecha</Badge></td>
                     <td className="font-monospace">21 – 24</td>
-                    <td className="font-monospace fw-bold">3.0</td>
-                    <td className="font-monospace fw-bold">1.0</td>
-                    <td className="font-monospace fw-bold">6.0</td>
-                    <td className="font-monospace fw-bold">2.0</td>
+                    <td className="font-monospace fw-bold">4.2</td>
+                    <td className="font-monospace fw-bold">1.4</td>
+                    <td className="font-monospace fw-bold">8.4</td>
+                    <td className="font-monospace fw-bold">2.8</td>
                     <td>Reducir dosis. Lavar suelo con agua limpia (lixiviación).</td>
                     <td><Badge bg="secondary" className="text-xs">Acumulación de sales en cama</Badge></td>
                   </tr>
                   <tr className="table-light fw-bold">
                     <td colSpan={2}><strong>TOTAL CICLO</strong></td>
-                    <td className="font-monospace text-danger">34.5 kg</td>
-                    <td className="font-monospace text-danger">21.0 kg</td>
-                    <td className="font-monospace text-success">43.0 kg</td>
-                    <td className="font-monospace">20.0 kg</td>
-                    <td colSpan={2} className="text-secondary text-xs">Costo estimado: $480 – $620 USD (sin M.O.)</td>
+                    <td className="font-monospace text-danger">48.3 kg</td>
+                    <td className="font-monospace text-danger">29.4 kg</td>
+                    <td className="font-monospace text-success">60.2 kg</td>
+                    <td className="font-monospace">28.0 kg</td>
+                    <td colSpan={2} className="text-secondary text-xs">Costo estimado: $670 – $860 USD (sin M.O.)</td>
                   </tr>
                 </tbody>
               </Table>
@@ -431,14 +431,14 @@ export const NutritionTanks: React.FC = () => {
                   <h6 className="fw-bold text-dark mb-0 text-xs text-uppercase">Plan Granulado Venezolano (K₂SO₄)</h6>
                 </div>
                 <ul className="list-unstyled text-xs text-secondary d-flex flex-column gap-1 mb-2">
-                  <li>• Inversión fertilizantes: <strong className="text-dark">$480 – $620 USD / ciclo</strong></li>
+                  <li>• Inversión fertilizantes: <strong className="text-dark">$670 – $860 USD / ciclo</strong></li>
                   <li>• Control de CE radicular: <strong className="text-danger">❌ No controlado</strong></li>
                   <li>• Rendimiento proy.: <strong className="text-dark">2.5 – 3.5 kg/planta</strong></li>
                   <li>• % Cesta Grande (&gt;220g): <strong className="text-warning">35 – 50%</strong></li>
                   <li>• % Maraña (&lt;100g): <strong className="text-danger">25 – 35%</strong></li>
                   <li>• Fe disponible en pH 7.4: <strong className="text-danger">❌ Clorosis frecuente</strong></li>
                   <li>• Mano de obra extra aplicación: <strong className="text-warning">+2 jornales/semana</strong></li>
-                  <li>• Ingreso neto estimado: <strong className="text-secondary">$2.345 USD / ciclo</strong></li>
+                  <li>• Ingreso neto estimado: <strong className="text-secondary">$4.000 USD / ciclo</strong></li>
                 </ul>
               </div>
             </Col>
@@ -449,18 +449,18 @@ export const NutritionTanks: React.FC = () => {
                   <h6 className="fw-bold text-dark mb-0 text-xs text-uppercase">Plan AIFA Hidrosoluble (Referencia)</h6>
                 </div>
                 <ul className="list-unstyled text-xs text-secondary d-flex flex-column gap-1 mb-2">
-                  <li>• Inversión fertilizantes: <strong className="text-dark">$1.380 USD / ciclo (A+B)</strong></li>
+                  <li>• Inversión fertilizantes: <strong className="text-dark">$1.930 USD / ciclo (A+B)</strong></li>
                   <li>• Control de CE radicular: <strong className="text-success">✅ Preciso 1.5–2.5 dS/m</strong></li>
-                  <li>• Rendimiento proy.: <strong className="text-dark">4.5 – 5.5 kg/planta</strong></li>
-                  <li>• % Cesta Grande (&gt;220g): <strong className="text-success">80 – 88%</strong></li>
-                  <li>• % Maraña (&lt;100g): <strong className="text-success">0 – 2%</strong></li>
+                  <li>• Rendimiento proy.: <strong className="text-dark">5.0 kg/planta</strong></li>
+                  <li>• % Cesta Grande (&gt;220g): <strong className="text-success">75 – 80%</strong></li>
+                  <li>• % Maraña (&lt;100g): <strong className="text-success">0% (Erradicada)</strong></li>
                   <li>• Fe disponible: <strong className="text-success">✅ Quelato EDDHA activo pH 7.8</strong></li>
                   <li>• Mano de obra aplicación: <strong className="text-success">Automatizado — goteo</strong></li>
-                  <li>• Ingreso neto estimado: <strong className="text-success">$6.360 USD / ciclo</strong></li>
+                  <li>• Ingreso neto estimado: <strong className="text-success">$8.892 USD / ciclo</strong></li>
                 </ul>
                 <div className="mt-2 p-2 bg-success bg-opacity-10 rounded border border-success border-opacity-30 text-center">
-                  <span className="fs-5 fw-bold font-monospace text-success">+$4.015 USD</span>
-                  <span className="text-success text-xs d-block">más ganancia vs granulado · ROI: 2.7×</span>
+                  <span className="fs-5 fw-bold font-monospace text-success">+$4.892 USD</span>
+                  <span className="text-success text-xs d-block">más ganancia vs granulado · ROI: 2.8×</span>
                 </div>
               </div>
             </Col>

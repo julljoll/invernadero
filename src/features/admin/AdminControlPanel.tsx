@@ -1058,7 +1058,7 @@ export const AdminControlPanel: React.FC = () => {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
                     <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                       <strong style={{ fontSize: '13px', color: '#166534', display: 'block' }}>01_Plan_Siembra</strong>
-                      <span style={{ fontSize: '12px', color: '#64748b' }}>Variedad Magistral F1, 2.500 plantas, 10 camellones, densidad 2.5 pl/m²</span>
+                      <span style={{ fontSize: '12px', color: '#64748b' }}>Variedad Magistral F1, 3.500 plantas, 10 camellones, densidad 2.5 pl/m²</span>
                     </div>
                     <div style={{ padding: '12px', backgroundColor: '#f8fafc', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                       <strong style={{ fontSize: '13px', color: '#0369a1', display: 'block' }}>02_Plan_Riego_FAO56</strong>

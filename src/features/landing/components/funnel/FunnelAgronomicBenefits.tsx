@@ -43,8 +43,8 @@ export const FunnelAgronomicBenefits: React.FC = () => {
     {
       id: 'rendimiento',
       title: 'Calidad "Lujo Grande"',
-      metric: '625 Cestas (20 kg)',
-      submetric: '5,0 kg / planta · 12.500 kg ciclo',
+      metric: '875 Cestas (20 kg)',
+      submetric: '5,0 kg / planta · 17.500 kg ciclo',
       desc: 'El sistema de espaldar Hortomalla mantiene el fruto suspendido, libre de pudrición basal y quemaduras solares. El 95% clasifica como Lujo Grande con cotización de $15 USD en puerta.',
       icon: 'workspace_premium',
       badge: 'Máximo Valor Comercial',
@@ -79,7 +79,7 @@ export const FunnelAgronomicBenefits: React.FC = () => {
     {
       factor: 'Producción Neta Comercial',
       openField: '~180 a 220 cestas (20 kg)',
-      greenhouse: '625 cestas (20 kg) seleccionadas',
+      greenhouse: '875 cestas (20 kg) seleccionadas',
       gain: '3.1x más volumen empacado',
       icon: 'inventory_2'
     },
@@ -94,7 +94,7 @@ export const FunnelAgronomicBenefits: React.FC = () => {
       factor: 'Eficiencia Hídrica (FAO-56)',
       openField: 'Riego por surco (25-35% eficiencia)',
       greenhouse: 'Goteo autocompensante PC (92% ef.)',
-      gain: 'Ahorro 70% de agua (74-75 cisternas)',
+      gain: 'Ahorro 70% de agua (92-93 cisternas)',
       icon: 'water_drop'
     },
     {
@@ -226,7 +226,7 @@ export const FunnelAgronomicBenefits: React.FC = () => {
               * Rendimiento a campo abierto basado en promedio histórico de Cuara y Tintorero (fuente: registros agronómicos locales).
             </span>
             <span className="font-mono text-dark fw-bold">
-              Base de cálculo: 2.500 plántulas Magistral · Espaldar Hortomalla · Fertirriego AIFA
+              Base de cálculo: 3.500 plántulas Magistral · Espaldar Hortomalla · Fertirriego AIFA
             </span>
           </div>
         </div>

@@ -271,7 +271,7 @@ const WellHero: React.FC = () => {
         Análisis técnico integral con datos validados del acuífero aluvial de Quíbor (CIDIAT-ULA · SHYQ · Jégat et al. 2012).
         El brocal artesanal está consolidado al <strong>83% (50 m)</strong>. Culminar los 10 metros restantes en grava saturada
         requiere <strong>$4.000 USD llave en mano</strong> y asegura riego independiente para{' '}
-        <strong>2.500 plantas de pimentón en 1.000 m²</strong>.
+        <strong>3.500 plantas de pimentón en 1.000 m²</strong>.
       </p>
 
       {/* Badges de geolocalización */}

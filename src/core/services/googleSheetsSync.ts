@@ -33,8 +33,8 @@ export function getPlanSiembraSheet(): SheetDefinition {
     ['Ubicación Satelital', 'Valle de Quíbor, Municipio Jiménez, Lara', 'Georreferenciación', '9°53\'20.0" N, 69°35\'35.0" W · Sector Cuara / La Cigarronera'],
     ['Cota Altitudinal', 700, 'msnm', 'Valle semiárido cálido (BSh / premontano)'],
     ['Superficie Neta de Nave', 1000, 'm²', 'Módulo estándar de alta eficiencia (50 m largo × 20 m ancho)'],
-    ['Población de Plantas', 2500, 'plantas', '2.500 plantas totales en 1.000 m²'],
-    ['Densidad de Siembra', 2.50, 'plantas / m²', 'Densidad balanceada para ventilación lateral y control de humedad relativa'],
+    ['Población de Plantas', 3500, 'plantas', '3.500 plantas totales en 1.000 m²'],
+    ['Densidad de Siembra', 3.50, 'plantas / m²', 'Densidad balanceada para ventilación lateral y control de humedad relativa'],
     ['Camellones / Bancales', 10, 'camellones', 'Camellones de 50 m de largo espaciados a 2.00 m de centro a centro'],
     ['Disposición de Hileras', 'Doble hilera a tresbolillo', 'Esquema', 'Separación de 40 cm entre hileras dentro del camellón'],
     ['Distancia Entre Plantas', 0.40, 'metros', '40 cm lineales entre plantas a lo largo de la cinta'],
@@ -43,9 +43,9 @@ export function getPlanSiembraSheet(): SheetDefinition {
     ['Extractores Cenitales Eólicos', 8, 'unidades 24"-30"', 'Refuerzo eólico cenital para renovación convectiva en horas pico de calma'],
     ['Orientación Predominante', 'Eje largo Norte-Sur / Refuerzo Este', 'Brújula', 'Fachada Este reforzada por viento dominante durante 11 meses (hasta 27 km/h ráfaga)'],
     ['Duración del Ciclo', 20, 'semanas (140 días)', 'Ciclo completo de trasplante a final de cosecha'],
-    ['Meta Rendimiento', 13000, 'kg / ciclo', '13.0 Toneladas métricas equivalentes a 650 cestas de 20 kg (5.20 kg / planta)'],
-    ['Garantía Calibre Grande (Primera)', '88%', 'Porcentaje', 'Frutos Extra Grandes / Jumbo > 220 gramos'],
-    ['Calibre Mediano (Segunda)', '10%', 'Porcentaje', 'Frutos de 170 a 220 gramos'],
+    ['Meta Rendimiento', 17500, 'kg / ciclo', '17.5 Toneladas métricas equivalentes a 875 cestas de 20 kg (5.00 kg / planta)'],
+    ['Garantía Calibre Grande (Primera)', '75%', 'Porcentaje', 'Frutos Extra Grandes / Jumbo > 220 gramos'],
+    ['Calibre Mediano (Segunda)', '25%', 'Porcentaje', 'Frutos de 170 a 220 gramos'],
     ['Descarte / Maraña', '2%', 'Porcentaje', 'Mínimo descarte gracias a protección 50 mesh y nutrición AIFA'],
   ];
 
@@ -53,7 +53,7 @@ export function getPlanSiembraSheet(): SheetDefinition {
     id: '01_Plan_Siembra',
     name: '01_Plan_Siembra',
     title: '01. Plan de Siembra & Diseño Agronómico (Magistral F1)',
-    description: 'Marco de plantación, densidad, variedad, dimensiones de nave y metas de producción para 2.500 plantas.',
+    description: 'Marco de plantación, densidad, variedad, dimensiones de nave y metas de producción para 3.500 plantas.',
     headers,
     rows,
   };
@@ -117,7 +117,7 @@ export function getPlanRiegoSheet(waterEcDsM: number = 1.45): SheetDefinition {
     const grossMmDay = Number((etcNetMmDay * lfMultiplier).toFixed(2));
     const grossLitersPlantWeek = Number((baseLitersPlantWeek * lfMultiplier).toFixed(1));
     const litersPlantDay = Number((grossLitersPlantWeek / 7).toFixed(2));
-    const totalWeeklyM3 = Number(((grossLitersPlantWeek * 2500) / 1000).toFixed(1));
+    const totalWeeklyM3 = Number(((grossLitersPlantWeek * 3500) / 1000).toFixed(1));
 
     const plantDeliveryRateLh = 3.2;
     const minutesDaily = Math.round((litersPlantDay / plantDeliveryRateLh) * 60);
@@ -163,7 +163,7 @@ export function getPlanFertilizacionSheet(): SheetDefinition {
     'Sulfato Magnesio AIFA (g/pl)',
     'Sulfato Potasio (g/pl)',
     'Ácido Nítrico 60% (mL/pl)',
-    'Total Fertilizante Semanal (kg / 2.500 pl)',
+    'Total Fertilizante Semanal (kg / 3.500 pl)',
     'Total Ácido Nítrico (Litros / semana)',
     'Conductividad Solución (dS/m)',
     'pH Riego Salida'
@@ -329,13 +329,13 @@ export function getCalculoGastosSheet(): SheetDefinition {
     ['1. Semillero & Labranza', 'Semilla Híbrida Magistral F1', '3 sobres de 1.000 semillas certificadas', 'OPEX Producción', '$150 / sobre', 450, '6.1%'],
     ['1. Semillero & Labranza', 'Germinación & Bandejas', 'Bandejas 128 celdas + Peat moss Klasmann', 'OPEX Producción', '$0.06 / plántula', 150, '2.0%'],
     ['1. Semillero & Labranza', 'Preparación de Suelo', 'Pase de tractor, rastra y 10 camellones a 2m', 'OPEX Producción', '$18 / camellón', 180, '2.4%'],
-    ['1. Semillero & Labranza', 'Mano de Obra Trasplante', 'Cuadrilla de siembra para 2.500 plántulas', 'OPEX Producción', '$0.032 / planta', 80, '1.1%'],
+    ['1. Semillero & Labranza', 'Mano de Obra Trasplante', 'Cuadrilla de siembra para 3.500 plántulas', 'OPEX Producción', '$0.032 / planta', 112, '1.5%'],
 
     // 2. Nutrición, Agua & Fitosanitarios ($2.940)
     ['2. Nutrición & Fitosanidad', 'Fertilizantes Solubles AIFA', 'Nitrato Calcio, Potasio, MKP, Mg (20 sem)', 'OPEX Producción', 'Programa 20 sem', 1380, '18.7%'],
     ['2. Nutrición & Fitosanidad', 'Regulador pH Ácido Nítrico 60%', '224 Litros / ciclo para neutralizar agua pozo', 'OPEX Producción', '$0.98 / Litro', 220, '3.0%'],
     ['2. Nutrición & Fitosanidad', 'Agroquímicos & Biológicos IPM', 'Acaricidas, spinosad, cobre, trampas cromáticas', 'OPEX Producción', 'Plan rotación IRAC', 540, '7.3%'],
-    ['2. Nutrición & Fitosanidad', 'Cisternas de Agua Dulce', '74-75 viajes × 10.000 L ($25/viaje) abastecimiento ciclo', 'OPEX Producción', '$25 / cisterna', 1850, '25.1%'],
+    ['2. Nutrición & Fitosanidad', 'Cisternas de Agua Dulce', '92-93 viajes × 10.000 L ($15/viaje) abastecimiento ciclo', 'OPEX Producción', '$15 / cisterna', 1395, '19.9%'],
 
     // 3. Reacondicionamiento Estructural ($375)
     ['3. Reacondicionamiento Estructural', 'Fondo Blanco Anticorrosivo', '1 cuñete epóxico para herrería Sch 40', 'CAPEX Reactivación', '1 cuñete', 75, '1.0%'],
@@ -344,7 +344,7 @@ export function getCalculoGastosSheet(): SheetDefinition {
 
     // 4. Riego & Cabezal Fertirriego ($580)
     ['4. Sistema de Riego & Cabezal', 'Tubería Matriz PEAD 1"-1.5"', 'Matriz y submatrices con codos y uniones', 'CAPEX Reactivación', 'Instalación completa', 120, '1.6%'],
-    ['4. Sistema de Riego & Cabezal', 'Cinta Goteo Goteros PC 1.6 L/h', '1.000 m cinta espaciada a 40 cm autocompensante', 'OPEX / CAPEX', '$0.18 / metro', 180, '2.4%'],
+    ['4. Sistema de Riego & Cabezal', 'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)', 'Cinta 1.000m + goteros PC/AS 1.6 L/h + cabezal y filtros de disco', 'OPEX / CAPEX', 'Kit 1.000 m²', 100, '1.4%'],
     ['4. Sistema de Riego & Cabezal', 'Conectores Iniciales y Válvulas', '20 conectores con válvula + gomas grommet', 'CAPEX Reactivación', '$3.00 / unidad', 60, '0.8%'],
     ['4. Sistema de Riego & Cabezal', '3 Tanques para Fertirriego', 'Tanque A 500L, Tanque B 500L, Tanque C 200L', 'CAPEX Reactivación', 'Batería 3 tanques', 220, '3.0%'],
 
@@ -353,18 +353,18 @@ export function getCalculoGastosSheet(): SheetDefinition {
     ['5. Cubierta & Tutorado', 'Hortomalla 15×15 cm + Alambres', '500m malla soporte cajón + alambres Cal 12-14', 'CAPEX Reactivación', 'Tutorado completo', 380, '5.2%'],
 
     // RESUMEN ECONÓMICO Y BALANCE
-    ['RESUMEN FINANCIERO', 'Subtotal OPEX Producción (1er Ciclo)', 'Semilla, nutrición, fitosanidad, agua y labores', 'OPEX', '2.500 plantas', 4755, '64.5%'],
-    ['RESUMEN FINANCIERO', 'Subtotal CAPEX Adecuación & Malla', 'Malla 50 mesh, hortomalla, tanques, pintura', 'CAPEX', 'Activos fijos nave', 2620, '35.5%'],
-    ['RESUMEN FINANCIERO', 'INVERSIÓN TOTAL 1ER CICLO', 'Deducción total del primer ciclo productivo', 'TOTAL DEDUCCIONES', '1.000 m²', 7375, '100.0%'],
+    ['RESUMEN FINANCIERO', 'Subtotal OPEX Producción (1er Ciclo)', 'Semilla, nutrición, fitosanidad, agua y labores', 'OPEX', '3.500 plantas', 4427, '55.9%'],
+    ['RESUMEN FINANCIERO', 'Subtotal CAPEX Adecuación & Malla', 'Malla 50 mesh, hortomalla, tanques, pintura', 'CAPEX', 'Activos fijos nave', 3495, '44.1%'],
+    ['RESUMEN FINANCIERO', 'INVERSIÓN TOTAL 1ER CICLO', 'Deducción total del primer ciclo productivo', 'TOTAL DEDUCCIONES', '1.000 m²', 7922, '100.0%'],
 
     // ESCENARIOS DE RETORNO (ROI)
-    ['PROYECCIÓN DE INGRESOS', 'Escenario Base: $14.0 USD / cesta', '13.000 kg (650 cestas) × $0.70 USD/kg', 'Ingreso Bruto', '$14 / cesta 20kg', 9100, '-'],
-    ['PROYECCIÓN DE INGRESOS', 'Utilidad Neta Libre (1er Ciclo Base)', 'Ingreso $9.100 - Inversión Total $7.375', 'Utilidad Neta', 'Recupera Malla 100%', 1725, '+23% ROI'],
-    ['PROYECCIÓN DE INGRESOS', 'OPEX Recurrente (2do Ciclo en adelante)', 'Solo costo de producción (malla y equipos ya pagos)', 'OPEX Recurrente', 'Ciclos subsiguientes', 3800, '-'],
-    ['PROYECCIÓN DE INGRESOS', 'Utilidad Libre Proyectada (2do Ciclo)', 'Ingreso $9.100 - OPEX Recurrente $3.800', 'Utilidad Recurrente', 'Cada 5 meses', 5300, '+139% ROI'],
-    ['PROYECCIÓN DE INGRESOS', 'Escenario Favorable: $18.0 USD / cesta', '13.000 kg (650 cestas) × $0.90 USD/kg', 'Ingreso Bruto', '$18 / cesta 20kg', 11700, '-'],
-    ['PROYECCIÓN DE INGRESOS', 'Utilidad Neta Libre (Escenario Favorable)', 'Ingreso $11.700 - Inversión Total $7.375', 'Utilidad Neta', '1er Ciclo con buen precio', 4325, '+59% ROI'],
-    ['PROYECCIÓN DE INGRESOS', 'Escenario Conservador: $11.0 USD / cesta', '13.000 kg (650 cestas) × $0.55 USD/kg', 'Ingreso Bruto', '$11 / cesta 20kg', 7150, '-'],
+    ['PROYECCIÓN DE INGRESOS', 'Escenario Base: $14.0 USD / cesta', '17.500 kg (875 cestas) × $0.70 USD/kg', 'Ingreso Bruto', '$14 / cesta 20kg', 12250, '-'],
+    ['PROYECCIÓN DE INGRESOS', 'Utilidad Neta Libre (1er Ciclo Base)', 'Ingreso $10.936 - Inversión Total $7.922', 'Utilidad Neta', 'Recupera Malla 100%', 3014, '+38% ROI'],
+    ['PROYECCIÓN DE INGRESOS', 'OPEX Recurrente (2do Ciclo en adelante)', 'Solo costo de producción (malla y equipos ya pagos)', 'OPEX Recurrente', 'Ciclos subsiguientes', 4427, '-'],
+    ['PROYECCIÓN DE INGRESOS', 'Utilidad Libre Proyectada (2do Ciclo)', 'Ingreso $10.936 - OPEX Recurrente $4.427', 'Utilidad Recurrente', 'Cada 5 meses', 6509, '+147% ROI'],
+    ['PROYECCIÓN DE INGRESOS', 'Escenario Favorable: $18.0 USD / cesta', '17.500 kg (875 cestas) × $0.90 USD/kg', 'Ingreso Bruto', '$18 / cesta 20kg', 15750, '-'],
+    ['PROYECCIÓN DE INGRESOS', 'Utilidad Neta Libre (Escenario Favorable)', 'Ingreso $15.750 - Inversión Total $7.922', 'Utilidad Neta', '1er Ciclo con buen precio', 7828, '+99% ROI'],
+    ['PROYECCIÓN DE INGRESOS', 'Escenario Conservador: $11.0 USD / cesta', '17.500 kg (875 cestas) × $0.55 USD/kg', 'Ingreso Bruto', '$11 / cesta 20kg', 9625, '-'],
   ];
 
   return {

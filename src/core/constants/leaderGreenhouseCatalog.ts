@@ -36,6 +36,7 @@ export interface HotSaleAccessory {
 export interface FacilitySystem {
   id: string;
   title: string;
+  priceUsd?: number;
   imageUrl: string;
   description: string;
   keyFeatures: string[];
@@ -109,7 +110,7 @@ export const GREENHOUSE_MODELS: GreenhouseModel[] = [
     crossBracing: true,
     imageUrl: 'https://sc04.alicdn.com/kf/He8062da9fca94fe09065e4818e40e9dfH/239438894/He8062da9fca94fe09065e4818e40e9dfH.png',
     description: 'Diseño verticalizado de gran despeje cenital que maximiza el volumen de aire buffer interior. El aire caliente asciende por convección natural manteniendo la zona de cuajado y floración bajo los 30 °C para prevenir el aborto. Estructura calculada para soportar tutorados intensivos de pimentón de hasta 20 kg/m².',
-    recommendedUse: 'Pimentón de alta densidad (2.5 pl/m² · 2.500 plantas), espalderas de 1.80m a 2.20m y fertirriego tecnificado.',
+    recommendedUse: 'Pimentón de alta densidad (3.5 pl/m² · 3.500 plantas), espalderas de 1.80m a 2.20m y fertirriego tecnificado.',
     structuralSpecs: {
       columnType: 'Pilares cuadrados de 80x80mm y arcos reforzados con cumbrera ventilada',
       galvanization: 'Inmersión térmica en caliente Z350 de máxima longevidad',
@@ -239,13 +240,14 @@ export const FACILITY_SYSTEMS: FacilitySystem[] = [
   },
   {
     id: 'drip-irrigation',
-    title: 'Sistema de Riego por Goteo Tecnificado y Fertirriego de Precisión',
+    title: 'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)',
+    priceUsd: 100,
     imageUrl: 'https://www.leadergreenhouse.com/themes/LeaderGreenhouse_en/public/assets/img/box/box2.jpg',
-    description: 'Red hidráulica completa con tuberías matrices de polietileno de alta densidad (PEAD), mangueras de goteo autocompensantes (PC), filtros de anillas/mallas y dosificación de fertilizantes para camellones dobles de 50 metros.',
+    description: 'Red hidráulica completa con tuberías matrices de polietileno de alta densidad (PEAD), mangueras de goteo autocompensantes PC/AS de 1.6 L/h, cabezal de control y filtros de anillas/discos para 1.000 m².',
     keyFeatures: [
+      'Goteros autocompensantes (PC) y antisucción (AS) de 1.60 L/h con descarga homogénea',
+      'Cabezal técnico completo con filtro de anillas/discos de 120 mesh resistente a aguas duras y salinas',
       'Uniformidad de emisión superior al 95% desde el primer hasta el último gotero del camellón',
-      'Goteros autocompensantes y antidrenantes resistentes a obstrucciones por aguas duras y salinas',
-      'Integración directa con inyectores Venturi y tanques dosificadores de nutrientes A, B y C',
       'Ahorro comprobado del 50% al 65% en volumen de agua frente a métodos tradicionales'
     ]
   },

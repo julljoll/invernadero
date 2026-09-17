@@ -245,7 +245,7 @@ export const GoogleSheetsSyncModal: React.FC<GoogleSheetsSyncModalProps> = ({
           </Nav>
 
           <span className="text-muted text-xs">
-            Cultivo activo: <strong>Pimentón Magistral F1</strong> (2.500 pl · 1.000 m²)
+            Cultivo activo: <strong>Pimentón Magistral F1</strong> (3.500 pl · 1.000 m²)
           </span>
         </div>
 

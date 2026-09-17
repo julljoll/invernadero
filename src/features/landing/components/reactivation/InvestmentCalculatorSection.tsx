@@ -7,7 +7,7 @@ type BudgetCategory = 'all' | 'seed' | 'nutrition' | 'structure' | 'irrigation' 
 export const InvestmentCalculatorSection: React.FC = () => {
   // Estados de simulación comercial
   const [sellingPricePerKg, setSellingPricePerKg] = useState<number>(0.70); // $14.0 USD / cesta de 20 kg
-  const [targetYieldKg, setTargetYieldKg] = useState<number>(13000); // 13.0 Ton = 650 cestas (2.500 pl × 5.20 kg)
+  const [targetYieldKg, setTargetYieldKg] = useState<number>(17500); // 17.5 Ton = 875 cestas (3.500 pl × 5.00 kg)
   const [activeCategory, setActiveCategory] = useState<BudgetCategory>('all');
   const [showTimelineDetails, setShowTimelineDetails] = useState<boolean>(false);
   const [showGoogleSheetsModal, setShowGoogleSheetsModal] = useState<boolean>(false);
@@ -19,14 +19,14 @@ export const InvestmentCalculatorSection: React.FC = () => {
   const costSeedMagistral = 450;        // Semilla híbrida certificada Magistral F1 (3 sobres de 1.000 semillas)
   const costGermination = 150;          // Gasto de germinación en bandejas 128 celdas + Peat Moss
   const costLandPrep = 180;             // Preparación de tierra: pase de tractor, rastra y conformación de 10 camellones
-  const costTransplantLabor = 80;       // Mano de obra para siembra y trasplante de 2.500 plántulas
+  const costTransplantLabor = 80;       // Mano de obra para siembra y trasplante de 3.500 plántulas
   const subtotalSeed = costSeedMagistral + costGermination + costLandPrep + costTransplantLabor; // $860 USD
 
   // 2. Nutrición, Agua & Protección Fitosanitaria
-  const costFertilizerAifa = 1380;      // Nutrición 100% hidrosoluble AIFA (20 semanas, Tanques A y B)
+  const costFertilizerAifa = 1930;      // Nutrición 100% hidrosoluble AIFA (20 semanas, Tanques A y B)
   const costPhRegulator = 220;          // Regulador de pH: Ácido Nítrico Técnico 60% (224 L / ciclo)
   const costPesticidesFungicides = 540;  // Venenos plagas y hongos (Plan Fitosanitario anti-trips, acaricidas, preventivos)
-  const costWaterCisterns = 1850;       // Cisternas de agua dulce 10.000L ($25/viaje × 74 viajes = 740.000 L)
+  const costWaterCisterns = 1380;       // Cisternas de agua dulce 10.000L ($15/viaje × 92 viajes = 920.000 L)
   const subtotalNutrition = costFertilizerAifa + costPhRegulator + costPesticidesFungicides + costWaterCisterns;
 
   // 3. Reacondicionamiento Estructural & Mano de Obra ($375 USD)
@@ -35,12 +35,12 @@ export const InvestmentCalculatorSection: React.FC = () => {
   const costMeshInstallLabor = 180;     // Mano de obra para colocar, coser con hilo UV y tensar la Malla 50 Mesh
   const subtotalStructure = costPaintWhitePrimer + costPaintLabor + costMeshInstallLabor; // $375 USD
 
-  // 4. Sistema de Riego & Cabezal de Fertirriego ($580 USD)
+  // 4. Sistema de Riego & Cabezal de Fertirriego ($500 USD)
   const costDripMainHose = 120;         // Tubería matriz y submatrices PEAD de 1" a 1.5"
-  const costDripTapeRoll = 180;         // Cinta de goteo rollo 1.000m para 2.500 plantas a 40cm (goteros PC/AS)
+  const costDripTapeRoll = 100;         // Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)
   const costDripInitialConnectors = 60; // Conectores iniciales con válvula individual y gomas grommet anti-fuga
   const cost3FertigationTanks = 220;    // 3 tanques para fertirriego (Tanque A 500L, Tanque B 500L, Tanque C 200L)
-  const subtotalIrrigation = costDripMainHose + costDripTapeRoll + costDripInitialConnectors + cost3FertigationTanks; // $580 USD
+  const subtotalIrrigation = costDripMainHose + costDripTapeRoll + costDripInitialConnectors + cost3FertigationTanks; // $500 USD
 
   // Gasto total de producción y adecuación (15 rubros por defecto): $4.755 USD
   const defaultProductionCost = subtotalSeed + subtotalNutrition + subtotalStructure + subtotalIrrigation;
@@ -85,10 +85,10 @@ export const InvestmentCalculatorSection: React.FC = () => {
   const pctNetProfit = grossRevenue > 0 ? Math.max(0, 100 - pctOpex - pctCapex) : 0;
 
   const waMessage = encodeURIComponent(
-    `Hola Agrovenecua, coticé la Reactivación Llave en Mano de Pimentón Grande con Semilla Magistral F1 (2.500 plantas / 1.000 m²):\n` +
+    `Hola Agrovenecua, coticé la Reactivación Llave en Mano de Pimentón Grande con Semilla Magistral F1 (3.500 plantas / 1.000 m²):\n` +
     `• Duración del Ciclo: 20 Semanas (140 días / 5 meses)\n` +
     `• Precio de Venta: $${sellingPricePerKg.toFixed(2)} USD/kg ($${(sellingPricePerKg * 20).toFixed(1)}/cesta)\n` +
-    `• Meta Cosecha Magistral F1: ${targetYieldKg.toLocaleString()} kg (${numCestas} cestas · ${(targetYieldKg / 2500).toFixed(2)} kg/pl)\n` +
+    `• Meta Cosecha Magistral F1: ${targetYieldKg.toLocaleString()} kg (${numCestas} cestas · ${(targetYieldKg / 3500).toFixed(2)} kg/pl)\n` +
     `• Gasto Producción y Adecuación (15 rubros): $${effectiveProductionCost.toLocaleString()} USD\n` +
     `• Cubierta Malla de 130 gsm 50 mesh (4 rollos @ $560 efectivo) + Hortomalla: $${structuralCapex.toLocaleString()} USD\n` +
     `• Deducción Total 1er Ciclo: $${totalDeductions.toLocaleString()} USD\n` +
@@ -108,7 +108,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
             MÓDULO 05 · CALCULADORA FINANCIERA &amp; RENTABILIDAD EN VIVO
           </span>
           <h2 className="display-6 fw-bold text-dark mb-2">
-            Calculadora de Inversión y Rentabilidad en Pimentón (2.500 Plantas)
+            Calculadora de Inversión y Rentabilidad en Pimentón (3.500 Plantas)
           </h2>
           <p className="text-secondary small mb-3">
             Simula en tiempo real la viabilidad financiera de tu nave de 1.000 m². Deduce de forma transparente el gasto de producción (15 rubros) y la reactivación física con Malla de 130 gsm 50 mesh.
@@ -204,7 +204,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                   <span>Ingreso Bruto de Venta</span>
                 </span>
                 <span className="badge bg-success bg-opacity-10 text-success rounded-pill font-monospace text-2xs">
-                  650 Cestas
+                  875 Cestas
                 </span>
               </div>
               <div className="display-6 fw-bold font-mono text-dark lh-1 mb-1">
@@ -214,8 +214,8 @@ export const InvestmentCalculatorSection: React.FC = () => {
                 Liquidación: <strong className="text-success font-mono">${(sellingPricePerKg * 20).toFixed(1)} USD / cesta</strong> (100% Cesta Grande)
               </div>
               <div className="mt-2 pt-2 border-top border-secondary-subtle text-2xs text-secondary d-flex justify-content-between font-monospace">
-                <span>13.000 kg</span>
-                <span className="text-success fw-bold">88% Grande · 0% Maraña</span>
+                <span>17.500 kg</span>
+                <span className="text-success fw-bold">75% Grande · 0% Maraña</span>
               </div>
             </div>
           </div>
@@ -258,7 +258,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
               <span className="fw-bold text-dark text-sm">¿Cómo se Distribuye Cada Dólar de la Cosecha (${grossRevenue.toLocaleString()} USD)?</span>
             </div>
             <div className="text-xs text-secondary font-monospace">
-              Meta: 13.000 kg @ ${(sellingPricePerKg * 20).toFixed(1)}/cesta
+              Meta: 17.500 kg @ ${(sellingPricePerKg * 20).toFixed(1)}/cesta
             </div>
           </div>
 
@@ -370,7 +370,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                     <span className="text-secondary font-mono">80 Días (11 sem)</span>
                   </div>
                   <div className="fw-bold text-dark mb-1">Cosecha Escalonada Continua</div>
-                  <div className="text-secondary">Cortes semanales ininterrumpidos de pimentón grande Magistral F1 hasta totalizar las 13.0 Toneladas (650 cestas).</div>
+                  <div className="text-secondary">Cortes semanales ininterrumpidos de pimentón grande Magistral F1 hasta totalizar las 17.5 Toneladas (875 cestas).</div>
                 </div>
               </div>
             </div>
@@ -390,7 +390,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                     <span>Variables de Mercado (Ajustables)</span>
                   </h3>
                   <span className="badge bg-light text-secondary border border-secondary-subtle font-monospace text-2xs">
-                    2.500 Plantas
+                    3.500 Plantas
                   </span>
                 </div>
 
@@ -406,16 +406,16 @@ export const InvestmentCalculatorSection: React.FC = () => {
                   onChange={setSellingPricePerKg}
                 />
                 <div className="text-2xs text-secondary mt-n2 mb-3 font-sans">
-                  *Referencia Quíbor: <strong>Grande ($14 USD)</strong>, <strong>Mediana ($8 USD)</strong>, <strong>Maraña ($3.5 USD)</strong>. Con semilla Magistral y AIFA se proyecta 88% Grande y 0% Maraña.
+                  *Referencia Quíbor: <strong>Grande ($14 USD)</strong>, <strong>Mediana ($8 USD)</strong>, <strong>Maraña ($3.5 USD)</strong>. Con semilla Magistral y AIFA se proyecta 75% Grande y 0% Maraña.
                 </div>
 
                 <Slider
                   label="Meta de Cosecha Total (kg):"
                   value={targetYieldKg}
                   min={9000}
-                  max={15000}
+                  max={20000}
                   step={500}
-                  formatValue={(v) => `${v.toLocaleString()} kg (${Math.round(v / 20)} cestas · ${(v / 2500).toFixed(2)} kg/planta)`}
+                  formatValue={(v) => `${v.toLocaleString()} kg (${Math.round(v / 20)} cestas · ${(v / 3500).toFixed(2)} kg/planta)`}
                   accentColor="info"
                   iconName="agriculture"
                   onChange={setTargetYieldKg}
@@ -552,7 +552,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                         <strong className="text-dark font-mono ms-2">${costLandPrep} USD</strong>
                       </div>
                       <div className="d-flex justify-content-between py-1">
-                        <span className="text-truncate">• Mano de obra siembra (2.500 plantas):</span>
+                        <span className="text-truncate">• Mano de obra siembra (3.500 plantas):</span>
                         <strong className="text-dark font-mono ms-2">${costTransplantLabor} USD</strong>
                       </div>
                     </div>
@@ -581,7 +581,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                         <strong className="text-dark font-mono ms-2">${costPesticidesFungicides} USD</strong>
                       </div>
                       <div className="d-flex justify-content-between py-1">
-                        <span className="text-truncate">• Cisternas agua ($25/viaje × 74 viajes):</span>
+                        <span className="text-truncate">• Cisternas agua ($15/viaje × 92 viajes):</span>
                         <strong className="text-dark font-mono ms-2">${costWaterCisterns} USD</strong>
                       </div>
                     </div>
@@ -627,7 +627,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                         <strong className="text-dark font-mono ms-2">${costDripMainHose} USD</strong>
                       </div>
                       <div className="d-flex justify-content-between py-1 border-bottom border-secondary-subtle">
-                        <span className="text-truncate">• Cinta de goteo rollo 2.500 pl a 40cm (1.000m):</span>
+                        <span className="text-truncate">• Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros):</span>
                         <strong className="text-dark font-mono ms-2">${costDripTapeRoll} USD</strong>
                       </div>
                       <div className="d-flex justify-content-between py-1 border-bottom border-secondary-subtle">
@@ -764,7 +764,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                   <span>Contactar Asesor Agronómico vía WhatsApp</span>
                 </a>
                 <div className="text-center text-secondary text-xs mt-2 font-sans">
-                  *Cálculo técnico para 2.500 plantas en Finca La Cigarronera (Valle de Quíbor, 700 msnm) bajo protocolo FAO-56.
+                  *Cálculo técnico para 3.500 plantas en Finca La Cigarronera (Valle de Quíbor, 700 msnm) bajo protocolo FAO-56.
                 </div>
               </div>
             </div>

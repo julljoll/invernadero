@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
+  <!-- Definitions for gradients and patterns -->
+  <defs>
+    <linearGradient id="soilGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B5A2B" />
+      <stop offset="100%" stop-color="#5C3A21" />
+    </linearGradient>
+    <linearGradient id="wetBulbGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.3" />
+    </linearGradient>
+    <linearGradient id="leafGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="100%" stop-color="#16a34a" />
+    </linearGradient>
+    
+    <pattern id="soilTexture" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#000" opacity="0.1" />
+      <circle cx="12" cy="8" r="1.5" fill="#000" opacity="0.1" />
+      <circle cx="6" cy="16" r="1" fill="#000" opacity="0.1" />
+    </pattern>
+  </defs>
+
+  <!-- Title -->
+  <rect x="0" y="0" width="800" height="60" fill="#0f172a" />
+  <text x="400" y="38" font-size="24" font-weight="bold" fill="#ffffff" text-anchor="middle">Sistema de Riego (3.500 Plantas): Doble Cinta a 30cm</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="85" font-size="16" font-weight="600" fill="#334155" text-anchor="middle">Doble Riego en Camellón: Banda Húmeda Continua</text>
+
+  <!-- Ground Level line -->
+  <path d="M 50 350 L 750 350" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 4" />
+  <text x="75" y="340" font-size="14" fill="#64748b" font-style="italic">Nivel del suelo (Pasillo)</text>
+
+  <!-- Soil Bed (Camellón) -->
+  <path d="M 150 350 L 250 250 L 550 250 L 650 350 Z" fill="url(#soilGradient)" />
+  <path d="M 150 350 L 250 250 L 550 250 L 650 350 Z" fill="url(#soilTexture)" />
+
+  <!-- Underground (Soil beneath) -->
+  <rect x="50" y="350" width="700" height="120" fill="#5C3A21" opacity="0.8" />
+  <rect x="50" y="350" width="700" height="120" fill="url(#soilTexture)" />
+  
+  <text x="400" y="450" font-size="16" fill="#e2e8f0" font-weight="bold" text-anchor="middle">Zona Radicular Activa (0 - 40 cm)</text>
+
+  <!-- Wet Bulbs (Banda Húmeda Continua) -->
+  <path d="M 230 250 Q 230 380 320 380 Q 410 380 410 250 Z" fill="url(#wetBulbGradient)" />
+  <path d="M 390 250 Q 390 380 480 380 Q 570 380 570 250 Z" fill="url(#wetBulbGradient)" />
+  
+  <!-- Overlay to show merging of bulbs (Banda Húmeda) -->
+  <rect x="320" y="250" width="160" height="130" fill="url(#wetBulbGradient)" opacity="0.5" />
+  <text x="400" y="330" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">Banda Húmeda Traslapada</text>
+
+  <!-- Drip Tapes (Cintas de Goteo) -->
+  <!-- Left Tape -->
+  <circle cx="320" cy="245" r="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2" />
+  <circle cx="320" cy="245" r="3" fill="#3b82f6" />
+  <!-- Right Tape -->
+  <circle cx="480" cy="245" r="8" fill="#1e293b" stroke="#3b82f6" stroke-width="2" />
+  <circle cx="480" cy="245" r="3" fill="#3b82f6" />
+
+  <!-- Drip Tape Labels -->
+  <path d="M 210 180 L 310 235" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 2" />
+  <rect x="90" y="150" width="140" height="50" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+  <text x="160" y="170" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Cinta Izquierda</text>
+  <text x="160" y="188" font-size="11" fill="#475569" text-anchor="middle">1.5 L/h, goteros a 30cm</text>
+
+  <path d="M 590 180 L 490 235" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4 2" />
+  <rect x="570" y="150" width="140" height="50" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+  <text x="640" y="170" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Cinta Derecha</text>
+  <text x="640" y="188" font-size="11" fill="#475569" text-anchor="middle">1.5 L/h, goteros a 30cm</text>
+
+  <!-- Plants (Pimentón) -->
+  <!-- Plant 1 (Left) -->
+  <path d="M 320 250 Q 310 170 320 120" fill="none" stroke="#15803d" stroke-width="6" stroke-linecap="round" />
+  <path d="M 320 180 Q 280 150 260 170 Q 280 190 320 180" fill="url(#leafGradient)" />
+  <path d="M 320 150 Q 360 120 380 140 Q 360 160 320 150" fill="url(#leafGradient)" />
+  <circle cx="280" cy="180" r="10" fill="#dc2626" /> <!-- Pepper -->
+  
+  <!-- Plant 2 (Right) -->
+  <path d="M 480 250 Q 490 170 480 120" fill="none" stroke="#15803d" stroke-width="6" stroke-linecap="round" />
+  <path d="M 480 170 Q 440 140 420 160 Q 440 180 480 170" fill="url(#leafGradient)" />
+  <path d="M 480 140 Q 520 110 540 130 Q 520 150 480 140" fill="url(#leafGradient)" />
+  <circle cx="510" cy="140" r="12" fill="#ef4444" /> <!-- Pepper -->
+  <circle cx="430" cy="175" r="9" fill="#22c55e" /> <!-- Green Pepper -->
+
+  <!-- Plant Label -->
+  <rect x="330" y="70" width="140" height="40" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1" />
+  <text x="400" y="88" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Población: 3.500 pl.</text>
+  <text x="400" y="102" font-size="11" fill="#15803d" text-anchor="middle">Disposición a Tresbolillo</text>
+
+  <!-- Stats Banner at the bottom -->
+  <rect x="100" y="420" width="600" height="60" rx="10" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+  
+  <text x="175" y="445" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Sectorización</text>
+  <text x="175" y="465" font-size="13" fill="#3b82f6" font-weight="bold" text-anchor="middle">2 Sectores (~1.666 got/sec)</text>
+  
+  <line x1="250" y1="430" x2="250" y2="470" stroke="#cbd5e1" stroke-width="2" />
+  
+  <text x="400" y="445" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Caudal por Sector</text>
+  <text x="400" y="465" font-size="13" fill="#10b981" font-weight="bold" text-anchor="middle">2.50 m³/h</text>
+
+  <line x1="550" y1="430" x2="550" y2="470" stroke="#cbd5e1" stroke-width="2" />
+
+  <text x="625" y="445" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">Total Goteros</text>
+  <text x="625" y="465" font-size="13" fill="#ef4444" font-weight="bold" text-anchor="middle">3.333 (1.5 L/h)</text>
+
+</svg>

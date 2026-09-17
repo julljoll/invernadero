@@ -23,7 +23,7 @@ export const GreenhouseSalesPage: React.FC = () => {
     {
       id: 'mesh-1000',
       name: 'Casa de Malla Clásica 1.000 m²',
-      targetCrop: 'Pimentón Híbrido Tecnificado (2.500 plantas)',
+      targetCrop: 'Pimentón Híbrido Tecnificado (3.500 plantas)',
       gutterHeightM: 3.0,
       ridgeHeightM: 5.5,
       meshGsm: 130,
@@ -36,7 +36,7 @@ export const GreenhouseSalesPage: React.FC = () => {
         'Malla 50 Mesh 130 gsm blanca con 5 años de garantía UV',
         'Refuerzo Este con doble tensor y guayas de 3/8"',
         'Sistema de doble puerta esclusa sanitaria anti-trips',
-        'Líneas de tutorado Hortomalla para 2.500 plantas de pimentón',
+        'Líneas de tutorado Hortomalla para 3.500 plantas de pimentón',
       ],
     },
     {
@@ -106,7 +106,7 @@ export const GreenhouseSalesPage: React.FC = () => {
             Estructuras Protegidas e <span className="text-success">Invernaderos 1.000 m²</span>
           </h1>
           <p className="lead text-secondary fs-6 mb-0">
-            Diseño e instalación llave en mano adaptado al microclima de Jiménez: ráfagas del Este de 27 km/h, alta radiación UV y requerimientos bioclimáticos para 2.500 plantas de pimentón.
+            Diseño e instalación llave en mano adaptado al microclima de Jiménez: ráfagas del Este de 27 km/h, alta radiación UV y requerimientos bioclimáticos para 3.500 plantas de pimentón.
           </p>
         </div>
 

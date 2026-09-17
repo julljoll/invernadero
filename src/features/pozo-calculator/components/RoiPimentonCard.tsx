@@ -10,7 +10,7 @@ export const RoiPimentonCard: React.FC<RoiPimentonCardProps> = ({ onContactClick
   const [pricePerKg, setPricePerKg] = useState<number>(1.20);
   const [yieldPerPlant, setYieldPerPlant] = useState<number>(4.2);
 
-  const plants = 2500;
+  const plants = 3500;
   const investmentPozo = 4000;
   const residualMartilloValue = 750; // Valor residual del martillo
   const netInvestmentPozo = investmentPozo - residualMartilloValue;
@@ -50,7 +50,7 @@ export const RoiPimentonCard: React.FC<RoiPimentonCardProps> = ({ onContactClick
               Retorno de Inversión (ROI) · Pimentón Tecnificado Quíbor
             </h4>
             <span className="text-secondary text-xs">
-              2.500 plantas protegidas bajo Malla 50 Mesh (1.000 m² en Cuara)
+              3.500 plantas protegidas bajo Malla 50 Mesh (1.000 m² en Cuara)
             </span>
           </div>
         </div>

@@ -6,8 +6,8 @@ export const RoiCalculator: React.FC = () => {
   const [investmentAmount, setInvestmentAmount] = useState<number>(4000);
   const [sellingPricePerKg, setSellingPricePerKg] = useState<number>(0.90);
 
-  // Proyección económica ciclo pimentón (12.5 Tons = 12.500 kg en 1.000 m²)
-  const totalProductionKg = 12500;
+  // Proyección económica ciclo pimentón (17.5 Tons = 17.500 kg en 1.000 m²)
+  const totalProductionKg = 17500;
   const grossRevenue = totalProductionKg * sellingPricePerKg;
   const operationalCosts = 4200;
   const netProfit = Math.max(0, grossRevenue - operationalCosts);

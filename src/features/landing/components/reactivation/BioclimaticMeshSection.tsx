@@ -107,7 +107,7 @@ export const BioclimaticMeshSection: React.FC = () => {
                   </li>
                   <li className="d-flex align-items-start gap-2">
                     <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
-                    <span><strong>Barrera Física Anti-Trips (Poro ≤ 192 µm):</strong> Blinda las 2.500 plantas de pimentón contra <em>Frankliniella occidentalis</em> y mosca blanca, vector primario del virus de la peste negra (TSWV).</span>
+                    <span><strong>Barrera Física Anti-Trips (Poro ≤ 192 µm):</strong> Blinda las 3.500 plantas de pimentón contra <em>Frankliniella occidentalis</em> y mosca blanca, vector primario del virus de la peste negra (TSWV).</span>
                   </li>
                   <li className="d-flex align-items-start gap-2">
                     <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>

@@ -22,7 +22,7 @@ export const FunnelHero: React.FC = () => {
             </h1>
 
             <p className="lead text-light text-opacity-90 fs-6 mb-4">
-              En el Valle de Quíbor, el cultivo a campo abierto sufre hasta un <strong className="text-danger">60% de pérdidas</strong> por virosis de mosca blanca y bochorno. Producir bajo una <strong className="text-white">casa de malla de 3.0 m</strong> con <strong className="text-white">espaldar Hortomalla</strong> y <strong className="text-white">fertirriego hidrosoluble</strong> asegura <strong style={{ color: '#53C942' }}>12.500 kg (625 cestas Lujo Grande)</strong> con 2.500 plantas y un retorno superior al <strong>100% de ROI</strong> en 5 meses.
+              En el Valle de Quíbor, el cultivo a campo abierto sufre hasta un <strong className="text-danger">60% de pérdidas</strong> por virosis de mosca blanca y bochorno. Producir bajo una <strong className="text-white">casa de malla de 3.0 m</strong> con <strong className="text-white">espaldar Hortomalla</strong> y <strong className="text-white">fertirriego hidrosoluble</strong> asegura <strong style={{ color: '#53C942' }}>17.500 kg (875 cestas Lujo Grande)</strong> con 3.500 plantas y un retorno superior al <strong>100% de ROI</strong> en 5 meses.
             </p>
 
             {/* Micro-puntos de valor agronómico del RAG */}
@@ -114,10 +114,10 @@ export const FunnelHero: React.FC = () => {
               {/* KPI Principal: Retorno / Ganancia */}
               <div className="mb-3">
                 <div className="text-uppercase text-xs tracking-wider fw-bold text-white-50">
-                  Ingreso Bruto Proyectado (625 Cestas)
+                  Ingreso Bruto Proyectado (875 Cestas)
                 </div>
                 <div className="display-5 fw-bold font-mono text-white mb-0">
-                  $9.375 <span className="fs-6 text-white-50">USD / ciclo</span>
+                  $13.125 <span className="fs-6 text-white-50">USD / ciclo</span>
                 </div>
                 <div className="text-xs text-light text-opacity-75 mt-1">
                   A precio referencial auditado de <strong style={{ color: '#53C942' }}>$15 USD / cesta (20 kg)</strong> puerta de invernadero.
@@ -131,7 +131,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-success fs-6">potted_plant</span>
                     <span>Plántulas Magistral F1:</span>
                   </span>
-                  <strong className="font-mono text-white">2.500 plantas (2.5 pl/m²)</strong>
+                  <strong className="font-mono text-white">3.500 plantas (3.5 pl/m²)</strong>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
@@ -147,7 +147,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-warning fs-6">inventory_2</span>
                     <span>Producción Comercial Neta:</span>
                   </span>
-                  <strong className="font-mono text-white" style={{ color: '#53C942' }}>12.500 kg (625 Cestas)</strong>
+                  <strong className="font-mono text-white" style={{ color: '#53C942' }}>17.500 kg (875 Cestas)</strong>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
@@ -155,7 +155,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-info fs-6">water_drop</span>
                     <span>Agua (Cisternas 10.000 L):</span>
                   </span>
-                  <strong className="font-mono text-white">74 – 75 viajes ($1.850 USD)</strong>
+                  <strong className="font-mono text-white">92 – 93 viajes ($1.380 USD)</strong>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
@@ -163,7 +163,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-danger fs-6">savings</span>
                     <span>Costos Operativos Ciclo:</span>
                   </span>
-                  <strong className="font-mono text-white">$3.170 USD (Agua + Insumos)</strong>
+                  <strong className="font-mono text-white">$2.700 USD (Agua + Insumos)</strong>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center pt-1.5">
@@ -171,7 +171,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-success fs-6">paid</span>
                     <span>Utilidad Neta Ciclo:</span>
                   </span>
-                  <strong className="font-mono fw-bold fs-6" style={{ color: '#53C942' }}>$6.205 USD</strong>
+                  <strong className="font-mono fw-bold fs-6" style={{ color: '#53C942' }}>$10.425 USD</strong>
                 </div>
               </div>
 
@@ -180,11 +180,11 @@ export const FunnelHero: React.FC = () => {
                 <Row className="g-2 text-center text-xs">
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">Inversión Inicial:</span>
-                    <strong className="fs-6 font-mono text-white">$5.195</strong>
+                    <strong className="fs-6 font-mono text-white">$4.845</strong>
                   </Col>
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">ROI por Ciclo:</span>
-                    <strong className="fs-6 font-mono" style={{ color: '#53C942' }}>+119%</strong>
+                    <strong className="fs-6 font-mono" style={{ color: '#53C942' }}>+215%</strong>
                   </Col>
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">Recuperación:</span>

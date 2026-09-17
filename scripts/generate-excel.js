@@ -155,7 +155,7 @@ const calculoGastosRows = [
   ['3. Reacondicionamiento Estructural', 'Instalación y Costura Malla', 'Mano de obra colocación con hilo UV reforzado', 'CAPEX Reactivación', '4 paños 50m', 180, '2.4%'],
   
   ['4. Sistema de Riego & Cabezal', 'Tubería Matriz PEAD 1"-1.5"', 'Matriz y submatrices con codos y uniones', 'CAPEX Reactivación', 'Instalación completa', 120, '1.6%'],
-  ['4. Sistema de Riego & Cabezal', 'Cinta Goteo Goteros PC 1.6 L/h', '1.000 m cinta espaciada a 40 cm autocompensante', 'OPEX / CAPEX', '$0.18 / metro', 180, '2.4%'],
+  ['4. Sistema de Riego & Cabezal', 'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)', 'Cinta 1.000m + goteros PC/AS 1.6 L/h + cabezal y filtros de disco', 'OPEX / CAPEX', 'Kit 1.000 m²', 100, '1.4%'],
   ['4. Sistema de Riego & Cabezal', 'Conectores Iniciales y Válvulas', '20 conectores con válvula + gomas grommet', 'CAPEX Reactivación', '$3.00 / unidad', 60, '0.8%'],
   ['4. Sistema de Riego & Cabezal', '3 Tanques para Fertirriego', 'Tanque A 500L, Tanque B 500L, Tanque C 200L', 'CAPEX Reactivación', 'Batería 3 tanques', 220, '3.0%'],
   

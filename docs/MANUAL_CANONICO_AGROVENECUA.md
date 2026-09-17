@@ -155,12 +155,11 @@ Un 28% de sobre-riego controlado es mandatorio para lixiviar sales fuera de la z
 * **Superficie Efectiva:** $1.000\text{ m}^2$ ($20\text{ m} \times 50\text{ m}$).
 * **Camellones:** 10 camellones dobles con separación entre ejes de **$2.00\text{ m}$**. Ancho de mesa $1.00\text{ m}$, pasillo de tránsito $1.00\text{ m}$.
 * **Hileras de Cultivo:** 20 hileras de $50\text{ m}$ cada una.
-* **Distancia entre Goteros y Plantas:** Goteros cada **$0.40\text{ m}$** con sincronía 1:1 planta-emisor.
-* **Población Total:** **2.500 plantas** ($2.50\text{ plantas/m}^2$).
-* **Emisores:** 2.500 goteros integrados autocompensantes y antidrenantes (PC/AS) de **$1.60\text{ L/h}$**.
-* **Caudal de Riego Simultáneo Total:**
-  $$Q_{riego} = 2.500\text{ goteros} \times 1.60\text{ L/h} = 4.000\text{ L/h} = \mathbf{4.00\text{ m}^3/\text{h}}\ (1.11\text{ L/s})$$
-* **Sectorización Hidráulica:** 2 sectores independientes de $2.00\text{ m}^3/\text{h}$ (5 camellones dobles / 1.250 plantas por sector). Permite trabajar con electrobomba de **1.5 HP a 220V**.
+* **Distancia entre Goteros y Plantas:** Goteros cada **$0.30\text{ m}$** con sincronía cercana a 1:1 (plantas a 28.5 cm).
+* **Población Total:** **3.500 plantas** ($3.50\text{ plantas/m}^2$).
+* **Emisores:** 3.333 goteros integrados autocompensantes y antidrenantes (PC/AS) de **$1.5\text{ L/h}$**.
+  $$Q_{riego} = 3.333\text{ goteros} \times 1.5\text{ L/h} \approx 5.000\text{ L/h} = \mathbf{5.00\text{ m}^3/\text{h}}\ (1.38\text{ L/s})$$
+* **Sectorización Hidráulica:** 2 sectores independientes de $2.50\text{ m}^3/\text{h}$ (5 camellones dobles / ~1.666 goteros por sector). Permite trabajar con electrobomba de **1.5 HP a 220V**.
 
 ### 4.2. Balance Hídrico por Etapa Fenológica (FAO-56 Ajustada a Quíbor)
 
@@ -191,12 +190,12 @@ La nutrición se administra en fertirriego diario fraccionado en 3 tanques conce
 
 | Categoría Comercial | Peso Fruto | Precio Liquidado en Finca | Sistema Tradicional (Suelo) | **Sistema Agrovenecua (Malla + AIFA)** |
 | :--- | :---: | :---: | :---: | :---: |
-| **Cesta Grande (Jumbo / 1ra)** | $> 220\text{ g}$ | **$14.00 USD / cesta** ($0.70/kg) | 25% (162 cestas) | **88% (572 cestas)** |
-| **Cesta Mediana (2da)** | $140 - 180\text{ g}$ | **$8.00 USD / cesta** ($0.40/kg) | 45% (293 cestas) | **12% (78 cestas)** |
-| **Cesta Pequeña ("Maraña")** | $< 120\text{ g}$ | **$3.50 USD / cesta** ($0.17/kg) | 30% (195 cestas) | **0% (0 cestas — Erradicada)** |
-| **Producción Total Ciclo** | — | — | $13.000\text{ kg}$ (650 cestas) | **$13.000\text{ kg}$ (650 cestas)** |
-| **Ingreso Bruto Cosecha** | — | — | **$5.294 USD** | **$8.632 USD** |
-| **Margen Neto Libre de Costos** | — | — | **$2.340 USD** | **$6.355 USD (+$4.015 USD netos)** |
+| **Cesta Grande (Jumbo / 1ra)** | $> 220\text{ g}$ | **$15.00 USD / cesta** ($0.75/kg) | 25% (218 cestas) | **75% (656 cestas)** |
+| **Cesta Mediana (2da)** | $140 - 180\text{ g}$ | **$8.00 USD / cesta** ($0.40/kg) | 45% (394 cestas) | **25% (219 cestas)** |
+| **Cesta Pequeña ("Maraña")** | $< 120\text{ g}$ | **$3.50 USD / cesta** ($0.17/kg) | 30% (263 cestas) | **0% (0 cestas — Erradicada)** |
+| **Producción Total Ciclo** | — | — | $17.500\text{ kg}$ (875 cestas) | **$17.500\text{ kg}$ (875 cestas)** |
+| **Ingreso Bruto Cosecha** | — | — | **$7.484 USD** | **$11.592 USD** |
+| **Margen Neto Libre de Costos** | — | — | **$4.000 USD** | **$8.892 USD** |
 
 ---
 

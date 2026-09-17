@@ -16,7 +16,7 @@ export const FertigationPlanSection: React.FC = () => {
             Plan de Fertirriego AIFA para Pimentón Grande (<span className="text-success">Semilla Magistral F1</span>)
           </h2>
           <p className="text-secondary small">
-            Programa de precisión para 2.500 plantas enfocado exclusivamente en maximizar el <strong>Calibre Extra Grande / Jumbo (&gt;220g por fruto)</strong>, integrando semilla híbrida Magistral, nutrición 100% soluble AIFA y regulador de pH para aguas duras de Quíbor.
+            Programa de precisión para 3.500 plantas enfocado exclusivamente en maximizar el <strong>Calibre Extra Grande / Jumbo (&gt;220g por fruto)</strong>, integrando semilla híbrida Magistral, nutrición 100% soluble AIFA y regulador de pH para aguas duras de Quíbor.
           </p>
         </div>
 
@@ -38,7 +38,7 @@ export const FertigationPlanSection: React.FC = () => {
             <div className="col-12 col-lg-4 text-lg-end">
               <div className="p-3 bg-white rounded-3 border border-success border-opacity-50 shadow-xs text-center">
                 <div className="text-secondary text-xs text-uppercase fw-semibold">Garantía de Calibre</div>
-                <div className="display-6 fw-bold font-mono text-success">88%</div>
+                <div className="display-6 fw-bold font-mono text-success">75%</div>
                 <div className="text-secondary text-xs font-monospace">Pimentones Grandes (&gt;220g)</div>
               </div>
             </div>
@@ -85,7 +85,7 @@ export const FertigationPlanSection: React.FC = () => {
                 <div className="mt-3 pt-2 border-top border-success border-opacity-25">
                   <div className="text-xs text-success fw-bold d-flex align-items-center gap-1">
                     <span className="material-symbols-outlined fs-6">check_circle</span>
-                    <span>Meta Plan AIFA: 88% de la cosecha</span>
+                    <span>Meta Plan AIFA: 75% de la cosecha</span>
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ export const FertigationPlanSection: React.FC = () => {
                 </div>
                 <div className="mt-3 pt-2 border-top border-secondary-subtle">
                   <div className="text-xs text-secondary d-flex align-items-center gap-1">
-                    <span>Plan AIFA: Solo 12% · Granulado: 45%</span>
+                    <span>Plan AIFA: Solo 25% · Granulado: 45%</span>
                   </div>
                 </div>
               </div>
@@ -285,7 +285,7 @@ export const FertigationPlanSection: React.FC = () => {
                   </li>
                   <li className="d-flex justify-content-between pb-1">
                     <span>Población Campo Lista:</span>
-                    <strong className="text-success">2.500 plantas</strong>
+                    <strong className="text-success">3.500 plantas</strong>
                   </li>
                 </ul>
               </div>
@@ -296,6 +296,63 @@ export const FertigationPlanSection: React.FC = () => {
           </div>
         </div>
 
+        {/* NUEVA SECCIÓN: ESTRATEGIA DE RIEGO Y pH/CE (Manual v2) */}
+        <div className="card card-agro p-3 p-md-4 mb-5 shadow-sm border-2 border-info border-opacity-25 bg-white">
+          <div className="d-flex align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary-subtle">
+            <span className="material-symbols-outlined text-info fs-5">water_drop</span>
+            <h3 className="h6 fw-bold text-dark text-uppercase mb-0">
+              Estrategia de Riego, pH y CE por Etapa Fenológica
+            </h3>
+          </div>
+
+          <p className="text-secondary text-xs mb-4">
+            En suelo franco-arcilloso con cinta doble (1 L/h a 20 cm), el riego se maneja con <strong>pulsos cortos y frecuentes</strong> para evitar percolación y asfixia radicular, manteniendo el pH estrictamente entre <strong>5.8 y 6.5</strong>.
+          </p>
+
+          <div className="table-responsive">
+            <table className="table table-bordered table-sm align-middle font-monospace text-xs mb-0">
+              <thead className="table-light font-sans">
+                <tr>
+                  <th>Fase Fenológica</th>
+                  <th>CE Objetivo (mS/cm)</th>
+                  <th>Pulsos Diarios Recomendados</th>
+                  <th>Nutrientes Prioritarios (Jerarquía AIFA)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="fw-bold">1. Trasplante / Enraizamiento</td>
+                  <td className="text-center">1.5 - 2.0</td>
+                  <td className="text-center">2 - 3 pulsos cortos</td>
+                  <td><span className="badge bg-primary text-white">Fósforo (P)</span> <span className="badge bg-secondary text-white">Calcio (Ca)</span></td>
+                </tr>
+                <tr>
+                  <td className="fw-bold">2. Desarrollo Vegetativo</td>
+                  <td className="text-center">2.0 - 2.5</td>
+                  <td className="text-center">4 - 5 pulsos</td>
+                  <td><span className="badge bg-success text-white">Nitrógeno (N) moderado</span> <span className="badge bg-secondary text-white">Calcio (Ca)</span> <span className="badge bg-info text-dark">Mg</span></td>
+                </tr>
+                <tr>
+                  <td className="fw-bold">3. Floración y Cuajado</td>
+                  <td className="text-center">2.5 - 2.8</td>
+                  <td className="text-center">5 - 7 pulsos</td>
+                  <td><span className="badge bg-secondary text-white">Calcio (Ca) absoluto</span> <span className="badge bg-warning text-dark">Boro (B)</span></td>
+                </tr>
+                <tr>
+                  <td className="fw-bold">4. Engorde / Producción Lujo</td>
+                  <td className="text-center">2.8 - 3.2</td>
+                  <td className="text-center">7 - 10 pulsos</td>
+                  <td><span className="badge bg-danger text-white">Potasio (K) alto</span> <span className="badge bg-secondary text-white">Calcio (Ca) continuo</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div className="alert alert-info bg-info bg-opacity-10 border-info border-opacity-25 small mb-0 mt-3 text-dark">
+            <strong>Jerarquía de Absorción Magistral F1:</strong> <span className="font-monospace text-primary fw-bold">Ca &gt; K &gt; Mg &gt; B &gt; N controlado</span>. Excesos de Nitrógeno generan follaje excesivo, reducen calibre y degradan la calidad del fruto a 2da categoría.
+          </div>
+        </div>
+
         {/* SECCIÓN PRINCIPAL: Matriz de Rentabilidad Mejorada (Agri-UX) */}
         <div className="card card-agro p-3 p-md-4 shadow-sm border-success border-opacity-50">
           {/* Cabecera Interactiva con Selector de Vista */}
@@ -303,7 +360,7 @@ export const FertigationPlanSection: React.FC = () => {
             <div>
               <div className="d-flex align-items-center gap-2 text-xs text-success fw-bold text-uppercase mb-1">
                 <span className="material-symbols-outlined ms-sm">analytics</span>
-                <span>Análisis Económico Comparativo · 2.500 Plantas en 1.000 m² (Ciclo 20 Semanas)</span>
+                <span>Análisis Económico Comparativo · 3.500 Plantas en 1.000 m² (Ciclo 20 Semanas)</span>
               </div>
               <h3 className="h4 fw-bold text-dark mb-1">
                 Matriz de Rentabilidad: <span className="text-secondary fw-normal">Fertilizante Granulado</span> vs <span className="text-success">Plan AIFA + Semilla Magistral F1</span>
@@ -372,11 +429,11 @@ export const FertigationPlanSection: React.FC = () => {
                   <span className="badge bg-success text-white font-mono">0% MARAÑA</span>
                 </div>
                 <div className="d-flex align-items-baseline gap-2 mb-1">
-                  <span className="fs-3 fw-bold font-mono text-success">88%</span>
+                  <span className="fs-3 fw-bold font-mono text-success">75%</span>
                   <span className="text-secondary text-xs">Cestas Grande ($14/cesta)</span>
                 </div>
                 <div className="text-xs text-secondary font-sans">
-                  <strong>650 cestas totales (+53%)</strong> · Granulado sufre 30% en Maraña ($3.50/cesta).
+                  <strong>875 cestas totales (+47%)</strong> · Granulado sufre 30% en Maraña ($3.50/cesta).
                 </div>
               </div>
             </div>
@@ -392,7 +449,7 @@ export const FertigationPlanSection: React.FC = () => {
                   <span className="text-success fw-bold text-xs">USD NETOS LIBRES</span>
                 </div>
                 <div className="text-xs text-dark font-sans fw-medium">
-                  <strong>$6.360 USD</strong> AIFA vs <strong>$2.345 USD</strong> granulado (2.7 veces más ganancia).
+                  <strong>$7.100 USD</strong> AIFA vs <strong>$2.781 USD</strong> granulado (2.5 veces más ganancia).
                 </div>
               </div>
             </div>
@@ -422,23 +479,23 @@ export const FertigationPlanSection: React.FC = () => {
                         <div className="p-3 rounded-2 bg-light border border-secondary-subtle">
                           <div className="text-secondary text-xs fw-semibold mb-1">🌾 Volumen Cosechado &amp; Clasificación</div>
                           <div className="d-flex align-items-baseline gap-2 mb-2">
-                            <span className="fs-4 fw-bold font-mono text-dark">425 cestas</span>
-                            <span className="text-secondary text-xs">(8.500 kg · 3.40 kg/planta)</span>
+                            <span className="fs-4 fw-bold font-mono text-dark">595 cestas</span>
+                            <span className="text-secondary text-xs">(11.900 kg · 3.40 kg/planta)</span>
                           </div>
 
                           {/* Desglose de Cestas */}
                           <div className="d-flex flex-column gap-1.5 text-2xs font-sans">
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-white rounded border border-secondary-subtle">
-                              <span>🟢 Grande (&gt;220g): <strong>25%</strong> (106 cestas @ $14)</span>
-                              <span className="font-mono fw-bold text-dark">$1.484</span>
+                              <span>🟢 Grande (&gt;220g): <strong>25%</strong> (149 cestas @ $14)</span>
+                              <span className="font-mono fw-bold text-dark">$2.086</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-white rounded border border-secondary-subtle">
-                              <span>🟡 Mediano (140-180g): <strong>45%</strong> (191 cestas @ $8)</span>
-                              <span className="font-mono fw-bold text-dark">$1.528</span>
+                              <span>🟡 Mediano (140-180g): <strong>45%</strong> (268 cestas @ $8)</span>
+                              <span className="font-mono fw-bold text-dark">$2.144</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-danger bg-opacity-10 rounded border border-danger border-opacity-25">
-                              <span className="text-danger fw-bold">🔴 Maraña (&lt;120g): 30% (128 cestas @ $3.5)</span>
-                              <span className="font-mono fw-bold text-danger">$448</span>
+                              <span className="text-danger fw-bold">🔴 Maraña (&lt;120g): 30% (178 cestas @ $3.5)</span>
+                              <span className="font-mono fw-bold text-danger">$623</span>
                             </div>
                           </div>
                         </div>
@@ -453,7 +510,7 @@ export const FertigationPlanSection: React.FC = () => {
                             </div>
                             <div className="text-end">
                               <div className="text-2xs text-secondary">Ingreso Bruto Total:</div>
-                              <div className="fs-5 fw-bold font-mono text-dark">$3.825 USD</div>
+                              <div className="fs-5 fw-bold font-mono text-dark">$4.853 USD</div>
                             </div>
                           </div>
                           <div className="text-2xs text-danger mt-1">
@@ -465,7 +522,7 @@ export const FertigationPlanSection: React.FC = () => {
                         <div className="p-3 rounded-2 bg-light border border-secondary-subtle">
                           <div className="d-flex justify-content-between align-items-center text-xs">
                             <span className="text-secondary fw-semibold">🧪 Costo en Insumos:</span>
-                            <strong className="font-mono text-dark fs-6">$1.480 USD</strong>
+                            <strong className="font-mono text-dark fs-6">$2.072 USD</strong>
                           </div>
                           <div className="text-2xs text-secondary mt-1">
                             Semilla común ($180) + Abono granulado ($820) + Sin ácido ($0) + Químicos ($480).
@@ -480,10 +537,10 @@ export const FertigationPlanSection: React.FC = () => {
                         Dinero Libre en Mano (Margen Neto)
                       </div>
                       <div className="fs-2 fw-black font-mono text-secondary mb-1">
-                        $2.345 USD
+                        $2.781 USD
                       </div>
                       <div className="text-2xs text-secondary">
-                        Ingreso $3.825 - Insumos $1.480 = $2.345 libres
+                        Ingreso $4.853 - Insumos $2.072 = $2.781 libres
                       </div>
                       <div className="text-2xs text-danger mt-2 pt-2 border-top border-secondary-subtle">
                         ⚠️ 128 cestas perdidas en Maraña y goteros tapados por agua de pozo sin tratar.
@@ -516,19 +573,19 @@ export const FertigationPlanSection: React.FC = () => {
                         <div className="p-3 rounded-2 bg-agro-success-soft border border-success border-opacity-50 shadow-2xs">
                           <div className="text-success text-xs fw-semibold mb-1">🌾 Volumen Cosechado &amp; Clasificación</div>
                           <div className="d-flex align-items-baseline gap-2 mb-2">
-                            <span className="fs-4 fw-bold font-mono text-success">650 cestas</span>
-                            <span className="text-success fw-bold text-xs">(13.000 kg · 5.20 kg/planta)</span>
+                            <span className="fs-4 fw-bold font-mono text-success">875 cestas</span>
+                            <span className="text-success fw-bold text-xs">(17.500 kg · 5.00 kg/planta)</span>
                           </div>
 
                           {/* Desglose de Cestas */}
                           <div className="d-flex flex-column gap-1.5 text-2xs font-sans">
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-white rounded border border-success border-opacity-50 shadow-2xs">
-                              <span className="text-success fw-bold">🟢 Grande (&gt;220g): 88% (572 cestas @ $14)</span>
-                              <span className="font-mono fw-bold text-success">$8.008</span>
+                              <span className="text-success fw-bold">🟢 Grande (&gt;220g): 75% (656 cestas @ $14)</span>
+                              <span className="font-mono fw-bold text-success">$9.184</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-white rounded border border-secondary-subtle shadow-2xs">
-                              <span>🟡 Mediano (140-180g): <strong>12%</strong> (78 cestas @ $8.5)</span>
-                              <span className="font-mono fw-bold text-dark">$663</span>
+                              <span>🟡 Mediano (140-180g): <strong>25%</strong> (219 cestas @ $8.0)</span>
+                              <span className="font-mono fw-bold text-dark">$1.752</span>
                             </div>
                             <div className="d-flex justify-content-between align-items-center p-1.5 bg-white rounded border border-success border-opacity-50 shadow-2xs">
                               <span className="text-success fw-bold">✨ Maraña (&lt;120g): 0% (ERRADICADA AL 100%)</span>
@@ -547,7 +604,7 @@ export const FertigationPlanSection: React.FC = () => {
                             </div>
                             <div className="text-end">
                               <div className="text-2xs text-secondary">Ingreso Bruto Total:</div>
-                              <div className="fs-5 fw-bold font-mono text-success">$9.100 USD</div>
+                              <div className="fs-5 fw-bold font-mono text-success">$10.936 USD</div>
                             </div>
                           </div>
                           <div className="text-2xs text-success mt-1">
@@ -559,7 +616,7 @@ export const FertigationPlanSection: React.FC = () => {
                         <div className="p-3 rounded-2 bg-agro-success-soft border border-success border-opacity-50 shadow-2xs">
                           <div className="d-flex justify-content-between align-items-center text-xs">
                             <span className="text-secondary fw-semibold">🧪 Inversión en Insumos:</span>
-                            <strong className="font-mono text-success fs-6">$2.740 USD</strong>
+                            <strong className="font-mono text-success fs-6">$3.836 USD</strong>
                           </div>
                           <div className="text-2xs text-secondary mt-1">
                             Magistral F1 ($600) + AIFA Soluble ($1.380) + Ácido Nítrico ($220) + Fitosanitario ($540).
@@ -574,10 +631,10 @@ export const FertigationPlanSection: React.FC = () => {
                         Dinero Libre en Mano (Margen Neto)
                       </div>
                       <div className="fs-2 fw-black font-mono text-white mb-1">
-                        $6.360 USD
+                        $7.100 USD
                       </div>
                       <div className="text-2xs text-white text-opacity-90 font-sans">
-                        Ingreso $9.100 - Insumos $2.740 = <strong>$6.360 USD netos libres</strong>
+                        Ingreso $10.936 - Insumos $3.836 = <strong>$7.100 USD netos libres</strong>
                       </div>
                       <div className="text-2xs text-white text-opacity-90 mt-2 pt-2 border-top border-white border-opacity-25">
                         ✅ Cero cestas de Maraña, 100% de nutrición asimilada y máxima rentabilidad.
@@ -647,7 +704,7 @@ export const FertigationPlanSection: React.FC = () => {
                     <td colSpan={4} className="fw-bold text-dark text-uppercase py-2 px-3 bg-secondary bg-opacity-10">
                       <span className="d-flex align-items-center gap-1.5 text-xs text-dark">
                         <span className="material-symbols-outlined ms-sm text-success">agriculture</span>
-                        <span>1. Rendimiento Físico &amp; Calidad de Fruto (2.500 Plantas en 1.000 m²)</span>
+                        <span>1. Rendimiento Físico &amp; Calidad de Fruto (3.500 Plantas en 1.000 m²)</span>
                       </span>
                     </td>
                   </tr>
@@ -676,23 +733,23 @@ export const FertigationPlanSection: React.FC = () => {
                     <td>
                       <div className="d-flex align-items-center gap-2">
                         <div className="progress flex-grow-1" style={{ height: '8px' }}>
-                          <div className="progress-bar bg-success" style={{ width: '88%' }}></div>
+                          <div className="progress-bar bg-success" style={{ width: '75%' }}></div>
                         </div>
-                        <strong className="text-success font-mono fs-6">88% (572 cestas)</strong>
+                        <strong className="text-success font-mono fs-6">75% (656 cestas)</strong>
                       </div>
                       <div className="text-secondary text-xs">Calibre Jumbo garantizado</div>
                     </td>
                     <td>
                       <div className="d-flex align-items-center gap-2">
                         <div className="progress flex-grow-1" style={{ height: '8px' }}>
-                          <div className="progress-bar bg-secondary" style={{ width: '25%' }}></div>
+                          <div className="progress-bar bg-secondary" style={{ width: '45%' }}></div>
                         </div>
-                        <span className="text-danger font-mono fw-bold">25% (106 cestas)</span>
+                        <span className="text-danger font-mono fw-bold">25% (149 cestas)</span>
                       </div>
                       <div className="text-secondary text-xs">Poca fruta de primera</div>
                     </td>
                     <td className="text-success">
-                      <strong className="text-success">+466 Cestas Grandes</strong>
+                      <strong className="text-success">+507 Cestas Grandes</strong>
                     </td>
                   </tr>
                   <tr>
@@ -718,15 +775,15 @@ export const FertigationPlanSection: React.FC = () => {
                       <div className="text-secondary text-xs fw-normal">Volumen comercializable acumulado</div>
                     </td>
                     <td className="text-success fw-bold">
-                      <div className="font-mono fs-6">650 cestas (13.0 Ton)</div>
-                      <div className="text-secondary text-xs">5.20 kg / planta promedio</div>
+                      <div className="font-mono fs-6">875 cestas (17.5 Ton)</div>
+                      <div className="text-secondary text-xs">5.00 kg / planta promedio</div>
                     </td>
                     <td className="text-secondary">
-                      <div className="font-mono">425 cestas (8.5 Ton)</div>
+                      <div className="font-mono">595 cestas (11.9 Ton)</div>
                       <div className="text-muted text-xs">3.40 kg / planta promedio</div>
                     </td>
                     <td className="text-success">
-                      <strong className="text-success">+225 cestas (+53%)</strong>
+                      <strong className="text-success">+280 cestas (+47%)</strong>
                     </td>
                   </tr>
                   <tr>
@@ -777,13 +834,13 @@ export const FertigationPlanSection: React.FC = () => {
                       <div className="text-secondary text-xs fw-normal">(Cestas cosechadas × Precio ponderado en puerta)</div>
                     </td>
                     <td className="text-success fw-bold font-mono fs-5">
-                      $9.100 USD
+                      $10.936 USD
                     </td>
                     <td className="text-secondary font-mono fs-6">
-                      $3.825 USD
+                      $4.853 USD
                     </td>
                     <td className="text-success fw-bold fs-6">
-                      +$5.275 USD (+138%)
+                      +$6.083 USD (+125%)
                     </td>
                   </tr>
 

@@ -35,7 +35,7 @@ export const MallaSalesPage: React.FC = () => {
               </h1>
 
               <p className="lead text-light text-opacity-90 fs-6 mb-4">
-                Blindaje biológico, difusión térmica infrarroja y máxima ventilación convectiva para <strong>2.500 plantas de pimentón (1.000 m²)</strong>. Diseñada con tenacidad probada contra las ráfagas de 27 km/h del Este y la alta radiación solar del Valle de Quíbor.
+                Blindaje biológico, difusión térmica infrarroja y máxima ventilación convectiva para <strong>3.500 plantas de pimentón (1.000 m²)</strong>. Diseñada con tenacidad probada contra las ráfagas de 27 km/h del Este y la alta radiación solar del Valle de Quíbor.
               </p>
 
               {/* Indicadores clave rápidos */}
@@ -211,7 +211,7 @@ export const MallaSalesPage: React.FC = () => {
               Catálogo Visual de Mallas e Infraestructura
             </h2>
             <p className="text-secondary small mb-0">
-              Inspecciona los componentes reales que blindan y optimizan la producción de 2.500 plantas de pimentón en Quíbor.
+              Inspecciona los componentes reales que blindan y optimizan la producción de 3.500 plantas de pimentón en Quíbor.
             </p>
           </div>
 
@@ -288,7 +288,7 @@ export const MallaSalesPage: React.FC = () => {
                 </div>
                 <Card.Body className="p-3">
                   <Badge bg="success" className="mb-2 font-monospace">Pimentón 1.000 m²</Badge>
-                  <h4 className="h6 fw-bold text-dark mb-1">Microclima para 2.500 Plantas</h4>
+                  <h4 className="h6 fw-bold text-dark mb-1">Microclima para 3.500 Plantas</h4>
                   <p className="text-secondary text-xs mb-0">
                     Rendimiento objetivo de 12.5 T con frutos de primera categoría libres de quemaduras solares.
                   </p>
@@ -496,7 +496,7 @@ export const MallaSalesPage: React.FC = () => {
                 <span className="fw-bold text-dark">5. ¿Qué accesorios requiero para una instalación completa en 1.000 m²?</span>
               </Accordion.Header>
               <Accordion.Body className="text-secondary small">
-                Para una nave estándar de 1.000 m² (2.500 plantas de pimentón) se requieren aproximadamente <strong>8 rollos de 4m × 100m</strong>, 950 a 1.000 metros de perfil Lock Channel C galvanizado, alambre Wiggle Wire plastificado y precintos UV de poliamida para costuras en faldas enterradas de 50 cm.
+                Para una nave estándar de 1.000 m² (3.500 plantas de pimentón) se requieren aproximadamente <strong>8 rollos de 4m × 100m</strong>, 950 a 1.000 metros de perfil Lock Channel C galvanizado, alambre Wiggle Wire plastificado y precintos UV de poliamida para costuras en faldas enterradas de 50 cm.
               </Accordion.Body>
             </Accordion.Item>
           </Accordion>

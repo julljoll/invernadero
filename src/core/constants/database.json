@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "generatedAt": "2026-09-16T04:15:18.452Z",
+    "generatedAt": "2026-09-17T03:12:24.025Z",
     "source": "database.sqlite",
     "version": "2.0.0"
   },
@@ -727,6 +727,15 @@
       "tamano_tokens_estimado": 3800,
       "es_fuente_primaria": 1,
       "ruta_archivo": "docs/04-produccion/HS22800_FICHA_INSUMO_PIMENTON.md"
+    },
+    {
+      "doc_id": "PROD-PIQ-002",
+      "titulo": "Marco Operativo de Alto Nivel — Pimentón Magistral F1 / Quíbor v2",
+      "dominio": "general",
+      "tags": "",
+      "tamano_tokens_estimado": 0,
+      "es_fuente_primaria": 1,
+      "ruta_archivo": "docs/Manual_Tecnico_Pimenton_Magistral_F1_Quibor_v2.md"
     }
   ]
 }

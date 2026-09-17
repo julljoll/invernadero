@@ -13,7 +13,7 @@ export const FunnelTechEvidence: React.FC = () => {
       kc: '0.60',
       litersPerPlantWeek: '7 – 9 L / planta / semana',
       litersPerPlantDay: '1.0 – 1.3 L / día',
-      volumeWeeklyLiters: '17.500 – 22.500 L / sem',
+      volumeWeeklyLiters: '17.500 – 23.500 L / sem',
       volumeWeeklyM3: '17.5 – 22.5 m³ / sem',
       cisternsWeekly: '2 cisternas de 10.000 L / sem',
       cisternsPhaseTotal: '6 cisternas (60.000 L)',
@@ -41,7 +41,7 @@ export const FunnelTechEvidence: React.FC = () => {
       kc: '1.10',
       litersPerPlantWeek: '15 – 17 L / planta / semana',
       litersPerPlantDay: '2.1 – 2.4 L / día',
-      volumeWeeklyLiters: '37.500 – 42.500 L / sem',
+      volumeWeeklyLiters: '37.500 – 43.500 L / sem',
       volumeWeeklyM3: '37.5 – 42.5 m³ / sem',
       cisternsWeekly: '4 cisternas / sem',
       cisternsPhaseTotal: '20 cisternas (200.000 L)',
@@ -55,7 +55,7 @@ export const FunnelTechEvidence: React.FC = () => {
       kc: '1.05',
       litersPerPlantWeek: '17 – 20 L / planta / semana',
       litersPerPlantDay: '2.4 – 2.9 L / día',
-      volumeWeeklyLiters: '42.500 – 50.000 L / sem',
+      volumeWeeklyLiters: '43.500 – 50.000 L / sem',
       volumeWeeklyM3: '42.5 – 50.0 m³ / sem',
       cisternsWeekly: '4.5 a 5 cisternas / sem',
       cisternsPhaseTotal: '37 cisternas (370.000 L)',
@@ -78,7 +78,7 @@ export const FunnelTechEvidence: React.FC = () => {
             Ingeniería de Cultivo: Magistral F1 en 1.000 m²
           </h2>
           <p className="text-secondary small max-w-xl mx-auto m-0">
-            Diseño agronómico e ingenieril validado para 2.500 plantas: protocolo de siembra, fertirriego comparativo (AIFA vs Granulados Venezuela con K₂SO₄) y balance hídrico por cisternas.
+            Diseño agronómico e ingenieril validado para 3.500 plantas: protocolo de siembra, fertirriego comparativo (AIFA vs Granulados Venezuela con K₂SO₄) y balance hídrico por cisternas.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export const FunnelTechEvidence: React.FC = () => {
                 className="rounded-pill px-3 py-2 text-xs fw-bold d-flex align-items-center gap-1.5"
               >
                 <span className="material-symbols-outlined fs-6">potted_plant</span>
-                <span>Siembra &amp; Espaldar Español (2.500 Pl)</span>
+                <span>Siembra &amp; Espaldar Español (3.500 Pl)</span>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
@@ -130,7 +130,7 @@ export const FunnelTechEvidence: React.FC = () => {
                 <Col xs={12} lg={6}>
                   <Card className="card-agro p-4 border bg-light h-100 shadow-sm">
                     <Badge bg="success" className="align-self-start mb-3 font-mono text-xxs">
-                      Marco de Siembra de Alta Densidad (2.500 Plantas / 1.000 m²)
+                      Marco de Siembra de Alta Densidad (3.500 Plantas / 1.000 m²)
                     </Badge>
                     <h3 className="fs-5 fw-bold text-dark mb-2">
                       Protocolo de Siembra y Trasplante en Valle de Quíbor
@@ -143,7 +143,7 @@ export const FunnelTechEvidence: React.FC = () => {
                       <div className="d-flex align-items-start gap-2 mb-2">
                         <span className="material-symbols-outlined text-success fs-5">grid_view</span>
                         <div className="text-xs">
-                          <strong className="text-dark">Distribución Espacial en la Nave (20m × 50m):</strong> 10 camellones dobles a 2.00 m entre centros. Cada camellón aloja 2 hileras a 50 cm y 40 cm entre plantas (250 plantas por camellón = <strong>2.500 plantas totales</strong>).
+                          <strong className="text-dark">Distribución Espacial en la Nave (20m × 50m):</strong> 10 camellones dobles a 2.00 m entre centros. Cada camellón aloja 2 hileras a 50 cm y 40 cm entre plantas (350 plantas por camellón = <strong>3.500 plantas totales</strong>).
                         </div>
                       </div>
                       <div className="d-flex align-items-start gap-2 mb-2">
@@ -161,7 +161,7 @@ export const FunnelTechEvidence: React.FC = () => {
                     </div>
 
                     <div className="d-flex justify-content-between align-items-center text-xxs font-mono text-secondary pt-2 border-top">
-                      <span>🌱 2.500 Plántulas Magistral F1</span>
+                      <span>🌱 3.500 Plántulas Magistral F1</span>
                       <span>📐 Camellones: 10 dobles (50m)</span>
                       <span>💧 Goteros: 1.6 L/h cada 40 cm</span>
                     </div>
@@ -229,7 +229,7 @@ export const FunnelTechEvidence: React.FC = () => {
                 <div>
                   <h4 className="fs-6 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
                     <span className="material-symbols-outlined text-primary fs-5">science</span>
-                    <span>Programa Nutricional para 2.500 Plantas: AIFA Soluble vs Granulados de Venezuela</span>
+                    <span>Programa Nutricional para 3.500 Plantas: AIFA Soluble vs Granulados de Venezuela</span>
                   </h4>
                   <span className="text-secondary small font-sans">
                     Formulación balanceada para 1.000 m² con fuente de Potasio sin cloro (K₂SO₄) para las aguas de Quíbor
@@ -628,14 +628,14 @@ export const FunnelTechEvidence: React.FC = () => {
                       Sincronización de Riego de Alta Frecuencia con Fertirriego Hidrosoluble:
                     </strong>
                     <span className="text-dark opacity-90 font-sans">
-                      En el clima semiárido de Quíbor (ET₀ 4.8 – 6.2 mm/día), la demanda neta total del ciclo de 20 semanas es de <strong>~740.000 Litros</strong> para las 2.500 plantas. Esto equivale a <strong>74 camiones cisterna de 10.000 L (+ 1 de reserva y purga de cabezal = 75 tanques cisternas en total)</strong> con un costo operativo consolidado de <strong>$1.850 USD ($25/cisterna)</strong>. El fraccionamiento en <strong>3 a 6 pulsos cortos (10–14 min)</strong> con goteros autocompensantes de 1.6 L/h inyecta simultáneamente las micro-dosis de sales AIFA solubles en el momento de máxima absorción transpiratoria, impidiendo la evaporación superficial o percolación profunda que arruinaría un abonado granulado tradicional.
+                      En el clima semiárido de Quíbor (ET₀ 4.8 – 6.2 mm/día), la demanda neta total del ciclo de 20 semanas es de <strong>~920.000 Litros</strong> para las 3.500 plantas. Esto equivale a <strong>92 camiones cisterna de 10.000 L (+ 1 de reserva y purga de cabezal = 93 tanques cisternas en total)</strong> con un costo operativo consolidado de <strong>$1.380 USD ($15/cisterna)</strong>. El fraccionamiento en <strong>3 a 6 pulsos cortos (10–14 min)</strong> con goteros autocompensantes de 1.6 L/h inyecta simultáneamente las micro-dosis de sales AIFA solubles en el momento de máxima absorción transpiratoria, impidiendo la evaporación superficial o percolación profunda que arruinaría un abonado granulado tradicional.
                     </span>
                   </div>
                 </div>
 
                 <div className="p-3 rounded-3 bg-light border text-xs text-secondary d-flex flex-wrap justify-content-between align-items-center gap-2">
                   <div>
-                    <strong className="text-dark">Balance Hídrico del Ciclo (20 semanas):</strong> ~740.000 Litros de agua tecnificada · <strong>74 a 75 cisternas de 10.000 L</strong> ($1.850 USD total de gasto de agua).
+                    <strong className="text-dark">Balance Hídrico del Ciclo (20 semanas):</strong> ~920.000 Litros de agua tecnificada · <strong>92 a 93 cisternas de 10.000 L</strong> ($1.380 USD total de gasto de agua).
                   </div>
                   <Link to="/cockpit" className="btn btn-outline-success btn-sm rounded-pill font-mono text-xs fw-bold px-3">
                     Ver calculadora KaTeX en Cockpit →

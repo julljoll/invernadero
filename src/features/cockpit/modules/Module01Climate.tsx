@@ -152,7 +152,7 @@ export const Module01Climate: React.FC = () => {
               </h2>
             </div>
             <p className="text-secondary small mb-0 font-sans">
-              Simulador psicrométrico interactivo según ecuación de Tetens y corrección foliar FAO para 2.500 plantas de pimentón.
+              Simulador psicrométrico interactivo según ecuación de Tetens y corrección foliar FAO para 3.500 plantas de pimentón.
             </p>
           </div>
           <div className="d-flex align-items-center gap-2">

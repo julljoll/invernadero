@@ -11,14 +11,32 @@ export const FunnelFinancialBenefits: React.FC = () => {
   const [basketPrice, setBasketPrice] = useState<number>(15.00);
 
   // Parámetros fijos validados
-  const totalPlants = 2500;
+  const totalPlants = 3500;
   const totalKg = totalPlants * yieldPerPlantKg;
   const basketsCount = Math.round(totalKg / 20); // Cestas de 20 kg
   const pricePerKg = basketPrice / 20;
 
-  // Costos e Inversión
-  const operationalCosts = 3170; // Costos con agua por cisternas (10.000L) y ahorro en mano de obra
-  const initialCapitalInvestment = 5195; // Malla instalada + Riego + Semilla + Pintura + Espalderas
+  const investmentItems = [
+    { item: '5 Rollos Malla 50 mesh 130 gsm (instalada en estructura y guayas existentes)', cost: 3000 },
+    { item: 'Pintura de fondo (1 cuñete para mantenimiento de la estructura metálica)', cost: 120 },
+    { item: 'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)', cost: 100 },
+    { item: 'Semillas / Plántulas certificadas Pimentón Magistral F1', cost: 875 },
+    { item: 'Malla Espaldera Biorientada (Sistema Español a 2.20 m)', cost: 350 },
+    { item: 'Insumos Iniciales: Fertirriego Hidrosoluble', cost: 650 },
+  ];
+
+  const operationalItems = [
+    { item: 'Nutrición semanal con sales hidrosolubles de alta pureza (20 semanas)', cost: 650 },
+    { item: 'Bioinsumos y productos de banda verde (cero residuos tóxicos)', cost: 300 },
+    { item: 'Mano de obra (Sistema Español sin poda, 75% ahorro) y cosecha', cost: 185 },
+    { item: 'Agua por cisternas: 92 a 93 viajes de 10.000 L (920.000 L demanda total del ciclo a $15/viaje)', cost: 1380 },
+    { item: 'Consumibles de cosecha (cestas, hilo de amarre y embalaje)', cost: 100 },
+    { item: 'Fondo de imprevistos técnicos y amortización menor (5%)', cost: 85 },
+  ];
+
+  // Costos e Inversión dinámicos
+  const operationalCosts = operationalItems.reduce((acc, curr) => acc + curr.cost, 0); // $3.170 USD
+  const initialCapitalInvestment = investmentItems.reduce((acc, curr) => acc + curr.cost, 0); // $4.845 USD
 
   // Métricas dinámicas
   const grossRevenue = basketsCount * basketPrice;
@@ -32,28 +50,28 @@ export const FunnelFinancialBenefits: React.FC = () => {
       kg: 2.0,
       label: '2 kg / mata',
       badge: 'Manejo Mínimo',
-      desc: '5.000 kg (250 cestas)',
+      desc: '7.000 kg (350 cestas)',
       note: 'Estrés hídrico o virosis parcial'
     },
     {
       kg: 3.0,
       label: '3 kg / mata',
       badge: 'Media Regional',
-      desc: '7.500 kg (375 cestas)',
+      desc: '10.500 kg (525 cestas)',
       note: 'Protegido sin espaldar'
     },
     {
       kg: 4.0,
       label: '4 kg / mata',
       badge: 'Buen Manejo',
-      desc: '10.000 kg (500 cestas)',
+      desc: '14.000 kg (700 cestas)',
       note: 'Tecnificado estándar'
     },
     {
       kg: 5.0,
       label: '5 kg / mata',
       badge: 'Óptimo AIFA',
-      desc: '12.500 kg (625 cestas)',
+      desc: '17.500 kg (875 cestas)',
       note: 'Sistema Español + Hidrosolubles',
       recommended: true
     },
@@ -71,30 +89,11 @@ export const FunnelFinancialBenefits: React.FC = () => {
     { price: 30, label: '$30', sub: '$1.50/kg', desc: 'Pico Escasez' },
   ];
 
-
-  const investmentItems = [
-    { item: '5 Rollos Malla 50 mesh 130 gsm (instalada en estructura y guayas existentes)', cost: 3000 },
-    { item: 'Pintura de fondo (1 cuñete para mantenimiento de la estructura metálica)', cost: 120 },
-    { item: 'Riego: Cinta de goteo, bolsa conectores iniciales y filtro de disco', cost: 450 },
-    { item: 'Semillas / Plántulas certificadas Pimentón Magistral F1', cost: 625 },
-    { item: 'Malla Espaldera Biorientada (Sistema Español a 2.20 m)', cost: 350 },
-    { item: 'Insumos Iniciales: Fertirriego Hidrosoluble', cost: 650 },
-  ];
-
-  const operationalItems = [
-    { item: 'Nutrición semanal con sales hidrosolubles de alta pureza (20 semanas)', cost: 650 },
-    { item: 'Bioinsumos y productos de banda verde (cero residuos tóxicos)', cost: 300 },
-    { item: 'Mano de obra (Sistema Español sin poda, 75% ahorro) y cosecha', cost: 185 },
-    { item: 'Agua por cisternas: 74 a 75 viajes de 10.000 L (740.000 L demanda total del ciclo a $25/viaje)', cost: 1850 },
-    { item: 'Consumibles de cosecha (cestas, hilo de amarre y embalaje)', cost: 100 },
-    { item: 'Fondo de imprevistos técnicos y amortización menor (5%)', cost: 85 },
-  ];
-
   const timelineSteps = [
     {
       week: 'Sem 1',
       title: 'Transplante',
-      desc: '2.500 plántulas Magistral en camellones dobles a 2.5 pl/m².'
+      desc: '3.500 plántulas Magistral en camellones dobles a 3.5 pl/m².'
     },
     {
       week: 'Sem 4',
@@ -136,7 +135,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
             Simulador de Rentabilidad: Pimentón Magistral 1.000 m²
           </h2>
           <p className="text-secondary small max-w-xl mx-auto">
-            Proyección real basada en <strong>2.500 plantas</strong>, con selector de rendimiento (kilos por mata) y precio por cesta de 20 kg a puerta de finca en Quíbor.
+            Proyección real basada en <strong>3.500 plantas</strong>, con selector de rendimiento (kilos por mata) y precio por cesta de 20 kg a puerta de finca en Quíbor.
           </p>
 
           {/* Chips de selección rápida de precios por cesta */}
@@ -311,7 +310,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
                 <div className="p-3 bg-light rounded-3 border border-secondary-subtle text-xs">
                   <div className="d-flex justify-content-between py-1 border-bottom">
                     <span className="text-secondary">Población de Siembra:</span>
-                    <strong className="font-mono text-dark">2.500 Plántulas Magistral F1</strong>
+                    <strong className="font-mono text-dark">3.500 Plántulas Magistral F1</strong>
                   </div>
                   <div className="d-flex justify-content-between py-1 border-bottom">
                     <span className="text-secondary">Rendimiento Seleccionado:</span>
@@ -557,7 +556,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
 
               <div className="mt-3 p-2.5 rounded bg-light border border-secondary-subtle text-xxs text-secondary">
                 <span className="fw-bold text-dark d-block mb-1">Nota Técnica sobre el Gasto de Agua:</span>
-                Calculado mediante balance hídrico FAO-56 por pulsos cortos. Las 2.500 plantas demandan exactamente <strong>~740.000 Litros</strong> en 20 semanas, abastecidos con <strong>74 viajes de camiones cisterna de 10.000 L (+ 1 de reserva = 75 viajes)</strong> a $25 USD/viaje puesto en finca.
+                Calculado mediante balance hídrico FAO-56 por pulsos cortos. Las 3.500 plantas demandan exactamente <strong>~920.000 Litros</strong> en 20 semanas, abastecidos con <strong>92 viajes de camiones cisterna de 10.000 L (+ 1 de reserva = 93 viajes)</strong> a $15 USD/viaje puesto en finca.
               </div>
             </Card>
           </Col>

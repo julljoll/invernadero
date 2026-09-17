@@ -10,7 +10,7 @@ interface SeoMetadata {
 const SEO_DIRECTORY: Record<string, SeoMetadata> = {
   '/': {
     title: 'Invernadero Pimentón Quíbor — La Cigarronera | Agrovenecua',
-    description: 'Casa de cultivo 1.000 m² para 2.500 plantas de Pimentón Magistral F1 en Valle de Quíbor, Lara. Retorno comprobado, pozo propio a 60m y nutrición AIFA.',
+    description: 'Casa de cultivo 1.000 m² para 3.500 plantas de Pimentón Magistral F1 en Valle de Quíbor, Lara. Retorno comprobado, pozo propio a 60m y nutrición AIFA.',
     keywords: 'invernadero quibor, casa de malla 50 mesh, pimenton lara, pozo profundo cuara, fertirriego aifa',
   },
   '/cockpit': {

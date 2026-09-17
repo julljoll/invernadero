@@ -123,7 +123,7 @@ export const HydrogeologyContext: React.FC = () => {
       <div className="card-cockpit p-4">
         <h3 className="fs-6 fw-bold text-dark mb-1 d-flex align-items-center gap-2">
           <span className="material-symbols-outlined text-success ms-sm">home_work</span>
-          <span>Eficiencia Hídrica: Campo Abierto vs Casa de Malla 1.000 m² (2.500 plantas)</span>
+          <span>Eficiencia Hídrica: Campo Abierto vs Casa de Malla 1.000 m² (3.500 plantas)</span>
         </h3>
         <p className="text-secondary text-xs mb-3">
           Frente a la sobreexplotación del acuífero, la Casa de Malla con goteo autocompensante PC representa la solución tecnológica de máxima eficiencia de uso del agua (WUE) disponible en el Valle de Quíbor.

@@ -71,7 +71,7 @@ describe('Cálculos Agronómicos de Precisión — Quíbor v3.0', () => {
     it('Debe generar las 4 etapas fenológicas con Kc ascendente', () => {
       const stages = calculateFao56IrrigationStages({
         surfaceM2: 1000,
-        totalPlants: 2500,
+        totalPlants: 3500,
         et0MmDay: 5.0,
         leachingFactor: 1.25,
         uniformityEfficiency: 0.90,
@@ -86,7 +86,7 @@ describe('Cálculos Agronómicos de Precisión — Quíbor v3.0', () => {
     it('Debe calcular litros por planta coherentes con la densidad poblacional', () => {
       const stages = calculateFao56IrrigationStages({
         surfaceM2: 1000,
-        totalPlants: 2500,
+        totalPlants: 3500,
         et0MmDay: 5.0,
         leachingFactor: 1.25,
         uniformityEfficiency: 0.90,
@@ -98,7 +98,7 @@ describe('Cálculos Agronómicos de Precisión — Quíbor v3.0', () => {
     it('Debe dimensionar pulsos cortos y frecuentes para prevenir evaporación', () => {
       const stages = calculateFao56IrrigationStages({
         surfaceM2: 1000,
-        totalPlants: 2500,
+        totalPlants: 3500,
         et0MmDay: 5.0,
         leachingFactor: 1.25,
         uniformityEfficiency: 0.90,
@@ -186,25 +186,25 @@ describe('Cálculos Agronómicos de Precisión — Quíbor v3.0', () => {
   // 6. ANÁLISIS FINANCIERO Y ERRADICACIÓN DE MARAÑA
   // =========================================================================
   describe('Motor Financiero y Rentabilidad de Cestas', () => {
-    it('Debe proyectar 88% de cesta grande a $14 USD en el sistema tecnificado', () => {
-      const fin = calculateCycleFinancials('pepper', 2500, 5.2);
-      expect(fin.technifiedSystem.largeBasketsCount).toBeGreaterThan(500);
+    it('Debe proyectar 75% de cesta grande a $14 USD en el sistema tecnificado', () => {
+      const fin = calculateCycleFinancials('pepper', 3500, 5.0);
+      expect(fin.technifiedSystem.largeBasketsCount).toBeGreaterThan(600);
       expect(fin.technifiedSystem.smallBasketsCount).toBe(0); // Cero maraña
     });
 
     it('Debe generar un incremento neto de más de $3.000 USD sobre el sistema tradicional', () => {
-      const fin = calculateCycleFinancials('pepper', 2500, 5.2);
+      const fin = calculateCycleFinancials('pepper', 3500, 5.0);
       expect(fin.netRevenueDifferenceUsd).toBeGreaterThan(3000);
       expect(fin.profitMultiplier).toBeGreaterThan(1.8);
     });
 
     it('Debe calcular punto de equilibrio (break-even) antes de la semana 12', () => {
-      const fin = calculateCycleFinancials('pepper', 2500, 5.2);
+      const fin = calculateCycleFinancials('pepper', 3500, 5.0);
       expect(fin.technifiedSystem.breakEvenWeek).toBeLessThanOrEqual(12);
     });
 
     it('Debe reflejar precio promedio por kilo mayor a $0.60 USD en sistema tecnificado', () => {
-      const fin = calculateCycleFinancials('pepper', 2500, 5.2);
+      const fin = calculateCycleFinancials('pepper', 3500, 5.0);
       expect(fin.technifiedSystem.avgPricePerKgUsd).toBeGreaterThan(0.60);
       expect(fin.traditionalSystem.avgPricePerKgUsd).toBeLessThan(0.55);
     });

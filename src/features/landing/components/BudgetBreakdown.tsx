@@ -35,7 +35,7 @@ export const BudgetBreakdown: React.FC = () => {
       variant: 'warning',
       items: [
         '2.200 plántulas certificadas de pimentón de primera calidad.',
-        'Mangueras de goteo autocompensantes con goteros a 20 cm.',
+        'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros).',
         'Fertilización de base soluble y red de entutorado Hortomalla.',
       ],
     },

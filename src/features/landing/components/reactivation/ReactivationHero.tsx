@@ -16,7 +16,7 @@ export const ReactivationHero: React.FC = () => {
             </h1>
 
             <p className="lead text-secondary fs-6 mb-4">
-              Ingeniería hortícola de precisión para <strong className="text-dark">2.500 plantas de pimentón grande (Semilla Magistral F1)</strong> en estructura de parral tensado con <strong className="text-dark">108 pilares Sch 40</strong>. Cero pérdidas por virosis (TSWV) y picadura de trips gracias al blindaje de <strong className="text-success">Malla 50 Mesh (130 gsm)</strong>, fertirriego 100% hidrosoluble AIFA y regulador de pH activo.
+              Ingeniería hortícola de precisión para <strong className="text-dark">3.500 plantas de pimentón grande (Semilla Magistral F1)</strong> en estructura de parral tensado con <strong className="text-dark">108 pilares Sch 40</strong>. Cero pérdidas por virosis (TSWV) y picadura de trips gracias al blindaje de <strong className="text-success">Malla 50 Mesh (130 gsm)</strong>, fertirriego 100% hidrosoluble AIFA y regulador de pH activo.
             </p>
 
             <div className="d-flex flex-wrap gap-3 mb-4">
@@ -25,7 +25,7 @@ export const ReactivationHero: React.FC = () => {
                 className="btn btn-success btn-lg rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2 shadow-sm"
               >
                 <span className="material-symbols-outlined ms-sm">calculate</span>
-                <span>Calculadora de Inversión (2.500 Pl.)</span>
+                <span>Calculadora de Inversión (3.500 Pl.)</span>
               </a>
 
               <a
@@ -45,7 +45,7 @@ export const ReactivationHero: React.FC = () => {
               </div>
               <div className="d-flex align-items-center gap-1.5">
                 <span className="material-symbols-outlined text-success ms-sm">grid_4x4</span>
-                <span>10 Camellones · 2.500 Goteros PC</span>
+                <span>10 Camellones · Doble Cinta Goteo</span>
               </div>
               <div className="d-flex align-items-center gap-1.5">
                 <span className="material-symbols-outlined text-success ms-sm">air</span>
@@ -66,27 +66,27 @@ export const ReactivationHero: React.FC = () => {
               </div>
 
               <div className="display-5 fw-bold font-mono text-dark mb-1">
-                13.0 <span className="fs-5 text-secondary font-sans fw-normal">Toneladas</span>
+                17.5 <span className="fs-5 text-secondary font-sans fw-normal">Toneladas</span>
               </div>
-              <div className="text-secondary small mb-3">650 cestas de 20 kg (rendimiento de 5.20 kg/planta)</div>
+              <div className="text-secondary small mb-3">875 cestas de 20 kg (rendimiento de 5.0 kg/planta) — 75% lujo ≈ 656 cestas Gran Premio</div>
 
               <div className="p-3 bg-light rounded-3 border border-secondary-subtle mb-3">
                 <div className="row g-2 text-xs">
                   <div className="col-6">
                     <span className="text-secondary">Población Activa:</span>
-                    <div className="fs-6 fw-bold font-mono text-dark">2.500 plantas (2.5 pl/m²)</div>
+                    <div className="fs-6 fw-bold font-mono text-dark">3.500 plantas (3.5 pl/m²)</div>
                   </div>
                   <div className="col-6">
                     <span className="text-secondary">Calibre Grande (&gt;220g):</span>
-                    <div className="fs-6 fw-bold font-mono text-success">88% de cosecha</div>
+                    <div className="fs-6 fw-bold font-mono text-success">75% de cosecha</div>
                   </div>
                   <div className="col-6">
                     <span className="text-secondary">Sectores de Riego:</span>
-                    <div className="fs-6 fw-bold font-mono text-info">2 sectores (2.00 m³/h)</div>
+                    <div className="fs-6 fw-bold font-mono text-info">2 sectores (3.50 m³/h est.)</div>
                   </div>
                   <div className="col-6">
                     <span className="text-secondary">Ahorro en Tutorado:</span>
-                    <div className="fs-6 fw-bold font-mono text-success">-85% en Mano de Obra</div>
+                    <div className="fs-6 fw-bold font-mono text-success">-75% en Mano de Obra (UF/IFAS)</div>
                   </div>
                 </div>
               </div>

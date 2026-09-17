@@ -10,10 +10,10 @@ export const TrellisEspalderaSection: React.FC = () => {
             MÓDULO 03 · SISTEMA DE ESPALDERAS ESPAÑOL
           </span>
           <h2 className="display-6 fw-bold text-dark mb-2">
-            Sistema de Espalderas Español sin Poda (Hortomalla 15×15 cm)
+            Sistema de Espalderas Español · Dos Guías + Deschuponado (Hortomalla 15×15 cm)
           </h2>
           <p className="text-secondary small">
-            Soporte continuo para 2.500 plantas de pimentón que erradica el desgajado de ramas por sobrepeso de frutos y elimina el atado manual.
+            Soporte continuo para 3.500 plantas de pimentón enfocado en maximizar calibre Grande Lujo y erradicar el desgajado de ramas por sobrepeso.
           </p>
         </div>
 
@@ -48,7 +48,7 @@ export const TrellisEspalderaSection: React.FC = () => {
                 </div>
                 <div className="d-flex justify-content-between py-1 border-bottom border-secondary-subtle">
                   <span>Carga Viva de Frutos Soportada:</span>
-                  <strong className="text-success">Hasta 12.500 kg de carga vegetal</strong>
+                  <strong className="text-success">Hasta 17.500 kg de carga vegetal</strong>
                 </div>
                 <div className="d-flex justify-content-between pt-1">
                   <span>Porte Final de Planta:</span>
@@ -72,9 +72,9 @@ export const TrellisEspalderaSection: React.FC = () => {
                 <span className="material-symbols-outlined text-success ms-md">verified_user</span>
               </div>
 
-              <h3 className="fs-5 fw-bold text-dark mb-2">Eliminación de Poda & Cero Contacto Manual</h3>
+              <h3 className="fs-5 fw-bold text-dark mb-2">Poda Selectiva: Dos Guías Principales</h3>
               <p className="text-secondary small mb-3">
-                Bajo el Sistema Español, la planta crece libremente sin poda de formación. Esto reduce drásticamente la labor en un 75% frente al sistema holandés ("V") y previene dispersión de patógenos:
+                Bajo el Sistema Español optimizado, cada planta mantiene DOS tallos principales. Se eliminan chupones, ramas deformes y hojas viejas para alcanzar 14–16 frutos grandes (350 g) por planta, maximizando la producción de cestas de primera calidad.
               </p>
 
               <div className="row g-2 mb-3">
@@ -97,24 +97,55 @@ export const TrellisEspalderaSection: React.FC = () => {
               <ul className="list-unstyled text-secondary small d-flex flex-column gap-2 mb-0">
                 <li className="d-flex align-items-start gap-2">
                   <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
-                  <span><strong>Blindaje contra Virosis y Bacterias:</strong> Las ramas descansan por gravedad en las ventanas de 15×15 cm sin manipulación humana, cortando la diseminación mecánica de TMV y <em>Xanthomonas</em>.</span>
+                  <span><strong>Protocolo de Deschuponado:</strong> Mantener 2 tallos principales desde la bifurcación "Y". Eliminar chupones laterales antes de alcanzar 5 cm.</span>
                 </li>
                 <li className="d-flex align-items-start gap-2">
                   <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
-                  <span><strong>Frutos Extra-Grandes Limpios:</strong> Estudios demuestran mayor producción de calibres extra-grandes en el Sistema Español. Los pimentones cuelgan protegidos de la radiación bajo el follaje y sin tocar el suelo.</span>
+                  <span><strong>Selección de Frutos:</strong> Retirar frutos deformes antes de cuajado final. El objetivo no es número de frutos, sino calibre extra grande limpio.</span>
                 </li>
                 <li className="d-flex align-items-start gap-2">
                   <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
-                  <span><strong>Reducción de Pudrición Apical (Blossom-end Rot):</strong> El no-podado asegura mayor área foliar y un mejor balance termodinámico, lo cual está documentado (UF/IFAS HS22800) que reduce la incidencia de Blossom-end Rot en primavera.</span>
+                  <span><strong>Prevención de Patógenos:</strong> Limpieza sanitaria del corte en hojas viejas y ramas. Se evita el atado manual continuo del sistema holandés.</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
 
+        {/* Cuadro Resumen Comparativo de Poda */}
+        <div className="card card-agro p-4 shadow-sm mb-4">
+          <h4 className="fs-6 fw-bold text-dark mb-3">Comparativa de Manejo de Poda (Manual Técnico v2 §13)</h4>
+          <div className="table-responsive">
+            <table className="table table-sm align-middle small mb-0 font-monospace">
+              <thead className="table-light font-sans">
+                <tr>
+                  <th>Estrategia de Manejo</th>
+                  <th>Ventajas Biológicas</th>
+                  <th>Limitaciones / Desventajas</th>
+                  <th>Dictamen Oficial</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="font-sans text-secondary">Crecimiento Libre (Sin Poda)</td>
+                  <td>Mayor masa vegetal, más flores iniciales</td>
+                  <td className="text-warning">Más competencia hídrica, alto porcentaje de maraña</td>
+                  <td className="text-danger fw-bold">❌ No Recomendado</td>
+                </tr>
+                <tr className="table-success fw-bold">
+                  <td className="font-sans text-success">Poda Selectiva (2 Guías)</td>
+                  <td className="text-success">Mejor calibre (350g), más luz, mayor % lujo</td>
+                  <td className="text-secondary font-sans fw-normal">Requiere mano de obra capacitada</td>
+                  <td className="text-success">✅ Recomendado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         {/* Cuadro Resumen Comparativo de Sistemas de Tutorado */}
         <div className="card card-agro p-4 shadow-sm">
-          <h4 className="fs-6 fw-bold text-dark mb-3">Comparativa Operativa de Soporte en Pimentón (2.500 Plantas / 1.000 m²)</h4>
+          <h4 className="fs-6 fw-bold text-dark mb-3">Comparativa Operativa de Soporte en Pimentón (3.500 Plantas / 1.000 m²)</h4>
           <div className="table-responsive">
             <table className="table table-sm align-middle small mb-0 font-monospace">
               <thead className="table-light font-sans">

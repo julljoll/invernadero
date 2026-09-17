@@ -22,7 +22,7 @@ export const Module03Structure: React.FC = () => {
             <span>Inspección Estructural CAD 3D &amp; Parámetros Bioclimáticos</span>
           </h3>
           <span className="text-secondary small">
-            Nave Estándar Quíbor ({greenhouseWidthM}m × {greenhouseLengthM}m = {greenhouseWidthM * greenhouseLengthM} m² · 2.500 Plantas de Pimentón) · Orientación Este-Oeste
+            Nave Estándar Quíbor ({greenhouseWidthM}m × {greenhouseLengthM}m = {greenhouseWidthM * greenhouseLengthM} m² · 3.500 Plantas de Pimentón) · Orientación Este-Oeste
           </span>
         </div>
         <div className="d-flex align-items-center gap-2">
@@ -40,7 +40,7 @@ export const Module03Structure: React.FC = () => {
         <div className="d-flex align-items-center gap-2">
           <span className="material-symbols-outlined text-success ms-sm">verified</span>
           <span className="text-dark small">
-            <strong>Geometría Bioclimática para Pimentón:</strong> Cumbrera a <strong>{ridgeHeightM}m</strong> y alero a <strong>{gutterHeightM}m</strong> garantizan el volumen buffer para disipar el calor y prevenir aborto floral en 2.500 plantas de <em>Capsicum annuum</em>.
+            <strong>Geometría Bioclimática para Pimentón:</strong> Cumbrera a <strong>{ridgeHeightM}m</strong> y alero a <strong>{gutterHeightM}m</strong> garantizan el volumen buffer para disipar el calor y prevenir aborto floral en 3.500 plantas de <em>Capsicum annuum</em>.
           </span>
         </div>
         <Badge bg="success" className="bg-opacity-20 text-success border border-success border-opacity-30 font-mono text-xs px-2.5 py-1 text-nowrap align-self-start align-self-md-auto">

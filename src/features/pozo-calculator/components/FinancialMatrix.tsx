@@ -60,7 +60,7 @@ export const FinancialMatrix: React.FC = () => {
       param: 'Aptitud Agronómica Pimentón',
       artesanal: '2.0 L/s sostenido (7.200 L/h)',
       mecanico: '2.5 a 3.2 L/s continuo',
-      benefit: 'Cubre 100% de la demanda de 2.500 plantas',
+      benefit: 'Cubre 100% de la demanda de 3.500 plantas',
       highlight: true,
       badge: '100% VIABLE',
       badgeVariant: 'success',

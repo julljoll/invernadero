@@ -32,7 +32,7 @@ tamano_tokens_estimado: 3800
 
 # MANUAL TÉCNICO UF/IFAS — PRODUCCIÓN DE PIMENTÓN (*Capsicum annuum*) EN CULTIVO PROTEGIDO Y FERTIRRIEGO INTENSIVO
 ## Basado en la Publicación Canónica EDIS HS979 / HS22800 (Protected Agriculture Project, University of Florida)
-### Adaptación Específica para el Valle de Quíbor (695 msnm, Lara, Venezuela) — Módulo de 1.000 m² (2.500 plantas)
+### Adaptación Específica para el Valle de Quíbor (695 msnm, Lara, Venezuela) — Módulo de 1.000 m² (3.500 plantas)
 
 ---
 
@@ -53,7 +53,7 @@ El documento `HS22800.pdf` corresponde a la publicación de referencia internaci
 | **Altura al Alero (Canal)** | $\ge 4.0\text{ m}$ (13 ft) | **$3.0\text{ a }4.0\text{ m}$ al alero** (cumbrera $5.5 - 6.5\text{ m}$) | En Quíbor, el pimentón requiere altura para crear colchón de aire buffer que mantenga $T_{interna} < 31.5^\circ\text{C}$. |
 | **Cubierta y Malla** | Polietileno UV difuso + Malla 50 mesh en ventilaciones | **Malla 50 mesh monofilamento blanco virgen (110 o 130 gsm)** en toda la envolvente | Ventilación convectiva natural pasiva continua (viento Este dominante de 7 a 11 km/h). |
 | **Sombreado Térmico** | Malla de sombreo 30% en meses de alta radiación | Malla blanca difusora + sombreo térmico 30% en meses secos (Marzo - Abril) | Disminuye la carga infrarroja directa, previene golpe de sol (*sunscald*) y aborto floral por estrés térmico ($> 32^\circ\text{C}$). |
-| **Rendimiento Comercial** | $1.6\text{ a }3.0\text{ lb/ft}^2$ ($7.8\text{ a }14.6\text{ kg/m}^2$), con potencial de $4.0\text{ lb/ft}^2$ ($19.5\text{ kg/m}^2$) | **$8.0\text{ a }12.0\text{ kg/m}^2$** ($8.0\text{ a }12.0\text{ ton/1.000 m}^2$) | Equivale a **3.2 a 4.8 kg/planta** en densidad de 2.5 plantas/m² (2.500 plantas en 1.000 m²). |
+| **Rendimiento Comercial** | $1.6\text{ a }3.0\text{ lb/ft}^2$ ($7.8\text{ a }14.6\text{ kg/m}^2$), con potencial de $4.0\text{ lb/ft}^2$ ($19.5\text{ kg/m}^2$) | **$17.5\text{ kg/m}^2$** ($17.5\text{ ton/1.000 m}^2$) | Equivale a **5.0 kg/planta** en densidad de 3.5 plantas/m² (3.500 plantas en 1.000 m²). |
 
 ---
 
@@ -100,7 +100,7 @@ El manual UF/IFAS estandariza las concentraciones elementales en solución nutri
 | **Conductividad Eléctrica ($EC$)** | $1.2 - 1.5\text{ dS/m}$ | $1.6 - 2.0\text{ dS/m}$ | $2.0 - 2.5\text{ dS/m}$ |
 | **pH Óptimo** | **5.5 – 6.5** | **5.5 – 6.5** | **5.5 – 6.5** |
 
-### 4.2 Formulación Práctica con Insumos AIFA Hidrosolubles (Nave de 1.000 m² / 2.500 plantas)
+### 4.2 Formulación Práctica con Insumos AIFA Hidrosolubles (Nave de 1.000 m² / 3.500 plantas)
 Para alcanzar estas concentraciones elementales en Quíbor combinando con el agua de pozo ($EC_w \approx 1.65\text{ dS/m}$, aportando Calcio y Sulfatos nativos):
 
 1. **Tanque A (Calcio y Hierro):**

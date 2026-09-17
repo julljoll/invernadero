@@ -44,7 +44,7 @@ export const VariantSelector: React.FC<VariantSelectorProps> = ({
             </div>
 
             <Card.Text className="text-secondary small mb-3">
-              <strong className="text-dark">Máximo Flujo Aerodinámico:</strong> Especialmente formulada para evacuar el calor acumulado en naves de Quíbor. Mantiene el microclima de las <strong className="text-success">2.500 plantas de pimentón</strong> hasta <strong className="text-success">2.0 °C más fresco</strong>, evitando la esterilidad del polen y el aborto de flores por temperaturas &gt; 32 °C.
+              <strong className="text-dark">Máximo Flujo Aerodinámico:</strong> Especialmente formulada para evacuar el calor acumulado en naves de Quíbor. Mantiene el microclima de las <strong className="text-success">3.500 plantas de pimentón</strong> hasta <strong className="text-success">2.0 °C más fresco</strong>, evitando la esterilidad del polen y el aborto de flores por temperaturas &gt; 32 °C.
             </Card.Text>
 
             <div className="row g-2 text-xs border-top border-secondary-subtle pt-3 mt-auto font-monospace">

@@ -55,7 +55,7 @@ export const CockpitHeader: React.FC = () => {
                     </Badge>
                   </div>
                   <span className="text-secondary font-mono text-xxs mt-0.5">
-                    <strong className="text-dark">2.500 Plantas</strong> · Densidad <strong className="text-success">2.50 pl/m²</strong> (1.000 m²)
+                    <strong className="text-dark">3.500 Plantas</strong> · Densidad <strong className="text-success">2.50 pl/m²</strong> (1.000 m²)
                   </span>
                 </div>
               </div>

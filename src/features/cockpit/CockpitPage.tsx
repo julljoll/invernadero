@@ -54,7 +54,7 @@ export const CockpitPage: React.FC = () => {
                   </span>
                 </div>
                 <Badge bg="success" className="bg-opacity-15 text-success border border-success border-opacity-30 rounded-pill px-2.5 py-1 text-xxs font-mono">
-                  2.500 Plantas
+                  3.500 Plantas
                 </Badge>
               </div>
 
@@ -147,7 +147,7 @@ export const CockpitPage: React.FC = () => {
             <div className="d-none d-md-flex align-items-center justify-content-between px-2 mb-3 text-secondary text-xs font-sans">
               <div className="d-flex align-items-center gap-2">
                 <span className="material-symbols-outlined text-success ms-sm">spa</span>
-                <span>Cultivo Objetivo: <strong className="text-dark">{crop.name}</strong> (2.500 plantas · 1.000 m²)</span>
+                <span>Cultivo Objetivo: <strong className="text-dark">{crop.name}</strong> (3.500 plantas · 1.000 m²)</span>
               </div>
               <div className="d-flex align-items-center gap-2 font-mono">
                 <Badge bg="light" text="secondary" className="border border-secondary-subtle">
