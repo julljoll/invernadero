@@ -152,10 +152,18 @@ export const FunnelHero: React.FC = () => {
 
                 <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
                   <span className="text-white-50 d-flex align-items-center gap-1.5">
+                    <span className="material-symbols-outlined text-info fs-6">water_drop</span>
+                    <span>Agua (Cisternas 10.000 L):</span>
+                  </span>
+                  <strong className="font-mono text-white">74 – 75 viajes ($1.850 USD)</strong>
+                </div>
+
+                <div className="d-flex justify-content-between align-items-center py-1.5 border-bottom border-white border-opacity-10">
+                  <span className="text-white-50 d-flex align-items-center gap-1.5">
                     <span className="material-symbols-outlined text-danger fs-6">savings</span>
                     <span>Costos Operativos Ciclo:</span>
                   </span>
-                  <strong className="font-mono text-white">$2.035 USD (Hidrosolubles + MO)</strong>
+                  <strong className="font-mono text-white">$3.170 USD (Agua + Insumos)</strong>
                 </div>
 
                 <div className="d-flex justify-content-between align-items-center pt-1.5">
@@ -163,7 +171,7 @@ export const FunnelHero: React.FC = () => {
                     <span className="material-symbols-outlined text-success fs-6">paid</span>
                     <span>Utilidad Neta Ciclo:</span>
                   </span>
-                  <strong className="font-mono fw-bold fs-6" style={{ color: '#53C942' }}>$7.340 USD</strong>
+                  <strong className="font-mono fw-bold fs-6" style={{ color: '#53C942' }}>$6.205 USD</strong>
                 </div>
               </div>
 
@@ -172,15 +180,15 @@ export const FunnelHero: React.FC = () => {
                 <Row className="g-2 text-center text-xs">
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">Inversión Inicial:</span>
-                    <strong className="fs-6 font-mono text-white">$6.975</strong>
+                    <strong className="fs-6 font-mono text-white">$5.195</strong>
                   </Col>
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">ROI por Ciclo:</span>
-                    <strong className="fs-6 font-mono" style={{ color: '#53C942' }}>+105%</strong>
+                    <strong className="fs-6 font-mono" style={{ color: '#53C942' }}>+119%</strong>
                   </Col>
                   <Col xs={4}>
                     <span className="text-white-50 d-block text-xxs">Recuperación:</span>
-                    <strong className="fs-6 font-mono text-info">4.5 Meses</strong>
+                    <strong className="fs-6 font-mono text-info">5 Meses</strong>
                   </Col>
                 </Row>
               </div>

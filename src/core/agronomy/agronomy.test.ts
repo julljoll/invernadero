@@ -94,6 +94,24 @@ describe('Cálculos Agronómicos de Precisión — Quíbor v3.0', () => {
       expect(stages[2].litersPerPlantWeek).toBeGreaterThan(15);
       expect(stages[2].litersPerPlantWeek).toBeLessThan(25);
     });
+
+    it('Debe dimensionar pulsos cortos y frecuentes para prevenir evaporación', () => {
+      const stages = calculateFao56IrrigationStages({
+        surfaceM2: 1000,
+        totalPlants: 2500,
+        et0MmDay: 5.0,
+        leachingFactor: 1.25,
+        uniformityEfficiency: 0.90,
+      });
+      // Etapa 4 (Cosecha Pico): 6 pulsos diarios de duración corta (10 a 20 min)
+      const pico = stages[3];
+      expect(pico.dailyPulses).toBe(6);
+      expect(pico.pulseDurationMinutes).toBeGreaterThanOrEqual(10);
+      expect(pico.pulseDurationMinutes).toBeLessThanOrEqual(25);
+      expect(pico.pulseVolumeLiters).toBeGreaterThan(0.3);
+      expect(pico.pulseVolumeLiters).toBeLessThan(0.8);
+      expect(pico.fertigationStrategy).toBeDefined();
+    });
   });
 
   // =========================================================================

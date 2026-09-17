@@ -17,8 +17,8 @@ export const FunnelFinancialBenefits: React.FC = () => {
   const pricePerKg = basketPrice / 20;
 
   // Costos e Inversión
-  const operationalCosts = 2035; // Costos operativos del ciclo de 5 meses
-  const initialCapitalInvestment = 6975; // Estructura + Riego + Espaldar + Plántulas + Insumos
+  const operationalCosts = 3170; // Costos con agua por cisternas (10.000L) y ahorro en mano de obra
+  const initialCapitalInvestment = 5195; // Malla instalada + Riego + Semilla + Pintura + Espalderas
 
   // Métricas dinámicas
   const grossRevenue = basketsCount * basketPrice;
@@ -54,7 +54,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
       label: '5 kg / mata',
       badge: 'Óptimo AIFA',
       desc: '12.500 kg (625 cestas)',
-      note: 'Espaldar 15×15 + Hidrosolubles',
+      note: 'Sistema Español + Hidrosolubles',
       recommended: true
     },
   ];
@@ -73,20 +73,19 @@ export const FunnelFinancialBenefits: React.FC = () => {
 
 
   const investmentItems = [
-    { item: 'Estructura Casa de Malla 1.000 m² (malla 50 mesh 130 gsm blanca, pilares y guayas)', cost: 3500 },
-    { item: 'Sistema de Riego por Goteo (goteros PC/AS 1.6 L/h autocompensados + cabezal y filtros)', cost: 800 },
-    { item: 'Malla Espaldera Biorientada Hortomalla 15×15 cm a 2.20 m con cables de soporte', cost: 350 },
-    { item: '2.500 Plántulas certificadas de Pimentón Híbrido Variedad Magistral F1 ($0.25/pl)', cost: 625 },
-    { item: 'Fertirriego Hidrosoluble AIFA (Nitrato Ca, Nitrato K, MKP, MgSO4, Ácido Nítrico)', cost: 650 },
-    { item: 'Manejo fitosanitario preventivo, trampas cromotrópicas y control biológico', cost: 300 },
-    { item: 'Mano de obra especializada (transplante, nivelación de camellones y puesta a punto)', cost: 750 },
+    { item: '5 Rollos Malla 50 mesh 130 gsm (instalada en estructura y guayas existentes)', cost: 3000 },
+    { item: 'Pintura de fondo (1 cuñete para mantenimiento de la estructura metálica)', cost: 120 },
+    { item: 'Riego: Cinta de goteo, bolsa conectores iniciales y filtro de disco', cost: 450 },
+    { item: 'Semillas / Plántulas certificadas Pimentón Magistral F1', cost: 625 },
+    { item: 'Malla Espaldera Biorientada (Sistema Español a 2.20 m)', cost: 350 },
+    { item: 'Insumos Iniciales: Fertirriego Hidrosoluble', cost: 650 },
   ];
 
   const operationalItems = [
     { item: 'Nutrición semanal con sales hidrosolubles de alta pureza (20 semanas)', cost: 650 },
     { item: 'Bioinsumos y productos de banda verde (cero residuos tóxicos)', cost: 300 },
-    { item: 'Mano de obra de mantenimiento, deschuponado y cosecha continua (3 jornaleros)', cost: 750 },
-    { item: 'Energía eléctrica para bombeo de pozo propio 60m (2 h/día x 150 días)', cost: 150 },
+    { item: 'Mano de obra (Sistema Español sin poda, 75% ahorro) y cosecha', cost: 185 },
+    { item: 'Agua por cisternas: 74 a 75 viajes de 10.000 L (740.000 L demanda total del ciclo a $25/viaje)', cost: 1850 },
     { item: 'Consumibles de cosecha (cestas, hilo de amarre y embalaje)', cost: 100 },
     { item: 'Fondo de imprevistos técnicos y amortización menor (5%)', cost: 85 },
   ];
@@ -100,7 +99,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
     {
       week: 'Sem 4',
       title: 'Tutorado',
-      desc: 'Entrada al espaldar Hortomalla 15×15 cm (-88% mano de obra).'
+      desc: 'Soporte con malla (Sistema Español sin poda, -75% mano de obra).'
     },
     {
       week: 'Sem 8',
@@ -417,7 +416,7 @@ export const FunnelFinancialBenefits: React.FC = () => {
                     <span className="text-dark fw-bold">Rendimiento Evaluado:</span>
                     <span className="text-success fw-bold">{yieldPerPlantKg.toFixed(1)} kg / mata ({totalKg.toLocaleString()} kg total)</span>
                   </div>
-                  <span className="text-dark fw-bold">Recuperación de Capital:</span> Con {yieldPerPlantKg} kg/planta y cesta a ${basketPrice.toFixed(2)}, el ciclo genera <strong>${netProfit.toLocaleString()} USD</strong> netos frente al CAPEX de $6.975 USD {netProfitAfterTotalCapex >= 0 ? `(excedente de +$${netProfitAfterTotalCapex.toLocaleString()} USD en el ciclo 1)` : `(recuperación del ${((netProfit / initialCapitalInvestment) * 100).toFixed(0)}% en ciclo 1)`}.
+                  <span className="text-dark fw-bold">Recuperación de Capital:</span> Con {yieldPerPlantKg} kg/planta y cesta a ${basketPrice.toFixed(2)}, el ciclo genera <strong>${netProfit.toLocaleString()} USD</strong> netos frente al CAPEX de ${initialCapitalInvestment.toLocaleString()} USD {netProfitAfterTotalCapex >= 0 ? `(excedente de +$${netProfitAfterTotalCapex.toLocaleString()} USD en el ciclo 1)` : `(recuperación del ${((netProfit / initialCapitalInvestment) * 100).toFixed(0)}% en ciclo 1)`}.
                 </div>
               </div>
 
@@ -554,6 +553,11 @@ export const FunnelFinancialBenefits: React.FC = () => {
                     </tr>
                   </tbody>
                 </Table>
+              </div>
+
+              <div className="mt-3 p-2.5 rounded bg-light border border-secondary-subtle text-xxs text-secondary">
+                <span className="fw-bold text-dark d-block mb-1">Nota Técnica sobre el Gasto de Agua:</span>
+                Calculado mediante balance hídrico FAO-56 por pulsos cortos. Las 2.500 plantas demandan exactamente <strong>~740.000 Litros</strong> en 20 semanas, abastecidos con <strong>74 viajes de camiones cisterna de 10.000 L (+ 1 de reserva = 75 viajes)</strong> a $25 USD/viaje puesto en finca.
               </div>
             </Card>
           </Col>

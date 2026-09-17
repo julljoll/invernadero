@@ -42,7 +42,7 @@ export const Module03Fertirriego: React.FC = () => {
   const sectorsCount = 2;
   const sectorFlowM3h = totalFlowM3h / sectorsCount;
 
-  // Etapas Fenológicas Agrupadas
+  // Etapas Fenológicas Agrupadas con Esquema de Pulsos y Logística de Cisternas (Quíbor)
   const stagesSummary = [
     {
       id: '1',
@@ -50,9 +50,9 @@ export const Module03Fertirriego: React.FC = () => {
       weeks: 'Semanas 1 a 3',
       kc: '0.45 – 0.60',
       waterPlWeek: '7.2 – 9.0 L/pl',
-      dailyVolGreenhouse: '2.83 m³/día',
-      pulses: '2 turnos de 12 min',
-      notes: 'Raíz superficial exploratoria (0-15 cm). Prohibido saturar para inducir enraizamiento y evitar asfixia.',
+      dailyVolGreenhouse: '2.83 m³/día (2 cisternas 10m³/sem)',
+      pulses: '3 pulsos de 10 min (08:00, 11:30, 15:00)',
+      notes: 'Riegos ultracortos para evitar saturación superficial y evaporación acelerada. Estimulante radicular e hidrosoluble fraccionado.',
       accent: 'border-info text-info',
     },
     {
@@ -61,9 +61,9 @@ export const Module03Fertirriego: React.FC = () => {
       weeks: 'Semanas 4 a 7',
       kc: '0.70 – 0.85',
       waterPlWeek: '12.0 – 15.0 L/pl',
-      dailyVolGreenhouse: '4.71 m³/día',
-      pulses: '2 turnos de 18 min',
-      notes: 'Desarrollo de biomasa foliar y bifurcaciones. Guiado en Hortomalla 15x15 cm sin ataduras.',
+      dailyVolGreenhouse: '4.71 m³/día (3.3 cisternas 10m³/sem)',
+      pulses: '4 pulsos de 12 min (08:00, 11:00, 13:30, 16:00)',
+      notes: 'Inyección de Nitrógeno y Potasio hidrosoluble al 100% de los pulsos para absorción activa sin percolación profunda.',
       accent: 'border-primary text-primary',
     },
     {
@@ -72,9 +72,9 @@ export const Module03Fertirriego: React.FC = () => {
       weeks: 'Semanas 8 a 11',
       kc: '0.95 – 1.05',
       waterPlWeek: '15.5 – 19.4 L/pl',
-      dailyVolGreenhouse: '6.09 m³/día',
-      pulses: '2 turnos de 23 min',
-      notes: 'Etapa más crítica en Quíbor. Estrés hídrico o salino >32°C detona aborto floral irreversible.',
+      dailyVolGreenhouse: '6.09 m³/día (4.3 cisternas 10m³/sem)',
+      pulses: '5 pulsos de 14 min (08:00, 10:00, 12:00, 14:00, 16:00)',
+      notes: 'Frecuencia intensificada en horas pico de calor/insolación. Mantiene conductividad eléctrica estable y previene aborto y blossom-end rot.',
       accent: 'border-warning text-warning',
     },
     {
@@ -83,9 +83,9 @@ export const Module03Fertirriego: React.FC = () => {
       weeks: 'Semanas 12 a 22',
       kc: '1.15 sostenido',
       waterPlWeek: '18.5 – 23.1 L/pl',
-      dailyVolGreenhouse: '7.26 – 9.25 m³/día',
-      pulses: '2 turnos de 28 min',
-      notes: 'Demanda pico en meses cálidos (marzo-abril). División en micropulsos para mitigar salinidad.',
+      dailyVolGreenhouse: '7.26 – 9.25 m³/día (5–6.5 cisternas 10m³/sem)',
+      pulses: '6 pulsos de 14 min (07:30 a 16:30 cada 1.8h)',
+      notes: 'Micro-dosis constantes en horas de máxima evapotranspiración. Aporte continuo de Calcio y Potasio asimilable sin saturar el suelo.',
       accent: 'border-success text-success',
     },
     {
@@ -94,9 +94,9 @@ export const Module03Fertirriego: React.FC = () => {
       weeks: 'Semanas 23 a 24',
       kc: '0.80 – 0.70',
       waterPlWeek: '11.0 – 13.8 L/pl',
-      dailyVolGreenhouse: '4.33 m³/día',
-      pulses: '2 turnos de 15 min',
-      notes: 'Maduración de últimos frutos. Despunte apical ya realizado y cierre sanitario del ciclo.',
+      dailyVolGreenhouse: '4.33 m³/día (3 cisternas 10m³/sem)',
+      pulses: '3 pulsos de 12 min (08:30, 12:30, 15:30)',
+      notes: 'Maduración final homogénea. Se restringen pulsos tardíos para evitar rajado de fruto antes del desmonte sanitario.',
       accent: 'border-secondary text-secondary',
     },
   ];

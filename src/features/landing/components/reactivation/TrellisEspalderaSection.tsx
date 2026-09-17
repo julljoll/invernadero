@@ -7,10 +7,10 @@ export const TrellisEspalderaSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-5">
           <span className="section-kicker mb-2">
             <span className="material-symbols-outlined ms-sm">table_rows</span>
-            MÓDULO 03 · TUTORADO MECÁNICO HORTOMALLA (15×15 CM)
+            MÓDULO 03 · SISTEMA DE ESPALDERAS ESPAÑOL
           </span>
           <h2 className="display-6 fw-bold text-dark mb-2">
-            Tutorado Mecánico con Malla Espaldera en Pimentón (Hortomalla 15×15 cm)
+            Sistema de Espalderas Español sin Poda (Hortomalla 15×15 cm)
           </h2>
           <p className="text-secondary small">
             Soporte continuo para 2.500 plantas de pimentón que erradica el desgajado de ramas por sobrepeso de frutos y elimina el atado manual.
@@ -67,14 +67,14 @@ export const TrellisEspalderaSection: React.FC = () => {
             <div className="card card-agro p-4 h-100 shadow-sm border-success border-opacity-50">
               <div className="d-flex align-items-center justify-content-between mb-3">
                 <span className="badge bg-success bg-opacity-25 text-success rounded-pill font-monospace">
-                  Ahorro del 85% en Mano de Obra
+                  Ahorro del 75%+ en Mano de Obra (UF/IFAS)
                 </span>
                 <span className="material-symbols-outlined text-success ms-md">verified_user</span>
               </div>
 
-              <h3 className="fs-5 fw-bold text-dark mb-2">Blindaje Sanitario &amp; Cero Contacto Manual</h3>
+              <h3 className="fs-5 fw-bold text-dark mb-2">Eliminación de Poda & Cero Contacto Manual</h3>
               <p className="text-secondary small mb-3">
-                El amarre constante con rafia y el uso de estacas de madera es el foco primario de dispersión de patógenos bacterianos y virosis:
+                Bajo el Sistema Español, la planta crece libremente sin poda de formación. Esto reduce drásticamente la labor en un 75% frente al sistema holandés ("V") y previene dispersión de patógenos:
               </p>
 
               <div className="row g-2 mb-3">
@@ -101,7 +101,11 @@ export const TrellisEspalderaSection: React.FC = () => {
                 </li>
                 <li className="d-flex align-items-start gap-2">
                   <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
-                  <span><strong>Frutos Limpios Fuera del Suelo:</strong> Los pimentones cuelgan protegidos de la radiación solar directa bajo el follaje y sin tocar el suelo, reduciendo las manchas por golpe de sol y pudriciones fúngicas.</span>
+                  <span><strong>Frutos Extra-Grandes Limpios:</strong> Estudios demuestran mayor producción de calibres extra-grandes en el Sistema Español. Los pimentones cuelgan protegidos de la radiación bajo el follaje y sin tocar el suelo.</span>
+                </li>
+                <li className="d-flex align-items-start gap-2">
+                  <span className="material-symbols-outlined text-success ms-sm mt-0.5">check_circle</span>
+                  <span><strong>Reducción de Pudrición Apical (Blossom-end Rot):</strong> El no-podado asegura mayor área foliar y un mejor balance termodinámico, lo cual está documentado (UF/IFAS HS22800) que reduce la incidencia de Blossom-end Rot en primavera.</span>
                 </li>
               </ul>
             </div>

@@ -49,6 +49,10 @@ export interface IrrigationStage {
   kc: number;
   grossMmDay: number;
   litersPerPlantWeek: number;
+  dailyPulses: number;        // Número de riegos cortos al día
+  pulseDurationMinutes: number; // Minutos que dura cada riego/pulso
+  pulseVolumeLiters: number;  // Litros aplicados por planta en cada pulso
+  fertigationStrategy: string; // Ej: "Inyección al 100% en cada pulso"
 }
 
 export interface SalinityResult {

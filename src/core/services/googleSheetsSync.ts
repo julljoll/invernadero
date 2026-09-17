@@ -335,7 +335,7 @@ export function getCalculoGastosSheet(): SheetDefinition {
     ['2. Nutrición & Fitosanidad', 'Fertilizantes Solubles AIFA', 'Nitrato Calcio, Potasio, MKP, Mg (20 sem)', 'OPEX Producción', 'Programa 20 sem', 1380, '18.7%'],
     ['2. Nutrición & Fitosanidad', 'Regulador pH Ácido Nítrico 60%', '224 Litros / ciclo para neutralizar agua pozo', 'OPEX Producción', '$0.98 / Litro', 220, '3.0%'],
     ['2. Nutrición & Fitosanidad', 'Agroquímicos & Biológicos IPM', 'Acaricidas, spinosad, cobre, trampas cromáticas', 'OPEX Producción', 'Plan rotación IRAC', 540, '7.3%'],
-    ['2. Nutrición & Fitosanidad', 'Cisternas de Agua Dulce', '40 viajes × 10.000 L ($20/viaje) para dilución', 'OPEX Producción', '$20 / cisterna', 800, '10.8%'],
+    ['2. Nutrición & Fitosanidad', 'Cisternas de Agua Dulce', '74-75 viajes × 10.000 L ($25/viaje) abastecimiento ciclo', 'OPEX Producción', '$25 / cisterna', 1850, '25.1%'],
 
     // 3. Reacondicionamiento Estructural ($375)
     ['3. Reacondicionamiento Estructural', 'Fondo Blanco Anticorrosivo', '1 cuñete epóxico para herrería Sch 40', 'CAPEX Reactivación', '1 cuñete', 75, '1.0%'],

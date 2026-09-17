@@ -22,12 +22,12 @@ export const InvestmentCalculatorSection: React.FC = () => {
   const costTransplantLabor = 80;       // Mano de obra para siembra y trasplante de 2.500 plántulas
   const subtotalSeed = costSeedMagistral + costGermination + costLandPrep + costTransplantLabor; // $860 USD
 
-  // 2. Nutrición, Agua & Protección Fitosanitaria ($2.940 USD)
+  // 2. Nutrición, Agua & Protección Fitosanitaria
   const costFertilizerAifa = 1380;      // Nutrición 100% hidrosoluble AIFA (20 semanas, Tanques A y B)
   const costPhRegulator = 220;          // Regulador de pH: Ácido Nítrico Técnico 60% (224 L / ciclo)
   const costPesticidesFungicides = 540;  // Venenos plagas y hongos (Plan Fitosanitario anti-trips, acaricidas, preventivos)
-  const costWaterCisterns = 800;        // Cisternas de agua dulce 10.000L ($20/viaje × 40 viajes = 400.000 L)
-  const subtotalNutrition = costFertilizerAifa + costPhRegulator + costPesticidesFungicides + costWaterCisterns; // $2.940 USD
+  const costWaterCisterns = 1850;       // Cisternas de agua dulce 10.000L ($25/viaje × 74 viajes = 740.000 L)
+  const subtotalNutrition = costFertilizerAifa + costPhRegulator + costPesticidesFungicides + costWaterCisterns;
 
   // 3. Reacondicionamiento Estructural & Mano de Obra ($375 USD)
   const costPaintWhitePrimer = 75;      // 1 cuñete de fondo blanco anticorrosivo para herrería Sch 40
@@ -348,7 +348,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                     <span className="text-secondary font-mono">40 Días</span>
                   </div>
                   <div className="fw-bold text-dark mb-1">Trasplante &amp; Crecimiento Vegetativo</div>
-                  <div className="text-secondary">Enraizamiento profundo, primeras bifurcaciones en "Y" y encause dentro de la malla espaldera Hortomalla.</div>
+                  <div className="text-secondary">Enraizamiento profundo, primeras bifurcaciones en "Y" y encause natural sin poda (Sistema Español) dentro de la malla espaldera Hortomalla.</div>
                 </div>
               </div>
 
@@ -581,7 +581,7 @@ export const InvestmentCalculatorSection: React.FC = () => {
                         <strong className="text-dark font-mono ms-2">${costPesticidesFungicides} USD</strong>
                       </div>
                       <div className="d-flex justify-content-between py-1">
-                        <span className="text-truncate">• Cisternas agua ($20/viaje × 40 viajes):</span>
+                        <span className="text-truncate">• Cisternas agua ($25/viaje × 74 viajes):</span>
                         <strong className="text-dark font-mono ms-2">${costWaterCisterns} USD</strong>
                       </div>
                     </div>

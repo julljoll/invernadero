@@ -57,7 +57,7 @@ El documento `HS22800.pdf` corresponde a la publicación de referencia internaci
 
 ---
 
-## 3. SISTEMAS DE TUTORADO: HOLANDÉS EN "V" vs. SISTEMA ESPAÑOL
+## 3. PODA Y TUTORADO: SISTEMA HOLANDÉS EN "V" vs. SISTEMA ESPAÑOL
 
 Uno de los aportes cruciales de la investigación de UF/IFAS (Jovicich & Cantliffe) es la validación técnica y económica de los dos sistemas de conducción en clima cálido:
 

@@ -33,7 +33,7 @@ export const FunnelAgronomicBenefits: React.FC = () => {
       title: 'Fertirriego Hidrosoluble',
       metric: '98% Asimilación',
       submetric: 'Sales AIFA Puras · Nitratos & Fosfatos',
-      desc: 'Nutrición estequiométrica líquida sin impurezas. Goteros autocompensantes PC de 1.6 L/h con fracción de lavado (LF 15-20%) para neutralizar la salinidad de pozo (CEw 1.5 dS/m).',
+      desc: 'Nutrición estequiométrica líquida sin impurezas. Goteros autocompensantes PC de 1.6 L/h con fracción de lavado (LF 15-20%) para neutralizar la salinidad del agua (CEw 1.5 dS/m).',
       icon: 'science',
       badge: 'Nutrición de Precisión',
       color: 'text-info',
@@ -94,8 +94,15 @@ export const FunnelAgronomicBenefits: React.FC = () => {
       factor: 'Eficiencia Hídrica (FAO-56)',
       openField: 'Riego por surco (25-35% eficiencia)',
       greenhouse: 'Goteo autocompensante PC (92% ef.)',
-      gain: 'Ahorro 70% agua de pozo',
+      gain: 'Ahorro 70% de agua (74-75 cisternas)',
       icon: 'water_drop'
+    },
+    {
+      factor: 'Nutrición & Fertilización',
+      openField: 'Granulado en banda (Urea/DAP/KCl) · 35% maraña',
+      greenhouse: 'AIFA 100% Soluble + K₂SO₄ + Ácido Nítrico (pH 6.0)',
+      gain: '+$4.015 USD netos (88% grande, 0% maraña)',
+      icon: 'science'
     }
   ];
 

@@ -12,13 +12,16 @@ export function calculateFao56IrrigationStages(
   params: CropWaterRequirementParams
 ): IrrigationStage[] {
   const { totalPlants, et0MmDay, leachingFactor, uniformityEfficiency } = params;
+  
+  // Caudal del gotero base (Litros por hora)
+  const dripperFlowLitersHour = 1.6; 
 
-  // Etapas estándar FAO-56 para pimentón (Capsicum annuum) en Quíbor
+  // Etapas estándar FAO-56 para pimentón (Capsicum annuum) en Quíbor con esquema de pulsos
   const stageDefinitions = [
-    { stageName: "01. Trasplante y Enraizamiento", weeks: "Sem 1 a 3", kc: 0.60 },
-    { stageName: "02. Crecimiento Vegetativo Rápido", weeks: "Sem 4 a 6", kc: 0.80 },
-    { stageName: "03. Floración & Primer Cuajado", weeks: "Sem 7 a 9", kc: 1.05 },
-    { stageName: "04. Plena Cosecha (Pico de Calor)", weeks: "Sem 10 a 20", kc: 1.15 }
+    { stageName: "01. Trasplante y Enraizamiento", weeks: "Sem 1 a 3", kc: 0.60, pulses: 3, strategy: "Inyección foliar + Radicular suave" },
+    { stageName: "02. Crecimiento Vegetativo Rápido", weeks: "Sem 4 a 6", kc: 0.80, pulses: 4, strategy: "Inyección N-K continua (100% pulsos)" },
+    { stageName: "03. Floración & Primer Cuajado", weeks: "Sem 7 a 9", kc: 1.05, pulses: 5, strategy: "Alta frec. Evita blossom-end rot" },
+    { stageName: "04. Plena Cosecha (Pico de Calor)", weeks: "Sem 10 a 20", kc: 1.15, pulses: 6, strategy: "Micro-dosis (Pico insolación)" }
   ];
 
   return stageDefinitions.map(def => {
@@ -30,13 +33,22 @@ export function calculateFao56IrrigationStages(
     // Litros por planta por semana:
     const totalWeeklyLiters = (grossMmDay * params.surfaceM2 * 7);
     const litersPerPlantWeek = totalPlants > 0 ? (totalWeeklyLiters / totalPlants) : 0;
+    
+    // Cálculos de Riego por Pulsos (Alta frecuencia)
+    const litersPerPlantDay = litersPerPlantWeek / 7;
+    const pulseVolumeLiters = litersPerPlantDay / def.pulses;
+    const pulseDurationMinutes = (pulseVolumeLiters / dripperFlowLitersHour) * 60;
 
     return {
       stageName: def.stageName,
       weeks: def.weeks,
       kc: def.kc,
       grossMmDay: Number(grossMmDay.toFixed(2)),
-      litersPerPlantWeek: Number(litersPerPlantWeek.toFixed(1))
+      litersPerPlantWeek: Number(litersPerPlantWeek.toFixed(1)),
+      dailyPulses: def.pulses,
+      pulseDurationMinutes: Math.round(pulseDurationMinutes),
+      pulseVolumeLiters: Number(pulseVolumeLiters.toFixed(2)),
+      fertigationStrategy: def.strategy
     };
   });
 }

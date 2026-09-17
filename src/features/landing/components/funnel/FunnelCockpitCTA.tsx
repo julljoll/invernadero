@@ -35,7 +35,7 @@ export const FunnelCockpitCTA: React.FC = () => {
               </h2>
 
               <p className="lead text-light text-opacity-80 fs-6 mb-4">
-                La siembra de <strong className="text-white">2.500 plántulas de Pimentón Magistral</strong> en este módulo de <strong className="text-white">1.000 m²</strong> no es una estimación teórica: cada parámetro está sustentado en la telemetría satelital <strong className="text-success">NASA MERRA-2</strong>, aforos hidrogeológicos de pozo a 60m en Cuara, y los modelos micrometeorológicos del <strong className="text-white">Cockpit Agronómico AGROVENECUA</strong>.
+                La siembra de <strong className="text-white">2.500 plántulas de Pimentón Magistral</strong> en este módulo de <strong className="text-white">1.000 m²</strong> no es una estimación teórica: cada parámetro está sustentado en la telemetría satelital <strong className="text-success">NASA MERRA-2</strong>, aforos hídricos de la zona, y los modelos micrometeorológicos del <strong className="text-white">Cockpit Agronómico AGROVENECUA</strong>.
               </p>
 
               {/* Chips de los 6 Módulos del Cockpit */}
@@ -58,7 +58,7 @@ export const FunnelCockpitCTA: React.FC = () => {
                 </span>
                 <span className="badge bg-black bg-opacity-60 border border-white border-opacity-15 text-light py-2 px-3 rounded-pill text-xs d-inline-flex align-items-center gap-1.5 font-monospace">
                   <span className="material-symbols-outlined text-info ms-sm">water_ph</span>
-                  <span>05. Pozo Profundo 60m Theis</span>
+                  <span>05. Viabilidad de Pozo</span>
                 </span>
                 <span className="badge bg-black bg-opacity-60 border border-white border-opacity-15 text-light py-2 px-3 rounded-pill text-xs d-inline-flex align-items-center gap-1.5 font-monospace">
                   <span className="material-symbols-outlined text-danger ms-sm">pest_control</span>
