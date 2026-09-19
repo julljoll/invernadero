@@ -115,7 +115,16 @@ export const LeaderCatalogPage: React.FC = () => {
                   title="Ver malla antiáfido 50 mesh de 130 gsm"
                 >
                   <span className="material-symbols-outlined ms-sm">grid_view</span>
-                  <span>Malla 50 Mesh (130 gsm)</span>
+                  <span>Malla 50 Mesh</span>
+                </Link>
+
+                <Link
+                  to="/casa-malla-plana"
+                  className="btn btn-outline-info btn-lg rounded-pill fw-bold px-4 d-inline-flex align-items-center gap-2"
+                  title="Ver tipología de Casa de Malla Plana (Parral)"
+                >
+                  <span className="material-symbols-outlined ms-sm">architecture</span>
+                  <span>Casa de Malla Plana</span>
                 </Link>
               </div>
 
