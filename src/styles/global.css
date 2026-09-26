@@ -5,46 +5,43 @@
 
 :root {
   /* Tipografía Google Fonts */
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   /* ====================================================================
-     PALETA CROMÁTICA AGRÍCOLA BASADA EN EL LOGO AGROVENECUA
+     PALETA CROMÁTICA AGRÍCOLA (MINIMALISTA Y TÉCNICA)
      ==================================================================== */
   /* 1. Verde Logo Primario Brillante (Brote, Clorofila, Resalte Activo) */
   --logo-green-bright: #53C942;
   --logo-green-bright-rgb: 83, 201, 66;
 
   /* 2. Verde Logo Profundo (Tierra fértil, Follaje maduro, Títulos de Autoridad) */
-  --logo-green-deep: #0F4D06;
-  --logo-green-deep-rgb: 15, 77, 6;
+  --logo-green-deep: #0D1409;
+  --logo-green-deep-rgb: 13, 20, 9;
 
-  /* 3. Verde de Acción / Botones (Contraste accesible WCAG AAA con texto blanco) */
-  --agro-action: #248a15;
-  --agro-action-hover: #1b6d0f;
+  /* 3. Verde de Acción / Botones */
+  --agro-action: #53C942;
+  --agro-action-hover: #45b035;
 
   /* 4. Semántica Agronómica Universal (agri-ux-ui) */
-  --agro-water: #0284c7;           /* Riego, goteros PC, pozo profundo, hidrología */
-  --agro-water-rgb: 2, 132, 199;
-  --agro-sun: #d97706;             /* Radiación, temperatura, boro, floración */
-  --agro-sun-rgb: 217, 119, 6;
-  --agro-alert: #dc2626;           /* Estrés osmótico, plagas críticas, salinidad */
-  --agro-alert-rgb: 220, 38, 38;
+  --agro-water: #0ea5e9;
+  --agro-sun: #f59e0b;
+  --agro-alert: #ef4444;
 
-  /* 5. Fondos y Superficies de Alto Contraste */
-  --agro-bg: #f3f3f3;              /* Fondo de página solicitado: #f3f3f3 */
-  --agro-surface: #ffffff;         /* Superficie de tarjetas y módulos elevados */
-  --agro-surface-alt: #f8fafc;     /* Fondos de tablas y micro-bloques */
+  /* 5. Fondos y Superficies de Alto Contraste (Laptop Optimized) */
+  --agro-bg: #0f172a;              /* Fondo oscuro técnico para Dashboard/Laptops */
+  --agro-surface: rgba(30, 41, 59, 0.7); /* Glassmorphism oscuro */
+  --agro-surface-alt: rgba(15, 23, 42, 0.8);
 
-  /* 6. Jerarquía de Textos (Legibilidad extrema bajo luz solar de campo) */
-  --agro-text-primary: #0a2007;    /* Verde-bosque ultra oscuro para máxima agudeza */
-  --agro-text-secondary: #475569;  /* Gris pizarra para descripciones técnicas */
-  --agro-text-muted: #64748b;      /* Metadatos y unidades de ingeniería */
+  /* 6. Jerarquía de Textos (Legibilidad en dark mode) */
+  --agro-text-primary: #f8fafc;
+  --agro-text-secondary: #cbd5e1;
+  --agro-text-muted: #64748b;
 
   /* 7. Bordes y Divisores de Sección */
-  --agro-border-subtle: rgba(15, 77, 6, 0.12);
-  --agro-border-accent: rgba(83, 201, 66, 0.35);
-  --agro-border-card: rgba(15, 77, 6, 0.14);
+  --agro-border-subtle: rgba(255, 255, 255, 0.05);
+  --agro-border-accent: rgba(83, 201, 66, 0.2);
+  --agro-border-card: rgba(255, 255, 255, 0.1);
 }
 
 /* Sobrescritura de Variables Bootstrap 5.3 en Modo Claro */

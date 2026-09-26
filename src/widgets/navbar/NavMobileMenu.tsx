@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAgroStore } from '../../store/useAgroStore';
+import { useAgroStore } from '@shared/store/useAgroStore';
 import { NAV_ITEMS } from './NavLinks';
 
 interface NavMobileMenuProps {

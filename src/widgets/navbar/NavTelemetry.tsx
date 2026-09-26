@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAgroStore } from '../../store/useAgroStore';
+import { useAgroStore } from '@shared/store/useAgroStore';
 
 export const NavTelemetry: React.FC = () => {
   const { liveTemperatureC, liveWindSpeedKmH } = useAgroStore();

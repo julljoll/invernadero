@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Row, Col, Badge, Tab, Nav } from 'react-bootstrap';
 import { InlineMath } from 'react-katex';
-import { LithologicProfile2D } from './components/LithologicProfile2D';
-import { WaterQualityPanel } from './components/WaterQualityPanel';
-import { FieldValidationProtocol } from './components/FieldValidationProtocol';
-import { HydrogeologyContext } from './components/HydrogeologyContext';
-import { FinancialMatrix } from './components/FinancialMatrix';
-import { RoiPimentonCard } from './components/RoiPimentonCard';
+import { LithologicProfile2D } from '../features/pozo-calculator/components/LithologicProfile2D';
+import { WaterQualityPanel } from '../features/pozo-calculator/components/WaterQualityPanel';
+import { FieldValidationProtocol } from '../features/pozo-calculator/components/FieldValidationProtocol';
+import { HydrogeologyContext } from '../features/pozo-calculator/components/HydrogeologyContext';
+import { FinancialMatrix } from '../features/pozo-calculator/components/FinancialMatrix';
+import { RoiPimentonCard } from '../features/pozo-calculator/components/RoiPimentonCard';
 import {
   WELL_LOCATION,
   WELL_PARAMS,
@@ -14,7 +14,7 @@ import {
   INVESTMENT_COMPLETION,
   HYDRAULIC_FORMULAS,
   LITHOLOGY_LAYERS,
-} from './wellData';
+} from '../features/pozo-calculator/wellData';
 
 // ─── HELPER ESTILO KPI DE ALTO CONTRASTE (WCAG AAA) ──────────────────────────
 const getKpiCardStyle = (color: string) => {

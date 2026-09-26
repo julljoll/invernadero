@@ -6,8 +6,8 @@ import {
   FACILITY_SYSTEMS,
   ACCESSORY_CATEGORIES,
   GreenhouseModel,
-} from '../../core/constants/leaderGreenhouseCatalog';
-import { AgroCtaBanner } from '../../shared/components/AgroCtaBanner';
+} from '@core/constants/leaderGreenhouseCatalog';
+import { AgroCtaBanner } from '@shared/components/AgroCtaBanner';
 
 export const LeaderCatalogPage: React.FC = () => {
   const [selectedModel, setSelectedModel] = useState<GreenhouseModel>(GREENHOUSE_MODELS[0]);

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import dbExport from '../../core/constants/database.json';
-import { GoogleSheetsSyncModal } from '../../shared/components/GoogleSheetsSyncModal';
-import { GOOGLE_SHEET_CONFIG } from '../../core/services/googleSheetsSync';
+import dbExport from '@core/constants/database.json';
+import { GoogleSheetsSyncModal } from '@shared/components/GoogleSheetsSyncModal';
+import { GOOGLE_SHEET_CONFIG } from '@core/services/googleSheetsSync';
 
 interface SettingRow {
   key: string;

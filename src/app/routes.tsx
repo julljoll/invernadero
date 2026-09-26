@@ -3,32 +3,32 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AgroLoadingSpinner } from '../shared/components/AgroLoadingSpinner';
 
 // Carga directa de la Landing Page para First Contentful Paint instantáneo
-import { LandingPage } from '../features/landing/LandingPage';
+import { LandingPage } from '../pages/LandingPage';
 
 // Code Splitting estratégico con React.lazy para naves de cálculo y visores 3D
 const CockpitPage = React.lazy(() =>
-  import('../features/cockpit/CockpitPage').then((m) => ({ default: m.CockpitPage }))
+  import('../pages/CockpitPage').then((m) => ({ default: m.CockpitPage }))
 );
 const PozoCalculatorPage = React.lazy(() =>
-  import('../features/pozo-calculator/PozoCalculatorPage').then((m) => ({ default: m.PozoCalculatorPage }))
+  import('../pages/PozoCalculatorPage').then((m) => ({ default: m.PozoCalculatorPage }))
 );
 const MallaSalesPage = React.lazy(() =>
-  import('../features/malla-sales/MallaSalesPage').then((m) => ({ default: m.MallaSalesPage }))
+  import('../pages/MallaSalesPage').then((m) => ({ default: m.MallaSalesPage }))
 );
 const GreenhouseSalesPage = React.lazy(() =>
-  import('../features/greenhouse-sales/GreenhouseSalesPage').then((m) => ({ default: m.GreenhouseSalesPage }))
+  import('../pages/GreenhouseSalesPage').then((m) => ({ default: m.GreenhouseSalesPage }))
 );
 const LeaderCatalogPage = React.lazy(() =>
-  import('../features/leader-catalog/LeaderCatalogPage').then((m) => ({ default: m.LeaderCatalogPage }))
+  import('../pages/LeaderCatalogPage').then((m) => ({ default: m.LeaderCatalogPage }))
 );
 const AdminControlPanel = React.lazy(() =>
-  import('../features/admin/AdminControlPanel').then((m) => ({ default: m.AdminControlPanel }))
+  import('../pages/AdminControlPanel').then((m) => ({ default: m.AdminControlPanel }))
 );
 const FlatMeshSalesPage = React.lazy(() =>
-  import('../features/flat-mesh-sales/FlatMeshSalesPage').then((m) => ({ default: m.FlatMeshSalesPage }))
+  import('../pages/FlatMeshSalesPage').then((m) => ({ default: m.FlatMeshSalesPage }))
 );
 const ViveroCadPage = React.lazy(() =>
-  import('../features/vivero-cad/ViveroCadPage').then((m) => ({ default: m.default }))
+  import('../pages/ViveroCadPage').then((m) => ({ default: m.default }))
 );
 
 export const AppRoutes: React.FC = () => {

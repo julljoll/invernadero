@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { GreenhouseViewer } from '../3d-viewers/GreenhouseViewer/GreenhouseViewer';
-import { Slider } from '../../shared/components/Slider';
+import { GreenhouseViewer } from '@features/3d-viewers/GreenhouseViewer/GreenhouseViewer';
+import { Slider } from '@shared/components/Slider';
 
 interface GreenhousePackage {
   id: string;

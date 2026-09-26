@@ -137,11 +137,13 @@ export const Module01Climate: React.FC = () => {
   };
 
   return (
-    <div className="d-flex flex-column gap-4">
-      {/* ====================================================================
-         SECCIÓN 1: SIMULADOR PSICROMÉTRICO & DÉFICIT DE PRESIÓN DE VAPOR (VPD)
-         ==================================================================== */}
-      <Card className="card-cockpit p-4">
+    <div className="d-flex flex-column gap-3">
+      <Row className="g-3">
+        {/* ====================================================================
+           SECCIÓN 1: SIMULADOR PSICROMÉTRICO & DÉFICIT DE PRESIÓN DE VAPOR (VPD)
+           ==================================================================== */}
+        <Col xs={12} xxl={6} className="d-flex">
+          <Card className="card-cockpit p-3 flex-grow-1">
         {/* Encabezado del Simulador */}
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-4 pb-2 border-bottom border-secondary-subtle">
           <div>
@@ -285,11 +287,13 @@ export const Module01Climate: React.FC = () => {
           )}
         </div>
       </Card>
+      </Col>
 
       {/* ====================================================================
          SECCIÓN 2: CLIMOGRAMA & TABLA LÍNEA BASE QUÍBOR 20 AÑOS (NASA MERRA-2)
          ==================================================================== */}
-      <Card className="card-cockpit p-4">
+      <Col xs={12} xxl={6} className="d-flex">
+      <Card className="card-cockpit p-3 flex-grow-1">
         <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 pb-2 border-bottom border-secondary-subtle">
           <div>
             <h3 className="fs-5 fw-bold text-dark mb-0 d-flex align-items-center gap-2">
@@ -369,18 +373,19 @@ export const Module01Climate: React.FC = () => {
           </div>
         </Alert>
       </Card>
-
+      </Col>
+      </Row>
       {/* ====================================================================
          SECCIÓN 3: VENTILACIÓN CONVECTIVA, ROSA DE VIENTOS & DLI SOLAR
          ==================================================================== */}
-      <Row className="g-4">
-        <Col xs={12} lg={6}>
+      <Row className="g-3">
+        <Col xs={12} lg={4}>
           <VentilationRahCalculator />
         </Col>
-        <Col xs={12} lg={6}>
+        <Col xs={12} lg={4}>
           <WindRoseChart />
         </Col>
-        <Col xs={12}>
+        <Col xs={12} lg={4}>
           <DliSolarPanel />
         </Col>
       </Row>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Button, Badge } from 'react-bootstrap';
-import { FlatMeshViewer } from '../3d-viewers/MeshViewer/FlatMeshViewer';
+import { FlatMeshViewer } from '@features/3d-viewers/MeshViewer/FlatMeshViewer';
 import { Link } from 'react-router-dom';
-import { AgroCtaBanner } from '../../shared/components/AgroCtaBanner';
+import { AgroCtaBanner } from '@shared/components/AgroCtaBanner';
 
 export const FlatMeshSalesPage: React.FC = () => {
 

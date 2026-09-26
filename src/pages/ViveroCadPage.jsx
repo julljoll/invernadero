@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Viewer from '@react-cad/viewer';
 import { Player } from '@remotion/player';
-import GreenhouseCAD from './core/cad/GreenhouseCAD';
-import Overlay from './components/ui/Overlay';
-import { CinematicVideo } from './remotion/CinematicVideo';
-import './index.css';
+import GreenhouseCAD from '../features/vivero-cad/core/cad/GreenhouseCAD';
+import Overlay from '../features/vivero-cad/components/ui/Overlay';
+import { CinematicVideo } from '../features/vivero-cad/remotion/CinematicVideo';
+import '../features/vivero-cad/index.css';
 
 function App() {
   const [isVideoMode, setIsVideoMode] = useState(false);

@@ -443,6 +443,7 @@ export const GoogleSheetsSyncModal: React.FC<GoogleSheetsSyncModalProps> = ({
           <span>Google Sheets API v4 Compatible · Valle de Quíbor 2026</span>
         </div>
 
+        {/* @ts-ignore */}
         <Button variant="secondary" size="sm" onClick={onHide} className="fw-semibold px-4">
           Cerrar
         </Button>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Badge, Button, Table, Accordion } from 'react-bootstrap';
-import { MeshViewer } from '../3d-viewers/MeshViewer/MeshViewer';
-import { VariantSelector } from './components/VariantSelector';
-import { MeshRollCalculator } from './components/MeshRollCalculator';
-import { AgroCtaBanner } from '../../shared/components/AgroCtaBanner';
+import { MeshViewer } from '@features/3d-viewers/MeshViewer/MeshViewer';
+import { VariantSelector } from '../features/malla-sales/components/VariantSelector';
+import { MeshRollCalculator } from '../features/malla-sales/components/MeshRollCalculator';
+import { AgroCtaBanner } from '@shared/components/AgroCtaBanner';
 
 export const MallaSalesPage: React.FC = () => {
   const [variant, setVariant] = useState<'110' | '130'>('130');

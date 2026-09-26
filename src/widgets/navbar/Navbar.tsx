@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar as BsNavbar, Container, Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
-import { NavBrand } from './navbar/NavBrand';
+import { NavBrand } from './NavBrand';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <BsNavbar expand="lg" sticky="top" className="bg-white border-bottom border-secondary-subtle shadow-sm py-2">
+    <BsNavbar expand="lg" sticky="top" className="bg-white border border-secondary-subtle shadow py-2 rounded-pill mt-3 mx-3 mx-xl-auto mb-4" style={{ maxWidth: '1200px', zIndex: 1030 }}>
       <Container fluid="xl">
         <NavBrand />
 

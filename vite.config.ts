@@ -1,13 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import wasm from 'vite-plugin-wasm';
-import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 import { viteSqliteDbPlugin } from './scripts/vite-db-plugin.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), viteSqliteDbPlugin(), wasm(), topLevelAwait()],
+  plugins: [react(), viteSqliteDbPlugin(), wasm()],
   optimizeDeps: {
     exclude: ['@react-cad/core']
   },
@@ -16,7 +15,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@core': path.resolve(__dirname, './src/core'),
       '@features': path.resolve(__dirname, './src/features'),
+      '@pages': path.resolve(__dirname, './src/pages'),
       '@shared': path.resolve(__dirname, './src/shared'),
+      '@widgets': path.resolve(__dirname, './src/widgets'),
     },
   },
   server: {

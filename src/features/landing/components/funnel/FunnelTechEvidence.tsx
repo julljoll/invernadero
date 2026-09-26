@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Badge, Table, Tab, Nav, ButtonGroup, Button, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Card, Badge, Table, Tab, Nav, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export const FunnelTechEvidence: React.FC = () => {
@@ -236,29 +236,29 @@ export const FunnelTechEvidence: React.FC = () => {
                   </span>
                 </div>
 
-                <ButtonGroup size="sm">
-                  <Button
-                    variant={nutritionMode === 'comparativa' ? 'success' : 'outline-secondary'}
+                <div className="btn-group btn-group-sm">
+                  <button
+                    type="button"
+                    className={`btn fw-bold px-3 text-xs ${nutritionMode === 'comparativa' ? 'btn-success' : 'btn-outline-secondary'}`}
                     onClick={() => setNutritionMode('comparativa')}
-                    className="fw-bold px-3 text-xs"
                   >
                     ⚖️ Cara a Cara &amp; Rentabilidad
-                  </Button>
-                  <Button
-                    variant={nutritionMode === 'aifa' ? 'primary' : 'outline-secondary'}
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn fw-bold px-3 text-xs ${nutritionMode === 'aifa' ? 'btn-primary' : 'btn-outline-secondary'}`}
                     onClick={() => setNutritionMode('aifa')}
-                    className="fw-bold px-3 text-xs"
                   >
                     Tanques AIFA (A, B, C)
-                  </Button>
-                  <Button
-                    variant={nutritionMode === 'granulado_ve' ? 'warning' : 'outline-secondary'}
+                  </button>
+                  <button
+                    type="button"
+                    className={`btn fw-bold px-3 text-xs ${nutritionMode === 'granulado_ve' ? 'btn-warning' : 'btn-outline-secondary'}`}
                     onClick={() => setNutritionMode('granulado_ve')}
-                    className="fw-bold px-3 text-xs"
                   >
                     Granulados Venezuela (K₂SO₄)
-                  </Button>
-                </ButtonGroup>
+                  </button>
+                </div>
               </div>
 
               {/* VISTA COMPARATIVA: CARA A CARA */}

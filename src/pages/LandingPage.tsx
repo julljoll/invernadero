@@ -1,9 +1,9 @@
 import React from 'react';
-import { FunnelHero } from './components/funnel/FunnelHero';
-import { FunnelAgronomicBenefits } from './components/funnel/FunnelAgronomicBenefits';
-import { FunnelTechEvidence } from './components/funnel/FunnelTechEvidence';
-import { FunnelFinancialBenefits } from './components/funnel/FunnelFinancialBenefits';
-import { FunnelCockpitCTA } from './components/funnel/FunnelCockpitCTA';
+import { FunnelHero } from '../features/landing/components/funnel/FunnelHero';
+import { FunnelAgronomicBenefits } from '../features/landing/components/funnel/FunnelAgronomicBenefits';
+import { FunnelTechEvidence } from '../features/landing/components/funnel/FunnelTechEvidence';
+import { FunnelFinancialBenefits } from '../features/landing/components/funnel/FunnelFinancialBenefits';
+import { FunnelCockpitCTA } from '../features/landing/components/funnel/FunnelCockpitCTA';
 
 export const LandingPage: React.FC = () => {
   return (

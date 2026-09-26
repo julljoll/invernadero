@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Nav, Badge, Button } from 'react-bootstrap';
-import { useAgroStore } from '../../shared/store/useAgroStore';
-import { CROPS_CATALOG } from '../../core/constants/crops';
-import { CockpitHeader } from './components/CockpitHeader';
-import { AgroErrorBoundary } from '../../shared/components/AgroErrorBoundary';
-import { Module01Climate } from './modules/Module01Climate';
-import { Module03Structure } from './modules/Module03Structure';
-import { Module03Fertirriego } from './modules/Module03Fertirriego';
-import { Module05Well } from './modules/Module05Well';
-import { Module06PestControl } from './modules/Module06PestControl';
-import { Module07Phenology } from './modules/Module07Phenology';
+import { useAgroStore } from '@shared/store/useAgroStore';
+import { CROPS_CATALOG } from '@core/constants/crops';
+import { CockpitHeader } from '../features/cockpit/components/CockpitHeader';
+import { AgroErrorBoundary } from '@shared/components/AgroErrorBoundary';
+import { Module01Climate } from '../features/cockpit/modules/Module01Climate';
+import { Module03Structure } from '../features/cockpit/modules/Module03Structure';
+import { Module03Fertirriego } from '../features/cockpit/modules/Module03Fertirriego';
+import { Module05Well } from '../features/cockpit/modules/Module05Well';
+import { Module06PestControl } from '../features/cockpit/modules/Module06PestControl';
+import { Module07Phenology } from '../features/cockpit/modules/Module07Phenology';
 
 export const CockpitPage: React.FC = () => {
   const { selectedCrop } = useAgroStore();
