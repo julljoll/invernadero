@@ -13,6 +13,11 @@
     "db:bake": "node scripts/db.js"
   },
   "dependencies": {
+    "@react-cad/core": "^0.23.0",
+    "@react-cad/renderer": "^0.23.0",
+    "@react-cad/viewer": "^0.23.0",
+    "@remotion/player": "^4.0.529",
+    "@remotion/three": "^4.0.529",
     "bootstrap": "^5.3.8",
     "canvas-confetti": "^1.9.4",
     "chart.js": "^4.5.1",
@@ -25,6 +30,7 @@
     "react-dom": "^18.3.1",
     "react-katex": "^3.1.0",
     "react-router-dom": "^6.28.0",
+    "remotion": "^4.0.529",
     "three": "^0.170.0",
     "xlsx": "^0.18.5",
     "zustand": "^5.0.1"
@@ -38,9 +44,12 @@
     "@types/react-katex": "^3.0.4",
     "@types/three": "^0.170.0",
     "@vitejs/plugin-react": "^4.3.3",
+    "esbuild": "^0.28.2",
     "pdf-parse": "^2.4.5",
     "typescript": "^5.6.3",
     "vite": "^5.4.11",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0",
     "vitest": "^2.1.4"
   }
 }

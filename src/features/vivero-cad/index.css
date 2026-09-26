@@ -1,0 +1,130 @@
+:root {
+  --bg-dark: #0a1128;
+  --primary: #00ffff;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --glass-bg: rgba(10, 17, 40, 0.7);
+  --glass-border: rgba(0, 255, 255, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  overflow: hidden; /* Canvas takes over */
+}
+
+.cad-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* UI Overlay styling imitating CAD software */
+.ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Let clicks pass through to the canvas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.5rem;
+  z-index: 10;
+}
+
+.header {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.badge {
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.sidebar {
+  pointer-events: auto;
+  align-self: flex-end;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  padding: 1.5rem;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.5rem;
+}
+
+.prop-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  font-family: monospace;
+}
+
+.prop-row span:first-child {
+  color: var(--text-muted);
+}
+
+.highlight {
+  color: var(--primary);
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--glass-border);
+  margin: 1.5rem 0;
+}
+
+.instruction {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.instruction strong {
+  color: var(--text-main);
+}

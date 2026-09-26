@@ -1,11 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import wasm from 'vite-plugin-wasm';
+import topLevelAwait from 'vite-plugin-top-level-await';
 import path from 'path';
 import { viteSqliteDbPlugin } from './scripts/vite-db-plugin.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), viteSqliteDbPlugin()],
+  plugins: [react(), viteSqliteDbPlugin(), wasm(), topLevelAwait()],
+  optimizeDeps: {
+    exclude: ['@react-cad/core']
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -20,6 +25,7 @@ export default defineConfig({
     host: true,
   },
   build: {
+    target: 'esnext',
     chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {

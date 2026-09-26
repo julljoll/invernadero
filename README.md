@@ -10,6 +10,10 @@
 [![Three.js](https://img.shields.io/badge/Three.js-r170_WebGL-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![PWA](https://img.shields.io/badge/PWA-Offline_First-10b981?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![Vercel](https://img.shields.io/badge/Vercel-Optimized_SSG-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+[![ReactCAD](https://img.shields.io/badge/ReactCAD-CSG_Solid-ffcc00?style=for-the-badge)](https://github.com/react-cad/react-cad)
+[![Remotion](https://img.shields.io/badge/Remotion-Cinematic_Video-ff4757?style=for-the-badge)](https://www.remotion.dev/)
+
+> 🚀 **Actualización 2026 (v3.5):** Se ha integrado nativamente el motor OpenCASCADE (ReactCAD) vía WebAssembly y el exportador de video cinemático Remotion. Ahora las visualizaciones no son meras mallas, sino **sólidos paramétricos** listos para manufactura (.STEP) y renderizados de video a 60 FPS directamente en la ruta `/vivero-cad`. Todo el código legado (`vivero-pimenton-web` y `vivero-react`) ha sido centralizado.
 
 <p align="center">
   <a href="#-manual-canónico-unificado"><strong>📖 Manual Canónico Unificado</strong></a> •
@@ -62,6 +66,7 @@ graph LR
 | [`/calculo-pozo`](http://localhost:3000/calculo-pozo) | **Calculadora de Pozo** | Modelo Theis/Cooper-Jacob, abatimiento dinámico, curvas de bombeo y estratigrafía de Cuara. | Lazy Chunk (~38 kB) |
 | [`/malla-50mesh`](http://localhost:3000/malla-50mesh) | **Cotizador de Malla** | Desglose técnico de rollos, gramajes (110 vs 130 gsm) y exclusión física de plagas. | Lazy Chunk (~37 kB) |
 | [`/catalogo-invernaderos`](http://localhost:3000/catalogo-invernaderos) | **Catálogo Leader Greenhouse** | Modelos góticos multicapilla (AGRO-U3, U4, U5), túneles y equipamiento de ventilación. | Lazy Chunk (~46 kB) |
+| [`/vivero-cad`](http://localhost:3000/vivero-cad) | **Visor CAD Sólido & Remotion** | (NUEVO) Modelado sólido avanzado (OpenCASCADE/WASM) del exoesqueleto y exportación de video cinemático. | Lazy Chunk (~800 kB) |
 | [`/admin`](http://localhost:3000/admin) | **Panel de Control BD** | Administración integral de la base de datos SQLite: parámetros, cultivos, clima mensual y textos. | Lazy Chunk (~31 kB) |
 
 ---

@@ -27,6 +27,9 @@ const AdminControlPanel = React.lazy(() =>
 const FlatMeshSalesPage = React.lazy(() =>
   import('../features/flat-mesh-sales/FlatMeshSalesPage').then((m) => ({ default: m.FlatMeshSalesPage }))
 );
+const ViveroCadPage = React.lazy(() =>
+  import('../features/vivero-cad/ViveroCadPage').then((m) => ({ default: m.default }))
+);
 
 export const AppRoutes: React.FC = () => {
   return (
@@ -39,6 +42,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/malla-50mesh" element={<MallaSalesPage />} />
         <Route path="/venta-invernaderos" element={<GreenhouseSalesPage />} />
         <Route path="/casa-malla-plana" element={<FlatMeshSalesPage />} />
+        <Route path="/vivero-cad" element={<ViveroCadPage />} />
         <Route path="/catalogo-invernaderos" element={<LeaderCatalogPage />} />
         <Route path="/catalogo" element={<Navigate to="/catalogo-invernaderos" replace />} />
         <Route path="/leader-greenhouse" element={<Navigate to="/catalogo-invernaderos" replace />} />
