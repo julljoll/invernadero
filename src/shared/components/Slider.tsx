@@ -50,15 +50,17 @@ export const Slider: React.FC<SliderProps> = ({
           {displayValue}
         </span>
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className={rangeClasses[accentColor]}
-      />
+      <div className="touch-target-48 d-flex align-items-center w-100">
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className={`${rangeClasses[accentColor]} w-100 m-0`}
+        />
+      </div>
     </div>
   );
 };

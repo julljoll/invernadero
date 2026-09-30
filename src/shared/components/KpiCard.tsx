@@ -19,44 +19,46 @@ export const KpiCard: React.FC<KpiCardProps> = ({
   variant = 'success',
   className = '',
 }) => {
-  const borderColors = {
-    success: 'border-success border-opacity-25',
-    info: 'border-info border-opacity-25',
-    warning: 'border-warning border-opacity-25',
-    danger: 'border-danger border-opacity-25',
-    secondary: 'border-secondary border-opacity-25',
+  const cardColors = {
+    success: 'card-cockpit card-cockpit-green',
+    info: 'card-cockpit card-cockpit-water',
+    warning: 'card-cockpit card-cockpit-sun',
+    danger: 'card-cockpit card-cockpit-alert',
+    secondary: 'card-cockpit',
   };
 
-  const textColors = {
-    success: 'text-success',
-    info: 'text-info',
-    warning: 'text-warning',
-    danger: 'text-danger',
-    secondary: 'text-secondary',
+  const iconPillColors = {
+    success: 'kpi-icon-green',
+    info: 'kpi-icon-water',
+    warning: 'kpi-icon-sun',
+    danger: 'kpi-icon-alert',
+    secondary: 'bg-light text-secondary border border-secondary-subtle',
   };
 
   return (
-    <div className={`card card-agro ${borderColors[variant]} ${className}`}>
-      <div className="card-body p-3 d-flex flex-column justify-content-between">
-        <div className="d-flex justify-content-between align-items-center mb-1">
-          <span className="text-secondary text-xs fw-semibold">{label}</span>
+    <div className={`${cardColors[variant]} ${className} h-100`}>
+      <div className="p-3 d-flex flex-column h-100 justify-content-between">
+        <div className="d-flex justify-content-between align-items-start mb-2">
+          <span className="text-secondary text-xs fw-bold text-uppercase tracking-wider mt-1">{label}</span>
           {iconName && (
-            <span className={`material-symbols-outlined ms-sm ${textColors[variant]}`}>
-              {iconName}
-            </span>
+            <div className={`kpi-icon-pill ${iconPillColors[variant]} shadow-sm`}>
+              <span className="material-symbols-outlined">{iconName}</span>
+            </div>
           )}
         </div>
 
-        <div className="d-flex align-items-baseline gap-1 my-1">
-          <span className={`fs-3 fw-bold font-mono ${textColors[variant]}`}>{value}</span>
-          {unit && <span className="text-secondary small font-monospace">{unit}</span>}
-        </div>
-
-        {subtext && (
-          <div className="text-secondary" style={{ fontSize: '0.75rem' }}>
-            {subtext}
+        <div>
+          <div className="d-flex align-items-baseline gap-1 mt-2 mb-1">
+            <span className="fs-2 fw-bold font-mono text-dark tracking-tight">{value}</span>
+            {unit && <span className="text-secondary text-xs font-monospace">{unit}</span>}
           </div>
-        )}
+
+          {subtext && (
+            <div className="text-muted font-sans text-xs lh-sm">
+              {subtext}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 import { useAgroStore } from '../../../shared/store/useAgroStore';
 import { calculateSalinityImpact } from '../../../core/agronomy/salinity';
 import { GoogleSheetsSyncModal } from '../../../shared/components/GoogleSheetsSyncModal';
@@ -107,14 +108,18 @@ export const Module03Fertirriego: React.FC = () => {
   };
 
   return (
-    <div className="d-flex flex-column gap-4">
-      {/* 1. Salinidad del Pozo & Lixiviación Mass-Hoffman */}
+    <div className="d-flex flex-column gap-3">
+      <Row className="g-3">
+        <Col xs={12} xl={5} className="d-flex">
+          {/* 1. Salinidad del Pozo & Lixiviación Mass-Hoffman */}
       <SalinityPanel
         waterEcDsM={waterEcDsM}
         selectedCrop={selectedCrop}
         onEcChange={(val) => setWaterParams({ waterEcDsM: val })}
       />
+      </Col>
 
+      <Col xs={12} xl={7} className="d-flex">
       {/* 2. Marco de Siembra & Diseño de Goteo */}
       <PlantingFrame
         areaM2={areaM2}
@@ -127,7 +132,11 @@ export const Module03Fertirriego: React.FC = () => {
         sectorsCount={sectorsCount}
         sectorFlowM3h={sectorFlowM3h}
       />
+      </Col>
+      </Row>
 
+      <Row className="g-3">
+      <Col xs={12} lg={7}>
       {/* 3. Programa de Riego FAO-56 por Etapas & Calendario Semanal */}
       <IrrigationSchedule
         stagesSummary={stagesSummary}
@@ -136,12 +145,19 @@ export const Module03Fertirriego: React.FC = () => {
         grossFactor={salinityResult.grossIrrigationFactor}
         onOpenSheetsModal={handleOpenSheetsModal}
       />
+      </Col>
 
+      <Col xs={12} lg={5}>
       {/* 4. Gráfico Anual de Balance Hídrico Quíbor */}
       <WaterBalanceChart grossFactor={salinityResult.grossIrrigationFactor} />
+      </Col>
+      </Row>
 
-      {/* 5. Tanques de Nutrición A, B y C (AIFA) */}
+      <Row className="g-3">
+      <Col xs={12}>
       <NutritionTanks />
+      </Col>
+      </Row>
 
       {/* Modal de Sincronización con Google Sheets */}
       <GoogleSheetsSyncModal

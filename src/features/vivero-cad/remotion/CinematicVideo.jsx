@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { interpolate, useCurrentFrame, useVideoConfig } from 'remotion';
 import { ThreeCanvas } from '@remotion/three';
 import { useFrame } from '@react-three/fiber';
+import GreenhouseCAD from '../core/cad/GreenhouseCAD';
 
 // Geometría puente que simula el Sólido exportado para el video
 const AnimatedStructure = () => {
@@ -34,22 +35,7 @@ const AnimatedStructure = () => {
 
   return (
     <group ref={mesh}>
-      {/* Exoesqueleto del Invernadero (Visualización Three.js) */}
-      <mesh position={[0, 0, 0]}>
-        <boxGeometry args={[5, 4.5, 12]} />
-        <meshStandardMaterial 
-          color="#00ffff" 
-          wireframe={true} 
-          emissive="#00ffff" 
-          emissiveIntensity={0.8} 
-        />
-      </mesh>
-      
-      {/* Pilares internos iluminados */}
-      <mesh position={[0, -1, 0]}>
-        <cylinderGeometry args={[2, 2, 4, 8]} />
-        <meshBasicMaterial color="#00ff00" wireframe={true} transparent opacity={0.3} />
-      </mesh>
+      <GreenhouseCAD animate={false} />
     </group>
   );
 };

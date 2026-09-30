@@ -209,7 +209,7 @@ export const Module06PestControl: React.FC = () => {
         <Row className="g-3 mb-4">
           {filteredPests.map((pest) => (
             <Col xs={12} md={6} lg={4} key={pest.id}>
-              <Card className="p-3 h-100 d-flex flex-column border-secondary-subtle bg-light hover-border-success transition-all shadow-xs">
+              <Card className="card-agro-interactive p-3 h-100 d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-start mb-2">
                   <div>
                     <h5 className="fs-6 fw-bold text-dark mb-0">{pest.name}</h5>
@@ -264,7 +264,7 @@ export const Module06PestControl: React.FC = () => {
 
           <Row className="g-3 text-xs">
             <Col xs={12} md={4}>
-              <div className="p-3 bg-light rounded border border-success border-opacity-30 h-100">
+              <div className="card-agro-interactive p-3 h-100 border-success border-opacity-30">
                 <div className="d-flex justify-content-between align-items-center mb-1">
                   <strong className="text-success">Semana 2: Post-Trasplante</strong>
                   <Badge bg="success" className="font-monospace text-3xs">Preventivo</Badge>
@@ -280,7 +280,7 @@ export const Module06PestControl: React.FC = () => {
             </Col>
 
             <Col xs={12} md={4}>
-              <div className="p-3 bg-light rounded border border-primary border-opacity-30 h-100">
+              <div className="card-agro-interactive p-3 h-100 border-primary border-opacity-30">
                 <div className="d-flex justify-content-between align-items-center mb-1">
                   <strong className="text-primary">Semana 4: Floración Inicial</strong>
                   <Badge bg="primary" className="font-monospace text-3xs">Pecíolo & Flores</Badge>
@@ -296,7 +296,7 @@ export const Module06PestControl: React.FC = () => {
             </Col>
 
             <Col xs={12} md={4}>
-              <div className="p-3 bg-light rounded border border-warning border-opacity-50 h-100">
+              <div className="card-agro-interactive p-3 h-100 border-warning border-opacity-50">
                 <div className="d-flex justify-content-between align-items-center mb-1">
                   <strong className="text-warning-emphasis">Semana 6: Pleno Vegetativo</strong>
                   <Badge bg="warning" className="font-monospace text-3xs">Focos Foliares</Badge>

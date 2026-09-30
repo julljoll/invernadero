@@ -10,6 +10,7 @@ export interface NavItem {
 export const NAV_ITEMS: NavItem[] = [
   { path: '/', label: 'Inversión ($4k)', icon: 'payments' },
   { path: '/cockpit', label: 'Cockpit Técnico', icon: 'biotech' },
+  { path: '/vivero-cad', label: 'Vivero 3D', icon: 'view_in_ar' },
   { path: '/malla-50mesh', label: 'Malla 50 Mesh', icon: 'grid_view' },
 ];
 
